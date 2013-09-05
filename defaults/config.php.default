@@ -1,0 +1,26 @@
+<?
+
+/* */
+$cfg_web_root = "/home/notch/dev/minecraftia";
+
+/* main xAuth db */
+$cfg_mysql_addr = "localhost";
+$cfg_mysql_db = "minecraft_auth";
+$cfg_mysql_user = "minecraft";
+$cfg_mysql_pass = "minecr4ft";
+
+/* unused */
+$cfg_enable_registrations = true;
+$cfg_recaptcha_public_key = "";
+
+/* wordpress  */
+$cfg_wp_enabled = false;
+$cfg_wp_location = "/home/minecraft/web/wordpress";
+$cfg_wp_url = "http://blog.minecraft.pt";
+
+/* gmail email */
+$cfg_phpmailer_username = "";
+$cfg_phpmailer_password = "";
+$cfg_phpmailer_email    = "";
+
+?>
