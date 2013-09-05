@@ -7,7 +7,7 @@ jQuery.fn.visibilityToggle = function() {
 function logout() {
     var form = $('<form></form>');
     form.attr("method", "post");
-    form.attr("action", "login/index.php");
+    form.attr("action", "/sessions/destroy.php");
 
     var field = $('<input></input>');
     field.attr("type", "hidden");

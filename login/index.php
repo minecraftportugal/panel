@@ -4,38 +4,9 @@ require('../lib.php');
 require('../i18n.php');
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-  if (isset($_POST['logout']) && $_POST['logout'] == 1) {
-
-    $xsrf_token = getXSRFToken();
-    if (!validateXSRFToken($xsrf_token)) {
-      return;
-    }
-
-    if (isset($_SESSION['id'])) {
-      terminatexAuthSession($_SESSION['id']);
-    }
-    session_destroy();
-    header('Location: /login?f=2');
-  } else {
-
-      $username = s($_POST['username']);
-      $password = s($_POST['password']);
-
-      $session = validateLogin($username, $password);
-      if ($session == NULL) {
-        header('Location: /login?f=1');
-      } else {
-        header('Location: /');
-      }
-  }
-  return;
-} else {
-  if (isLoggedIn()) {
-    header('Location: /');
-    exit();
-  }
+if (isLoggedIn()) {
+  header('Location: /');
+  exit();
 }
 
 ?>
@@ -65,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <p><?= m("L_WELCOME3"); ?> </p>
     </div>
     <div id="actions">
-      <form name="login" method="post" action="index.php">
+      <form name="login" method="post" action="/sessions/create.php">
         <span class="center"><input type="text" name="username" autofocus="true" placeholder="username" /></span>
         <span class="center"><input type="password" name="password" placeholder="password" /></span>
         <span class="center"><input type="submit" value="Login!"/></span>
