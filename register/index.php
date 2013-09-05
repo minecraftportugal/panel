@@ -4,25 +4,10 @@ require('../lib.php');
 require('../i18n.php');
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  if (isset($_POST['username']) && isset($_POST['email'])) {
-    $username = s($_POST['username']);
-    $email = s($_POST['email']);
-
-    $result = register($username, $email, $email_ip = true);
-    if ($result != "0") {
-      header("Location: /register?f=$result");
-    } else {
-      header("Location: /login?f=3");
-    }
-  }
-} else {
-  if (isLoggedIn()) {
-    header('Location: /');
-    exit();
-  }
+if (isLoggedIn()) {
+  header('Location: /');
+  exit();
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -53,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <? if ($cfg_enable_registrations): ?>
     <div id="actions">
-      <form name="login" method="post" action="index.php">
+      <form name="login" method="post" action="/users/create.php">
         
         <span class="center"><input type="text" id="username" name="username" placeholder="<?= m("L_USERNAMEA") ?>" /></span>
         <span class="center"><input type="text" id="email" name="email" placeholder="<?= m("L_EMAILA") ?>" /></span>
