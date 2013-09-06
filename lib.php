@@ -125,8 +125,12 @@ function validateLogin($username, $password) {
   return $val;
 }
 
-function validateXSRFToken($token) {  
-  return isset($_SESSION['xsrf_token']) && $_SESSION['xsrf_token'] == $token;
+function getXSRFToken() {
+  return isset($_SESSION['xsrf_token']) ? $_SESSION['xsrf_token'] : NULL;
+}
+
+function validateXSRFToken($token) {
+  return getXSRFToken() == $token;
 }
 
 function initSession($id, $username, $admin) {

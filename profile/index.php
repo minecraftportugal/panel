@@ -7,7 +7,7 @@ validateSession();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $xsrf_token = isset($_POST['xsrf_token']) ? $_POST['xsrf_token'] : NULL;
+  $xsrf_token = getXSRFToken();
   if (!validateXSRFToken($xsrf_token)) {
     return;
   }
@@ -58,7 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset=utf-8 />
-    <meta name="xsrf_token" content="<?= $_SESSION['xsrf_token'] ?>" />
     <title>news</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
@@ -146,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </tbody>
       </table>
     </div>
-    <input type="hidden" name="xsrf_token" value="<?= $_SESSION['xsrf_token'] ?>" />
+    <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
    </form>
    <? endif; ?>
 
@@ -204,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </table>
     </div>
     <? endif; ?>
-    <input type="hidden" name="xsrf_token" value="<?= $_SESSION['xsrf_token'] ?>" />
+    <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
   </form>
   </div>
 </body>

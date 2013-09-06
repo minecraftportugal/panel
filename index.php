@@ -5,10 +5,10 @@ session_start();
 validateSession();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="EN"> 
-<head> 
+<html xmlns="http://www.w3.org/1999/xhtml" lang="EN">
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="xsrf_token" content="<?= $_SESSION['xsrf_token'] ?>" />
+<meta name="xsrf_token" content="<?= getXSRFToken() ?>" />
 <title>Minecraftia!</title>
 <link rel="stylesheet" href="/styles/style.css" type="text/css" />
 <link rel="stylesheet" href="/styles/jqueryui.css" type="text/css" />
@@ -39,5 +39,5 @@ validateSession();
 
 <iframe id="map" name="mapa" src="//dynmap.minecraft.pt/" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> 
 
-</body> 
+</body>
 </html>

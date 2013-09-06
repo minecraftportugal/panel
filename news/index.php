@@ -10,7 +10,6 @@ refreshxAuthSession($_SESSION['id']);
 <html>
 <head>
     <meta charset=utf-8 />
-    <meta name="xsrf_token" content="<?= $_SESSION['xsrf_token'] ?>" />
     <title>news</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
