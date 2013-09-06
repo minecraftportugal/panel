@@ -571,4 +571,4 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
   }
 }
 
-?>  
+?>
