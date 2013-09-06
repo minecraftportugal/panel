@@ -4,32 +4,8 @@ require('../lib.php');
 session_start();
 validateSession(true);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
-
-  $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
-  $active = isset($_POST['active']) ? $_POST['active'] : array();
-  $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
-  $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
-  $email = isset($_POST['email']) ? $_POST['email'] : NULL;
-
-  /* does the stuff /!\ */
-  $status = usersConfigure($admin, $active, $delete, s($username), s($email), $message);
-
-  if (!$status) {
-    header("Location: /admin/index.php?error=$message");
-  } else {
-    header("Location: /admin/index.php?ok=$message");
-  }
-  return;
-} else {
-  $error = isset($_GET['error']) ? $_GET['error'] : NULL;
-  $ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
-}
+$error = isset($_GET['error']) ? $_GET['error'] : NULL;
+$ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
 
 ?>
 <!DOCTYPE html>
@@ -76,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  </div>
  <? endif; ?>
 
-  <form name="manage_users" action="/admin/index.php" method="POST" autocomplete="off">
+  <form name="manage_users" action="/admin/configure.php" method="POST" autocomplete="off">
     <div class="section">
     <h2>Manage Accounts</h2>
     <div> 
