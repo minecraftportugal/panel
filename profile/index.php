@@ -5,54 +5,16 @@ require('../i18n.php');
 session_start();
 validateSession();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$error = isset($_GET['error']) ? $_GET['error'] : NULL;
+$ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
 
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
+$id = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id'];
+$own  = ($id == $_SESSION['id']) ? true : false;
+$admin = ($_SESSION['admin'] == '1') ? true : false;
+$p = getUserById($id);
 
-  $username = $_SESSION['username'];
-  $password = isset($_POST['password']) ? $_POST['password'] : NULL;
-  $new_password = isset($_POST['new_password']) ? $_POST['new_password'] : NULL;
-  $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : NULL;
-  $irc_nickname = isset($_POST['irc_nickname']) ? $_POST['irc_nickname'] : NULL;
-  $irc_password = isset($_POST['irc_password']) ? $_POST['irc_password'] : NULL;
-  $irc_auto = isset($_POST['irc_auto']) ? $_POST['irc_auto'] : 0;
-  $reset = isset($_POST['reset']) ? $_POST['reset'] : NULL;
+$skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=10&format=png&displayHairs=true&headOnly=false&login=".s($p['playername']);
 
-  /* do the stuff /!\ */
-  $message = NULL;
-  if ($reset == NULL) {
-    $status = changePassword($username, $password, $new_password, $confirm_password, $irc_nickname, $irc_password, $irc_auto, $message);
-    if (!$status) {
-      header("Location: /profile/index.php?error=$message");
-    } else {
-      header("Location: /profile/index.php?ok=$message");
-    }
-  } else {
-    $status = resetPassword($reset, $message);
-    if (!$status) {
-      header("Location: /profile/index.php?id=$reset&error=$message");
-    } else {
-      header("Location: /profile/index.php?id=$reset&ok=$message");
-    }
-  }
-
-  return;
-
-
-} else {
-  $error = isset($_GET['error']) ? $_GET['error'] : NULL;
-  $ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
-
-  $id = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id'];
-  $own  = ($id == $_SESSION['id']) ? true : false;
-  $admin = ($_SESSION['admin'] == '1') ? true : false;
-  $p = getUserById($id);
-  
-  $skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=10&format=png&displayHairs=true&headOnly=false&login=".s($p['playername']);
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -132,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>*/?>
 
    <? if ($admin): ?>
-   <form name="reset_password" action="/profile/index.php" method="POST" autocomplete="off">
+   <form name="reset_password" action="/users/reset_password.php" method="POST" autocomplete="off">
     <div class="section">
       <table style="margin-bottom: 0px !important;">
         <tbody>
@@ -149,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    </form>
    <? endif; ?>
 
-  <form name="manage_profile" action="/profile/index.php" method="POST" autocomplete="off">
+  <form name="manage_profile" action="/users/update.php" method="POST" autocomplete="off">
     <? if ($own): ?>
     <div class="section">
       <h2><?= m("L_LANGUAGE") ?></h2>
