@@ -6,12 +6,18 @@ validateSession(true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+  $xsrf_token = isset($_POST['xsrf_token']) ? $_POST['xsrf_token'] : NULL;
+  if (!validateXSRFToken($xsrf_token)) {
+    return;
+  }
+
   $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
   $active = isset($_POST['active']) ? $_POST['active'] : array();
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
   $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
   $email = isset($_POST['email']) ? $_POST['email'] : NULL;
 
+  /* does the stuff /!\ */
   $status = usersConfigure($admin, $active, $delete, s($username), s($email), $message);
 
   if (!$status) {
@@ -30,6 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <meta charset=utf-8 />
+    <meta name="xsrf_token" content="<?= $_SESSION['xsrf_token'] ?>" />
     <title>news</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
@@ -126,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </tbody>
     </table>
   </div>
-
+  <input type="hidden" name="xsrf_token" value="<?= $_SESSION['xsrf_token'] ?>" />
   </form>
   </div>
 </body>

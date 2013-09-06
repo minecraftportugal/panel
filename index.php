@@ -7,8 +7,9 @@ validateSession();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="EN"> 
 <head> 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-<title>Minecraftia!</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="xsrf_token" content="<?= $_SESSION['xsrf_token'] ?>" />
+<title>Minecraftia!</title>
 <link rel="stylesheet" href="/styles/style.css" type="text/css" />
 <link rel="stylesheet" href="/styles/jqueryui.css" type="text/css" />
 <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />

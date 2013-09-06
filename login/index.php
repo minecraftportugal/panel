@@ -5,7 +5,14 @@ require('../i18n.php');
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
   if (isset($_POST['logout']) && $_POST['logout'] == 1) {
+
+    $xsrf_token = isset($_POST['xsrf_token']) ? $_POST['xsrf_token'] : NULL;
+    if (!validateXSRFToken($xsrf_token)) {
+      return;
+    }
+
     if (isset($_SESSION['id'])) {
       terminatexAuthSession($_SESSION['id']);
     }

@@ -125,11 +125,15 @@ function validateLogin($username, $password) {
   return $val;
 }
 
+function validateXSRFToken($token) {  
+  return isset($_SESSION['xsrf_token']) && $_SESSION['xsrf_token'] == $token;
+}
+
 function initSession($id, $username, $admin) {
   $_SESSION['id'] = $id;
   $_SESSION['username'] = $username;
   $_SESSION['admin'] = $admin;
-
+  $_SESSION['xsrf_token'] = substr(md5(rand()), 0, 32);
   newxAuthSession($id);
 }
 
@@ -567,4 +571,4 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
   }
 }
 
-?>
+?>  
