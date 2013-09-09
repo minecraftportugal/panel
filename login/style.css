@@ -139,6 +139,10 @@ a.socialicon {
   height: 36px;
 }
 
+a.socialicon[href]:active {
+  background-position: 75% 75%;
+}
+
 div#social {
  width: 220px;
  height: 52px;
