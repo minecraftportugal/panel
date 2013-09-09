@@ -321,9 +321,23 @@ function getLastSession($id) {
 function newxAuthSession($accountid) {
 
   $ip = $_SERVER['REMOTE_ADDR'];
+
+  // Insert into sessions table
   $q = "
   INSERT INTO sessions(accountid, ipaddress, logintime) VALUES($accountid, '$ip', sysdate())
   ON DUPLICATE KEY UPDATE ipaddress = '$ip', logintime = sysdate()";
+  list($result, $con) = q($q);
+
+  $result = mysql_query($q);
+  if (!$result) {
+    die('Invalid query: ' . mysql_error());
+  }
+  mysql_close($con);
+
+  $q = "
+  UPDATE accounts
+  SET lastlogindate = sysdate(), lastloginip = '$ip'
+  WHERE id = $accountid";
   list($result, $con) = q($q);
 
   $result = mysql_query($q);
