@@ -1,22 +1,10 @@
-<?php
-require('../config.php');
-require('../lib.php');
-require('../i18n.php');
-session_start();
-
-if (isLoggedIn()) {
-  header('Location: /');
-  exit();
-}
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset=utf-8 />
     <title><?= m("L_TITLE") ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/styles/login.css" />
     <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
     <link rel="shortcut icon" href="../favicon.ico" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
@@ -36,7 +24,7 @@ if (isLoggedIn()) {
       <p><?= m("L_WELCOME3"); ?> </p>
     </div>
     <div id="actions">
-      <form name="login" method="post" action="/sessions/create.php">
+      <form name="login" method="post" action="/login">
         <span class="center"><input type="text" name="username" autofocus="true" placeholder="username" /></span>
         <span class="center"><input type="password" name="password" placeholder="password" /></span>
         <span class="center"><input type="submit" value="Login!"/></span>
