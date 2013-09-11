@@ -6,7 +6,10 @@ require("vendors/PHPMailer/class.phpmailer.php");
 require("config.php");
 
 function s($string) {
-  return mysql_real_escape_string($string);
+  global $cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass, $cfg_mysql_db;
+  $con = mysql_connect($cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass) or die(mysql_error());
+
+  return mysql_real_escape_string($string, $con);
 }
 
 function q($sql, $db = null) {
@@ -98,10 +101,13 @@ function getNewest() {
 
   return $a;
 }
+
 function validateLogin($username, $password) {
+  global $cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass, $cfg_mysql_db;
+  $con = mysql_connect($cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass) or die(mysql_error());
 
   $val = NULL;
-  $username = mysql_real_escape_string($username);
+  $username = mysql_real_escape_string($username, $con);
   $q = "SELECT id, playername, password, admin FROM accounts WHERE playername = '$username' AND active=1;";
   list($result, $con) = q($q);
 
