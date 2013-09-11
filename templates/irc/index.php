@@ -1,9 +1,3 @@
-<?php
-require('../config.php');
-require('../lib.php');
-session_start();
-validateSession();
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
@@ -12,7 +6,7 @@ validateSession();
  <meta name="author" content="Valentin Manthei - lightIRC.com" />
  <title></title>
  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
- <script type="text/javascript" src="config.js"></script>
+ <script type="text/javascript" src="/scripts/irc.js"></script>
  <script type="text/javascript" src="/scripts/frames.js"></script>
  <script type="text/javascript" src="/scripts/jquery.js"></script>
  <style type="text/css">

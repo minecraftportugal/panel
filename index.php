@@ -22,6 +22,9 @@ require_once('controllers/users/reset_password.php');
 require_once('controllers/admin/index.php');
 require_once('controllers/admin/configure.php');
 
+require_once('controllers/irc/index.php');
+require_once('controllers/webchat/index.php');
+
 $r = new Router();
 
 $r->map('GET',  '/', 'home');
@@ -40,6 +43,9 @@ $r->map('POST', '/users/update', 'users_update'); // Should be a put
 
 $r->map('GET',  '/admin', 'admin_index');
 $r->map('POST', '/admin/configure', 'admin_configure');
+
+$r->map('GET', '/irc', 'irc_index');
+$r->map('GET', '/webchat', 'webchat_index');
 
 $path = $_SERVER['PATH_INFO'];
 if ($path == NULL) $path = '/';
