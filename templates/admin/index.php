@@ -19,7 +19,7 @@
    <? if (isLoggedIn()): ?>
   <div class="section status userbar">
   <div class="section-left">
-    <? $head_url = "/profile/3d.php?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
+    <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
     <a style="background-image: url('<?= $head_url ?>');" class="button" id="profile" href="/profile" title="Profile"><?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
@@ -60,8 +60,8 @@
       <? foreach(getUserList() as $r): ?>
       <? $a = getLastSession($r["id"]); ?>
         <tr>
-          <? $head_url = "/profile/3d.php?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$r['playername']; ?>
-          <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;"><a class="button-padded" style="background-image: url('<?= $head_url ?>');" href="/profile/index.php?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>"><?= $r["playername"] ?></a></td>
+          <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$r['playername']; ?>
+          <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;"><a class="button-padded" style="background-image: url('<?= $head_url ?>');" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>"><?= $r["playername"] ?></a></td>
           <td>
             <span title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
               <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>

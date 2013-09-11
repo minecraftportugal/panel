@@ -1,21 +1,3 @@
-<?
-require('../config.php');
-require('../lib.php');
-require('../i18n.php');
-session_start();
-validateSession();
-
-$error = isset($_GET['error']) ? $_GET['error'] : NULL;
-$ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
-
-$id = isset($_GET['id']) ? $_GET['id'] : $_SESSION['id'];
-$own  = ($id == $_SESSION['id']) ? true : false;
-$admin = ($_SESSION['admin'] == '1') ? true : false;
-$p = getUserById($id);
-
-$skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=10&format=png&displayHairs=true&headOnly=false&login=".s($p['playername']);
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +20,7 @@ $skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&rati
   <? if (isLoggedIn()): ?>
   <div class="section status userbar">
   <div class="section-left">
-    <? $head_url = "/profile/3d.php?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
+    <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
     <a style="background-image: url('<?= $head_url ?>');" class="button" id="profile" href="/profile" title="Profile"><?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
@@ -65,7 +47,7 @@ $skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&rati
  <? endif; ?>
 
  <?
-   $head_url = "/profile/3d.php?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$p['playername'];
+   $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$p['playername'];
  ?>
   <div class="section">
     <h1 class="playername">
@@ -94,7 +76,7 @@ $skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&rati
     </div>*/?>
 
    <? if ($admin): ?>
-   <form name="reset_password" action="/users/reset_password.php" method="POST" autocomplete="off">
+   <form name="reset_password" action="/reset_password" method="POST" autocomplete="off">
     <div class="section">
       <table style="margin-bottom: 0px !important;">
         <tbody>
@@ -111,7 +93,7 @@ $skin_url = "/profile/3d.php?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&rati
    </form>
    <? endif; ?>
 
-  <form name="manage_profile" action="/users/update.php" method="POST" autocomplete="off">
+  <form name="manage_profile" action="/users/update" method="POST" autocomplete="off">
     <? if ($own): ?>
     <div class="section">
       <h2><?= m("L_LANGUAGE") ?></h2>

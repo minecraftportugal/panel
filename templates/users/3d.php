@@ -1,8 +1,4 @@
 <?php
-require('../config.php');
-require('../lib.php');
-session_start();
-validateSession();
 
 /*
 	* Copyright (c) 2012, Pierre Gros
@@ -136,7 +132,23 @@ validateSession();
 	$maxX = 0;
 	$minY = 0;
 	$maxY = 0;
-	
+
+  class Poop {
+    public $ca;
+    public $sa;
+    public $cw;
+    public $sw;
+	  public $minX = 0;
+	  public $maxX = 0;
+	  public $minY = 0;
+	  public $maxY = 0;
+  }
+
+  $poop = new Poop();
+  $poop->ca = $ca;
+  $poop->sa = $sa;
+  $poop->cw = $cw;
+  $poop->sw = $sw;
 	
 	$times[] = array('Calculs-Angles', microtime_float());
 	
@@ -157,14 +169,14 @@ validateSession();
 	{
 		unset($cubeMaxDepthFaces, $cubePoints);
 		$cubePoints = array();
-		$cubePoints[] = array(new Point(array('x' => 0,'y' => 0,'z' => 0)), array('arriere',   'droite', 'haut'));//0
-		$cubePoints[] = array(new Point(array('x' => 0,'y' => 0,'z' => 1)), array('avant',     'droite', 'haut'));//1
-		$cubePoints[] = array(new Point(array('x' => 0,'y' => 1,'z' => 0)), array('arriere',   'droite', 'bas'));//2
-		$cubePoints[] = array(new Point(array('x' => 0,'y' => 1,'z' => 1)), array('avant',     'droite', 'bas'));//3
-		$cubePoints[] = array(new Point(array('x' => 1,'y' => 0,'z' => 0)), array('arriere',   'gauche', 'haut'));//4
-		$cubePoints[] = array(new Point(array('x' => 1,'y' => 0,'z' => 1)), array('avant',     'gauche', 'haut'));//5
-		$cubePoints[] = array(new Point(array('x' => 1,'y' => 1,'z' => 0)), array('arriere',   'gauche', 'bas'));//6
-		$cubePoints[] = array(new Point(array('x' => 1,'y' => 1,'z' => 1)), array('avant',     'gauche', 'bas'));//7
+		$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 0,'z' => 0)), array('arriere',   'droite', 'haut'));//0
+		$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 0,'z' => 1)), array('avant',     'droite', 'haut'));//1
+		$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 1,'z' => 0)), array('arriere',   'droite', 'bas'));//2
+		$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 1,'z' => 1)), array('avant',     'droite', 'bas'));//3
+		$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 0,'z' => 0)), array('arriere',   'gauche', 'haut'));//4
+		$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 0,'z' => 1)), array('avant',     'gauche', 'haut'));//5
+		$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 1,'z' => 0)), array('arriere',   'gauche', 'bas'));//6
+		$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 1,'z' => 1)), array('avant',     'gauche', 'bas'));//7
 		foreach($cubePoints as $cubePoint)
 		{
 			
@@ -185,14 +197,14 @@ validateSession();
 	
 	
 	$cubePoints = array();
-	$cubePoints[] = array(new Point(array('x' => 0,'y' => 0,'z' => 0)), array('arriere',   'droite', 'haut'));//0
-	$cubePoints[] = array(new Point(array('x' => 0,'y' => 0,'z' => 1)), array('avant',     'droite', 'haut'));//1
-	$cubePoints[] = array(new Point(array('x' => 0,'y' => 1,'z' => 0)), array('arriere',   'droite', 'bas'));//2
-	$cubePoints[] = array(new Point(array('x' => 0,'y' => 1,'z' => 1)), array('avant',     'droite', 'bas'));//3
-	$cubePoints[] = array(new Point(array('x' => 1,'y' => 0,'z' => 0)), array('arriere',   'gauche', 'haut'));//4
-	$cubePoints[] = array(new Point(array('x' => 1,'y' => 0,'z' => 1)), array('avant',     'gauche', 'haut'));//5
-	$cubePoints[] = array(new Point(array('x' => 1,'y' => 1,'z' => 0)), array('arriere',   'gauche', 'bas'));//6
-	$cubePoints[] = array(new Point(array('x' => 1,'y' => 1,'z' => 1)), array('avant',     'gauche', 'bas'));//7
+	$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 0,'z' => 0)), array('arriere',   'droite', 'haut'));//0
+	$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 0,'z' => 1)), array('avant',     'droite', 'haut'));//1
+	$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 1,'z' => 0)), array('arriere',   'droite', 'bas'));//2
+	$cubePoints[] = array(new Point($poop, array('x' => 0,'y' => 1,'z' => 1)), array('avant',     'droite', 'bas'));//3
+	$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 0,'z' => 0)), array('arriere',   'gauche', 'haut'));//4
+	$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 0,'z' => 1)), array('avant',     'gauche', 'haut'));//5
+	$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 1,'z' => 0)), array('arriere',   'gauche', 'bas'));//6
+	$cubePoints[] = array(new Point($poop, array('x' => 1,'y' => 1,'z' => 1)), array('avant',     'gauche', 'bas'));//7
 	
 	unset($cubeMaxDepthFaces);
 	foreach($cubePoints as $cubePoint)
@@ -213,26 +225,6 @@ validateSession();
 	
 	
 	$times[] = array('Determination-des-faces', microtime_float());
-	
-	/*$cubePoints = array();
-	$cubePoints[] = new Point(array('x' => 0,'y' => 0,'z' => 0));//0
-	$cubePoints[] = new Point(array('x' => 0,'y' => 0,'z' => 1));//1
-	$cubePoints[] = new Point(array('x' => 0,'y' => 1,'z' => 0));//2
-	$cubePoints[] = new Point(array('x' => 0,'y' => 1,'z' => 1));//3
-	$cubePoints[] = new Point(array('x' => 1,'y' => 0,'z' => 0));//4
-	$cubePoints[] = new Point(array('x' => 1,'y' => 0,'z' => 1));//5
-	$cubePoints[] = new Point(array('x' => 1,'y' => 1,'z' => 0));//6
-	$cubePoints[] = new Point(array('x' => 1,'y' => 1,'z' => 1));//7
-	*/
-	/*
-	$polygones = array();
-	$polygones[] = new Polygon(array($cubePoints[1], $cubePoints[5], $cubePoints[7], $cubePoints[3]), imagecolorat($imgPng, 0, 0));
-	$polygones[] = new Polygon(array($cubePoints[0], $cubePoints[1], $cubePoints[3], $cubePoints[2]), imagecolorat($imgPng, 1, 0));
-	$polygones[] = new Polygon(array($cubePoints[0], $cubePoints[1], $cubePoints[5], $cubePoints[4]), imagecolorat($imgPng, 2, 0));
-	$polygones[] = new Polygon(array($cubePoints[4], $cubePoints[5], $cubePoints[7], $cubePoints[6]), imagecolorat($imgPng, 3, 0));
-	$polygones[] = new Polygon(array($cubePoints[2], $cubePoints[6], $cubePoints[7], $cubePoints[3]), imagecolorat($imgPng, 4, 0));
-	$polygones[] = new Polygon(array($cubePoints[0], $cubePoints[4], $cubePoints[6], $cubePoints[2]), imagecolorat($imgPng, 5, 0));
-	*/
 	
 	$faceDepths = array();
 	
@@ -259,11 +251,11 @@ validateSession();
 		{
 			if(!isset($volumePoints[$i][$j][-2*$hdRatio]))
 			{
-				$volumePoints[$i][$j][-2*$hdRatio] = new Point(array('x' => $i,'y' => $j,'z' => -2*$hdRatio));
+				$volumePoints[$i][$j][-2*$hdRatio] = new Point($poop, array('x' => $i,'y' => $j,'z' => -2*$hdRatio));
 			}
 			if(!isset($volumePoints[$i][$j][6*$hdRatio]))
 			{
-				$volumePoints[$i][$j][6*$hdRatio] = new Point(array('x' => $i,'y' => $j,'z' => 6*$hdRatio));
+				$volumePoints[$i][$j][6*$hdRatio] = new Point($poop, array('x' => $i,'y' => $j,'z' => 6*$hdRatio));
 			}
 		}
 	}
@@ -273,10 +265,10 @@ validateSession();
 		{
 			if(!isset($volumePoints[0][$j][$k]))
 			{
-				$volumePoints[0][$j][$k] = new Point(array('x' => 0,'y' => $j,'z' => $k));
+				$volumePoints[0][$j][$k] = new Point($poop, array('x' => 0,'y' => $j,'z' => $k));
 			}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 			{
-				$volumePoints[8*$hdRatio][$j][$k] = new Point(array('x' => 8*$hdRatio,'y' => $j,'z' => $k));
+				$volumePoints[8*$hdRatio][$j][$k] = new Point($poop, array('x' => 8*$hdRatio,'y' => $j,'z' => $k));
 			}
 		}
 	}
@@ -286,11 +278,11 @@ validateSession();
 		{
 			if(!isset($volumePoints[$i][0][$k]))
 			{
-				$volumePoints[$i][0][$k] = new Point(array('x' => $i,'y' => 0,'z' => $k));
+				$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i,'y' => 0,'z' => $k));
 			}
 			if(!isset($volumePoints[$i][8*$hdRatio][$k]))
 			{
-				$volumePoints[$i][8*$hdRatio][$k] = new Point(array('x' => $i,'y' => 8*$hdRatio,'z' => $k));
+				$volumePoints[$i][8*$hdRatio][$k] = new Point($poop, array('x' => $i,'y' => 8*$hdRatio,'z' => $k));
 			}
 		}
 	}
@@ -366,11 +358,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][$j][-2*$hdRatio]))
 				{
-					$volumePoints[$i][$j][-2*$hdRatio] = new Point(array('x' => $i*9/8-0.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => -2.5*$hdRatio));
+					$volumePoints[$i][$j][-2*$hdRatio] = new Point($poop, array('x' => $i*9/8-0.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => -2.5*$hdRatio));
 				}
 				if(!isset($volumePoints[$i][$j][6*$hdRatio]))
 				{
-					$volumePoints[$i][$j][6*$hdRatio] = new Point(array('x' => $i*9/8-0.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => 6.5*$hdRatio));
+					$volumePoints[$i][$j][6*$hdRatio] = new Point($poop, array('x' => $i*9/8-0.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => 6.5*$hdRatio));
 				}
 			}
 		}
@@ -380,10 +372,10 @@ validateSession();
 			{
 				if(!isset($volumePoints[0][$j][$k]))
 				{
-					$volumePoints[0][$j][$k] = new Point(array('x' => -0.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
+					$volumePoints[0][$j][$k] = new Point($poop, array('x' => -0.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
 				}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 				{
-					$volumePoints[8*$hdRatio][$j][$k] = new Point(array('x' => 8.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
+					$volumePoints[8*$hdRatio][$j][$k] = new Point($poop, array('x' => 8.5*$hdRatio,'y' => $j*9/8-0.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
 				}
 			}
 		}
@@ -393,11 +385,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][0][$k]))
 				{
-					$volumePoints[$i][0][$k] = new Point(array('x' => $i*9/8-0.5*$hdRatio,'y' => -0.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
+					$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i*9/8-0.5*$hdRatio,'y' => -0.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
 				}
 				if(!isset($volumePoints[$i][8*$hdRatio][$k]))
 				{
-					$volumePoints[$i][8*$hdRatio][$k] = new Point(array('x' => $i*9/8-0.5*$hdRatio,'y' => 8.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
+					$volumePoints[$i][8*$hdRatio][$k] = new Point($poop, array('x' => $i*9/8-0.5*$hdRatio,'y' => 8.5*$hdRatio,'z' => $k*9/8-0.5*$hdRatio));
 				}
 			}
 		}
@@ -474,11 +466,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][$j][0]))
 				{
-					$volumePoints[$i][$j][0] = new Point(array('x' => $i,'y' => $j+8*$hdRatio,'z' => 0));
+					$volumePoints[$i][$j][0] = new Point($poop, array('x' => $i,'y' => $j+8*$hdRatio,'z' => 0));
 				}
 				if(!isset($volumePoints[$i][$j][4*$hdRatio]))
 				{
-					$volumePoints[$i][$j][4*$hdRatio] = new Point(array('x' => $i,'y' => $j+8*$hdRatio,'z' => 4*$hdRatio));
+					$volumePoints[$i][$j][4*$hdRatio] = new Point($poop, array('x' => $i,'y' => $j+8*$hdRatio,'z' => 4*$hdRatio));
 				}
 			}
 		}
@@ -488,10 +480,10 @@ validateSession();
 			{
 				if(!isset($volumePoints[0][$j][$k]))
 				{
-					$volumePoints[0][$j][$k] = new Point(array('x' => 0,'y' => $j+8*$hdRatio,'z' => $k));
+					$volumePoints[0][$j][$k] = new Point($poop, array('x' => 0,'y' => $j+8*$hdRatio,'z' => $k));
 				}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 				{
-					$volumePoints[8*$hdRatio][$j][$k] = new Point(array('x' => 8*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
+					$volumePoints[8*$hdRatio][$j][$k] = new Point($poop, array('x' => 8*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -501,11 +493,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][0][$k]))
 				{
-					$volumePoints[$i][0][$k] = new Point(array('x' => $i,'y' => 0+8*$hdRatio,'z' => $k));
+					$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i,'y' => 0+8*$hdRatio,'z' => $k));
 				}
 				if(!isset($volumePoints[$i][12*$hdRatio][$k]))
 				{
-					$volumePoints[$i][12*$hdRatio][$k] = new Point(array('x' => $i,'y' => 12*$hdRatio+8*$hdRatio,'z' => $k));
+					$volumePoints[$i][12*$hdRatio][$k] = new Point($poop, array('x' => $i,'y' => 12*$hdRatio+8*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -579,11 +571,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][$j][0]))
 				{
-					$volumePoints[$i][$j][0] = new Point(array('x' => $i-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => 0));
+					$volumePoints[$i][$j][0] = new Point($poop, array('x' => $i-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => 0));
 				}
 				if(!isset($volumePoints[$i][$j][4*$hdRatio]))
 				{
-					$volumePoints[$i][$j][4*$hdRatio] = new Point(array('x' => $i-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => 4*$hdRatio));
+					$volumePoints[$i][$j][4*$hdRatio] = new Point($poop, array('x' => $i-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => 4*$hdRatio));
 				}
 			}
 		}
@@ -593,10 +585,10 @@ validateSession();
 			{
 				if(!isset($volumePoints[0][$j][$k]))
 				{
-					$volumePoints[0][$j][$k] = new Point(array('x' => 0-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
+					$volumePoints[0][$j][$k] = new Point($poop, array('x' => 0-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
 				}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 				{
-					$volumePoints[4*$hdRatio][$j][$k] = new Point(array('x' => 4*$hdRatio-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
+					$volumePoints[4*$hdRatio][$j][$k] = new Point($poop, array('x' => 4*$hdRatio-4*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -606,11 +598,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][0][$k]))
 				{
-					$volumePoints[$i][0][$k] = new Point(array('x' => $i-4*$hdRatio,'y' => 0+8*$hdRatio,'z' => $k));
+					$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i-4*$hdRatio,'y' => 0+8*$hdRatio,'z' => $k));
 				}
 				if(!isset($volumePoints[$i][12*$hdRatio][$k]))
 				{
-					$volumePoints[$i][12*$hdRatio][$k] = new Point(array('x' => $i-4*$hdRatio,'y' => 12*$hdRatio+8*$hdRatio,'z' => $k));
+					$volumePoints[$i][12*$hdRatio][$k] = new Point($poop, array('x' => $i-4*$hdRatio,'y' => 12*$hdRatio+8*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -684,11 +676,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][$j][0]))
 				{
-					$volumePoints[$i][$j][0] = new Point(array('x' => $i+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => 0));
+					$volumePoints[$i][$j][0] = new Point($poop, array('x' => $i+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => 0));
 				}
 				if(!isset($volumePoints[$i][$j][4*$hdRatio]))
 				{
-					$volumePoints[$i][$j][4*$hdRatio] = new Point(array('x' => $i+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => 4*$hdRatio));
+					$volumePoints[$i][$j][4*$hdRatio] = new Point($poop, array('x' => $i+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => 4*$hdRatio));
 				}
 			}
 		}
@@ -698,10 +690,10 @@ validateSession();
 			{
 				if(!isset($volumePoints[0][$j][$k]))
 				{
-					$volumePoints[0][$j][$k] = new Point(array('x' => 0+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
+					$volumePoints[0][$j][$k] = new Point($poop, array('x' => 0+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
 				}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 				{
-					$volumePoints[4*$hdRatio][$j][$k] = new Point(array('x' => 4*$hdRatio+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
+					$volumePoints[4*$hdRatio][$j][$k] = new Point($poop, array('x' => 4*$hdRatio+8*$hdRatio,'y' => $j+8*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -711,11 +703,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][0][$k]))
 				{
-					$volumePoints[$i][0][$k] = new Point(array('x' => $i+8*$hdRatio,'y' => 0+8*$hdRatio,'z' => $k));
+					$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i+8*$hdRatio,'y' => 0+8*$hdRatio,'z' => $k));
 				}
 				if(!isset($volumePoints[$i][12*$hdRatio][$k]))
 				{
-					$volumePoints[$i][12*$hdRatio][$k] = new Point(array('x' => $i+8*$hdRatio,'y' => 12*$hdRatio+8*$hdRatio,'z' => $k));
+					$volumePoints[$i][12*$hdRatio][$k] = new Point($poop, array('x' => $i+8*$hdRatio,'y' => 12*$hdRatio+8*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -789,11 +781,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][$j][0]))
 				{
-					$volumePoints[$i][$j][0] = new Point(array('x' => $i,'y' => $j+20*$hdRatio,'z' => 0));
+					$volumePoints[$i][$j][0] = new Point($poop, array('x' => $i,'y' => $j+20*$hdRatio,'z' => 0));
 				}
 				if(!isset($volumePoints[$i][$j][4*$hdRatio]))
 				{
-					$volumePoints[$i][$j][4*$hdRatio] = new Point(array('x' => $i,'y' => $j+20*$hdRatio,'z' => 4*$hdRatio));
+					$volumePoints[$i][$j][4*$hdRatio] = new Point($poop, array('x' => $i,'y' => $j+20*$hdRatio,'z' => 4*$hdRatio));
 				}
 			}
 		}
@@ -803,10 +795,10 @@ validateSession();
 			{
 				if(!isset($volumePoints[0][$j][$k]))
 				{
-					$volumePoints[0][$j][$k] = new Point(array('x' => 0,'y' => $j+20*$hdRatio,'z' => $k));
+					$volumePoints[0][$j][$k] = new Point($poop, array('x' => 0,'y' => $j+20*$hdRatio,'z' => $k));
 				}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 				{
-					$volumePoints[4*$hdRatio][$j][$k] = new Point(array('x' => 4*$hdRatio,'y' => $j+20*$hdRatio,'z' => $k));
+					$volumePoints[4*$hdRatio][$j][$k] = new Point($poop, array('x' => 4*$hdRatio,'y' => $j+20*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -816,11 +808,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][0][$k]))
 				{
-					$volumePoints[$i][0][$k] = new Point(array('x' => $i,'y' => 0+20*$hdRatio,'z' => $k));
+					$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i,'y' => 0+20*$hdRatio,'z' => $k));
 				}
 				if(!isset($volumePoints[$i][12*$hdRatio][$k]))
 				{
-					$volumePoints[$i][12*$hdRatio][$k] = new Point(array('x' => $i,'y' => 12*$hdRatio+20*$hdRatio,'z' => $k));
+					$volumePoints[$i][12*$hdRatio][$k] = new Point($poop, array('x' => $i,'y' => 12*$hdRatio+20*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -894,11 +886,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][$j][0]))
 				{
-					$volumePoints[$i][$j][0] = new Point(array('x' => $i+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => 0));
+					$volumePoints[$i][$j][0] = new Point($poop, array('x' => $i+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => 0));
 				}
 				if(!isset($volumePoints[$i][$j][4*$hdRatio]))
 				{
-					$volumePoints[$i][$j][4*$hdRatio] = new Point(array('x' => $i+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => 4*$hdRatio));
+					$volumePoints[$i][$j][4*$hdRatio] = new Point($poop, array('x' => $i+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => 4*$hdRatio));
 				}
 			}
 		}
@@ -908,10 +900,10 @@ validateSession();
 			{
 				if(!isset($volumePoints[0][$j][$k]))
 				{
-					$volumePoints[0][$j][$k] = new Point(array('x' => 0+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => $k));
+					$volumePoints[0][$j][$k] = new Point($poop, array('x' => 0+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => $k));
 				}if(!isset($volumePoints[8*$hdRatio][$j][$k]))
 				{
-					$volumePoints[4*$hdRatio][$j][$k] = new Point(array('x' => 4*$hdRatio+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => $k));
+					$volumePoints[4*$hdRatio][$j][$k] = new Point($poop, array('x' => 4*$hdRatio+4*$hdRatio,'y' => $j+20*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -921,11 +913,11 @@ validateSession();
 			{
 				if(!isset($volumePoints[$i][0][$k]))
 				{
-					$volumePoints[$i][0][$k] = new Point(array('x' => $i+4*$hdRatio,'y' => 0+20*$hdRatio,'z' => $k));
+					$volumePoints[$i][0][$k] = new Point($poop, array('x' => $i+4*$hdRatio,'y' => 0+20*$hdRatio,'z' => $k));
 				}
 				if(!isset($volumePoints[$i][12*$hdRatio][$k]))
 				{
-					$volumePoints[$i][12*$hdRatio][$k] = new Point(array('x' => $i+4*$hdRatio,'y' => 12*$hdRatio+20*$hdRatio,'z' => $k));
+					$volumePoints[$i][12*$hdRatio][$k] = new Point($poop, array('x' => $i+4*$hdRatio,'y' => 12*$hdRatio+20*$hdRatio,'z' => $k));
 				}
 			}
 		}
@@ -1065,8 +1057,8 @@ validateSession();
 	
 	$times[] = array('Projection-plan', microtime_float());
 	
-	$width = $maxX - $minX;
-	$height = $maxY - $minY;
+	$width = $poop->maxX - $poop->minX;
+	$height = $poop->maxY - $poop->minY;
 	//var_dump($minX,$maxX, $width, $minY,$maxY, $height);
 	
 	$ratio = intval($_GET['ratio']);
@@ -1093,7 +1085,7 @@ validateSession();
 		"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 		 
 		<svg width="100%" height="100%" version="1.1"
-		xmlns="http://www.w3.org/2000/svg" viewBox="'.$minX.' '.$minY.' '.$width.' '.$height.'">';
+		xmlns="http://www.w3.org/2000/svg" viewBox="'.$poop->minX.' '.$poop->minY.' '.$width.' '.$height.'">';
 	} else {
 		header('Content-type: image/png');
 		$image = imagecreatetruecolor($ratio * $width +1, $ratio * $height +1);
@@ -1193,7 +1185,7 @@ validateSession();
 					if($_GET['format']=='svg')
 						echo $poly->getSvgPolygon(1);
 					else
-						$poly->addPngPolygon($image, $minX, $minY, $ratio);
+						$poly->addPngPolygon($image, $poop->minX, $poop->minY, $ratio);
 				}
 			}
 		}
@@ -1214,13 +1206,14 @@ validateSession();
 	}
 	else
 	{
-		imagepng($image);
-		imagedestroy($image);
 		for($i=1;$i<count($times);$i++)
 		{
 			header('generation-time-'.$i .'-' .$times[$i][0].': ' . ($times[$i][1] - $times[$i-1][1])*1000 . 'ms');
 		}
 		header('generation-time-'.count($times) .'-TOTAL: ' . ($times[count($times)-1][1] - $times[0][1])*1000 . 'ms');
+
+		imagepng($image);
+		imagedestroy($image);
 	}
 	
 	
@@ -1231,8 +1224,9 @@ validateSession();
 		private $_isProjected = false;
 		private $_isPreProjected = false;
 		
-		function __construct($originCoord)//constructeur parametrer
+		function __construct($poop, $originCoord)//constructeur parametrer
 		{
+      $this->poop = $poop;
 			if(is_array($originCoord) && count($originCoord)==3) {
 				$this->_originCoord = array(
 					'x' => (isset($originCoord['x'])?$originCoord['x']:0),
@@ -1244,8 +1238,11 @@ validateSession();
 		}
 		
 		function project() {
-			global $ca, $sa, $cw, $sw;
-			global $minX, $maxX, $minY, $maxY;
+			$ca = $this->poop->ca;
+			$sa = $this->poop->sa;
+			$cw = $this->poop->cw;
+			$sw = $this->poop->sw;
+
 			//1,0,1,0
 			$x = $this->_originCoord['x'];
 			$y = $this->_originCoord['y'];
@@ -1261,10 +1258,10 @@ validateSession();
 			
 			$this->_isProjected = true;
 			
-			$minX = min($minX, $this->_destCoord['x']);
-			$maxX = max($maxX, $this->_destCoord['x']);
-			$minY = min($minY, $this->_destCoord['y']);
-			$maxY = max($maxY, $this->_destCoord['y']);
+			$this->poop->minX = min($this->poop->minX, $this->_destCoord['x']);
+			$this->poop->maxX = max($this->poop->maxX, $this->_destCoord['x']);
+			$this->poop->minY = min($this->poop->minY, $this->_destCoord['y']);
+			$this->poop->maxY = max($this->poop->maxY, $this->_destCoord['y']);
 		}
 		
 		function preProject($dx, $dy, $dz, $ca, $sa, $cw, $sw) {
