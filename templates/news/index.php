@@ -1,11 +1,3 @@
-<?
-require('../config.php');
-require('../lib.php');
-require('../i18n.php');
-session_start();
-validateSession();
-refreshxAuthSession($_SESSION['id']);
-?>
 <!DOCTYPE html>
 <html>
 <head>
