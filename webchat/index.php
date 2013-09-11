@@ -1,4 +1,5 @@
 <?php
+require('../config.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
@@ -9,8 +10,7 @@
  <title>Minecraftia.PT! Webchat: PTnet</title>
  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
  <script type="text/javascript" src="config.js"></script>
- <script type="text/javascript" src="notifications.js"></script>
- <script type="text/javascript" src="../jquery.js"></script>
+ <script type="text/javascript" src="/scripts/jquery.js"></script>
  <style type="text/css">
     html { height: 100%; overflow: hidden; }
     body { 
@@ -48,7 +48,7 @@
     params.ident = "<?=dechex(ip2long($_SERVER['REMOTE_ADDR']))?>W";
     params.identifyMessage = "NickServ:Nick registado e protegido";
 
-    swfobject.embedSWF("lightIRC.swf", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
+    swfobject.embedSWF("<?= $cfg_lightirc_path ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
  </script>
 </body>
 </html>
