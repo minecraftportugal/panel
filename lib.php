@@ -73,7 +73,7 @@ function getRecent($exclude) {
   WHERE accounts.id != $exclude
   ORDER BY logintime desc LIMIT 10;";
   list($result, $con) = q($q);
-  
+
   $a = array();
   while($row = mysql_fetch_array($result))
   {
@@ -91,7 +91,7 @@ function getNewest() {
   FROM accounts INNER JOIN sessions ON accounts.id = sessions.accountid
   ORDER BY accounts.registerdate desc LIMIT 10;";
   list($result, $con) = q($q);
-  
+
   $a = array();
   while($row = mysql_fetch_array($result))
   {
@@ -235,7 +235,7 @@ function getUserList() {
 
   $q = "
   SELECT playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip, email, admin, active, id, DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
-  FROM accounts 
+  FROM accounts
   ORDER BY id desc;";
   list($result, $con) = q($q);
 
@@ -315,7 +315,7 @@ function getLastSession($id) {
   $q = "
   SELECT accountid, ipaddress, logintime as logintime
   FROM sessions
-  WHERE accountid = $id 
+  WHERE accountid = $id
   ORDER BY logintime DESC LIMIT 1";
   list($result, $con) = q($q);
 
@@ -440,7 +440,7 @@ function usersConfigure($admin, $active, $delete, $playername, $email, &$message
     } else if ($result == 4) {
       $message = "Invalid username";
       return false;
-    } 
+    }
   }
 
   //delete users
@@ -519,7 +519,7 @@ function changeIRC($username, $ircnickname, $ircpassword, $ircauto, &$message) {
   mysql_query("SET NAMES 'utf8'");
 
 
-  $q = "UPDATE accounts 
+  $q = "UPDATE accounts
         SET ircnickname = '$ircnickname', ircpassword = '$ircpassword', ircauto = '$ircauto'
         WHERE playername = '$username'";
   $result = mysql_query($q);
@@ -555,7 +555,7 @@ function resetPassword($id, &$message) {
 function emailConfirmation($playername, $password, $email, $email_ip = false) {
   global $cfg_phpmailer_username, $cfg_phpmailer_password, $cfg_phpmailer_email, $cfg_web_root;
 
-  $mail = new PHPMailer(); 
+  $mail = new PHPMailer();
 
   $mail->IsSMTP(true); // send via SMTP
 
@@ -568,14 +568,14 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
   $mail->Username = $cfg_phpmailer_username; // SMTP username
   $mail->Password = $cfg_phpmailer_password; // SMTP password
   $webmaster_email = $cfg_phpmailer_email; //Reply to this email ID
-  
+
   $name = $playername; // Recipient's name
   $mail->From = $webmaster_email;
   $mail->FromName = "Minecraftia!";
   $mail->AddAddress($email,$name);
   $mail->WordWrap = 50; // set word wrap
   $mail->IsHTML(true); // send as HTML
-  
+
   $mail->Subject = "Welcome to Minecraftia!";
   $body = file_get_contents("$cfg_web_root/templates/email.html");
   $body = str_replace('$playername', $playername, $body);
@@ -588,7 +588,7 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
   }
   $mail->Body = $body;
   $mail->AltBody = strip_tags($body); //Text Body
-  
+
   if(!$mail->Send())
   {
       die("Mailer Error: " . $mail->ErrorInfo);
