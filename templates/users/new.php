@@ -1,22 +1,10 @@
-<?php
-require('../config.php');
-require('../lib.php');
-require('../i18n.php');
-session_start();
-
-if (isLoggedIn()) {
-  header('Location: /');
-  exit();
-}
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset=utf-8 />
     <title><?= m("L_TITLE") ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/styles/register.css" />
     <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
     <link rel="shortcut icon" href="../favicon.ico" />
  
@@ -38,7 +26,7 @@ if (isLoggedIn()) {
 
     <? if ($cfg_enable_registrations): ?>
     <div id="actions">
-      <form name="login" method="post" action="/users/create.php">
+      <form name="login" method="post" action="/register">
         
         <span class="center"><input type="text" id="username" name="username" placeholder="<?= m("L_USERNAMEA") ?>" /></span>
         <span class="center"><input type="text" id="email" name="email" placeholder="<?= m("L_EMAILA") ?>" /></span>
