@@ -77,7 +77,7 @@ $(function() {
     params.showNickSelection = "false";
   <? endif; ?>
 
-    swfobject.embedSWF("lightIRC.swf", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
+    swfobject.embedSWF("<?= $cfg_lightirc_path ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
  </script>
 </body>
 </html>

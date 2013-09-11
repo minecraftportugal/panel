@@ -109,10 +109,10 @@ function onContextMenuSelect(type, nick, ident, realname) {
 /* This method gets called if you use the parameter loopServerCommands */
 /* */
 function onServerCommand(command) {
-  if (command.substring(0,4) != "PING") {
-    chatHilight(command);
-  }
-  return command.replace(/:MemoServ!suporte@PTnet.org PRIVMSG/, ":MemoServ!suporte@PTnet.org NOTICE");
+  //if (command.substring(0,4) != "PING") {
+  //}
+  //return command.replace(/:MemoServ!suporte@PTnet.org PRIVMSG/, ":MemoServ!suporte@PTnet.org NOTICE");
+  return command;
 }
 
 window.onbeforeunload = function() {
