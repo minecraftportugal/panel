@@ -2,6 +2,7 @@
 
 session_start();
 
+require_once('environment.php');
 require_once('router.php');
 
 require_once('controllers/home.php');
@@ -47,8 +48,7 @@ $r->map('POST', '/admin/configure', 'admin_configure');
 $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');
 
-$path = $_SERVER['PATH_INFO'];
-if ($path == NULL) $path = '/';
+$path = getPathInfo();
 $method = $_SERVER['REQUEST_METHOD'];
 
 $x = $r->match($method, $path);
