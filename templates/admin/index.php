@@ -1,13 +1,3 @@
-<?
-require('../config.php');
-require('../lib.php');
-session_start();
-validateSession(true);
-
-$error = isset($_GET['error']) ? $_GET['error'] : NULL;
-$ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +42,7 @@ $ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
  </div>
  <? endif; ?>
 
-  <form name="manage_users" action="/admin/configure.php" method="POST" autocomplete="off">
+  <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
     <div class="section">
     <h2>Manage Accounts</h2>
     <div> 
