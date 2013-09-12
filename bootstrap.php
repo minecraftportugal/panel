@@ -6,6 +6,7 @@ define('MINECRAFTIA_NICE_PATH', MINECRAFTIA_PATH . '/lib');
 
 require MINECRAFTIA_NICE_PATH . '/db/CONNice.php';
 require MINECRAFTIA_NICE_PATH . '/db/DBNice.php';
+require MINECRAFTIA_NICE_PATH . '/db/Bitch.php';
 
 use minecraftia\db\CONNice;
 
