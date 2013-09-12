@@ -1,6 +1,6 @@
 body {
  font-size: 14px;
- font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+ font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
  background: #000 url('/images/backgrounds/register/1.png');
  color: #FFF;
 }
