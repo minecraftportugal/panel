@@ -1,0 +1,88 @@
+<?php
+
+namespace minecraftia\db;
+
+require MINECRAFTIA_NICE_PATH . '/db/DBNice.php';
+
+use minecraftia\db\DBNice;
+use PDOException;
+
+
+class CONNice {
+
+  protected static $_instances = [];
+
+  protected static $_configs = [];
+
+  protected static $_status = [];
+
+
+  public function __construct() {}
+  public function __clone() {}
+
+  public static function add($name, array $config = []) {
+    $defaults = [
+      'database' => null,
+      'host' => null,
+      'port' => null,
+      'user' => null,
+      'password' => null,
+      'persistent' => null
+    ];
+
+    if (is_array($name)) {
+      $name = 'default';
+    }
+
+    static::$_configs[$name] = $config + $defaults;
+  }
+
+  public static function get($name = null, array $options = []) {
+    $defaults = [
+      'config' => true
+    ];
+    $options += $defaults;
+
+    if ($name === null) {
+      return static::$_configs;
+    }
+
+    if (isset(static::$_configs[$name]) && $options['config']) {
+      return static::$_configs[$name];
+    }
+
+    if (!isset(static::$_instances[$name])) {
+      static::$_instances[$name] = new DBNice(static::$_configs[$name]);
+    }
+
+    return static::$_instances[$name];
+  }
+
+  public static function close($name = null) {
+    if (!$name) {
+      foreach (static::$_instances as $name => $conn) {
+        try {
+          $conn->close();
+        } catch (PDOException $e) {
+          die("Error closing connection `{$name}`: " . $e->getMessage());
+        }
+      }
+      return true;
+    }
+
+    if (!isset(static::$_configs[$name])) {
+      return false;
+    }
+
+    return isset(static::$_instances[$name]) ? static::$_instances[$name]->close() : false;
+  }
+
+
+  /**
+   * Querying methods
+   * This stuff should be in another layer or even using the returning instances but what the heck..
+   */
+  public static function find($sql, array $params, array $options = []) {}
+
+  public static function query($sql, array $params, array $options = []) {}
+}
