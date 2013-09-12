@@ -2,8 +2,6 @@
 
 namespace minecraftia\test;
 
-require 'DBNice.php';
-
 use minecraftia\db\DBNice;
 
 $test = new DBNice();

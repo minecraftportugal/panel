@@ -28,9 +28,10 @@ class DBNice {
       'prefix' => 'mysql',
       'host' => 'localhost',
       'port' => 3306,
-      'dbname' => 'minecraft_auth',
+      'database' => 'minecraft_auth',
       'user' => 'minecraft',
       'password' => 'minecr4ft',
+      'encoding' => 'utf8',
       'dsn' => null,
       'persistent' => true,
       'options' => []
@@ -39,6 +40,10 @@ class DBNice {
     $this->_config = $config + $defaults;
 
     $this->connect();
+  }
+
+  public function __destruct() {
+    $this->close();
   }
 
   public function connect(array $options = []) {
@@ -53,7 +58,7 @@ class DBNice {
       $dsn,
       $this->_config['host'],
       $this->_config['port'],
-      $this->_config['dbname']
+      $this->_config['database']
     );
 
     $this->_config['options'] = [
@@ -72,6 +77,10 @@ class DBNice {
       die('Error ' . $e->getMessage());
     }
 
+    if ($this->_config['encoding']) {
+      $this->encoding($this->_config['encoding']);
+    }
+
     $this->_connected = true;
   }
 
@@ -87,6 +96,27 @@ class DBNice {
     unset($this->connection);
     $this->connection = null;
     return $this->_conected = false;
+  }
+
+  public function encoding($encoding = null) {
+    $default = 'utf8';
+
+    if (!$encoding) {
+      return $this->_config['encoding'];
+    }
+
+    try {
+      $encoding = $this->_config['encoding'] ? $this->_config['encoding'] : $default;
+      $this->connection->exec("SET NAMES '{$encoding}'");
+      return true;
+    } catch (PDOException $e) {
+      die("Error trying to set the encoding to `{$encoding}`: " . $e->getMessage());
+      /**
+       * When die statements will be removed once the error handler is finished
+       * because of it, the next statement doesn't happen, never.
+       */
+      return false;
+    }
   }
 
 

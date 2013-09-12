@@ -2,8 +2,6 @@
 
 namespace minecraftia\db;
 
-require MINECRAFTIA_NICE_PATH . '/db/DBNice.php';
-
 use minecraftia\db\DBNice;
 use PDOException;
 
@@ -22,11 +20,13 @@ class CONNice {
 
   public static function add($name, array $config = []) {
     $defaults = [
+      'prefix' => 'mysql',
       'database' => null,
       'host' => null,
       'port' => null,
       'user' => null,
       'password' => null,
+      'encoding' => 'utf8',
       'persistent' => null
     ];
 
@@ -39,7 +39,7 @@ class CONNice {
 
   public static function get($name = null, array $options = []) {
     $defaults = [
-      'config' => true
+      'config' => false
     ];
     $options += $defaults;
 

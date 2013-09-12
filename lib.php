@@ -2,8 +2,11 @@
 
 error_reporting (E_ALL);
 
+use minecraftia\db\CONNice;
+
 require("vendors/PHPMailer/class.phpmailer.php");
 require("config.php");
+
 
 function s($string) {
   global $cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass, $cfg_mysql_db;
@@ -103,32 +106,16 @@ function getNewest() {
 }
 
 function validateLogin($username, $password) {
-  global $cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass, $cfg_mysql_db;
-  $con = mysql_connect($cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass) or die(mysql_error());
+  $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
 
-  $val = NULL;
-  $username = mysql_real_escape_string($username, $con);
-  $q = "SELECT id, playername, password, admin FROM accounts WHERE playername = '$username' AND active=1;";
-  list($result, $con) = q($q);
-
-  $n = mysql_num_rows($result);
-  if ($n == 1) {
-    $row = mysql_fetch_array($result);
-    $id = $row['id'];
-    $realpass = $row['password'];
-    $admin = $row['admin'];
-    $playername = $row['playername'];
-    if (checkPassword($password, $realpass)) {
+  if ($result = CONNice::get('default')->fetch($q, compact('username'))) {
+    if (checkPassword($password, $result['password'])) {
       $val = "OK";
-      initSession($id, $playername, $admin);
+      initSession($result['id'], $result['playername'], $result['admin']);
     }
   }
 
-  if (!$con) {
-    mysql_close($con);
-  }
-
-  return $val;
+  return isset($val) ? $val : null;
 }
 
 function getXSRFToken() {
@@ -355,22 +342,11 @@ function newxAuthSession($accountid) {
 }
 
 function terminatexAuthSession($accountid) {
-
-  //database connection
-
   $ip = $_SERVER['REMOTE_ADDR'];
-  $q = "
-  UPDATE sessions
-  SET ipaddress = ''
-  WHERE accountid = $accountid";
-  list($result, $con) = q($q);
+  $q = "UPDATE sessions SET ipaddress=:ip WHERE accountid=:accountid";
+  $result = CONNice::get('default')->query($q, compact('ip', 'accountid'));
 
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  mysql_close($con);
-
+  return $result;
 }
 
 function usersConfigure($admin, $active, $delete, $playername, $email, &$message) {
