@@ -3,176 +3,106 @@
 require("vendors/PHPMailer/class.phpmailer.php");
 require("config.php");
 
+use minecraftia\db\CONNice;
 
 /*
  * getShit
  */
 
 
-
+/*
+ * getInquisitor: returns inquisitor data for a given playername;
+ */
 function getInquisitor($playername) {
-  $q = "SELECT * FROM players WHERE name = '$playername';";
-  list($result, $con) = q($q, "inquisitor");
-  $data = mysql_fetch_array($result);
-  mysql_close($con);
-  return $data;
+  $q = "SELECT * FROM players WHERE name = :playername;";
+
+  $result = CONNice::get('inquisitor')->fetch($q, compact('playername'));
+
+  return $result;
 }
 
-/* /!\ */
-function updateConfigFiles() {
-  $b = system("/home/minecraft/minecraft/update-white-list.sh");
-  $a = system("/home/minecraft/minecraft/update-ops-list.sh");
-  var_dump($a);
-  var_dump($b);
-}
-
-
-
-
+/*
+ * getRecent: returns the list of all the returning players, except $exclude 
+ * which should be the ID of the current user
+ */
 function getRecent($exclude) {
 
-  $q = "
-  SELECT id, playername, DATE_FORMAT(logintime, '%b %d %H:%i %Y') sessiondate
+  $q = "SELECT id, playername, DATE_FORMAT(logintime, '%b %d %H:%i %Y') sessiondate
   FROM accounts INNER JOIN sessions ON accounts.id = sessions.accountid
-  WHERE accounts.id != $exclude
+  WHERE accounts.id != :exclude
   ORDER BY logintime desc LIMIT 10;";
-  list($result, $con) = q($q);
-
-  $a = array();
-  while($row = mysql_fetch_array($result))
-  {
-    array_push($a, $row);
-  }
-  mysql_close($con);
-
-  return $a;
+  
+  $result = CONNice::get('default')->fetch($q, compact('exclude'));
+  
+  return $result;
 }
 
+/*
+ * getNewest: returns the list of the newest players who have initiated a session in the site or game 
+ */
 function getNewest() {
 
-  $q = "
-  SELECT id, playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') registerdate
+  $q = "SELECT id, playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') registerdate
   FROM accounts INNER JOIN sessions ON accounts.id = sessions.accountid
   ORDER BY accounts.registerdate desc LIMIT 10;";
-  list($result, $con) = q($q);
-
-  $a = array();
-  while($row = mysql_fetch_array($result))
-  {
-    array_push($a, $row);
-  }
-  mysql_close($con);
-
-  return $a;
+  
+  $result = CONNice::get('default')->fetch($q);
+  
+  return $result;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*
+ * getUserList: fetch all users
+ */
 
 function getUserList() {
 
-  $q = "
-  SELECT playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip, email, admin, active, id, DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
+  $q = "SELECT id, playername, email, admin, active, 
+    DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip, 
+    DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
   FROM accounts
-  ORDER BY id desc;";
-  list($result, $con) = q($q);
+  ORDER BY id DESC;";
 
-  $a = array();
-  while($row = mysql_fetch_array($result))
-  {
-    array_push($a, $row);
-  }
-  mysql_close($con);
-
-  return $a;
+  $result = CONNice::get('default')->fetch($q);
+  
+  return $result;
 }
-
-function getNews() {
-
-  $q = "
-  SELECT title, body, date_format(date_created, '%W, %d %b %Y') date_created
-  FROM news
-  ORDER BY id desc;";
-  list($result, $con) = q($q);
-
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  $a = array();
-  while($row = mysql_fetch_array($result))
-  {
-    array_push($a, $row);
-  }
-  mysql_close($con);
-
-  return $a;
-}
-
 
 function getUser($username) {
 
-  $q = "
-  SELECT playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, email, admin, active, id
+  $q = "SELECT id, playername, email, admin, active,
+    DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate
   FROM accounts
-  WHERE playername = '$username'";
-  list($result, $con) = q($q);
+  WHERE playername = :username";
 
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  $row = mysql_fetch_array($result);
-
-  mysql_close($con);
-
-  return $row;
+  $result = CONNice::get('default')->fetchOne($q, compact('username'));
+  
+  return $result;
 }
 
 function getUserById($id) {
 
-  $q = "
-  SELECT playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate,
-         email, admin, active, id, ircnickname, ircpassword, ircauto,
-         DATE_FORMAT(sessions.logintime, '%b %d %H:%i %Y') as logintime
+  $q = "SELECT id, playername, email, admin, active, ircnickname, ircpassword, ircauto,
+    DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate,
+    DATE_FORMAT(sessions.logintime, '%b %d %H:%i %Y') as logintime
   FROM accounts LEFT JOIN sessions ON accounts.id = sessions.accountid
-  WHERE id = '$id'";
+  WHERE id = :id";
 
-  list($result, $con) = q($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  $row = mysql_fetch_array($result);
-
-  mysql_close($con);
-
-  return $row;
+  $result = CONNice::get('default')->fetchOne($q, compact('id'));
+  
+  return $result;
 }
 
 function getLastSession($id) {
 
-  $q = "
-  SELECT accountid, ipaddress, logintime as logintime
+  $q = "SELECT accountid, ipaddress, logintime as logintime
   FROM sessions
-  WHERE accountid = $id
-  ORDER BY logintime DESC LIMIT 1";
-  list($result, $con) = q($q);
+  WHERE accountid = :id
+  ORDER BY logintime DESC";
 
-  $row = mysql_fetch_array($result);
-  mysql_close($con);
-  return $row;
+  $result = CONNice::get('default')->fetchOne($q, compact('id'));
+  
+  return $result;
 }
 
 
@@ -343,6 +273,16 @@ function usersConfigure($admin, $active, $delete, $playername, $email, &$message
   $message = "Settings saved.";
   return true;
 }
+
+
+/* /!\ */
+function updateConfigFiles() {
+  $b = system("/home/minecraft/minecraft/update-white-list.sh");
+  $a = system("/home/minecraft/minecraft/update-ops-list.sh");
+  var_dump($a);
+  var_dump($b);
+}
+
 
 function changePassword($username, $password, $new_password, $confirm_password, $ircnickname, $ircpassword, $ircauto, &$message) {
 
