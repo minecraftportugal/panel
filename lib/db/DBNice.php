@@ -224,7 +224,7 @@ class DBNice {
       return false;
     }
 
-    return count($this->_result) === 1 ? $this->_result[0] : $this->_result;
+    return empty($this->_result) ? null : $this->_result;
   }
 }
 
