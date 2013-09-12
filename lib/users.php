@@ -1,35 +1,14 @@
-<?php
-
-error_reporting (E_ALL);
-
-use minecraftia\db\CONNice;
+<?
 
 require("vendors/PHPMailer/class.phpmailer.php");
 require("config.php");
 
 
-function s($string) {
-  global $cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass, $cfg_mysql_db;
-  $con = mysql_connect($cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass) or die(mysql_error());
-
-  return mysql_real_escape_string($string, $con);
-}
-
-function q($sql, $db = null) {
-  global $cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass, $cfg_mysql_db;
-
-  if ($db == null) {
-    $db = $cfg_mysql_db;
-  }
-
-  $con = mysql_connect($cfg_mysql_addr, $cfg_mysql_user, $cfg_mysql_pass) or die(mysql_error());
-  mysql_select_db($db) or die(mysql_error());
-  mysql_query("SET NAMES 'utf8'");
+/*
+ * getShit
+ */
 
 
-  $result = mysql_query($sql);
-  return array($result, $con);
-}
 
 function getInquisitor($playername) {
   $q = "SELECT * FROM players WHERE name = '$playername';";
@@ -47,26 +26,8 @@ function updateConfigFiles() {
   var_dump($b);
 }
 
-function validateSession($admin = false) {
-    if (!isLoggedIn($admin)) {
-      header('Location: /login');
-      exit();
-    }
-}
 
-function encryptPassword($password) {
-  $salt = substr(hash('whirlpool', uniqid(rand(), true)), 0, 12);
-  $hash = hash('whirlpool', $salt . $password);
-  $saltPos = (strlen($password) >= strlen($hash) ? strlen($hash) : strlen($password));
-  return substr($hash, 0, $saltPos) . $salt . substr($hash, $saltPos);
-}
 
-function checkPassword($checkPass, $realPass) {
-  $saltPos = (strlen($checkPass) >= strlen($realPass) ? strlen($realPass) : strlen($checkPass));
-  $salt = substr($realPass, $saltPos, 12);
-  $hash = hash('whirlpool', $salt . $checkPass);
-  return $realPass == substr($hash, 0, $saltPos) . $salt . substr($hash, $saltPos);
-}
 
 function getRecent($exclude) {
 
@@ -105,118 +66,21 @@ function getNewest() {
   return $a;
 }
 
-function validateLogin($username, $password) {
-  $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
-
-  if ($result = CONNice::get('default')->fetch($q, compact('username'))) {
-    if (checkPassword($password, $result['password'])) {
-      $val = "OK";
-      initSession($result['id'], $result['playername'], $result['admin']);
-    }
-  }
-
-  return isset($val) ? $val : null;
-}
-
-function getXSRFToken() {
-  return isset($_SESSION['xsrf_token']) ? $_SESSION['xsrf_token'] : NULL;
-}
-
-function validateXSRFToken($token) {
-  return getXSRFToken() == $token;
-}
-
-function initSession($id, $username, $admin) {
-  $_SESSION['id'] = $id;
-  $_SESSION['username'] = $username;
-  $_SESSION['admin'] = $admin;
-  $_SESSION['xsrf_token'] = substr(md5(rand()), 0, 32);
-  newxAuthSession($id);
-}
-
-function isLoggedIn($admin = false) {
-  $val = false;
-
-  if (!$admin) {
-    if (isset($_SESSION['username'])) {
-      $val = true;
-    }
-  } else {
-    if (isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
-      $val = true;
-    }
-  }
-  return $val;
-}
 
 
-/* register
-   0: OK
-   1: Duped Email
-   2: Duped Username
-   3: Invalid Email
-   4: Invlaid Username
- */
-function register($username, $email, $email_ip = false) {
-
-  // check for dupe email
-  $q = "SELECT count(*) FROM accounts WHERE email = '$email';";
-  list($result, $con) = q($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  $result = mysql_result($result, 0);
-  if ($result != "0") {
-    return 1;
-  }
-
-  // check for dupe username
-  $q = "SELECT count(*) FROM accounts WHERE playername = '$username';";
-  list($result, $con) = q($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  $result = mysql_result($result, 0);
-  if ($result != "0") {
-    return 2;
-  }
-
-  // check for valid email
-  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    return 3;
-  }
-
-  // check for valid username
-  if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
-   return 4;
-  }
-
-  // create new account
-  $password = substr(md5(rand()), 0, 7);
-  $ip = $_SERVER['REMOTE_ADDR'];
-  $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active) ";
-  $q .= "VALUES('$username', '".encryptPassword($password)."', '0', '$email', sysdate(), '$ip', '1')";
-
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  emailConfirmation($username, $password, $email, $email_ip);
-
-  return 0;
-}
 
 
-//
-// Refreshes xAuth session if the established session doesn't exist
-// or is old.
-//
-function refreshxAuthSession($id) {
-  newxAuthSession($id);
-}
+
+
+
+
+
+
+
+
+
+
+
 
 function getUserList() {
 
@@ -311,43 +175,77 @@ function getLastSession($id) {
   return $row;
 }
 
-function newxAuthSession($accountid) {
 
-  $ip = $_SERVER['REMOTE_ADDR'];
 
-  // Insert into sessions table
-  $q = "
-  INSERT INTO sessions(accountid, ipaddress, logintime) VALUES($accountid, '$ip', sysdate())
-  ON DUPLICATE KEY UPDATE ipaddress = '$ip', logintime = sysdate()";
+
+
+
+
+
+
+
+/* 
+ * User Accounts and Preferences
+ */
+/* register
+   0: OK
+   1: Duped Email
+   2: Duped Username
+   3: Invalid Email
+   4: Invlaid Username
+ */
+function register($username, $email, $email_ip = false) {
+
+  // check for dupe email
+  $q = "SELECT count(*) FROM accounts WHERE email = '$email';";
   list($result, $con) = q($q);
+  if (!$result) {
+    die('Invalid query: ' . mysql_error());
+  }
+
+  $result = mysql_result($result, 0);
+  if ($result != "0") {
+    return 1;
+  }
+
+  // check for dupe username
+  $q = "SELECT count(*) FROM accounts WHERE playername = '$username';";
+  list($result, $con) = q($q);
+  if (!$result) {
+    die('Invalid query: ' . mysql_error());
+  }
+
+  $result = mysql_result($result, 0);
+  if ($result != "0") {
+    return 2;
+  }
+
+  // check for valid email
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    return 3;
+  }
+
+  // check for valid username
+  if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
+   return 4;
+  }
+
+  // create new account
+  $password = substr(md5(rand()), 0, 7);
+  $ip = $_SERVER['REMOTE_ADDR'];
+  $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active) ";
+  $q .= "VALUES('$username', '".encryptPassword($password)."', '0', '$email', sysdate(), '$ip', '1')";
 
   $result = mysql_query($q);
   if (!$result) {
     die('Invalid query: ' . mysql_error());
   }
-  mysql_close($con);
 
-  $q = "
-  UPDATE accounts
-  SET lastlogindate = sysdate(), lastloginip = '$ip'
-  WHERE id = $accountid";
-  list($result, $con) = q($q);
+  emailConfirmation($username, $password, $email, $email_ip);
 
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  mysql_close($con);
-
+  return 0;
 }
 
-function terminatexAuthSession($accountid) {
-  $ip = $_SERVER['REMOTE_ADDR'];
-  $q = "UPDATE sessions SET ipaddress=:ip WHERE accountid=:accountid";
-  $result = CONNice::get('default')->query($q, compact('ip', 'accountid'));
-
-  return $result;
-}
 
 function usersConfigure($admin, $active, $delete, $playername, $email, &$message) {
 

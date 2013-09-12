@@ -1,7 +1,7 @@
 <?
 
 require_once('config.php');
-require_once('lib.php');
+require_once('lib/sessions.php');
 
 function users_3d() {
   global $cfg_web_root;

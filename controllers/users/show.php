@@ -1,8 +1,8 @@
 <?
 
 require_once('config.php');
-require_once('lib.php');
-require_once('i18n.php');
+require_once('lib/sessions.php');
+require_once('lib/i18n.php');
 
 function users_show () {
   validateSession();

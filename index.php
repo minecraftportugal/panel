@@ -27,6 +27,8 @@ require_once('controllers/admin/configure.php');
 require_once('controllers/irc/index.php');
 require_once('controllers/webchat/index.php');
 
+require_once('lib/db.php');
+
 $r = new Router();
 
 $r->map('GET',  '/', 'home');
