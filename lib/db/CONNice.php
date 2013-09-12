@@ -55,6 +55,10 @@ class CONNice {
       static::$_instances[$name] = new DBNice(static::$_configs[$name]);
     }
 
+    if (!static::$_instances[$name]->isConnected()) {
+      static::$_instances[$name]->connect();
+    }
+
     return static::$_instances[$name];
   }
 
@@ -74,6 +78,12 @@ class CONNice {
       return false;
     }
 
-    return isset(static::$_instances[$name]) ? static::$_instances[$name]->close() : false;
+    try {
+      static::$_instances[$name]->close();
+    } catch (PDOException $e) {
+      die("Error closing connection `{$name}`: " . $e->getMessage());
+    }
+
+    return true;
   }
 }

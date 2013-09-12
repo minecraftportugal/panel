@@ -95,7 +95,7 @@ class DBNice {
     $this->_statement = null;
     unset($this->connection);
     $this->connection = null;
-    return $this->_conected = false;
+    return $this->_connected = false;
   }
 
   public function encoding($encoding = null) {
@@ -126,6 +126,10 @@ class DBNice {
    */
   public function isConnected() {
     return $this->_connected;
+  }
+
+  public function isPersistent() {
+    return $this->_config['persistent'];
   }
 
 
