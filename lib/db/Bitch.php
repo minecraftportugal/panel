@@ -33,6 +33,10 @@ class Bitch {
     $defaults = $this->_meta;
     $methods = ['first', 'all', 'query'];
 
+    if (!in_array($method, $methods)) {
+      return false;
+    }
+
     if (!(count($params) >= 1 && count($params) <= 3)) {
       /**
        * should throw exception
@@ -45,25 +49,22 @@ class Bitch {
     $options = isset($params[2]) ? $params[2] + $defaults : $defaults;
     $source = $options['source'];
 
-    if (!in_array($method, $methods)) {
-      return false;
-    }
-
     $connice = $this->_classes['connection'];
     $conn = $connice::get($options['source']);
-    if (!$conn) {
+
+    if (!$conn->isConnected()) {
       return false;
     }
 
     switch ($method) {
       case 'first':
         $result = $conn->fetch($query, $conditions, $options);
-        $result = is_array($result) && count($result) === 1 ? reset($result) : false;
+        $result = is_array($result) && count($result) === 1 ? reset($result) : null;
         break;
 
       case 'all':
         $result = $conn->fetch($query, $conditions, $options);
-        $result = is_array($result) && !empty($result) ? $result : false;
+        $result = is_array($result) && !empty($result) ? $result : null;
         break;
 
       case 'query':
@@ -71,7 +72,9 @@ class Bitch {
         break;
     }
 
-    $conn->close();
+    if (!$conn->isPersistent()) {
+      $conn->close();
+    }
 
     return $result;
   }
@@ -82,6 +85,10 @@ class Bitch {
     ];
     $methods = ['first', 'all', 'query'];
 
+    if (!in_array($method, $methods)) {
+      return false;
+    }
+
     if (!(count($params) >= 1 && count($params) <= 3)) {
       /**
        * should throw exception
@@ -94,25 +101,7 @@ class Bitch {
     $options = isset($params[2]) ? $params[2] + $defaults : $defaults;
     $source = $options['source'];
 
-    if (!in_array($method, $methods)) {
-      return false;
-    }
-
     $conn = static::source($source);
-    switch ($method) {
-      case 'first':
-        $result = $conn->first($query, $conditions, $options);
-        break;
-
-      case 'all':
-        $result = $conn->all($query, $conditions, $options);
-        break;
-
-      case 'query':
-        $result = $conn->query($query, $conditions, $options);
-        break;
-    }
-
-    return $result;
+    return $con->{$method}($query, $conditions, $options);
   }
 }
