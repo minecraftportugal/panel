@@ -2,7 +2,7 @@
 
 require("config.php");
 
-use minecraftia\db\CONNice;
+use minecraftia\db\Bitch;
 
 /*
  * refreshxAuthSession: refreshes the user's minecraft session
@@ -12,29 +12,17 @@ function refreshxAuthSession($accountid) {
   $ip = $_SERVER['REMOTE_ADDR'];
 
   // Insert into sessions table
-  $q = "
-  INSERT INTO sessions(accountid, ipaddress, logintime) VALUES($accountid, '$ip', sysdate())
-  ON DUPLICATE KEY UPDATE ipaddress = '$ip', logintime = sysdate()";
-  list($result, $con) = q($q);
+  $q = "INSERT INTO sessions(accountid, ipaddress, logintime) 
+  VALUES($accountid, :ip, sysdate())
+  ON DUPLICATE KEY UPDATE ipaddress = :ip, logintime = sysdate()";
 
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  mysql_close($con);
+  $result = Bitch::source('default')->query($q, compact('ip'));
 
-  $q = "
-  UPDATE accounts
-  SET lastlogindate = sysdate(), lastloginip = '$ip'
-  WHERE id = $accountid";
-  list($result, $con) = q($q);
+  $q = "UPDATE accounts
+  SET lastlogindate = sysdate(), lastloginip = :ip
+  WHERE id = :accountid;";
 
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  mysql_close($con);
-
+  $result = Bitch::source('default')->query($q, compact('ip', 'accountid'));
 }
 
 /*
@@ -43,7 +31,7 @@ function refreshxAuthSession($accountid) {
 
 function terminatexAuthSession($accountid) {
   $q = "UPDATE sessions SET ipaddress='' WHERE accountid=:accountid";
-  $result = CONNice::get('default')->query($q, compact('ip', 'accountid'));
+  $result = Bitch::source('default')->query($q, compact('ip', 'accountid'));
 
   return $result;
 }

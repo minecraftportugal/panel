@@ -3,14 +3,14 @@
 require('config.php');
 require('lib/xauth.php');
 
-use minecraftia\db\CONNice;
+use minecraftia\db\Bitch;
 /*
  * validateLogin: validates user logins
  */
 function validateLogin($username, $password) {
   $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
 
-  if ($result = CONNice::get('default')->fetch($q, compact('username'))) {
+  if ($result = Bitch::source('default')->first($q, compact('username'))) {
     if (checkPassword($password, $result['password'])) {
       $val = "OK";
       initSession($result['id'], $result['playername'], $result['admin']);
@@ -28,6 +28,7 @@ function initSession($id, $username, $admin) {
   $_SESSION['username'] = $username;
   $_SESSION['admin'] = $admin;
   $_SESSION['xsrf_token'] = substr(md5(rand()), 0, 32);
+  
   refreshxAuthSession($id);
 }
 

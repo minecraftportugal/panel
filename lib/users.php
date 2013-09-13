@@ -3,7 +3,7 @@
 require("vendors/PHPMailer/class.phpmailer.php");
 require("config.php");
 
-use minecraftia\db\CONNice;
+use minecraftia\db\Bitch;
 
 /*
  * getShit
@@ -32,9 +32,9 @@ function getRecent($exclude) {
   WHERE accounts.id != :exclude
   ORDER BY logintime desc LIMIT 10;";
   
-  $result = CONNice::get('default')->fetch($q, compact('exclude'));
-  
-  return $result;
+  $result = Bitch::source('default')->all($q, compact('exclude'));
+
+  return $result ? $result : [];
 }
 
 /*
@@ -45,10 +45,10 @@ function getNewest() {
   $q = "SELECT id, playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') registerdate
   FROM accounts INNER JOIN sessions ON accounts.id = sessions.accountid
   ORDER BY accounts.registerdate desc LIMIT 10;";
-  
-  $result = CONNice::get('default')->fetch($q);
-  
-  return $result;
+
+  $result = Bitch::source('default')->all($q);
+
+  return $result ? $result : [];
 }
 
 /*
@@ -63,7 +63,7 @@ function getUserList() {
   FROM accounts
   ORDER BY id DESC;";
 
-  $result = CONNice::get('default')->fetch($q);
+  $result = Bitch::source('default')->all($q);
   
   return $result;
 }
@@ -75,7 +75,7 @@ function getUser($username) {
   FROM accounts
   WHERE playername = :username";
 
-  $result = CONNice::get('default')->fetchOne($q, compact('username'));
+  $result = Bitch::source('default')->first($q, compact('username'));
   
   return $result;
 }
@@ -88,7 +88,7 @@ function getUserById($id) {
   FROM accounts LEFT JOIN sessions ON accounts.id = sessions.accountid
   WHERE id = :id";
 
-  $result = CONNice::get('default')->fetchOne($q, compact('id'));
+  $result = Bitch::source('default')->first($q, compact('id'));
   
   return $result;
 }
@@ -100,7 +100,7 @@ function getLastSession($id) {
   WHERE accountid = :id
   ORDER BY logintime DESC";
 
-  $result = CONNice::get('default')->fetchOne($q, compact('id'));
+  $result = Bitch::source('default')->allOne($q, compact('id'));
   
   return $result;
 }
