@@ -21,8 +21,11 @@
   <? if (isLoggedIn()): ?>
   <div class="section status userbar">
   <div class="section-left">
-    <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
-    <a style="background-image: url('<?= $head_url ?>');" class="button" id="profile" href="/profile" title="Profile"><?= $_SESSION['username'] ?></a>
+    <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
+    <a class="button" id="profile" href="/profile" title="Profile">
+       <span class="stevehead pixels"></span>
+       <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+      <?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
     <? if ($_SESSION['admin'] == 1): ?>
@@ -47,12 +50,15 @@
  </div>
  <? endif; ?>
 
- <?
-   $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$p['playername'];
- ?>
+ <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png"; ?>
   <div class="section">
     <h1 class="playername">
-      <a style="background-image: url('<?= $head_url ?>');" href="//inquisitor.minecraftia.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!"><?= $p['playername'] ?></a></h1>
+      <a href="//inquisitor.minecraftia.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!">
+       <span class="stevehead pixels"></span>
+       <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+       <?= $p["playername"] ?>
+      </a>
+    </h1>
     <div id="skin">
       <!--<img onerror="this.onerror=null;this.src='/steve.png';" src="http://s3.amazonaws.com/MinecraftSkins/xxx.png" alt="Skin" />-->
       <img id="skinDisplay" style="display:none" src="<?= $skin_url ?>" alt="Skin" />

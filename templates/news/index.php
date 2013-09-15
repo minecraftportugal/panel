@@ -18,8 +18,11 @@
     <? if (isLoggedIn()): ?>
     <div class="section status userbar">
     <div class="section-left">
-      <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
-      <a style="background-image: url('<?= $head_url ?>');" class="button" id="profile" href="/profile" title="Profile"><?= $_SESSION['username'] ?></a>
+      <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
+      <a class="button" id="profile" href="/profile" title="Profile">
+         <span class="stevehead pixels"></span>
+         <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+        <?= $_SESSION['username'] ?></a>
     </div>
     <div class="section-right aright">
       <? if ($_SESSION['admin'] == 1): ?>
@@ -36,9 +39,13 @@
       <h2><?= m("L_LASTACTIVE") ?></h2>
       <ul class="player-list">
       <? foreach(getRecent($_SESSION['id']) as $r): ?>
-        <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".s($r['playername']); ?>
-        <li class="link" style="background-image: url('<?= $head_url ?>');">
-          <a title="@ <?= $r["sessiondate"] ?>" href="/profile?id=<?= $r['id'] ?>"><?= $r["playername"] ?></a>
+          <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+        <li class="link">
+          <a title="@ <?= $r["sessiondate"] ?>" href="/profile?id=<?= $r['id'] ?>">
+           <span class="stevehead pixels"></span>
+           <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+           <?= $r["playername"] ?>
+          </a>
         </li>
       <? endforeach; ?>
       </ul>
@@ -47,9 +54,13 @@
       <h2><?= m("L_NEWEST") ?></h2>
       <ul class="player-list">
       <? foreach(getNewest() as $r): ?>
-        <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".s($r['playername']); ?>
-        <li class="link" style="background-image: url('<?= $head_url ?>');">
-          <a title="@ <?= $r["registerdate"] ?>" href="/profile?id=<?= $r['id'] ?>"><?= $r["playername"] ?></a>
+        <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+        <li class="link">
+          <a title="@ <?= $r["registerdate"] ?>" href="/profile?id=<?= $r['id'] ?>">
+           <span class="stevehead pixels"></span>
+           <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+           <?= $r["playername"] ?>
+          </a>
         </li>
       <? endforeach; ?>
       </ul>
