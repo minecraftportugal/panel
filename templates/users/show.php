@@ -9,6 +9,7 @@
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/cookies.js"></script>
     <script type="text/javascript" src="/scripts/i18n.js"></script>
+    <script type="text/javascript" src="/scripts/Three.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -56,9 +57,11 @@
       <a style="background-image: url('<?= $head_url ?>');" href="//inquisitor.minecraftia.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!"><?= $p['playername'] ?></a></h1>
     <div id="skin">
       <!--<img onerror="this.onerror=null;this.src='/steve.png';" src="http://s3.amazonaws.com/MinecraftSkins/xxx.png" alt="Skin" />-->
-      <img id="skinDisplay" src="<?= $skin_url ?>" alt="Skin" />
+      <img id="skinDisplay" src="<? //= $skin_url ?>" alt="Skin" />
     </div>
-
+   <script>
+   PlayerSkin.setSkin("<?= $id ?>");
+   </script>
     <ul>
     <? if ($own or $admin): ?>
       <li>Email: <?= $p['email'] ?></li>
