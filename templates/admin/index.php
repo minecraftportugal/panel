@@ -19,8 +19,11 @@
    <? if (isLoggedIn()): ?>
   <div class="section status userbar">
   <div class="section-left">
-    <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$_SESSION['username']; ?>
-    <a style="background-image: url('<?= $head_url ?>');" class="button" id="profile" href="/profile" title="Profile"><?= $_SESSION['username'] ?></a>
+    <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
+    <a class="button" id="profile" href="/profile" title="Profile">
+       <span class="stevehead pixels"></span>
+       <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+      <?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
     <a class="button" id="news" href="/news" title="News"></a>
@@ -47,7 +50,7 @@
   <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
     <div class="section">
     <h2>Manage Accounts</h2>
-    <div> 
+    <div class="manage_users"> 
     <table>
       <thead>
         <tr>
@@ -62,8 +65,14 @@
       <? foreach(getUserList() as $r): ?>
       <? $a = getLastSession($r["id"]); ?>
         <tr>
-          <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$r['playername']; ?>
-          <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;"><a class="button-padded" style="background-image: url('<?= $head_url ?>');" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>"><?= $r["playername"] ?></a></td>
+          <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+          <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;">
+            <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>">
+             <span class="stevehead pixels"></span>
+             <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+             <?= $r["playername"] ?>
+            </a>
+          </td>
           <td>
             <span title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
               <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>

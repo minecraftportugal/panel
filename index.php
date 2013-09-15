@@ -16,7 +16,6 @@ require_once('controllers/sessions/destroy.php');
 require_once('controllers/users/new.php');
 require_once('controllers/users/create.php');
 require_once('controllers/users/show.php');
-require_once('controllers/users/3d.php');
 require_once('controllers/users/skin.php');
 
 require_once('controllers/users/update.php');
@@ -40,7 +39,6 @@ $r->map('POST', '/logout', 'sessions_destroy');
 
 $r->map('GET',  '/register', 'users_new');
 $r->map('GET',  '/profile', 'users_show');
-$r->map('GET',  '/profile/3d', 'users_3d');
 $r->map('GET',  '/profile/skin', 'users_skin');
 $r->map('POST', '/register', 'users_create');
 $r->map('POST', '/reset_password', 'users_reset_password');

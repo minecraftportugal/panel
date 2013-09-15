@@ -332,3 +332,55 @@ a[data-lang=pt_PT] {
 a[data-lang=en_GB] {
  background: url('/images/icons/GB.png') no-repeat left center;
 }
+
+span.stevehead
+{
+  background: url('/images/steve.png') no-repeat -16px -16px;
+  width: 16px;
+  height: 16px;
+  background-size: 128px 64px;
+}
+
+div.userbar span.stevehead
+{
+  position: absolute;
+  margin-left: -22px;
+}
+
+div.manage_users span.stevehead
+{
+  position: absolute;
+  margin-left: -25px;
+  margin-top: -3px;
+}
+
+h1.playername span.stevehead
+{
+  background: url('/images/steve.png') no-repeat -24px -24px;
+  width: 24px;
+  height: 24px;
+  background-size: 192px 96px;
+  position: absolute;
+  margin-left: -25px;
+}
+
+ul.player-list span.stevehead
+{
+  position: absolute;
+  margin-left: -22px;
+}
+
+/*
+ * http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas
+ * attempt nearest neighbour in every browser, for pixel goodness
+ */
+.pixels
+{
+  image-rendering: optimizeSpeed;             // Older versions of FF
+  image-rendering: -moz-crisp-edges;          // FF 6.0+
+  image-rendering: -webkit-optimize-contrast; // Webkit
+                                              //  (Safari now, Chrome soon)
+  image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
+  image-rendering: optimize-contrast;         // Possible future browsers.
+  -ms-interpolation-mode: nearest-neighbor;   // IE
+}
