@@ -15,7 +15,7 @@ function users_show () {
   $admin = ($_SESSION['admin'] == '1') ? true : false;
   $p = getUserById($id);
   
-  $skin_url = "/profile/3d?a=-25&w=35&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=10&format=png&displayHairs=true&headOnly=false&login=".s($p['playername']);
+  $skin_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png";
 
   require('templates/users/show.php');
 }

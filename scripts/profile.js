@@ -481,6 +481,9 @@ var PlayerSkin = (function() {
         },
         setSkin: function(playerId) {
             if (checkcanvas)
+              if (playerId < 0)
+                skin.src = '/images/steve.png';
+              else
                 skin.src = '/profile/skin?clip=none&id=' + playerId;
             else
                 skin.src = simpleImageSrc;
