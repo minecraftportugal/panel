@@ -21,10 +21,11 @@
   <? if (isLoggedIn()): ?>
   <div class="section status userbar">
   <div class="section-left">
-    <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
     <a class="button" id="profile" href="/profile" title="Profile">
-       <span class="stevehead pixels"></span>
-       <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+      <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
+      <span class="stevehead pixels">
+        <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+      </span>
       <?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
@@ -52,13 +53,14 @@
     <div class="section success"><?= $success ?></div>
   <? endif; ?>
 
- <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png"; ?>
   <div class="section">
     <h1 class="playername">
-      <a href="//inquisitor.minecraftia.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!">
-       <span class="stevehead pixels"></span>
-       <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
-       <?= $p["playername"] ?>
+      <a href="//inquisitor.minecraft.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!">
+        <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png"; ?>
+        <span class="stevehead pixels">
+          <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+        </span>
+        <?= $p["playername"] ?>
       </a>
     </h1>
     <div id="skin">

@@ -333,41 +333,46 @@ a[data-lang=en_GB] {
  background: url('/images/icons/GB.png') no-repeat left center;
 }
 
+/****************************************/
+
 span.stevehead
 {
-  background: url('/images/steve.png') no-repeat -16px -16px;
   width: 16px;
   height: 16px;
-  background-size: 128px 64px;
+  overflow: hidden;
+  position: relative;
+  float: left;
+  margin-right: 5px;
 }
 
-div.userbar span.stevehead
+span.stevehead img
 {
+  width: 128px;
+  height: 64px;
+  margin-left: -16px;
+  margin-top: -16px;
   position: absolute;
-  margin-left: -22px;
 }
 
 div.manage_users span.stevehead
 {
-  position: absolute;
-  margin-left: -25px;
-  margin-top: -3px;
+  margin-top: -2px;
 }
 
 h1.playername span.stevehead
 {
-  background: url('/images/steve.png') no-repeat -24px -24px;
+  /*margin-top:-16px;*/
   width: 24px;
   height: 24px;
-  background-size: 192px 96px;
-  position: absolute;
-  margin-left: -25px;
 }
 
-ul.player-list span.stevehead
+h1.playername span.stevehead img
 {
+  width: 192px;
+  height: 96px;
+  margin-left: -24px;
+  margin-top: -24px;
   position: absolute;
-  margin-left: -22px;
 }
 
 /*
@@ -384,3 +389,26 @@ ul.player-list span.stevehead
   image-rendering: optimize-contrast;         // Possible future browsers.
   -ms-interpolation-mode: nearest-neighbor;   // IE
 }
+
+/* XXX XXX XXX XXX para analisar e reflectir nos parents XXX */
+a#profile
+{
+  padding: 0px;
+  width: auto;
+}
+
+ul.player-list li a
+{
+  padding: 0px;
+}
+
+div.manage_users a.button-padded
+{
+  padding: 0px;
+}
+
+h1.playername > a
+{
+  padding: 0px;
+}
+
