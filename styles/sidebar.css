@@ -40,7 +40,6 @@ h1.playername {
 h1.playername > a {
  background-position: left center;
  background-repeat: no-repeat;
- padding-left: 22px;
 }
 
 h1.playername > a:active {
@@ -230,10 +229,10 @@ ul.player-list li {
 }
 
 ul.player-list li a {
- padding-left: 23px;
+ padding-left: 0px;
 }
 ul.player-list li a:active {
- padding-left: 24px;
+ padding-left: 1px;
 }
 
 div#skin {
@@ -274,8 +273,8 @@ a#news {
 
 a#profile {
  margin-top: 4px;
- padding-left: 23px;
  line-height: 1.5em;
+ width: auto;
 }
 
 a#admin {
@@ -305,7 +304,6 @@ a.button {
 a.button-padded {
  background-position: top left;
  background-repeat: no-repeat;
- padding-left: 25px;
 }
 li.link:active {
  background-position: 1px top !important;
@@ -333,8 +331,7 @@ a[data-lang=en_GB] {
  background: url('/images/icons/GB.png') no-repeat left center;
 }
 
-/****************************************/
-
+/* little heads cropped from full minecraft skins */
 span.stevehead
 {
   width: 16px;
@@ -359,9 +356,9 @@ div.manage_users span.stevehead
   margin-top: -2px;
 }
 
+/* lil bigger heads at the profile page */
 h1.playername span.stevehead
 {
-  /*margin-top:-16px;*/
   width: 24px;
   height: 24px;
 }
@@ -388,27 +385,5 @@ h1.playername span.stevehead img
   image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
   image-rendering: optimize-contrast;         // Possible future browsers.
   -ms-interpolation-mode: nearest-neighbor;   // IE
-}
-
-/* XXX XXX XXX XXX para analisar e reflectir nos parents XXX */
-a#profile
-{
-  padding: 0px;
-  width: auto;
-}
-
-ul.player-list li a
-{
-  padding: 0px;
-}
-
-div.manage_users a.button-padded
-{
-  padding: 0px;
-}
-
-h1.playername > a
-{
-  padding: 0px;
 }
 
