@@ -21,8 +21,8 @@
   <div class="section-left">
     <a class="button" id="profile" href="/profile" title="Profile">
       <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
-      <span class="stevehead pixels">
-        <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" /></span>
+      <span class="stevehead">
+        <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" /></span>
       <?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
@@ -66,8 +66,8 @@
           <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;">
             <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>">
               <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-              <span class="stevehead pixels">
-                <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+              <span class="stevehead">
+                <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
               </span><?= $r["playername"] ?>
             </a>
           </td>

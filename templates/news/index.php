@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/news.js"></script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -20,8 +21,8 @@
     <div class="section-left">
       <a class="button" id="profile" href="/profile" title="Profile">
         <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
-        <span class="stevehead pixels">
-          <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+        <span class="stevehead">
+          <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
         </span><?= $_SESSION['username'] ?></a>
     </div>
     <div class="section-right aright">
@@ -42,8 +43,8 @@
         <li class="link">
           <a title="@ <?= $r["sessiondate"] ?>" href="/profile?id=<?= $r['id'] ?>">
             <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-            <span class="stevehead pixels">
-              <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+            <span class="stevehead">
+              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
             </span>
             <?= $r["playername"] ?>
           </a>
@@ -58,8 +59,8 @@
         <li class="link">
           <a title="@ <?= $r["registerdate"] ?>" href="/profile?id=<?= $r['id'] ?>">
             <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-            <span class="stevehead pixels">
-              <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+            <span class="stevehead">
+              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
             </span>
            <?= $r["playername"] ?>
           </a>

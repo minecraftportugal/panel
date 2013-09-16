@@ -23,8 +23,8 @@
   <div class="section-left">
     <a class="button" id="profile" href="/profile" title="Profile">
       <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
-      <span class="stevehead pixels">
-        <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+      <span class="stevehead">
+        <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
       </span>
       <?= $_SESSION['username'] ?></a>
   </div>
@@ -55,26 +55,15 @@
     <h1 class="playername">
       <a href="//inquisitor.minecraft.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!">
         <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png"; ?>
-        <span class="stevehead pixels">
-          <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+        <span class="stevehead">
+          <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
         </span>
         <?= $p["playername"] ?>
       </a>
     </h1>
     <div id="skin">
-      <!--<img onerror="this.onerror=null;this.src='/steve.png';" src="http://s3.amazonaws.com/MinecraftSkins/xxx.png" alt="Skin" />-->
-      <img id="skinDisplay" style="display:none" src="<?= $skin_url ?>" alt="Skin" />
+      <img id="skinDisplay" style="display:none" src="<?= $skin_url ?>" data-playerid="<?= $id ?>" alt="Skin" />
     </div>
-     <script>
-      $(document).ready(function() {
-        $("#skinDisplay").load(function() {
-          PlayerSkin.setSkin("<?= $id ?>");
-        });
-        $("#skinDisplay").error(function() {
-          PlayerSkin.setSkin(-1);
-        });
-      });
-     </script>
     <ul>
     <? if ($own or $admin): ?>
       <li>Email: <?= $p['email'] ?></li>

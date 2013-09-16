@@ -342,7 +342,8 @@ span.stevehead
   margin-right: 5px;
 }
 
-span.stevehead img
+span.stevehead img, 
+span.stevehead canvas
 {
   width: 128px;
   height: 64px;
@@ -363,7 +364,8 @@ h1.playername span.stevehead
   height: 24px;
 }
 
-h1.playername span.stevehead img
+h1.playername span.stevehead img,
+h1.playername span.stevehead canvas
 {
   width: 192px;
   height: 96px;
@@ -371,6 +373,8 @@ h1.playername span.stevehead img
   margin-top: -24px;
   position: absolute;
 }
+
+
 
 /*
  * http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas
