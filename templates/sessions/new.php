@@ -28,15 +28,21 @@
         <span class="center"><input type="text" name="username" autofocus="true" placeholder="username" /></span>
         <span class="center"><input type="password" name="password" placeholder="password" /></span>
         <span class="center"><input type="submit" value="Login!"/></span>
-        <?php if (isset($_GET['f']) && $_GET['f'] == 1): ?>
-          <label class="error"><?= m("L_INVALID") ?></label>
-        <?php elseif (isset($_GET['f']) && $_GET['f'] == 2): ?>
-          <label class="ok"><?= m("L_GOODBYE") ?></label>
-        <?php elseif (isset($_GET['f']) && $_GET['f'] == 3): ?>
-          <label class="ok"><?= m("L_PLEASELOGIN") ?></label>
-        <?php else: ?>
-          <label></label>
-        <?php endif; ?>
+        <span>
+        <? 
+          $error = getFlash('error');
+          if ($error != false):
+        ?>
+          <label class="error"><?= $error ?></label>
+        <? endif; ?>
+        
+        <? 
+          $success = getFlash('success');
+          if ($success != false):
+        ?>
+          <label class="success"><?= $success ?></label>
+        <? endif; ?>
+        <span>
       </form>
     </div>
     <div id="social">

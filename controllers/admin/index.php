@@ -9,9 +9,6 @@ function admin_index() {
 
   validateSession(true);
   
-  $error = isset($_GET['error']) ? $_GET['error'] : NULL;
-  $ok = isset($_GET['ok']) ? $_GET['ok'] : NULL;
-
   require('templates/admin/index.php');
 }
 

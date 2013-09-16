@@ -100,7 +100,7 @@ function getLastSession($id) {
   WHERE accountid = :id
   ORDER BY logintime DESC";
 
-  $result = Bitch::source('default')->allOne($q, compact('id'));
+  $result = Bitch::source('default')->first($q, compact('id'));
   
   return $result;
 }
@@ -127,150 +127,144 @@ function getLastSession($id) {
 function register($username, $email, $email_ip = false) {
 
   // check for dupe email
-  $q = "SELECT count(*) FROM accounts WHERE email = '$email';";
-  list($result, $con) = q($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
+  $q = "SELECT count(*) AS total
+  FROM accounts 
+  WHERE email = :email";
+  $result = Bitch::source('default')->first($q, compact('email'))['total']; // /!\ array index applied to function call
 
-  $result = mysql_result($result, 0);
   if ($result != "0") {
-    return 1;
+    setFlash('error', 'Email address already used');
+    return false;
   }
 
   // check for dupe username
-  $q = "SELECT count(*) FROM accounts WHERE playername = '$username';";
-  list($result, $con) = q($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
+  $q = "SELECT count(*) AS total
+  FROM accounts
+  WHERE playername = :username;";
+  $result = Bitch::source('default')->first($q, compact('username'))['total']; // /!\ array index applied to function call
 
-  $result = mysql_result($result, 0);
   if ($result != "0") {
-    return 2;
+    setFlash('error', 'Username address already used');
+    return false;
   }
 
   // check for valid email
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    return 3;
+    setFlash('error', 'Invalid email address');
+    return false;
   }
 
   // check for valid username
   if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
-   return 4;
+   setFlash('error', 'Invalid username');
+   return false;
   }
 
   // create new account
-  $password = substr(md5(rand()), 0, 7);
   $ip = $_SERVER['REMOTE_ADDR'];
-  $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active) ";
-  $q .= "VALUES('$username', '".encryptPassword($password)."', '0', '$email', sysdate(), '$ip', '1')";
+  $password = substr(md5(rand()), 0, 7);
+  $plain_password = $password;
+  $password = encryptPassword($password);
+  $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active)
+  VALUES(:username, :password, '0', :email, sysdate(), :ip, 1)";
+  $result = Bitch::source('default')->query($q, compact('username', 'password', 'email', 'ip'));
 
-  $result = mysql_query($q);
   if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    die('Invalid query');
   }
 
-  emailConfirmation($username, $password, $email, $email_ip);
+  emailConfirmation($username, $plain_password, $email, $email_ip);
+  setFlash('success', 'Registration successful');
 
-  return 0;
+  return true;
 }
 
 
-function usersConfigure($admin, $active, $delete, $playername, $email, &$message) {
+function usersConfigure($admin, $active, $delete, $playername, $email) {
 
-  $message = NULL;
-
-  //database connection
-  $con = mysql_connect("localhost:3306","minecraft","minecr4ft") or die(mysql_error());
-  mysql_select_db("minecraft_auth") or die(mysql_error());
-  mysql_query("SET NAMES 'utf8'");
-
-  //admin privileges
-  $str = "-1";
+  /*
+   *  Set/Unset Admin Account Privilege
+   */
   if (count($admin) > 0) {
-    $str = implode(",", $admin);
+    $sql_in = implode(',', array_fill(0, count($admin), '?'));
+    
+    // Unset Admin
+    $q = "UPDATE accounts
+    SET admin = 0
+    WHERE id NOT IN ($sql_in)
+    AND admin = 1;";
+    $result = Bitch::source('default')->query($q, $admin);
+    if (!$result) { die('Invalid query'); }
+    
+    // Set Admin
+    $q = "UPDATE accounts
+    SET admin = 1
+    WHERE id IN ($sql_in)
+    AND admin = 0;";
+    $result = Bitch::source('default')->query($q, $admin);
+    if (!$result) { die('Invalid query'); }
   }
 
-  $q = "UPDATE accounts SET admin = 0 WHERE id not in ($str) AND admin = 1";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  $q = "UPDATE accounts SET admin = 1 WHERE id in ($str) AND admin = 0";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  //deactivate accounts
-  $str = "-1";
+  /*
+   * Set/Unset Active Accounts
+   */
   if (count($active) > 0) {
-    $str = implode(",", $active);
-  }
+    $sql_in = implode(',', array_fill(0, count($active), '?'));
+    
+    // Unset Active
+    $q = "UPDATE accounts
+    SET active = 0
+    WHERE id NOT IN ($sql_in)
+    AND active = 1;";
+    $result = Bitch::source('default')->query($q, $active);
+    if (!$result) { die('Invalid query'); }
 
-  $q = "UPDATE accounts SET active = 0 WHERE id not in ($str) AND active = 1";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
+    // Set Active
+    $q = "UPDATE accounts
+    SET active = 1
+    WHERE id IN ($sql_in)
+    AND active = 0;";
+    $result = Bitch::source('default')->query($q, $active);
+    if (!$result) { die('Invalid query'); }
 
-  //remove sessions for deactivated accounts
-  $q = "UPDATE sessions SET ipaddress = '' WHERE accountid not in ($str)";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
+    // Remove Sessions for accounts that are not active
+    $q = "UPDATE sessions
+    SET ipaddress = ''
+    WHERE accountid NOT IN ($sql_in);";
+    $result = Bitch::source('default')->query($q, $active);
+    if (!$result) { die('Invalid query'); }
   }
-
-  $q = "UPDATE accounts SET active = 1 WHERE id in ($str) AND active = 0";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  //create new account
+  
+  /*
+   * Create new account
+   */
   if ($playername != "") {
     $result = register($playername, $email);
-    if ($result == 1) {
-      $message = "Email address already taken";
-      return false;
-    } else if ($result == 2) {
-      $message = "Username already taken";
-      return false;
-    } else if ($result == 3) {
-      $message = "Invalid email address";
-      return false;
-    } else if ($result == 4) {
-      $message = "Invalid username";
-      return false;
-    }
+    return $result;
   }
 
-  //delete users
-  $str = "-1";
+  /*
+   * Delete users
+   */
   if (count($delete) > 0) {
-    $str = implode(",", $delete);
+    $sql_in = implode(',', array_fill(0, count($delete), '?'));
+
+    // Delete Accounts
+    $q = "DELETE FROM accounts
+    WHERE id IN ($sql_in);";
+    $result = Bitch::source('default')->query($q, $delete);
+    if (!$result) { die('Invalid query'); }
+
+    $q = "DELETE FROM sessions
+    WHERE accountid IN ($sql_in);";
+    $result = Bitch::source('default')->query($q, $delete);
+    if (!$result) { die('Invalid query'); }
   }
 
-  $q = "DELETE FROM accounts WHERE id IN ($str)";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-  $q = "DELETE FROM sessions WHERE accountid IN ($str)";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-
-
-  mysql_close($con);
-
+  setFlash('success', 'Settings Saved');
+  
   updateConfigFiles();
 
-  $message = "Settings saved.";
   return true;
 }
 
@@ -284,85 +278,80 @@ function updateConfigFiles() {
 }
 
 
-function changePassword($username, $password, $new_password, $confirm_password, $ircnickname, $ircpassword, $ircauto, &$message) {
+function changePassword($username, $password, $new_password, $confirm_password, $ircnickname, $ircpassword, $ircauto) {
 
   //validate login
   //if it doesn't, try to change nickserv data
-  $session = validateLogin($username, $password);
-  if ($session == NULL) {
-    $message = NULL;
-    $val = changeIRC($username, $ircnickname, $ircpassword, $ircauto, $message);
+
+  // ACHTUNG /!\ The line below has the side-effect of being able to initialize the user's session
+  // Maybe should replace by another function
+  $result = validateLogin($username, $password);
+  if (!$result) {
+    $val = changeIRC($username, $ircnickname, $ircpassword, $ircauto);
     return val;
   }
 
   if ($new_password == $confirm_password) {
     if (strlen($new_password) < 6) {
-      $message = "Passwords must be at least 6 characters long!";
+      setFlash('error', 'Passwords must be at least 6 characters long!');
       return false;
     }
 
-    //database connection
-    $con = mysql_connect("localhost:3306","minecraft","minecr4ft") or die(mysql_error());
-    mysql_select_db("minecraft_auth") or die(mysql_error());
-    mysql_query("SET NAMES 'utf8'");
+    $password = encryptPassword($new_password);
+    $q = "UPDATE accounts
+    SET password = :password 
+    WHERE playername = :username";
+    $result = Bitch::source('default')->query($q, compact('password', 'username'));
+    if (!$result) { die('Invalid query'); }
 
-    $q = "UPDATE accounts SET password = '".encryptPassword($new_password)."' WHERE playername = '$username'";
-    $result = mysql_query($q);
-    if (!$result) {
-      die('Invalid query: ' . mysql_error());
-    }
 
-    mysql_close($con);
-
-    $message = "Password changed successfully!";
+    setFlash('success', 'Password changed successfully!');
     return true;
 
   } else {
 
-    $message = "Passwords do not match";
+    setFlash('error', 'Passwords do not match.');
     return false;
   }
 
 }
 
-function changeIRC($username, $ircnickname, $ircpassword, $ircauto, &$message) {
-
-  //database connection
-  $con = mysql_connect("localhost:3306","minecraft","minecr4ft") or die(mysql_error());
-  mysql_select_db("minecraft_auth") or die(mysql_error());
-  mysql_query("SET NAMES 'utf8'");
-
+function changeIRC($username, $ircnickname, $ircpassword, $ircauto) {
 
   $q = "UPDATE accounts
-        SET ircnickname = '$ircnickname', ircpassword = '$ircpassword', ircauto = '$ircauto'
-        WHERE playername = '$username'";
-  $result = mysql_query($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
+  SET ircnickname = :ircnickname,
+      ircpassword = :ircpassword,
+      ircauto = :ircauto
+  WHERE playername = :username";
+  $result = Bitch::source('default')->query($q, compact('ircnickname', 'ircpassword', 'ircauto', 'username'));
+  if (!$result) { die('Invalid query'); }
 
-  mysql_close($con);
-
-  $message = "IRC settings saved!";
+  setFlash('success', 'IRC settings saved!');
   return true;
-
 }
 
-function resetPassword($id, &$message) {
+function resetPassword($id) {
 
   $u = getUserById($id);
-  $v_username = $u['playername'];
-  $v_email = $u['email'];
-  $v_password = substr(md5(rand()), 0, 7);
-  $q = "UPDATE accounts SET password = '".encryptPassword($v_password)."' WHERE id = $id";
-  list($result, $con) = q($q);
-  if (!$result) {
-    die('Invalid query: ' . mysql_error());
-  }
-  mysql_close($con);
-  emailConfirmation($v_username, $v_password, $v_email);
+  $username = $u['playername'];
+  $email = $u['email'];
+  $password = substr(md5(rand()), 0, 7);
+  $plain_password = $password;
+  $password = encryptPassword($password);
 
-  $message = "Password reset successful! Email sent.";
+  $q = "UPDATE accounts
+  SET password = :password
+  WHERE id = :id";
+  $result = Bitch::source('default')->query($q, compact('password', 'id'));
+
+  if (!$result) {
+    die('Invalid query');
+  }
+  
+  emailConfirmation($username, $plain_password, $email);
+
+  setFlash('success', 'Password reset successful! Email sent.');
+
   return true;
 }
 

@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once 'bootstrap.php';
+require_once('bootstrap.php');
 require_once('environment.php');
 require_once('router.php');
 
@@ -27,8 +27,7 @@ require_once('controllers/admin/configure.php');
 require_once('controllers/irc/index.php');
 require_once('controllers/webchat/index.php');
 
-require_once('lib/db.php');
-
+require_once('lib/flash.php');
 $r = new Router();
 
 $r->map('GET',  '/', 'home');

@@ -12,15 +12,19 @@ function users_reset_password() {
     return;
   }
   
-  $reset = isset($_POST['reset']) ? $_POST['reset'] : NULL;
-  $message = NULL;
-  
-  $status = resetPassword($reset, $message);
+  $id = isset($_POST['id']) ? $_POST['id'] : NULL;
+  $admin = isset($_SESSION['admin']) ? $_SESSION['admin'] : NULL;
+    
+  if (($admin == "1") or ($_SESSION[id] == $id)) {
+    $status = resetPassword($id);
+  } else {
+    setFlash('error', "You can't change this password!");
+  }
   
   if (!$status) {
-    header("Location: /profile?id=$reset&error=$message");
+    header("Location: /profile?id=$id");
   } else {
-    header("Location: /profile?id=$reset&ok=$message");
+    header("Location: /profile?id=$id");
   }
 }
 

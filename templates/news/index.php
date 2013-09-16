@@ -36,7 +36,7 @@
       <h2><?= m("L_LASTACTIVE") ?></h2>
       <ul class="player-list">
       <? foreach(getRecent($_SESSION['id']) as $r): ?>
-        <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".s($r['playername']); ?>
+        <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$r['playername']; ?>
         <li class="link" style="background-image: url('<?= $head_url ?>');">
           <a title="@ <?= $r["sessiondate"] ?>" href="/profile?id=<?= $r['id'] ?>"><?= $r["playername"] ?></a>
         </li>
@@ -47,7 +47,7 @@
       <h2><?= m("L_NEWEST") ?></h2>
       <ul class="player-list">
       <? foreach(getNewest() as $r): ?>
-        <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".s($r['playername']); ?>
+        <? $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$r['playername']; ?>
         <li class="link" style="background-image: url('<?= $head_url ?>');">
           <a title="@ <?= $r["registerdate"] ?>" href="/profile?id=<?= $r['id'] ?>"><?= $r["playername"] ?></a>
         </li>

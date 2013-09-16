@@ -33,18 +33,20 @@
   </div>
   </div>
   <? endif; ?>
-
- <? if (isset($ok)): ?>
- <div class="section success">
-   <?= $ok ?>
- </div>
- <? endif; ?>
-
- <? if (isset($error)): ?>
- <div class="section error">
-   <?= $error ?>
- </div>
- <? endif; ?>
+  
+  <? 
+    $error = getFlash('error');
+    if ($error != false):
+  ?>
+    <div class="section error"><?= $error ?></div>
+  <? endif; ?>
+  
+  <? 
+    $success = getFlash('success');
+    if ($success != false):
+  ?>
+    <div class="section success"><?= $success ?></div>
+  <? endif; ?>
 
  <?
    $head_url = "/profile/3d?a=0&w=45&wt=-45&abg=0&abd=-30&ajg=-25&ajd=30&ratio=2&format=png&displayHairs=true&headOnly=true&login=".$p['playername'];
@@ -82,7 +84,7 @@
         <tbody>
         <tr>
           <td>
-            <input type="hidden" name="reset" value="<?= $p['id'] ?>" />
+            <input type="hidden" name="id" value="<?= $p['id'] ?>" />
             <input type="submit" value="<?= m("L_RESETPASS") ?>" />
           </td>
         </tr>

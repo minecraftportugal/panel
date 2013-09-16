@@ -4,6 +4,7 @@ require('config.php');
 require('lib/xauth.php');
 
 use minecraftia\db\Bitch;
+
 /*
  * validateLogin: validates user logins
  */
@@ -12,12 +13,12 @@ function validateLogin($username, $password) {
 
   if ($result = Bitch::source('default')->first($q, compact('username'))) {
     if (checkPassword($password, $result['password'])) {
-      $val = "OK";
       initSession($result['id'], $result['playername'], $result['admin']);
+      return true;
     }
   }
 
-  return isset($val) ? $val : null;
+  return false;
 }
 
 /*

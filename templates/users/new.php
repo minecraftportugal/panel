@@ -31,19 +31,21 @@
         <span class="center"><input type="text" id="username" name="username" placeholder="<?= m("L_USERNAMEA") ?>" /></span>
         <span class="center"><input type="text" id="email" name="email" placeholder="<?= m("L_EMAILA") ?>" /></span>
         <span class="center"><input type="submit" value="<?= m("L_CREATEACC") ?>"/></span>
-        <?php if (isset($_GET['f']) && $_GET['f'] == 1): ?>
-          <label class="error">Email address already used</label>
-        <?php elseif (isset($_GET['f']) && $_GET['f'] == 2): ?>
-          <label class="error">Username already taken</label>
-        <?php elseif (isset($_GET['f']) && $_GET['f'] == 3): ?>
-          <label class="error">Invalid email address</label>
-        <?php elseif (isset($_GET['f']) && $_GET['f'] == 4): ?>
-          <label class="error">Invalid username</label>
-        <?php elseif (isset($_GET['f'])): ?>
-          <label class="error">Someone is being a smartass</label>
-        <?php else: ?>
-          <label></label>
-        <?php endif; ?>
+        <span>
+        <? 
+          $error = getFlash('error');
+          if ($error != false):
+        ?>
+          <label class="error"><?= $error ?></label>
+        <? endif; ?>
+        
+        <? 
+          $success = getFlash('success');
+          if ($success != false):
+        ?>
+          <label class="success"><?= $success ?></label>
+        <? endif; ?>
+        </span>
       </form>
     </div>
     <? else: ?>

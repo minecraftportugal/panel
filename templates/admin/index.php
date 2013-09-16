@@ -30,17 +30,19 @@
   </div>
   <? endif; ?>
 
-  <? if (isset($ok)): ?>
- <div class="section success">
-   <?= $ok ?>
- </div>
- <? endif; ?>
-
- <? if (isset($error)): ?>
- <div class="section error">
-   <?= $error ?>
- </div>
- <? endif; ?>
+  <? 
+    $error = getFlash('error');
+    if ($error != false):
+  ?>
+    <div class="section error"><?= $error ?></div>
+  <? endif; ?>
+  
+  <? 
+    $success = getFlash('success');
+    if ($success != false):
+  ?>
+    <div class="section success"><?= $success ?></div>
+  <? endif; ?>
 
   <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
     <div class="section">

@@ -9,7 +9,8 @@ function sessions_create () {
   
   $session = validateLogin($username, $password);
   if ($session == NULL) {
-    header('Location: /login?f=1');
+  	setFlash('error', 'Invalid user/pass combination');
+    header('Location: /login');
   } else {
     header('Location: /');
   }

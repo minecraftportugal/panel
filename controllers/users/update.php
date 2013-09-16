@@ -20,13 +20,11 @@ function users_update() {
   $irc_password = isset($_POST['irc_password']) ? $_POST['irc_password'] : NULL;
   $irc_auto = isset($_POST['irc_auto']) ? $_POST['irc_auto'] : 0;
   
-  $message = NULL;
-  
-  $status = changePassword($username, $password, $new_password, $confirm_password, $irc_nickname, $irc_password, $irc_auto, $message);
+  $status = changePassword($username, $password, $new_password, $confirm_password, $irc_nickname, $irc_password, $irc_auto);
   if (!$status) {
-    header("Location: /profile?error=$message");
+    header("Location: /profile");
   } else {
-    header("Location: /profile?ok=$message");
+    header("Location: /profile");
   }
 }
 

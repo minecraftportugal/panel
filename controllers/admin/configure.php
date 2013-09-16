@@ -6,7 +6,7 @@ require_once('lib/i18n.php');
 
 
 function admin_configure() {
-  validateSession(true);
+  validateSession(true); //validate if admin
   
   $xsrf_token = getXSRFToken();
   if (!validateXSRFToken($xsrf_token)) {
@@ -19,12 +19,14 @@ function admin_configure() {
   $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
   $email = isset($_POST['email']) ? $_POST['email'] : NULL;
   
-  $status = usersConfigure($admin, $active, $delete, s($username), s($email), $message);
+  // /!\ usersConfigure tem q ser decomposta em funções mais pequenas e colocada seguindo a logica de um model mvc
+  // /!\ e posteriormente implementar aqui a logica de negocio do form à conta dessas funçoes
+  $status = usersConfigure($admin, $active, $delete, $username, $email);
   
   if (!$status) {
-    header("Location: /admin?error=$message");
+    header("Location: /admin");
   } else {
-    header("Location: /admin?ok=$message");
+    header("Location: /admin");
   }
 }
 

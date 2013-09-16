@@ -13,7 +13,10 @@ function sessions_destroy () {
     terminatexAuthSession($_SESSION['id']);
   }
   session_destroy();
-  header('Location: /login?f=2');
+  
+  session_start();
+  setFlash('success', 'Logged out sucessfully!');
+  header('Location: /login');
 }
 
 ?>
