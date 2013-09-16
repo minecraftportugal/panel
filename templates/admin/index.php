@@ -19,10 +19,10 @@
    <? if (isLoggedIn()): ?>
   <div class="section status userbar">
   <div class="section-left">
-    <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
     <a class="button" id="profile" href="/profile" title="Profile">
-       <span class="stevehead pixels"></span>
-       <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+      <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
+      <span class="stevehead pixels">
+        <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" /></span>
       <?= $_SESSION['username'] ?></a>
   </div>
   <div class="section-right aright">
@@ -63,12 +63,12 @@
       <? foreach(getUserList() as $r): ?>
       <? $a = getLastSession($r["id"]); ?>
         <tr>
-          <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
           <td style="max-width:120px;overflow:hidden;text-overflow:ellipsis;">
             <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>">
-             <span class="stevehead pixels"></span>
-             <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
-             <?= $r["playername"] ?>
+              <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+              <span class="stevehead pixels">
+                <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+              </span><?= $r["playername"] ?>
             </a>
           </td>
           <td>

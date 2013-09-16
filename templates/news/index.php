@@ -18,11 +18,11 @@
     <? if (isLoggedIn()): ?>
     <div class="section status userbar">
     <div class="section-left">
-      <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
       <a class="button" id="profile" href="/profile" title="Profile">
-         <span class="stevehead pixels"></span>
-         <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
-        <?= $_SESSION['username'] ?></a>
+        <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
+        <span class="stevehead pixels">
+          <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+        </span><?= $_SESSION['username'] ?></a>
     </div>
     <div class="section-right aright">
       <? if ($_SESSION['admin'] == 1): ?>
@@ -39,12 +39,13 @@
       <h2><?= m("L_LASTACTIVE") ?></h2>
       <ul class="player-list">
       <? foreach(getRecent($_SESSION['id']) as $r): ?>
-          <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
         <li class="link">
           <a title="@ <?= $r["sessiondate"] ?>" href="/profile?id=<?= $r['id'] ?>">
-           <span class="stevehead pixels"></span>
-           <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
-           <?= $r["playername"] ?>
+            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+            <span class="stevehead pixels">
+              <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+            </span>
+            <?= $r["playername"] ?>
           </a>
         </li>
       <? endforeach; ?>
@@ -54,11 +55,12 @@
       <h2><?= m("L_NEWEST") ?></h2>
       <ul class="player-list">
       <? foreach(getNewest() as $r): ?>
-        <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
         <li class="link">
           <a title="@ <?= $r["registerdate"] ?>" href="/profile?id=<?= $r['id'] ?>">
-           <span class="stevehead pixels"></span>
-           <span class="stevehead pixels" style="background-image: url('<?= $head_url ?>')"></span>
+            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+            <span class="stevehead pixels">
+              <img onerror="this.onerror=null;this.src='/images/steve.png';" src="<?= $head_url ?>" alt="Skin" />
+            </span>
            <?= $r["playername"] ?>
           </a>
         </li>
