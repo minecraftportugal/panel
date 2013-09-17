@@ -1,3 +1,8 @@
+/*
+ * Top Frame CSS
+ * Styles frames, buttons and windows that apepar on the top frame
+ */
+
 html {overflow: auto;} 
 html, body, div, iframe {margin: 0px; padding: 0px; height: 100%; border: none;} 
 iframe#map, iframe#news {display: block; width: 100%; border: none; overflow-y: auto; overflow-x: hidden;}

@@ -4,7 +4,7 @@
     <meta charset=utf-8 />
     <title><?= m("L_TITLE") ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/login.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
     <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
     <link rel="shortcut icon" href="../favicon.ico" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
@@ -15,7 +15,7 @@
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body>
+<body id="login">
   <div id="content">
     <div id="motd">
       <h1><?= m("L_WELCOME") ?></h1>
