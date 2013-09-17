@@ -64,7 +64,7 @@ var PlayerSkin = (function() {
     }();
 
     var skin = new Image();
-    skin.crossOrigin = '';
+
     skin.onload = function() {
         if (mode === 'simple')
             renderSimple();
