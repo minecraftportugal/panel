@@ -374,7 +374,47 @@ h1.playername span.stevehead canvas
   position: absolute;
 }
 
+div.content.section > div
+{
+  clear: both;
+  width: 100%;
+}
 
+div.health > span,
+div.hunger > span
+{
+  width: 9px;
+  height: 9px;
+  background: url("/images/hungerlife.png");
+  float: left;
+  margin: 1px;
+}
+
+div.health > span.empty
+{
+  background-position: 0px 0px;
+}
+div.health > span.half
+{
+  background-position: -9px 0px;
+}
+div.health > span.full
+{
+  background-position: -18px 0px;
+}
+
+div.hunger > span.empty
+{
+  background-position: 0px -9px;
+}
+div.hunger > span.half
+{
+  background-position: -9px -9px;
+}
+div.hunger > span.full
+{
+  background-position: -18px -9px;
+}
 
 /*
  * http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas

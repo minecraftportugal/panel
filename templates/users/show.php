@@ -53,7 +53,8 @@
     <div class="section success"><?= $success ?></div>
   <? endif; ?>
 
-  <div class="section">
+  <div class="content section">
+  <? $pi = getInquisitor($p['playername']); ?>
     <h1 class="playername">
       <a href="//inquisitor.minecraft.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!">
         <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png"; ?>
@@ -66,19 +67,29 @@
     <div id="skin">
       <img id="skinDisplay" style="display:none" src="<?= $skin_url ?>" data-playerid="<?= $id ?>" alt="Skin" />
     </div>
-    <ul>
-    <? if ($own or $admin): ?>
-      <li>Email: <?= $p['email'] ?></li>
-    <? endif; ?>
-      <li><?= m("L_REGISTERED") ?>: <?= $p['registerdate'] ?></li>
-    <? if ($p['logintime'] != null): ?>
-      <li><?= m("L_LASTSEEN") ?>: <?= $p['logintime'] ?></li>
-    <? endif; ?>
-    <? if ($p['admin'] == 1): ?>
-      <li><?= m("L_SERVERADM") ?></li>
-    <? endif; ?>
-    </ul>
+    <div class="health">
+    <? $h = $pi['health']; ?>
+    <? for ($i = 0; $i < 10; $i++, $h--): ?>
+      <span class="<?= ($h > 1)? "full" : (($h < 0)? "empty" : "half") ?>"></span>
+    <? endfor; ?>
     </div>
+    <div class="hunger">
+    <? $h = 6.5; ?>
+    <? for ($i = 0; $i < 10; $i++, $h--): ?>
+      <span class="<?= ($h > 1)? "full" : (($h < 0)? "empty" : "half") ?>"></span>
+    <? endfor; ?>
+    </div>
+  <? if ($own or $admin): ?>
+    <div>Email: <?= $p['email'] ?></div>
+  <? endif; ?>
+    <div><?= m("L_REGISTERED") ?>: <?= $p['registerdate'] ?></div>
+  <? if ($p['logintime'] != null): ?>
+    <div><?= m("L_LASTSEEN") ?>: <?= $p['logintime'] ?></div>
+  <? endif; ?>
+  <? if ($p['admin'] == 1): ?>
+    <div><?= m("L_SERVERADM") ?></div>
+  <? endif; ?>
+  </div>
 
     <?/*<div class="section">
       <? $inq = getInquisitor($p['playername']); print_r($inq); ?>
