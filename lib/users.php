@@ -379,7 +379,7 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
   $mail->WordWrap = 50; // set word wrap
   $mail->IsHTML(true); // send as HTML
 
-  $mail->Subject = "Welcome to Minecraftia!";
+  $mail->Subject = "Comunidade Minecraft Portugal: Registo!";
   $body = file_get_contents("$cfg_web_root/templates/email.html");
   $body = str_replace('$playername', $playername, $body);
   $body = str_replace('$password', $password, $body);

@@ -53,7 +53,7 @@
  ?>
   <div class="section">
     <h1 class="playername">
-      <a style="background-image: url('<?= $head_url ?>');" href="//inquisitor.minecraftia.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!"><?= $p['playername'] ?></a></h1>
+      <a style="background-image: url('<?= $head_url ?>');" href="//inquisitor.minecraft.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!"><?= $p['playername'] ?></a></h1>
     <div id="skin">
       <!--<img onerror="this.onerror=null;this.src='/steve.png';" src="http://s3.amazonaws.com/MinecraftSkins/xxx.png" alt="Skin" />-->
       <img id="skinDisplay" src="<?= $skin_url ?>" alt="Skin" />

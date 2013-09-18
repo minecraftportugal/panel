@@ -3,9 +3,9 @@
   $locale = isset($_COOKIE["i18n"]) ? $_COOKIE["i18n"] : $fallback;
   $messages = array(
     "pt_PT" => array(
-      "L_TITLE"       => "Bem vindo à Minecraftia!",
-      "L_WELCOME"     => "Bem vindo à Minecraftia!",
-      "L_WELCOME1"  => "Servidor Privado de Minecraft. <a href=\"/register\">Regista-te aqui</a>.",
+      "L_TITLE"       => "Comunidade Minecraft Portugal",
+      "L_WELCOME"     => "Comunidade Minecraft Portugal",
+      "L_WELCOME1"  => "Servidor Português de Minecraft. <a href=\"/register\">Regista-te aqui</a>.",
       "L_WELCOME2"   => "Se procuras mais informações sobre o servidor contacta-nos em <u><span class=\"email\">mail[at]minecraft.pt</span></u> ou vem conversar conosco no <a href=\"//blog.minecraft.pt/webchat/\" target=\"_blank\">#minecraft</a> na <a href=\"http://www.ptnet.org/\" target=\"_blank\">PTnet</a>.",
       "L_WELCOME3"   => "Para estares a par de todas as novidades, visita o nosso blog em <a href=\"//blog.minecraft.pt\" target=\"_blank\">blog.minecraft.pt</a>.",
       "L_INVALID"     => "Nome de utilizador ou password invalidos",
@@ -28,9 +28,9 @@
       "L_EMAILA" => "esteves@minecraft.pt"
     ),
     "en_GB" => array(
-      "L_TITLE"       => "Welcome to Minecraftia!",
-      "L_WELCOME"     => "Welcome to Minecraftia!",
-      "L_WELCOME1"    => "We're a Minecraft Private Server. <a href=\"/register\">Click here to register</a>.",
+      "L_TITLE"       => "Comunidade Minecraft Portugal",
+      "L_WELCOME"     => "Comunidade Minecraft Portugal",
+      "L_WELCOME1"    => "We're a Portuguese Minecraft Community. <a href=\"/register\">Click here to register</a>.",
       "L_WELCOME2"   => "If you are looking to know more about this server contact us at <u><span class=\"email\">mail[at]minecraft.pt</span></u> or come chat with us in <a href=\"//blog.minecraft.pt/webchat\" target=\"_blank\">#minecraft</a> at <a href=\"http://www.ptnet.org/\" target=\"_blank\">PTnet</a>.",
       "L_WELCOME3"   => "To get the latest news and updates, visit our blog at <a href=\"//blog.minecraft.pt/\" target=\"_blank\">blog.minecraft.pt</a>.",
       "L_INVALID"     => "Invalid username/password combination",
