@@ -2,6 +2,7 @@
 
 session_start();
 
+require_once('config.php');
 require_once('bootstrap.php');
 require_once('environment.php');
 require_once('router.php');
@@ -28,6 +29,11 @@ require_once('controllers/irc/index.php');
 require_once('controllers/webchat/index.php');
 
 require_once('lib/flash.php');
+
+if ($cfg_wp_enabled) {
+  require_once("$cfg_wp_location/wp-blog-header.php");
+}
+
 $r = new Router();
 
 $r->map('GET',  '/', 'home');

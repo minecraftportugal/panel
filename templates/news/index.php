@@ -61,16 +61,15 @@
     <div id="news" class="section topbump">
     <h2><?= m("L_NEWS") ?></h2>
     <?
-      require("$cfg_wp_location/wp-blog-header.php");
       $posts = get_posts('numberposts=10&order=desc&orderby=post_date');
+      foreach ($posts as $post) : setup_postdata( $post );
     ?>
-    <? foreach ($posts as $post) : start_wp(); ?>
     <div class="section2 pushd2">
-    <h3><a href="<?= get_permalink() ?>" target="_blank"><?= the_time("F j, Y"); ?>: <?= the_title(); ?></a></h3>
-    <p><?= the_excerpt(); ?></p>
+    <h3><a href="<?= get_permalink($post->ID) ?>" target="_blank"><?= get_the_time("F j, Y", $post->ID); ?>: <?= get_the_title($post->ID); ?></a></h3>
+    <p><?= get_the_excerpt($post->ID); ?></p>
     </div>
     <?
-    endforeach;
+      endforeach;
     ?>
     </div>
     <? endif; ?>
