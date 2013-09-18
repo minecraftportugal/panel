@@ -13,10 +13,10 @@ use minecraftia\db\Bitch;
 /*
  * getInquisitor: returns inquisitor data for a given playername;
  */
-function getInquisitor($playername) {
-  $q = "SELECT * FROM players WHERE name = :playername;";
+function getInquisitor($username) {
+  $q = "SELECT * FROM players WHERE name = :username;";
 
-  $result = CONNice::get('inquisitor')->fetch($q, compact('playername'));
+  $result = Bitch::source('inquisitor')->first($q, compact('username'));
 
   return $result;
 }

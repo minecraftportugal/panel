@@ -22,9 +22,8 @@
   <div class="section status userbar">
   <div class="section-left">
     <a class="button" id="profile" href="/profile" title="Profile">
-      <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
       <span class="stevehead">
-        <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+        <img class="pixels" src="/images/steve.png" data-src="<?= $userSkin ?>" alt="Skin" />
       </span>
       <?= $_SESSION['username'] ?></a>
   </div>
@@ -54,46 +53,38 @@
   <? endif; ?>
 
   <div class="content section">
-  <? $pi = getInquisitor($p['playername']); ?>
     <h1 class="playername">
-      <a href="//inquisitor.minecraft.pt/player/<?= $p['playername'] ?>" target="_new" title="Inquisitor!">
-        <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['playername'].".png"; ?>
+      <a href="//inquisitor.minecraft.pt/player/<?= $profile['playername'] ?>" target="_new" title="Inquisitor!">
         <span class="stevehead">
-          <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+          <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
         </span>
-        <?= $p["playername"] ?>
+        <?= $profile["playername"] ?>
       </a>
     </h1>
     <div id="skin">
-      <img id="skinDisplay" style="display:none" src="<?= $skin_url ?>" data-playerid="<?= $id ?>" alt="Skin" />
+      <img id="skinDisplay" style="display:none" src="<?= $profileSkin ?>" data-playerid="<?= $profileId ?>" alt="Skin" />
     </div>
     <div class="health">
-    <? $h = $pi['health']; ?>
-    <? for ($i = 0; $i < 10; $i++, $h--): ?>
-      <span class="<?= ($h > 1)? "full" : (($h < 0)? "empty" : "half") ?>"></span>
+    <? for ($i = 0, $h = ($inquisitor) ? $inquisitor['health'] : 0; $i < 10; $i++, $h-=2): ?>
+      <span class="<?= ($h > 1)? "full" : (($h <= 0)? "empty" : "half") ?>"></span>
     <? endfor; ?>
     </div>
     <div class="hunger">
-    <? $h = 6.5; ?>
-    <? for ($i = 0; $i < 10; $i++, $h--): ?>
-      <span class="<?= ($h > 1)? "full" : (($h < 0)? "empty" : "half") ?>"></span>
+    <? for ($i = 0, $f = $h = ($inquisitor) ? $inquisitor['foodLevel'] : 0; $i < 10; $i++, $f-=2): ?>
+      <span class="<?= ($f > 1)? "full" : (($f <= 0)? "empty" : "half") ?>"></span>
     <? endfor; ?>
     </div>
   <? if ($own or $admin): ?>
-    <div>Email: <?= $p['email'] ?></div>
+    <div>Email: <?= $profile['email'] ?></div>
   <? endif; ?>
-    <div><?= m("L_REGISTERED") ?>: <?= $p['registerdate'] ?></div>
-  <? if ($p['logintime'] != null): ?>
-    <div><?= m("L_LASTSEEN") ?>: <?= $p['logintime'] ?></div>
+    <div><?= m("L_REGISTERED") ?>: <?= $profile['registerdate'] ?></div>
+  <? if ($profile['logintime'] != null): ?>
+    <div><?= m("L_LASTSEEN") ?>: <?= $profile['logintime'] ?></div>
   <? endif; ?>
-  <? if ($p['admin'] == 1): ?>
+  <? if ($profile['admin'] == 1): ?>
     <div><?= m("L_SERVERADM") ?></div>
   <? endif; ?>
   </div>
-
-    <?/*<div class="section">
-      <? $inq = getInquisitor($p['playername']); print_r($inq); ?>
-    </div>*/?>
 
    <? if ($admin): ?>
    <form name="reset_password" action="/reset_password" method="POST" autocomplete="off">
@@ -102,7 +93,7 @@
         <tbody>
         <tr>
           <td>
-            <input type="hidden" name="id" value="<?= $p['id'] ?>" />
+            <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
             <input type="submit" value="<?= m("L_RESETPASS") ?>" />
           </td>
         </tr>
@@ -126,14 +117,14 @@
     <table>
       <tbody>
        <tr>
-          <td colspan="3"><input type="text" name="irc_nickname" value="<?= $p['ircnickname'] ?>" placeholder="irc nickname"></td>
+          <td colspan="3"><input type="text" name="irc_nickname" value="<?= $profile['ircnickname'] ?>" placeholder="irc nickname"></td>
        </tr>
        <tr>
-          <td colspan="3"><input type="password" name="irc_password" value="<?= $p['ircpassword'] ?>" placeholder="nickserv password"></td>
+          <td colspan="3"><input type="password" name="irc_password" value="<?= $profile['ircpassword'] ?>" placeholder="nickserv password"></td>
         </tr>
         <tr>
           <td colspan="3" class="checkbox" style="background-color: rgba(0,0,0,0.5);">
-            <input id="irc_auto" type="checkbox" name="irc_auto" value="1" <?= $p['ircauto'] == 1 ? 'checked="checked"' : '' ?> />
+            <input id="irc_auto" type="checkbox" name="irc_auto" value="1" <?= $profile['ircauto'] == 1 ? 'checked="checked"' : '' ?> />
             <label for="irc_auto">auto-connect to IRC</label>
           </td>
         </tr>
