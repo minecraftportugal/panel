@@ -1,9 +1,12 @@
+// toggle the VISIBILITY property
+// used by the mozilla 
 jQuery.fn.visibilityToggle = function() {
     return this.css('visibility', function(i, visibility) {
         return (visibility == 'visible') ? 'hidden' : 'visible';
     });
 }
 
+// call top.logout() to terminate your session!
 function logout() {
     var form = $('<form></form>');
     form.attr("method", "post");
@@ -31,37 +34,37 @@ function logout() {
 function hideChat() {
   // mozilla unloads the swf when display none ;_;
   if ($.browser.mozilla) {
-    $("div#sitechat").css("visibility", "hidden");
+    $("div#window").css("visibility", "hidden");
   } else {
-    $("div#sitechat").hide();
-  }
+    $("div#window").hide();
+  } 
   $("div#button-chat").show();
 }
 
 function showChat() {
   if ($.browser.mozilla) {
-    $("div#sitechat").css("visibility", "visible");
+    $("div#window").css("visibility", "visible");
   } else {
-    $("div#sitechat").show();
+    $("div#window").show();
   }
   $("div#button-chat").hide();
 }
 
 function hideNews() {
-  $("div#sitenews").hide();
+  $("div#sidebar").hide();
   $("div#button-news").show();
 }
 
 function showNews() {
-  $("div#sitenews").show();
+  $("div#sidebar").show();
   $("div#button-news").hide();
 }
 
 function toggleChat() {
     if ($.browser.mozilla) {
-      $("div#sitechat").visibilityToggle();
+      $("div#window").visibilityToggle();
     } else {
-      $("div#sitechat").toggle();
+      $("div#window").toggle();
     }
     $("div#button-chat").fadeToggle({'duration':150});
 
@@ -74,7 +77,7 @@ function toggleChat() {
 }
 
 function toggleNews() {
-    $("div#sitenews").fadeToggle({'duration':150});
+    $("div#sidebar").fadeToggle({'duration':150});
     $("div#button-news").fadeToggle({'duration':150})
     var p = getCookie("showNews");
     if (p === undefined) {
@@ -85,14 +88,14 @@ function toggleNews() {
 }
 
 function dockChat() {
-  $("div#sitechat").css('left', '6px');
-  $("div#sitechat").css('bottom', '6px');
-  $("div#sitechat").css('top', '');
+  $("div#window").css('left', '6px');
+  $("div#window").css('bottom', '6px');
+  $("div#window").css('top', '');
   savePosition();
 }
 
 function chatHilight(command) {
-  if (!$("div#sitechat").is(":visible") || ($("div#sitechat").css("visibility") == "hidden")) {
+  if (!$("div#window").is(":visible") || ($("div#window").css("visibility") == "hidden")) {
     $("div#button-chat").addClass("activity");
     $("div#button-chat").one("click", function() {
       $("div#button-chat").removeClass("activity");
@@ -102,10 +105,10 @@ function chatHilight(command) {
 }
 
 function savePosition() {
-  setCookie("chatPosLeft", $("div#sitechat").css("left"));
-  setCookie("chatPosTop", $("div#sitechat").css("top"));
-  setCookie("chatSizeWidth", $("div#sitechat").css("width"));
-  setCookie("chatSizeHeight", $("div#sitechat").css("height"));
+  setCookie("chatPosLeft", $("div#window").css("left"));
+  setCookie("chatPosTop", $("div#window").css("top"));
+  setCookie("chatSizeWidth", $("div#window").css("width"));
+  setCookie("chatSizeHeight", $("div#window").css("height"));
 }
 $(function() {
   var pref = getCookie("showChat");
@@ -127,28 +130,28 @@ $(function() {
   var w = getCookie("chatSizeWidth");
   var h = getCookie("chatSizeHeight");
 
-  if (l !== undefined) $("div#sitechat").css("left", l);;
-  if (t !== undefined) $("div#sitechat").css("top", t);
-  if (w !== undefined) $("div#sitechat").width(w);
-  if (h !== undefined) $("div#sitechat").height(h);
+  if (l !== undefined) $("div#window").css("left", l);;
+  if (t !== undefined) $("div#window").css("top", t);
+  if (w !== undefined) $("div#window").width(w);
+  if (h !== undefined) $("div#window").height(h);
 
-  $("#button-chat, #minimize").click(toggleChat);
+  $("#button-chat, .window-minimize").click(toggleChat);
   $("#button-news").click(toggleNews);
 
-  $("div#sitechat").draggable({
+  $("div#window").draggable({
     addClasses: false,
     iframeFix: true,
     cancel: ".nointeraction",
-    handle: "div#drag",
+    handle: "div.window-drag",
     stop: function(event, ui) {
-      var l = $("div#sitechat").css("left");
-      var t = $("div#sitechat").css("top");
+      var l = $("div#window").css("left");
+      var t = $("div#window").css("top");
       savePosition();
     }
   });
 
-  $("div#sitechat").resizable({ 
-    handles: { 'se' : 'div#resize' },
+  $("div#window").resizable({ 
+    handles: { 'se' : 'div.window-resize' },
     minHeight: 200,
     minWidth: 400,
     start: function(event, ui) {
@@ -156,13 +159,13 @@ $(function() {
     },
     stop: function(event, ui) {
       $("iframe").css('pointer-events', 'auto');
-      var w = $("div#sitechat").width();
-      var h = $("div#sitechat").height();
+      var w = $("div#window").width();
+      var h = $("div#window").height();
       savePosition();
     },
   });
 
- $("div#dock").click(function() {
+ $("div.window-dock").click(function() {
    dockChat();
   });
 });

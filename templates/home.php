@@ -15,17 +15,16 @@
 </head> 
 <body>
 
-	<div id="sitenews">
+	<div id="sidebar">
 	  <iframe id="news" src="/news"></iframe>
 	</div>
 
-	<div id="sitechat">
-	<!--  <div id="close" class="nointeraction" onclick="javascript:toggleChat();"></div> -->
-	  <div id="drag" title="drag to move"></div>
+	<div id="window">
+	  <div class="window-drag window-interact" title="drag to move"></div>
 	  <iframe id="chat" src="/irc"></iframe>
-	  <div id="dock" title="click to dock"></div>
-	  <div id="minimize" title="click to minimize"></div>
-	  <div class="ui-resizable-handle ui-resizable-se" id="resize" title="drag to resize"></div>
+	  <div class="window-dock window-interact" title="click to dock"></div>
+	  <div class="window-minimize window-interact" title="click to minimize"></div>
+	  <div class="ui-resizable-handle ui-resizable-se window-resize window-interact" title="drag to resize"></div>
 	</div>
 
 	<div id="button-chat" class="button">Chat</div>

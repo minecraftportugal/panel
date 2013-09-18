@@ -7,6 +7,10 @@ body {
 html {
   overflow-y: scroll;
 }
+
+/*
+ * Headings
+ */
 h1 {
  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
  font-variant: small-caps;
@@ -24,9 +28,7 @@ h2 {
  margin-bottom: 0.3em;
 }
 
-i {
-  font-style: italic;
-}
+
 
 h1.playername {
  font-family: monospace;
@@ -46,12 +48,21 @@ h1.playername > a {
 h1.playername > a:active {
  margin-left: 2px;
 }
+
 h3 {
  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
  font-variant: small-caps;
  color: #777;
  font-size: 1.2em;
  margin-bottom: 5px;
+}
+
+/*
+ * Formats
+ */
+
+i {
+  font-style: italic;
 }
  
 p { 
@@ -60,6 +71,9 @@ p {
  line-height: 1.3em;
 }
 
+/*
+ * Forms
+ */
 input[type="submit"], input[type="text"], input[type="password"] {
   font-family: monospace;
   background-color: rgba(0,0,0,0.5);
@@ -122,9 +136,6 @@ a:active {
  text-decoration: none;
 }
 
-
-
-
 div.status {
  height: 15px;
 }
@@ -185,10 +196,6 @@ div.pushd2 {
 span.small {
  font-size: 0.9em;
  color: #666;
-}
-
-span.lleft {
- min-width: 150px;
 }
 
 div#buttons {
@@ -265,11 +272,6 @@ div.userbar {
 
 .aright {
  text-align: right;
-}
-
-
-a#news {
-
 }
 
 a#profile {

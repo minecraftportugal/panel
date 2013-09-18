@@ -1,11 +1,26 @@
 /*
- * Top Frame CSS
+ * top.css
  * Styles frames, buttons and windows that apepar on the top frame
  */
 
-html {overflow: auto;} 
-html, body, div, iframe {margin: 0px; padding: 0px; height: 100%; border: none;} 
-iframe#map, iframe#news {display: block; width: 100%; border: none; overflow-y: auto; overflow-x: hidden;}
+html {
+  overflow: auto;
+} 
+
+html, body, div, iframe {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  border: none;
+} 
+
+iframe#map, iframe#news {
+  display: block;
+  width: 100%;
+  border: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 /*
  * Buttons
@@ -41,9 +56,7 @@ div.button.activity:hover {
 div.button.activity:active {
   background: rgba(0,0,255,0.7) url('/images/icons/chatnew.png') no-repeat 5px center !important;
 }
-/*
- * http://findicons.com/pack/42/basic
- */
+
 div#button-chat {
   bottom: 0;
   left: 50%;
@@ -70,7 +83,7 @@ div#button-news {
  * Panels
  */
 
-div#sitenews {
+div#sidebar {
   background-color:rgba(0,0,0,0.4);
   position: fixed;
   width: 350px;
@@ -78,11 +91,14 @@ div#sitenews {
   margin-left: -100px;
 }
 
-div#sitenews iframe {
+div#sidebar iframe {
 
 }
 
-div#sitechat {
+/*
+ * Window
+ */
+div#window {
   background-color:rgba(0,0,0,0.4);
   border: none;
   position: fixed;
@@ -94,11 +110,11 @@ div#sitechat {
   z-index: 2;
 }
 
-div#sitechat iframe {
+div#window iframe {
   width: 100%;
 }
 
-div#close {
+div.window-close {
  position: absolute;
  top: 0px;
  right: 0px;
@@ -106,54 +122,46 @@ div#close {
  height: 8px;
  background-color:rgba(255,0,0,0.4);;
  cursor: pointer;
- z-index: 10;
-}
+ }
 
-div#drag {
- position: absolute;
- /*top: 0px;
- width: 8px;
- bottom: 0px;
- right: 0px;*/
+div.window-drag {
  top: -12px;
  height: 10px;
  left: 0;
  right: 24px;
- background-color:rgba(0,0,0,0.4);
  cursor: move;
 }
 
-div#dock {
- position: absolute;
+div.window-dock {
  top: -12px;
  right: 12px;
  width: 10px;
  height: 10px;
- background-color:rgba(0,0,0,0.4);
  cursor: pointer;
 }
 
-div#minimize {
- position: absolute;
+div.window-minimize {
  top: -12px;
  right: 0px;
  width: 10px;
  height: 10px;
- background-color:rgba(0,0,0,0.4);
  cursor: pointer;
 }
 
-div#resize {
- position: absolute;
+div.window-resize {
  right: -1px;
  bottom: -1px;
  width: 4px;
  height: 4px;
- background-color:rgba(0,0,0,0.9);
  cursor: se-resize;
 }
 
-div#drag:hover, div#dock:hover, div#resize:hover, div#minimize:hover {
+div.window-interact {
+ background-color:rgba(0,0,0,0.4);
+ position: absolute;
+}
+
+div.window-interact:hover {
  background-color:rgba(0,0,200,0.4);
 }
 
