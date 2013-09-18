@@ -86,6 +86,12 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+input[type="submit"]:active {
+  color: #DEDEDE;
+  background-color: rgba(0,0,0,0.75);
+}
+
+
 table {
   width: 100%;
   white-space: nowrap;
