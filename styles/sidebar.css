@@ -416,6 +416,49 @@ div.hunger > span.full
   background-position: -18px -9px;
 }
 
+section
+{
+  /*background-color: rgba(0, 0, 0, 0.5);*/
+  clear: both;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+div.section div.section
+{
+  background: transparent;
+}
+
+div.colapsible.section div
+{
+  margin: 0;
+}
+
+div.colapsible.section > div
+{
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  height: 0;
+  padding: 0;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-transition: opacity 0.2s ease-in-out;
+     -moz-transition: opacity 0.2s ease-in-out;
+      -ms-transition: opacity 0.2s ease-in-out;
+       -o-transition: opacity 0.2s ease-in-out;
+          transition: opacity 0.2s ease-in-out;
+}
+
+div.colapsible.section:target > div
+{
+  height: auto;
+  opacity: 1;
+  -webkit-transition: opacity 0.2s ease-in-out;
+     -moz-transition: opacity 0.2s ease-in-out;
+      -ms-transition: opacity 0.2s ease-in-out;
+       -o-transition: opacity 0.2s ease-in-out;
+          transition: opacity 0.2s ease-in-out;
+}
+
 /*
  * http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas
  * attempt nearest neighbour in every browser, for pixel goodness

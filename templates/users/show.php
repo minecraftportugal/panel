@@ -53,14 +53,16 @@
   <? endif; ?>
 
   <div class="content section">
-    <h1 class="playername">
-      <a href="//inquisitor.minecraft.pt/player/<?= $profile['playername'] ?>" target="_new" title="Inquisitor!">
-        <span class="stevehead">
-          <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
-        </span>
-        <?= $profile["playername"] ?>
-      </a>
-    </h1>
+    <header>
+      <h1 class="playername">
+        <a href="//inquisitor.minecraft.pt/player/<?= $profile['playername'] ?>" target="_new" title="Inquisitor!">
+          <span class="stevehead">
+            <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
+          </span>
+          <?= $profile["playername"] ?>
+        </a>
+      </h1>
+    </header>
     <div id="skin">
       <img id="skinDisplay" style="display:none" src="<?= $profileSkin ?>" data-playerid="<?= $profileId ?>" alt="Skin" />
     </div>
@@ -86,6 +88,9 @@
   <? endif; ?>
   </div>
 
+  <div id="settings" class="colapsible section">
+    <a href="#settings" ><h2>SETTINGS</h2></a>
+    <div>
    <? if ($admin): ?>
    <form name="reset_password" action="/reset_password" method="POST" autocomplete="off">
     <div class="section">
@@ -160,6 +165,34 @@
     <? endif; ?>
     <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
   </form>
+    </div>
+  </div>
+
+   <? if ($inquisitor) : ?>
+    <div id="playerstats" class="colapsible section">
+      <a href="#playerstats">
+        <h2>STATS</h2>
+      </a>
+      <div class="section">
+        <p>Level: <?= $inquisitor['level'] ?>
+        <p>XP gained: <?= $inquisitor['lifetimeExperience'] ?>
+        <p>Session time: <?= $inquisitor['sessionTime'] ?>
+        <p>Total play time: <?= $inquisitor['totalTime'] ?>
+        <p>Kicks: <?= $inquisitor['kicks'] ?>
+        <p>Online: <?= $inquisitor['online'] ?>
+        <p>Quits: <?= $inquisitor['quits'] ?>
+        <p>Blocks broken: <?= $inquisitor['totalBlocksBroken'] ?>
+        <p>Game Mode: <?= $inquisitor['gameMode'] ?>
+        <p>IP Address: <?= $inquisitor['address'] ?>
+        <p>Server: <?= $inquisitor['server'] ?>
+        <p>World: <?= $inquisitor['world'] ?>
+        <p>Joins: <?= $inquisitor['joins'] ?>
+        <p>Deaths: <?= $inquisitor['deaths'] ?>
+        <p>Distance traveled: <?= $inquisitor['totalDistanceTraveled'] ?>
+      </div>
+    </div>
+  <? endif; ?>
+
   </div>
 </body>
 </html>
