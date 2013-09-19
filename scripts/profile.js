@@ -188,7 +188,7 @@ var PlayerSkin = (function() {
 //        skinContext.mozImageSmoothingEnabled = false;     // doesn't work?
 
         var charMaterial = getMaterial(skinCanvas, false);
-        //var charMaterialTrans = getMaterial(skinCanvas, true);
+        var charMaterialTrans = getMaterial(skinCanvas, true);
 
         camera = new THREE.PerspectiveCamera(35, canvasWidth / canvasHeight, 1, 1000);
         camera.position.z = 50;
@@ -209,7 +209,7 @@ var PlayerSkin = (function() {
         uvmap(headMesh, 5, 16, 8, 8, 8);
         headGroup.add(headMesh);
 
-        /*
+        
         var helmet = cubeFromPlanes(9, charMaterialTrans);
         helmet.position.y = 2;
         uvmap(helmet.children[0], 0, 32+8, 8, 8, 8);
@@ -219,7 +219,7 @@ var PlayerSkin = (function() {
         uvmap(helmet.children[4], 0, 32+0, 8, 8, 8);
         uvmap(helmet.children[5], 0, 32+16, 8, 8, 8);
         headGroup.add(helmet);
-        */
+        
 
         headGroup.position.y = 8;
 
@@ -324,7 +324,7 @@ var PlayerSkin = (function() {
         skinContext.drawImage(skin, 0, 0);
         // skinContext.mozImageSmoothingEnabled = false;    // doesn't work?
 
-        /*
+       
     var imgData = skinContext.getImageData(0, 0, 64, 32);
     var pixels = imgData.data;
 
@@ -382,11 +382,11 @@ var PlayerSkin = (function() {
       }
     }
     context.restore();
-        */
+       
 
 
   charMaterial.map.needsUpdate = true;
-  //charMaterialTrans.map.needsUpdate = true;
+  charMaterialTrans.map.needsUpdate = true;
 
         var onMouseMove = function(e) {
             if (isMouseDown) {

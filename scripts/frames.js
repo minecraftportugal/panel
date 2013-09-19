@@ -17,9 +17,6 @@ $(document).ready(function() {
           $(this).attr('src', defimg);
         })
         .on('load', function(){
-          if (navigator.userAgent.indexOf("AppleWebKit") == -1)
-            return;
-
           // webkit anti image smoothing hack
           var c = document.createElement('canvas');
           $(c).addClass('pixels');
@@ -33,6 +30,7 @@ $(document).ready(function() {
           ctx.oImageSmoothingEnabled = false;
           ctx.webkitImageSmoothingEnabled = false;
           ctx.drawImage(this, 0, 0, w, h);
+          ctx.drawImage(this, -w/2, 0, w, h); // nice hat
         });
 
       return ds;
