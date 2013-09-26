@@ -1,6 +1,7 @@
 <?php
   $fallback = "pt_PT";
-  $locale = isset($_COOKIE["i18n"]) ? $_COOKIE["i18n"] : $fallback;
+  //$locale = isset($_COOKIE["i18n"]) ? $_COOKIE["i18n"] : $fallback;
+  $locale = "pt_PT";
   $messages = array(
     "pt_PT" => array(
       "L_TITLE"       => "Comunidade Minecraft Portugal",
@@ -20,7 +21,7 @@
       "L_LANGUAGE"    => "Idioma",
       "L_REGISTER0"   => "Novo Registo",
       "L_REGISTER1"   => "Utiliza o <u>mesmo</u> nome de utilizador que usas para jogar Minecraft e um endereço de email onde possas receber a tua password.",
-      "L_CREATEACC"   => "Registar!",
+      "L_CREATEACC"   => "Registar",
       "L_PLEASELOGIN" => "Por favor faça login.",
       "L_USERNAME" => "Nome de utilizador",
       "L_USERNAMEA" => "esteves",

@@ -15,7 +15,7 @@ function sessions_destroy () {
   session_destroy();
   
   session_start();
-  setFlash('success', 'Logged out sucessfully!');
+  setFlash('success', 'sessão terminada');
   header('Location: /login');
 }
 

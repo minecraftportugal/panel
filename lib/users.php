@@ -133,7 +133,7 @@ function register($username, $email, $email_ip = false) {
   $result = Bitch::source('default')->first($q, compact('email'))['total']; // /!\ array index applied to function call
 
   if ($result != "0") {
-    setFlash('error', 'Email address already used');
+    setFlash('error', 'Endereço de email já utilizado');
     return false;
   }
 
@@ -144,19 +144,19 @@ function register($username, $email, $email_ip = false) {
   $result = Bitch::source('default')->first($q, compact('username'))['total']; // /!\ array index applied to function call
 
   if ($result != "0") {
-    setFlash('error', 'Username address already used');
+    setFlash('error', 'Username já utilizado');
     return false;
   }
 
   // check for valid email
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    setFlash('error', 'Invalid email address');
+    setFlash('error', 'Endereço de email inválido');
     return false;
   }
 
   // check for valid username
   if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
-   setFlash('error', 'Invalid username');
+   setFlash('error', 'Username inválido');
    return false;
   }
 
@@ -174,7 +174,7 @@ function register($username, $email, $email_ip = false) {
   }
 
   emailConfirmation($username, $plain_password, $email, $email_ip);
-  setFlash('success', 'Registration successful');
+  setFlash('success', 'Verifica o teu Email');
 
   return true;
 }
