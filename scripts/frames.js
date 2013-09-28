@@ -5,35 +5,44 @@ if (window.self == window.top) {
 }
 
 $(document).ready(function() {
-  $('span.stevehead > img.pixels')
-    .attr('src', function(){
-      var ds = $(this).attr('data-src');
-      var defimg = $(this).attr('src');
+  $('span.stevehead > img.pixels').each(function() {
+    var ds = $(this).attr('data-src');
 
-      // try to prevent load events and src changing simultaneously
-      $(this)
-        .attr('src', '')
-        .one('error', function(){
-          $(this).attr('src', defimg);
-        })
-        .on('load', function(){
-          // webkit anti image smoothing hack
-          var c = document.createElement('canvas');
-          $(c).addClass('pixels');
-          var w = c.width = this.width;
-          var h = c.height = this.height;
-          $(this).replaceWith(c);
+    var img = new Image();
+    var defimg = this;
+   
+    var head = function(i) {
+        var c = document.createElement('canvas');
+        $(c).addClass('pixels');
+        var w = c.width = i.width * 2; // XXX ¯\(°_o)/¯
+        var h = c.height = i.height * 2;
 
-          var ctx = c.getContext('2d');
-          ctx.imageSmoothingEnabled = false;
-          ctx.mozImageSmoothingEnabled = false;
-          ctx.oImageSmoothingEnabled = false;
-          ctx.webkitImageSmoothingEnabled = false;
-          ctx.drawImage(this, 0, 0, w, h);
-          ctx.drawImage(this, -w/2, 0, w, h); // nice hat
-        });
+        $(defimg).replaceWith(c);
 
-      return ds;
-    });
+        var ctx = c.getContext('2d');
+        ctx.imageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.oImageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+        ctx.drawImage(i, 0, 0, w, h);
+        ctx.drawImage(i, -w/2, 0, w, h); // nice hat
+    }
+
+    img.onload = function() {
+      if(this.width < 64 || this.height < 32) {
+        // damn you amazdong
+        img = defimg;
+      }
+      head(img)
+    }
+
+    img.onerror = function() {
+      head(defimg);
+    }
+
+    img.src = ds;
+  });
 });
+
+
 
