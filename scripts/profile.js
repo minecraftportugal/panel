@@ -499,17 +499,85 @@ $(function() {
   });   
 });
 
-// XXX possivel race condition se os eventos ja tiverem disparado antes disto
-$(document).ready(function() {
-
-  
+$(document).ready(function() {  
   $('#skinDisplay')
     .on('load', function() {
-      PlayerSkin.setSkin($(this).attr('data-playerid'));
+      if(this.width < 64 || this.height < 32)
+        PlayerSkin.setSkin(-1);
+      else
+        PlayerSkin.setSkin($(this).attr('data-playerid'));
     })
     .on('error',function() {
       PlayerSkin.setSkin(-1);
     });
 
+  $.getJSON('/scripts/itemsprite.json', function(sd) {
+    $('#playerinventory span.item').each(function() {
+      var d = $(this).attr('data-item').split(' ');
+
+      if (d.length < 4) // empty
+      {
+        $(this).attr('style', 'background-position:-360px -672px');
+
+        return
+      }
+
+      var sid = d[0] +"-"+ d[1];
+      var amount = d[2];
+      var durability = d[3];
+      var info = null;
+      var title = null;
+
+      if (sid in sd['sprites']) {
+        info = sd['sprites'][sid];
+      }
+      else {
+        var pid = d[0] +"-"+ durability;
+        if (pid in sd['potions']) {
+          info = sd['potions'][pid];
+          title = info[1]+"&#10"+info[2];
+          sid = "potion-" + info[0];
+          if (sid in sd['sprites'])
+            info = sd['sprites'][sid];
+          else
+            info = null;
+        }
+        else {
+          sid = d[0]+"-0";
+          if (sid in sd['sprites'])
+            info = sd['sprites'][sid];
+          else
+            info = null;
+        }
+      }
+
+      if (info) {
+        if (info[2] && !title)
+          title = info[2];
+        // if enchantements
+        
+        if (amount > 1)
+          $(this).append('<span class="amount">'+amount+'</span>');
+
+        if (durability > 0 && sid in sd['durabilities'])
+        {
+          var damage = 22 * (1 - durability / sd['durabilities'][sid])
+          $(this).append('<div class="damage"><div style="width:'+damage+'px"></div></div>');
+        }
+
+        $(this).attr('title', title);
+
+        var x=-(info[0])*24;
+        var y=-(info[1])*24;
+        $(this).attr('style', 'background-position:'+x+'px '+y+'px');
+      }
+      else { // empty
+        $(this).attr('style', 'background-position:-360px -672px');
+      }
+ 
+      return
+
+    });
+  });
 });
 

@@ -163,12 +163,20 @@
       <table class="pretty">
         <tbody>
         <? for ($j = 0; $j < 4; $j++): ?>
-          <tr>
+          <tr class="line<?= $j ?>">
           <? for ($i = 0; $i < 9; $i++): ?>
-          <td><? // var_dump($inventory[$i + 9 * $j]); ?>
+          <td>
           <? $a = $inventory[$i + 9 * $j]; ?>
-          <? //if($a) echo $a['type']; ?>
-          <? if($a) echo $a->type; ?>
+          <?
+$itemdata = "";
+if ($a) {
+  $itemdata .= $a->type;
+  $itemdata .= " ".$a->data;
+  $itemdata .= " ".$a->amount;
+  $itemdata .= " ".$a->durability;
+}
+          ?>
+            <span class="item" data-item="<?= $itemdata ?>"></span>
           </td>
           <? endfor; ?>
           </tr>
