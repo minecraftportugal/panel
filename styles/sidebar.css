@@ -111,8 +111,11 @@ input[type=text], input[type=password], label[for] {
 input[type=submit] {
   width: 50%;
   margin: auto;
-  background: rgba(255,255,255,0.2);
+  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+  text-transform: lowercase;
+  background: rgba(255, 255, 255, 0.2);
   cursor: pointer;
+  border: 1px solid #CCC;
 }
 
 input[type=checkbox] {
@@ -244,12 +247,10 @@ table.admin.options tr td {
   padding-bottom: 0.5em;
 }
 
-
 div.meh {
   height: 500px;
   margin-bottom: 0.5em;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 table.admin td, table.admin th {
@@ -672,6 +673,10 @@ div.collapsible.section > div.inside
       -ms-transition: opacity 0.2s ease-in-out;
        -o-transition: opacity 0.2s ease-in-out;
           transition: opacity 0.2s ease-in-out;
+}
+
+div.collapsible.section:target h1 {
+ background-color: rgba(255, 255, 255, 0.95);
 }
 
 div.collapsible.section:target > div.inside

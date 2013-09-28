@@ -8,6 +8,7 @@
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
+
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -69,18 +70,6 @@
       <div class="meh">
       <table class="admin">
         <tbody>
-          <tr>
-            <td class="shortcell cella">
-              <h2>Username</h2>
-            </td>
-            <td class="shortcell cellb">
-              <h2>Ultimo IP</h2>
-            </td>
-            <td class="cellc center"><h2>@</h2></td>
-            <td class="cellc center"><h2>A</h2></td>
-            <td class="cellc center"><h2>X</h2></td>
-            <td class="celld"></td>
-          </tr>
         <? foreach(getUserList() as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
           <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >

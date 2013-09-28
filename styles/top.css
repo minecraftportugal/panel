@@ -108,6 +108,11 @@ div#window {
   height: 300px;
   padding: 0px 0px 0px 0px;
   z-index: 2;
+
+  color: #FFF;
+  font-family: monospace;
+  font-size: 14px;
+
 }
 
 div#window iframe {
@@ -125,34 +130,34 @@ div.window-close {
  }
 
 div.window-drag {
- top: -12px;
- height: 10px;
+ top: -16px;
+ height: 14px;
  left: 0;
- right: 24px;
+ right: 32px;
  cursor: move;
 }
 
 div.window-dock {
- top: -12px;
- right: 12px;
- width: 10px;
- height: 10px;
+ top: -16px;
+ right: 16px;
+ width: 14px;
+ height: 14px;
  cursor: pointer;
 }
 
 div.window-minimize {
- top: -12px;
+ top: -16px;
  right: 0px;
- width: 10px;
- height: 10px;
+ width: 14px;
+ height: 14px;
  cursor: pointer;
 }
 
 div.window-resize {
  right: -1px;
  bottom: -1px;
- width: 4px;
- height: 4px;
+ width: 8px;
+ height: 8px;
  cursor: se-resize;
 }
 

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="xsrf_token" content="<?= getXSRFToken() ?>" />
-<title>Minecraftia!</title>
+<title>Comunidade Minecraft Portugal: Servidor Oficial</title>
 <link rel="stylesheet" href="/styles/top.css" type="text/css" />
 <link rel="stylesheet" href="/styles/jqueryui.css" type="text/css" />
 <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />

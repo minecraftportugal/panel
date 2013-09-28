@@ -70,19 +70,6 @@
       <table class="pretty">
         <tbody>
           <tr>
-            <th colspan="2">Badges</th>
-          </tr>
-          <tr>
-            <td colspan="2">
-              <div id="badges">
-                <? if ($profile['admin'] == 1): ?>
-                  <?= m("L_SERVERADM") ?>
-                <? endif; ?>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
             <td colspan="2">
               <div class="health">
               <? for ($i = 0, $h = ($inquisitor) ? $inquisitor['health'] : 0; $i < 10; $i++, $h-=2): ?>
