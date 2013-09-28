@@ -12,6 +12,8 @@ function users_show () {
 
   $profile = getUserById($profileId);
   $inquisitor = getInquisitor($profile['playername']);
+  if ($inquisitor)
+    $inventory = json_decode($inquisitor['inventory']);
 
   $userSkin = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png";
   $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png";
