@@ -69,6 +69,9 @@
       </table>
       <div class="meh">
       <table class="alt-rows admin">
+        <thead>
+          <tr><td class="cella">Player</td><td class="cellb">IP</td><td class="cellc">@</td><td class="cellc">A</td><td class="cellc">X</td><td class="celld"></td></tr>
+        </thead>
         <tbody>
         <? foreach(getUserList() as $r): ?>
         <? $a = getLastSession($r["id"]); ?>

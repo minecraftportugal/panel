@@ -7,7 +7,9 @@ $(function() {
   $("input#select_a").click(function() {
   	var checked = $(this).is(":checked");
   	if (checked) {
-  		$('tr[data-no-login=true] input[name="delete[]"]:not(:checked)').click();
-  	}
+  		$('tr[data-no-login=true] input[name="delete[]"]:not(:checked)').attr("checked", "checked");
+  	} else {
+      $('tr[data-no-login=true] input[name="delete[]"]:checked').removeAttr("checked");
+    }
   });
 });
