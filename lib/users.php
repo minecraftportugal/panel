@@ -13,10 +13,10 @@ use minecraftia\db\Bitch;
 /*
  * getInquisitor: returns inquisitor data for a given playername;
  */
-function getInquisitor($playername) {
-  $q = "SELECT * FROM players WHERE name = :playername;";
+function getInquisitor($username) {
+  $q = "SELECT * FROM players WHERE name = :username;";
 
-  $result = CONNice::get('inquisitor')->fetch($q, compact('playername'));
+  $result = Bitch::source('inquisitor')->first($q, compact('username'));
 
   return $result;
 }
@@ -133,7 +133,7 @@ function register($username, $email, $email_ip = false) {
   $result = Bitch::source('default')->first($q, compact('email'))['total']; // /!\ array index applied to function call
 
   if ($result != "0") {
-    setFlash('error', 'Email address already used');
+    setFlash('error', 'Email já tomado.');
     return false;
   }
 
@@ -144,19 +144,19 @@ function register($username, $email, $email_ip = false) {
   $result = Bitch::source('default')->first($q, compact('username'))['total']; // /!\ array index applied to function call
 
   if ($result != "0") {
-    setFlash('error', 'Username address already used');
+    setFlash('error', 'Username já tomado.');
     return false;
   }
 
   // check for valid email
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    setFlash('error', 'Invalid email address');
+    setFlash('error', 'Email inválido.');
     return false;
   }
 
   // check for valid username
   if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
-   setFlash('error', 'Invalid username');
+   setFlash('error', 'Username Inválido.');
    return false;
   }
 
@@ -174,7 +174,7 @@ function register($username, $email, $email_ip = false) {
   }
 
   emailConfirmation($username, $plain_password, $email, $email_ip);
-  setFlash('success', 'Registration successful');
+  setFlash('success', 'Utilizador registado');
 
   return true;
 }
@@ -234,14 +234,6 @@ function usersConfigure($admin, $active, $delete, $playername, $email) {
     $result = Bitch::source('default')->query($q, $active);
     if (!$result) { die('Invalid query'); }
   }
-  
-  /*
-   * Create new account
-   */
-  if ($playername != "") {
-    $result = register($playername, $email);
-    return $result;
-  }
 
   /*
    * Delete users
@@ -261,39 +253,24 @@ function usersConfigure($admin, $active, $delete, $playername, $email) {
     if (!$result) { die('Invalid query'); }
   }
 
-  setFlash('success', 'Settings Saved');
-  
-  updateConfigFiles();
-
+  setFlash('success', 'Yay ;-) Alterações Efectuadas.');
   return true;
 }
 
+function changePassword($username, $password, $new_password, $confirm_password) {
+  
+  $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
 
-/* /!\ */
-function updateConfigFiles() {
-  $b = system("/home/minecraft/minecraft/update-white-list.sh");
-  $a = system("/home/minecraft/minecraft/update-ops-list.sh");
-  var_dump($a);
-  var_dump($b);
-}
-
-
-function changePassword($username, $password, $new_password, $confirm_password, $ircnickname, $ircpassword, $ircauto) {
-
-  //validate login
-  //if it doesn't, try to change nickserv data
-
-  // ACHTUNG /!\ The line below has the side-effect of being able to initialize the user's session
-  // Maybe should replace by another function
-  $result = validateLogin($username, $password);
-  if (!$result) {
-    $val = changeIRC($username, $ircnickname, $ircpassword, $ircauto);
-    return val;
+  if (!($result = Bitch::source('default')->first($q, compact('username')))
+  or  (!checkPassword($password, $result['password']))) {
+    setFlash('error', 'Password original errada.');
+    return false;
   }
 
   if ($new_password == $confirm_password) {
+
     if (strlen($new_password) < 6) {
-      setFlash('error', 'Passwords must be at least 6 characters long!');
+      setFlash('error', 'Password deve ter pelo menos 6 characters.');
       return false;
     }
 
@@ -305,12 +282,12 @@ function changePassword($username, $password, $new_password, $confirm_password, 
     if (!$result) { die('Invalid query'); }
 
 
-    setFlash('success', 'Password changed successfully!');
+    setFlash('success', 'Password alterada.');
     return true;
 
   } else {
 
-    setFlash('error', 'Passwords do not match.');
+    setFlash('error', 'Password não confirmada');
     return false;
   }
 
@@ -326,7 +303,7 @@ function changeIRC($username, $ircnickname, $ircpassword, $ircauto) {
   $result = Bitch::source('default')->query($q, compact('ircnickname', 'ircpassword', 'ircauto', 'username'));
   if (!$result) { die('Invalid query'); }
 
-  setFlash('success', 'IRC settings saved!');
+  setFlash('success', 'Alterações Efectuadas.');
   return true;
 }
 
@@ -350,7 +327,7 @@ function resetPassword($id) {
   
   emailConfirmation($username, $plain_password, $email);
 
-  setFlash('success', 'Password reset successful! Email sent.');
+  setFlash('success', 'Nova password enviada por email.');
 
   return true;
 }

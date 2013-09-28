@@ -16,12 +16,8 @@ function admin_configure() {
   $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
   $active = isset($_POST['active']) ? $_POST['active'] : array();
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
-  $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
-  $email = isset($_POST['email']) ? $_POST['email'] : NULL;
   
-  // /!\ usersConfigure tem q ser decomposta em funções mais pequenas e colocada seguindo a logica de um model mvc
-  // /!\ e posteriormente implementar aqui a logica de negocio do form à conta dessas funçoes
-  $status = usersConfigure($admin, $active, $delete, $username, $email);
+  $status = usersConfigure($admin, $active, $delete);
   
   if (!$status) {
     header("Location: /admin");

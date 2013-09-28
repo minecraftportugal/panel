@@ -28,7 +28,7 @@
 	</div>
 
 	<div id="button-chat" class="button">Chat</div>
-	<div id="button-news" class="button">News</div>
+	<div id="button-news" class="button">Notícias</div>
 
 	<iframe id="map" name="mapa" src="//dynmap.minecraft.pt/" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> 
 
