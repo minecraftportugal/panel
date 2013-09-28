@@ -745,6 +745,17 @@ div.collapsible.section h1:active {
   background-color: rgba(255, 255, 255, 0.95);
 }
 
+#playerinventory span.item {
+  background: url('/images/items.png');
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+#playerinventory tr.line3 > td {
+  border: 0.3em solid grey;
+  padding: 0px;
+}
 
 /*
  * http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas

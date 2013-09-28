@@ -499,17 +499,45 @@ $(function() {
   });   
 });
 
-// XXX possivel race condition se os eventos ja tiverem disparado antes disto
-$(document).ready(function() {
-
-  
+$(document).ready(function() {  
   $('#skinDisplay')
     .on('load', function() {
-      PlayerSkin.setSkin($(this).attr('data-playerid'));
+      if(this.width < 64 || this.height < 32)
+        PlayerSkin.setSkin(-1);
+      else
+        PlayerSkin.setSkin($(this).attr('data-playerid'));
     })
     .on('error',function() {
       PlayerSkin.setSkin(-1);
     });
 
+  $.getJSON('/scripts/itemsprite.json', function(sd) {
+    $('#playerinventory span.item').each(function() {
+      var d = $(this).attr('data-item').split(' ');
+
+      if (d.length < 4) // empty
+      {
+        $(this).attr('style', 'background-position:-360px -672px');
+        return
+      }
+
+      console.log(d);
+      var i = d[0] +"-"+ d[1];
+
+      console.log(i);
+      if (i in sd) {
+        console.log(sd[i][2]);
+        var x=-sd[i][0]*24;
+        var y=-sd[i][1]*24;
+        $(this).attr('title', sd[i][2]);
+        $(this).attr('style', 'background-position:'+x+'px '+y+'px');
+        return
+      }
+
+      $(this).attr('style', 'background-position:-360px -672px');
+      return
+
+    });
+  });
 });
 
