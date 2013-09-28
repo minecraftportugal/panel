@@ -23,6 +23,7 @@ require_once('controllers/users/reset_password.php');
 
 require_once('controllers/admin/index.php');
 require_once('controllers/admin/configure.php');
+require_once('controllers/admin/register.php');
 
 require_once('controllers/irc/index.php');
 require_once('controllers/webchat/index.php');
@@ -42,10 +43,12 @@ $r->map('GET',  '/profile', 'users_show');
 $r->map('GET',  '/profile/skin', 'users_skin');
 $r->map('POST', '/register', 'users_create');
 $r->map('POST', '/reset_password', 'users_reset_password');
-$r->map('POST', '/users/update', 'users_update'); // Should be a put
+$r->map('POST', '/users/update_irc', 'users_update_irc'); // Should be a put -- LOL REST
+$r->map('POST', '/users/update_password', 'users_update_password');
 
 $r->map('GET',  '/admin', 'admin_index');
 $r->map('POST', '/admin/configure', 'admin_configure');
+$r->map('POST', '/admin/register', 'admin_register');
 
 $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');

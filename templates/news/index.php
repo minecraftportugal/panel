@@ -72,7 +72,7 @@
     </div>
 
     <? if ($cfg_wp_enabled): ?>
-    <div id="news" class="section topbump">
+    <div id="news" class="section">
     <h2><?= m("L_NEWS") ?></h2>
     <?
       require("$cfg_wp_location/wp-blog-header.php");
