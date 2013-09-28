@@ -58,19 +58,17 @@
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="admin options">
         <thead>
-          <tr>
-            <th><h2>Selecionar para apagar...</h2></th>
-          </tr>
-          <tr>  
+          <tr> 
+            <th><h2>Nunca fez Login</h2></th>
             <td>
               <input id="select_a" type="checkbox" />
-              <label class="checkbox" for="select_a">Nunca fez login</label>
+              <label class="checkbox" for="select_a">Selecionar</label>
             </td>
           </tr>
         </thead>
       </table>
       <div class="meh">
-      <table class="admin">
+      <table class="alt-rows admin">
         <tbody>
         <? foreach(getUserList() as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
@@ -90,9 +88,9 @@
                 <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>
               </span>
             </td>
-            <td class="cellc center"><input name="admin[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> /></td>
-            <td class="cellc center"><input name="active[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?>/></td>
-            <td class="cellc center"><input name="delete[]" value="<?= $r["id"] ?>" type="checkbox" /></td>
+            <td class="cellc center"><input class="gridy" name="admin[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> /></td>
+            <td class="cellc center"><input class="gridy" name="active[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?>/></td>
+            <td class="cellc center"><input class="gridy" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" /></td>
             <td class="celld"></td>
           </tr>
         <? endforeach; ?>

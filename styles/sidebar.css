@@ -121,6 +121,9 @@ input[type=submit] {
 input[type=checkbox] {
   cursor: pointer;
   display: inline;
+}
+
+input[type=checkbox]:not(.gridy) {
   float: left;
 }
 
@@ -243,8 +246,33 @@ table.admin {
   table-layout: fixed;
 }
 
-table.admin.options tr td {
+table.admin.alt-rows td {
+  line-height: 16px;
+}
+
+table.admin.options {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+table.admin td.cellc {
+  text-align: center;
+  vertical-align: middle
+}
+
+table.admin td.cella {
+  padding-top: 0.5em;
+  padding-left: 0.5em;
   padding-bottom: 0.5em;
+}
+
+
+table.alt-rows tr:nth-child(even) td {
+  background: rgba(0,0,0, 0.1);
+}
+
+table.alt-rows tr:nth-child(odd) td {
+  background: rgba(0,0,0, 0.2);
 }
 
 div.meh {
