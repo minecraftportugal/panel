@@ -22,6 +22,28 @@ function getInquisitor($username) {
 }
 
 /*
+ * getOnlinePlayers: returns the names of online players
+ */
+function getOnlinePlayers() {
+  $q = "SELECT name FROM players WHERE online = 1 ORDER BY lastJoin;";
+
+  $result = Bitch::source('inquisitor')->all($q, compact('username'));
+
+  return $result;
+}
+
+/*
+ * getUserIdByName: returns the names of online players
+ */
+function getUserIdByName($playername) {
+  $q = "SELECT id FROM accounts WHERE playername = :playername;";
+
+  $result = Bitch::source('default')->first($q, compact('playername'));
+
+  return $result;
+}
+
+/*
  * getRecent: returns the list of all the returning players, except $exclude 
  * which should be the ID of the current user
  */

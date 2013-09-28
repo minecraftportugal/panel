@@ -313,6 +313,14 @@ td.celld {
   width: 6px;
 }
 
+td.online {
+  background-color: rgba(0,255,0,0.1) !important;
+}
+
+td.offline {
+  background-color: rgba(255,0,0,0.1) !important;
+}
+
 table.pretty {
   border-collapse: separate;
   border-spacing: 2px;

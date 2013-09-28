@@ -35,6 +35,31 @@
     </div>
     <? endif; ?>
 
+    <? 
+      $o = getOnlinePlayers();
+      $len = $o == null ? 0 : count($o);
+
+      if ($len > 0):
+    ?>
+    <div class="section">
+      <h2>Jogadores Online (<?= $len ?>)</h2>
+      <ul class="player-list">
+      <? foreach($o as $r): ?>
+        <li class="link">
+          <? $id = getUserIdByName($r['name'])['id'] ?>
+          <a href="<?= $id != null ? '/profile?id='.$id : '#' ?>" style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
+            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
+            <span class="stevehead">
+              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+            </span>
+            <?= $r["name"] ?>
+          </a>
+        </li>
+      <? endforeach; ?>
+      </ul>
+    </div>
+    <? endif; ?>
+
     <div class="section">
     <div class="section-left">
       <h2><?= m("L_LASTACTIVE") ?></h2>

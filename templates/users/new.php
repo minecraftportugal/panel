@@ -26,7 +26,6 @@
     <? if ($cfg_enable_registrations): ?>
     <div id="actions">
       <form name="login" method="post" action="/register">
-        
         <span class="center"><input type="text" id="username" name="username" placeholder="<?= m("L_USERNAMEA") ?>" /></span>
         <span class="center"><input type="text" id="email" name="email" placeholder="<?= m("L_EMAILA") ?>" /></span>
         <span class="center"><input type="submit" value="<?= m("L_CREATEACC") ?>"/></span>

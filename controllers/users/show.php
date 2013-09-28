@@ -2,6 +2,7 @@
 require_once('config.php');
 require_once('lib/sessions.php');
 require_once('lib/i18n.php');
+require_once('helpers/date.php');
 
 function users_show () {
   validateSession();

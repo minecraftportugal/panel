@@ -82,6 +82,10 @@
               <? endfor; ?>
             </td>
           </tr>
+
+          <? if ($inquisitor): ?>
+          <tr><th>Status</th><td class="<?= $inquisitor['online'] == 1 ? 'online' : 'offline' ?>"><?= $inquisitor['online'] == 1 ? 'online' : 'offline' ?></td></tr>
+          <? endif; ?>
       
           <? if ($own): ?> 
           <tr>
@@ -106,22 +110,6 @@
     </div>
   </div>
 
-  <? if ($admin): ?>
-  <div id="userinfo" class="collapsible section">
-    <a href="#userinfo">
-      <h1>User Info</h1>
-    </a>
-    <div class="inside">
-      <table class="pretty">
-        <tbody>
-          <tr><th>Inquisitor IP</th><td> <?= $inquisitor['address'] ?></td></tr>
-          <tr><th>Email</th><td><?= $profile['email'] ?></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <? endif; ?>
-
   <? if ($inquisitor) : ?>
   <div id="playerstats" class="collapsible section">
     <a href="#playerstats">
@@ -131,20 +119,36 @@
       <table class="pretty">
         <tbody>
           <tr><th>Level</th><td><?= $inquisitor['level'] ?></td></tr>
-          <tr><th>XP gained</th><td> <?= $inquisitor['lifetimeExperience'] ?></td></tr>
-          <tr><th>Session time</th><td> <?= $inquisitor['sessionTime'] ?></td></tr>
-          <tr><th>Total play time</th><td> <?= $inquisitor['totalTime'] ?></td></tr>
-          <tr><th>Kicks</th><td> <?= $inquisitor['kicks'] ?></td></tr>
-          <tr><th>Online</th><td> <?= $inquisitor['online'] ?></td></tr>
-          <tr><th>Quits</th><td> <?= $inquisitor['quits'] ?></td></tr>
-          <tr><th>Blocks broken</th><td> <?= $inquisitor['totalBlocksBroken'] ?></td></tr>
-          <tr><th>Game Mode</th><td> <?= $inquisitor['gameMode'] ?></td></tr>
-          <tr><th>IP Address</th><td> <?= $inquisitor['address'] ?></td></tr>
-          <tr><th>Server</th><td> <?= $inquisitor['server'] ?></td></tr>
+          <tr><th>XP</th><td><?= $inquisitor['totalExperience'] ?>/<?= $inquisitor['lifetimeExperience'] ?></td></tr>
+          <tr><th>Tempo total</th><td> <?= secs_to_h($inquisitor['totalTime']) ?></td></tr>
+          <tr><th>Ultima sessão</th><td> <?= secs_to_h($inquisitor['sessionTime']) ?></td></tr>
+          <tr><th>KMs Percorridos</th><td> <?= round($inquisitor['totalDistanceTraveled']/1000,2) ?> km</td></tr>
+          <tr><th>Modo de Jogo</th><td> <?= $inquisitor['gameMode'] ?></td></tr>
           <tr><th>World</th><td> <?= $inquisitor['world'] ?></td></tr>
-          <tr><th>Joins</th><td> <?= $inquisitor['joins'] ?></td></tr>
-          <tr><th>Deaths</th><td> <?= $inquisitor['deaths'] ?></td></tr>
-          <tr><th>Distance traveled</th><td> <?= $inquisitor['totalDistanceTraveled'] ?></td></tr>
+          <tr><th colspan="2">Entradas</th></tr>
+          <tr><th>Entradas</th><td> <?= $inquisitor['joins'] ?></td></tr>
+          <tr><th>Primeira</th><td> <?= $inquisitor['firstJoin'] ?></td></tr>
+          <tr><th>Última</th><td> <?= $inquisitor['lastJoin'] ?></td></tr>
+        <? if ($inquisitor['kicks'] > 0): ?>
+          <tr><th colspan="2">Kicks</th></tr>
+          <tr><th>Total</th><td> <?= $inquisitor['kicks'] ?></td></tr>
+          <tr><th>Ultimo</th><td> <?= $inquisitor['lastKick'] ?></td></tr>
+        <? endif; ?>
+        <? if ($inquisitor['quits'] > 0): ?>
+          <tr><th colspan="2">Quits</th></tr>
+          <tr><th>Total</th><td> <?= $inquisitor['quits'] ?></td></tr>
+          <tr><th>Ultimo</th><td> <?= $inquisitor['lastQuit'] ?></td></tr>
+        <? endif; ?>
+          <tr><th colspan="2">Blocos</th></tr>
+          <tr><th>Destruidos</th><td> <?= $inquisitor['totalBlocksBroken'] ?></td></tr>
+          <tr><th>Colocados</th><td> <?= $inquisitor['totalBlocksPlaced'] ?></td></tr>
+          <tr><th colspan="2">Mortes</th></tr>
+          <tr><th>Morreu</th><td> <?= $inquisitor['deaths'] ?></td></tr>
+          <tr><th>Matou</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
+        <? if ($inquisitor['lastPlayerKilled'] > 0): ?>)
+          <tr><th>Último Morto</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
+          <tr><th>Em</th><td> <?= $inquisitor['lastPlayerKill'] ?></td></tr>
+        <? endif; ?>
         </tbody>
       </table>
     </div>
@@ -199,6 +203,25 @@
           </table>
         </form>
        </div>
+    </div>
+  </div>
+  <? endif; ?>
+
+  <? if ($admin): ?>
+  <div id="userinfo" class="collapsible section">
+    <a href="#userinfo">
+      <h1>User Info</h1>
+    </a>
+    <div class="inside">
+      <table class="pretty">
+        <tbody>
+        <? if ($inquisitor): ?>
+          <tr><th>Inquisitor IP</th><td> <?= $inquisitor['address'] ?></td></tr>
+          <tr><th>Server</th><td> <?= $inquisitor['server'] ?></td></tr>
+        <? endif; ?>
+          <tr><th>Email</th><td><?= $profile['email'] ?></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
   <? endif; ?>
