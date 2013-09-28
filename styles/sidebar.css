@@ -248,9 +248,8 @@ table.admin.options tr td {
 }
 
 div.meh {
-  height: 500px;
+
   margin-bottom: 0.5em;
-  overflow: hidden;
 }
 
 table.admin td, table.admin th {
@@ -276,22 +275,6 @@ td.cellc {
 }
 
 td.celld {
-  width: 6px;
-}
-
-th.cella {
-  width: 80px;
-}
-
-th.cellb {
-  width: 70px;
-}
-
-th.cellc {
-  width: 12px;
-}
-
-th.celld {
   width: 6px;
 }
 
@@ -423,7 +406,6 @@ div#skin {
   width: 100%;
   text-align: center;
   margin-top: 1em;
-  margin-bottom: 1em;
   height: 360px;
 }
 

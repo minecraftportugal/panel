@@ -9,6 +9,5 @@ $(function() {
   	if (checked) {
   		$('tr[data-no-login=true] input[name="delete[]"]:not(:checked)').click();
   	}
-
   });
 });

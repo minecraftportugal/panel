@@ -3,8 +3,10 @@
 <head>
     <meta charset=utf-8 />
     <title>news</title>
+    
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
+
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
@@ -73,6 +75,7 @@
         <? foreach(getUserList() as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
           <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >
+
             <td class="shortcell cella">
               <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>">
                 <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
@@ -81,6 +84,7 @@
                 </span><?= $r["playername"] ?>
               </a>
             </td>
+            
             <td class="shortcell cellb">
               <span title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
                 <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>
