@@ -518,23 +518,63 @@ $(document).ready(function() {
       if (d.length < 4) // empty
       {
         $(this).attr('style', 'background-position:-360px -672px');
+
         return
       }
 
-      console.log(d);
-      var i = d[0] +"-"+ d[1];
+      var sid = d[0] +"-"+ d[1];
+      var amount = d[2];
+      var durability = d[3];
+      var info = null;
+      var title = null;
 
-      console.log(i);
-      if (i in sd) {
-        console.log(sd[i][2]);
-        var x=-sd[i][0]*24;
-        var y=-sd[i][1]*24;
-        $(this).attr('title', sd[i][2]);
+      if (sid in sd['sprites']) {
+        info = sd['sprites'][sid];
+      }
+      else {
+        var pid = d[0] +"-"+ durability;
+        if (pid in sd['potions']) {
+          info = sd['potions'][pid];
+          title = info[1]+"&#10"+info[2];
+          sid = "potion-" + info[0];
+          if (sid in sd['sprites'])
+            info = sd['sprites'][sid];
+          else
+            info = null;
+        }
+        else {
+          sid = d[0]+"-0";
+          if (sid in sd['sprites'])
+            info = sd['sprites'][sid];
+          else
+            info = null;
+        }
+      }
+
+      if (info) {
+        if (info[2] && !title)
+          title = info[2];
+        // if enchantements
+        
+        if (amount > 1)
+          $(this).append('<span class="amount">'+amount+'</span>');
+
+        if (durability > 0 && sid in sd['durabilities'])
+        {
+          var damage = 22 * (1 - durability / sd['durabilities'][sid])
+          $(this).append('<div class="damage"><div style="width:'+damage+'px"></div></div>');
+        }
+
+        $(this).attr('title', title);
+
+        var x=-(info[0])*24;
+        var y=-(info[1])*24;
         $(this).attr('style', 'background-position:'+x+'px '+y+'px');
-        return
       }
-
-      $(this).attr('style', 'background-position:-360px -672px');
+      else { // empty
+        $(this).attr('style', 'background-position:-360px -672px');
+      }
+ 
       return
 
     });
