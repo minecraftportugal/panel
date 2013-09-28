@@ -496,11 +496,13 @@ $(function() {
   $("a#logout").click(function(e) {
     top.logout();
     return false;
-  });
+  });   
 });
 
 // XXX possivel race condition se os eventos ja tiverem disparado antes disto
 $(document).ready(function() {
+
+  
   $('#skinDisplay')
     .on('load', function() {
       PlayerSkin.setSkin($(this).attr('data-playerid'));
@@ -508,5 +510,6 @@ $(document).ready(function() {
     .on('error',function() {
       PlayerSkin.setSkin(-1);
     });
+
 });
 

@@ -42,6 +42,8 @@ $(document).ready(function() {
 
     img.src = ds;
   });
+
+  $("div.section.default h1").click();
 });
 
 
