@@ -149,6 +149,30 @@
       </table>
     </div>
   </div>
+
+  
+  <div id="playerinventory" class="collapsible section">
+    <a href="#playerinventory">
+      <h1>Inventory</h1>
+    </a>
+    <div class="inside">
+      <table class="pretty">
+        <tbody>
+        <? for ($j = 0; $j < 4; $j++): ?>
+          <tr>
+          <? for ($i = 0; $i < 9; $i++): ?>
+          <td><? // var_dump($inventory[$i + 9 * $j]); ?>
+          <? $a = $inventory[$i + 9 * $j]; ?>
+          <? //if($a) echo $a['type']; ?>
+          <? if($a) echo $a->type; ?>
+          </td>
+          <? endfor; ?>
+          </tr>
+        <? endfor; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <? endif; ?>
 
   <? if ($admin): ?>
