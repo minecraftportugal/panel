@@ -351,7 +351,7 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
 
   $name = $playername; // Recipient's name
   $mail->From = $webmaster_email;
-  $mail->FromName = "Minecraftia!";
+  $mail->FromName = "Comunidade Minecraft Portugal";
   $mail->AddAddress($email,$name);
   $mail->WordWrap = 50; // set word wrap
   $mail->IsHTML(true); // send as HTML
