@@ -255,6 +255,13 @@ table.admin.options {
   margin-bottom: 0.5em;
 }
 
+table.admin.options th {
+  
+}
+ table.admin.options th, table.admin.options td {
+  padding: 0.5em;
+ }
+
 table.admin td.cellc {
   text-align: center;
   vertical-align: middle

@@ -62,7 +62,7 @@
             <th><h2>Nunca fez Login</h2></th>
             <td>
               <input id="select_a" type="checkbox" />
-              <label class="checkbox" for="select_a">Selecionar</label>
+              <label class="checkbox" for="select_a">Apagar</label>
             </td>
           </tr>
         </thead>
