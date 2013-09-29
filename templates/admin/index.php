@@ -53,7 +53,6 @@
  
   <div id="accounts" class="collapsible section default">
     <a href="#accounts"><h1>Gerir Utilizadores</h1></a>
-
     <div class="inside">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="admin options">

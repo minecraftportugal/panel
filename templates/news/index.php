@@ -35,13 +35,31 @@
     </div>
     <? endif; ?>
 
+    <div class="section">
+    <div class="section-left">
+      <h2 title="Time Wasters ;)">Top Jogadores</h2>
+      <ul class="player-list">
+      <? foreach(getTopPlayers() as $r): ?>
+        <li class="link">
+          <? $id = getUserIdByName($r['name'])['id'] ?>
+          <a href="<?= $id != null ? '/profile?id='.$id : '#' ?>" style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
+            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
+            <span class="stevehead">
+              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+            </span>
+            <?= $r["name"] ?>
+          </a>
+        </li>
+      <? endforeach; ?>
+      </ul>
+    </div>
     <? 
       $o = getOnlinePlayers();
       $len = $o == null ? 0 : count($o);
 
       if ($len > 0):
     ?>
-    <div class="section">
+    <div class="section-right">
       <h2>Jogadores Online (<?= $len ?>)</h2>
       <ul class="player-list">
       <? foreach($o as $r): ?>
@@ -59,8 +77,11 @@
       </ul>
     </div>
     <? endif; ?>
+    <div style="clear: both;"></div>
+    </div>
+    
 
-    <div class="section">
+    <div class="section pushd">
     <div class="section-left">
       <h2><?= m("L_LASTACTIVE") ?></h2>
       <ul class="player-list">
@@ -98,13 +119,13 @@
 
     <? if ($cfg_wp_enabled): ?>
     <div id="news" class="section">
-    <h2><?= m("L_NEWS") ?></h2>
+    <h2>Notícias</h2>
     <?
       $posts = get_posts('numberposts=10&order=desc&orderby=post_date');
       foreach ($posts as $post) : setup_postdata( $post );
     ?>
     <div class="section2 pushd2">
-    <h2><a href="<?= get_permalink($post->ID) ?>" target="_blank"><?= get_the_time("F j, Y", $post->ID); ?>: <?= get_the_title($post->ID); ?></a></h2>
+    <h3><a href="<?= get_permalink($post->ID) ?>" target="_blank"><?= get_the_time("F j, Y", $post->ID); ?>: <?= get_the_title($post->ID); ?></a></h3>
     <p><?= get_the_excerpt($post->ID); ?></p>
     </div>
     <?

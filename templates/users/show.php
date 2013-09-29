@@ -74,6 +74,9 @@
             <? if ($badges['donor'] == 1): ?>
               <span title="Dador" class="badge badge-donor"></span>
             <? endif; ?>
+            <? if ($badges['contributor'] == 1): ?>
+              <span title="Contribuidor" class="badge badge-contributor"></span>
+            <? endif; ?>
             <? if ($badges['premium'] == 1): ?>
               <span title="Premium" class="badge badge-premium"></span>
             <? endif; ?>

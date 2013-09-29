@@ -33,6 +33,17 @@ function getOnlinePlayers() {
 }
 
 /*
+ * getTopPlayers: returns the top 10 player list
+ */
+function getTopPlayers() {
+  $q = "SELECT name FROM players ORDER BY totalTime DESC LIMIT 10;";
+
+  $result = Bitch::source('inquisitor')->all($q);
+
+  return $result;
+}
+
+/*
  * getUserIdByName: returns the names of online players
  */
 function getUserIdByName($playername) {
@@ -49,13 +60,14 @@ function getUserIdByName($playername) {
 function getUserBadges($id) {
 
   // premium, admin, donor
-  $q = "SELECT premium, donor, admin FROM accounts WHERE id = :id;";
+  $q = "SELECT premium, donor, contributor, admin FROM accounts WHERE id = :id;";
   $result = Bitch::source('default')->first($q, compact('id'));
 
   $badges = [
     'premium' => $result['premium'],
     'admin' => $result['admin'],
     'donor' => $result['donor'],
+    'contributor' => $result['contributor'],
     'operator' => 0,
   ];
 

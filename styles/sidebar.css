@@ -57,8 +57,12 @@ h2 {
 }
 
 h3 {
+ font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+ font-variant: small-caps;
  color: #777;
- font-size: 1.1em;
+ font-size: 1.2em;
+
+ margin-bottom: 0.3em;
  margin-bottom: 5px;
 }
 
@@ -192,7 +196,7 @@ a:active {
 }
 
 .pushd {
- margin-bottom: 1em;
+ margin-bottom: 0.5em;
 }
 
 .pushu {
@@ -826,6 +830,10 @@ span.badge-premium {
 
 span.badge-donor {
   background-image: url(/images/icons/badge_donor.png);
+}
+
+span.badge-contributor {
+  background-image: url(/images/icons/badge_contributor.png);
 }
 
 span.badge-administrator {
