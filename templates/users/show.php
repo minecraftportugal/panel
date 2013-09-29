@@ -52,13 +52,32 @@
     <div class="section success"><?= $success ?></div>
   <? endif; ?>
 
+  <? $badges = getUserBadges($profile['id']); ?>
   <div id="player" class="collapsible section default">
     <a href="#player">
       <h1>
-          <span class="stevehead">
-            <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
+          <span style="float: left; height: 20px; padding-top: 4px;" class="playername">
+            <span class="stevehead">
+              <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
+            </span>
+            <?= $profile["playername"] ?>
           </span>
-          <?= $profile["playername"] ?>
+          
+
+          <span class="badges">
+            <? if ($badges['admin'] == 1): ?>
+              <span title="Administrador do Servidor" class="badge badge-administrator"></span>
+            <? endif; ?>
+            <? if ($badges['operator'] == 1): ?>
+              <span title="Operador do Servidor" class="badge badge-operator"></span>
+            <? endif; ?>
+            <? if ($badges['donor'] == 1): ?>
+              <span title="Dador" class="badge badge-donor"></span>
+            <? endif; ?>
+            <? if ($badges['premium'] == 1): ?>
+              <span title="Premium" class="badge badge-premium"></span>
+            <? endif; ?>
+          </span>
       </h1>
     </a>
 
@@ -126,7 +145,7 @@
           <tr><th>Modo de Jogo</th><td> <?= $inquisitor['gameMode'] ?></td></tr>
           <tr><th>World</th><td> <?= $inquisitor['world'] ?></td></tr>
           <tr><th colspan="2">Entradas</th></tr>
-          <tr><th>Entradas</th><td> <?= $inquisitor['joins'] ?></td></tr>
+          <tr><th>Total</th><td> <?= $inquisitor['joins'] ?></td></tr>
           <tr><th>Primeira</th><td> <?= $inquisitor['firstJoin'] ?></td></tr>
           <tr><th>Última</th><td> <?= $inquisitor['lastJoin'] ?></td></tr>
         <? if ($inquisitor['kicks'] > 0): ?>
@@ -144,8 +163,8 @@
           <tr><th>Colocados</th><td> <?= $inquisitor['totalBlocksPlaced'] ?></td></tr>
           <tr><th colspan="2">Mortes</th></tr>
           <tr><th>Morreu</th><td> <?= $inquisitor['deaths'] ?></td></tr>
-          <tr><th>Matou</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
         <? if ($inquisitor['lastPlayerKilled'] > 0): ?>)
+          <tr><th>Matou</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
           <tr><th>Último Morto</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
           <tr><th>Em</th><td> <?= $inquisitor['lastPlayerKill'] ?></td></tr>
         <? endif; ?>

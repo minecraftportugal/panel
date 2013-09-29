@@ -784,7 +784,7 @@ div.collapsible.section h1:active {
 }
 
 #playerinventory tr.line3 > td {
-  border: 0.3em solid grey;
+  border: 0.3em solid gray;
   padding: 0px;
 }
 
@@ -801,4 +801,32 @@ div.collapsible.section h1:active {
   image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
   image-rendering: optimize-contrast;         // Possible future browsers.
   -ms-interpolation-mode: nearest-neighbor;   // IE
+}
+
+span.badges {
+  width: 50%;
+  float:right;
+}
+
+span.badge {
+  display: block;
+  width: 24px;
+  height: 24px;
+  float: right;
+}
+
+span.badge-premium {
+  background-image: url(/images/icons/badge_premium.png);
+}
+
+span.badge-donor {
+  background-image: url(/images/icons/badge_donor.png);
+}
+
+span.badge-administrator {
+  background-image: url(/images/icons/badge_administrator.png);
+}
+
+span.badge-operator {
+  background-image: url(/images/icons/badge_operator.png);
 }

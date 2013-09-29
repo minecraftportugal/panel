@@ -44,6 +44,25 @@ function getUserIdByName($playername) {
 }
 
 /*
+ * getUserBadges: returns the badges of a user
+ */
+function getUserBadges($id) {
+
+  // premium, admin, donor
+  $q = "SELECT premium, admin FROM accounts WHERE id = :id;";
+  $result = Bitch::source('default')->first($q, compact('id'));
+
+  $badges = [
+    'premium' => $result['premium'],
+    'admin' => $result['premium'],
+    'donor' => 0,
+    'operator' => 0,
+  ];
+
+  return $badges;
+}
+
+/*
  * getRecent: returns the list of all the returning players, except $exclude 
  * which should be the ID of the current user
  */

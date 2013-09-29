@@ -19,11 +19,13 @@ function secs_to_h($secs)
 
         $s = "";
 
+        $words = 0;
         foreach ( $units as $name => $divisor ) {
-                if ( $quot = intval($secs / $divisor) ) {
+                if (($quot = intval($secs / $divisor)) and $words < 3)  {
                         $s .= "$quot $name";
                         $s .= (abs($quot) > 1 ? "s" : "") . ", ";
                         $secs -= $quot * $divisor;
+                    $words++;
                 }
         }
 

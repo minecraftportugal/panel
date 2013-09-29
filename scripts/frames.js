@@ -43,7 +43,9 @@ $(document).ready(function() {
     img.src = ds;
   });
 
+  // Accordion
   $("div.section.default h1").click();
+  
 });
 
 
