@@ -817,6 +817,7 @@ span.badge {
   width: 24px;
   height: 24px;
   float: right;
+  margin-left: 0.2em;
 }
 
 span.badge-premium {
