@@ -155,16 +155,7 @@ function getLastSession($id) {
 
 
 
-/* 
- * User Accounts and Preferences
- */
-/* register
-   0: OK
-   1: Duped Email
-   2: Duped Username
-   3: Invalid Email
-   4: Invlaid Username
- */
+/* Registers a user */
 function register($username, $email, $email_ip = false) {
 
   // check for dupe email
@@ -201,8 +192,21 @@ function register($username, $email, $email_ip = false) {
    return false;
   }
 
-  // create new account
+  // check for registration spam
   $ip = $_SERVER['REMOTE_ADDR'];
+  $q = "SELECT count(*) AS n
+  FROM accounts 
+  WHERE registerip = :ip
+  AND now()-registerdate < 500";
+  $result = Bitch::source('default')->first($q, compact('ip'));
+
+  if ($result['n'] > 0) {
+    setFlash('error', '1 registo por IP a cada 5m');
+    return false;
+  }
+
+
+
   $password = substr(md5(rand()), 0, 7);
   $plain_password = $password;
   $password = encryptPassword($password);
