@@ -29,6 +29,9 @@
         <?= $_SESSION['username'] ?></a>
     </div>
     <div class="section-right aright">
+      <? if ($_SESSION['admin'] == 1): ?>
+        <a class="button" id="admin" href="/admin" title="Admin"></a>
+      <? endif; ?>
       <a class="button" id="news" href="/news" title="News"></a>
       <a class="button" id="logout" href="#" title="Logout"></a>
       <a class="button" id="close" href="#" onclick="javascript:parent.toggleNews();" title="Hide Sidebar"></a>
