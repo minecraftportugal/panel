@@ -9,6 +9,7 @@ function admin_index() {
 
   validateSession(true);
   
+  $userlist = getUserList();
   require('templates/admin/index.php');
 }
 

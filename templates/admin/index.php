@@ -55,7 +55,7 @@
 
  
   <div id="accounts" class="collapsible section default">
-    <a href="#accounts"><h1>Gerir Utilizadores</h1></a>
+    <a href="#accounts"><h1>Gerir Utilizadores (<?= count($userlist) ?>)</h1></a>
     <div class="inside">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="admin options">
@@ -75,7 +75,7 @@
           <tr><td class="cella">Player</td><td class="cellb">IP</td><td class="cellc">@</td><td class="cellc">A</td><td class="cellc">X</td><td class="celld"></td></tr>
         </thead>
         <tbody>
-        <? foreach(getUserList() as $r): ?>
+        <? foreach($userlist as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
           <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >
 

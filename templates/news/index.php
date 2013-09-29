@@ -57,8 +57,6 @@
     <? 
       $o = getOnlinePlayers();
       $len = $o == null ? 0 : count($o);
-
-      if ($len > 0):
     ?>
     <div class="section-right">
       <h2>Jogadores Online (<?= $len ?>)</h2>
@@ -77,7 +75,6 @@
       <? endforeach; ?>
       </ul>
     </div>
-    <? endif; ?>
     <div style="clear: both;"></div>
     </div>
     
