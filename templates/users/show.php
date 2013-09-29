@@ -163,8 +163,8 @@
           <tr><th>Colocados</th><td> <?= $inquisitor['totalBlocksPlaced'] ?></td></tr>
           <tr><th colspan="2">Mortes</th></tr>
           <tr><th>Morreu</th><td> <?= $inquisitor['deaths'] ?></td></tr>
-        <? if ($inquisitor['lastPlayerKilled'] > 0): ?>)
-          <tr><th>Matou</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
+        <? if ($inquisitor['totalPlayersKilled'] > 0): ?>)
+          <tr><th>Matou</th><td> <?= $inquisitor['totalPlayersKilled'] ?></td></tr>
           <tr><th>Último Morto</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
           <tr><th>Em</th><td> <?= $inquisitor['lastPlayerKill'] ?></td></tr>
         <? endif; ?>
