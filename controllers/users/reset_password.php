@@ -23,9 +23,9 @@ function users_reset_password() {
   }
   
   if (!$status) {
-    header("Location: /profile?id=$id");
+    header("Location: /profile?id=$id#resetpw");
   } else {
-    header("Location: /profile?id=$id");
+    header("Location: /profile?id=$id#resetpw");
   }
 }
 

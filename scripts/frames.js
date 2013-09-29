@@ -44,7 +44,9 @@ $(document).ready(function() {
   });
 
   // Accordion
-  $("div.section.default h1").click();
+  if (document.location.hash == "" || document.location.hash == "#") {
+    $("div.section.default h1").click();
+  }
   
 });
 

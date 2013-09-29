@@ -21,9 +21,9 @@ function users_update_irc() {
   $status = changeIRC($username, $irc_nickname, $irc_password, $irc_auto);
 
   if (!$status) {
-    header("Location: /profile");
+    header("Location: /profile#irc");
   } else {
-    header("Location: /profile");
+    header("Location: /profile#irc");
   }
 }
 
@@ -44,9 +44,9 @@ function users_update_password() {
   $status = changePassword($username, $password, $new_password, $confirm_password);
 
   if (!$status) {
-    header("Location: /profile");
+    header("Location: /profile#changepw");
   } else {
-    header("Location: /profile");
+    header("Location: /profile#changepw");
   }
 }
 
