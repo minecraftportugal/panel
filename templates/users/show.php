@@ -185,17 +185,8 @@
           <tr class="line<?= $j ?>">
           <? for ($i = 0; $i < 9; $i++): ?>
           <td>
-          <? $a = $inventory[$i + 9 * $j]; ?>
-          <?
-$itemdata = "";
-if ($a) {
-  $itemdata .= $a->type;
-  $itemdata .= " ".$a->data;
-  $itemdata .= " ".$a->amount;
-  $itemdata .= " ".$a->durability;
-}
-          ?>
-            <span class="item" data-item="<?= $itemdata ?>"></span>
+          <? $pi = $playerinv[$i + 9 * $j]; ?>
+            <span class="item" data-item="<?= $pi['itemdata'] ?>" data-enchantments="<?= $pi['enchantments'] ?>"></span>
           </td>
           <? endfor; ?>
           </tr>
