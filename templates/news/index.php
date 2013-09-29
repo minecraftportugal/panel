@@ -104,7 +104,7 @@
       foreach ($posts as $post) : setup_postdata( $post );
     ?>
     <div class="section2 pushd2">
-    <h3><a href="<?= get_permalink($post->ID) ?>" target="_blank"><?= get_the_time("F j, Y", $post->ID); ?>: <?= get_the_title($post->ID); ?></a></h3>
+    <h2><a href="<?= get_permalink($post->ID) ?>" target="_blank"><?= get_the_time("F j, Y", $post->ID); ?>: <?= get_the_title($post->ID); ?></a></h2>
     <p><?= get_the_excerpt($post->ID); ?></p>
     </div>
     <?
