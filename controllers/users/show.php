@@ -49,6 +49,10 @@ function users_show () {
     }
   }
 
+  $a = array_slice($playerinv, 0, 9);
+  $b = array_slice($playerinv, 9);
+  $playerinv = array_merge($b, $a);
+
   $userSkin = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png";
   $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png";
 
