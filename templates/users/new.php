@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
     <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
-    <link rel="shortcut icon" href="../favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/cookies.js"></script>
     <script type="text/javascript" src="/scripts/i18n.js"></script>
