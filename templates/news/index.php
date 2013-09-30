@@ -60,6 +60,7 @@
     ?>
     <div class="section-right">
       <h2>Jogadores Online (<?= $len ?>)</h2>
+      <? if ($len > 0): ?>
       <ul class="player-list">
       <? foreach($o as $r): ?>
         <li class="link">
@@ -74,6 +75,7 @@
         </li>
       <? endforeach; ?>
       </ul>
+      <? endif; ?>
     </div>
     <div style="clear: both;"></div>
     </div>
