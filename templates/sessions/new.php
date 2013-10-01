@@ -29,7 +29,7 @@
       </p>
       <p>
         Se procuras mais informações sobre o servidor contacta-nos em <u><span class="email">mail[at]minecraft.pt</span></u> 
-        ou vem conversar conosco no <a href="//blog.minecraft.pt/webchat/" target="_blank">#minecraft</a> na
+        ou vem conversar connosco no <a href="//blog.minecraft.pt/webchat/" target="_blank">#minecraft</a> na
         Rede de IRC <a href="http://www.ptnet.org/" target="_blank">PTnet</a>.
       </p>
       <p>
@@ -63,12 +63,12 @@
       <ul class="icons">
         <? $icon_path = "/images/icons"; ?>
         <li><a title="Facebook" href="http://facebook.com/MinecraftPT" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_fb.png');" target="_blank"></a></li>
-        <li><a title="Tumblr" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_tumblr.png');" target="_blank"></a></li>
+        <li><a title="Tumblr" href="http://oficialmcpt.tumblr.com" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_tumblr.png');" target="_blank"></a></li>
         <li><a title="Blog" href="http://blog.minecraft.pt/" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_wp.png');" target="_blank"></a></li>
         <li><a title="Twitter" href="http://www.twitter.com/oficialmcpt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_twitter.png');" target="_blank"></a></li>
-        <li><a title="Email" href="mailto:mail[at]minecraft.pt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_email.png');" target="_blank"></a></li>
+        <li><a title="Email" href="mailto:mail[ a t ]minecraft.pt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_email.png');" target="_blank"></a></li>
         <li><a title="Webchat" href="//blog.minecraft.pt/webchat" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_chat.png');" target="_blank"></a></li>
-        <li><a title="Youtube" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_yt.png');"></a></li>
+        <li><a title="Youtube" href="http://www.youtube.com/user/oficialmcpt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_yt.png');"></a></li>
       </ul>
     </div>
   </div>
