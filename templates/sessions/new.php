@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset=utf-8 />
+    <meta name="keywords" content="minecraft, Portugal, pt, tuga, blog, server, servidor, notícias, login">
     <title><?= m("L_TITLE") ?></title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
