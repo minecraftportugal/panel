@@ -143,7 +143,7 @@ function getUserListPaged($index, $per_page) {
         DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
         DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
       FROM accounts
-    ORDER BY id DESC
+    ORDER BY id ASC
     ) pages LIMIT :index, :per_page";
 
     $result = Bitch::source('default')->all($q, compact('index', 'per_page'));
