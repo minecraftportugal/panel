@@ -60,7 +60,7 @@ function getUserIdByName($playername) {
 function getUserBadges($id) {
 
   // premium, admin, donor
-  $q = "SELECT premium, donor, contributor, admin FROM accounts WHERE id = :id;";
+  $q = "SELECT playername, premium, donor, contributor, admin FROM accounts WHERE id = :id;";
   $result = Bitch::source('default')->first($q, compact('id'));
 
   $badges = [
@@ -70,6 +70,14 @@ function getUserBadges($id) {
     'contributor' => $result['contributor'],
     'operator' => 0,
   ];
+
+
+  $q = "SELECT totalTime FROM players WHERE name = :playername";
+  $playername = $result['playername'];
+  $result = Bitch::source('inquisitor')->first($q, compact('playername'));
+
+  $totalTime = intval($result['totalTime']);
+  $badges["member"] = $totalTime > 3600*10 ? 1 : 0;
 
   return $badges;
 }
@@ -108,7 +116,7 @@ function getNewest() {
  * getUserList: fetch all users
  */
 
-function getUserList() {
+function getUserList($page = NULL, $per_page = NULL) {
 
   $q = "SELECT id, playername, email, admin, active, 
     DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip, 
@@ -117,8 +125,30 @@ function getUserList() {
   ORDER BY id DESC;";
 
   $result = Bitch::source('default')->all($q);
-  
-  return $result;
+}
+
+/*
+ * getUserListPaged: paged version of getUserList
+ */
+
+function getUserListPaged($index, $per_page) {
+
+    $q = "SELECT count(1) AS total
+    FROM accounts
+    ORDER BY id DESC;";
+    $total = Bitch::source('default')->first($q)["total"];
+
+    $q = "SELECT * FROM (
+      SELECT id, playername, email, admin, active,
+        DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
+        DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
+      FROM accounts
+    ORDER BY id DESC
+    ) pages LIMIT :index, :per_page";
+
+    $result = Bitch::source('default')->all($q, compact('index', 'per_page'));
+
+    return ["total" => $total, "pages" => $result];
 }
 
 function getUser($username) {
@@ -137,7 +167,8 @@ function getUserById($id) {
 
   $q = "SELECT id, playername, email, admin, active, ircnickname, ircpassword, ircauto,
     DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate,
-    DATE_FORMAT(sessions.logintime, '%b %d %H:%i %Y') as logintime
+    DATE_FORMAT(sessions.logintime, '%b %d %H:%i %Y') as logintime,
+    lastloginip, registerip
   FROM accounts LEFT JOIN sessions ON accounts.id = sessions.accountid
   WHERE id = :id";
 
@@ -237,7 +268,42 @@ function register($username, $email, $email_ip = false) {
 }
 
 
-function usersConfigure($admin, $active, $delete, $playername, $email) {
+function userConfigure($id, $admin, $active, $donor, $contributor, $delete) {
+
+  $admin = ($admin == '1' ? 1 : 0);
+  $active = ($active == '1' ? 1 : 0);
+  $donor = ($donor == '1' ? 1 : 0);
+  $contributor = ($contributor == '1' ? 1 : 0);
+  $delete = ($delete == '1' ? 1 : 0);
+
+  if ($delete == 1) {
+    // Delete Accounts
+    $q = "DELETE FROM accounts
+    WHERE id=:id;";
+
+    $result = Bitch::source('default')->query($q, compact('id'));
+    if (!$result) { die('Invalid query'); }
+
+    setFlash('success', 'Utilizador apagado.');
+    return 2;
+  }
+
+
+  $q = "UPDATE accounts
+  SET admin=:admin,
+      active=:active,
+      donor=:donor,
+      contributor=:contributor
+  WHERE id = :id";
+
+  $result = Bitch::source('default')->query($q, compact('admin', 'active', 'donor', 'contributor', 'id'));
+  if (!$result) { die('Invalid query'); }
+
+  setFlash('success', 'Utilizador alterado.');
+  return 1;
+}
+
+function usersConfigure($admin, $active, $delete) {
 
   /*
    *  Set/Unset Admin Account Privilege
@@ -266,30 +332,15 @@ function usersConfigure($admin, $active, $delete, $playername, $email) {
    * Set/Unset Active Accounts
    */
   if (count($active) > 0) {
-    $sql_in = implode(',', array_fill(0, count($active), '?'));
-    
-    // Unset Active
-    $q = "UPDATE accounts
-    SET active = 0
-    WHERE id NOT IN ($sql_in)
-    AND active = 1;";
-    $result = Bitch::source('default')->query($q, $active);
-    if (!$result) { die('Invalid query'); }
+    //$sql_in = implode(',', array_fill(0, count($active), '?'));
 
-    // Set Active
-    $q = "UPDATE accounts
-    SET active = 1
-    WHERE id IN ($sql_in)
-    AND active = 0;";
-    $result = Bitch::source('default')->query($q, $active);
-    if (!$result) { die('Invalid query'); }
-
-    // Remove Sessions for accounts that are not active
-    $q = "UPDATE sessions
-    SET ipaddress = ''
-    WHERE accountid NOT IN ($sql_in);";
-    $result = Bitch::source('default')->query($q, $active);
-    if (!$result) { die('Invalid query'); }
+    foreach ($active as $id => $val) {
+      $q = "UPDATE accounts
+      SET active = :val
+      WHERE id = :id";
+      $result = Bitch::source('default')->query($q, compact('val', 'id'));
+      if (!$result) { die('Invalid query'); }
+    }    
   }
 
   /*

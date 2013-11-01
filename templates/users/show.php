@@ -18,25 +18,11 @@
 </head>
 <body>
 <div id="conteudo">
-  <? if (isLoggedIn()): ?>
-  <div class="section status userbar">
-  <div class="section-left">
-    <a class="button" id="profile" href="/profile" title="Profile">
-      <span class="stevehead">
-        <img class="pixels" src="/images/steve.png" data-src="<?= $userSkin ?>" alt="Skin" />
-      </span>
-      <?= $_SESSION['username'] ?></a>
-  </div>
-  <div class="section-right aright">
-    <? if ($_SESSION['admin'] == 1): ?>
-      <a class="button" id="admin" href="/admin" title="Admin"></a>
-    <? endif; ?>
-    <a class="button" id="news" href="/news" title="News"></a>
-    <a class="button" id="logout" href="#" title="Logout"></a>
-    <a class="button" id="close" href="#" onclick="javascript:parent.toggleNews();" title="Hide Sidebar"></a>
-  </div>
-  </div>
-  <? endif; ?>
+  <? 
+    if (isLoggedIn()) {
+      require __DIR__.'/../partials/userbar.php';
+    }
+  ?>
   
   <? 
     $error = getFlash('error');
@@ -52,7 +38,6 @@
     <div class="section success"><?= $success ?></div>
   <? endif; ?>
 
-  <? $badges = getUserBadges($profile['id']); ?>
   <div id="player" class="collapsible section default">
     <a href="#player">
       <h1>
@@ -63,8 +48,10 @@
             <?= $profile["playername"] ?>
           </span>
           
-
           <span class="badges">
+            <? if ($badges['member'] == 1): ?>
+              <span title="Membro" class="badge badge-member"></span>
+            <? endif; ?>
             <? if ($badges['admin'] == 1): ?>
               <span title="Administrador do Servidor" class="badge badge-administrator"></span>
             <? endif; ?>
@@ -135,7 +122,7 @@
   <? if ($inquisitor) : ?>
   <div id="playerstats" class="collapsible section">
     <a href="#playerstats">
-      <h1>Stats</h1>
+      <h1>Estatísticas</h1>
     </a>
     <div class="inside">
       <table class="pretty">
@@ -179,7 +166,7 @@
   
   <div id="playerinventory" class="collapsible section">
     <a href="#playerinventory">
-      <h1>Inventory</h1>
+      <h1>Inventário</h1>
     </a>
     <div class="inside">
       <table class="pretty">
@@ -229,20 +216,63 @@
   <? endif; ?>
 
   <? if ($admin): ?>
-  <div id="userinfo" class="collapsible section">
-    <a href="#userinfo">
-      <h1>User Info</h1>
+  <div id="adminactions" class="collapsible section">
+    <a href="#adminactions">
+      <h1>Admin</h1>
     </a>
     <div class="inside">
-      <table class="pretty">
+      <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">
+      <table class="form">
         <tbody>
-        <? if ($inquisitor): ?>
-          <tr><th>Inquisitor IP</th><td> <?= $inquisitor['address'] ?></td></tr>
-          <tr><th>Server</th><td> <?= $inquisitor['server'] ?></td></tr>
-        <? endif; ?>
-          <tr><th>Email</th><td><?= $profile['email'] ?></td></tr>
+          <tr><th><label><h2>Registration IP</h2></label></th><td><?= $profile['registerip'] ?></td></tr>
+          <? if (isset($profile['lastloginip'])): ?>
+            <tr><th><label><h2>Login IP</h2></label></th><td><?= $profile['lastloginip'] ?></td></tr>
+          <? endif; ?>
+          <? if ($inquisitor): ?>
+            <tr><th><label><h2>Inquisitor IP</h2></label></th><td><?= $inquisitor['address'] ?></td></tr>
+            <tr><th><label><h2>Server</h2></label></th><td><?= $inquisitor['server'] ?></td></tr>
+          <? endif; ?>
+            <tr><th><label><h2>Email</h2></label></th><td><?= $profile['email'] ?></td></tr>
+            <tr><th rowspan="5"><label><h2>Atributos</h2></label></th>
+            <td>
+              <input id="chk_admin" type="checkbox" name="admin" value="1" <?= $profile['admin'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="chk_admin">administrador</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="chk_active" type="checkbox" name="active" value="1" <?= $profile['active'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="chk_active">activo</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="chk_contributor" type="checkbox" name="contributor" value="1" <?= $badges['contributor'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="chk_contributor">contribuidor</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="chk_donor" type="checkbox" name="donor" value="1" <?= $badges['donor'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="chk_donor">dador</label>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="chk_delete" type="checkbox" name="delete" value="1" />
+              <label class="checkbox" for="chk_delete">apagar</label>
+            </td>
+          </tr>
+          <tr class="padup" >
+            <td colspan="2" class="center">
+              <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+              <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+              <input type="submit" value="OK" />
+            </td>
+          </tr>
         </tbody>
       </table>
+      </form>
     </div>
   </div>
   <? endif; ?>

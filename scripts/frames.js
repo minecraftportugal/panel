@@ -14,8 +14,8 @@ $(document).ready(function() {
     var head = function(i) {
         var c = document.createElement('canvas');
         $(c).addClass('pixels');
-        var w = c.width = i.width * 2; // XXX ¯\(°_o)/¯
-        var h = c.height = i.height * 2;
+        var w = c.width = i.width * 8; // XXX ¯\(°_o)/¯
+        var h = c.height = i.height * 8;
 
         $(defimg).replaceWith(c);
 

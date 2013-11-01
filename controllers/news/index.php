@@ -10,6 +10,9 @@ function news_index() {
   validateSession();
   refreshxAuthSession($_SESSION['id']);
 
+  $onlinePlayers = getOnlinePlayers();
+  $numberOnlinePlayers = $onlinePlayers == null ? 0 : count($onlinePlayers);
+
   require('templates/news/index.php');
 }
 

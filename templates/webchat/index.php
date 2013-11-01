@@ -11,7 +11,7 @@
  <style type="text/css">
     html { height: 100%; overflow: hidden; }
     body { 
-      background: #000 url('../images/backgrounds/register/<?= rand(1,5) ?>.png');
+      background: #000 url('../images/backgrounds/register/<?= rand(1,5) ?>.jpg');
       height:100%;
       margin:0;
       padding:0;

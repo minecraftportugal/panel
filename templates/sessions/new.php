@@ -17,7 +17,7 @@
     <![endif]-->
     <style type="text/css">
       body#login {
-        background: #000 url('/images/backgrounds/login/bg<?= rand(1,4) ?>.png') no-repeat top center;
+        background: #000 url('/images/backgrounds/login/bg<?= rand(1,4) ?>.jpg') no-repeat top center;
       }
     </style>
 </head>

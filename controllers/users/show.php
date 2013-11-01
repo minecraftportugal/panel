@@ -13,6 +13,7 @@ function users_show () {
 
   $profile = getUserById($profileId);
   $inquisitor = getInquisitor($profile['playername']);
+  $badges = getUserBadges($profile['id']);
 
   // prepare inquisitor data
   if ($inquisitor)

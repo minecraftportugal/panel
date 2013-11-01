@@ -6,7 +6,7 @@ require_once('lib/i18n.php');
 
 
 function admin_configure() {
-  validateSession(true); //validate if admin
+  validateSession($admin = true); //validate if admin
   
   $xsrf_token = getXSRFToken();
   if (!validateXSRFToken($xsrf_token)) {

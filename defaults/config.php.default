@@ -3,6 +3,10 @@
 /* */
 $cfg_web_root = "/home/notch/dev/minecraftia";
 
+/* DYNMAP URL */
+$cfg_dynmap_url = "//dynmap.minecraft.pt/";
+//$cfg_dynmap_url = "//ticklemynausea.net/?mute";
+
 /* main xAuth db */
 $cfg_mysql_addr = "localhost";
 $cfg_mysql_db = "minecraft_auth";

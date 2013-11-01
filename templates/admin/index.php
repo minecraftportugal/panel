@@ -19,25 +19,11 @@
 <body>
  <div id="conteudo">
 
-   <? if (isLoggedIn()): ?>
-  <div class="section status userbar">
-    <div class="section-left">
-      <a class="button" id="profile" href="/profile" title="Profile">
-        <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png"; ?>
-        <span class="stevehead">
-          <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" /></span>
-        <?= $_SESSION['username'] ?></a>
-    </div>
-    <div class="section-right aright">
-      <? if ($_SESSION['admin'] == 1): ?>
-        <a class="button" id="admin" href="/admin" title="Admin"></a>
-      <? endif; ?>
-      <a class="button" id="news" href="/news" title="News"></a>
-      <a class="button" id="logout" href="#" title="Logout"></a>
-      <a class="button" id="close" href="#" onclick="javascript:parent.toggleNews();" title="Hide Sidebar"></a>
-    </div>
-  </div>
-  <? endif; ?>
+  <? 
+    if (isLoggedIn()) {
+      require __DIR__.'/../partials/userbar.php';
+    }
+  ?>
 
   <? 
     $error = getFlash('error');
@@ -55,10 +41,10 @@
 
  
   <div id="accounts" class="collapsible section default">
-    <a href="#accounts"><h1>Gerir Utilizadores (<?= count($userlist) ?>)</h1></a>
+    <a href="#accounts"><h1>Gerir Utilizadores (<?= $total ?>)</h1></a>
     <div class="inside">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-      <table class="admin options">
+      <!--<table class="admin options">
         <thead>
           <tr> 
             <th><h2>Nunca fez Login</h2></th>
@@ -68,7 +54,7 @@
             </td>
           </tr>
         </thead>
-      </table>
+      </table>-->
       <div class="meh">
       <table class="alt-rows admin">
         <thead>
@@ -93,9 +79,16 @@
                 <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>
               </span>
             </td>
-            <td class="cellc center"><input class="gridy" name="admin[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> /></td>
-            <td class="cellc center"><input class="gridy" name="active[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?>/></td>
-            <td class="cellc center"><input class="gridy" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" /></td>
+            <td class="cellc center">
+              <input class="gridy" name="admin[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
+            </td>
+            <td class="cellc center">
+              <input class="gridy fakecheckbox" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
+              <input name="active[<?= $r["id"] ?>]" value="<?= $r["active"] ?>" type="hidden" />
+            </td>
+            <td class="cellc center">
+              <input class="gridy" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
+            </td>
             <td class="celld"></td>
           </tr>
         <? endforeach; ?>
@@ -110,6 +103,7 @@
               <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
             </td>
           </tr>
+          <tr><td colspan="5" class="nav"><?= $page_navigation ?></td></tr>
         </tbody>
       </table>
     </form>
