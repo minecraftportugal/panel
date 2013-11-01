@@ -8,7 +8,7 @@ require_once('lib/nav.php');
 function directory_index() {
   global $cfg_wp_url;
 
-  validateSession(true);
+  validateSession();
 
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $page = intval($page);
