@@ -56,7 +56,7 @@
               
               <div class="player">
                 <div style="width: 95px; margin-left:23.5px;">
-                <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>" title="<?= $r["playername"] ?>">
+                <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>" title="<?= $r["playername"] ?>">
                   <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
                   <span class="stevehead large">
                     <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
@@ -96,7 +96,7 @@
               </div>
               
               <div style="text-overflow: ellipsis; overflow: hidden;text-align:center;">
-                <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>" title="<?= $r["playername"] ?>">
+                <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>" title="<?= $r["playername"] ?>">
                   <?= $r["playername"] ?>
                 </a>
               </div>
