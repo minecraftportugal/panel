@@ -22,9 +22,10 @@
     }
   ?>
 
-    <div class="section" id="onlineplayers">
-      <h2>Jogadores Online (<?= $numberOnlinePlayers ?>)</h2>
+    <div class="section">
       <? if ($numberOnlinePlayers > 0): ?>
+      <h2>Jogadores Online (<?= $numberOnlinePlayers ?>)</h2>
+      <div id="onlineplayers">
       <? foreach($onlinePlayers as $r): ?>
         <div class="stevegrid">
           <? $id = getUserIdByName($r['name'])['id'] ?>
@@ -36,6 +37,11 @@
           </a>
         </div>
       <? endforeach; ?>
+      </div>
+      <? else: ?>
+      <div style="text-align: center; margin-top: 10px;">
+        <img src="/images/bed.png" alt="IT'S A BED" title="O servidor está vazio... :(">
+      </div>
       <? endif; ?>
       <div style="clear: both;"></div>
     </div>
