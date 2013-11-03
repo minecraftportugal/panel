@@ -135,7 +135,7 @@ function getUserListPaged($index, $per_page, $playername = null) {
 
   $q = "SELECT count(1) AS total
   FROM accounts
-  WHERE playername = :playername
+  WHERE playername = ifnull(:playername, playername)
   ORDER BY id DESC;";
   $total = Bitch::source('default')->first($q, compact('playername'))["total"];
 
