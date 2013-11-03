@@ -10,18 +10,25 @@ function admin_index() {
   validateSession($admin = true);
   $playername = isset($_GET['playername']) && $_GET['playername'] != "" ? $_GET['playername'] : null;
   $ipaddress = isset($_GET['ipaddress']) && $_GET['ipaddress'] != "" ? $_GET['ipaddress'] : null;
+  $emailaddress = isset($_GET['emailaddress']) && $_GET['emailaddress'] != "" ? $_GET['emailaddress'] : null;
+
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $page = intval($page);
   $per_page = 20;
   
-  $pages = getUserListPaged(($page-1)*$per_page, $per_page, $playername, $ipaddress);
+  $pages = getUserListPaged(($page-1)*$per_page, $per_page, $playername, $ipaddress, $emailaddress);
   $total = $pages['total'];
   $userlist = $pages['pages'] != null ? $pages['pages'] : array();
 
   $addresses = getPopularAddresses();
   $addresses = $addresses != null ? $addresses : [];
 
-  $page_navigation = navigation($page, $total, $per_page);
+  $link_extra = "";
+  $link_extra .= $playername != null ? "&playername=$playername" : "";
+  $link_extra .= $ipaddress != null ? "&ipaddress=$ipaddress" : "";
+  $link_extra .= $emailaddress != null ? "&emailaddress=$emailaddress" : "";
+
+  $page_navigation = navigation($page, $total, $per_page, $link_extra);
 
   require('templates/admin/index.php');
 }
