@@ -160,7 +160,7 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
  * getPopularAddresses: most used ips
  */
 
-function getPopularAddresses($index = 1 , $per_page = 1000) {
+function getPopularAddresses() {
 
   $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
     FROM (
@@ -168,7 +168,7 @@ function getPopularAddresses($index = 1 , $per_page = 1000) {
       FROM accounts
     ) x 
     GROUP BY x.lastip 
-    HAVING total > 2
+    HAVING total > 1
     ORDER BY total DESC";
 
   $result = Bitch::source('default')->all($q);
