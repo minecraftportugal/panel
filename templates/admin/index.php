@@ -153,7 +153,7 @@
           <tr title="<?= $a['playernames'] ?>">
             <td><?= $a['lastip'] ?></td>
             <td style="text-align: right;"><?= $a['total'] ?></td>
-            <td><?= substr($a['playernames'], 0, 30) ?>&hellip;</td>
+            <td><?= substr($a['playernames'], 0, 16) ?>&hellip;</td>
           </tr>
         <? endforeach; ?>
         </table>
