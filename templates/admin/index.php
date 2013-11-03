@@ -61,12 +61,12 @@
             </td>
           </tr>*/?>
           <tr>
-            <th style="width:25%;"><h2>Filtros</h2></th>
-            <td><input type="text" name="playername" placeholder="nome" value="<?= $playername ?>"></td>
+            <th style="width:25%;"><h2>Nome</h2></th>
+            <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
           </tr>
           <tr>
-            <th></th>
-            <td><input type="text" name="ipaddress" placeholder="ip" value="<?= $ipaddress ?>"></td>
+            <th><h2>Último IP</h2></th>
+            <td><input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $ipaddress ?>"></td>
           </tr>
           <tr>
             <td colspan="2" class="center">
@@ -103,9 +103,9 @@
             </td>
             
             <td class="shortcell cellb">
-              <span title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
+              <a href="/admin?ipaddress=<?= $r['lastloginip'] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
                 <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>
-              </span>
+              </a>
             </td>
             <td class="cellc center">
               <input class="gridy" name="admin[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
@@ -145,7 +145,7 @@
       <table class="admin options">
         <thead>
           <tr>
-            <th style="width:35%;"><h2>Ultimo IP</h2></th><th style="text-align: right; width:15%;"><h2>Total</h2><th><h2>Utilizadores</h2></th>
+            <th style="width:35%;"><h2>Último IP</h2></th><th style="text-align: right; width:15%;"><h2>Total</h2><th><h2>Utilizadores</h2></th>
           </tr>
         </thead>
         <tbody>
