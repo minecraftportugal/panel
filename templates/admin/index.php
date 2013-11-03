@@ -61,8 +61,12 @@
             </td>
           </tr>*/?>
           <tr>
-            <th style="width:25%;"><h2>Nome</h2></th>
-            <td><input type="text" name="playername" placeholder="filtrar por nome" value="<?= $playername ?>"></td>
+            <th style="width:25%;"><h2>Filtros</h2></th>
+            <td><input type="text" name="playername" placeholder="nome" value="<?= $playername ?>"></td>
+          </tr>
+          <tr>
+            <th></th>
+            <td><input type="text" name="ipaddress" placeholder="ip" value="<?= $ipaddress ?>"></td>
           </tr>
           <tr>
             <td colspan="2" class="center">
@@ -76,13 +80,19 @@
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="alt-rows admin">
         <thead>
-          <tr><td class="cella">Player</td><td class="cellb">IP</td><td class="cellc">@</td><td class="cellc">A</td><td class="cellc">X</td><td class="celld"></td></tr>
+          <tr>
+            <th class="cella"><h2 title="Player Name">Player<h2></th>
+            <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
+            <th class="cellc"><h2 title="Administrador">@</h2></th>
+            <th class="cellc"><h2 title="Conta Activa">A</h2></th>
+            <th class="cellc"><h2 title="APAGAR A CONTA!">X</h2></th>
+            <th class="celld"></th>
+          </tr>
         </thead>
         <tbody>
         <? foreach($userlist as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
-          <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >
-
+          <tr>
             <td class="shortcell cella">
               <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["email"] ?>">
                 <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
@@ -127,6 +137,30 @@
     </form>
     </div>
   </div>
+
+  <div id="popular" class="collapsible section">
+    <a href="#popular"><h1>IPs Populares</h1></a>
+    <div class="inside">
+
+      <table class="admin options">
+        <thead>
+          <tr>
+            <th style="width:35%;"><h2>Ultimo IP</h2></th><th style="text-align: right; width:15%;"><h2>Total</h2><th><h2>Utilizadores</h2></th>
+          </tr>
+        </thead>
+        <tbody>
+        <? foreach($addresses as $a): ?>
+          <tr title="<?= $a['playernames'] ?>">
+            <td><?= $a['lastip'] ?></td>
+            <td style="text-align: right;"><?= $a['total'] ?></td>
+            <td><?= substr($a['playernames'], 0, 30) ?>&hellip;</td>
+          </tr>
+        <? endforeach; ?>
+        </table>
+
+    </div>
+  </div>
+
 
 <div id="register" class="collapsible section">
   <a href="#register"><h1>Registar Utilizador</h1></a>
