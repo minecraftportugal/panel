@@ -138,7 +138,7 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
   WHERE playername = ifnull(:playername, playername)
   AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
   ORDER BY id DESC;";
-  $total = Bitch::source('default')->first($q, compact('playername'))["total"];
+  $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress'))["total"];
 
   $q = "SELECT * FROM (
     SELECT id, playername, email, admin, active,
