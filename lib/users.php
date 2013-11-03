@@ -131,7 +131,7 @@ function getUserList($page = NULL, $per_page = NULL) {
  * getUserListPaged: paged version of getUserList
  */
 
-function getUserListPaged($index, $per_page, $playername = null) {
+function getUserListPaged($index, $per_page, $playername = null, $ipaddress = null) {
 
   $q = "SELECT count(1) AS total
   FROM accounts
@@ -145,12 +145,34 @@ function getUserListPaged($index, $per_page, $playername = null) {
       DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
     FROM accounts
     WHERE playername = ifnull(:playername, playername)
+    AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
+
     ORDER BY id ASC
   ) pages LIMIT :index, :per_page";
 
-  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername'));
+  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername', 'ipaddress'));
 
   return ["total" => $total, "pages" => $result];
+}
+
+/*
+ * getPopularAddresses: most used ips
+ */
+
+function getPopularAddresses($index = 1 , $per_page = 1000) {
+
+  $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
+    FROM (
+      SELECT ifnull(lastloginip,registerip) lastip, playername
+      FROM accounts
+    ) x 
+    GROUP BY x.lastip 
+    HAVING total > 2
+    ORDER BY total DESC";
+
+  $result = Bitch::source('default')->all($q);
+
+  return $result;
 }
 
 function getUser($username) {
