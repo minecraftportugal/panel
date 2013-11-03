@@ -66,7 +66,6 @@
           </tr>
           <tr>
             <td colspan="2" class="center">
-              <input type="hidden" name="page" value="<?= $page ?>" />
               <input type="submit" value="filtrar" />
             </td>
           </tr>
