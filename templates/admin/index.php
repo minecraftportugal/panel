@@ -65,6 +65,10 @@
             <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
           </tr>
           <tr>
+            <th><h2>End. Email</h2></th>
+            <td><input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $emailaddress ?>"></td>
+          </tr>
+          <tr>
             <th><h2>Último IP</h2></th>
             <td><input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $ipaddress ?>"></td>
           </tr>

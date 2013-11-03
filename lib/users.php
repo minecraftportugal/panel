@@ -131,14 +131,15 @@ function getUserList($page = NULL, $per_page = NULL) {
  * getUserListPaged: paged version of getUserList
  */
 
-function getUserListPaged($index, $per_page, $playername = null, $ipaddress = null) {
+function getUserListPaged($index, $per_page, $playername = null, $ipaddress = null, $emailaddress = null) {
 
   $q = "SELECT count(1) AS total
   FROM accounts
   WHERE playername = ifnull(:playername, playername)
   AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
+  AND email = ifnull(:emailaddress, email)
   ORDER BY id DESC;";
-  $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress'))["total"];
+  $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress', 'emailaddress'))["total"];
 
   $q = "SELECT * FROM (
     SELECT id, playername, email, admin, active,
@@ -147,11 +148,11 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
     FROM accounts
     WHERE playername = ifnull(:playername, playername)
     AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
-
+    AND email = ifnull(:emailaddress, email)
     ORDER BY id ASC
   ) pages LIMIT :index, :per_page";
 
-  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername', 'ipaddress'));
+  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress'));
 
   return ["total" => $total, "pages" => $result];
 }
