@@ -43,19 +43,38 @@
   <div id="accounts" class="collapsible section default">
     <a href="#accounts"><h1>Gerir Utilizadores (<?= $total ?>)</h1></a>
     <div class="inside">
-    <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-      <!--<table class="admin options">
+    <form name="manage_users_filters" action="/admin" method="GET" autocomplete="off">
+      <table class="admin options">
         <thead>
-          <tr> 
-            <th><h2>Nunca fez Login</h2></th>
+        <?/* <tr> 
+            <th><h2>Filtros</h2></th>
             <td>
               <input id="select_a" type="checkbox" />
-              <label class="checkbox" for="select_a">Apagar</label>
+              <label class="checkbox" for="select_a">Administrador</label>
+            </td>
+          </tr>
+          <tr> 
+            <td></td>
+            <td>
+              <input id="select_a" type="checkbox" />
+              <label class="checkbox" for="select_a">Premium</label>
+            </td>
+          </tr>*/?>
+          <tr>
+            <th style="width:25%;"><h2>Nome</h2></th>
+            <td><input type="text" name="playername" placeholder="filtrar por nome" value="<?= $playername ?>"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="center">
+              <input type="hidden" name="page" value="<?= $page ?>" />
+              <input type="submit" value="filtrar" />
             </td>
           </tr>
         </thead>
-      </table>-->
-      <div class="meh">
+      </table>
+    </form>
+    <div class="meh">
+    <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="alt-rows admin">
         <thead>
           <tr><td class="cella">Player</td><td class="cellb">IP</td><td class="cellc">@</td><td class="cellc">A</td><td class="cellc">X</td><td class="celld"></td></tr>

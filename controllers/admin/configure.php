@@ -16,7 +16,7 @@ function admin_configure() {
   $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
   $active = isset($_POST['active']) ? $_POST['active'] : array();
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
-  
+
   $status = usersConfigure($admin, $active, $delete);
   
   if (!$status) {
