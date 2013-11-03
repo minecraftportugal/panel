@@ -136,6 +136,7 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
   $q = "SELECT count(1) AS total
   FROM accounts
   WHERE playername = ifnull(:playername, playername)
+  AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
   ORDER BY id DESC;";
   $total = Bitch::source('default')->first($q, compact('playername'))["total"];
 
