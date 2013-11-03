@@ -7,6 +7,14 @@ require_once('bootstrap.php');
 require_once('environment.php');
 require_once('router.php');
 
+if ($cfg_wp_enabled) {
+  require_once("$cfg_wp_location/wp-config.php");
+  $wp->init(); $wp->parse_request(); $wp->query_posts();
+  $wp->register_globals(); $wp->send_headers();
+}
+
+
+
 require_once('controllers/home.php');
 require_once('controllers/news/index.php');
 
@@ -34,9 +42,6 @@ require_once('controllers/webchat/index.php');
 
 require_once('lib/flash.php');
 
-if ($cfg_wp_enabled) {
-  require_once("$cfg_wp_location/wp-blog-header.php");
-}
 
 $r = new Router();
 
