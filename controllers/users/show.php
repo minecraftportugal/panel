@@ -57,7 +57,7 @@ function users_show () {
     // 'mapped' data
     $mapped = json_decode($inquisitor['mapped'], true);
     $blocksBroken = $mapped['blocksBroken'];
-    $total = array_sum($blocksBroken);
+    $total = empty($blocksBroken) ? 0 : array_sum($blocksBroken);
     $diamond = $mapped['blocksBroken']['Diamond Ore'];
     $diamond = $diamond != null ? $diamond : 0;
     $hours = round($inquisitor['totalTime']/60/60);
