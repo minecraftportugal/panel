@@ -236,9 +236,9 @@
             <tr><th><h2>Last Login</h2></th><td><?= $profile['logintime'] ?></td></tr>
             <tr><th><h2>Email</h2></th><td><?= $profile['email'] ?></td></tr>
           <? if ($inquisitor): ?>
-            <tr><th><h2 title="">Blocks per Hour</h2></th><td><?= $total ?>/<?= $minutes ?> (<?= round($total/$minutes, 2) ?>)</td></tr>
-            <tr><th><h2 title="">Dmd Ore per Hour</h2></th><td><?= $diamond ?>/<?= $minutes ?> (<?= round($diamond/$minutes, 2) ?>)</td></tr>
-            <tr><th><h2 title="">Blocks per Dmd Ore</h2></th><td><?= $total ?>/<?= $diamond ?> (<?= round($total/$diamond, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Blocks/Hour</h2></th><td><?= $total ?>/<?= $minutes ?> (<?= round($total/$minutes, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Dmd/Hour</h2></th><td><?= $diamond ?>/<?= $minutes ?> (<?= round($diamond/$minutes, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Blocks/Dmd</h2></th><td><?= $total ?>/<?= $diamond ?> (<?= round($total/$diamond, 2) ?>)</td></tr>
           <? endif; ?>
             <tr><th rowspan="5"><h2>Atributos</h2></th>
             <td>
