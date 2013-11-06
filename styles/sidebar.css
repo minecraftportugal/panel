@@ -683,6 +683,9 @@ div#playerlist div.player {
   padding-bottom: 10px;
 }
 
+div#playerlist div.player a {
+  line-height: 1.2em;
+}
 div#playerlist div.badges {
   text-align: center;
   min-width: 24px;
