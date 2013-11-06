@@ -1,6 +1,5 @@
 <?
 
-require("vendors/PHPMailer/class.phpmailer.php");
 require("config.php");
 
 use minecraftia\db\Bitch;
