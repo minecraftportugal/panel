@@ -224,20 +224,20 @@
       <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">
       <table class="form">
         <tbody>
-          <tr><th><h2>Registration IP</h2></th><td><?= $profile['registerip'] ?></td></tr>
+          <tr><th><h2>Reg. IP</h2></th><td><?= $profile['registerip'] ?></td></tr>
           <? if (isset($profile['lastloginip'])): ?>
             <tr><th><h2>Login IP</h2></th><td><?= $profile['lastloginip'] ?></td></tr>
-          <? endif; ?>
-          <? if ($inquisitor): ?>
-            <tr><th><h2>Inquisitor IP</h2></th><td><?= $inquisitor['address'] ?></td></tr>
-            <tr><th><h2>Server</h2></th><td><?= $inquisitor['server'] ?></td></tr>
-            <tr><th><h2>Last Join</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
           <? endif; ?>
             <tr><th><h2>Last Login</h2></th><td><?= $profile['logintime'] ?></td></tr>
             <tr><th><h2>Email</h2></th><td><?= $profile['email'] ?></td></tr>
           <? if ($inquisitor): ?>
-            <tr><th><h2 title="">Blocks/Hour</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
-            <tr><th><h2 title="">Dmd/Hour</h2></th><td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td></tr>
+            <tr><th><h2>Inq. IP</h2></th><td><?= $inquisitor['address'] ?></td></tr>
+            <tr><th><h2>Server</h2></th><td><?= $inquisitor['server'] ?></td></tr>
+            <tr><th><h2>Last Join</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
+          <? endif; ?>
+          <? if ($inquisitor): ?>
+            <tr><th><h2 title="">Blocks/Hr</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Dmd/Hr</h2></th><td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td></tr>
             <tr><th><h2 title="">Dmd/Blocks</h2></th><td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td></tr>
           <? endif; ?>
             <tr><th rowspan="5"><h2>Atributos</h2></th>
