@@ -53,6 +53,15 @@ function users_show () {
     $a = array_slice($playerinv, 0, 9);
     $b = array_slice($playerinv, 9);  
     $playerinv = array_merge($b, $a);
+
+    // 'mapped' data
+    $mapped = json_decode($inquisitor['mapped'], true);
+    $blocksBroken = $mapped['blocksBroken'];
+    $total = array_sum($blocksBroken);
+    $diamond = $mapped['blocksBroken']['Diamond Ore'];
+    $diamond = $diamond != null ? $diamond : 0;
+    $minutes = round($inquisitor['totalTime']/60/60);
+
   }
 
 

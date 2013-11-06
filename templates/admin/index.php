@@ -61,20 +61,33 @@
             </td>
           </tr>*/?>
           <tr>
-            <th style="width:25%;"><h2>Nome</h2></th>
+            <th class="center" style="width:25%;"><h2>Nome</h2></th>
             <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
           </tr>
           <tr>
-            <th><h2>End. Email</h2></th>
+            <th class="center"><h2>End. Email</h2></th>
             <td><input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $emailaddress ?>"></td>
           </tr>
           <tr>
-            <th><h2>Último IP</h2></th>
+            <th class="center"><h2>Último IP</h2></th>
             <td><input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $ipaddress ?>"></td>
           </tr>
           <tr>
+            <th class="center"><h2>Critérios</h2></th>
+            <td>
+              <input id="nologin" type="checkbox" name="nologin" value="1" <?= $nologin == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="nologin">nunca fez login</label>
+            </td>
+          </tr>
+            <td></td>
+            <td>
+              <input id="inactive" type="checkbox" name="inactive" value="1" <?= $inactive == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="inactive">inactivo</label>
+            </td>
+          </tr>
+          <tr>
             <td colspan="2" class="center">
-              <input type="submit" value="filtrar" />
+              <input type="submit" value="pesquisa" />
             </td>
           </tr>
         </thead>
@@ -94,7 +107,7 @@
           </tr>
         </thead>
         <tbody>
-        <? foreach($userlist as $r): ?>
+        <? foreach((array)$userlist as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
           <tr>
             <td class="shortcell cella">

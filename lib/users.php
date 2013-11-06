@@ -131,15 +131,17 @@ function getUserList($page = NULL, $per_page = NULL) {
  * getUserListPaged: paged version of getUserList
  */
 
-function getUserListPaged($index, $per_page, $playername = null, $ipaddress = null, $emailaddress = null) {
+function getUserListPaged($index, $per_page, $playername = null, $ipaddress = null, $emailaddress = null, $nologin = 0, $inactive = 0) {
 
   $q = "SELECT count(1) AS total
   FROM accounts
   WHERE playername = ifnull(:playername, playername)
   AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
   AND email = ifnull(:emailaddress, email)
+  AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate is null))
+  AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
   ORDER BY id DESC;";
-  $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress', 'emailaddress'))["total"];
+  $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress', 'emailaddress', 'nologin', 'inactive'))["total"];
 
   $q = "SELECT * FROM (
     SELECT id, playername, email, admin, active,
@@ -149,10 +151,12 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
     WHERE playername = ifnull(:playername, playername)
     AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
     AND email = ifnull(:emailaddress, email)
+    AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate is null))
+    AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
     ORDER BY id ASC
   ) pages LIMIT :index, :per_page";
 
-  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress'));
+  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress', 'nologin', 'inactive'));
 
   return ["total" => $total, "pages" => $result];
 }

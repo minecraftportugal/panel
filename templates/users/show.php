@@ -224,43 +224,50 @@
       <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">
       <table class="form">
         <tbody>
-          <tr><th><label><h2>Registration IP</h2></label></th><td><?= $profile['registerip'] ?></td></tr>
+          <tr><th><h2>Registration IP</h2></th><td><?= $profile['registerip'] ?></td></tr>
           <? if (isset($profile['lastloginip'])): ?>
-            <tr><th><label><h2>Login IP</h2></label></th><td><?= $profile['lastloginip'] ?></td></tr>
+            <tr><th><h2>Login IP</h2></th><td><?= $profile['lastloginip'] ?></td></tr>
           <? endif; ?>
           <? if ($inquisitor): ?>
-            <tr><th><label><h2>Inquisitor IP</h2></label></th><td><?= $inquisitor['address'] ?></td></tr>
-            <tr><th><label><h2>Server</h2></label></th><td><?= $inquisitor['server'] ?></td></tr>
+            <tr><th><h2>Inquisitor IP</h2></th><td><?= $inquisitor['address'] ?></td></tr>
+            <tr><th><h2>Server</h2></th><td><?= $inquisitor['server'] ?></td></tr>
+            <tr><th><h2>Last Join</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
           <? endif; ?>
-            <tr><th><label><h2>Email</h2></label></th><td><?= $profile['email'] ?></td></tr>
-            <tr><th rowspan="5"><label><h2>Atributos</h2></label></th>
+            <tr><th><h2>Last Login</h2></th><td><?= $profile['logintime'] ?></td></tr>
+            <tr><th><h2>Email</h2></th><td><?= $profile['email'] ?></td></tr>
+          <? if ($inquisitor): ?>
+            <tr><th><h2 title="">Blocks per Hour</h2></th><td><?= $total ?>/<?= $minutes ?> (<?= round($total/$minutes, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Dmd Ore per Hour</h2></th><td><?= $diamond ?>/<?= $minutes ?> (<?= round($diamond/$minutes, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Blocks per Dmd Ore</h2></th><td><?= $total ?>/<?= $diamond ?> (<?= round($total/$diamond, 2) ?>)</td></tr>
+          <? endif; ?>
+            <tr><th rowspan="5"><h2>Atributos</h2></th>
             <td>
               <input id="chk_admin" type="checkbox" name="admin" value="1" <?= $profile['admin'] == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="chk_admin">administrador</label>
+              <label class="checkbox" for="chk_admin">administrador
             </td>
           </tr>
           <tr>
             <td>
               <input id="chk_active" type="checkbox" name="active" value="1" <?= $profile['active'] == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="chk_active">activo</label>
+              <label class="checkbox" for="chk_active">activo
             </td>
           </tr>
           <tr>
             <td>
               <input id="chk_contributor" type="checkbox" name="contributor" value="1" <?= $badges['contributor'] == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="chk_contributor">contribuidor</label>
+              <label class="checkbox" for="chk_contributor">contribuidor
             </td>
           </tr>
           <tr>
             <td>
               <input id="chk_donor" type="checkbox" name="donor" value="1" <?= $badges['donor'] == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="chk_donor">dador</label>
+              <label class="checkbox" for="chk_donor">dador
             </td>
           </tr>
           <tr>
             <td>
               <input id="chk_delete" type="checkbox" name="delete" value="1" />
-              <label class="checkbox" for="chk_delete">apagar</label>
+              <label class="checkbox" for="chk_delete">apagar
             </td>
           </tr>
           <tr class="padup" >
@@ -286,7 +293,7 @@
           <table class="form">
             <tr>
               <th><label for="irc_nickname"><h2>Nickname IRC</h2></label></th>
-              <td><input id="irc_password" type="text" name="irc_nickname" value="<?= $profile['ircnickname'] ?>" placeholder="irc nickname"></td>
+              <td><input id="irc_nickname" type="text" name="irc_nickname" value="<?= $profile['ircnickname'] ?>" placeholder="irc nickname"></td>
             </tr>
             <tr>
               <th><label for="irc_password"><h2>Password Nickname</h2></label></th>

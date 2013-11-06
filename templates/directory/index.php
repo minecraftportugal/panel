@@ -44,13 +44,29 @@
   <div id="playerlist" class="collapsible section default">
     <a href="#playerlist"><h1>Jogadores</h1></a>
     <div class="inside">
+    <form name="directory_users_filters" action="/directory" method="GET" autocomplete="off">
+      <table class="admin options">
+        <thead>
+          <tr>
+            <th class="center" style="width:25%;"><h2>Nome</h2></th>
+            <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="center">
+              <input type="submit" value="pesquisar" />
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </form>
+    <? if (!empty($userlist)): ?>
       <div class="meh"> 
       <table class="alt-rows">
         <tbody>
           <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >
             <td class="shortcell cella">
 
-        <? foreach($userlist as $r): ?>
+        <? foreach((array)$userlist as $r): ?>
           <? $badges = getUserBadges($r["id"]); ?>
           <? $a = getLastSession($r["id"]); ?>
               
@@ -109,6 +125,7 @@
         </tbody>
       </table>
       </div>
+    <? endif; ?>
     </div>
   </div>
 </div>
