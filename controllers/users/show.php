@@ -60,7 +60,9 @@ function users_show () {
     $total = array_sum($blocksBroken);
     $diamond = $mapped['blocksBroken']['Diamond Ore'];
     $diamond = $diamond != null ? $diamond : 0;
-    $minutes = round($inquisitor['totalTime']/60/60);
+    $hours = round($inquisitor['totalTime']/60/60);
+    $hours = $hours > 0 ? $hours : 1;
+
 
   }
 
