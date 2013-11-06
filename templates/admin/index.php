@@ -140,10 +140,10 @@
         </tbody>
       </table>
       </div>
-      <table class="admin">
+      <table>
         <tbody>
           <tr>
-            <td colspan="5" class="center">
+            <td class="center">
               <input type="submit" value="OK" />        
               <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
             </td>
