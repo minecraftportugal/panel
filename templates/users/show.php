@@ -238,7 +238,9 @@
           <? if ($inquisitor): ?>
             <tr><th><h2 title="">Blocks/Hr</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
             <tr><th><h2 title="">Dmd/Hr</h2></th><td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td></tr>
-            <tr><th><h2 title="">Dmd/Blocks</h2></th><td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td></tr>
+            <? if ($total > 0): ?>
+              <tr><th><h2 title="">Dmd/Blocks</h2></th><td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td></tr>
+            <? endif; ?>
           <? endif; ?>
             <tr><th rowspan="5"><h2>Atributos</h2></th>
             <td>
