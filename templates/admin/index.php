@@ -46,20 +46,6 @@
     <form name="manage_users_filters" action="/admin" method="GET" autocomplete="off">
       <table class="admin options">
         <thead>
-        <?/* <tr> 
-            <th><h2>Filtros</h2></th>
-            <td>
-              <input id="select_a" type="checkbox" />
-              <label class="checkbox" for="select_a">Administrador</label>
-            </td>
-          </tr>
-          <tr> 
-            <td></td>
-            <td>
-              <input id="select_a" type="checkbox" />
-              <label class="checkbox" for="select_a">Premium</label>
-            </td>
-          </tr>*/?>
           <tr>
             <th class="center" style="width:25%;"><h2>Nome</h2></th>
             <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
@@ -125,7 +111,8 @@
               </a>
             </td>
             <td class="cellc center">
-              <input class="gridy" name="admin[]" value="<?= $r["id"] ?>" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
+              <input class="gridy fakecheckbox" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
+              <input name="admin[<?= $r["id"] ?>]" value="<?= $r["admin"] ?>" type="hidden" />
             </td>
             <td class="cellc center">
               <input class="gridy fakecheckbox" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />

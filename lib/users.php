@@ -338,38 +338,26 @@ function usersConfigure($admin, $active, $delete) {
    *  Set/Unset Admin Account Privilege
    */
   if (count($admin) > 0) {
-    $sql_in = implode(',', array_fill(0, count($admin), '?'));
-    
-    // Unset Admin
-    $q = "UPDATE accounts
-    SET admin = 0
-    WHERE id NOT IN ($sql_in)
-    AND admin = 1;";
-    $result = Bitch::source('default')->query($q, $admin);
-    if (!$result) { die('Invalid query'); }
-    
-    // Set Admin
-    $q = "UPDATE accounts
-    SET admin = 1
-    WHERE id IN ($sql_in)
-    AND admin = 0;";
-    $result = Bitch::source('default')->query($q, $admin);
-    if (!$result) { die('Invalid query'); }
+    foreach ($admin as $id => $val) {
+      $q = "UPDATE accounts
+      SET admin = :val
+      WHERE id = :id";
+      $result = Bitch::source('default')->query($q, compact('val', 'id'));
+      if (!$result) { die('Invalid query'); }
+    }
   }
 
   /*
    * Set/Unset Active Accounts
    */
   if (count($active) > 0) {
-    //$sql_in = implode(',', array_fill(0, count($active), '?'));
-
     foreach ($active as $id => $val) {
       $q = "UPDATE accounts
       SET active = :val
       WHERE id = :id";
       $result = Bitch::source('default')->query($q, compact('val', 'id'));
       if (!$result) { die('Invalid query'); }
-    }    
+    }
   }
 
   /*
