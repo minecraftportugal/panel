@@ -55,7 +55,7 @@
             <td><input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $emailaddress ?>"></td>
           </tr>
           <tr>
-            <th class="center"><h2>Último IP</h2></th>
+            <th class="center"><h2>End. IP</h2></th>
             <td><input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $ipaddress ?>"></td>
           </tr>
           <tr>
@@ -106,7 +106,7 @@
             </td>
             
             <td class="shortcell cellb">
-              <a href="/admin?ipaddress=<?= $r['lastloginip'] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
+              <a href="/admin?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
                 <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>
               </a>
             </td>
