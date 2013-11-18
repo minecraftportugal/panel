@@ -59,7 +59,7 @@ function getUserIdByName($playername) {
 function getUserBadges($id) {
 
   // premium, admin, donor
-  $q = "SELECT playername, premium, donor, contributor, admin FROM accounts WHERE id = :id;";
+  $q = "SELECT playername, premium, donor, contributor, admin, operator FROM accounts WHERE id = :id;";
   $result = Bitch::source('default')->first($q, compact('id'));
 
   $badges = [
@@ -67,7 +67,7 @@ function getUserBadges($id) {
     'admin' => $result['admin'],
     'donor' => $result['donor'],
     'contributor' => $result['contributor'],
-    'operator' => 0,
+    'operator' => $result['operator'],
   ];
 
 
@@ -117,7 +117,7 @@ function getNewest() {
 
 function getUserList($page = NULL, $per_page = NULL) {
 
-  $q = "SELECT id, playername, email, admin, active, 
+  $q = "SELECT id, playername, email, admin, operator, active, 
     DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip, 
     DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
   FROM accounts
@@ -143,7 +143,7 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
   $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress', 'emailaddress', 'nologin', 'inactive'))["total"];
 
   $q = "SELECT * FROM (
-    SELECT id, playername, email, admin, active,
+    SELECT id, playername, email, admin, operator, active,
       DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
       DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
     FROM accounts
@@ -182,7 +182,7 @@ function getPopularAddresses() {
 
 function getUser($username) {
 
-  $q = "SELECT id, playername, email, admin, active,
+  $q = "SELECT id, playername, email, admin, operator, active,
     DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate
   FROM accounts
   WHERE playername = :username";
@@ -194,7 +194,7 @@ function getUser($username) {
 
 function getUserById($id) {
 
-  $q = "SELECT id, playername, email, admin, active, ircnickname, ircpassword, ircauto,
+  $q = "SELECT id, playername, email, admin, operator, active, ircnickname, ircpassword, ircauto,
     DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate,
     DATE_FORMAT(sessions.logintime, '%b %d %H:%i %Y') as logintime,
     lastloginip, registerip
@@ -297,9 +297,10 @@ function register($username, $email, $email_ip = false) {
 }
 
 
-function userConfigure($id, $admin, $active, $donor, $contributor, $delete) {
+function userConfigure($id, $admin, $operator, $active, $donor, $contributor, $delete) {
 
   $admin = ($admin == '1' ? 1 : 0);
+  $operator = ($operator == '1' ? 1 : 0);
   $active = ($active == '1' ? 1 : 0);
   $donor = ($donor == '1' ? 1 : 0);
   $contributor = ($contributor == '1' ? 1 : 0);
@@ -320,12 +321,13 @@ function userConfigure($id, $admin, $active, $donor, $contributor, $delete) {
 
   $q = "UPDATE accounts
   SET admin=:admin,
+      operator=:operator,
       active=:active,
       donor=:donor,
       contributor=:contributor
   WHERE id = :id";
 
-  $result = Bitch::source('default')->query($q, compact('admin', 'active', 'donor', 'contributor', 'id'));
+  $result = Bitch::source('default')->query($q, compact('admin','operator', 'active', 'donor', 'contributor', 'id'));
   if (!$result) { die('Invalid query'); }
 
   setFlash('success', 'Utilizador alterado.');

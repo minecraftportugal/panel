@@ -242,10 +242,16 @@
               <tr><th><h2 title="">Dmd/Blocks</h2></th><td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td></tr>
             <? endif; ?>
           <? endif; ?>
-            <tr><th rowspan="5"><h2>Atributos</h2></th>
+            <tr><th rowspan="6"><h2>Atributos</h2></th>
             <td>
               <input id="chk_admin" type="checkbox" name="admin" value="1" <?= $profile['admin'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="chk_admin">administrador
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="chk_operator" type="checkbox" name="operator" value="1" <?= $profile['operator'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="chk_operator">operador
             </td>
           </tr>
           <tr>
