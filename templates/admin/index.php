@@ -81,7 +81,7 @@
     </form>
     <div class="meh">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-      <table class="alt-rows admin">
+      <table class="admin">
         <thead>
           <tr>
             <th class="cella"><h2 title="Player Name">Player<h2></th>

@@ -61,7 +61,7 @@
     </form>
     <? if (!empty($userlist)): ?>
       <div class="meh"> 
-      <table class="alt-rows">
+      <table>
         <tbody>
           <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >
             <td class="shortcell cella">
@@ -121,7 +121,7 @@
              <? endforeach; ?>
             </td>
           </tr>
-          <tr><td class="nav2"><?= $page_navigation ?></td></tr>
+          <tr><td class="nav"><?= $page_navigation ?></td></tr>
         </tbody>
       </table>
       </div>

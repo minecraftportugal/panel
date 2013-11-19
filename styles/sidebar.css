@@ -259,9 +259,6 @@ table.admin.options {
   margin-bottom: 0.5em;
 }
 
-table.admin.options th {
-  
-}
  table.admin.options th, table.admin.options td {
   padding: 0.5em;
  }
@@ -275,10 +272,6 @@ table.admin .cella {
   padding-top: 0.5em;
   padding-left: 0.5em;
   padding-bottom: 0.5em;
-}
-
-th.cella, th.cellb, th.cellc, th.celld { 
-  background-color: rgba(0,0,0,0.3); 
 }
 
 table.alt-rows tr:nth-child(even) td {
@@ -975,14 +968,6 @@ td.nav {
   color: #000;
   text-align: center !important;
   height: 3em;
-  vertical-align: middle;
-  padding: 0 !important;
-}
-
-td.nav2 {
-  background-color: rgba(0, 0, 0, 0.2) !important;
-  color: #000;
-  text-align: center !important;
   vertical-align: middle;
   padding: 0 !important;
 }
