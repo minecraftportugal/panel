@@ -944,6 +944,10 @@ span.badge-member {
   background-image: url(/images/icons/badge_member.png);
 }
 
+span.badge-deactivated {
+  background-image: url(/images/icons/badge_deactivated.png);
+}
+
 ul.navigation {
  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
  font-variant: small-caps;

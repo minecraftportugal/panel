@@ -59,7 +59,7 @@ function getUserIdByName($playername) {
 function getUserBadges($id) {
 
   // premium, admin, donor
-  $q = "SELECT playername, premium, donor, contributor, admin, operator FROM accounts WHERE id = :id;";
+  $q = "SELECT playername, active, premium, donor, contributor, admin, operator FROM accounts WHERE id = :id;";
   $result = Bitch::source('default')->first($q, compact('id'));
 
   $badges = [
@@ -68,6 +68,7 @@ function getUserBadges($id) {
     'donor' => $result['donor'],
     'contributor' => $result['contributor'],
     'operator' => $result['operator'],
+    'active' => $result['active']
   ];
 
 

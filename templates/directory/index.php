@@ -100,6 +100,9 @@
                 <? if ($badges['premium'] == 1): ?>
                   <span title="Premium" class="badge2 badge-premium"></span>
                 <? endif; ?>
+                <? if ($badges['active'] != 1): ?>
+                  <span title="Conta Desactivada" class="badge2 badge-deactivated"></span>
+                <? endif; ?>
                 <? if (($badges['premium'] == 1)
                    or  ($badges['admin'] == 1)
                    or  ($badges['operator'] == 1)
