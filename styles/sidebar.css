@@ -795,7 +795,7 @@ div.collapsible.section > div.inside
 }
 
 div.collapsible.section:target h1 {
- background-color: rgba(255, 255, 255, 0.95);
+ background-color: rgba(255, 255, 255, 0.7);
 }
 
 div.collapsible.section:target > div.inside
@@ -811,7 +811,7 @@ div.collapsible.section:target > div.inside
 
 div.collapsible.section h1 {
 
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
 
   padding: 0.5em;
   font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
@@ -820,7 +820,8 @@ div.collapsible.section h1 {
   color: #000;
   font-size: 1.2em;
 
-  border: 2px dotted #111111;
+  border: 1px solid #777777;
+  border-radius: 4px;
 }
 
 div.collapsible.section.playername h1 {
