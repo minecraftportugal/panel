@@ -18,6 +18,12 @@ function directory_index() {
   $total = $pages['total'];
   $userlist = $pages['pages'];
 
+  $onlinePlayers = getOnlinePlayers();
+  $f = function($e) {
+    return $e['name'];
+  };
+  $flatOnlinePlayers = array_map($f, $onlinePlayers);
+
   $link_extra = "";
   $link_extra .= $playername != null ? "&playername=$playername" : "";
 

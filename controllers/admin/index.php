@@ -22,6 +22,12 @@ function admin_index() {
   $total = $pages['total'];
   $userlist = $pages['pages'];
 
+  $onlinePlayers = getOnlinePlayers();
+  $f = function($e) {
+    return $e['name'];
+  };
+  $flatOnlinePlayers = array_map($f, $onlinePlayers);
+
   $addresses = getPopularAddresses();
   $addresses = $addresses != null ? $addresses : [];
 

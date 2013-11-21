@@ -976,3 +976,25 @@ td.nav {
   vertical-align: middle;
   padding: 0 !important;
 }
+
+
+/*
+ * "Online" Green Light
+ */
+span.online {
+  width: 5px;
+  height: 5px;
+  border-radius: 6px;
+  position: relative;
+  z-index: 1000;
+}
+
+a[data-online='true'] span.online {
+  background-color: #55FF55;
+  display: block;
+  
+}
+
+a:not([data-online='true']) span.online {
+  display: none;
+}

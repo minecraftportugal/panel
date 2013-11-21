@@ -10,6 +10,8 @@
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
+    <script type="text/javascript" src="/scripts/dynmap.js"></script>
+
 
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -72,9 +74,14 @@
               
               <div class="player">
                 <div style="width: 95px; margin-left:23.5px;">
-                <a class="button-padded" href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>" title="<?= $r["playername"] ?>">
+                <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
+                   data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+                   class="button-padded"
+                   href="/profile?id=<?= $r['id'] ?>"
+                   title="<?= $r["registerdate"] ?>">
                   <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
                   <span class="stevehead large">
+                    <span class="online"></span>
                     <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
                   </span>
                   </a>

@@ -32,6 +32,19 @@ function getOnlinePlayers() {
 }
 
 /*
+ * inquisitorOnline: returns true or false, if the given user is actually online or isn't
+ */
+function inquisitorOnline($username) {
+  $q = "SELECT online FROM players WHERE name = :username ORDER BY lastJoin;";
+
+  $result = Bitch::source('inquisitor')->first($q, compact('username'));
+  
+  return $result['online'] == '1' ?  'true' : 'false';
+}
+
+
+
+/*
  * getTopPlayers: returns the top 10 player list
  */
 function getTopPlayers() {
@@ -70,7 +83,6 @@ function getUserBadges($id) {
     'operator' => $result['operator'],
     'active' => $result['active']
   ];
-
 
   $q = "SELECT totalTime FROM players WHERE name = :playername";
   $playername = $result['playername'];

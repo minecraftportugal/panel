@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/cookies.js"></script>
-    <script type="text/javascript" src="/scripts/i18n.js"></script>
+    <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/Three.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
     <!--[if IE]>

@@ -11,6 +11,11 @@ function news_index() {
   refreshxAuthSession($_SESSION['id']);
 
   $onlinePlayers = getOnlinePlayers();
+  $f = function($e) {
+  	return $e['name'];
+  };
+
+  $flatOnlinePlayers = array_map($f, $onlinePlayers);
   $numberOnlinePlayers = $onlinePlayers == null ? 0 : count($onlinePlayers);
 
   require('templates/news/index.php');

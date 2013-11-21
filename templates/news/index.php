@@ -8,6 +8,7 @@
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/news.js"></script>
+    <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -29,9 +30,14 @@
       <? foreach($onlinePlayers as $r): ?>
         <div class="stevegrid">
           <? $id = getUserIdByName($r['name'])['id'] ?>
-          <a class="<?= $id == null ? 'notregistered' : '' ?>" title="<?= $r['name'] ?> <?= $id == null ? '(not registered)' : '' ?>" href="<?= $id != null ? '/profile?id='.$id : '#' ?>">
+          <a data-dynmap-gotoplayer="<?= $r['name'] ?>"
+             data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+             class="<?= $id == null ? 'notregistered' : '' ?>" 
+             title="<?= $r['name'] ?> <?= $id == null ? '(not registered)' : '' ?>" 
+             href="<?= $id != null ? '/profile?id='.$id : '#' ?>">
             <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
             <span class="stevehead">
+              <span class="online"></span>
               <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
             </span>
           </a>
@@ -97,9 +103,13 @@
         <? foreach(getTopPlayers() as $r): ?>
           <li class="link">
             <? $id = getUserIdByName($r['name'])['id'] ?>
-            <a href="<?= $id != null ? '/profile?id='.$id : '#' ?>" style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
+            <a data-dynmap-gotoplayer="<?= $r['name'] ?>"
+               data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+               href="<?= $id != null ? '/profile?id='.$id : '#' ?>"
+               style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
               <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
               <span class="stevehead">
+                <span class="online"></span>
                 <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
               </span>
               <?= $r["name"] ?>
@@ -113,9 +123,13 @@
         <ul class="player-list">
         <? foreach(getNewest() as $r): ?>
           <li class="link">
-            <a title="@ <?= $r["registerdate"] ?>" href="/profile?id=<?= $r['id'] ?>">
+            <a data-dynmap-gotoplayer="<?= $r['name'] ?>"
+               data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+               title="@ <?= $r["registerdate"] ?>"
+               href="/profile?id=<?= $r['id'] ?>">
               <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
               <span class="stevehead">
+                <span class="online"></span>
                 <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
               </span>
              <?= $r["playername"] ?>
