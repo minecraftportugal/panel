@@ -1,5 +1,5 @@
-var urlDefault = "http://dynmap.minecraft.pt/";
-var urlChangePlayer = "http://dynmap.minecraft.pt/?playername=#{1}&mapname=surface";
+var urlDefault = "//dynmap.minecraft.pt/";
+var urlChangePlayer = "//dynmap.minecraft.pt/?playername=#{1}";
 
 $(function() {
 	$("a[data-dynmap-gotoplayer]").click(function() {
