@@ -37,7 +37,6 @@
              href="<?= $id != null ? '/profile?id='.$id : '#' ?>">
             <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
             <span class="stevehead">
-              <span class="online"></span>
               <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
             </span>
           </a>
