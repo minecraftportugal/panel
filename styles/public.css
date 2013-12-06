@@ -9,7 +9,8 @@
 
 body {
   font-size: 14px;
-  font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+  /*font-family: Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;*/
+  font-family: Georgia, Times, "Times New Roman", serif;
   color: #FFF;
 }
 

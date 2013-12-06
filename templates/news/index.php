@@ -96,7 +96,7 @@
     </div> */ ?>
 
     <div class="section pushd">
-      <div class="section-left">
+      <div class="section-left extra-padding-left">
         <h2 title="Time Wasters ;)">Mais Activos</h2>
         <ul class="player-list">
         <? foreach(getTopPlayers() as $r): ?>
@@ -117,7 +117,7 @@
         <? endforeach; ?>
         </ul>
       </div>
-      <div class="section-right">
+      <div class="section-right extra-padding-left">
         <h2><?= m("L_NEWEST") ?></h2>
         <ul class="player-list">
         <? foreach(getNewest() as $r): ?>

@@ -86,7 +86,7 @@ div#button-news {
 div#sidebar {
   background-color:rgba(0,0,0,0.4);
   position: fixed;
-  width: 350px;
+  width: 384px;
   right: 0px;
   margin-left: -100px;
 }

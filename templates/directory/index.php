@@ -73,7 +73,7 @@
           <? $a = getLastSession($r["id"]); ?>
               
               <div class="player">
-                <div style="width: 95px; margin-left:23.5px;">
+                <div style="width: 95px; margin-left:31px;">
                 <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
                    data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                    class="button-padded"

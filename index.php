@@ -37,15 +37,20 @@ require_once('controllers/admin/register.php');
 
 require_once('controllers/directory/index.php');
 
+require_once('controllers/maps/index.php');
+
 require_once('controllers/irc/index.php');
+
 require_once('controllers/webchat/index.php');
+
+require_once('controllers/errors.php');
 
 require_once('lib/flash.php');
 
 
 $r = new Router();
 
-$r->map('GET',  '/', 'home');
+$r->map('GET',  '', 'home');
 $r->map('GET',  '/news', 'news_index');
 
 $r->map('GET',  '/login', 'sessions_new');
@@ -68,15 +73,26 @@ $r->map('POST', '/admin/register', 'admin_register');
 
 $r->map('GET',  '/directory', 'directory_index');
 
+$r->map('GET',  '/maps', 'maps_index');
+
 $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');
 
 $path = getPathInfo();
+$path = rtrim($path, '/');
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 $x = $r->match($method, $path);
 
-if ($x != NULL) $x();
+// match route
+if ($x != NULL) {
+	$x();
+} 
+
 // else 404
+else {
+	notfound();
+}
 
 ?>
