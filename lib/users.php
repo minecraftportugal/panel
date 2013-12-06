@@ -27,6 +27,7 @@ function getOnlinePlayers() {
   $q = "SELECT name FROM players WHERE online = 1 ORDER BY lastJoin;";
 
   $result = Bitch::source('inquisitor')->all($q, compact('username'));
+  $result = $result == NULL ? [] : $result;
 
   return $result;
 }
