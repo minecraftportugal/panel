@@ -75,13 +75,11 @@
               <div class="player">
                 <div style="width: 95px; margin-left:31px;">
                 <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
-                   data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                    class="button-padded"
                    href="/profile?id=<?= $r['id'] ?>"
                    title="<?= $r["registerdate"] ?>">
                   <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
                   <span class="stevehead large">
-                    <span class="online"></span>
                     <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
                   </span>
                   </a>
@@ -115,6 +113,7 @@
                    or  ($badges['operator'] == 1)
                    or  ($badges['donor'] == 1)
                    or  ($badges['contributor'] == 1)
+                   or  ($badges['active'] != 1)
                    or  ($badges['member'] == 1)):
                 ?>
                   <div style="height:10px;clear:both;"></div>
@@ -122,8 +121,11 @@
               </div>
               
               <div style="text-overflow: ellipsis; overflow: hidden;text-align:center;">
-                <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>" title="<?= $r["playername"] ?>">
-                  <?= $r["playername"] ?>
+                <a href="/profile?id=<?= $r['id'] ?>"
+                    title="<?= $r["registerdate"] ?>"
+                    data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>">
+                  <span class=""><?= $r["playername"] ?></span>
+                  <span class="online no-margin-left"></span>
                 </a>
               </div>
             </div>

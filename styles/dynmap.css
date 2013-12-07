@@ -61,7 +61,43 @@ div#playerlist ul.playerlist {
   width: 95%;
   margin: auto;
 }
+  
+ul.playerlist li.player {
+ cursor: pointer; 
+ float: left; 
+ width: 45%;
+ margin: 0 !important;
+ padding: 5px !important;
 
-div#playerlist span.playerIcon {
-  cursor: pointer;
+ height: 32px;
+ margin-bottom: 10px !important;
+ overflow: hidden;
+ text-overflow:ellipsis;
+}
+
+ul.playerlist li.player:nth-child(odd) {
+   margin-right: 3% !important;
+}
+
+ul.playerlist li.map a:hover {
+  color: #fff !important;
+}
+
+ul.playerlist li.player:hover  {
+  background-color: rgba(255,255,255,0.1) !important;
+}
+ul.playerlist li.player span {
+
+  float: left;
+}
+ul.playerlist li.player a {
+  line-height: 10pt;
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.compass, .compass_NE, .compass_SE, .compass_NW, .compass_SW {
+  left:32px !important;
+  right: auto;
 }

@@ -900,6 +900,10 @@ div.collapsible.section h1:active {
   background: url('/images/enchanted.gif') center center;
 }
 
+#playerinventory div.inventory {
+  width: 305px;
+  margin: auto;
+}
 /*
  * http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas
  * attempt nearest neighbour in every browser, for pixel goodness
@@ -996,17 +1000,24 @@ td.nav {
  * "Online" Green Light
  */
 span.online {
-  width: 5px;
-  height: 5px;
-  border-radius: 6px;
-  position: relative;
-  z-index: 1000;
+  width: 8px;
+  height: 8px;
+  border-radius: 8px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+span.no-margin-left {
+  margin-left: 0px !important;
+}
+
+table.admin span.name-label {
+  margin-top: 3px;
 }
 
 a[data-online='true'] span.online {
-  background-color: #55FF55;
-  display: block;
-  
+  background-color: #45FF54;
+  display: inline-block;
 }
 
 a:not([data-online='true']) span.online {

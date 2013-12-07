@@ -174,20 +174,22 @@
       <h1>Inventário</h1>
     </a>
     <div class="inside">
-      <table class="pretty">
-        <tbody>
-        <? for ($j = 0; $j < 4; $j++): ?>
-          <tr class="line<?= $j ?>">
-          <? for ($i = 0; $i < 9; $i++): ?>
-          <td>
-          <? $pi = $playerinv[$i + 9 * $j]; ?>
-            <span class="item" data-item="<?= $pi['itemdata'] ?>" data-enchantments="<?= $pi['enchantments'] ?>"></span>
-          </td>
+      <div class="inventory">
+        <table class="pretty">
+          <tbody>
+          <? for ($j = 0; $j < 4; $j++): ?>
+            <tr class="line<?= $j ?>">
+            <? for ($i = 0; $i < 9; $i++): ?>
+            <td>
+            <? $pi = $playerinv[$i + 9 * $j]; ?>
+              <span class="item" data-item="<?= $pi['itemdata'] ?>" data-enchantments="<?= $pi['enchantments'] ?>"></span>
+            </td>
+            <? endfor; ?>
+            </tr>
           <? endfor; ?>
-          </tr>
-        <? endfor; ?>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
   <? endif; ?>
@@ -223,7 +225,7 @@
   <? if ($admin): ?>
   <div id="adminactions" class="collapsible section">
     <a href="#adminactions">
-      <h1>Admin</h1>
+      <h1>Gestão</h1>
     </a>
     <div class="inside">
       <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">

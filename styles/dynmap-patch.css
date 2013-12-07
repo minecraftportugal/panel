@@ -1,3 +1,18 @@
 div.sidebar {
 	display: none !important;
 }
+
+
+.compass, .compass_NE, .compass_SE, .compass_NW, .compass_SW {
+  left:32px !important;
+  right: auto;
+}
+
+
+.leaflet-top {
+	top: 100px;
+}
+
+.leaflet-left {
+  font-family: Consolas, monaco, monospace !important;
+};

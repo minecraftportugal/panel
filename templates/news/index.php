@@ -30,8 +30,7 @@
       <? foreach($onlinePlayers as $r): ?>
         <div class="stevegrid">
           <? $id = getUserIdByName($r['name'])['id'] ?>
-          <a data-dynmap-gotoplayer="<?= $r['name'] ?>"
-             data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+          <a data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
              class="<?= $id == null ? 'notregistered' : '' ?>" 
              title="<?= $r['name'] ?> <?= $id == null ? '(not registered)' : '' ?>" 
              href="<?= $id != null ? '/profile?id='.$id : '#' ?>">
@@ -51,67 +50,22 @@
       <div style="clear: both;"></div>
     </div>
 
-   <? /* <div class="section">
-    <div class="section-left">
-      <h2><?= m("L_LASTACTIVE") ?></h2>
-      <ul class="player-list">
-      <? foreach(getRecent($_SESSION['id']) as $r): ?>
-        <li class="link">
-          <a title="@ <?= $r["sessiondate"] ?>" href="/profile?id=<?= $r['id'] ?>">
-            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-            <span class="stevehead">
-              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-            </span>
-            <?= $r["playername"] ?>
-          </a>
-        </li>
-      <? endforeach; ?>
-      </ul>
-      
-    </div>
-    <? 
-      $o = getOnlinePlayers();
-      $len = $o == null ? 0 : count($o);
-    ?>
-    <div class="section-right">
-      <h2>Cenas</h2>
-      <? if ($len > 0): ?>
-      <ul class="player-list">
-      <? foreach(getTopPlayers() as $r): ?>
-        <li class="link">
-          <? $id = getUserIdByName($r['name'])['id'] ?>
-          <a href="<?= $id != null ? '/profile?id='.$id : '#' ?>" style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
-            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
-            <span class="stevehead">
-              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-            </span>
-            <?= $r["name"] ?>
-          </a>
-        </li>
-      <? endforeach; ?>
-      </ul>
-      <? endif; ?>
-    </div>
-    <div style="clear: both;"></div>
-    </div> */ ?>
-
     <div class="section pushd">
       <div class="section-left extra-padding-left">
         <h2 title="Time Wasters ;)">Mais Activos</h2>
         <ul class="player-list">
         <? foreach(getTopPlayers() as $r): ?>
-          <li class="link">
+          <li class="link clear">
             <? $id = getUserIdByName($r['name'])['id'] ?>
-            <a data-dynmap-gotoplayer="<?= $r['name'] ?>"
-               data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+            <a data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                href="<?= $id != null ? '/profile?id='.$id : '#' ?>"
                style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
               <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
               <span class="stevehead">
-                <span class="online"></span>
                 <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
               </span>
-              <?= $r["name"] ?>
+              <span class="name-label pull-left"><?= $r["name"] ?></span>
+              <span class="online pull-left" title="O jogador está online!"></span>
             </a>
           </li>
         <? endforeach; ?>
@@ -121,17 +75,16 @@
         <h2><?= m("L_NEWEST") ?></h2>
         <ul class="player-list">
         <? foreach(getNewest() as $r): ?>
-          <li class="link">
-            <a data-dynmap-gotoplayer="<?= $r['name'] ?>"
-               data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+          <li class="link clear">
+            <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                title="@ <?= $r["registerdate"] ?>"
                href="/profile?id=<?= $r['id'] ?>">
               <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
               <span class="stevehead">
-                <span class="online"></span>
                 <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
               </span>
-             <?= $r["playername"] ?>
+              <span class="name-label pull-left"><?= $r["playername"] ?></span>
+              <span class="online pull-left" title="O jogador está online!"></span>
             </a>
           </li>
         <? endforeach; ?>

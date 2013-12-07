@@ -105,9 +105,10 @@
                  title="<?= $r["email"] ?>">
                 <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
                 <span class="stevehead">
-                  <span class="online"></span>
                   <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-                </span><?= $r["playername"] ?>
+                </span>
+                <span class="name-label pull-left"><?= $r["playername"] ?></span>
+                <span class="online pull-left" title="O jogador está online!"></span>
               </a>
             </td>
             
