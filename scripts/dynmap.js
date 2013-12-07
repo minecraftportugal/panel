@@ -47,6 +47,8 @@ $(function() {
 		}
 
 		$(elem).append(object);
+		$(elem).find("ul.worldlist").unmousewheel();
+		$(elem).find("ul.playerlist").unmousewheel();
 
 		if ($(this).attr("data-dynmap-fix-images") == "true") {
 			$(this).find("img").each(function(n, elem) {
@@ -55,18 +57,5 @@ $(function() {
 			});
 		}
 	});
-
-
-
-	// sets this flag so this only happens once.
-	if (window.top.dynmapScriptLoaded === undefined) {
-		// hide dynmap elements
-		$(window.top.document).find("iframe#map").load(function() {
-			this.contentWindow.$('head').append('<link rel="stylesheet" type="text/css" href="//dev.minecraft.pt/styles/dynmap-patch.css">');
-		});
-
-		window.top.dynmapScriptLoaded = true;
-	}
-
 
 });
