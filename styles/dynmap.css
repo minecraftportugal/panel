@@ -79,7 +79,7 @@ ul.playerlist li.player:nth-child(odd) {
    margin-right: 3% !important;
 }
 
-ul.playerlist li.map a:hover {
+ul.playerlist li.player a:hover {
   color: #fff !important;
 }
 

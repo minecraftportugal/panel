@@ -47,8 +47,7 @@ $(function() {
 		}
 
 		$(elem).append(object);
-		$(elem).find("ul.worldlist").unmousewheel();
-		$(elem).find("ul.playerlist").unmousewheel();
+		
 
 		if ($(this).attr("data-dynmap-fix-images") == "true") {
 			$(this).find("img").each(function(n, elem) {
