@@ -78,6 +78,8 @@ $r->map('GET',  '/maps', 'maps_index');
 $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');
 
+$r->map('GET', '/forbidden', 'forbidden');
+
 $path = getPathInfo();
 $path = rtrim($path, '/');
 

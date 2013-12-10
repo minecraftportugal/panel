@@ -5,13 +5,13 @@
 <meta name="xsrf_token" content="<?= getXSRFToken() ?>" />
 <title>Comunidade Minecraft Portugal: Servidor Oficial</title>
 <link rel="stylesheet" href="/styles/top.css" type="text/css" />
-<link rel="stylesheet" href="/styles/jqueryui.css" type="text/css" />
 <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
 <link rel="shortcut icon" href="favicon.ico" />
-<script type="text/javascript" src="scripts/jquery.js"></script>
-<script type="text/javascript" src="scripts/jqueryui.js"></script>
-<script type="text/javascript" src="scripts/cookies.js"></script>
-<script type="text/javascript" src="scripts/top.js"></script>
+<script type="text/javascript" src="/scripts/jquery.js"></script>
+<script type="text/javascript" src="/scripts/jqueryui.js"></script>
+<script type="text/javascript" src="/scripts/cookies.js"></script>
+<script type="text/javascript" src="/scripts/top.js"></script>
+<script type="text/javascript" src="/scripts/sop.js"></script>
 </head> 
 <body>
 
