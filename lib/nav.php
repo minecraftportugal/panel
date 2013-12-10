@@ -8,7 +8,7 @@
       return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI']; 
   }
 
-  function navigation($page, $total, $per_page, $link_extra = null, $page_margin = 4) {
+  function navigation($page, $total, $per_page, $link_extra = null, $page_margin = 4, $show_expand = false) {
 
     if ($total == 0)
       return "";
@@ -49,6 +49,12 @@
       //$html .= "<li>&gt;</li>";
     }
     $html .= "<li><a href=\"?page=$total_pages$link_extra\">&gt;&gt;</a></li>";
+
+    if ($show_expand) {
+      $per_page_expand = $per_page + 100;
+      $html .= "<li><a href=\"?page=$page&per_page=$per_page_expand$link_extra\">&nbsp;&nbsp;&gt;&gt;&gt;</a></li>";
+    }
+
     $html .= "</ul>";
 
     return $html;

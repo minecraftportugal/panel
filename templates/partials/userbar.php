@@ -8,7 +8,7 @@
     </div>
     <div class="section-right-large aright">
       <? if ($_SESSION['admin'] == 1): ?>
-        <a class="button" id="admin" href="/admin" title="Admin"></a>
+        <a class="button" id="backoffice" href="/admin" title="Admin"></a>
       <? endif; ?>
       <a class="button" id="maps" href="/maps" title="Mapa"></a>    
       <a class="button" id="directory" href="/directory" title="Jogadores"></a>

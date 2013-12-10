@@ -232,14 +232,14 @@
       <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">
       <table class="form">
         <tbody>
-          <tr><th><h2>Reg. IP</h2></th><td><?= $profile['registerip'] ?></td></tr>
+          <tr><th><h2>Reg. IP</h2></th><td><a href="/admin?ipaddress=<?= $profile["registerip"] ?>"><?= $profile['registerip'] ?></a></td></tr>
           <? if (isset($profile['lastloginip'])): ?>
-            <tr><th><h2>Login IP</h2></th><td><?= $profile['lastloginip'] ?></td></tr>
+            <tr><th><h2>Login IP</h2></th><td><a href="/admin?ipaddress=<?= $profile["lastloginip"] ?>"><?= $profile['lastloginip'] ?></a></td></tr>
           <? endif; ?>
             <tr><th><h2>Last Login</h2></th><td><?= $profile['logintime'] ?></td></tr>
-            <tr><th><h2>Email</h2></th><td><?= $profile['email'] ?></td></tr>
+            <tr><th><h2>Email</h2></th><td><a href="/admin?emailaddress=<?= $profile["email"] ?>"><?= $profile['email'] ?></a></td></tr>
           <? if ($inquisitor): ?>
-            <tr><th><h2>Inq. IP</h2></th><td><?= $inquisitor['address'] ?></td></tr>
+            <tr><th><h2>Inq. IP</h2></th><td><a href="/admin?ipaddress=<?= $inquisitor['address'] ?>"><?= $inquisitor['address'] ?></a></td></tr>
             <tr><th><h2>Server</h2></th><td><?= $inquisitor['server'] ?></td></tr>
             <tr><th><h2>Last Join</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
           <? endif; ?>

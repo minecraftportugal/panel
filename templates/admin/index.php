@@ -61,12 +61,29 @@
             <td><input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $ipaddress ?>"></td>
           </tr>
           <tr>
+            <th class="center"><h2>Data Login</h2></th>
+            <td><input type="date" name="login_date_begin" value="<?= $login_date_begin ?>"> <span title="Apenas serão mostradas contas onde houve um login após esta data">(Após)</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="date" name="login_date_end" value="<?= $login_date_end ?>"> <span title="Apenas serão mostradas contas onde houve um login até esta data">(Até)</span></td>
+          </tr>
+          <tr>
+            <th class="center"><h2>Data Registo</h2></th>
+            <td><input type="date" name="register_date_begin" value="<?= $register_date_begin ?>"> <span title="Apenas serão mostradas contas registadas após esta data">(Após)</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="date" name="register_date_end" value="<?= $register_date_end ?>"> <span title="Apenas serão mostradas registadas até esta data">(Até)</span></td>
+          </tr>
+          <tr>
             <th class="center"><h2>Critérios</h2></th>
             <td>
               <input id="nologin" type="checkbox" name="nologin" value="1" <?= $nologin == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="nologin">nunca fez login</label>
             </td>
           </tr>
+          <tr>
             <td></td>
             <td>
               <input id="inactive" type="checkbox" name="inactive" value="1" <?= $inactive == 1 ? 'checked="checked"' : '' ?> />
@@ -74,8 +91,44 @@
             </td>
           </tr>
           <tr>
+            <td></td>
+            <td>
+              <input id="admin" type="checkbox" name="admin" value="1" <?= $admin == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="admin">admin</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="operator" type="checkbox" name="operator" value="1" <?= $operator == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="operator">operador</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="contributor" type="checkbox" name="contributor" value="1" <?= $contributor == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="contributor">contribuidor</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="donor" type="checkbox" name="donor" value="1" <?= $donor == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="donor">dador</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="premium" type="checkbox" name="premium" value="1" <?= $premium == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="premium">premium</label>
+            </td>
+          </tr>
+          <tr>
             <td colspan="2" class="center">
               <input type="submit" value="pesquisa" />
+              <input type="reset" value="reset" />
             </td>
           </tr>
         </thead>
@@ -89,8 +142,8 @@
             <th class="cella"><h2 title="Player Name">Player<h2></th>
             <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
             <th class="cellc"><h2 title="Administrador">@</h2></th>
-            <th class="cellc"><h2 title="Conta Activa">A</h2></th>
-            <th class="cellc"><h2 title="APAGAR A CONTA!">X</h2></th>
+            <th class="cellc"><h2 title="Conta Activa"><a id="select-all-active" href="#">A</a></h2></th>
+            <th class="cellc"><h2 title="APAGAR A CONTA!"><a id="select-all-delete" href="#">X</a></h2></th>
             <th class="celld"></th>
           </tr>
         </thead>
@@ -115,7 +168,7 @@
             
             <td class="shortcell cellb">
               <a href="/admin?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
-                <?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?>
+                <span class="pull-left"><?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?></span>
               </a>
             </td>
             <td class="cellc center">

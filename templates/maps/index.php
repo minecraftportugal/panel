@@ -43,13 +43,6 @@
     <div class="section success"><?= $success ?></div>
   <? endif; ?>
 
-  <div id="maplist" class="collapsible section default">
-    <a href="#maplist"><h1>Mapas</h1></a>
-    <div class="inside">
-      <div data-dynmap-copy="worldlist" data-dynmap-set-anchor="#maplist"></div>
-    </div>
-  </div>
-
   <div id="playerlist" class="collapsible section">
     <a href="#playerlist"><h1>Jogadores Online</h1></a>
     <div class="inside">
@@ -57,6 +50,12 @@
     </div>
   </div>
 
+  <div id="maplist" class="collapsible section default">
+    <a href="#maplist"><h1>Mapas</h1></a>
+    <div class="inside">
+      <div data-dynmap-copy="worldlist" data-dynmap-set-anchor="#maplist"></div>
+    </div>
+  </div>
 
 </div>
 
