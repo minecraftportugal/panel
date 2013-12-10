@@ -358,6 +358,10 @@ td.shortcol {
   width: 5%;
 }
 
+table.admin h2#select-all-active,
+table.admin h2#select-all-delete {
+  cursor: pointer;
+}
 
 /*
      █    █                                                █

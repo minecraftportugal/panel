@@ -142,8 +142,8 @@
             <th class="cella"><h2 title="Player Name">Player<h2></th>
             <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
             <th class="cellc"><h2 title="Administrador">@</h2></th>
-            <th class="cellc"><h2 title="Conta Activa"><a id="select-all-active" href="#">A</a></h2></th>
-            <th class="cellc"><h2 title="APAGAR A CONTA!"><a id="select-all-delete" href="#">X</a></h2></th>
+            <th class="cellc"><h2 id="select-all-active" title="Conta Activa">A</h2></th>
+            <th class="cellc"><h2 id="select-all-delete" title="APAGAR A CONTA!">X</h2></th>
             <th class="celld"></th>
           </tr>
         </thead>
@@ -176,11 +176,11 @@
               <input name="admin[<?= $r["id"] ?>]" value="<?= $r["admin"] ?>" type="hidden" />
             </td>
             <td class="cellc center">
-              <input class="gridy fakecheckbox" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
+              <input class="gridy fakecheckbox fake-active" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
               <input name="active[<?= $r["id"] ?>]" value="<?= $r["active"] ?>" type="hidden" />
             </td>
             <td class="cellc center">
-              <input class="gridy" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
+              <input class="gridy check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
             </td>
             <td class="celld"></td>
           </tr>
