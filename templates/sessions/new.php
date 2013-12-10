@@ -10,8 +10,8 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/cookies.js"></script>
-    <script type="text/javascript" src="/scripts/i18n.js"></script>
     <script type="text/javascript" Src="/scripts/login.js"></script>
+    <script type="text/javascript" src="/scripts/sop.js"></script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->

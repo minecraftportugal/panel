@@ -9,6 +9,7 @@
  <script type="text/javascript" src="/scripts/irc.js"></script>
  <script type="text/javascript" src="/scripts/jquery.js"></script>
  <script type="text/javascript" src="/scripts/frames.js"></script>
+ <script type="text/javascript" src="/scripts/sop.js"></script>
  <style type="text/css">
     html { height: 100%; overflow: hidden; }
     body { 

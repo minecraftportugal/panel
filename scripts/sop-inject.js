@@ -1,5 +1,5 @@
+// bypass same origin policy on *.minecraft.pt
 document.domain = "minecraft.pt";
-
 
 // hide dynmap elements
 $(window.top.document).find("iframe#map").load(function() {

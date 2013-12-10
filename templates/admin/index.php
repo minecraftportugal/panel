@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
+    <script type="text/javascript" src="/scripts/sop.js"></script>
 
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
