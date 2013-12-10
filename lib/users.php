@@ -144,8 +144,24 @@ function getUserList($page = NULL, $per_page = NULL) {
  * getUserListPaged: paged version of getUserList
  */
 
-function getUserListPaged($index, $per_page, $playername = null, $ipaddress = null, $emailaddress = null, $nologin = 0, $inactive = 0) {
-
+function getUserListPaged(
+  $index,
+  $per_page,
+  $playername = null,
+  $ipaddress = null,
+  $emailaddress = null,
+  $login_date_begin = null,
+  $login_date_end = null,
+  $register_date_begin = null,
+  $register_date_end = null,
+  $nologin = 0,
+  $inactive = 0,
+  $admin = 0,
+  $operator = 0,
+  $contributor = 0,
+  $donor = 0,
+  $premium = 0
+) {
   $q = "SELECT count(1) AS total
   FROM accounts
   WHERE playername = ifnull(:playername, playername)
@@ -153,8 +169,21 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
   AND email = ifnull(:emailaddress, email)
   AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate is null))
   AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
+  AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
+  AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
+  AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
+  AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
+  AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
+  AND ((:login_date_begin IS NULL) OR (:login_date_begin <= lastlogindate))
+  AND ((:login_date_end IS NULL) OR (:login_date_end >= lastlogindate))
+  AND ((:register_date_begin IS NULL) OR (:register_date_begin <= registerdate))
+  AND ((:register_date_end IS NULL) OR (:register_date_end >= registerdate))
   ORDER BY id DESC;";
-  $total = Bitch::source('default')->first($q, compact('playername', 'ipaddress', 'emailaddress', 'nologin', 'inactive'))["total"];
+  $total = Bitch::source('default')->first($q,
+    compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
+      'login_date_begin', 'login_date_end', 'register_date_begin', 'register_date_end',
+      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium')
+  )["total"];
 
   $q = "SELECT * FROM (
     SELECT id, playername, email, admin, operator, active,
@@ -166,10 +195,23 @@ function getUserListPaged($index, $per_page, $playername = null, $ipaddress = nu
     AND email = ifnull(:emailaddress, email)
     AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate is null))
     AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
+    AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
+    AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
+    AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
+    AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
+    AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
+    AND ((:login_date_begin IS NULL) OR (:login_date_begin <= lastlogindate))
+    AND ((:login_date_end IS NULL) OR (:login_date_end >= lastlogindate))
+    AND ((:register_date_begin IS NULL) OR (:register_date_begin <= registerdate))
+    AND ((:register_date_end IS NULL) OR (:register_date_end >= registerdate))
     ORDER BY id ASC
   ) pages LIMIT :index, :per_page";
 
-  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress', 'nologin', 'inactive'));
+  $result = Bitch::source('default')->all($q, 
+    compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
+      'login_date_begin', 'login_date_end', 'register_date_begin', 'register_date_end',
+      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium')
+  );
 
   return ["total" => $total, "pages" => $result];
 }
