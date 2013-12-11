@@ -39,7 +39,9 @@ $(function() {
 	$("[data-dynmap-copy]").each(function(n, elem) {
 		var target = $(elem).data("dynmap-copy");
 		var dynmap = getDynmap();
+
 		var object = dynmap[target].clone(true);
+		object.unmousewheel();
 
 		if ($(this).attr("data-dynmap-set-anchor") !== undefined) {
 			var anchor = $(this).attr("data-dynmap-set-anchor");
