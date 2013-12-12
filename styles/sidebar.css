@@ -638,6 +638,11 @@ h1.playername span.stevehead canvas
 div#onlineplayers {
   padding-left: 0px;
 }
+
+div#onlineplayers h2 {
+  margin-left: 5px;
+}
+
 div#onlineplayers span.stevehead
 {
   width: 32px;

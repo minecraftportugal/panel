@@ -2,6 +2,9 @@ div.sidebar {
 	display: none !important;
 }
 
+.compass {
+  background: rgba(0,0,0,0.4) !important;
+}
 
 .compass, .compass_NE, .compass_SE, .compass_NW, .compass_SW {
   left:32px !important;

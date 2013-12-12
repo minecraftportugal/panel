@@ -174,10 +174,10 @@ function getUserListPaged(
   AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
   AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
   AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
-  AND ((:login_date_begin IS NULL) OR (:login_date_begin <= lastlogindate))
-  AND ((:login_date_end IS NULL) OR (:login_date_end >= lastlogindate))
-  AND ((:register_date_begin IS NULL) OR (:register_date_begin <= registerdate))
-  AND ((:register_date_end IS NULL) OR (:register_date_end >= registerdate))
+  AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
+  AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
+  AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
+  AND ((:register_date_end IS NULL) OR (:register_date_end >= date(registerdate)))
   ORDER BY id DESC;";
   $total = Bitch::source('default')->first($q,
     compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
@@ -200,10 +200,10 @@ function getUserListPaged(
     AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
     AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
     AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
-    AND ((:login_date_begin IS NULL) OR (:login_date_begin <= lastlogindate))
-    AND ((:login_date_end IS NULL) OR (:login_date_end >= lastlogindate))
-    AND ((:register_date_begin IS NULL) OR (:register_date_begin <= registerdate))
-    AND ((:register_date_end IS NULL) OR (:register_date_end >= registerdate))
+    AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
+    AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
+    AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
+    AND ((:register_date_end IS NULL) OR (:register_date_end >= date(registerdate)))
     ORDER BY id ASC
   ) pages LIMIT :index, :per_page";
 
