@@ -26,8 +26,9 @@
 
     <div class="section">
       <? if ($numberOnlinePlayers > 0): ?>
-      <h2>Jogadores Online (<?= $numberOnlinePlayers ?>)</h2>
+      
       <div id="onlineplayers">
+      <h2>Jogadores Online (<?= $numberOnlinePlayers ?>)</h2>
       <? foreach($onlinePlayers as $r): ?>
         <div class="stevegrid">
           <? $id = getUserIdByName($r['name'])['id'] ?>

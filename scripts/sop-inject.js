@@ -8,5 +8,5 @@ $(window.top.document).find("iframe#map").load(function() {
 
 // make sure it loads properly inside the panel site
 if (window.top.document == window.document) {
-	window.location = '//forbidden'
+    window.location = '//www.minecraft.pt/forbidden'
 }

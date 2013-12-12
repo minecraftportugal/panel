@@ -49,19 +49,19 @@
       <table class="admin options">
         <thead>
           <tr>
-            <th class="center" style="width:25%;"><h2>Nome</h2></th>
+            <th class="center" style="width:35%;"><h2>Nome</h2></th>
             <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
           </tr>
           <tr>
-            <th class="center"><h2>End. Email</h2></th>
+            <th class="center"><h2>Endereço de Email</h2></th>
             <td><input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $emailaddress ?>"></td>
           </tr>
           <tr>
-            <th class="center"><h2>End. IP</h2></th>
+            <th class="center"><h2>Endereço IP</h2></th>
             <td><input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $ipaddress ?>"></td>
           </tr>
           <tr>
-            <th class="center"><h2>Data Login</h2></th>
+            <th class="center"><h2>Data de Login</h2></th>
             <td><input type="date" name="login_date_begin" value="<?= $login_date_begin ?>"> <span title="Apenas serão mostradas contas onde houve um login após esta data">(Após)</span></td>
           </tr>
           <tr>
@@ -69,7 +69,7 @@
             <td><input type="date" name="login_date_end" value="<?= $login_date_end ?>"> <span title="Apenas serão mostradas contas onde houve um login até esta data">(Até)</span></td>
           </tr>
           <tr>
-            <th class="center"><h2>Data Registo</h2></th>
+            <th class="center"><h2>Data de Registo</h2></th>
             <td><input type="date" name="register_date_begin" value="<?= $register_date_begin ?>"> <span title="Apenas serão mostradas contas registadas após esta data">(Após)</span></td>
           </tr>
           <tr>
@@ -139,7 +139,7 @@
       <table class="admin">
         <thead>
           <tr>
-            <th class="cella"><h2 title="Player Name">Player<h2></th>
+            <th class="cella"><h2 title="Nome do Jogador">Nome<h2></th>
             <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
             <th class="cellc"><h2 title="Administrador">@</h2></th>
             <th class="cellc"><h2 id="select-all-active" title="Conta Activa">A</h2></th>
