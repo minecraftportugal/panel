@@ -37,16 +37,12 @@
   <div class="b6"></div>
 </div>
 <div id="center">
-  <h1>Erro 404</h1>
+  <h1>Erro 500</h1>
   <div>
-    Oops! A página a que tentaste aceder (<?= selfURL(); ?>) não foi encontrada ou está temporariamente indisponível!
-    É possível que o site esteja em manutenção ou que a página simplesmente não exista.
+    Não tens permissões para aceder a esta página.
   </div>
   <div>
-    Se houver um problema, <a href="/webchat">podemos ajudar.</a>
-  </div>
-  <div>
-    Ou então, <a href="/">volta ao inicio!</a>
+    Por favor <a href="/">volta ao inicio!</a>
   </div>
  </div>
 </body>
