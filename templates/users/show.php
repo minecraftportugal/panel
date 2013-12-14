@@ -236,18 +236,16 @@
           <? if (isset($profile['lastloginip'])): ?>
             <tr><th><h2>Login IP</h2></th><td><a href="/admin?ipaddress=<?= $profile["lastloginip"] ?>"><?= $profile['lastloginip'] ?></a></td></tr>
           <? endif; ?>
-            <tr><th><h2>Last Login</h2></th><td><?= $profile['logintime'] ?></td></tr>
+            <tr><th><h2>Sessão</h2></th><td><?= $profile['logintime'] != "" ? $profile['logintime'] : "Sem Sessão" ?></td></tr>
             <tr><th><h2>Email</h2></th><td><a href="/admin?emailaddress=<?= $profile["email"] ?>"><?= $profile['email'] ?></a></td></tr>
           <? if ($inquisitor): ?>
             <tr><th><h2>Inq. IP</h2></th><td><a href="/admin?ipaddress=<?= $inquisitor['address'] ?>"><?= $inquisitor['address'] ?></a></td></tr>
-            <tr><th><h2>Server</h2></th><td><?= $inquisitor['server'] ?></td></tr>
-            <tr><th><h2>Last Join</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
-          <? endif; ?>
-          <? if ($inquisitor): ?>
-            <tr><th><h2 title="">Blocks/Hr</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
-            <tr><th><h2 title="">Dmd/Hr</h2></th><td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td></tr>
+            <tr><th><h2>Servidor</h2></th><td><?= $inquisitor['server'] ?></td></tr>
+            <tr><th><h2>Entrada</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
+            <tr><th><h2 title="">Blocos/Hr</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
+            <tr><th><h2 title="">Dim/Hr</h2></th><td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td></tr>
             <? if ($total > 0): ?>
-              <tr><th><h2 title="">Dmd/Blocks</h2></th><td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td></tr>
+              <tr><th><h2 title="">Dim/Blocos</h2></th><td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td></tr>
             <? endif; ?>
           <? endif; ?>
             <tr><th rowspan="6"><h2>Atributos</h2></th>
