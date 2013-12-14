@@ -43,7 +43,10 @@
     É possível que o site esteja em manutenção ou que a página simplesmente não exista.
   </div>
   <div>
-    É chato? <a href="/webchat">Coça.</a> :)
+    Se houver um problema, <a href="/webchat">podemos ajudar.</a>
+  </div>
+  <div>
+    Ou então, <a href="/">volta ao inicio!</a>
   </div>
  </div>
 </body>
