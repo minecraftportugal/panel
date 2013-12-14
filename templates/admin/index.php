@@ -43,7 +43,7 @@
 
  
   <div id="accounts" class="collapsible section default">
-    <a href="#accounts"><h1>Gerir Utilizadores (<?= $total ?>)</h1></a>
+    <a href="#accounts"><h1>Gerir Utilizadores (<?= $total_accounts ?>)</h1></a>
     <div class="inside">
     <form name="manage_users_filters" action="/admin" method="GET" autocomplete="off">
       <table class="admin options">
@@ -136,7 +136,7 @@
     </form>
     <div class="meh">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-      <table class="admin">
+      <table class="admin alt-rows">
         <thead>
           <tr>
             <th class="cella"><h2 title="Nome do Jogador">Nome<h2></th>
@@ -148,7 +148,7 @@
           </tr>
         </thead>
         <tbody>
-        <? foreach((array)$userlist as $r): ?>
+        <? foreach((array)$accounts as $r): ?>
         <? $a = getLastSession($r["id"]); ?>
           <tr>
             <td class="shortcell cella">
@@ -196,7 +196,108 @@
               <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
             </td>
           </tr>
-          <tr><td colspan="5" class="nav"><?= $page_navigation ?></td></tr>
+          <tr><td colspan="5" class="nav"><?= $accounts_page_navigation ?></td></tr>
+        </tbody>
+      </table>
+    </form>
+    </div>
+  </div>
+
+  <div id="sessions" class="collapsible section">
+    <a href="#sessions"><h1>Gerir Sessões (<?= $total_sessions ?>)</h1></a>
+    <div class="inside">
+    <?/*<form name="manage_sessions_filters" action="/admin" method="GET" autocomplete="off">
+      <table class="admin options">
+        <thead>
+          <tr>
+            <th class="center"><h2>Data da Sessão</h2></th>
+            <td><input type="date" name="login_date_begin" value="<?= $login_date_begin ?>"> <span title="Apenas serão mostradas contas onde houve um login após esta data">(Após)</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="date" name="login_date_end" value="<?= $login_date_end ?>"> <span title="Apenas serão mostradas contas onde houve um login até esta data">(Até)</span></td>
+          </tr>
+          <tr>
+            <th class="center"><h2>Data de Registo</h2></th>
+            <td><input type="date" name="register_date_begin" value="<?= $register_date_begin ?>"> <span title="Apenas serão mostradas contas registadas após esta data">(Após)</span></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="date" name="register_date_end" value="<?= $register_date_end ?>"> <span title="Apenas serão mostradas registadas até esta data">(Até)</span></td>
+          </tr>
+          <tr>
+            <th class="center"><h2>Critérios</h2></th>
+            <td>
+              <input id="nologin" type="checkbox" name="nologin" value="1" <?= $nologin == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="nologin">sessões web</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="center">
+              <input type="submit" value="pesquisa" />
+              <input type="reset" value="reset" />
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </form>*/?>
+    <div class="meh">
+    <form name="manage_sessions" action="/sessions/configure" method="POST" autocomplete="off">
+      <table class="admin alt-rows2">
+        <thead>
+          <tr>
+            <th class="cella" style="width: 80px;"><h2 title="Nome do Jogador">Nome<h2></th>
+            <th class="cella" style="width: 80px;"><h2 title="Endereço IP">IP</h2></th>
+          </tr>
+          <tr>
+            <th class="cella"><h2 title="Login (Sessão)">Login (Sessão)<h2></th>
+            <th class="cella"><h2 title="Login (Conta)">Login (Conta)</h2></th>
+          </tr>
+        </thead>
+        <tbody>
+        <? foreach((array)$sessions as $r): ?>
+        
+          <tr>
+            <td class="shortcell cella overflowh">
+              <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
+                 data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+                 class="button-padded"
+                 href="/profile?id=<?= $r['id'] ?>"
+                 title="<?= $r["email"] ?>">
+                <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+                <span class="stevehead">
+                  <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+                </span>
+                <span class="name-label pull-left"><?= $r["playername"] ?></span>
+                <span class="online pull-left" title="O jogador está online!"></span>
+              </a>
+            </td>
+        
+            <td class="shortcell cella overflowh">
+              <a href="/admin?ipaddress=<?= $r["lastloginip"] ?>" class="pull-left" title="<?= $r["lastloginip"] ?>"><?= $r["lastloginip"] ?><span>
+            </td>
+        </tr>
+        <tr>
+            <td class="shortcell cella overflowh"  <?= ($r["logintime"] < $r["lastlogindate"]) ? 'style="color: red;"' : "" ?>>
+              <span class="pull-left" title="<?= $r["logintimef"] ?>"><?= $r["logintimef"] ?></span>
+            </td>
+            <td class="shortcell cella overflowh" <?= ($r["logintime"] > $r["lastlogindate"]) ? 'style="color: red;"' : "" ?>>
+              <span class="pull-left" title="<?= $r["lastlogindatef"] ?>"><?= $r["lastlogindatef"] ?></span>
+            </td>
+          </tr>
+        <? endforeach; ?>
+        </tbody>
+      </table>
+      </div>
+      <table>
+        <tbody>
+          <tr>
+            <td class="center">
+              <input type="submit" value="OK" />        
+              <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+            </td>
+          </tr>
+          <tr><td colspan="5" class="nav"><?= $sessions_page_navigation ?></td></tr>
         </tbody>
       </table>
     </form>

@@ -22,16 +22,27 @@ function admin_index() {
   $contributor = isset($_GET['contributor']) && $_GET['contributor'] == "1" ? $_GET['contributor'] : 0;
   $donor = isset($_GET['donor']) && $_GET['donor'] == "1" ? $_GET['donor'] : 0;
   $premium = isset($_GET['premium']) && $_GET['premium'] == "1" ? $_GET['premium'] : 0;
-  $per_page = isset($_GET['per_page']) ? $_GET['per_page'] : 20;
-  $page = isset($_GET['page']) ? $_GET['page'] : 1;
-  $page = intval($page);
-  $per_page = intval($per_page);
+
+  $accounts_per_page = isset($_GET['accounts_per_page']) ? $_GET['accounts_per_page'] : 20;
+  $accounts_page = isset($_GET['accounts_page']) ? $_GET['accounts_page'] : 1;
+  $accounts_page = intval($accounts_page);
+  $accounts_per_page = intval($accounts_per_page);
+
+  $sessions_per_page = isset($_GET['sessions_per_page']) ? $_GET['sessions_per_page'] : 20;
+  $sessions_page = isset($_GET['sessions_page']) ? $_GET['sessions_page'] : 1;
+  $sessions_page = intval($sessions_page);
+  $sessions_per_page = intval($sessions_per_page);
+
   
-  $pages = getUserListPaged(($page-1)*$per_page, $per_page, $playername, $ipaddress,
+  $accounts_pages = getUserListPaged(($accounts_page-1)*$accounts_per_page, $accounts_per_page, $playername, $ipaddress,
     $emailaddress, $login_date_begin, $login_date_end, $register_date_begin, $register_date_end,
     $nologin, $inactive, $admin, $operator, $contributor, $donor, $premium);
-  $total = $pages['total'];
-  $userlist = $pages['pages'];
+  $total_accounts = $accounts_pages['total'];
+  $accounts = $accounts_pages['pages'];
+
+  $sessions_pages = getSessionsPaged(($sessions_page-1)*$sessions_per_page, $sessions_per_page);
+  $total_sessions = $sessions_pages['total'];
+  $sessions = $sessions_pages['pages'];
 
   $onlinePlayers = getOnlinePlayers();
   $f = function($e) {
@@ -58,7 +69,9 @@ function admin_index() {
   $link_extra .= $donor != null ? "&donor=$donor" : "";
   $link_extra .= $premium != null ? "&premium=$premium" : "";
 
-  $page_navigation = navigation($page, $total, $per_page, $link_extra, 4, true);
+  $accounts_page_navigation = navigation($accounts_page, $total_accounts, $accounts_per_page, $link_extra, 4, true, 'accounts_page', 'accounts_per_page');
+
+  $sessions_page_navigation = navigation($sessions_page, $total_sessions, $sessions_per_page, '#sessions', 4, true, 'sessions_page', 'sessions_per_page');
 
   require('templates/admin/index.php');
 }

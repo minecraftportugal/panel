@@ -71,8 +71,6 @@
 
         <? foreach((array)$userlist as $r): ?>
           <? $badges = getUserBadges($r["id"]); ?>
-          <? $a = getLastSession($r["id"]); ?>
-              
               <div class="player">
                 <div style="width: 95px; margin-left:31px;">
                 <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"

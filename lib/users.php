@@ -8,7 +8,6 @@ use minecraftia\db\Bitch;
  * getShit
  */
 
-
 /*
  * getInquisitor: returns inquisitor data for a given playername;
  */
@@ -49,7 +48,7 @@ function inquisitorOnline($username) {
  * getTopPlayers: returns the top 10 player list
  */
 function getTopPlayers() {
-  $q = "SELECT name FROM players ORDER BY totalTime DESC LIMIT 10;";
+  $q = "SELECT name FROM players ORDER BY totalTime DESC LIMIT 15;";
 
   $result = Bitch::source('inquisitor')->all($q);
 
@@ -96,29 +95,14 @@ function getUserBadges($id) {
 }
 
 /*
- * getRecent: returns the list of all the returning players, except $exclude 
- * which should be the ID of the current user
- */
-function getRecent($exclude) {
-
-  $q = "SELECT id, playername, DATE_FORMAT(logintime, '%b %d %H:%i %Y') sessiondate
-  FROM accounts INNER JOIN sessions ON accounts.id = sessions.accountid
-  WHERE accounts.id != :exclude
-  ORDER BY logintime desc LIMIT 10;";
-  
-  $result = Bitch::source('default')->all($q, compact('exclude'));
-
-  return $result ? $result : [];
-}
-
-/*
  * getNewest: returns the list of the newest players who have initiated a session in the site or game 
  */
 function getNewest() {
 
   $q = "SELECT id, playername, DATE_FORMAT(registerdate, '%b %d %H:%i %Y') registerdate
-  FROM accounts INNER JOIN sessions ON accounts.id = sessions.accountid
-  ORDER BY accounts.registerdate desc LIMIT 10;";
+  FROM accounts
+  WHERE lastlogindate IS NOT NULL
+  ORDER BY accounts.registerdate desc LIMIT 15;";
 
   $result = Bitch::source('default')->all($q);
 
@@ -216,6 +200,34 @@ function getUserListPaged(
   return ["total" => $total, "pages" => $result];
 }
 
+
+/*
+ * getSessionsPaged: paged version of..oh
+ */
+
+function getSessionsPaged(
+  $index,
+  $per_page
+) {
+  $q = "SELECT count(1) AS total
+  FROM accounts a INNER JOIN sessions s on a.id = s.accountid
+  ORDER BY id DESC;";
+  $total = Bitch::source('default')->first($q, compact('index', 'per_page'))["total"];
+
+  $q = "SELECT * FROM (
+    SELECT id, playername, lastloginip, lastlogindate, logintime,
+      DATE_FORMAT(logintime, '%b %d %H:%i:%s %Y') AS logintimef,
+      DATE_FORMAT(lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindatef
+    FROM accounts a INNER JOIN sessions s on a.id = s.accountid
+    ORDER BY logintime DESC
+  ) pages LIMIT :index, :per_page";
+
+  $result = Bitch::source('default')->all($q, 
+    compact('index', 'per_page')
+  );
+
+  return ["total" => $total, "pages" => $result];
+}
 /*
  * getPopularAddresses: most used ips
  */

@@ -282,13 +282,12 @@ table.admin .cella {
   padding-bottom: 0.5em;
 }
 
-table.alt-rows tr:nth-child(even) td {
-  background: rgba(0,0,0, 0.1);
+.overflowh {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-table.alt-rows tr:nth-child(odd) td {
-  background: rgba(0,0,0, 0.2);
-}
+
 
 div.meh {
 
@@ -328,6 +327,32 @@ td.online {
 td.offline {
   background-color: rgba(255,0,0,0.1) !important;
 }
+
+
+table.alt-rows tr th,
+table.alt-rows2 tr th {
+  background: rgba(0,0,0, 0.8);
+}
+
+table.alt-rows tr:nth-child(even) td {
+  background: rgba(0,0,0, 0.2);
+}
+
+table.alt-rows tr:nth-child(odd) td {
+   background: rgba(255,255,255, 0.05);
+}
+
+table.alt-rows2 tr:nth-child(4n) td, 
+table.alt-rows2 tr:nth-child(4n-1) td {
+  background: rgba(0,0,0, 0.1);
+}
+
+table.alt-rows2 tr:nth-child(4n-2) td, 
+table.alt-rows2 tr:nth-child(4n-3) td {
+  background: rgba(255,255,255, 0.1);
+}
+
+
 
 table.pretty {
   border-collapse: separate;
