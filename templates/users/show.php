@@ -7,11 +7,13 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
-    <script type="text/javascript" src="/scripts/cookies.js"></script>
+    <script type="text/javascript" src="/scripts/steve.js"></script>
+    <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/Three.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
+
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->

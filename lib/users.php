@@ -144,10 +144,15 @@ function getUserListPaged(
   $operator = 0,
   $contributor = 0,
   $donor = 0,
-  $premium = 0
+  $premium = 0,
+  $online = 0,
+  $staff = 0
 ) {
   $q = "SELECT count(1) AS total
-  FROM accounts
+  FROM accounts a LEFT JOIN (
+    SELECT 1 as online, name FROM inquisitor.players
+    WHERE online = 1
+  ) o ON (o.name = a.playername)
   WHERE playername = ifnull(:playername, playername)
   AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
   AND email = ifnull(:emailaddress, email)
@@ -155,9 +160,11 @@ function getUserListPaged(
   AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
   AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
   AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
+  AND ((:staff = 0) OR (:staff = 1 AND (admin = 1 OR operator = 1)))
   AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
   AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
   AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
+  AND ((:online = 0) OR (:online = 1 AND online = 1))
   AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
   AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
   AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
@@ -166,14 +173,18 @@ function getUserListPaged(
   $total = Bitch::source('default')->first($q,
     compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
       'login_date_begin', 'login_date_end', 'register_date_begin', 'register_date_end',
-      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium')
+      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium', 'online',
+      'staff')
   )["total"];
 
   $q = "SELECT * FROM (
     SELECT id, playername, email, admin, operator, active,
       DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
       DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip
-    FROM accounts
+    FROM accounts LEFT JOIN (
+      SELECT 1 as online, name FROM inquisitor.players
+      WHERE online = 1
+    ) online_players ON (online_players.name = accounts.playername)
     WHERE playername = ifnull(:playername, playername)
     AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
     AND email = ifnull(:emailaddress, email)
@@ -181,9 +192,11 @@ function getUserListPaged(
     AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
     AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
     AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
+    AND ((:staff = 0) OR (:staff = 1 AND (admin = 1 OR operator = 1)))
     AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
     AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
     AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
+    AND ((:online = 0) OR (:online = 1 AND online = 1))
     AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
     AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
     AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
@@ -194,7 +207,8 @@ function getUserListPaged(
   $result = Bitch::source('default')->all($q, 
     compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
       'login_date_begin', 'login_date_end', 'register_date_begin', 'register_date_end',
-      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium')
+      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium', 'online',
+      'staff')
   );
 
   return ["total" => $total, "pages" => $result];
@@ -207,23 +221,56 @@ function getUserListPaged(
 
 function getSessionsPaged(
   $index,
-  $per_page
+  $per_page,
+  $playername = null,
+  $ipaddress = null,
+  $session_date_begin = null,
+  $session_date_end = null,
+  $session_valid = 0,
+  $session_invalid = 0,
+  $online = 0
 ) {
+  /* As defined in xAuth/config.yml */
+  $session_length = 3600;
+
   $q = "SELECT count(1) AS total
-  FROM accounts a INNER JOIN sessions s on a.id = s.accountid
+  FROM accounts a INNER JOIN sessions s on a.id = s.accountid LEFT JOIN (
+    SELECT 1 as online, name FROM inquisitor.players
+    WHERE online = 1
+  ) online_players ON (online_players.name = a.playername)
+  WHERE playername = ifnull(:playername, playername)
+  AND (ipaddress = ifnull(:ipaddress, ipaddress))
+  AND ((:session_date_begin IS NULL) OR (:session_date_begin <= date(logintime)))
+  AND ((:session_date_end IS NULL) OR (:session_date_end >= date(logintime)))
+  AND ((:session_valid = 0) OR ((:session_valid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) > NOW())))
+  AND ((:session_invalid = 0) OR ((:session_invalid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) <=  NOW())))
+  AND ((:online = 0) OR (:online = 1 AND online = 1))
   ORDER BY id DESC;";
-  $total = Bitch::source('default')->first($q, compact('index', 'per_page'))["total"];
+  $total = Bitch::source('default')->first($q, compact('index', 'per_page', 'playername',
+    'ipaddress', 'session_date_begin', 'session_date_end', 'session_valid', 'session_invalid', 
+    'session_length', 'online'))["total"];
 
   $q = "SELECT * FROM (
     SELECT id, playername, lastloginip, lastlogindate, logintime,
       DATE_FORMAT(logintime, '%b %d %H:%i:%s %Y') AS logintimef,
       DATE_FORMAT(lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindatef
-    FROM accounts a INNER JOIN sessions s on a.id = s.accountid
+    FROM accounts a INNER JOIN sessions s on a.id = s.accountid LEFT JOIN (
+    SELECT 1 as online, name FROM inquisitor.players
+    WHERE online = 1
+  ) o ON (o.name = a.playername)
+    WHERE playername = ifnull(:playername, playername)
+    AND (ipaddress = ifnull(:ipaddress, ipaddress))
+    AND ((:session_date_begin IS NULL) OR (:session_date_begin <= date(logintime)))
+    AND ((:session_date_end IS NULL) OR (:session_date_end >= date(logintime)))
+    AND ((:session_valid = 0) OR ((:session_valid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) > NOW())))
+    AND ((:session_invalid = 0) OR ((:session_invalid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) <= NOW())))
+    AND ((:online = 0) OR (:online = 1 AND online = 1))
     ORDER BY logintime DESC
   ) pages LIMIT :index, :per_page";
 
-  $result = Bitch::source('default')->all($q, 
-    compact('index', 'per_page')
+  $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername',
+    'ipaddress', 'session_date_begin', 'session_date_end', 'session_valid', 'session_invalid', 
+    'session_length', 'online')
   );
 
   return ["total" => $total, "pages" => $result];

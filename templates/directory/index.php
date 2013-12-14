@@ -9,7 +9,8 @@
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
-    <script type="text/javascript" src="/scripts/admin.js"></script>
+    <script type="text/javascript" src="/scripts/steve.js"></script>
+    <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
 
@@ -51,8 +52,43 @@
       <table class="admin options">
         <thead>
           <tr>
-            <th class="center" style="width:25%;"><h2>Nome</h2></th>
+            <th class="center" style="width:35%;"><h2>Nome</h2></th>
             <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
+          </tr>
+          <tr>
+             <th class="center"><h2>Critérios</h2></th>
+            <td>
+              <input id="staff" type="checkbox" name="staff" value="1" <?= $staff == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="staff">staff</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="contributor" type="checkbox" name="contributor" value="1" <?= $contributor == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="contributor">contribuidor</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="donor" type="checkbox" name="donor" value="1" <?= $donor == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="donor">dador</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="premium" type="checkbox" name="premium" value="1" <?= $premium == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="premium">premium</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="isonline" type="checkbox" name="online" value="1" <?= $online == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="isonline">online</label>
+            </td>
           </tr>
           <tr>
             <td colspan="2" class="center">
@@ -123,7 +159,7 @@
                 <a href="/profile?id=<?= $r['id'] ?>"
                     title="<?= $r["registerdate"] ?>"
                     data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>">
-                  <span class=""><?= $r["playername"] ?></span>
+                  <span class=""><?= $r["playername"] ?></span> <br>
                   <span class="online no-margin-left"></span>
                 </a>
               </div>

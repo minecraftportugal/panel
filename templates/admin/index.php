@@ -9,6 +9,8 @@
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
+    <script type="text/javascript" src="/scripts/steve.js"></script>
+    <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
@@ -126,6 +128,13 @@
             </td>
           </tr>
           <tr>
+            <td></td>
+            <td>
+              <input id="isonline" type="checkbox" name="online" value="1" <?= $online == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="isonline">online</label>
+            </td>
+          </tr>
+          <tr>
             <td colspan="2" class="center">
               <input type="submit" value="pesquisa" />
               <input type="reset" value="reset" />
@@ -206,30 +215,44 @@
   <div id="sessions" class="collapsible section">
     <a href="#sessions"><h1>Gerir Sessões (<?= $total_sessions ?>)</h1></a>
     <div class="inside">
-    <?/*<form name="manage_sessions_filters" action="/admin" method="GET" autocomplete="off">
+    <form name="manage_sessions_filters" action="/admin#sessions" method="GET" autocomplete="off">
       <table class="admin options">
         <thead>
           <tr>
+            <th class="center" style="width:35%;"><h2>Nome</h2></th>
+            <td><input type="text" name="session_playername" placeholder="steve" value="<?= $session_playername ?>"></td>
+          </tr>
+          <tr>
+            <th class="center"><h2>Endereço IP</h2></th>
+            <td><input type="text" name="session_ipaddress" placeholder="192.168.0.1" value="<?= $session_ipaddress ?>"></td>
+          </tr>
+          <tr>
             <th class="center"><h2>Data da Sessão</h2></th>
-            <td><input type="date" name="login_date_begin" value="<?= $login_date_begin ?>"> <span title="Apenas serão mostradas contas onde houve um login após esta data">(Após)</span></td>
+            <td><input type="date" name="session_date_begin" value="<?= $session_date_begin ?>"> <span title="Apenas serão mostradas sessões após esta data">(Após)</span></td>
           </tr>
           <tr>
             <td></td>
-            <td><input type="date" name="login_date_end" value="<?= $login_date_end ?>"> <span title="Apenas serão mostradas contas onde houve um login até esta data">(Até)</span></td>
-          </tr>
-          <tr>
-            <th class="center"><h2>Data de Registo</h2></th>
-            <td><input type="date" name="register_date_begin" value="<?= $register_date_begin ?>"> <span title="Apenas serão mostradas contas registadas após esta data">(Após)</span></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><input type="date" name="register_date_end" value="<?= $register_date_end ?>"> <span title="Apenas serão mostradas registadas até esta data">(Até)</span></td>
+            <td><input type="date" name="session_date_end" value="<?= $session_date_end ?>"> <span title="Apenas serão mostradas sessões até esta data">(Até)</span></td>
           </tr>
           <tr>
             <th class="center"><h2>Critérios</h2></th>
             <td>
-              <input id="nologin" type="checkbox" name="nologin" value="1" <?= $nologin == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="nologin">sessões web</label>
+              <input id="session_valid" type="checkbox" name="session_valid" value="1" <?= $session_valid == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="session_valid" title="sessão não expirada">sessão válida</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="session_invalid" type="checkbox" name="session_invalid" value="1" <?= $session_invalid == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="session_invalid" title="sessão expirada">sessão inválida</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="session_online" type="checkbox" name="session_online" value="1" <?= $session_online == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="session_online">online</label>
             </td>
           </tr>
           <tr>
@@ -240,7 +263,7 @@
           </tr>
         </thead>
       </table>
-    </form>*/?>
+    </form>
     <div class="meh">
     <form name="manage_sessions" action="/sessions/configure" method="POST" autocomplete="off">
       <table class="admin alt-rows2">

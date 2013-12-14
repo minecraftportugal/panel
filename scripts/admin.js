@@ -1,8 +1,4 @@
 $(function() {
-  $("a#logout").click(function(e) {
-    top.logout();
-    return false;
-  });
 
   $("h2#select-all-active").click(function() {
   	$("input.fake-active").click();
@@ -16,4 +12,5 @@ $(function() {
     var value = $(this).is(":checked") ? 1 : 0;
     $(this).next().val(value);
   });
+
 });
