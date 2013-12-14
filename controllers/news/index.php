@@ -8,7 +8,6 @@ function news_index() {
   global $cfg_wp_enabled, $cfg_wp_location, $cfg_wp_url;
 
   validateSession();
-  refreshxAuthSession($_SESSION['id']);
 
   $onlinePlayers = getOnlinePlayers();
   $f = function($e) {
