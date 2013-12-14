@@ -11,7 +11,6 @@
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/steve.js"></script>
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
-    <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
 
 
@@ -109,8 +108,7 @@
           <? $badges = getUserBadges($r["id"]); ?>
               <div class="player">
                 <div style="width: 95px; margin-left:31px;">
-                <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
-                   class="button-padded"
+                <a class="button-padded"
                    href="/profile?id=<?= $r['id'] ?>"
                    title="<?= $r["registerdate"] ?>">
                   <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>

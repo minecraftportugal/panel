@@ -9,7 +9,6 @@
     <script type="text/javascript" src="/scripts/frames.js"></script>
     <script type="text/javascript" src="/scripts/steve.js"></script>
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
-    <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/Three.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>

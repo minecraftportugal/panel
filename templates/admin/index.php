@@ -12,7 +12,6 @@
     <script type="text/javascript" src="/scripts/steve.js"></script>
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
-    <script type="text/javascript" src="/scripts/dynmap.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
 
     <!--[if IE]>
@@ -161,8 +160,7 @@
         <? $a = getLastSession($r["id"]); ?>
           <tr>
             <td class="shortcell cella">
-              <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
-                 data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+              <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                  class="button-padded"
                  href="/profile?id=<?= $r['id'] ?>"
                  title="<?= $r["email"] ?>">
@@ -282,8 +280,7 @@
         
           <tr>
             <td class="shortcell cella overflowh">
-              <a data-dynmap-gotoplayer="<?= $r['playername'] ?>"
-                 data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+              <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                  class="button-padded"
                  href="/profile?id=<?= $r['id'] ?>"
                  title="<?= $r["email"] ?>">
