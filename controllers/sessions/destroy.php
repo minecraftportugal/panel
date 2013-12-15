@@ -4,6 +4,8 @@ require_once('lib/sessions.php');
 require_once('lib/i18n.php');
 
 function sessions_destroy () {
+  validateSession();
+
   $xsrf_token = getXSRFToken();
   if (!validateXSRFToken($xsrf_token)) {
     return;

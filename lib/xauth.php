@@ -12,9 +12,9 @@ function refreshxAuthSession($accountid) {
   $ip = $_SERVER['REMOTE_ADDR'];
 
   // Insert into sessions table
-  $q = "INSERT INTO sessions(accountid, ipaddress, logintime) 
-  VALUES($accountid, :ip, sysdate())
-  ON DUPLICATE KEY UPDATE ipaddress = :ip, logintime = sysdate()";
+  $q = "INSERT INTO sessions(accountid, ipaddress, logintime, websession) 
+  VALUES($accountid, :ip, sysdate(), 1)
+  ON DUPLICATE KEY UPDATE ipaddress = :ip, logintime = sysdate(), websession = 1";
 
   $result = Bitch::source('default')->query($q, compact('ip'));
 

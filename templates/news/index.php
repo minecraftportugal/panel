@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
     <script type="text/javascript" src="/scripts/jquery.js"></script>
     <script type="text/javascript" src="/scripts/frames.js"></script>
+    <script type="text/javascript" src="/scripts/autoreload.js"></script>
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/steve.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>

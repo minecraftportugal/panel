@@ -16,7 +16,7 @@ function admin_register() {
   $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
   $email = isset($_POST['email']) ? $_POST['email'] : NULL;
 
-  $status = register($username, $email, $email_ip = true);
+  $status = register($username, $email, $email_ip = false);
   
   if (!$status) {
     header("Location: /admin");

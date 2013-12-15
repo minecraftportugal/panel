@@ -254,6 +254,13 @@
             </td>
           </tr>
           <tr>
+            <td></td>
+            <td>
+              <input id="session_web" type="checkbox" name="session_web" value="1" <?= $session_web == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="session_web">sessão web</label>
+            </td>
+          </tr>
+          <tr>
             <td colspan="2" class="center">
               <input type="submit" value="pesquisa" />
               <input type="reset" value="reset" />
@@ -267,12 +274,13 @@
       <table class="admin alt-rows2">
         <thead>
           <tr>
-            <th class="cella" style="width: 80px;"><h2 title="Nome do Jogador">Nome<h2></th>
+            <th class="cella" style="width: 90px;"><h2 title="Nome do Jogador">Nome<h2></th>
             <th class="cella" style="width: 80px;"><h2 title="Endereço IP">IP</h2></th>
+            <th rowspan="2" class="cellz"><h2 id="select-all-delete-sessions" title="APAGAR A CONTA!">X</h2></th>
           </tr>
           <tr>
-            <th class="cella"><h2 title="Login (Sessão)">Login (Sessão)<h2></th>
-            <th class="cella"><h2 title="Login (Conta)">Login (Conta)</h2></th>
+            <th class="cella"><h2 title="Data">Data Sessão<h2></th>
+            <th class="cella"><h2 title="Tipo">Tipo Sessão</h2></th>
           </tr>
         </thead>
         <tbody>
@@ -296,13 +304,19 @@
             <td class="shortcell cella overflowh">
               <a href="/admin?ipaddress=<?= $r["lastloginip"] ?>" class="pull-left" title="<?= $r["lastloginip"] ?>"><?= $r["lastloginip"] ?><span>
             </td>
+
+            <td rowspan="2" class="cellz">
+              <input class="check-delete-sessions" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
+            </td>
         </tr>
         <tr>
-            <td class="shortcell cella overflowh"  <?= ($r["logintime"] < $r["lastlogindate"]) ? 'style="color: red;"' : "" ?>>
-              <span class="pull-left" title="<?= $r["logintimef"] ?>"><?= $r["logintimef"] ?></span>
+            <td class="shortcell cella overflowh">
+              <span class="pull-left" title="<?= $r["logintimef"] ?>" style="<?= $r["valid"] == 0 ? "text-decoration:line-through;" : "" ?>"><?= $r["logintimef"] ?></span>
             </td>
-            <td class="shortcell cella overflowh" <?= ($r["logintime"] > $r["lastlogindate"]) ? 'style="color: red;"' : "" ?>>
-              <span class="pull-left" title="<?= $r["lastlogindatef"] ?>"><?= $r["lastlogindatef"] ?></span>
+            <td class="shortcell cella overflowh">
+              <span class="pull-left" title="<?= $r["websession"] == 1 ? "sessão iniciada no site" : "sessão iniciada no jogo" ?>">
+                 <?= $r["websession"] == 1 ? "Web" : "Minecraft" ?>
+              </span>
             </td>
           </tr>
         <? endforeach; ?>

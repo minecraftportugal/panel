@@ -21,6 +21,7 @@ require_once('controllers/news/index.php');
 require_once('controllers/sessions/new.php');
 require_once('controllers/sessions/create.php');
 require_once('controllers/sessions/destroy.php');
+require_once('controllers/sessions/configure.php');
 
 require_once('controllers/users/new.php');
 require_once('controllers/users/create.php');
@@ -56,6 +57,7 @@ $r->map('GET',  '/news', 'news_index');
 $r->map('GET',  '/login', 'sessions_new');
 $r->map('POST', '/login', 'sessions_create');
 $r->map('POST', '/logout', 'sessions_destroy');
+$r->map('POST', '/sessions/configure', 'sessions_configure');
 
 $r->map('GET',  '/register', 'users_new');
 $r->map('GET',  '/profile', 'users_show');

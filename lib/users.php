@@ -1,6 +1,6 @@
 <?
 
-require("config.php");
+require_once("config.php");
 
 use minecraftia\db\Bitch;
 
@@ -228,7 +228,8 @@ function getSessionsPaged(
   $session_date_end = null,
   $session_valid = 0,
   $session_invalid = 0,
-  $online = 0
+  $online = 0,
+  $websession = 0
 ) {
   /* As defined in xAuth/config.yml */
   $session_length = 3600;
@@ -245,15 +246,17 @@ function getSessionsPaged(
   AND ((:session_valid = 0) OR ((:session_valid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) > NOW())))
   AND ((:session_invalid = 0) OR ((:session_invalid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) <=  NOW())))
   AND ((:online = 0) OR (:online = 1 AND online = 1))
+  AND ((:websession = 0) OR (:websession = 1 AND websession = 1))
   ORDER BY id DESC;";
   $total = Bitch::source('default')->first($q, compact('index', 'per_page', 'playername',
     'ipaddress', 'session_date_begin', 'session_date_end', 'session_valid', 'session_invalid', 
-    'session_length', 'online'))["total"];
+    'session_length', 'online', 'websession'))["total"];
 
   $q = "SELECT * FROM (
-    SELECT id, playername, lastloginip, lastlogindate, logintime,
+    SELECT id, playername, lastloginip, lastlogindate, logintime, websession,
       DATE_FORMAT(logintime, '%b %d %H:%i:%s %Y') AS logintimef,
-      DATE_FORMAT(lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindatef
+      DATE_FORMAT(lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindatef,
+      IF(DATE_ADD(logintime, INTERVAL :session_length SECOND) > NOW(), 1, 0) as valid
     FROM accounts a INNER JOIN sessions s on a.id = s.accountid LEFT JOIN (
     SELECT 1 as online, name FROM inquisitor.players
     WHERE online = 1
@@ -265,12 +268,13 @@ function getSessionsPaged(
     AND ((:session_valid = 0) OR ((:session_valid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) > NOW())))
     AND ((:session_invalid = 0) OR ((:session_invalid = 1) AND (DATE_ADD(logintime, INTERVAL :session_length SECOND) <= NOW())))
     AND ((:online = 0) OR (:online = 1 AND online = 1))
+    AND ((:websession = 0) OR (:websession = 1 AND websession = 1))
     ORDER BY logintime DESC
   ) pages LIMIT :index, :per_page";
 
   $result = Bitch::source('default')->all($q, compact('index', 'per_page', 'playername',
     'ipaddress', 'session_date_begin', 'session_date_end', 'session_valid', 'session_invalid', 
-    'session_length', 'online')
+    'session_length', 'online', 'websession')
   );
 
   return ["total" => $total, "pages" => $result];
@@ -496,6 +500,23 @@ function usersConfigure($admin, $active, $delete) {
   }
 
   setFlash('success', 'Yay ;-) Alterações Efectuadas.');
+  return true;
+}
+
+function sessionsConfigure($delete) {
+  /*
+   * Delete users
+   */
+  if (count($delete) > 0) {
+    $sql_in = implode(',', array_fill(0, count($delete), '?'));
+
+    $q = "DELETE FROM sessions
+    WHERE accountid IN ($sql_in);";
+    $result = Bitch::source('default')->query($q, $delete);
+    if (!$result) { die('Invalid query'); }
+  }
+
+  setFlash('success', 'Sessões Apagadas');
   return true;
 }
 

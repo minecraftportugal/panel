@@ -35,6 +35,7 @@ function admin_index() {
   $session_valid = isset($_GET['session_valid']) && $_GET['session_valid'] != "" ? $_GET['session_valid'] : 0;
   $session_invalid = isset($_GET['session_invalid']) && $_GET['session_invalid'] != "" ? $_GET['session_invalid'] : 0;
   $session_online = isset($_GET['session_online']) && $_GET['session_online'] != "" ? $_GET['session_online'] : 0;
+  $session_web = isset($_GET['session_web']) && $_GET['session_web'] != "" ? $_GET['session_web'] : 0;
 
   $sessions_per_page = isset($_GET['sessions_per_page']) ? $_GET['sessions_per_page'] : 20;
   $sessions_page = isset($_GET['sessions_page']) ? $_GET['sessions_page'] : 1;
@@ -49,7 +50,8 @@ function admin_index() {
   $accounts = $accounts_pages['pages'];
 
   $sessions_pages = getSessionsPaged(($sessions_page-1)*$sessions_per_page, $sessions_per_page, $session_playername, 
-    $session_ipaddress, $session_date_begin, $session_date_end, $session_valid, $session_invalid, $session_online);
+    $session_ipaddress, $session_date_begin, $session_date_end, $session_valid, $session_invalid, $session_online,
+    $session_web);
   $total_sessions = $sessions_pages['total'];
   $sessions = $sessions_pages['pages'];
 

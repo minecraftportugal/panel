@@ -8,6 +8,10 @@ $(function() {
     $("input.check-delete").click();
   });
 
+  $("h2#select-all-delete-sessions").click(function() {
+    $("input.check-delete-sessions").click();
+  });
+
   $("input.fakecheckbox").click(function() {
     var value = $(this).is(":checked") ? 1 : 0;
     $(this).next().val(value);

@@ -18,11 +18,10 @@ function admin_configure() {
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
   $status = usersConfigure($admin, $active, $delete);
-  
   if (!$status) {
-    header("Location: /admin");
+    header("Location: /admin#accounts");
   } else {
-    header("Location: /admin");
+    header("Location: /admin#accounts");
   }
 }
 

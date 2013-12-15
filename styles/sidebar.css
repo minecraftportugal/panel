@@ -320,6 +320,19 @@ td.shortcell {
   width: 6px;
 }
 
+.cellz {
+  width: 40px;
+  text-align: center !important;
+  vertical-align: middle;
+}
+
+.cellz h2 {
+  cursor: pointer;
+}
+
+.cellz input {
+  float: none !important;
+}
 td.online {
   background-color: rgba(0,255,0,0.1) !important;
 }
