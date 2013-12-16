@@ -44,6 +44,8 @@ require_once('controllers/irc/index.php');
 
 require_once('controllers/webchat/index.php');
 
+require_once('controllers/widgets/players.php');
+
 require_once('controllers/errors.php');
 
 require_once('lib/flash.php');
@@ -76,6 +78,8 @@ $r->map('POST', '/admin/register', 'admin_register');
 $r->map('GET',  '/directory', 'directory_index');
 
 $r->map('GET',  '/maps', 'maps_index');
+
+$r->map('GET',  '/widgets/players', 'widgets_players');
 
 $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');

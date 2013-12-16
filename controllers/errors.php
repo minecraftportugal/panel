@@ -6,8 +6,8 @@ function notfound() {
 }
 
 function forbidden() {
-  http_response_code("500");
-  require('templates/500.php');
+  http_response_code("403");
+  require('templates/403.php');
 }
 
 ?>

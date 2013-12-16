@@ -37,7 +37,7 @@
   <div class="b6"></div>
 </div>
 <div id="center">
-  <h1>Erro 500</h1>
+  <h1>Erro 403</h1>
   <div>
     Não tens permissões para aceder a esta página.
   </div>
