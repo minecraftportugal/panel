@@ -7,13 +7,10 @@ require_once('lib/i18n.php');
 
 function users_configure() {
 
-  validateSession($admin = true); //validate if admin
-  
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
-  
+  //session: admin
+  validateSession(true);
+  validateXSRFToken();
+
   $id = $_POST['id'];
   $admin = isset($_POST['admin']) ? $_POST['admin'] : 0;
   $operator = isset($_POST['operator']) ? $_POST['operator'] : 0;

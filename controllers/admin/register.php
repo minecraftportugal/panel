@@ -6,12 +6,10 @@ require_once('lib/i18n.php');
 
 
 function admin_register() {
-  validateSession(true); //validate if admin
   
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
+  //session: admin
+  validateSession(true);
+  validateXSRFToken();
   
   $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
   $email = isset($_POST['email']) ? $_POST['email'] : NULL;

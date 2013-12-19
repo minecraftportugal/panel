@@ -6,13 +6,11 @@ require_once('lib/i18n.php');
 
 
 function admin_configure() {
-  validateSession($admin = true); //validate if admin
-  
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
-  
+
+  //session: admin
+  validateSession(true);
+  validateXSRFToken();
+
   $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
   $active = isset($_POST['active']) ? $_POST['active'] : array();
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();

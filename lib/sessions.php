@@ -51,6 +51,28 @@ function isLoggedIn($admin = false) {
   return $val;
 }
 
+
+/*
+ * getXSRFToken: wraps the sessions' XRSF token
+ */
+function getXSRFToken() {
+  return isset($_SESSION['xsrf_token']) ? $_SESSION['xsrf_token'] : NULL;
+}
+
+/*
+ * getSubmittedXSRFToken: wraps the POST requests' XRSF token
+ */
+function getSubmittedXSRFToken() {
+  return isset($_POST['xsrf_token']) ? $_POST['xsrf_token'] : NULL;
+}
+
+/*
+ * isValidXSRFToken: validates a user's XSRF token
+ */
+function isValidXSRFToken($token) {
+  return getXSRFToken() == $token;
+}
+
 /*
  * validateSession: validates a users' session, optionally as an admin. redirects to login if invalid
  */
@@ -64,15 +86,13 @@ function validateSession($admin = false) {
 /*
  * validateXSRFToken: validates a user's XSRF token
  */
-function validateXSRFToken($token) {
-  return getXSRFToken() == $token;
-}
+function validateXSRFToken() {
+    $token = getSubmittedXSRFToken();
 
-/*
- * getXSRFToken: wraps the sessions' XRSF token
- */
-function getXSRFToken() {
-  return isset($_SESSION['xsrf_token']) ? $_SESSION['xsrf_token'] : NULL;
+    if (!isValidXSRFToken($token)) {
+      header('Location: /forbidden');
+      exit();
+    }
 }
 
 ?>

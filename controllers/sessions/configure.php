@@ -4,12 +4,9 @@ require_once('lib/sessions.php');
 require_once('lib/i18n.php');
 
 function sessions_configure () {
-  validateSession();
 
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
+  validateSession();
+  validateXSRFToken();
 
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 

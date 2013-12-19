@@ -5,13 +5,10 @@ require_once('lib/sessions.php');
 require_once('lib/i18n.php');
 
 function users_reset_password() {
+  
   validateSession();
-  
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
-  
+  validateXSRFToken();
+
   $id = isset($_POST['id']) ? $_POST['id'] : NULL;
   $reset_pass_check = isset($_POST['reset_pass_check']) ? $_POST['reset_pass_check'] : NULL;
   $admin = isset($_SESSION['admin']) ? $_SESSION['admin'] : NULL;

@@ -7,11 +7,7 @@ require_once('lib/i18n.php');
 function users_update_irc() {
 
   validateSession();
- 
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
+  validateXSRFToken();
   
   $username = $_SESSION['username'];
   $irc_nickname = isset($_POST['irc_nickname']) ? $_POST['irc_nickname'] : NULL;
@@ -30,11 +26,7 @@ function users_update_irc() {
 function users_update_password() {
 
   validateSession();
-  
-  $xsrf_token = getXSRFToken();
-  if (!validateXSRFToken($xsrf_token)) {
-    return;
-  }
+  validateXSRFToken();
   
   $username = $_SESSION['username'];
   $password = isset($_POST['password']) ? $_POST['password'] : NULL;
