@@ -1,0 +1,51 @@
+<?
+
+use minecraftia\db\Bitch;
+
+/*
+ * getDrops: returns the items dropped for a user
+ */
+function getDrops(
+  $index,
+  $per_page,
+  $accountid = null
+) {
+
+  $q = "SELECT COUNT(1) AS total
+  FROM itemdrops
+  WHERE ((:accountid IS NULL) OR (accountid = :accountid));";
+  $total = Bitch::source('default')->first($q, compact('accountid'))["total"];
+
+  $q = "SELECT * FROM (
+    SELECT id, itemdrop, itemnumber,
+      DATE_FORMAT(dropdate, '%b %d %H:%i %Y') as dropdate,
+      DATE_FORMAT(takendate, '%b %d %H:%i %Y') as takendate
+    FROM itemdrops
+    WHERE ((:accountid IS NULL) OR (accountid = :accountid))
+    ORDER BY id DESC
+  ) x LIMIT :index, :per_page;";
+  $result = Bitch::source('default')->all($q, compact('accountid', 'index', 'per_page'));
+
+  return ["total" => $total, "pages" => $result];
+}
+
+function saveDrop($accountid, $itemdrop, $itemnumber) {
+
+  if (($itemdrop <= 0) or ($itemnumber <= 0)) {
+    return false;
+  }
+
+  $q = " INSERT INTO itemdrops(accountid,itemdrop,itemnumber,dropdate)
+  VALUES(:accountid, :itemdrop, :itemnumber, NOW())";
+
+  $result = Bitch::source('default')->query($q, 
+    compact('accountid', 'itemdrop', 'itemnumber'));
+
+  if (!$result) {
+    die('Invalid query');
+  }
+
+  return true;
+}
+
+?>

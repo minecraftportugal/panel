@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/steve.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
+    <script type="text/javascript" src="/scripts/profile.js"></script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -24,6 +25,25 @@
       require __DIR__.'/../partials/userbar.php';
     }
   ?>
+
+  <? if ($total_drops > 0): ?>
+    <div class="section pushd itemdrops">
+      <h2>Wow! Such Loot!</h2>
+      <table>
+      <? foreach((array)$drops as $i): ?>
+        <tr>
+          <td style="width: 25px;">
+            <span class="item" data-item="<?= $i['itemdrop'] ?> 0 <?= $i['itemnumber']?>" data-enchantments=""></span>
+          </td>
+          <td style="width: 100%;">
+            <span class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
+          </td>
+        </tr>
+      <? endforeach; ?>
+      </table>
+      <p class="clear">Para as receberes basta entrares no jogo com slots livres no teu inventário :)</p>
+    </div>
+  <? endif; ?>
 
     <div class="section">
       <? if ($numberOnlinePlayers > 0): ?>

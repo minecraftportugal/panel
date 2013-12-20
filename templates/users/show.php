@@ -196,6 +196,64 @@
   </div>
   <? endif; ?>
 
+  <? if ($own or $admin): ?>
+  <div id="itemdrops" class="collapsible section">
+    <a href="#itemdrops" ><h1>Drops</h1></a>
+    <div class="inside">
+      <div class="section">
+        <table class="admin drops alt-rows">
+          <thead>
+            <tr>
+              <th class="cella" style="width: 24px;"><h2 title="Item">Item</h2></th>
+              <th class="cella" style="width: 50%;"></th>
+              <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido">Data Dropped/Recebido</h2></th>
+            </tr>
+          </thead>
+          <tbody>
+          <? foreach((array)$itemdrops as $i): ?>
+            <tr>
+              <td class="cella" style="width: 30px;" title="Item ID #<?= $i['itemdrop'] ?>">
+                <span class="item" data-item="<?= $i['itemdrop'] ?> 0 <?= $i['itemnumber']?>" data-enchantments=""></span>
+              </td>
+              <td class="cella" title="Item ID #<?= $i['itemdrop'] ?>">
+                <span class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
+              </td>
+            <? if (isset($r['takendate'])): ?>
+              <td class="cella" title="<?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
+            <? else: ?>
+              <td class="cella"><i><?= $i['dropdate'] ?></i></td>
+            <? endif; ?>
+            </tr>
+          <? endforeach; ?>
+         </tbody>
+        </table>
+        <? if ($admin): ?>
+        <form name="drop_items" action="/users/drop_items" method="POST" autocomplete="off">
+          <table class="form">
+            <tr>
+              <td class="w25"><label for="itemid"><h2>Item ID</h2></label></td>
+              <td class="w25"><input id="itemid" name="itemid" type="number" min="1" value="1" /></td>
+              <td class="w25"><label for="itemqt"><h2>Qtd.</h2></label></td>
+              <td class="w25"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
+            </tr>
+            <tr>
+              <td colspan="4" class="center">
+                <input type="submit" value="OK" />
+                <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+                <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+              </td>
+            </tr>
+          </table>
+        </form>
+        <? endif; ?>
+        <table>
+          <tr><td colspan="3" class="nav"><?= $drops_page_navigation ?></td></tr>
+        </table>
+       </div>
+    </div>
+  </div>
+  <? endif; ?> 
+
   <? if ($admin): ?>
   <div id="resetpw" class="collapsible section">
     <a href="#resetpw" ><h1>Reenviar Password</h1></a>
@@ -222,9 +280,7 @@
        </div>
     </div>
   </div>
-  <? endif; ?>
 
-  <? if ($admin): ?>
   <div id="adminactions" class="collapsible section">
     <a href="#adminactions">
       <h1>Gestão</h1>
@@ -332,9 +388,7 @@
       </div>
     </div>
   </div>
-  <? endif; ?>
 
-  <? if ($own): ?>
   <div id="changepw" class="collapsible section">
     <a href="#changepw" ><h1>Alterar Password</h1></a>
     <div class="inside">

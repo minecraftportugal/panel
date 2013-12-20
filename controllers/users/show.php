@@ -16,8 +16,7 @@ function users_show () {
   $badges = getUserBadges($profile['id']);
 
   // prepare inquisitor data
-  if ($inquisitor)
-  {
+  if ($inquisitor) {
     $inventory = json_decode($inquisitor['inventory']);
 
     $playerinv = array();
@@ -62,10 +61,20 @@ function users_show () {
     $diamond = $diamond != null ? $diamond : 0;
     $hours = round($inquisitor['totalTime']/60/60);
     $hours = $hours > 0 ? $hours : 1;
-
-
   }
 
+  // item drops
+  $drops_per_page = isset($_GET['drops_per_page']) ? $_GET['drops_per_page'] : 10;
+  $drops_page = isset($_GET['drops_page']) ? $_GET['drops_page'] : 1;
+  $drops_page = intval($drops_page);
+  $drops_per_page = intval($drops_per_page);
+  $drops_pages = getDrops(($drops_page-1)*$drops_per_page, $drops_per_page, $profileId);
+  $link_after = "";
+  $link_after .= "&id=$profileId";
+  $link_after .= "#itemdrops";
+  $total_drops = $drops_pages["total"];
+  $itemdrops = $drops_pages["pages"];
+  $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, true, 'drops_page', 'drops_per_page');
 
   $userSkin = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png";
   $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png";
