@@ -196,12 +196,12 @@
   </div>
   <? endif; ?>
 
-  <? if ($own or $admin): ?>
+  <? if (($own and $total_drops > 0) or $admin): ?>
   <div id="itemdrops" class="collapsible section">
     <a href="#itemdrops" ><h1>Drops</h1></a>
     <div class="inside">
       <div class="section">
-        <? if ($total_drops > 0): ?>
+      <? if ($total_drops > 0): ?>
         <form name="delete_drops" action="/users/delete_drops" method="POST" autocomplete="off">
         <table class="admin drops alt-rows">
           <thead>
@@ -252,7 +252,7 @@
         </table>
         <? endif; ?>
         </form>
-        <? endif; ?>
+      <? endif; ?>
         <? if ($admin): ?>
         <h2 <?= ($total_drops > 0) ? 'class="pushu"' : '' ?>>Associar Drop</h2>
         <form name="drop_items" action="/users/drop_items" method="POST" autocomplete="off">

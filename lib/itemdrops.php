@@ -13,7 +13,8 @@ function getDrops(
 
   $q = "SELECT COUNT(1) AS total
   FROM itemdrops
-  WHERE ((:accountid IS NULL) OR (accountid = :accountid));";
+  WHERE takendate IS NULL
+  AND ((:accountid IS NULL) OR (accountid = :accountid));";
   $total = Bitch::source('default')->first($q, compact('accountid'))["total"];
 
   $q = "SELECT * FROM (
@@ -21,7 +22,8 @@ function getDrops(
       DATE_FORMAT(dropdate, '%b %d %H:%i %Y') as dropdate,
       DATE_FORMAT(takendate, '%b %d %H:%i %Y') as takendate
     FROM itemdrops
-    WHERE ((:accountid IS NULL) OR (accountid = :accountid))
+    WHERE takendate IS NULL
+    AND ((:accountid IS NULL) OR (accountid = :accountid))
     ORDER BY id DESC
   ) x LIMIT :index, :per_page;";
   $result = Bitch::source('default')->all($q, compact('accountid', 'index', 'per_page'));

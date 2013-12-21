@@ -6,7 +6,7 @@ require_once('lib/i18n.php');
 function sessions_destroy () {
 
   // session: admin
-  validateSession(true);
+  validateSession();
   validateXSRFToken();
 
   if (isset($_SESSION['id'])) {
