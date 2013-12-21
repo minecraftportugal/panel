@@ -95,6 +95,9 @@ ul.playerlist li.player a {
   float: left;
   margin-top: 10px;
   margin-left: 10px;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .compass, .compass_NE, .compass_SE, .compass_NW, .compass_SW {
