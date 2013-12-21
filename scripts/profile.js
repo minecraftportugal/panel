@@ -493,10 +493,9 @@ var PlayerSkin = (function() {
 }());
 
 $(function() {
-  $("a#logout").click(function(e) {
-    top.logout();
-    return false;
-  });   
+  $("h2#select-all-delete-drops").click(function() {
+    $("input.check-delete-drops").click();
+  }); 
 });
 
 $(document).ready(function() {  

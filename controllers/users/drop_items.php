@@ -29,4 +29,24 @@ function users_drop_items () {
 
 }
 
+function users_delete_drops() {
+
+  //session: admin
+  validateSession(true);
+  validateXSRFToken();
+
+  $accountid = isset($_POST['id']) ? $_POST['id'] : null;
+  $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
+
+  $status = dropsConfigure($delete);
+  if ($status) {
+    setFlash('success', 'Item drops apagados.');
+    header("Location: /profile?id=$accountid#itemdrops");
+  } else {
+    setFlash('error', 'Erro ao apagar item drops!');
+    header("Location: /profile?id=$accountid#itemdrops");
+  }
+
+}
+
 ?>

@@ -74,7 +74,7 @@ function users_show () {
   $link_after .= "#itemdrops";
   $total_drops = $drops_pages["total"];
   $itemdrops = $drops_pages["pages"];
-  $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, true, 'drops_page', 'drops_per_page');
+  $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, $admin, 'drops_page', 'drops_per_page');
 
   $userSkin = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png";
   $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png";

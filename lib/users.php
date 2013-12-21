@@ -516,7 +516,22 @@ function sessionsConfigure($delete) {
     if (!$result) { die('Invalid query'); }
   }
 
-  setFlash('success', 'Sessões Apagadas');
+  return true;
+}
+
+function dropsConfigure($delete) {
+  /*
+   * Delete drops
+   */
+  if (count($delete) > 0) {
+    $sql_in = implode(',', array_fill(0, count($delete), '?'));
+
+    $q = "DELETE FROM itemdrops
+    WHERE id IN ($sql_in);";
+    $result = Bitch::source('default')->query($q, $delete);
+    if (!$result) { die('Invalid query'); }
+  }
+
   return true;
 }
 

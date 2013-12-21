@@ -201,12 +201,17 @@
     <a href="#itemdrops" ><h1>Drops</h1></a>
     <div class="inside">
       <div class="section">
+        <? if ($total_drops > 0): ?>
+        <form name="delete_drops" action="/users/delete_drops" method="POST" autocomplete="off">
         <table class="admin drops alt-rows">
           <thead>
             <tr>
               <th class="cella" style="width: 24px;"><h2 title="Item">Item</h2></th>
               <th class="cella" style="width: 50%;"></th>
-              <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido">Data Dropped/Recebido</h2></th>
+              <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido">Dropped/Recebido</h2></th>
+            <? if ($admin): ?>
+              <th class="cellz"><h2 id="select-all-delete-drops">X</h2></th>
+            <? endif; ?>
             </tr>
           </thead>
           <tbody>
@@ -223,11 +228,33 @@
             <? else: ?>
               <td class="cella"><i><?= $i['dropdate'] ?></i></td>
             <? endif; ?>
+            <? if ($admin): ?>
+              <td class="cellz">
+                <input class="check-delete-drops" name="delete[]" value="<?= $i["id"] ?>" type="checkbox" />
+              </td>
+            <? endif; ?>
             </tr>
           <? endforeach; ?>
          </tbody>
         </table>
+        <table>
+          <tr><td colspan="3" class="nav"><?= $drops_page_navigation ?></td></tr>
+        </table>
         <? if ($admin): ?>
+        <table>
+          <tr>
+            <td colspan="4" class="center">
+              <input type="submit" value="apagar" />
+              <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+              <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+            </td>
+          </tr>
+        </table>
+        <? endif; ?>
+        </form>
+        <? endif; ?>
+        <? if ($admin): ?>
+        <h2 <?= ($total_drops > 0) ? 'class="pushu"' : '' ?>>Associar Drop</h2>
         <form name="drop_items" action="/users/drop_items" method="POST" autocomplete="off">
           <table class="form">
             <tr>
@@ -238,7 +265,7 @@
             </tr>
             <tr>
               <td colspan="4" class="center">
-                <input type="submit" value="OK" />
+                <input type="submit" value="drop" />
                 <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
                 <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
               </td>
@@ -246,9 +273,6 @@
           </table>
         </form>
         <? endif; ?>
-        <table>
-          <tr><td colspan="3" class="nav"><?= $drops_page_navigation ?></td></tr>
-        </table>
        </div>
     </div>
   </div>

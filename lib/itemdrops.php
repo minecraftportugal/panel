@@ -48,4 +48,24 @@ function saveDrop($accountid, $itemdrop, $itemnumber) {
   return true;
 }
 
+function getLootMessage() {
+  $r = [
+    "Acordaste com este maravilhoso prémio debaixo da almofada!",
+    "Tropeçaste num calhau... e isto estava por baixo."
+  ];
+
+  return $r[array_rand($r)];
+}
+
+function getLootTitles() {
+  $r = [
+    "Wow! Such loot!",
+    "Ena, cenas de borla!",
+    "Toma... mereceste ;-)",
+    "Ora vê só...",
+  ];
+
+  return $r[array_rand($r)];
+}
+
 ?>

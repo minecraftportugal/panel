@@ -72,6 +72,7 @@ $r->map('POST', '/users/update_irc', 'users_update_irc'); // Should be a put -- 
 $r->map('POST', '/users/update_password', 'users_update_password');
 $r->map('POST', '/users/configure', 'users_configure');
 $r->map('POST', '/users/drop_items', 'users_drop_items');
+$r->map('POST', '/users/delete_drops', 'users_delete_drops');
 
 $r->map('GET',  '/admin', 'admin_index');
 $r->map('POST', '/admin/configure', 'admin_configure');

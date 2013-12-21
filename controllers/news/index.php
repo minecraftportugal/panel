@@ -20,6 +20,8 @@ function news_index() {
   $drops_pages = getDrops(0, 1, $_SESSION["id"]);
   $total_drops = $drops_pages["total"];
   $drops = $drops_pages["pages"];
+  $lootmessage = getLootMessage();
+  $loottitle = getLootTitles();
 
   require('templates/news/index.php');
 }

@@ -28,7 +28,8 @@
 
   <? if ($total_drops > 0): ?>
     <div class="section pushd itemdrops">
-      <h2>Wow! Such Loot!</h2>
+      <div id="loot">
+      <h2><?= $loottitle ?></h2>
       <table>
       <? foreach((array)$drops as $i): ?>
         <tr>
@@ -41,7 +42,8 @@
         </tr>
       <? endforeach; ?>
       </table>
-      <p class="clear">Para as receberes basta entrares no jogo com slots livres no teu inventário :)</p>
+      <p class="clear"><?= $lootmessage ?></p>
+      </div>
     </div>
   <? endif; ?>
 
