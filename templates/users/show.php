@@ -258,10 +258,14 @@
         <form name="drop_items" action="/users/drop_items" method="POST" autocomplete="off">
           <table class="form">
             <tr>
-              <td class="w25"><label for="itemid"><h2>Item ID</h2></label></td>
-              <td class="w25"><input id="itemid" name="itemid" type="number" min="1" value="1" /></td>
-              <td class="w25"><label for="itemqt"><h2>Qtd.</h2></label></td>
-              <td class="w25"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
+              <td class="w10"><label for="itemid"><h2>Item</h2></label></td>
+              <td class="w70">
+                <select id="itemid" name="itemid">
+                </select>
+              </td>
+
+              <td class="w10"><label for="itemqt"><h2>Qtd.</h2></label></td>
+              <td class="w10"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
             </tr>
             <tr>
               <td colspan="4" class="center">

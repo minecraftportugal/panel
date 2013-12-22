@@ -54,7 +54,8 @@ function saveDrop($accountid, $itemdrop, $itemnumber) {
 function getLootMessage() {
   $r = [
     "Acordaste com este maravilhoso prémio debaixo da almofada!",
-    "Tropeçaste num calhau... e isto estava por baixo."
+    "Tropeçaste num calhau... e isto estava por baixo.",
+    "Encontraste coisas no chão!"
   ];
 
   return $r[array_rand($r)];
@@ -66,6 +67,7 @@ function getLootTitles() {
     "Ena, cenas de borla!",
     "Toma... mereceste ;-)",
     "Ora vê só...",
+    "Prémios!"
   ];
 
   return $r[array_rand($r)];

@@ -91,7 +91,15 @@ h3 a:active {
    █     ███    █     █ █ █  ▒███▒
 */
 
-input {
+select#itemid {
+  width: 200px !important;
+}
+
+label[for=itemid] {
+  width: 25px !important;
+}
+
+select, input {
  font-family: Consolas, monaco, monospace !important;
  font-size: 1em;
  border-radius: 3px;
@@ -99,8 +107,10 @@ input {
  background: rgba(255,255,255,0.2);
  color: #EEEEEE;
  padding: 0.3em;
+}
 
-
+select option {
+ background: rgba(0, 0, 0, 0.8);
 }
 
 input[type=text], input[type=password] {
@@ -166,8 +176,9 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 
 input[type="number"] {
-  width: 100px;
+  width: 40px;
 }
+
 
 /*
           █                                ███
@@ -420,6 +431,17 @@ table.admin h2#select-all-delete {
 
 .w25 {
   width: 25%;
+}
+
+.w10 {
+  width: 15%;
+}
+
+.w70 {
+  width:  70%;
+}
+.w100 {
+  width: 100%;
 }
 
 /*
@@ -1104,11 +1126,11 @@ span.no-margin-left {
   margin-left: 0px !important;
 }
 
-table.admin span.name-label {
+span.name-label {
   margin-top: 3px;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 115px;
+  max-width: 100px;
 }
 
 a[data-online='true'] span.online {
