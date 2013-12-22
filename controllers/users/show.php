@@ -68,7 +68,7 @@ function users_show () {
   $drops_page = isset($_GET['drops_page']) ? $_GET['drops_page'] : 1;
   $drops_page = intval($drops_page);
   $drops_per_page = intval($drops_per_page);
-  $drops_pages = getDrops(($drops_page-1)*$drops_per_page, $drops_per_page, $profileId);
+  $drops_pages = getDrops(($drops_page-1)*$drops_per_page, $drops_per_page, $profileId, 0);
   $link_after = "";
   $link_after .= "&id=$profileId";
   $link_after .= "#itemdrops";

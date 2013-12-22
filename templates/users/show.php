@@ -208,7 +208,7 @@
             <tr>
               <th class="cella" style="width: 24px;"><h2 title="Item">Item</h2></th>
               <th class="cella" style="width: 50%;"></th>
-              <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido">Dropped/Recebido</h2></th>
+              <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido"><i>Dropped</i>/Recebido</h2></th>
             <? if ($admin): ?>
               <th class="cellz"><h2 id="select-all-delete-drops">X</h2></th>
             <? endif; ?>
@@ -223,8 +223,8 @@
               <td class="cella" title="Item ID #<?= $i['itemdrop'] ?>">
                 <span class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
               </td>
-            <? if (isset($r['takendate'])): ?>
-              <td class="cella" title="<?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
+            <? if (isset($i['takendate'])): ?>
+              <td class="cella" title="Recebido a <?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
             <? else: ?>
               <td class="cella"><i><?= $i['dropdate'] ?></i></td>
             <? endif; ?>

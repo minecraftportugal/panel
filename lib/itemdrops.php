@@ -8,25 +8,26 @@ use minecraftia\db\Bitch;
 function getDrops(
   $index,
   $per_page,
-  $accountid = null
+  $accountid = null,
+  $undelivered = 0
 ) {
 
   $q = "SELECT COUNT(1) AS total
   FROM itemdrops
-  WHERE takendate IS NULL
+  WHERE ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
   AND ((:accountid IS NULL) OR (accountid = :accountid));";
-  $total = Bitch::source('default')->first($q, compact('accountid'))["total"];
+  $total = Bitch::source('default')->first($q, compact('undelivered', 'accountid'))["total"];
 
   $q = "SELECT * FROM (
     SELECT id, itemdrop, itemnumber,
       DATE_FORMAT(dropdate, '%b %d %H:%i %Y') as dropdate,
       DATE_FORMAT(takendate, '%b %d %H:%i %Y') as takendate
     FROM itemdrops
-    WHERE takendate IS NULL
+    WHERE ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
     AND ((:accountid IS NULL) OR (accountid = :accountid))
     ORDER BY id DESC
   ) x LIMIT :index, :per_page;";
-  $result = Bitch::source('default')->all($q, compact('accountid', 'index', 'per_page'));
+  $result = Bitch::source('default')->all($q, compact('undelivered', 'accountid', 'index', 'per_page'));
 
   return ["total" => $total, "pages" => $result];
 }

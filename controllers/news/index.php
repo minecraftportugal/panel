@@ -17,7 +17,7 @@ function news_index() {
   $flatOnlinePlayers = array_map($f, $onlinePlayers);
   $numberOnlinePlayers = $onlinePlayers == null ? 0 : count($onlinePlayers);
 
-  $drops_pages = getDrops(0, 1, $_SESSION["id"]);
+  $drops_pages = getDrops(0, 1, $_SESSION["id"], 1);
   $total_drops = $drops_pages["total"];
   $drops = $drops_pages["pages"];
   $lootmessage = getLootMessage();
