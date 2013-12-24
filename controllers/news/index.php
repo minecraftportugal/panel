@@ -17,10 +17,10 @@ function news_index() {
   $flatOnlinePlayers = array_map($f, $onlinePlayers);
   $numberOnlinePlayers = $onlinePlayers == null ? 0 : count($onlinePlayers);
 
-  // mostrar até 6 itens
-  $drops_pages = getDrops(0, 6, $_SESSION["id"], 1);
+  // Item Drops!
+  $drops_pages = getDrops(0, 6, $_SESSION["id"], 1); //mostrar até 6 itens
   $total_drops = $drops_pages["total"];
-  $drops = $drops_pages["pages"];
+  $itemdrops = $drops_pages["pages"];
   $lootmessage = getLootMessage();
   $loottitle = getLootTitles();
 

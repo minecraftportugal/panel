@@ -26,6 +26,12 @@
     }
   ?>
   
+  <?
+    if ($total_drops > 0) {
+      require __DIR__.'/../partials/itemdrops.php';
+    }
+  ?>
+  
   <? 
     $error = getFlash('error');
     if ($error != false):
