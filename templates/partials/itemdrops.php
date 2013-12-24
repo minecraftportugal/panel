@@ -2,7 +2,7 @@
       <div id="loot">
       <h2><?= $loottitle ?></h2>
       <table>
-      <? foreach((array)$itemdrops as $i): ?>
+      <? foreach((array)$new_drops as $i): ?>
         <tr>
           <td style="width: 25px;">
             <span class="item" data-item="<?= $i['itemdrop'] ?> 0 <?= $i['itemnumber']?>" data-enchantments=""></span>

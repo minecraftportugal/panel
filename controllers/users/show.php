@@ -75,6 +75,11 @@ function users_show () {
   $total_drops = $drops_pages["total"];
   $itemdrops = $drops_pages["pages"];
   $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, $admin, 'drops_page', 'drops_per_page');
+
+  // Item Drops!
+  $new_drops_pages = getDrops(0, 6, $_SESSION["id"], 1); //mostrar até 6 itens
+  $total_new_drops = $new_drops_pages["total"];
+  $new_drops = $new_drops_pages["pages"];
   $lootmessage = getLootMessage();
   $loottitle = getLootTitles();
 

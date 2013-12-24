@@ -25,9 +25,8 @@
       require __DIR__.'/../partials/userbar.php';
     }
   ?>
-
   <?
-    if ($total_drops > 0) {
+    if ($total_new_drops > 0) {
       require __DIR__.'/../partials/itemdrops.php';
     }
   ?>

@@ -27,7 +27,7 @@
   ?>
   
   <?
-    if ($total_drops > 0) {
+    if ($total_new_drops > 0) {
       require __DIR__.'/../partials/itemdrops.php';
     }
   ?>
@@ -227,7 +227,7 @@
                 <span class="item" data-item="<?= $i['itemdrop'] ?> 0 <?= $i['itemnumber']?>" data-enchantments=""></span>
               </td>
               <td class="cella" title="Item ID #<?= $i['itemdrop'] ?>">
-                <span class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
+                <span style="width: 120px;" class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
               </td>
             <? if (isset($i['takendate'])): ?>
               <td class="cella" title="Recebido a <?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
