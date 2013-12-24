@@ -230,7 +230,7 @@
                 <span style="width: 120px;" class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
               </td>
             <? if (isset($i['takendate'])): ?>
-              <td class="cella" title="Recebido a <?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
+              <td class="cella" title="Dropped a <?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
             <? else: ?>
               <td class="cella"><i><?= $i['dropdate'] ?></i></td>
             <? endif; ?>
