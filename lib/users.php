@@ -315,9 +315,9 @@ function getUserById($id) {
 
   $q = "SELECT id, playername, email, admin, operator, active, ircnickname, ircpassword, ircauto,
     DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate,
-    DATE_FORMAT(sessions.logintime, '%b %d %H:%i %Y') as logintime,
+    DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') as logintime,
     lastloginip, registerip
-  FROM accounts LEFT JOIN sessions ON accounts.id = sessions.accountid
+  FROM accounts
   WHERE id = :id";
 
   $result = Bitch::source('default')->first($q, compact('id'));
