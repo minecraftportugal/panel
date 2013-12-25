@@ -50,7 +50,7 @@ function getUsersDrops(
     SELECT i.id, i.itemdrop, i.itemnumber,
       DATE_FORMAT(i.dropdate, '%b %d %H:%i %Y') as dropdate,
       DATE_FORMAT(i.takendate, '%b %d %H:%i %Y') as takendate,
-      IFNULL((takendate - dropdate), 'Não Entregue') AS idledroptime,
+      IFNULL(timediff(takendate, dropdate), 'Não Entregue') AS idledroptime,
       a.playername, a.id as accountid
     FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id
     WHERE ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
