@@ -13,6 +13,7 @@
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/admin.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
+    <script type="text/javascript" src="/scripts/items.js"></script>
 
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -44,9 +45,9 @@
 
  
   <div id="accounts" class="collapsible section default">
-    <a href="#accounts"><h1>Gerir Utilizadores (<?= $total_accounts ?>)</h1></a>
+    <a href="#accounts"><h1>Utilizadores (<?= $total_accounts ?>)</h1></a>
     <div class="inside">
-    <form name="manage_users_filters" action="/admin" method="GET" autocomplete="off">
+    <form name="manage_users_filters" action="/admin#accounts" method="GET" autocomplete="off">
       <table class="admin options">
         <thead>
           <tr>
@@ -211,7 +212,7 @@
   </div>
 
   <div id="sessions" class="collapsible section">
-    <a href="#sessions"><h1>Gerir Sessões (<?= $total_sessions ?>)</h1></a>
+    <a href="#sessions"><h1>Sessões (<?= $total_sessions ?>)</h1></a>
     <div class="inside">
     <form name="manage_sessions_filters" action="/admin#sessions" method="GET" autocomplete="off">
       <table class="admin options">
@@ -276,7 +277,7 @@
           <tr>
             <th class="cella" style="width: 90px;"><h2 title="Nome do Jogador">Nome<h2></th>
             <th class="cella" style="width: 80px;"><h2 title="Endereço IP">IP</h2></th>
-            <th rowspan="2" class="cellz"><h2 id="select-all-delete-sessions" title="APAGAR A CONTA!">X</h2></th>
+            <th rowspan="2" class="cellz"><h2 id="select-all-delete-sessions" title="Apagar Sessão!">X</h2></th>
           </tr>
           <tr>
             <th class="cella"><h2 title="Data">Data Sessão<h2></th>
@@ -332,6 +333,92 @@
             </td>
           </tr>
           <tr><td colspan="5" class="nav"><?= $sessions_page_navigation ?></td></tr>
+        </tbody>
+      </table>
+    </form>
+    </div>
+  </div>
+
+  <div id="drops" class="collapsible section">
+    <a href="#drops"><h1>Drops (<?= $total_drops ?>)</h1></a>
+    <div class="inside">
+    <form name="manage_drops_filters" action="/admin#drops" method="GET" autocomplete="off">
+      <table class="admin options">
+          <tr>
+            <th class="center" style="width:35%;"><h2>Critérios</h2></th>
+            <td>
+              <input id="drops_undelivered" type="checkbox" name="drops_undelivered" value="1" <?= $drops_undelivered == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="drops_undelivered" title="drop não entregue">não entregue</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="drops_delivered" type="checkbox" name="drops_delivered" value="1" <?= $drops_delivered == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="drops_delivered" title="drop entregue">entregue</label>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" class="center">
+              <input type="submit" value="pesquisa" />
+              <input type="reset" value="reset" />
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </form>
+    <div class="meh">
+    <form name="manage_users" action="/admin/delete_drops" method="POST" autocomplete="off">
+      <table class="admin alt-rows">
+        <thead>
+          <tr>
+            <th class="cella" style="width: 30px;"><h2 title="Item">Item</h2></th>
+            <th class="cella" style="width: 50%;"><h2 title="Nome do Jogador">Nome<h2></th>
+            <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido"><i>Dropped</i>/Recebido</h2></th>
+            <th class="cellz"><h2 id="select-all-delete-drops" title="Apagar Drops!">X</h2></th>
+          </tr>
+        </thead>
+        <tbody>
+        <? foreach((array)$drops as $r): ?>
+          <tr>
+            <td class="cella" style="width: 30px;" title="Item ID #<?= $r['itemdrop'] ?>">
+              <span class="item" data-item="<?= $r['itemdrop'] ?> 0 <?= $r['itemnumber']?>" data-enchantments=""></span>
+            </td>
+            <td class="shortcell cella">
+              <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
+                 class="button-padded"
+                 href="/profile?id=<?= $r['accountid'] ?>"
+                 title="<?= $r["email"] ?>">
+                <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
+                <span class="stevehead">
+                  <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+                </span>
+                <span class="name-label pull-left"><?= $r["playername"] ?></span>
+                <span class="online pull-left" title="O jogador está online!"></span>
+              </a>
+            </td>
+            <? if (isset($r['takendate'])): ?>
+              <td class="cella" title="Dropped a <?= $r['dropdate'] ?>"><span class="pull-left"><?= $r['takendate'] ?></span></td>
+            <? else: ?>
+              <td class="cella"><span class="pull-left"><i><?= $r['dropdate'] ?></i></span></td>
+            <? endif; ?>
+            <td class="cellc center">
+              <input class="gridy check-delete-drops" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
+            </td>
+          </tr>
+        <? endforeach; ?>
+        </tbody>
+      </table>
+      </div>
+      <table>
+        <tbody>
+          <tr>
+            <td class="center">
+              <input type="submit" value="OK" />        
+              <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+            </td>
+          </tr>
+          <tr><td colspan="5" class="nav"><?= $drops_page_navigation ?></td></tr>
         </tbody>
       </table>
     </form>

@@ -42,6 +42,14 @@ function admin_index() {
   $sessions_page = intval($sessions_page);
   $sessions_per_page = intval($sessions_per_page);
 
+  $drops_undelivered = isset($_GET['drops_undelivered']) && $_GET['drops_undelivered'] != "" ? $_GET['drops_undelivered'] : 0;
+  $drops_delivered = isset($_GET['drops_delivered']) && $_GET['drops_delivered'] != "" ? $_GET['drops_delivered'] : 0;
+
+  $drops_per_page = isset($_GET['drops_per_page']) ? $_GET['drops_per_page'] : 20;
+  $drops_page = isset($_GET['drops_page']) ? $_GET['drops_page'] : 1;
+  $drops_page = intval($drops_page);
+  $drops_per_page = intval($drops_per_page);
+
   
   $accounts_pages = getUserListPaged(($accounts_page-1)*$accounts_per_page, $accounts_per_page, $playername, $ipaddress,
     $emailaddress, $login_date_begin, $login_date_end, $register_date_begin, $register_date_end,
@@ -54,6 +62,12 @@ function admin_index() {
     $session_web);
   $total_sessions = $sessions_pages['total'];
   $sessions = $sessions_pages['pages'];
+
+  $drops_pages = getUsersDrops(
+    ($drops_page-1)*$drops_per_page, $drops_per_page,
+    $drops_undelivered, $drops_delivered);
+  $total_drops = $drops_pages["total"];
+  $drops = $drops_pages["pages"];
 
   $onlinePlayers = getOnlinePlayers();
   $f = function($e) {
@@ -93,6 +107,12 @@ function admin_index() {
   $link_after .= $session_online != null ? "&session_online=$session_online" : "";
   $link_after .= "#sessions";
   $sessions_page_navigation = navigation($sessions_page, $total_sessions, $sessions_per_page, "", $link_after, 4, true, 'sessions_page', 'sessions_per_page');
+
+  $link_after = "";
+  $link_after .= $drops_undelivered != null ? "&drops_undelivered=$drops_undelivered" : "";
+  $link_after .= $drops_delivered != null ? "&drops_delivered=$drops_delivered" : "";
+  $link_after .= "#drops";
+  $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, true, 'drops_page', 'drops_per_page');
 
   require('templates/admin/index.php');
 }

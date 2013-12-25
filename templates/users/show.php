@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/scripts/sidebar.js"></script>
     <script type="text/javascript" src="/scripts/Three.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
+    <script type="text/javascript" src="/scripts/items.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
 
     <!--[if IE]>

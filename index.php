@@ -36,6 +36,7 @@ require_once('controllers/users/reset_password.php');
 require_once('controllers/admin/index.php');
 require_once('controllers/admin/configure.php');
 require_once('controllers/admin/register.php');
+require_once('controllers/admin/drop_items.php');
 
 require_once('controllers/directory/index.php');
 
@@ -77,6 +78,7 @@ $r->map('POST', '/users/delete_drops', 'users_delete_drops');
 $r->map('GET',  '/admin', 'admin_index');
 $r->map('POST', '/admin/configure', 'admin_configure');
 $r->map('POST', '/admin/register', 'admin_register');
+$r->map('POST', '/admin/delete_drops', 'admin_delete_drops');
 
 $r->map('GET',  '/directory', 'directory_index');
 

@@ -32,6 +32,34 @@ function getDrops(
   return ["total" => $total, "pages" => $result];
 }
 
+function getUsersDrops(
+  $index,
+  $per_page,
+  $undelivered = 0,
+  $delivered = 0
+) {
+
+  $q = "SELECT COUNT(1) AS total
+  FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id
+  WHERE ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
+  AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))";
+  $total = Bitch::source('default')->first($q, compact('undelivered', 'delivered'))["total"];
+
+  $q = "SELECT * FROM (
+    SELECT i.id, i.itemdrop, i.itemnumber,
+      DATE_FORMAT(i.dropdate, '%b %d %H:%i %Y') as dropdate,
+      DATE_FORMAT(i.takendate, '%b %d %H:%i %Y') as takendate,
+      a.playername, a.id as accountid
+    FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id
+    WHERE ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
+    AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))
+    ORDER BY id DESC
+  ) x LIMIT :index, :per_page;";
+  $result = Bitch::source('default')->all($q, compact('undelivered', 'delivered', 'index', 'per_page'));
+
+  return ["total" => $total, "pages" => $result];
+}
+
 function saveDrop($accountid, $itemdrop, $itemnumber) {
 
   if (($itemdrop <= 0) or ($itemnumber <= 0)) {
