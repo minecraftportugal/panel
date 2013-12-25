@@ -64,7 +64,7 @@ function getUsersDrops(
 
 function saveDrop($accountid, $itemdrop, $itemnumber, $itemaux = 0) {
 
-  if (($itemdrop <= 0) or ($itemnumber <= 0) or ($itemaux <= 0)) {
+  if (($itemdrop <= 0) or ($itemnumber <= 0) or ($itemaux < 0)) {
     return false;
   }
 
