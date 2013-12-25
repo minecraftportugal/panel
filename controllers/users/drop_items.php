@@ -20,8 +20,19 @@ function users_drop_items () {
     return;
   }
 
-  if ($itemid2 != null)
+  if ($itemid2 != null) {
     $itemid = $itemid2;
+  } else {
+    $tokens = explode("-", $itemid);
+    if (count($tokens) != 2) {
+      setFlash('error', 'Erro no id do itemid!');
+      header("Location: /profile?id=$id#itemdrops");
+      return;
+    } else {
+      $itemid = $tokens[0];
+      $itemaux = $tokens[1];
+    }
+  }
 
   $status = saveDrop($id, $itemid, $itemqt, $itemaux);
   if ($status) {
