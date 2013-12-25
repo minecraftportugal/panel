@@ -280,7 +280,7 @@
               <td class="w5"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
             </tr>
             <tr>
-              <td colspan="4" class="center">
+              <td colspan="6" class="center">
                 <input type="submit" value="drop" />
                 <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
                 <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
