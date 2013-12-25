@@ -227,7 +227,7 @@
               <td class="cella" style="width: 30px;" title="Item ID #<?= $i['itemdrop'] ?>">
                 <span class="item" data-item="<?= $i['itemdrop'] ?> <?= $i['itemaux'] ?> <?= $i['itemnumber']?>" data-enchantments=""></span>
               </td>
-              <td class="cella" title="Item ID #<?= $i['itemaux'] != null ? $i['itemdrop'].":".$i['itemaux'] : $i['itemdrop'] ?>">
+              <td class="cella" title="Item ID #<?= $i['itemaux'] != 0 ? $i['itemdrop'].":".$i['itemaux'] : $i['itemdrop'] ?>">
                 <span style="width: 120px;" class="itemname" data-item="<?= $i['itemdrop'] ?> <?= $i['itemaux'] ?>" data-enchantments=""></span>
               </td>
             <? if (isset($i['takendate'])): ?>

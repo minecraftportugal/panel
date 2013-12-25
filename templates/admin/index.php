@@ -381,8 +381,8 @@
         <tbody>
         <? foreach((array)$drops as $r): ?>
           <tr>
-            <td rowspan="2" class="cella cellz" style="width: 30px;" title="Item ID #<?= $r['itemdrop'] ?>">
-              <span class="item" data-item="<?= $r['itemdrop'] ?> 0 <?= $r['itemnumber']?>" data-enchantments=""></span>
+            <td rowspan="2" class="cella cellz" style="width: 30px;" title="Item ID #<?= $r['itemaux'] != 0 ? $r['itemdrop'].":".$r['itemaux'] : $r['itemdrop'] ?>">
+              <span class="item" data-item="<?= $r['itemdrop'] ?> <?= $r['itemaux'] ?> <?= $r['itemnumber']?>" data-enchantments=""></span>
             </td>
             <td class="shortcell cella">
               <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
