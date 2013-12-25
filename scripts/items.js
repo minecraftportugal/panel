@@ -11,8 +11,7 @@ $(function() {
       if (d[0] == "") // empty
       {
         $(this).attr('style', 'background-position:-360px -672px');
-
-        return
+        return;
       }
 
       if (enchantments[0] == "")
