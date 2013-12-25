@@ -92,7 +92,7 @@ h3 a:active {
 */
 
 select#itemid {
-  width: 200px !important;
+  width: 285px !important;
 }
 
 label[for=itemid] {
@@ -176,7 +176,7 @@ input[type="date"]::-webkit-inner-spin-button{
 }
 
 input[type="number"] {
-  width: 40px;
+  width: 60px;
 }
 
 
@@ -433,6 +433,10 @@ table.admin h2#select-all-delete {
 
 .w25 {
   width: 25%;
+}
+
+.w5 {
+  width: 10%;
 }
 
 .w10 {

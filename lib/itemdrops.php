@@ -62,25 +62,19 @@ function getUsersDrops(
   return ["total" => $total, "pages" => $result];
 }
 
-function saveDrop($accountid, $itemdrop, $itemnumber, $itemaux = null) {
+function saveDrop($accountid, $itemdrop, $itemnumber, $itemaux = 0) {
 
-  if (($itemdrop <= 0) or ($itemnumber <= 0)) {
+  if (($itemdrop <= 0) or ($itemnumber <= 0) or ($itemaux <= 0)) {
     return false;
   }
 
-  if ($itemaux == null) {
-    $q = " INSERT INTO itemdrops(accountid, itemdrop, itemnumber, dropdate)
-    VALUES(:accountid, :itemdrop, :itemnumber, NOW())";
 
-    $result = Bitch::source('default')->query($q, 
-      compact('accountid', 'itemdrop', 'itemnumber'));
-  } else {
-    $q = " INSERT INTO itemdrops(accountid,itemdrop, itemaux, itemnumber, dropdate)
-    VALUES(:accountid, :itemdrop, :itemaux, :itemnumber, NOW())";
+  $q = " INSERT INTO itemdrops(accountid,itemdrop, itemaux, itemnumber, dropdate)
+  VALUES(:accountid, :itemdrop, :itemaux, :itemnumber, NOW())";
 
-    $result = Bitch::source('default')->query($q, 
-      compact('accountid', 'itemdrop', 'itemaux', 'itemnumber'));
-  }
+  $result = Bitch::source('default')->query($q, 
+    compact('accountid', 'itemdrop', 'itemaux', 'itemnumber'));
+
 
   if (!$result) {
     die('Invalid query');

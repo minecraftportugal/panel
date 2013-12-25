@@ -265,20 +265,19 @@
         <form name="drop_items" action="/users/drop_items" method="POST" autocomplete="off">
           <table class="form">
             <tr>
-              <td class="w80"><label for="itemid"><h2>Item</h2></label></td>
-              <td class="w10"><label for="itemqt"><h2>Qtd.</h2></label></td>
-              <td class="w10"><label for="itemaux"><h2>Aux</h2></label></td>
-            <tr>
-              
-              <td class="w80">
+              <td class="w5"><label for="itemid"><h2>Item</h2></label></td>
+              <td class="w100" colspan="6">
                 <select id="itemid" name="itemid">
                 </select>
               </td>
-
-              
-              <td class="w10"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
-              
-              <td class="w10"><input id="itemaux" name="itemaux" type="number" value="" /></td>
+            </tr>
+            <tr>
+              <td class="w5"><label for="itemid2"><h2>Id</h2></label></td>
+              <td class="w5"><input id="itemid2" name="itemid2" type="number" value="" /></td>
+              <td class="w5"><label for="itemaux"><h2>Aux</h2></label></td>
+              <td class="w5"><input id="itemaux" name="itemaux" type="number" value="" /></td>
+              <td class="w5"><label for="itemqt"><h2>Qtd.</h2></label></td>
+              <td class="w5"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
             </tr>
             <tr>
               <td colspan="4" class="center">
