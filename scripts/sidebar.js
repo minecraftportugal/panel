@@ -7,9 +7,7 @@ $(document).ready(function() {
   $("a[href*='#']").click(function(e) {
     var target = $(this).attr("href");
     var current = window.location.hash;
-    console.log(target, current);
     if (target == current) {
-      console.log("AWMG");
       window.location.hash = "";
       e.preventDefault();
     }

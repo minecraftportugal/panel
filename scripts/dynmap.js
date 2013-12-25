@@ -5,7 +5,6 @@ function getDynmap() {
   try {
     dynmap = $(window.top.document).find("iframe#map")[0].contentWindow.dynmap;
   } catch(e) {
-  	console.log(e);
   	dynmap = null;
   }
 

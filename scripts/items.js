@@ -161,7 +161,6 @@ $(function() {
       var that = this;
       $.each(sd["sprites"], function(k, v) {
         k = k.split("-")[0];
-        console.log(k);
         if (!isNaN(parseFloat(k)) && isFinite(k)) {
           $(that).append($("<option></option>").val(k).text(v[2]));
         }

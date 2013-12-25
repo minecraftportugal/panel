@@ -101,7 +101,6 @@ function chatHilight(command) {
       $("div#button-chat").removeClass("activity");
     });
   }
-  //console.log(command);
 }
 
 function savePosition() {
