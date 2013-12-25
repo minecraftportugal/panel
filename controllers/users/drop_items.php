@@ -10,6 +10,7 @@ function users_drop_items () {
 
   $id = isset($_POST['id']) && $_POST['id'] != "" ? $_POST['id'] : null;
   $itemid = isset($_POST['itemid']) && $_POST['itemid'] != "" ? $_POST['itemid'] : null;
+  $itemaux = isset($_POST['itemaux']) && $_POST['itemaux'] != "" ? $_POST['itemaux'] : null;
   $itemqt = isset($_POST['itemid']) && $_POST['itemqt'] != "" ? $_POST['itemqt'] : null;
 
   if (($itemid == null) or ($itemqt == null)) {
@@ -18,7 +19,7 @@ function users_drop_items () {
     return;
   }
 
-  $status = saveDrop($id, $itemid, $itemqt);
+  $status = saveDrop($id, $itemid, $itemqt, $itemaux);
   if ($status) {
     setFlash('success', 'Item drop criada.');
     header("Location: /profile?id=$id#itemdrops");

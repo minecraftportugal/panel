@@ -227,7 +227,7 @@
               <td class="cella" style="width: 30px;" title="Item ID #<?= $i['itemdrop'] ?>">
                 <span class="item" data-item="<?= $i['itemdrop'] ?> 0 <?= $i['itemnumber']?>" data-enchantments=""></span>
               </td>
-              <td class="cella" title="Item ID #<?= $i['itemdrop'] ?>">
+              <td class="cella" title="Item ID #<?= $i['itemaux'] != null ? $i['itemdrop'].":".$i['itemaux'] : $i['itemdrop'] ?>">
                 <span style="width: 120px;" class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
               </td>
             <? if (isset($i['takendate'])): ?>
@@ -265,14 +265,20 @@
         <form name="drop_items" action="/users/drop_items" method="POST" autocomplete="off">
           <table class="form">
             <tr>
-              <td class="w10"><label for="itemid"><h2>Item</h2></label></td>
-              <td class="w70">
+              <td class="w80"><label for="itemid"><h2>Item</h2></label></td>
+              <td class="w10"><label for="itemqt"><h2>Qtd.</h2></label></td>
+              <td class="w10"><label for="itemaux"><h2>Aux</h2></label></td>
+            <tr>
+              
+              <td class="w80">
                 <select id="itemid" name="itemid">
                 </select>
               </td>
 
-              <td class="w10"><label for="itemqt"><h2>Qtd.</h2></label></td>
+              
               <td class="w10"><input id="itemqt" name="itemqt" type="number" min="1" max="64" value="1" /></td>
+              
+              <td class="w10"><input id="itemaux" name="itemaux" type="number" value="" /></td>
             </tr>
             <tr>
               <td colspan="4" class="center">

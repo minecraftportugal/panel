@@ -19,7 +19,7 @@ function getDrops(
   $total = Bitch::source('default')->first($q, compact('undelivered', 'accountid'))["total"];
 
   $q = "SELECT * FROM (
-    SELECT id, itemdrop, itemnumber,
+    SELECT id, itemdrop, itemnumber, itemaux,
       DATE_FORMAT(dropdate, '%b %d %H:%i %Y') as dropdate,
       DATE_FORMAT(takendate, '%b %d %H:%i %Y') as takendate,
       IFNULL(timediff(takendate, dropdate), 'Não Entregue') AS idledroptime
@@ -47,7 +47,7 @@ function getUsersDrops(
   $total = Bitch::source('default')->first($q, compact('undelivered', 'delivered'))["total"];
 
   $q = "SELECT * FROM (
-    SELECT i.id, i.itemdrop, i.itemnumber,
+    SELECT i.id, i.itemdrop, i.itemnumber, i.itemaux,
       DATE_FORMAT(i.dropdate, '%b %d %H:%i %Y') as dropdate,
       DATE_FORMAT(i.takendate, '%b %d %H:%i %Y') as takendate,
       IFNULL(timediff(takendate, dropdate), 'Não Entregue') AS idledroptime,
@@ -62,17 +62,25 @@ function getUsersDrops(
   return ["total" => $total, "pages" => $result];
 }
 
-function saveDrop($accountid, $itemdrop, $itemnumber) {
+function saveDrop($accountid, $itemdrop, $itemnumber, $itemaux = null) {
 
   if (($itemdrop <= 0) or ($itemnumber <= 0)) {
     return false;
   }
 
-  $q = " INSERT INTO itemdrops(accountid,itemdrop,itemnumber,dropdate)
-  VALUES(:accountid, :itemdrop, :itemnumber, NOW())";
+  if ($itemaux == null) {
+    $q = " INSERT INTO itemdrops(accountid, itemdrop, itemnumber, dropdate)
+    VALUES(:accountid, :itemdrop, :itemnumber, NOW())";
 
-  $result = Bitch::source('default')->query($q, 
-    compact('accountid', 'itemdrop', 'itemnumber'));
+    $result = Bitch::source('default')->query($q, 
+      compact('accountid', 'itemdrop', 'itemnumber'));
+  } else {
+    $q = " INSERT INTO itemdrops(accountid,itemdrop, itemaux, itemnumber, dropdate)
+    VALUES(:accountid, :itemdrop, :itemaux, :itemnumber, NOW())";
+
+    $result = Bitch::source('default')->query($q, 
+      compact('accountid', 'itemdrop', 'itemaux', 'itemnumber'));
+  }
 
   if (!$result) {
     die('Invalid query');
