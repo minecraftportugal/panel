@@ -30,7 +30,7 @@
 	<div id="button-chat" class="button">Chat</div>
 	<div id="button-news" class="button">Panel</div>
 
-	<iframe id="map" name="mapa" src="<?= $cfg_dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> 
+	<iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> 
 
 </body>
 </html>

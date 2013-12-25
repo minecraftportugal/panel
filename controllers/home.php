@@ -8,6 +8,14 @@ function home() {
 
   validateSession();
 
+  $inquisitor = getInquisitor($_SESSION["username"]);
+  $dynmap_url = $cfg_dynmap_url;
+
+  if ($inquisitor != NULL) {
+    $world = $inquisitor["world"];
+    $dynmap_url .= '?worldname=' . $world;
+  }
+
   require('templates/home.php');
 }
 
