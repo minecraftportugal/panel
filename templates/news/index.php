@@ -12,6 +12,7 @@
     <script type="text/javascript" src="/scripts/steve.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
     <script type="text/javascript" src="/scripts/profile.js"></script>
+    <script type="text/javascript" src="/scripts/items.js"></script>
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
