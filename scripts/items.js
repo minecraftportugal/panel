@@ -156,13 +156,27 @@ $(function() {
       return;
     });
 
-    $("select#itemid").each(function() {
+    $("select#itemid_sel").each(function() {
       var that = this;
+      $(that).append($("<option></option>").val("").text("..."));
       $.each(sd["sprites"], function(k, v) {
         if (v != "") {
           $(that).append($("<option></option>").val(k).text(v[2]));
         }
       });
+    });
+
+    $("select#itemid_sel").change(function() {
+      var val = $(this).val().split("-");
+      var itemid = val[0];
+      var itemaux = val[1];
+
+      $("input[name=itemid]").val(itemid);
+      $("input[name=itemaux]").val(itemaux);
+    });
+
+    $("input[name=itemid], input[name=itemaux]").change(function() {
+      $("select#itemid_sel").val("");
     });
   });
 });

@@ -10,28 +10,13 @@ function users_drop_items () {
 
   $id = isset($_POST['id']) && $_POST['id'] != "" ? $_POST['id'] : null;
   $itemid = isset($_POST['itemid']) && $_POST['itemid'] != "" ? $_POST['itemid'] : null;
-  $itemid2 = isset($_POST['itemid2']) && $_POST['itemid2'] != "" ? $_POST['itemid2'] : null;
   $itemaux = isset($_POST['itemaux']) && $_POST['itemaux'] != "" ? $_POST['itemaux'] : 0;
   $itemqt = isset($_POST['itemid']) && $_POST['itemqt'] != "" ? $_POST['itemqt'] : null;
 
-  if ((($itemid == null) and ($itemid2 == null)) or ($itemqt == null)) {
+  if (($itemid == null) or ($itemqt == null)) {
     setFlash('error', 'Item ID ou quantidade inválida.');
     header("Location: /profile?id=$id#itemdrops");
     return;
-  }
-
-  if ($itemid2 != null) {
-    $itemid = $itemid2;
-  } else {
-    $tokens = explode("-", $itemid);
-    if (count($tokens) != 2) {
-      setFlash('error', 'Erro no id do itemid!');
-      header("Location: /profile?id=$id#itemdrops");
-      return;
-    } else {
-      $itemid = $tokens[0];
-      $itemaux = $tokens[1];
-    }
   }
 
   $status = saveDrop($id, $itemid, $itemqt, $itemaux);

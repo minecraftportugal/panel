@@ -91,12 +91,8 @@ h3 a:active {
    █     ███    █     █ █ █  ▒███▒
 */
 
-select#itemid {
+select#itemid_sel {
   width: 285px !important;
-}
-
-label[for=itemid] {
-  width: 25px !important;
 }
 
 select, input {
