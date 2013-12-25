@@ -231,9 +231,9 @@
                 <span style="width: 120px;" class="itemname" data-item="<?= $i['itemdrop'] ?>" data-enchantments=""></span>
               </td>
             <? if (isset($i['takendate'])): ?>
-              <td class="cella" title="Dropped a <?= $i['dropdate'] ?>"><?= $i['takendate'] ?></td>
+              <td class="cella" title="Dropped a <?= $i['dropdate'] ?> (<?= $i['idledroptime'] ?>)"><?= $i['takendate'] ?></td>
             <? else: ?>
-              <td class="cella"><i><?= $i['dropdate'] ?></i></td>
+              <td class="cella" title="Não Entregue"><i><?= $i['dropdate'] ?></i></td>
             <? endif; ?>
             <? if ($admin): ?>
               <td class="cellz">

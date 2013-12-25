@@ -369,19 +369,19 @@
     </form>
     <div class="meh">
     <form name="manage_users" action="/admin/delete_drops" method="POST" autocomplete="off">
-      <table class="admin alt-rows">
+      <table class="admin alt-rows2">
         <thead>
           <tr>
             <th class="cella" style="width: 30px;"><h2 title="Item">Item</h2></th>
-            <th class="cella" style="width: 50%;"><h2 title="Nome do Jogador">Nome<h2></th>
-            <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido"><i>Dropped</i>/Recebido</h2></th>
+            <th class="cella" style="width: 55%;"><h2 title="Nome do Jogador">Nome<h2></th>
+            <th class="cella" style="width: 45%;"><h2 title="Data Dropped/Recebido"><i>Dropped</i>/Recebido</h2></th>
             <th class="cellz"><h2 id="select-all-delete-drops" title="Apagar Drops!">X</h2></th>
           </tr>
         </thead>
         <tbody>
         <? foreach((array)$drops as $r): ?>
           <tr>
-            <td class="cella" style="width: 30px;" title="Item ID #<?= $r['itemdrop'] ?>">
+            <td rowspan="2" class="cella cellz" style="width: 30px;" title="Item ID #<?= $r['itemdrop'] ?>">
               <span class="item" data-item="<?= $r['itemdrop'] ?> 0 <?= $r['itemnumber']?>" data-enchantments=""></span>
             </td>
             <td class="shortcell cella">
@@ -397,14 +397,14 @@
                 <span class="online pull-left" title="O jogador está online!"></span>
               </a>
             </td>
-            <? if (isset($r['takendate'])): ?>
-              <td class="cella" title="Dropped a <?= $r['dropdate'] ?>"><span class="pull-left"><?= $r['takendate'] ?></span></td>
-            <? else: ?>
-              <td class="cella"><span class="pull-left"><i><?= $r['dropdate'] ?></i></span></td>
-            <? endif; ?>
-            <td class="cellc center">
+            <td class="cella"><span class="pull-left"><?= $r['idledroptime'] ?></span></td>
+            <td rowspan="2" class="cellc center">
               <input class="gridy check-delete-drops" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
             </td>
+          </tr>
+          <tr>
+            <td class="cella"><span class="pull-left"><?= $r['dropdate'] ?></span></td>
+            <td class="cella"><span class="pull-left"><?= $r['takendate'] ?></span></td>
           </tr>
         <? endforeach; ?>
         </tbody>
