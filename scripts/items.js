@@ -160,7 +160,7 @@ $(function() {
       var that = this;
       $(that).append($("<option></option>").val("").text("..."));
       $.each(sd["sprites"], function(k, v) {
-        if (v != "") {
+        if (v[2] != "") {
           $(that).append($("<option></option>").val(k).text(v[2]));
         }
       });
