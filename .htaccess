@@ -1,6 +1,15 @@
 RewriteEngine On
 
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^images/(.*)$ /public/images/$1 [NC,L]
+RewriteRule ^scripts/(.*)$ /public/scripts/$1 [NC,L]
+RewriteRule ^styles/(.*)$ /public/styles/$1 [NC,L]
 
+RewriteRule ^controllers/(.*)$ /index.php [NC,L]
+RewriteRule ^defaults/(.*)$ /index.php [NC,L]
+RewriteRule ^helpers/(.*)$ /index.php [NC,L]
+RewriteRule ^lib/(.*)$ /index.php [NC,L]
+RewriteRule ^models/(.*)$ /index.php [NC,L]
+RewriteRule ^templates/(.*)$ /index.php [NC,L]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^.*$ ./index.php [QSA]
