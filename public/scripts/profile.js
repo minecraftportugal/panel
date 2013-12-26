@@ -480,25 +480,28 @@ var PlayerSkin = (function() {
                 mode = m;
         },
         setSkin: function(playerId) {
-            if (checkcanvas)
-              if (playerId < 0)
+            if (checkcanvas) {
+              if (playerId < 0) {
                 skin.src = '/images/steve.png';
-              else
+              } else {
                 skin.src = '/profile/skin?clip=none&id=' + playerId;
-            else
+              }
+            } else {
                 skin.src = simpleImageSrc;
+            }
         }
     };
 
 }());
 
-$(document).ready(function() {  
+$(document).ready(function() { 
   $('#skinDisplay')
     .on('load', function() {
-      if(this.width < 64 || this.height < 32)
+      if(this.width < 64 || this.height < 32) {
         PlayerSkin.setSkin(-1);
-      else
+      } else {
         PlayerSkin.setSkin($(this).attr('data-playerid'));
+      }
     })
     .on('error',function() {
       PlayerSkin.setSkin(-1);

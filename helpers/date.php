@@ -32,4 +32,8 @@ function secs_to_h($secs)
         return substr($s, 0, -2);
 }
 
+function nocachetag() {
+    return time() . rand(1,100);
+}
+
 ?>

@@ -83,8 +83,8 @@ function users_show () {
   $lootmessage = getLootMessage();
   $loottitle = getLootTitles();
 
-  $userSkin = "http://s3.amazonaws.com/MinecraftSkins/".$_SESSION['username'].".png";
-  $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png";
+  
+  $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png?cache=".nocachetag();
 
   require('templates/users/show.php');
 }
