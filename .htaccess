@@ -10,6 +10,7 @@ RewriteRule ^helpers/(.*)$ /index.php [NC,L]
 RewriteRule ^lib/(.*)$ /index.php [NC,L]
 RewriteRule ^models/(.*)$ /index.php [NC,L]
 RewriteRule ^templates/(.*)$ /index.php [NC,L]
+RewriteRule ^scripts/(.*)$ /index.php [NC,L]
 
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^.*$ ./index.php [QSA]
