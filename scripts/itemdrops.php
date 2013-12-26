@@ -138,7 +138,7 @@ $drop_template_geral = [
     'DMDSWORD'    => 2,
     'GLDAPPLE'    => 2,
     '13DISC'      => 2, 
-    'CAT DISC'    => 2,
+    'CATDISC'    => 2,
     'BLOCKSDISC'  => 2,
     'CHIRPDISC'   => 2,
     'FARDISC'     => 2,
@@ -256,7 +256,7 @@ function drop_item($sql, $dropset) {
   $row = Bitch::source('default')->first($sql);
   
   if ($row == NULL) {
-    echo "No eligible players. ";
+    echo "No eligible players.\n";
     return;
   }
 
@@ -276,29 +276,30 @@ function drop_item($sql, $dropset) {
       $itemnumber = $drop[2];
 
       $result = Bitch::source('default')->query($q, compact('accountid', 'itemdrop', 'itemaux', 'itemnumber'));
-      echo "Gave $itemnumber of $itemdrop $itemaux to $accountname.";
+      echo "Gave $itemnumber of $itemdrop $itemaux to $accountname.\n";
   }
 
   $end = microtime(true);
 
-  $runtime = round($end - $start, 6);
-  echo "Finished after $runtime";
+  $runtime = round($end - $start, 6) * 1000;
+  echo "Finished after $runtime ms\n";
 }
 
 while (true) {
   
   # send default drops
-  echo "D " . date("Y-m-d H:i:s") . " "; 
+  echo "D " . date("Y-m-d H:i:s") . "\n"; 
   drop_item($sql_default, $drop_template_geral);
   $sleep_time = rand(1, 20) * 5;
   echo "Sleeping for $sleep_time seconds...\n";
-
+  sleep($sleep_time);
 
   # send online drops
   echo "O " . date("Y-m-d H:i:s") . " "; 
   drop_item($sql_online, $drop_template_geral);
   $sleep_time = rand(1, 20) * 5;
   echo "Sleeping for $sleep_time seconds...\n";
+  sleep($sleep_time);
  
 }
 
