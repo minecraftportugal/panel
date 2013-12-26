@@ -50,7 +50,7 @@ require_once('controllers/widgets/players.php');
 
 require_once('controllers/errors.php');
 
-require_once('lib/flash.php');
+require_once('helpers/flash.php');
 
 
 $r = new Router();

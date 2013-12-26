@@ -1,0 +1,172 @@
+/*
+ * top.css
+ * Styles frames, buttons and windows that apepar on the top frame
+ */
+
+html {
+  overflow: auto;
+} 
+
+html, body, div, iframe {
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+  border: none;
+} 
+
+iframe#map, iframe#news {
+  display: block;
+  width: 100%;
+  border: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/*
+ * Buttons
+ */
+div.button {
+  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-variant: small-caps;
+  cursor: pointer;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  color: #FFFFFF;
+  padding: 4px;
+  height: 22px;
+  padding-left: 25px;
+}
+
+div.button:hover {
+  background-color: rgba(0,0,0,0.6) !important;
+}
+
+div.button:active {
+  background-color: rgba(0,0,0,0.7) !important;
+}
+
+div.button.activity {
+  background: rgba(0,0,255,0.5) url('/images/icons/chatnew.png') no-repeat 5px center !important;
+}
+
+div.button.activity:hover {
+  background: rgba(0,0,255,0.6) url('/images/icons/chatnew.png') no-repeat 5px center !important;
+}
+
+div.button.activity:active {
+  background: rgba(0,0,255,0.7) url('/images/icons/chatnew.png') no-repeat 5px center !important;
+}
+
+div#button-chat {
+  bottom: 0;
+  left: 50%;
+  margin-left: -140px;
+  width: 100px;
+  border-top-left-radius: 4px 4px;
+  border-top-right-radius: 4px 4px;
+  background: rgba(0,0,0,0.5) url('/images/icons/chat.png') no-repeat 5px center;
+}
+
+div#button-news {
+  width: 100px;
+  bottom:0;
+  left:50%;
+  margin-right: 140px;
+  border-top-left-radius: 4px 4px;
+  border-top-right-radius: 4px 4px;
+  background: rgba(0,0,0,0.5) url('/images/icons/news.png') no-repeat 5px center;
+}
+
+
+
+/*
+ * Panels
+ */
+
+div#sidebar {
+  background-color:rgba(0,0,0,0.4);
+  position: fixed;
+  width: 384px;
+  right: 0px;
+  margin-left: -100px;
+}
+
+div#sidebar iframe {
+
+}
+
+/*
+ * Window
+ */
+div#window {
+  background-color:rgba(0,0,0,0.4);
+  border: none;
+  position: fixed;
+  left: 6px;
+  bottom: 6px;
+  width: 500px;
+  height: 300px;
+  padding: 0px 0px 0px 0px;
+  z-index: 2;
+
+  color: #FFF;
+  font-family: monospace;
+  font-size: 14px;
+
+}
+
+div#window iframe {
+  width: 100%;
+}
+
+div.window-close {
+ position: absolute;
+ top: 0px;
+ right: 0px;
+ width: 8px;
+ height: 8px;
+ background-color:rgba(255,0,0,0.4);;
+ cursor: pointer;
+ }
+
+div.window-drag {
+ top: -16px;
+ height: 14px;
+ left: 0;
+ right: 32px;
+ cursor: move;
+}
+
+div.window-dock {
+ top: -16px;
+ right: 16px;
+ width: 14px;
+ height: 14px;
+ cursor: pointer;
+}
+
+div.window-minimize {
+ top: -16px;
+ right: 0px;
+ width: 14px;
+ height: 14px;
+ cursor: pointer;
+}
+
+div.window-resize {
+ right: -1px;
+ bottom: -1px;
+ width: 8px;
+ height: 8px;
+ cursor: se-resize;
+}
+
+div.window-interact {
+ background-color:rgba(0,0,0,0.4);
+ position: absolute;
+}
+
+div.window-interact:hover {
+ background-color:rgba(0,0,200,0.4);
+}
+

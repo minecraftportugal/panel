@@ -2,6 +2,7 @@
 
 function notfound() {
   http_response_code("404");
+  require('helpers/selfurl.php');
   require('templates/404.php');
 }
 
