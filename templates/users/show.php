@@ -92,6 +92,7 @@
 
       <table class="pretty">
         <tbody>
+          <? if ($inquisitor) : ?>
           <tr>
             <td colspan="2">
               <div class="health">
@@ -105,6 +106,7 @@
               <? endfor; ?>
             </td>
           </tr>
+          <? endif; ?>
 
           <? if ($inquisitor): ?>
           <tr><th>Status</th><td class="<?= $inquisitor['online'] == 1 ? 'online' : 'offline' ?>"><?= $inquisitor['online'] == 1 ? 'online' : 'offline' ?></td></tr>
