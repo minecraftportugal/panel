@@ -9,6 +9,7 @@ function directory_index() {
   global $cfg_wp_url;
 
   validateSession();
+  $playername = isset($_GET['playername']) && $_GET['playername'] != "" ? $_GET['playername'] : null;
   $staff = isset($_GET['staff']) && $_GET['staff'] == "1" ? $_GET['staff'] : 0;
   $contributor = isset($_GET['contributor']) && $_GET['contributor'] == "1" ? $_GET['contributor'] : 0;
   $donor = isset($_GET['donor']) && $_GET['donor'] == "1" ? $_GET['donor'] : 0;
