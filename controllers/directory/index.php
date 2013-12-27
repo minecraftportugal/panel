@@ -21,7 +21,7 @@ function directory_index() {
   $per_page = 21;
   $pages = getUserListPaged(($page-1)*$per_page, $per_page, $playername, null,
     null, null, null, null, null,
-    0, 0, 0, 0, $contributor, $donor, $premium, $online, $staff);
+    0, 0, 0, 0, 0, $contributor, $donor, $premium, $online, $staff);
   $total = $pages['total'];
   $userlist = $pages['pages'];
 

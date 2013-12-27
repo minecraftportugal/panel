@@ -15,6 +15,9 @@ function admin_index() {
   $register_date_begin = isset($_GET['register_date_begin']) && $_GET['register_date_begin'] != "" ? $_GET['register_date_begin'] : null;
   $register_date_end = isset($_GET['register_date_end']) && $_GET['register_date_end'] != "" ? $_GET['register_date_end'] : null;
   $nologin = isset($_GET['nologin']) && $_GET['nologin'] == "1" ? $_GET['nologin'] : 0;
+  $yeslogin = isset($_GET['yeslogin']) && $_GET['yeslogin'] == "1" ? $_GET['yeslogin'] : 0;
+  $nogame = isset($_GET['nogame']) && $_GET['nogame'] == "1" ? $_GET['nogame'] : 0;
+  $yesgame = isset($_GET['yesgame']) && $_GET['yesgame'] == "1" ? $_GET['yesgame'] : 0;
   $inactive = isset($_GET['inactive']) && $_GET['inactive'] == "1" ? $_GET['inactive'] : 0;
   $admin = isset($_GET['admin']) && $_GET['admin'] == "1" ? $_GET['admin'] : 0;
   $operator = isset($_GET['operator']) && $_GET['operator'] == "1" ? $_GET['operator'] : 0;
@@ -53,7 +56,7 @@ function admin_index() {
   
   $accounts_pages = getUserListPaged(($accounts_page-1)*$accounts_per_page, $accounts_per_page, $playername, $ipaddress,
     $emailaddress, $login_date_begin, $login_date_end, $register_date_begin, $register_date_end,
-    $nologin, $inactive, $admin, $operator, $contributor, $donor, $premium, $online);
+    $nologin, $yeslogin, $nogame, $yesgame, $inactive, $admin, $operator, $contributor, $donor, $premium, $online);
   $total_accounts = $accounts_pages['total'];
   $accounts = $accounts_pages['pages'];
 
@@ -87,6 +90,9 @@ function admin_index() {
   $link_after .= $register_date_begin != null ? "&register_date_begin=$register_date_begin" : "";
   $link_after .= $register_date_end != null ? "&register_date_end=$register_date_end" : "";
   $link_after .= $nologin != null ? "&nologin=$nologin" : "";
+  $link_after .= $yeslogin != null ? "&yeslogin=$yeslogin" : "";
+  $link_after .= $nogame != null ? "&nogame=$nogame" : "";
+  $link_after .= $yesgame != null ? "&yesgame=$yesgame" : "";
   $link_after .= $inactive != null ? "&inactive=$inactive" : "";
   $link_after .= $admin != null ? "&admin=$admin" : "";
   $link_after .= $operator != null ? "&operator=$operator" : "";

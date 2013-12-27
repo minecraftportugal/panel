@@ -139,6 +139,9 @@ function getUserListPaged(
   $register_date_begin = null,
   $register_date_end = null,
   $nologin = 0,
+  $yeslogin = 0,
+  $nogame = 0,
+  $yesgame = 0,
   $inactive = 0,
   $admin = 0,
   $operator = 0,
@@ -156,7 +159,8 @@ function getUserListPaged(
   WHERE playername = ifnull(:playername, playername)
   AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
   AND email = ifnull(:emailaddress, email)
-  AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate is null))
+  AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate IS NULL))
+  AND ((:yeslogin = 0) OR (:yeslogin = 1 AND lastlogindate IS NOT null))
   AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
   AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
   AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
@@ -165,6 +169,8 @@ function getUserListPaged(
   AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
   AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
   AND ((:online = 0) OR (:online = 1 AND online = 1))
+  AND ((:nogame = 0) OR (:nogame = 1 AND playername NOT IN (SELECT name FROM inquisitor.players)))
+  AND ((:yesgame = 0) OR (:yesgame = 1 AND playername IN (SELECT name FROM inquisitor.players)))
   AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
   AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
   AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
@@ -173,7 +179,7 @@ function getUserListPaged(
   $total = Bitch::source('default')->first($q,
     compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
       'login_date_begin', 'login_date_end', 'register_date_begin', 'register_date_end',
-      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium', 'online',
+      'nologin', 'yeslogin', 'nogame', 'yesgame', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium', 'online',
       'staff')
   )["total"];
 
@@ -188,7 +194,8 @@ function getUserListPaged(
     WHERE playername = ifnull(:playername, playername)
     AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
     AND email = ifnull(:emailaddress, email)
-    AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate is null))
+    AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate IS NULL))
+    AND ((:yeslogin = 0) OR (:yeslogin = 1 AND lastlogindate IS NOT null))
     AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
     AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
     AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
@@ -197,6 +204,8 @@ function getUserListPaged(
     AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
     AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
     AND ((:online = 0) OR (:online = 1 AND online = 1))
+    AND ((:nogame = 0) OR (:nogame = 1 AND playername NOT IN (SELECT name FROM inquisitor.players)))
+    AND ((:yesgame = 0) OR (:yesgame = 1 AND playername IN (SELECT name FROM inquisitor.players)))
     AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
     AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
     AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
@@ -207,7 +216,7 @@ function getUserListPaged(
   $result = Bitch::source('default')->all($q, 
     compact('index', 'per_page', 'playername', 'ipaddress', 'emailaddress',
       'login_date_begin', 'login_date_end', 'register_date_begin', 'register_date_end',
-      'nologin', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium', 'online',
+      'nologin', 'yeslogin', 'nogame', 'yesgame', 'inactive', 'admin', 'operator', 'contributor', 'donor', 'premium', 'online',
       'staff')
   );
 

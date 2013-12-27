@@ -88,6 +88,27 @@
           <tr>
             <td></td>
             <td>
+              <input id="yeslogin" type="checkbox" name="yeslogin" value="1" <?= $yeslogin == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="yeslogin">já fez login</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="nogame" type="checkbox" name="nogame" value="1" <?= $nogame == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="nogame">nunca jogou</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+              <input id="yesgame" type="checkbox" name="yesgame" value="1" <?= $yesgame == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="yesgame">já jogou</label>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
               <input id="inactive" type="checkbox" name="inactive" value="1" <?= $inactive == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="inactive">inactivo</label>
             </td>
