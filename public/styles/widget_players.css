@@ -15,6 +15,36 @@ ul {
 	padding: 1em; 
 }
 
+li {
+	height: 35px;
+}
+
+span.name {
+	float: right;
+	padding-top: 5px;
+	padding-right: 5px;
+}
 a {
   color: #000;
 }
+
+span.stevehead
+{
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  position: relative;
+  float: right;
+}
+ 
+div#onlineplayers span.stevehead img,
+div#onlineplayers span.stevehead canvas
+{
+  width: 256px;
+  height: 128px;
+  margin-left: -32px;
+  margin-top: -32px;
+  position: absolute;
+}
+
+

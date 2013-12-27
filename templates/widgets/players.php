@@ -6,6 +6,7 @@
   <meta name="author" content="Comunidade Minecraft Portugal" />
   <title></title>
   <script type="text/javascript" src="/scripts/jquery.js"></script>
+  <script type="text/javascript" src="/scripts/steve.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="/styles/widget_players.css" />
@@ -17,7 +18,13 @@
 <h1><?= $n ?> jogadores online!</h1>
 <ul>
 <? foreach((array)$onlinePlayers as $p): ?>
-  <li><?= $p['name'] ?></li>
+  <li>
+	<? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['name'].".png"; ?>
+	<span class="stevehead">
+	  <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
+	</span>
+    <span class="name"><?= $p['name'] ?></span>
+  </li>
 <? endforeach; ?>
 </ul>
 </div>
