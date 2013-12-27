@@ -9,7 +9,6 @@ function directory_index() {
   global $cfg_wp_url;
 
   validateSession();
-  $playername = isset($_GET['playername']) && $_GET['playername'] != "" ? $_GET['playername'] : null;
   $staff = isset($_GET['staff']) && $_GET['staff'] == "1" ? $_GET['staff'] : 0;
   $contributor = isset($_GET['contributor']) && $_GET['contributor'] == "1" ? $_GET['contributor'] : 0;
   $donor = isset($_GET['donor']) && $_GET['donor'] == "1" ? $_GET['donor'] : 0;
@@ -19,9 +18,10 @@ function directory_index() {
   $page = isset($_GET['page']) ? $_GET['page'] : 1;
   $page = intval($page);
   $per_page = 21;
-  $pages = getUserListPaged(($page-1)*$per_page, $per_page, $playername, null,
-    null, null, null, null, null,
-    0, 0, 0, 0, 0, $contributor, $donor, $premium, $online, $staff);
+  $pages = getUserListPaged(($page-1)*$per_page, $per_page, 
+    null, // playername
+    null, null, null, null, null, null,
+    0, 0, 0, 0, 0, 0, 0, $contributor, $donor, $premium, $online, $staff);
   $total = $pages['total'];
   $userlist = $pages['pages'];
 
