@@ -22,7 +22,7 @@ $drop_definitions = [
   'FARMERPACK'  => [[292, 0, 1], [295, 0, 5], [361, 0, 2], [362, 0, 2]],
 
   // flintsteel + 10 obsidian
-  'PORTALKIT'   => [[49, 0, 10], [259, 0, 10]],
+  'PORTALKIT'   => [[49, 0, 10], [259, 0, 1]],
 
   // full leather armor
   'FULLLEATHER' => [[298, 0, 1], [299, 0, 1], [300, 0, 1], [301, 0, 1]],
@@ -170,19 +170,27 @@ $drop_template_geral = [
 # - fazem parte do actual grupo de jogadores com menor total de drops
 # - nao tem mais que cinco drops pendentes
 
-$sql_default = "SELECT x.id, x.playername FROM (
-    SELECT a.id, a.playername, count(i.id) AS totalDrops, count(ip.id) as totalDropsPending
-    FROM accounts a 
-    INNER JOIN (
-      SELECT name
-        FROM inquisitor.players
-        WHERE lastJoin > NOW() - INTERVAL 1 WEEK
-        AND totalTime > 3600
-    ) p ON a.playername = p.name
-    LEFT JOIN itemdrops i ON a.id = i.accountid
-    LEFT JOIN itemdrops ip ON a.id = i.accountid
-    WHERE ip.takendate IS NULL
-    GROUP BY a.id
+$sql_default = "
+  SELECT x.id, x.playername FROM (
+    SELECT y.id, y.playername, y.totalDrops, count(ip.id) AS totalDropsPending
+    FROM (
+      SELECT a.id, a.playername, count(i.id) AS totalDrops
+      FROM accounts a
+      INNER JOIN (
+        SELECT name
+          FROM inquisitor.players
+          WHERE lastJoin > NOW() - INTERVAL 1 WEEK
+          AND totalTime > 3600
+      ) p ON a.playername = p.name
+      LEFT JOIN itemdrops i ON a.id = i.accountid
+      GROUP BY a.id, a.playername
+    ) y
+    LEFT JOIN (
+      SELECT i.id, i.accountid
+      FROM itemdrops i
+      WHERE i.takendate IS NULL
+    ) ip ON y.id = ip.accountid
+    GROUP BY y.id, y.playername, y.totalDrops
   ) x
   LEFT JOIN (
     SELECT i.accountid, MAX(i.dropdate) AS date
@@ -202,12 +210,19 @@ $sql_default = "SELECT x.id, x.playername FROM (
         AND totalTime > 3600
       ) p on a.playername = p.name
       LEFT JOIN itemdrops i ON a.id = i.accountid
+      LEFT JOIN (
+        SELECT i.accountid, MAX(i.dropdate) AS date
+        FROM itemdrops i
+        GROUP BY i.accountid
+      ) latestDrop ON a.id = latestDrop.accountid
+      WHERE (latestDrop.date IS NULL OR latestDrop.date < NOW() - INTERVAL 8 HOUR)
       GROUP BY a.id
      ) counts
   )
   AND totalDropsPending < 5
   ORDER BY RAND()
-  LIMIT 1;";
+  LIMIT 1;
+";
 
 #
 # Drops "Online"
@@ -217,24 +232,94 @@ $sql_default = "SELECT x.id, x.playername FROM (
 # - nao tem uma drop ha pelo menos 2 horas
 # - tem pelo menos 5 minutos de jogo
 
-$sql_online = "SELECT x.id, x.playername FROM (
-      SELECT a.id, a.playername
-      FROM accounts a 
+$sql_online = "
+  SELECT x.id, x.playername FROM (
+    SELECT a.id, a.playername
+    FROM accounts a 
+    INNER JOIN (
+      SELECT name
+      FROM inquisitor.players
+      WHERE online = 1
+      AND totalTime > 300
+    ) p ON a.playername = p.name
+  ) x
+  LEFT JOIN (
+    SELECT i.accountid, MAX(i.dropdate) AS date
+    FROM itemdrops i
+    GROUP BY i.accountid
+  ) latestDrop ON x.id = latestDrop.accountid
+  WHERE (latestDrop.date IS NULL OR latestDrop.date < NOW() - INTERVAL 2 HOUR)
+  ORDER BY RAND()
+  LIMIT 1;
+";
+
+# Drops "Vip Donor" 
+# São elegiveis para uma drop todos
+# os jogadores que:
+# - sao vip donors
+# - entraram na ultimas 2 semanas
+# - nao tem uma drop ha pelo menos 1 hora
+# - tem pelo menos 1 hora de jogo
+# - fazem parte do actual grupo de jogadores vip donor com menor total de drops
+# - nao tem mais que cinco drops pendentes
+
+$sql_vip = "
+  SELECT x.id, x.playername FROM (
+    SELECT y.id, y.playername, y.totalDrops, count(ip.id) AS totalDropsPending
+    FROM (
+      SELECT a.id, a.playername, count(i.id) AS totalDrops
+      FROM accounts a
+      INNER JOIN (
+        SELECT name
+          FROM inquisitor.players
+          WHERE lastJoin > NOW() - INTERVAL 1 WEEK
+          AND totalTime > 3600
+      ) p ON a.playername = p.name
+      LEFT JOIN itemdrops i ON a.id = i.accountid
+      WHERE a.donor = 1
+      GROUP BY a.id, a.playername
+    ) y
+    LEFT JOIN (
+      SELECT i.id, i.accountid
+      FROM itemdrops i
+      WHERE i.takendate IS NULL
+    ) ip ON y.id = ip.accountid
+    GROUP BY y.id, y.playername, y.totalDrops
+  ) x
+  LEFT JOIN (
+    SELECT i.accountid, MAX(i.dropdate) AS date
+    FROM itemdrops i
+    GROUP BY i.accountid
+  ) latestDrop ON x.id = latestDrop.accountid
+  WHERE (latestDrop.date IS NULL OR latestDrop.date < NOW() - INTERVAL 4 HOUR)
+  AND totalDrops = (
+    SELECT min(count)
+    FROM (
+      SELECT count(i.id) AS count
+      FROM accounts a
       INNER JOIN (
         SELECT name
         FROM inquisitor.players
-        WHERE online = 1
-        AND totalTime > 300
-      ) p ON a.playername = p.name
-    ) x
-    LEFT JOIN (
-      SELECT i.accountid, MAX(i.dropdate) AS date
-      FROM itemdrops i
-      GROUP BY i.accountid
-    ) latestDrop ON x.id = latestDrop.accountid
-    WHERE (latestDrop.date IS NULL OR latestDrop.date < NOW() - INTERVAL 2 HOUR)
-    ORDER BY RAND()
-    LIMIT 1;";
+        WHERE lastJoin > NOW() - INTERVAL 1 WEEK
+        AND totalTime > 3600
+      ) p on a.playername = p.name
+      LEFT JOIN itemdrops i ON a.id = i.accountid
+      LEFT JOIN (
+        SELECT i.accountid, MAX(i.dropdate) AS date
+        FROM itemdrops i
+        GROUP BY i.accountid
+      ) latestDrop ON a.id = latestDrop.accountid
+      WHERE (latestDrop.date IS NULL OR latestDrop.date < NOW() - INTERVAL 4 HOUR)
+      AND a.donor = 1
+      GROUP BY a.id
+     ) counts
+  )
+  AND totalDropsPending < 5
+  ORDER BY RAND()
+  LIMIT 1;
+";
+
+
 
 function randomWeightedChoice(array $weightedValues) {
     $rand = mt_rand(1, (int) array_sum($weightedValues));
@@ -256,8 +341,12 @@ function drop_item($sql, $dropset) {
   $row = Bitch::source('default')->first($sql);
   
   if ($row == NULL) {
-    echo "No eligible players.\n";
-    return;
+    $end = microtime(true);
+    $runtime = round($end - $start, 6) * 1000;
+    $runtime = str_pad($runtime, 8, STR_PAD_LEFT);
+    $runtime = $runtime . "ms";
+    echo "\t$runtime\t No eligible players.\n";
+    return -1;
   }
 
   $drops = randomWeightedChoice($dropset);
@@ -276,31 +365,37 @@ function drop_item($sql, $dropset) {
       $itemnumber = $drop[2];
 
       $result = Bitch::source('default')->query($q, compact('accountid', 'itemdrop', 'itemaux', 'itemnumber'));
-      echo "Gave $itemnumber of $itemdrop $itemaux to $accountname.\n";
+
+      $end = microtime(true);
+      $runtime = round($end - $start, 6) * 1000;
+      $runtime = str_pad($runtime, 8, STR_PAD_LEFT);
+      $runtime = $runtime . "ms";
+      echo "\t$runtime\t$accountname $itemnumber of $itemdrop:$itemaux\n";
   }
 
   $end = microtime(true);
 
-  $runtime = round($end - $start, 6) * 1000;
-  echo "Finished after $runtime ms\n";
+
+  return $runtime;
+}
+
+function make_drop($name, $sql, $drop_template, $sleep_time) {
+  echo "$name " . date("Y-m-d H:i:s") . ": \n";
+  $drop_result = drop_item($sql, $drop_template);
+  sleep($sleep_time);
 }
 
 while (true) {
-  
+
+  # send vip drops
+  make_drop("V", $sql_vip, $drop_template_geral, rand(10,30));
+
   # send default drops
-  echo "D " . date("Y-m-d H:i:s") . "\n"; 
-  drop_item($sql_default, $drop_template_geral);
-  $sleep_time = rand(1, 20) * 5;
-  echo "Sleeping for $sleep_time seconds...\n";
-  sleep($sleep_time);
+  make_drop("D", $sql_default, $drop_template_geral, rand(10,30));
 
   # send online drops
-  echo "O " . date("Y-m-d H:i:s") . " "; 
-  drop_item($sql_online, $drop_template_geral);
-  $sleep_time = rand(1, 20) * 5;
-  echo "Sleeping for $sleep_time seconds...\n";
-  sleep($sleep_time);
- 
+  make_drop("O", $sql_online, $drop_template_geral, rand(10,30));
+
 }
 
 ?>
