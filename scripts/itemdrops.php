@@ -144,7 +144,7 @@ $drop_template_geral = [
     'FARDISC'     => 2,
     'MALLDISC'    => 2,
     'MELLDISC'    => 2,
-    'STALDISC'    => 2,
+    'STALLDISC'    => 2,
     'STRADDISC'   => 2,
     'WARDDISC'    => 2,
     '11DISC'      => 2,
@@ -165,6 +165,7 @@ $drop_template_geral = [
 # São elegiveis para uma drop todos
 # os jogadores que:
 # - entraram na ultima semana
+# - não estão em limbo worlds
 # - nao tem uma drop ha pelo menos 8 horas
 # - tem pelo menos 1 hora de jogo
 # - fazem parte do actual grupo de jogadores com menor total de drops
@@ -180,6 +181,7 @@ $sql_default = "
         SELECT name
           FROM inquisitor.players
           WHERE lastJoin > NOW() - INTERVAL 1 WEEK
+          AND world NOT LIKE 'limbo%'
           AND totalTime > 3600
       ) p ON a.playername = p.name
       LEFT JOIN itemdrops i ON a.id = i.accountid
@@ -229,6 +231,7 @@ $sql_default = "
 # São elegiveis para uma drop online todos
 # os jogadores que:
 # - estão online
+# - não estão em limbo worlds
 # - nao tem uma drop ha pelo menos 2 horas
 # - tem pelo menos 5 minutos de jogo
 
@@ -240,6 +243,7 @@ $sql_online = "
       SELECT name
       FROM inquisitor.players
       WHERE online = 1
+      AND world NOT LIKE 'limbo%'
       AND totalTime > 300
     ) p ON a.playername = p.name
   ) x
@@ -257,6 +261,7 @@ $sql_online = "
 # São elegiveis para uma drop todos
 # os jogadores que:
 # - sao vip donors
+# - não estão em limbo worlds
 # - entraram na ultimas 2 semanas
 # - nao tem uma drop ha pelo menos 1 hora
 # - tem pelo menos 1 hora de jogo
@@ -273,6 +278,7 @@ $sql_vip = "
         SELECT name
           FROM inquisitor.players
           WHERE lastJoin > NOW() - INTERVAL 1 WEEK
+          AND world NOT LIKE 'limbo%'
           AND totalTime > 3600
       ) p ON a.playername = p.name
       LEFT JOIN itemdrops i ON a.id = i.accountid
