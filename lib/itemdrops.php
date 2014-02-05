@@ -55,7 +55,7 @@ function getUsersDrops(
     FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id
     WHERE ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
     AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))
-    ORDER BY takendate DESC, id DESC
+    ORDER BY id DESC
   ) x LIMIT :index, :per_page;";
   $result = Bitch::source('default')->all($q, compact('undelivered', 'delivered', 'index', 'per_page'));
 
