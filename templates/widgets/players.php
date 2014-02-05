@@ -19,7 +19,7 @@
 <ul>
 <? foreach((array)$onlinePlayers as $p): ?>
   <li>
-	<? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$p['name'].".png"; ?>
+	<? $head_url = "//s3.amazonaws.com/MinecraftSkins/".$p['name'].".png"; ?>
 	<span class="stevehead">
 	  <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
 	</span>
