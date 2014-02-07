@@ -7,6 +7,7 @@
   <title></title>
   <script type="text/javascript" src="/scripts/jquery.js"></script>
   <script type="text/javascript" src="/scripts/steve.js"></script>
+  <script type="text/javascript" src="/scripts/widget_players.js"></script>
   <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
   <link rel="stylesheet" type="text/css" media="screen" href="/styles/widget_players.css" />
