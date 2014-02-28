@@ -11,4 +11,8 @@ function forbidden() {
   require('templates/403.php');
 }
 
+function testpattern() {
+  require('templates/testpattern.html');
+}
+
 ?>

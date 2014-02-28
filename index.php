@@ -13,8 +13,6 @@ if ($cfg_wp_enabled) {
   $wp->register_globals(); $wp->send_headers();
 }
 
-
-
 require_once('controllers/home.php');
 require_once('controllers/news/index.php');
 
@@ -90,6 +88,8 @@ $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');
 
 $r->map('GET', '/forbidden', 'forbidden');
+
+$r->map('GET', '/testpattern', 'testpattern');
 
 $path = getPathInfo();
 $path = rtrim($path, '/');
