@@ -5,12 +5,17 @@ $(function() {
      * Items in Player Inventory
      */
     $('span.item').each(function() {
+      var EMPTY_ITEM_X = 19;
+      var EMPTY_ITEM_Y = 17;
+
       var d = $(this).attr('data-item').split(' ');
       var enchantments = $(this).attr('data-enchantments').split(' ');
 
       if (d[0] == "") // empty
       {
-        $(this).attr('style', 'background-position:-360px -672px');
+        var x=-(EMPTY_ITEM_X)*24;
+        var y=-(EMPTY_ITEM_Y)*24;
+        $(this).attr('style', 'background-position:'+x+'px '+y+'px');
         return;
       }
 
@@ -85,7 +90,9 @@ $(function() {
         $(this).attr('style', 'background-position:'+x+'px '+y+'px');
       }
       else { // empty
-        $(this).attr('style', 'background-position:-360px -672px');
+        var x=-(EMPTY_ITEM_X)*24;
+        var y=-(EMPTY_ITEM_Y)*24;
+        $(this).attr('style', 'background-position:'+x+'px '+y+'px');
       }
  
       return;
