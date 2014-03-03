@@ -1014,7 +1014,7 @@ tr.line3 > td {
 }
 
 td.enchanted {
-  background: url('/images/enchanted.gif') center center;
+  background: url('/images/enchanted.gif') center center !important;
 }
 
 div.inventory {
