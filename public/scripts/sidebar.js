@@ -12,6 +12,10 @@ $(document).ready(function() {
       e.preventDefault();
     }
   });
+
+  $(window).bind("hashchange", function() {
+    $(window).scrollTop(0);
+  });
   
   // Logout
   $("a#logout").click(function(e) {
