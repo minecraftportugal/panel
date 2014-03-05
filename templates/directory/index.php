@@ -28,18 +28,12 @@
     }
   ?>
 
-  <? 
-    $error = getFlash('error');
-    if ($error != false):
-  ?>
-    <div class="section error"><?= $error ?></div>
+  <? if (isset($notice['error'])): ?>
+    <div class="section error"><?= $notice['error'] ?></div>
   <? endif; ?>
 
-  <? 
-    $success = getFlash('success');
-    if ($success != false):
-  ?>
-    <div class="section success"><?= $success ?></div>
+  <? if (isset($notice['success'])): ?>
+    <div class="section success"><?= $notice['success'] ?></div>
   <? endif; ?>
 
 
@@ -52,40 +46,40 @@
         <thead>
           <tr>
             <th class="center" style="width:35%;"><h2>Nome</h2></th>
-            <td><input type="text" name="playername" placeholder="steve" value="<?= $playername ?>"></td>
+            <td><input type="text" name="playername" placeholder="steve" value="<?= $p['playername']; ?>"></td>
           </tr>
           <tr>
              <th class="center"><h2>Critérios</h2></th>
             <td>
-              <input id="staff" type="checkbox" name="staff" value="1" <?= $staff == 1 ? 'checked="checked"' : '' ?> />
+              <input id="staff" type="checkbox" name="staff" value="1" <?= $p['staff'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="staff">staff</label>
             </td>
           </tr>
           <tr>
             <td></td>
             <td>
-              <input id="contributor" type="checkbox" name="contributor" value="1" <?= $contributor == 1 ? 'checked="checked"' : '' ?> />
+              <input id="contributor" type="checkbox" name="contributor" value="1" <?= $p['contributor'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="contributor">contribuidor</label>
             </td>
           </tr>
           <tr>
             <td></td>
             <td>
-              <input id="donor" type="checkbox" name="donor" value="1" <?= $donor == 1 ? 'checked="checked"' : '' ?> />
+              <input id="donor" type="checkbox" name="donor" value="1" <?= $p['donor'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="donor">dador</label>
             </td>
           </tr>
           <tr>
             <td></td>
             <td>
-              <input id="premium" type="checkbox" name="premium" value="1" <?= $premium == 1 ? 'checked="checked"' : '' ?> />
+              <input id="premium" type="checkbox" name="premium" value="1" <?= $p['premium'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="premium">premium</label>
             </td>
           </tr>
           <tr>
             <td></td>
             <td>
-              <input id="isonline" type="checkbox" name="online" value="1" <?= $online == 1 ? 'checked="checked"' : '' ?> />
+              <input id="isonline" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="isonline">online</label>
             </td>
           </tr>
@@ -97,14 +91,14 @@
         </thead>
       </table>
     </form>
-    <? if (!empty($userlist)): ?>
+    <? if (!empty($pages)): ?>
       <div class="meh"> 
       <table>
         <tbody>
           <tr <?= $r["lastloginip"] == NULL ? 'data-no-login="true"' : '' ?> >
             <td class="shortcell cella">
 
-        <? foreach((array)$userlist as $r): ?>
+        <? foreach((array)$pages as $r): ?>
           <? $badges = getUserBadges($r["id"]); ?>
               <div class="player">
                 <div style="width: 95px; margin-left:31px;">
@@ -156,7 +150,7 @@
               <div style="text-overflow: ellipsis; overflow: hidden;text-align:center;">
                 <a href="/profile?id=<?= $r['id'] ?>"
                     title="<?= $r["registerdate"] ?>"
-                    data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>">
+                    data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
                   <span class=""><?= $r["playername"] ?></span> <br>
                   <span class="online no-margin-left"></span>
                 </a>

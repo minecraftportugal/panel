@@ -26,6 +26,7 @@
       require __DIR__.'/../partials/userbar.php';
     }
   ?>
+
   <?
     if ($total_new_drops > 0) {
       require __DIR__.'/../partials/itemdrops.php';
@@ -33,18 +34,17 @@
   ?>
 
     <div class="section">
-      <? if ($numberOnlinePlayers > 0): ?>
+      <? if (count($online_players) > 0): ?>
       
       <div id="onlineplayers">
-      <h2>Jogadores Online (<?= $numberOnlinePlayers ?>)</h2>
-      <? foreach($onlinePlayers as $r): ?>
+      <h2>Jogadores Online (<?= count($online_players) ?>)</h2>
+      <? foreach($online_players as $r): ?>
         <div class="stevegrid">
-          <? $id = getUserIdByName($r['name'])['id'] ?>
-          <a data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
-             class="<?= $id == null ? 'notregistered' : '' ?>" 
-             title="<?= $r['name'] ?> <?= $id == null ? '(not registered)' : '' ?>" 
-             href="<?= $id != null ? '/profile?id='.$id : '#' ?>">
-            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
+          <a data-online="<?= $r['online'] = 1 ? 'true' : 'false' ?>"
+             class="<?= $r['id'] == null ? 'notregistered' : '' ?>" 
+             title="<?= $r['playername'] ?> <?= $r['id'] == null ? '(not registered)' : '' ?>" 
+             href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>">
+            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
             <span class="stevehead">
               <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
             </span>
@@ -60,32 +60,34 @@
       <div style="clear: both;"></div>
     </div>
 
+
     <div class="section pushd">
       <div class="section-left extra-padding-left">
         <h2 title="Time Wasters ;)">Mais Activos</h2>
         <ul class="player-list">
-        <? foreach(getTopPlayers() as $r): ?>
+        <? foreach($top_players as $r): ?>
           <li class="link clear">
-            <? $id = getUserIdByName($r['name'])['id'] ?>
-            <a data-online="<?= in_array($r['name'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
-               href="<?= $id != null ? '/profile?id='.$id : '#' ?>"
-               style="<?= $id == null ? 'text-decoration: line-through;' : '' ?>">
-              <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['name'].".png"; ?>
+            <a data-online="<?= $r['online'] == 1? 'true' : 'false' ?>"
+               href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
+               style="<?= $r['id'] == null ? 'text-decoration: line-through;' : '' ?>">
+              <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
               <span class="stevehead">
                 <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
               </span>
-              <span class="name-label pull-left"><?= $r["name"] ?></span>
+              <span class="name-label pull-left"><?= $r["playername"] ?></span>
               <span class="online pull-left" title="O jogador está online!"></span>
             </a>
           </li>
         <? endforeach; ?>
         </ul>
       </div>
+
+
       <div class="section-right extra-padding-left">
         <h2><?= m("L_NEWEST") ?></h2>
         <ul class="player-list">
-        <? foreach(getNewest() as $r): ?>
-          <li class="link clear">
+        <? foreach($newest_players as $r): ?>
+          <li class="link clear">   
             <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                title="@ <?= $r["registerdate"] ?>"
                href="/profile?id=<?= $r['id'] ?>">

@@ -4,27 +4,27 @@ require_once('lib/sessions.php');
 require_once('lib/i18n.php');
 require_once('lib/users.php');
 
+use models\account\AccountModel;
+use models\drop\DropModel;
+
 function news_index() {
-  global $cfg_wp_enabled, $cfg_wp_location, $cfg_wp_url;
+    global $cfg_wp_enabled, $cfg_wp_location, $cfg_wp_url;
 
-  validateSession();
+    validateSession();
 
-  $onlinePlayers = getOnlinePlayers();
-  $f = function($e) {
-  	return $e['name'];
-  };
+    $online_players = AccountModel::get(["per_page" => 100, "online" => 1]);
 
-  $flatOnlinePlayers = array_map($f, $onlinePlayers);
-  $numberOnlinePlayers = $onlinePlayers == null ? 0 : count($onlinePlayers);
+    $new_drops_pages = DropModel::get(["per_page" => 6, "accountid" => $_SESSION["id"]]);
 
-  // Item Drops!
-  $new_drops_pages = getDrops(0, 6, $_SESSION["id"], 1); //mostrar até 6 itens
-  $total_new_drops = $new_drops_pages["total"];
-  $new_drops = $new_drops_pages["pages"];
-  $lootmessage = getLootMessage();
-  $loottitle = getLootTitles();
+    $lootmessage = getLootMessage();
 
-  require('templates/news/index.php');
+    $loottitle = getLootTitles();
+
+    $top_players = AccountModel::get(["per_page" => 15], "totalTime DESC");
+    
+    $newest_players = AccountModel::get(["per_page" => 15, "yeslogin" => 1], "a.registerdate DESC");
+
+    require('templates/news/index.php');
 }
 
 ?>

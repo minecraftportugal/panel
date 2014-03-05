@@ -1,5 +1,18 @@
 <?
 
+
+  function make_link($args) {
+      $str = '';
+
+      foreach ($args as $k => $v) {
+          if (!in_array($k, ['page', 'per_page'])) {
+              $str .= "&$k=$v";
+          }
+      }
+
+      return $str;
+  }
+
   function navigation(
     $page,
     $total,

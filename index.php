@@ -13,6 +13,10 @@ if ($cfg_wp_enabled) {
   $wp->register_globals(); $wp->send_headers();
 }
 
+require_once('models/account.php');
+require_once('models/session.php');
+require_once('models/drop.php');
+
 require_once('controllers/home.php');
 require_once('controllers/news/index.php');
 
@@ -47,6 +51,8 @@ require_once('controllers/webchat/index.php');
 require_once('controllers/widgets/players.php');
 
 require_once('controllers/errors.php');
+
+require_once('controllers/test/index.php');
 
 require_once('helpers/flash.php');
 
@@ -90,6 +96,8 @@ $r->map('GET', '/webchat', 'webchat_index');
 $r->map('GET', '/forbidden', 'forbidden');
 
 $r->map('GET', '/testpattern', 'testpattern');
+
+$r->map('GET', '/test', 'test_index');
 
 $path = getPathInfo();
 $path = rtrim($path, '/');

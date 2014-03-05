@@ -48,7 +48,7 @@ function inquisitorOnline($username) {
  * getTopPlayers: returns the top 10 player list
  */
 function getTopPlayers() {
-  $q = "SELECT name FROM players ORDER BY totalTime DESC LIMIT 15;";
+  $q = "SELECT name AS playername FROM players ORDER BY totalTime DESC LIMIT 15;";
 
   $result = Bitch::source('inquisitor')->all($q);
 
