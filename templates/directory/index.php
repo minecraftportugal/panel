@@ -1,42 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8 />
-    <title>directory</title>
-    
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
-
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/frames.js"></script>
-    <script type="text/javascript" src="/scripts/steve.js"></script>
-    <script type="text/javascript" src="/scripts/sidebar.js"></script>
-    <script type="text/javascript" src="/scripts/sop.js"></script>
-
-
-    <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-</head>
-<body>
- <div id="conteudo">
-
-  <? 
-    if (isLoggedIn()) {
-      require __DIR__.'/../partials/userbar.php';
-    }
-  ?>
-
-  <? if (isset($notice['error'])): ?>
-    <div class="section error"><?= $notice['error'] ?></div>
-  <? endif; ?>
-
-  <? if (isset($notice['success'])): ?>
-    <div class="section success"><?= $notice['success'] ?></div>
-  <? endif; ?>
-
-
+ <div id="widget-directory">
 
   <div id="playerlist" class="collapsible section default">
     <a href="#playerlist"><h1>Jogadores</h1></a>
@@ -169,8 +131,4 @@
   </div>
 </div>
 
-
-
 </div>
-</body>
-</html>

@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8 />
-    <title>news</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/frames.js"></script>
-    <script type="text/javascript" src="/scripts/steve.js"></script>
-    <script type="text/javascript" src="/scripts/sidebar.js"></script>
-    <script type="text/javascript" src="/scripts/Three.js"></script>
-    <script type="text/javascript" src="/scripts/profile.js"></script>
-    <script type="text/javascript" src="/scripts/items.js"></script>
-    <script type="text/javascript" src="/scripts/sop.js"></script>
-
-    <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-</head>
-<body>
-<div id="conteudo">
-  <? 
-    if (isLoggedIn()) {
-      require __DIR__.'/../partials/userbar.php';
-    }
-  ?>
-  
+<div class="widget-show">
   <?
     if ($total_new_drops > 0) {
       require __DIR__.'/../partials/itemdrops.php';
@@ -463,6 +435,4 @@
 
 
 
-  </div>
-</body>
-</html>
+</div>

@@ -1,40 +1,99 @@
-/*
-                                      █                    █
-                                      █                    █
-  ▓██▒  ▒███▒  ▒███▒         ▒███▒  █████  ░███░   █▒██▒ █████
- ▓█  ▓  █▒ ░█  █▒ ░█         █▒ ░█    █    █▒ ▒█   ██  █   █
- █░     █▒░    █▒░           █▒░      █        █   █       █
- █      ░███▒  ░███▒         ░███▒    █    ▒████   █       █
- █░        ▒█     ▒█            ▒█    █    █▒  █   █       █
- ▓█  ▓  █░ ▒█  █░ ▒█         █░ ▒█    █░   █░ ▓█   █       █░
-  ▓██▒  ▒███▒  ▒███▒         ▒███▒    ▒██  ▒██▒█   █       ▒██
-*/
-
-body {
- font-size: 12px;
- font-family: Consolas, monaco, monospace !important;
- color: #ddd;
-}
 
 html {
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
-/*
-   █                        █    █
-   █                        █
-   █                        █
-   █▒██▒   ███   ░███░   ██▓█  ███    █▒██▒   ██▓█  ▒███▒
-   █▓ ▒█  ▓▓ ▒█  █▒ ▒█  █▓ ▓█    █    █▓ ▒█  █▓ ▓█  █▒ ░█
-   █   █  █   █      █  █   █    █    █   █  █   █  █▒░
-   █   █  █████  ▒████  █   █    █    █   █  █   █  ░███▒
-   █   █  █      █▒  █  █   █    █    █   █  █   █     ▒█
-   █   █  ▓▓  █  █░ ▓█  █▓ ▓█    █    █   █  █▓ ▓█  █░ ▒█
-   █   █   ███▒  ▒██▒█   ██▓█  █████  █   █   ██▒█  ▒███▒
-                                                 █
-                                              ▓ ▒█
-                                              ▒██░
-*/
+body {
+  background: url('/images/backgrounds/app/pattern1.jpg');
+  background-size: 100% auto;
+}
+
+/* unselectable */  
+* {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+
+a#profile {
+  margin-top: 4px;
+  line-height: 1.5em;
+  width: auto;
+}
+
+a[data-widget-name="admin"], a[data-widget-name="admin-accounts"],
+a[data-widget-name="admin-drops"], a[data-widget-name="admin-sessions"] {
+  background-image: url('/images/icons/side_admin.png');
+}
+
+a[data-widget-name="maps"] {
+  background-image: url('/images/icons/side_maps.png');
+}
+
+a[data-widget-name="directory"] {
+  background-image: url('/images/icons/side_directory.png');
+}
+
+a[data-widget-name="news"] {
+  background-image: url('/images/icons/side_news.png');
+}
+
+a[data-widget-name="close"] {
+  background-image: url('/images/icons/side_close.png');
+}
+
+a[data-widget-name="logout"] {
+  background-image: url('/images/icons/side_logout.png');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 h1, h2, h3 {
   overflow:hidden;
@@ -49,7 +108,7 @@ h1 {
 
 h2 {
  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
- font-variant: small-caps;
+ text-transform: uppercase;
 
  color: #777;
  font-size: 1.2em;
@@ -82,13 +141,13 @@ h3 a:active {
    ▒██
    █░
    █
- █████   ███    █▒██▒ ██▓█▓  ▒███▒
-   █    █▓ ▓█   ██  █ █▒█▒█  █▒ ░█
-   █    █   █   █     █ █ █  █▒░
-   █    █   █   █     █ █ █  ░███▒
-   █    █   █   █     █ █ █     ▒█
-   █    █▓ ▓█   █     █ █ █  █░ ▒█
-   █     ███    █     █ █ █  ▒███▒
+ █████   ███  █▒██▒ ██▓█▓  ▒███▒
+   █  █▓ ▓█   ██  █ █▒█▒█  █▒ ░█
+   █  █   █   █   █ █ █  █▒░
+   █  █   █   █   █ █ █  ░███▒
+   █  █   █   █   █ █ █   ▒█
+   █  █▓ ▓█   █   █ █ █  █░ ▒█
+   █   ███  █   █ █ █  ▒███▒
 */
 
 select#itemid_sel {
@@ -168,7 +227,7 @@ input[type="date"] {
 }
 
 input[type="date"]::-webkit-inner-spin-button{
-    display: none;
+  display: none;
 }
 
 input[type="number"] {
@@ -177,16 +236,16 @@ input[type="number"] {
 
 
 /*
-          █                                ███
-                                             █
-                                             █
- ██▓█▓  ███    ▒███▒   ▓██▒          ▓██▒    █    ░███░  ▒███▒  ▒███▒
- █▒█▒█    █    █▒ ░█  ▓█  ▓         ▓█  ▓    █    █▒ ▒█  █▒ ░█  █▒ ░█
- █ █ █    █    █▒░    █░            █░       █        █  █▒░    █▒░
- █ █ █    █    ░███▒  █             █        █    ▒████  ░███▒  ░███▒
- █ █ █    █       ▒█  █░            █░       █    █▒  █     ▒█     ▒█
- █ █ █    █    █░ ▒█  ▓█  ▓         ▓█  ▓    █░   █░ ▓█  █░ ▒█  █░ ▒█
- █ █ █  █████  ▒███▒   ▓██▒          ▓██▒    ▒██  ▒██▒█  ▒███▒  ▒███▒
+      █                ███
+                       █
+                       █
+ ██▓█▓  ███  ▒███▒   ▓██▒      ▓██▒  █  ░███░  ▒███▒  ▒███▒
+ █▒█▒█  █  █▒ ░█  ▓█  ▓     ▓█  ▓  █  █▒ ▒█  █▒ ░█  █▒ ░█
+ █ █ █  █  █▒░  █░      █░     █    █  █▒░  █▒░
+ █ █ █  █  ░███▒  █       █    █  ▒████  ░███▒  ░███▒
+ █ █ █  █     ▒█  █░      █░     █  █▒  █   ▒█   ▒█
+ █ █ █  █  █░ ▒█  ▓█  ▓     ▓█  ▓  █░   █░ ▓█  █░ ▒█  █░ ▒█
+ █ █ █  █████  ▒███▒   ▓██▒      ▓██▒  ▒██  ▒██▒█  ▒███▒  ▒███▒
 */
 
 i {
@@ -194,59 +253,96 @@ i {
 }
 
 p { 
- font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
- font-size: 1.1em;
- line-height: 1.3em;
+  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+  font-size: 1.1em;
+  line-height: 1.3em;
 }
 
 a {
- color: #ddd;
- text-decoration: none;
+  color: #ddd;
+  text-decoration: none;
 }
 
 a:hover {
- color: #666;
- text-decoration: none;
+  color: #666;
+  text-decoration: none;
 }
 
 a:active {
- color: #777;
- text-decoration: none;
+  color: #777;
+  text-decoration: none;
 }
 
 .pushd {
- margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .pushu {
- margin-top: 1em;
+  margin-top: 1em;
 }
 .clear {
- clear: left;
+  clear: left;
 } 
 .pull-left {
- float: left;
+  float: left;
+}
+
+.halfwidth {
+  width: 50%;
 }
 
 .pull-right {
- float: right;
+  float: right;
 }
 
-.aright {
- text-align: right;
+.half-width {
+  width: 50%;
 }
+.aright {
+  text-align: right;
+}
+
+div.sep {
+  width: 25px;
+  height: 1px;
+  display: inline-block;
+}
+
+div#ajax-indicator {
+  width: 140px;
+  height: 24px;
+}
+
+div#ajax-indicator.ajax-loading {
+  background-image: url("/images/loader1.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+div#ajax-indicator.ajax-loading-https {
+  background-image: url("/images/loader2.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+div#ajax-indicator.ajax-error {
+  background-image: url("/images/loader3.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
 
 /*
-               █      ███
-   █           █        █
-   █           █        █
- █████  ░███░  █▓██     █     ███   ▒███▒
-   █    █▒ ▒█  █▓ ▓█    █    ▓▓ ▒█  █▒ ░█
-   █        █  █   █    █    █   █  █▒░
-   █    ▒████  █   █    █    █████  ░███▒
-   █    █▒  █  █   █    █    █         ▒█
-   █░   █░ ▓█  █▓ ▓█    █░   ▓▓  █  █░ ▒█
-   ▒██  ▒██▒█  █▓██     ▒██   ███▒  ▒███▒
+         █    ███
+   █       █    █
+   █       █    █
+ █████  ░███░  █▓██   █   ███   ▒███▒
+   █  █▒ ▒█  █▓ ▓█  █  ▓▓ ▒█  █▒ ░█
+   █    █  █   █  █  █   █  █▒░
+   █  ▒████  █   █  █  █████  ░███▒
+   █  █▒  █  █   █  █  █     ▒█
+   █░   █░ ▓█  █▓ ▓█  █░   ▓▓  █  █░ ▒█
+   ▒██  ▒██▒█  █▓██   ▒██   ███▒  ▒███▒
 */
 
 /* Admin Table */
@@ -447,16 +543,16 @@ table.admin h2#select-all-delete {
 }
 
 /*
-     █    █                                                █
-     █                                              █
-     █                                              █
-  ██▓█  ███    █░ ░█         ▒███▒   ███    ▓██▒  █████  ███     ███   █▒██▒
- █▓ ▓█    █    ▓▒ ▒▓         █▒ ░█  ▓▓ ▒█  ▓█  ▓    █      █    █▓ ▓█  █▓ ▒█
- █   █    █    ▒█ █▒         █▒░    █   █  █░       █      █    █   █  █   █
- █   █    █     █ █    ███   ░███▒  █████  █        █      █    █   █  █   █
- █   █    █     █▓█             ▒█  █      █░       █      █    █   █  █   █
- █▓ ▓█    █     ▒█▒          █░ ▒█  ▓▓  █  ▓█  ▓    █░     █    █▓ ▓█  █   █
-  ██▓█  █████   ░█░          ▒███▒   ███▒   ▓██▒    ▒██  █████   ███   █   █
+   █  █                        █
+   █                        █
+   █                        █
+  ██▓█  ███  █░ ░█     ▒███▒   ███  ▓██▒  █████  ███   ███   █▒██▒
+ █▓ ▓█  █  ▓▒ ▒▓     █▒ ░█  ▓▓ ▒█  ▓█  ▓  █    █  █▓ ▓█  █▓ ▒█
+ █   █  █  ▒█ █▒     █▒░  █   █  █░     █    █  █   █  █   █
+ █   █  █   █ █  ███   ░███▒  █████  █    █    █  █   █  █   █
+ █   █  █   █▓█       ▒█  █    █░     █    █  █   █  █   █
+ █▓ ▓█  █   ▒█▒      █░ ▒█  ▓▓  █  ▓█  ▓  █░   █  █▓ ▓█  █   █
+  ██▓█  █████   ░█░      ▒███▒   ███▒   ▓██▒  ▒██  █████   ███   █   █
 */
 
 div#conteudo {
@@ -574,49 +670,6 @@ div#skin img {
   height: 346px;
 }
 
-div.userbar {
-  height: 26px !important;
-  margin-bottom: 0.5em;
-}
-
-a#profile {
-  margin-top: 4px;
-  line-height: 1.5em;
-  width: auto;
-}
-
-a#backoffice {
-  background-image: url('/images/icons/side_admin.png');
-}
-
-a#maps {
-  background-image: url('/images/icons/side_maps.png');
-}
-
-a#directory {
-  background-image: url('/images/icons/side_directory.png');
-}
-
-a#news {
-  background-image: url('/images/icons/side_news.png');
-}
-
-a#close {
-  background-image: url('/images/icons/side_close.png');
-}
-
-a#logout {
-  background-image: url('/images/icons/side_logout.png');
-}
-
-a.button {
-  background-position: top left;
-  background-repeat: no-repeat;
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-}
-
 a.button-padded {
   background-position: top left;
   background-repeat: no-repeat;
@@ -625,9 +678,7 @@ li.link:active {
   background-position: 1px top !important;
 }
 
-a.button:active {
-  background-position: 1px 1px !important;
-}
+
 
 a#profile:active {
   padding-top: 1px;
@@ -647,36 +698,36 @@ a[data-lang=en_GB] {
  background: url('/images/icons/GB.png') no-repeat left center;
 }*/
 
-/*
-                        ▒██    █    ███             █
-                        █░            █
-                        █             █
- █▓██    █▒██▒  ███   █████  ███      █     ███   ███     ▓██▒   ███   █▒██▒
- █▓ ▓█   ██  █ █▓ ▓█    █      █      █    ▓▓ ▒█    █    ▓█  ▓  █▓ ▓█  █▓ ▒█
- █   █   █     █   █    █      █      █    █   █    █    █░     █   █  █   █
- █   █   █     █   █    █      █      █    █████    █    █      █   █  █   █
- █   █   █     █   █    █      █      █    █        █    █░     █   █  █   █
- █▓ ▓█   █     █▓ ▓█    █      █      █░   ▓▓  █    █    ▓█  ▓  █▓ ▓█  █   █
- █▓██    █      ███     █    █████    ▒██   ███▒  █████   ▓██▒   ███   █   █
+
+            ▒██  █  ███       █
+            █░      █
+            █       █
+ █▓██  █▒██▒  ███   █████  ███    █   ███   ███   ▓██▒   ███   █▒██▒
+ █▓ ▓█   ██  █ █▓ ▓█  █    █    █  ▓▓ ▒█  █  ▓█  ▓  █▓ ▓█  █▓ ▒█
+ █   █   █   █   █  █    █    █  █   █  █  █░   █   █  █   █
+ █   █   █   █   █  █    █    █  █████  █  █    █   █  █   █
+ █   █   █   █   █  █    █    █  █    █  █░   █   █  █   █
+ █▓ ▓█   █   █▓ ▓█  █    █    █░   ▓▓  █  █  ▓█  ▓  █▓ ▓█  █   █
+ █▓██  █    ███   █  █████  ▒██   ███▒  █████   ▓██▒   ███   █   █
  █
  █
  █
 
-   █                           █             █
-                                                    █
-                                                    █
- ███    █▒██▒   ██▓█  █   █  ███    ▒███▒  ███    █████   ███    █▒██▒
-   █    █▓ ▒█  █▓ ▓█  █   █    █    █▒ ░█    █      █    █▓ ▓█   ██  █
-   █    █   █  █   █  █   █    █    █▒░      █      █    █   █   █
-   █    █   █  █   █  █   █    █    ░███▒    █      █    █   █   █
-   █    █   █  █   █  █   █    █       ▒█    █      █    █   █   █
-   █    █   █  █▓ ▓█  █▒ ▓█    █    █░ ▒█    █      █░   █▓ ▓█   █
- █████  █   █   ██▓█  ▒██▒█  █████  ▒███▒  █████    ▒██   ███    █
-                   █
-                   █
-                   █
+   █               █       █
+                          █
+                          █
+ ███  █▒██▒   ██▓█  █   █  ███  ▒███▒  ███  █████   ███  █▒██▒
+   █  █▓ ▒█  █▓ ▓█  █   █  █  █▒ ░█  █    █  █▓ ▓█   ██  █
+   █  █   █  █   █  █   █  █  █▒░    █    █  █   █   █
+   █  █   █  █   █  █   █  █  ░███▒  █    █  █   █   █
+   █  █   █  █   █  █   █  █     ▒█  █    █  █   █   █
+   █  █   █  █▓ ▓█  █▒ ▓█  █  █░ ▒█  █    █░   █▓ ▓█   █
+ █████  █   █   ██▓█  ▒██▒█  █████  ▒███▒  █████  ▒██   ███  █
+           █
+           █
+           █
 
- */
+ 
  
 /* little heads cropped from full minecraft skins */
 a.notregistered {
@@ -885,30 +936,30 @@ div.section div.section
 }
 
 /*
-               ███    ███                           █    █      ███
-                 █      █                                █        █
-                 █      █                                █        █
-  ▓██▒   ███     █      █    ░███░  █▓██   ▒███▒  ███    █▓██     █     ███
- ▓█  ▓  █▓ ▓█    █      █    █▒ ▒█  █▓ ▓█  █▒ ░█    █    █▓ ▓█    █    ▓▓ ▒█
- █░     █   █    █      █        █  █   █  █▒░      █    █   █    █    █   █
- █      █   █    █      █    ▒████  █   █  ░███▒    █    █   █    █    █████
- █░     █   █    █      █    █▒  █  █   █     ▒█    █    █   █    █    █
- ▓█  ▓  █▓ ▓█    █░     █░   █░ ▓█  █▓ ▓█  █░ ▒█    █    █▓ ▓█    █░   ▓▓  █
-  ▓██▒   ███     ▒██    ▒██  ▒██▒█  █▓██   ▒███▒  █████  █▓██     ▒██   ███▒
-                                    █
-                                    █
-                                    █
+         ███  ███               █  █    ███
+         █    █                █    █
+         █    █                █    █
+  ▓██▒   ███   █    █  ░███░  █▓██   ▒███▒  ███  █▓██   █   ███
+ ▓█  ▓  █▓ ▓█  █    █  █▒ ▒█  █▓ ▓█  █▒ ░█  █  █▓ ▓█  █  ▓▓ ▒█
+ █░   █   █  █    █    █  █   █  █▒░    █  █   █  █  █   █
+ █    █   █  █    █  ▒████  █   █  ░███▒  █  █   █  █  █████
+ █░   █   █  █    █  █▒  █  █   █   ▒█  █  █   █  █  █
+ ▓█  ▓  █▓ ▓█  █░   █░   █░ ▓█  █▓ ▓█  █░ ▒█  █  █▓ ▓█  █░   ▓▓  █
+  ▓██▒   ███   ▒██  ▒██  ▒██▒█  █▓██   ▒███▒  █████  █▓██   ▒██   ███▒
+                  █
+                  █
+                  █
 
-                                      █
-                               █
-                               █
-        ▒███▒   ███    ▓██▒  █████  ███     ███   █▒██▒  ▒███▒
-        █▒ ░█  ▓▓ ▒█  ▓█  ▓    █      █    █▓ ▓█  █▓ ▒█  █▒ ░█
-        █▒░    █   █  █░       █      █    █   █  █   █  █▒░
-        ░███▒  █████  █        █      █    █   █  █   █  ░███▒
-           ▒█  █      █░       █      █    █   █  █   █     ▒█
-        █░ ▒█  ▓▓  █  ▓█  ▓    █░     █    █▓ ▓█  █   █  █░ ▒█
-        ▒███▒   ███▒   ▓██▒    ▒██  █████   ███   █   █  ▒███▒
+                    █
+                 █
+                 █
+    ▒███▒   ███  ▓██▒  █████  ███   ███   █▒██▒  ▒███▒
+    █▒ ░█  ▓▓ ▒█  ▓█  ▓  █    █  █▓ ▓█  █▓ ▒█  █▒ ░█
+    █▒░  █   █  █░     █    █  █   █  █   █  █▒░
+    ░███▒  █████  █    █    █  █   █  █   █  ░███▒
+       ▒█  █    █░     █    █  █   █  █   █   ▒█
+    █░ ▒█  ▓▓  █  ▓█  ▓  █░   █  █▓ ▓█  █   █  █░ ▒█
+    ▒███▒   ███▒   ▓██▒  ▒██  █████   ███   █   █  ▒███▒
 */
 
 div.collapsible.section > div.inside
@@ -919,10 +970,10 @@ div.collapsible.section > div.inside
   overflow: auto;
 
   -webkit-transition: opacity 0.2s ease-in-out;
-     -moz-transition: opacity 0.2s ease-in-out;
-      -ms-transition: opacity 0.2s ease-in-out;
-       -o-transition: opacity 0.2s ease-in-out;
-          transition: opacity 0.2s ease-in-out;
+   -moz-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+     -o-transition: opacity 0.2s ease-in-out;
+      transition: opacity 0.2s ease-in-out;
 }
 
 div.collapsible.section:target h1 {
@@ -934,10 +985,10 @@ div.collapsible.section:target > div.inside
   height: auto;
   opacity: 1;
   -webkit-transition: opacity 0.2s ease-in-out;
-     -moz-transition: opacity 0.2s ease-in-out;
-      -ms-transition: opacity 0.2s ease-in-out;
-       -o-transition: opacity 0.2s ease-in-out;
-          transition: opacity 0.2s ease-in-out;
+   -moz-transition: opacity 0.2s ease-in-out;
+    -ms-transition: opacity 0.2s ease-in-out;
+     -o-transition: opacity 0.2s ease-in-out;
+      transition: opacity 0.2s ease-in-out;
 }
 
 div.collapsible.section h1 {
@@ -1027,12 +1078,12 @@ div.inventory {
  */
 .pixels
 {
-  image-rendering: optimizeSpeed;             // Older versions of FF
-  image-rendering: -moz-crisp-edges;          // FF 6.0+
+  image-rendering: optimizeSpeed;       // Older versions of FF
+  image-rendering: -moz-crisp-edges;      // FF 6.0+
   image-rendering: -webkit-optimize-contrast; // Webkit
-                                              //  (Safari now, Chrome soon)
-  image-rendering: -o-crisp-edges;            // OS X & Windows Opera (12.02+)
-  image-rendering: optimize-contrast;         // Possible future browsers.
+                        //  (Safari now, Chrome soon)
+  image-rendering: -o-crisp-edges;      // OS X & Windows Opera (12.02+)
+  image-rendering: optimize-contrast;     // Possible future browsers.
   -ms-interpolation-mode: nearest-neighbor;   // IE
 }
 
@@ -1142,4 +1193,4 @@ a[data-online='true'] span.online {
 
 a:not([data-online='true']) span.online {
   display: none;
-}
+} 

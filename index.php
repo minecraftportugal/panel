@@ -36,6 +36,9 @@ require_once('controllers/users/configure.php');
 require_once('controllers/users/reset_password.php');
 
 require_once('controllers/admin/index.php');
+require_once('controllers/admin/accounts.php');
+require_once('controllers/admin/drops.php');
+require_once('controllers/admin/sessions.php');
 require_once('controllers/admin/configure.php');
 require_once('controllers/admin/register.php');
 require_once('controllers/admin/drop_items.php');
@@ -55,7 +58,10 @@ require_once('controllers/errors.php');
 require_once('controllers/test/index.php');
 
 require_once('helpers/flash.php');
-
+require_once('helpers/pagination.php');
+require_once('helpers/request.php');
+require_once('helpers/notice.php');
+require_once('helpers/minotar.php');
 
 $r = new Router();
 
@@ -80,6 +86,10 @@ $r->map('POST', '/users/drop_items', 'users_drop_items');
 $r->map('POST', '/users/delete_drops', 'users_delete_drops');
 
 $r->map('GET',  '/admin', 'admin_index');
+$r->map('GET',  '/admin/accounts', 'admin_accounts');
+$r->map('GET',  '/admin/sessions', 'admin_sessions');
+$r->map('GET',  '/admin/drops', 'admin_drops');
+
 $r->map('POST', '/admin/configure', 'admin_configure');
 $r->map('POST', '/admin/register', 'admin_register');
 $r->map('POST', '/admin/delete_drops', 'admin_delete_drops');

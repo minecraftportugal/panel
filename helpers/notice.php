@@ -14,14 +14,14 @@ class NoticeHelper {
 
   function get($type = null) {
 
+    if (!isset($_SESSION["notice"])) {
+       $_SESSION["notice"] = [];
+    }
+
     if ($type = null) {
 
-      if (!isset($_SESSION["notice"])) {
-         $_SESSION["notice"] = [];
-      }
-
       $notice = $_SESSION["notice"];
-      unset($_SESSION["notice"]):
+      unset($_SESSION["notice"]);
       return $notice;
 
     } else {
@@ -34,7 +34,7 @@ class NoticeHelper {
         return false;
       }
     }
-    
+
   }
 
 }

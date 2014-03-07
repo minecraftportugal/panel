@@ -42,7 +42,7 @@ class AccountModel {
 
     $q = "SELECT count(1) AS total
       FROM accounts a LEFT JOIN (
-      SELECT online, totalTime, name FROM inquisitor.players
+      SELECT online, totalTime, name, world FROM inquisitor.players
     ) o ON (o.name = a.playername)
     WHERE playername = ifnull(:playername, playername)
     AND (id = ifnull(:id, id))
@@ -75,9 +75,9 @@ class AccountModel {
       SELECT id, playername, email, admin, operator, active,
         DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
         DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip,
-        IFNULL(online, 0) AS online
+        o.online, o.totalTime, o.world
       FROM accounts a LEFT JOIN (
-        SELECT online, totalTime, name
+        SELECT online, totalTime, name, world
         FROM inquisitor.players
       ) o ON (o.name = a.playername)
       WHERE playername = ifnull(:playername, playername)

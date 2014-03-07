@@ -10,8 +10,8 @@ class DropModel {
            "page" => 1,
        "per_page" => 20,
       "accountid" => null,
-      "delivered" => null,
-    "undelivered" => null
+      "delivered" => 0,
+    "undelivered" => 0
   ];
 
   public function __construct() {
@@ -26,7 +26,7 @@ class DropModel {
     WHERE ((:accountid IS NULL) OR (accountid = :accountid))
     AND ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
     AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))";
-    
+
     return Bitch::source('default')->first($q, $args)["total"];
   }
 
@@ -45,7 +45,7 @@ class DropModel {
         AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))
       ORDER BY $order
     ) x LIMIT :index, :per_page;";
-    
+
     $args["index"] = ($args["page"] - 1) * $args["per_page"];
 
     $result = Bitch::source('default')->all($q, $args);

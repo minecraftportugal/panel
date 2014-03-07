@@ -1,31 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset=utf-8 />
-    <title>news</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/sidebar.css" />
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/frames.js"></script>
-    <script type="text/javascript" src="/scripts/autoreload.js"></script>
-    <script type="text/javascript" src="/scripts/sidebar.js"></script>
-    <script type="text/javascript" src="/scripts/steve.js"></script>
-    <script type="text/javascript" src="/scripts/sop.js"></script>
-    <script type="text/javascript" src="/scripts/profile.js"></script>
-    <script type="text/javascript" src="/scripts/items.js"></script>
-    <!--[if IE]>
-        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-</head>
-<body>
-  <div id="conteudo">
-  
-  <? 
-    if (isLoggedIn()) {
-      require __DIR__.'/../partials/userbar.php';
-    }
-  ?>
+  <div id="widget-news">
 
   <?
     if ($total_new_drops > 0) {
@@ -44,10 +17,8 @@
              class="<?= $r['id'] == null ? 'notregistered' : '' ?>" 
              title="<?= $r['playername'] ?> <?= $r['id'] == null ? '(not registered)' : '' ?>" 
              href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>">
-            <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-            <span class="stevehead">
-              <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-            </span>
+            <?= \helpers\minotar\MinotarHelper::head($r['playername'], 40) ?>
+            <?= $user['playername'] ?>
           </a>
         </div>
       <? endforeach; ?>
@@ -70,10 +41,8 @@
             <a data-online="<?= $r['online'] == 1? 'true' : 'false' ?>"
                href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
                style="<?= $r['id'] == null ? 'text-decoration: line-through;' : '' ?>">
-              <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-              <span class="stevehead">
-                <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-              </span>
+              <?= \helpers\minotar\MinotarHelper::head($r['playername'], 25) ?>
+              <?= $user['r'] ?>
               <span class="name-label pull-left"><?= $r["playername"] ?></span>
               <span class="online pull-left" title="O jogador está online!"></span>
             </a>
@@ -91,10 +60,8 @@
             <a data-online="<?= in_array($r['playername'], $flatOnlinePlayers) ? 'true' : 'false' ?>"
                title="@ <?= $r["registerdate"] ?>"
                href="/profile?id=<?= $r['id'] ?>">
-              <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-              <span class="stevehead">
-                <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-              </span>
+              <?= \helpers\minotar\MinotarHelper::head($r['playername'], 25) ?>
+              <?= $user['r'] ?>
               <span class="name-label pull-left"><?= $r["playername"] ?></span>
               <span class="online pull-left" title="O jogador está online!"></span>
             </a>
@@ -121,5 +88,3 @@
     ?>
     </div>
     <? endif; ?>
-</body>
-</html>

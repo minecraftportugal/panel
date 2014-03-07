@@ -4,7 +4,7 @@ namespace helpers\pagination;
 
 class PaginationHelper {
 
-    function make_link($args) {
+    function make_link($args, $suffix = '') {
         $str = '';
 
         foreach ($args as $k => $v) {
@@ -13,7 +13,7 @@ class PaginationHelper {
             }
         }
 
-        return $str;
+        return $str . $suffix;
     }
 
     function navigation(
