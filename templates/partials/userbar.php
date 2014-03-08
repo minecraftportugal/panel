@@ -1,10 +1,49 @@
+<ul class="pull-left">
+    <li><a href="#menu1">admin</a>
+      <ul id="menu1">
+        <li><a href="#">contas</a></li>
+        <li><a href="#">sessões</a></li>
+        <li><a href="#">item drops</a></li>
+      </ul>
+    </li>
+</ul>
+
+<ul class="pull-left">
+  <li><a href="#menu2">ajuda</a>
+    <ul id="menu2">
+      <li><a href="#">como jogar</a></li>
+      <li><a href="#">it's a trap</a></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class="pull-right">
+    <li>
+      <a id="profile" href="#menu3" title="Profile"
+      class="bg-icon" style="background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 20) ?>');"
+      >
+        <?= $user['playername'] ?>
+      </a>
+    <ul id="menu3">
+      <li><a href="#">opções</a></li>
+      <li><a href="#"  data-widget-action="open" data-widget-name="profile">perfil</a></li>
+      <li><a href="#">sair</a></li>
+      </ul>
+    </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+<? /*
 <div>
-  <div class="pull-left half-width">
-    <a id="profile" href="/profile" title="Profile" data-widget-action="open" data-widget-name="profile">
-      <div class="pull-left"> <?= \helpers\minotar\MinotarHelper::head($user['playername'], 30) ?></div>
-      <div class="pull-left "><?= $user['playername'] ?></div>
-    </a>
-  </div>
 
   <div class="pull-right half-width">
     <div class="userbar pull-right"> 
@@ -29,4 +68,4 @@
 
   </div>
 </div>
-
+*/?>

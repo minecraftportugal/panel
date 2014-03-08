@@ -1,6 +1,5 @@
-  <div id="sessions" class="collapsible section">
-    <a href="#sessions"><h1>Sessões (<?= $total ?>)</h1></a>
-    <div class="inside">
+  <div id="sessions">
+    <h1>Sessões (<?= $total ?>)</h1>
     <form name="manage_sessions_filters" action="/admin#sessions" method="GET" autocomplete="off">
       <table class="admin options">
         <thead>

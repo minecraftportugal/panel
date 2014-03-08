@@ -22,12 +22,6 @@ body {
    user-select: none;
 }
 
-a#profile {
-  margin-top: 4px;
-  line-height: 1.5em;
-  width: auto;
-}
-
 a[data-widget-name="admin"], a[data-widget-name="admin-accounts"],
 a[data-widget-name="admin-drops"], a[data-widget-name="admin-sessions"] {
   background-image: url('/images/icons/side_admin.png');
@@ -68,74 +62,6 @@ a[data-widget-name="logout"] {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-h1, h2, h3 {
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-h1 {
- color: #999;
- font-size: 2em;
- margin-bottom: 0.3em;
-}
-
-h2 {
- font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
- text-transform: uppercase;
-
- color: #777;
- font-size: 1.2em;
- margin-bottom: 0.3em;
-}
-
-h3 {
- font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
- font-variant: small-caps;
- color: #777;
- font-size: 1.2em;
-
- margin-bottom: 0.3em;
- margin-bottom: 5px;
-}
-
-/* for the links in blog posts */
-h3 a {
-  color: #666;
-}
-
-h3 a:hover {
-  color: #777;
-}
-h3 a:active {
-  color: #888;
-}
 
 /*
    ▒██
@@ -636,28 +562,6 @@ div.itemdrops table tr td {
   vertical-align: middle;
 }
 
-li {
- line-height: 1.5em;
- margin-bottom: 2px;
-
-}
-
-ul.player-list {
- width: 100%;
-}
-
-ul.player-list li {
- background-position: left top;
- background-repeat: no-repeat;
-}
-
-ul.player-list li a {
- padding-left: 0px;
-}
-ul.player-list li a:active {
- 
-}
-
 div#skin {
   width: 100%;
   text-align: center;
@@ -674,16 +578,8 @@ a.button-padded {
   background-position: top left;
   background-repeat: no-repeat;
 }
-li.link:active {
-  background-position: 1px top !important;
-}
 
 
-
-a#profile:active {
-  padding-top: 1px;
-  padding-left: 1px;
-}
 
 /* deprecated a.i18n {
  padding-left: 20px;
@@ -1016,10 +912,6 @@ div.collapsible.section.playername h1 {
   margin-left: 2px;
 }
 
-div.collapsible.section h1:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
 div.collapsible.section h1:active {
   padding-left: 0.55em;
   padding-top: 0.55em;
@@ -1133,26 +1025,6 @@ span.badge-member {
 
 span.badge-deactivated {
   background-image: url(/images/icons/badge_deactivated.png);
-}
-
-ul.navigation {
- font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
- font-variant: small-caps;
-}
-
-ul.navigation li {
-  display: inline-block;
-  width: 1.4em;
-  color: #FFF;
-  margin-bottom: 0 !important;
-}
-
-ul.navigation li.short {
-  width: 1em;
-}
-
-ul.navigation li.current {
-  color: #444;
 }
 
 td.nav {

@@ -1,6 +1,5 @@
-  <div id="accounts" class="collapsible section default">
-    <a href="#accounts"><h1>Utilizadores (<?= $total ?>)</h1></a>
-    <div class="inside">
+  <div id="widget-accounts">
+    <h1>Utilizadores (<?= $total ?>)</h1>
     <form name="manage_users_filters" action="/admin#accounts" method="GET" autocomplete="off">
       <table class="admin options">
         <thead>
@@ -208,5 +207,5 @@
         </tbody>
       </table>
     </form>
-    </div>
+  
   </div>

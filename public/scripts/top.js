@@ -59,7 +59,7 @@ $(function() {
   w3 = new Widget({
     'name' : 'tickl',
     'url' : '/profile?id=6',
-    'title' : 'MAN OF THE YEAR'
+    'title' : 'Man of the Year'
   });
 
   w4 = new Widget({

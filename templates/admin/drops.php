@@ -1,6 +1,5 @@
-  <div id="drops" class="collapsible section">
-    <a href="#drops"><h1>Drops (<?= $total ?>)</h1></a>
-    <div class="inside">
+  <div id="drops">
+    <h1>Drops (<?= $total ?>)</h1>
     <form name="manage_drops_filters" action="/admin#drops" method="GET" autocomplete="off">
       <table class="admin options">
           <tr>
@@ -81,6 +80,6 @@
         </tbody>
       </table>
     </form>
-    </div>
+
   </div>
 

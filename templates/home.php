@@ -45,9 +45,10 @@
     <div id="widget-template">
       <div class="widget">
         <div class="widget-titlebar">
+          <div class="widget-close widget-ui" title="click to minimize"><div></div></div>
           <div class="widget-title widget-drag widget-ui" title="drag to move"><div></div></div>
-          <div class="widget-dock widget-ui" title="click to dock"><div></div></div>
-          <div class="widget-minimize widget-ui" title="click to minimize"><div></div></div>
+          <div class="widget-maximize widget-ui" title="click to dock"><div></div></div>
+          <div class="widget-minimize widget-ui" title="click to dock"><div></div></div>
         </div>
         <div class="widget-body">
         </div>

@@ -26,3 +26,21 @@ $.ajaxSetup({
   },
   type: "GET"
 });
+
+$(function() {
+
+  $(document).on('click', 'div.widget a', function(e) {
+    var href = $(this).attr("href");
+    var container = $(this).closest("div.widget-body");
+    $.ajax({
+      url : href,
+      type : "GET",
+      success : function(data) {
+        console.log(data);
+        container.html(data);
+      }
+    })
+    return false;
+  });
+
+});

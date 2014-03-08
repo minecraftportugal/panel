@@ -16,20 +16,11 @@ function Widget(options) {
         'max-width' : null, //'700px',
         'max-height' : null //'700px' 
       },
-      'docked' : {
-        'position' : 'relative',
-        'width':'100%',
+      'maximized' : {
         'top':'0px',
         'left':'0px',
-        'bottom':'0px',
-        'right' : '0px'
-      },
-      'moveable' : {
-        'position' : 'absolute',
-        'width' : '300px',
-        'height' : '600px',
-        'top' : '40px',
-        'right' : '0px'
+        'width': parseInt($('div#widget-container').css('width')) - 5 + 'px' ,
+        'height': parseInt($('div#widget-container').css('height')) - 8 + 'px'
       }
     }
   }
@@ -42,13 +33,16 @@ function Widget(options) {
   this.buttonId = "button-widget-" + this.options.name;
   this.buttonSelector = "div#button-widget-" + this.options.name;
 
+  this.states = [];
 
   if (Widget.counter === undefined) {
     Widget.counter = 1;
   } else {
     Widget.counter += 1;
   }
-  
+
+  this.serial = Widget.counter;
+
   var existing = null;
   if (Widget.widgets === undefined) {
     Widget.widgets = [];
@@ -104,7 +98,7 @@ Widget.prototype._init = function() {
     handle: "div.widget-drag",
     snap: true,
     snapMode: "outer",
-    containment: $("div#widget-container"),
+    containment: "parent",
     start: function(event, ui) {
       $("iframe").css('pointer-events', 'none');
     },
@@ -123,6 +117,7 @@ Widget.prototype._init = function() {
     handle: "div.widget-drag",
     snap: true,
     snapMode: "outer",
+    containment: "parent",
     start: function(event, ui) {
       $("iframe").css('pointer-events', 'none');
     },
@@ -133,18 +128,29 @@ Widget.prototype._init = function() {
 
   });
 
-  $(this.selector).find("div.widget-dock").click(function() {
-    widgetInstance.dock();
+  $(this.selector).find("div.widget-maximize").click(function() {
+    if ($(widgetInstance.selector).hasClass("maximized")) {
+      widgetInstance.restore();
+    } else {
+      widgetInstance.maximize();
+    }
   });
 
   $(this.selector).find("div.widget-minimize").click(function() {
     widgetInstance.minimize();
   });
 
-  $(this.buttonSelector).click(function() {
-    widgetInstance.toggle();
+  $(this.selector).find("div.widget-close").click(function() {
+    widgetInstance.close();
   });
 
+  $(this.buttonSelector).click(function() {
+    if ($(widgetInstance.buttonSelector).hasClass("minimized")) {
+      widgetInstance.restore();
+    } else {
+      widgetInstance.minimize();
+    }
+  });
 
   $(this.selector).find("div.widget-drag").mousedown(function() {
     widgetInstance.bringTop();
@@ -176,6 +182,21 @@ Widget.prototype._load = function() {
   }
 }
 
+Widget.prototype._pushState = function() {
+  var state = {
+    'top': $(this.selector).css('top'),
+    'left': $(this.selector).css('left'),
+    'width': $(this.selector).css('width'),
+    'height': $(this.selector).css('height')
+  }
+  this.states.push(state);
+}
+
+Widget.prototype._popState = function() {
+  var state = this.states.pop();
+  $(this.selector).css(state);
+}
+
 Widget.prototype.bringTop = function() {
   var max_z = 0;
   $(Widget.widgets).each(function(n, e) {
@@ -186,58 +207,45 @@ Widget.prototype.bringTop = function() {
   $(this.selector).css("z-index", max_z + 1);
 }
 
-Widget.prototype.toggle = function() {
-  if ($(this.buttonSelector).hasClass("minimized")) {
-    this.maximize();
-  } else {
-    this.minimize();
-  }
-}
-
 Widget.prototype.maximize = function() {
   $(this.selector).show();
+  this._pushState();
+  $(this.selector).css(this.options.css.maximized);
   $(this.buttonSelector).removeClass("minimized");
+  $(this.selector).addClass("maximized");
   this.bringTop();
-  // var widgetInstance = this;
-  // $(widgetInstance.selector).animate({
-  //   opacity : 1,
-  //   width: 0,
-  //   left : $($(widgetInstance).buttonSelector).css("left"),
-  //   top : "-=100"
-  // }, {
-  //   duration : 400,
-  //   easing: "swing",
-  //   complete : function() {
-  //     $(widgetInstance.selector).show();
-  //     $(widgetInstance.buttonSelector).removeClass("minimized");
-  //     this.bringTop();
-  //   }
-  // });
 }
 
-Widget.prototype.minimize = function () {
+Widget.prototype.restore = function() {
+  $(this.selector).show();
+  this._popState();
+  $(this.buttonSelector).removeClass("minimized");
+  $(this.selector).removeClass("maximized");
+  this.bringTop(); 
+}
+
+Widget.prototype.minimize = function() {
   $(this.selector).hide();
+  this._pushState();
   $(this.buttonSelector).addClass("minimized");
-  // var widgetInstance = this;
-  // $(widgetInstance.selector).animate({
-  //   opacity : 0,
-  //   width: 0,
-  //   left : $($(widgetInstance).buttonSelector).css("left"),
-  //   top : "+=100"
-  // }, {
-  //   duration : 400,
-  //   easing: "swing",
-  //   complete : function() {
-  //     $(widgetInstance.selector).hide();
-  //     $(widgetInstance.buttonSelector).addClass("minimized");
-  //   }
-  // });
-
+  $(this.selector).removeClass("maximized");
 }
 
+Widget.prototype.close = function() {
+  $(this.selector).remove();
+  $(this.buttonSelector).remove();
 
-Widget.prototype.dock = function() {
-  $(this.selector).css(this.options.css.docked);
+  var widgetInstance = this;
+  var elementIndex = null;
+  $.each(Widget.widgets, function(n, e) {
+    if (e.options.name == widgetInstance.options.name) {
+      elementIndex = n;
+    }
+  });
+
+  if (elementIndex !== null) {
+    Widget.widgets.splice(elementIndex, 1);
+  }
 }
 
 $(document).on("click", "[data-widget-action]", function() {
