@@ -68,6 +68,13 @@ $(function() {
     'title':'Dynamic Map',
     'useIframe':true
   });
+
+  // w5 = new Widget({
+  //   'name':'blog',
+  //   'url':'//blog.minecraft.pt',
+  //   'title':'Blog',
+  //   'useIframe':true
+  // });
 });
 
-var widgetTest, widget2, w3, w4;
+var widgetTest, widget2, w3, w4, w5;

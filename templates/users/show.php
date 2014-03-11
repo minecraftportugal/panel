@@ -20,7 +20,7 @@
   <? endif; ?>
 
   <div id="player" class="collapsible section default">
-    <a href="#player">
+    <a href="#player" class="noajax">
       <h1>
           <span style="float: left; height: 20px; padding-top: 4px;" class="playername">
             <span class="stevehead">
@@ -109,7 +109,7 @@
 
   <? if ($inquisitor) : ?>
   <div id="playerstats" class="collapsible section">
-    <a href="#playerstats">
+    <a href="#playerstats" class="noajax">
       <h1>Estatísticas</h1>
     </a>
     <div class="inside">
@@ -153,7 +153,7 @@
 
   
   <div id="playerinventory" class="collapsible section">
-    <a href="#playerinventory">
+    <a href="#playerinventory"  class="noajax">
       <h1>Inventário</h1>
     </a>
     <div class="inside">
@@ -179,7 +179,7 @@
 
   <? if (($own and $total_drops > 0) or $admin): ?>
   <div id="itemdrops" class="collapsible section">
-    <a href="#itemdrops" ><h1>Drops</h1></a>
+    <a href="#itemdrops" class="noajax"><h1>Drops</h1></a>
     <div class="inside">
       <div class="section">
       <? if ($total_drops > 0): ?>
@@ -270,7 +270,7 @@
 
   <? if ($admin): ?>
   <div id="resetpw" class="collapsible section">
-    <a href="#resetpw" ><h1>Reenviar Password</h1></a>
+    <a href="#resetpw" class="noajax"><h1>Reenviar Password</h1></a>
     <div class="inside">
       <div class="section">
         <form name="reset_password" action="/reset_password" method="POST" autocomplete="off">
@@ -296,21 +296,21 @@
   </div>
 
   <div id="adminactions" class="collapsible section">
-    <a href="#adminactions">
+    <a href="#adminactions" class="noajax">
       <h1>Gestão</h1>
     </a>
     <div class="inside">
       <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">
       <table class="form">
         <tbody>
-          <tr><th><h2>Reg. IP</h2></th><td><a href="/admin?ipaddress=<?= $profile["registerip"] ?>"><?= $profile['registerip'] ?></a></td></tr>
+          <tr><th><h2>Reg. IP</h2></th><td><a href="/admin/accounts/?ipaddress=<?= $profile["registerip"] ?>"><?= $profile['registerip'] ?></a></td></tr>
           <? if (isset($profile['lastloginip'])): ?>
-            <tr><th><h2>Login IP</h2></th><td><a href="/admin?ipaddress=<?= $profile["lastloginip"] ?>"><?= $profile['lastloginip'] ?></a></td></tr>
+            <tr><th><h2>Login IP</h2></th><td><a href="/admin/accounts?ipaddress=<?= $profile["lastloginip"] ?>"><?= $profile['lastloginip'] ?></a></td></tr>
           <? endif; ?>
             <tr><th><h2>Sessão</h2></th><td><?= $profile['logintime'] != "" ? $profile['logintime'] : "Sem Sessão" ?></td></tr>
-            <tr><th><h2>Email</h2></th><td><a href="/admin?emailaddress=<?= $profile["email"] ?>"><?= $profile['email'] ?></a></td></tr>
+            <tr><th><h2>Email</h2></th><td><a href="/admin/accounts?emailaddress=<?= $profile["email"] ?>"><?= $profile['email'] ?></a></td></tr>
           <? if ($inquisitor): ?>
-            <tr><th><h2>Inq. IP</h2></th><td><a href="/admin?ipaddress=<?= $inquisitor['address'] ?>"><?= $inquisitor['address'] ?></a></td></tr>
+            <tr><th><h2>Inq. IP</h2></th><td><a href="/admin/accounts?ipaddress=<?= $inquisitor['address'] ?>"><?= $inquisitor['address'] ?></a></td></tr>
             <tr><th><h2>Servidor</h2></th><td><?= $inquisitor['server'] ?></td></tr>
             <tr><th><h2>Entrada</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
             <tr><th><h2 title="">Blocos/Hr</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
@@ -371,7 +371,7 @@
 
   <? if ($own): ?>
   <div id="irc" class="collapsible section">
-    <a href="#irc" ><h1>Configurar  IRC</h1></a>
+    <a href="#irc" class="noajax"><h1>Configurar  IRC</h1></a>
     <div class="inside">
       <div class="section">
         <form name="irc_settings" action="/users/update_irc" method="POST" autocomplete="off">
@@ -404,7 +404,7 @@
   </div>
 
   <div id="changepw" class="collapsible section">
-    <a href="#changepw" ><h1>Alterar Password</h1></a>
+    <a href="#changepw" class="noajax"><h1>Alterar Password</h1></a>
     <div class="inside">
       <div class="section">
         <form name="change_password" action="/users/update_password" method="POST" autocomplete="off">

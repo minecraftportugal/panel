@@ -22,37 +22,6 @@ body {
    user-select: none;
 }
 
-a[data-widget-name="admin"], a[data-widget-name="admin-accounts"],
-a[data-widget-name="admin-drops"], a[data-widget-name="admin-sessions"] {
-  background-image: url('/images/icons/side_admin.png');
-}
-
-a[data-widget-name="maps"] {
-  background-image: url('/images/icons/side_maps.png');
-}
-
-a[data-widget-name="directory"] {
-  background-image: url('/images/icons/side_directory.png');
-}
-
-a[data-widget-name="news"] {
-  background-image: url('/images/icons/side_news.png');
-}
-
-a[data-widget-name="close"] {
-  background-image: url('/images/icons/side_close.png');
-}
-
-a[data-widget-name="logout"] {
-  background-image: url('/images/icons/side_logout.png');
-}
-
-
-
-
-
-
-
 
 
 
@@ -185,17 +154,11 @@ p {
 }
 
 a {
-  color: #ddd;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #666;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
 a:active {
-  color: #777;
   text-decoration: none;
 }
 
@@ -234,28 +197,6 @@ div.sep {
   display: inline-block;
 }
 
-div#ajax-indicator {
-  width: 140px;
-  height: 24px;
-}
-
-div#ajax-indicator.ajax-loading {
-  background-image: url("/images/loader1.gif");
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-
-div#ajax-indicator.ajax-loading-https {
-  background-image: url("/images/loader2.gif");
-  background-position: center center;
-  background-repeat: no-repeat;
-}
-
-div#ajax-indicator.ajax-error {
-  background-image: url("/images/loader3.gif");
-  background-position: center center;
-  background-repeat: no-repeat;
-}
 
 
 /*
@@ -459,6 +400,10 @@ table.admin h2#select-all-delete {
 
 .w10 {
   width: 15%;
+}
+
+.w50 {
+  width: 50%;
 }
 
 .w70 {

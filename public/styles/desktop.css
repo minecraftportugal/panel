@@ -1,13 +1,14 @@
 div#top-bar {
-  background: linear-gradient(to bottom, #000000, #151515);
+  color: #FFFFFF;
+  background: linear-gradient(to bottom, #050505, #252525);
   position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
-  padding: 3px 3px 3px 2px;
-  height: 30px;
+  height: 36px;
+  line-height: 36px;
   z-index: 1000;
-  box-shadow: 0px 2px 2px #111111;
+
 }
 
 div#top-bar a.button {
@@ -15,7 +16,7 @@ div#top-bar a.button {
   background-repeat: no-repeat;
   display: inline-block;
   min-width: 30px;
-  height: 30px;
+  height: 36px;
 }
 
 /*
@@ -25,49 +26,53 @@ div#top-bar a.button {
 div#top-bar .bg-icon {
   background-repeat: no-repeat;
   background-position: 5px center;
-}
-
-div#top-bar .bg-icon {
   padding-left: 30px;
 }
 
-
 div#top-bar > ul {
-  margin: 0px 4px 0px 4px;
-  border-left: 2px solid #111;
-  border-right: 2px solid #111;
-  width: 160px;
+  min-width: 160px;
+}
 
+div#top-bar > ul:hover {
+  background: linear-gradient(to top, #252525, #050505, #050505);
+}
+
+div#top-bar > ul:active {
+  color: #888888;
+  background: linear-gradient(to top, #202020, #050505, #050505);
 }
 
 div#top-bar li a {
   display: block;
-  height: 30px;
-  line-height: 30px;
+  height: 36px;
+  line-height: 36px;
   padding: 0px 6px 0px 6px;
 }
 
-div#top-bar li {
-  color: #FFFFFF;
-  height: 30px;
-  line-height: 30px;
-  border-bottom: 1px solid #101010;
+div#top-bar > ul.menu-selected > li {
+  background: linear-gradient(to bottom left, #000000, #000000, #000000, #252525);
 }
 
-div#top-bar li li {
-  background-color: #222;
+div#top-bar > ul.menu-selected > li:hover {
+  background: rgba(0, 0, 0, 0);
+}
+
+div#top-bar > ul.menu-selected > li:active {
+  background: linear-gradient(to top, #101010, #000000, #000000);
+}
+
+div#top-bar li li:hover {
+  background-color: rgba(0, 0, 255, 0.2);
 }
 
 div#top-bar ul ul {
   margin-top: 4px;
-  border-left: 1px solid #000;
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  box-shadow: 2px 2px 2px #111111;
+  box-shadow: 0px 2px 2px #111111;
   display: none;
+  background: linear-gradient(to bottom, #000000, #303030);
 }
 
-div#top-bar ul li ul:target {
+div#top-bar ul.menu-selected li ul {
   display: block;
 }
 
@@ -84,15 +89,41 @@ div#top-bar a.button:active {
   background-position: 1px 1px !important;
 }
 
+div#top-bar .fa {
+    color: #AAAAAA;
+    font-size: 0.95em;
+}
+
 div#widget-button-container {
-  background: linear-gradient(to bottom, #151515, #000000);
+  background: linear-gradient(to bottom, #252525, #050505);
   position: absolute;
   left: 0px;
   right: 0px;
   bottom: 0px;
-  padding: 4px 4px 4px 4px;
-  height: 29px;
+  height: 36px;
   z-index: 1000;
-  border-bottom: 1px solid #050505;
-  box-shadow: 0px -2px 2px #111111;
+}
+
+div#ajax-indicator {
+  width: 140px;
+  height: 36px;
+  margin-right: 40px;
+}
+
+div#ajax-indicator.ajax-loading {
+  background-image: url("/images/loader1.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+div#ajax-indicator.ajax-loading-https {
+  background-image: url("/images/loader2.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+div#ajax-indicator.ajax-error {
+  background-image: url("/images/loader3.gif");
+  background-position: center center;
+  background-repeat: no-repeat;
 }

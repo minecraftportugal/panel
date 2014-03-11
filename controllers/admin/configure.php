@@ -17,9 +17,9 @@ function admin_configure() {
 
   $status = usersConfigure($admin, $active, $delete);
   if (!$status) {
-    header("Location: /admin#accounts");
+    header("Location: /admin/accounts");
   } else {
-    header("Location: /admin#accounts");
+    header("Location: /admin/accounts");
   }
 }
 

@@ -3,6 +3,7 @@ RewriteEngine On
 RewriteRule ^images/(.*)$ /public/images/$1 [NC,L]
 RewriteRule ^scripts/(.*)$ /public/scripts/$1 [NC,L]
 RewriteRule ^styles/(.*)$ /public/styles/$1 [NC,L]
+RewriteRule ^fonts/(.*)$ /public/fonts/$1 [NC,L]
 
 RewriteRule ^controllers/(.*)$ /index.php [NC,L]
 RewriteRule ^defaults/(.*)$ /index.php [NC,L]
