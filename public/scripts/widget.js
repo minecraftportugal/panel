@@ -11,8 +11,8 @@ function Widget(options) {
         'left': '0px',
         'width' : '800px',
         'height' : '600px',
-        'min-width' : '640px',
-        'min-height' : '480px',
+        'min-width' : '480px',
+        'min-height' : '360px',
         'max-width' : null, //'700px',
         'max-height' : null //'700px' 
       },
@@ -28,6 +28,10 @@ function Widget(options) {
   this.options = {};
   $.extend(this.options, Widget.options);
   $.extend(this.options, options);
+
+  if (this.options.alwaysCreate) {
+    this.options.name += new Date().getTime();
+  }
 
   this.id = "widget-" + this.options.name;
   this.selector = "div#widget-" + this.options.name;
@@ -63,12 +67,6 @@ function Widget(options) {
     this._init();
     this._load();
     this._initPosition();
-  } else if (this.options.alwaysCreate) {
-    this.widget = this;
-    Widget.widgets.push(this);
-    this._init();
-    this._load();
-    this._initPosition();
   } else {
     this.bringTop();
     this.setActive();
@@ -96,7 +94,6 @@ Widget.prototype._init = function() {
   $(button).html(this.options.title);
   $(button).appendTo("div#widget-button-container");
 
-  console.log(this);
   $(this.selector).css(this.options.css.normal);
 
   var widgetInstance = this;
@@ -162,8 +159,13 @@ Widget.prototype._init = function() {
     if ($(widgetInstance.buttonSelector).hasClass("minimized")) {
       widgetInstance.restore();
     } else {
-      widgetInstance.minimize();
-      widgetInstance.unsetActive();
+      if ($(widgetInstance.selector).hasClass("widget-active")) {
+        widgetInstance.minimize();
+        widgetInstance.unsetActive();
+      } else {
+        widgetInstance.bringTop();
+        widgetInstance.setActive();
+      }
     }
   });
 
@@ -220,24 +222,26 @@ Widget.prototype._popState = function() {
 }
 
 Widget.prototype._initPosition = function() {
-  var wLeft = 10;
-  var wTop = 10;
+  var wLeft = 5;
+  var wTop = 5;
   var leftStep = (Widget.counter - 1 % 5);
   var topStep = (Widget.counter - 1 % 5);
-  var delta_x = wLeft + 20 * (leftStep + 1);
-  var delta_y = wTop + 20 * (topStep + 1);
+  var delta_x = wLeft + 30 * (leftStep + 1);
+  var delta_y = wTop + 25 * (topStep + 1);
   $(this.selector).css("left", delta_x + "px");
   $(this.selector).css("top", delta_y + "px");
 }
 
 Widget.prototype.setActive = function() {
   this.unsetActive();
-  $(this.selector).addClass("widget-active"); 
+  $(this.selector).addClass("widget-active");
+  $(this.buttonSelector).addClass("widget-button-active"); 
 }
 
 Widget.prototype.unsetActive = function() {
   $.each(Widget.widgets, function (n, elem) {
     $(elem.selector).removeClass("widget-active"); 
+    $(this.buttonSelector).removeClass("widget-button-active"); 
   });
 }
 
@@ -256,22 +260,42 @@ Widget.cascade = function() {
   Widget.counter = 0;
   $.each(Widget.widgets, function(n, e) { 
     Widget.counter += 1;
+    e.shrink();
     e._initPosition();
     e.bringTop();
   });
 }
-
 
 Widget.tile = function() {
-  console.log(Window.counter);
-  Widget.counter = 0;
+  var wLeft = 0;
+  var wTop = 0;
   $.each(Widget.widgets, function(n, e) { 
-    Widget.counter += 1;
-    e.restore();
-    e._initPosition();
+    e.shrink();
+    $(this.selector).css("left", wLeft + "px");
+    $(this.selector).css("top", wTop + "px");
     e.bringTop();
+
+    wLeft = wLeft + parseInt($(this.selector).css("width"));
+
+    if (wLeft > $("div#widget-container").width()) {
+      wTop = wTop + parseInt($(this.selector).css("height"));
+      wLeft = 0;
+
+      if (wTop > $("div#widget-container").height()) {
+        wTop = 0;
+      }
+    }
   });
 }
+
+Widget.embiggen = function() {
+  $.each(Widget.widgets, function(n, e) { 
+    e.maximize();
+    e.bringTop();
+    e.setActive();
+  });
+}
+
 
 Widget.prototype.maximize = function() {
   $(this.selector).show();
@@ -292,6 +316,19 @@ Widget.prototype.restore = function() {
   this.bringTop();
   this.setActive();
 }
+
+Widget.prototype.shrink = function() {
+  $(this.selector).show();
+  $(this.buttonSelector).removeClass("minimized");
+  $(this.selector).removeClass("maximized");
+  $(this.selector).css({
+     "width" : this.options.css.normal["min-width"],
+     "height" : this.options.css.normal["min-height"]
+  });
+  this.bringTop();
+  this.setActive();
+}
+
 
 Widget.prototype.minimize = function() {
   $(this.selector).hide();
@@ -332,8 +369,8 @@ $(document).on("click", "[data-widget-action]", function(event) {
       var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'css' : css});
       break;
 
-    case "open-copy":
-      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'css' : css});
+    case "open-always":
+      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'css' : css, 'alwaysCreate' : true});
       break;
 
     default:

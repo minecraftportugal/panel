@@ -44,7 +44,7 @@ div#top-bar .bg-icon {
 }
 
 div#top-bar > ul {
-  min-width: 160px;
+  min-width: 130px;
 }
 
 div#top-bar > ul:hover {
@@ -103,6 +103,7 @@ div#top-bar a.button:active {
   background-position: 1px 1px !important;
 }
 
+div#widget-button-container .fa,
 div#top-bar .fa {
     color: #AAAAAA;
     font-size: 0.9em;

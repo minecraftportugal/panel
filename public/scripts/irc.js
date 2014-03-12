@@ -116,7 +116,11 @@ function onServerCommand(command) {
 }
 
 window.onbeforeunload = function() {
-  swfobject.getObjectById('lightIRC').sendQuit();
+  try {
+    swfobject.getObjectById('lightIRC').sendQuit();
+  } catch(e) {
+    null;
+  }
 }
 
 /* This loop escapes % signs in parameters. You should not change it */

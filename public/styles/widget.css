@@ -189,7 +189,6 @@ div.widget-button {
   text-align: center;
   width: 140px;
   overflow: hidden;
-  background: #050505; /* linear-gradient(to bottom right, #050505, #050505, #202020);*/
   border-right: 1px solid #101010;
 
 }
@@ -201,6 +200,11 @@ div.widget-button:hover {
 div.widget-button:active {
   color: #888888;
   background: linear-gradient(to top, #000000, #000000, #101010);
+}
+
+div.widget-button.widget-button-active {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 div.widget-button.minimized {

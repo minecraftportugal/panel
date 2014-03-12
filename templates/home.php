@@ -46,6 +46,9 @@
     <div id="widget-button-container-context">
       <div class="widget-context-button" onclick="javascript: Widget.cascade();"><i class="fa fa-align-justify"></i></div>
     </div>
+    <div id="widget-button-container-context">
+      <div class="widget-context-button" onclick="javascript: Widget.embiggen();"><i class="fa fa-list-alt  "></i></div>
+    </div>
   </div>
 
   <!-- <iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> -->

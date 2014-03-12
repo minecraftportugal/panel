@@ -1,19 +1,9 @@
-
-      
-
-
-<ul class="pull-left">
-  <li><a href="#"><i class="fa fa-question-circle"></i> ajuda</a>
-    <ul>
-      <li><a href="#">como jogar</a></li>
-      <li><a href="#">it's a trap</a></li>
-    </ul>
-  </li>
-</ul>
-
 <ul class="pull-left">
   <li><a href="#"><i class="fa fa-trello"></i> apps/crap</a>
     <ul>
+      <li><a href="/news" 
+             data-widget-action="open"
+             data-widget-name="widget-news"><i class="fa fa-users"></i> notícias</a></li>
       <li><a href="/launcher"
              data-widget-action="open"
              data-widget-name="launcher"
@@ -24,31 +14,20 @@
              data-widget-name="inquisitor"
              data-widget-mode="iframe"
              data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'>inquisitor</a></li>
-      <li><a href="//dynmap.minecraft.pt" data-widget-action="open" data-widget-name="dynmap" data-widget-mode="iframe">dynmap</a></li>
-      <li><a href="//minecraft.pt/webchat" data-widget-action="open" data-widget-name="irc" data-widget-mode="iframe">irc/chat</a></li>
+      <li><a href="//dynmap.minecraft.pt"
+             data-widget-action="open-always"
+             data-widget-name="dynmap"
+             data-widget-mode="iframe">dynmap</a></li>
+      <li><a href="//minecraft.pt/webchat"
+             data-widget-action="open"
+             data-widget-name="irc"
+             data-widget-mode="iframe">irc/chat</a></li>
     </ul>
   </li>
 </ul>
 
-
-
-<ul class="pull-right">
-    <li>
-      <a id="profile" href="#" title="Profile"
-      class="bg-icon" style="background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 20) ?>');"
-      >
-        <?= $user['playername'] ?>
-      </a>
-    <ul id="menu3">
-      <li><a href="/profile/?id=<?= $user['id'] ?>" data-widget-action="open" data-widget-name="options">opções</a></li>
-      <li><a href="/profile/?id=<?= $user['id'] ?>" data-widget-action="open" data-widget-name="profile">perfil</a></li>
-      <li><a href="#" onclick="javascript:top.logout();">sair</a></li>
-      </ul>
-    </li>
-</ul>
-
 <? if ($user['admin'] == 1): ?>
-<ul class="pull-right">
+<ul class="pull-left">
     <li><a href="#"><i class="fa fa-gears"></i> área de admin</a>
       <ul id="menu1">
         <li><a href="/admin/accounts" data-widget-action="open" data-widget-name="admin-accounts"><i class="fa fa-users"></i> contas</a></li>
@@ -58,6 +37,35 @@
     </li>
 </ul>
 <? endif; ?>
+
+<ul class="pull-left">
+  <li><a href="#"><i class="fa fa-question-circle"></i> ajuda</a>
+    <ul>
+      <li><a href="#">como jogar</a></li>
+      <li><a href="#">it's a trap</a></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class="pull-right">
+    <li>
+      <a id="profile" href="#" title="Profile"
+      class="bg-icon" style="background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 20) ?>');"
+      >
+        <?= $user['playername'] ?>
+      </a>
+    <ul id="menu3">
+      <li><a href="/profile/?id=<?= $user['id'] ?>"
+             data-widget-action="open"
+             data-widget-name="options">opções</a></li>
+      <li><a href="/profile/?id=<?= $user['id'] ?>"
+             data-widget-action="open" data-widget-name="profile">perfil</a></li>
+      <li><a href="#"
+             onclick="javascript:top.logout();">sair</a></li>
+      </ul>
+    </li>
+</ul>
+
 
 
 <div class="pull-right" id="ajax-indicator"></div>
