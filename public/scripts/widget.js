@@ -358,6 +358,7 @@ Widget.prototype.close = function() {
 $(document).on("click", "[data-widget-action]", function(event) {
   var action = $(this).data("widget-action");
   var name = $(this).data("widget-name");
+  var title = $(this).data("widget-title") || name;
   var href = $(this).attr("href");
   var useIframe = $(this).data("widget-mode") == "iframe";
   var css = $(this).data("widget-css") || Widget.options;
@@ -366,11 +367,11 @@ $(document).on("click", "[data-widget-action]", function(event) {
   switch (action) {
 
     case "open":
-      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'css' : css});
+      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'title' : title, 'css' : css});
       break;
 
     case "open-always":
-      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'css' : css, 'alwaysCreate' : true});
+      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'title' : title, 'css' : css, 'alwaysCreate' : true});
       break;
 
     default:

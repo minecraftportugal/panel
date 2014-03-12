@@ -1,27 +1,40 @@
 <ul class="pull-left">
   <li><a href="#"><i class="fa fa-trello"></i> apps/crap</a>
     <ul>
-      <li><a href="/news" 
-             data-widget-action="open"
-             data-widget-name="widget-news"><i class="fa fa-users"></i> notícias</a></li>
       <li><a href="/launcher"
              data-widget-action="open"
              data-widget-name="launcher"
+             data-widget-title="Minecraft Launcher"
              data-widget-mode="iframe"
-             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'>embedded launcher</a></li>
+             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'><i class="fa fa-money"></i> embedded launcher</a></li>
       <li><a href="//inquisitor.minecraft.pt"
              data-widget-action="open"
              data-widget-name="inquisitor"
              data-widget-mode="iframe"
-             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'>inquisitor</a></li>
+             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'><i class="fa fa-tachometer"></i> inquisitor</a></li>
       <li><a href="//dynmap.minecraft.pt"
              data-widget-action="open-always"
              data-widget-name="dynmap"
-             data-widget-mode="iframe">dynmap</a></li>
+             data-widget-mode="iframe"><i class="fa fa-picture-o"></i> dynmap</a></li>
       <li><a href="//minecraft.pt/webchat"
              data-widget-action="open"
              data-widget-name="irc"
-             data-widget-mode="iframe">irc/chat</a></li>
+             data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> irc/chat</a></li>
+    </ul>
+  </li>
+</ul>
+
+<ul class="pull-left">
+  <li><a href="#"><i class="fa fa-globe"></i> servidor</a>
+    <ul>
+      <li><a href="/news" 
+             data-widget-action="open"
+             data-widget-name="widget-news"
+             data-widget-title="Notícias"><i class="fa fa-users"></i> notícias</a></li>
+      <li><a href="/directory"
+             data-widget-action="open"
+             data-widget-name="widget-directory"
+             data-widget-title="Jogadores">Jogadores</a></li>
     </ul>
   </li>
 </ul>
@@ -61,7 +74,7 @@
       <li><a href="/profile/?id=<?= $user['id'] ?>"
              data-widget-action="open" data-widget-name="profile">perfil</a></li>
       <li><a href="#"
-             onclick="javascript:top.logout();">sair</a></li>
+             onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> sair</a></li>
       </ul>
     </li>
 </ul>

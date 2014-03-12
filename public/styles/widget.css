@@ -187,7 +187,8 @@ div.widget-button {
   height: 30px;
   line-height: 30px;
   text-align: center;
-  width: 140px;
+  min-width: 140px;
+  padding: 0px 5px 0px 5px;
   overflow: hidden;
   border-right: 1px solid #101010;
 
