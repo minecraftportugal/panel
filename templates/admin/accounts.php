@@ -1,6 +1,7 @@
-  <div id="widget-accounts">
-    <h1>Utilizadores (<?= $total ?>)</h1>
-    <div class="admin-form-filter">
+  <div id="widget-accounts" c>
+    <h1><a href="#widget-accounts-f" class="noajax collapsible"> Utilizadores (<?= $total ?>)</a></h1>
+    
+    <div class="listing-filters" id="widget-accounts-f" style="display: none;" >
       <form name="manage_users_filters" action="/admin/accounts" method="GET" autocomplete="off">
         <table class="admin options">
           <thead>
@@ -145,12 +146,13 @@
         </table>
       </form>
     </div>
-    <div class="admin-form-body">
+    <div class="admin-form-body w100 pull-right">
       <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
         <table class="admin alt-rows">
           <thead>
             <tr>
               <th class="cella"><h2 title="Nome do Jogador">Nome<h2></th>
+              <th class="cellb"><h2 title="Ultima entrada no servidor">Ultima Entrada no servidor</h2></th>
               <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
               <th class="cellc"><h2 title="Administrador">@</h2></th>
               <th class="cellc"><h2 id="select-all-active" title="Conta Activa">A</h2></th>

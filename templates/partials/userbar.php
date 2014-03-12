@@ -14,7 +14,16 @@
 <ul class="pull-left">
   <li><a href="#"><i class="fa fa-trello"></i> apps/crap</a>
     <ul>
-      <li><a href="//inquisitor.minecraft.pt" data-widget-action="open" data-widget-name="inquisitor" data-widget-mode="iframe">inquisitor</a></li>
+      <li><a href="/launcher"
+             data-widget-action="open"
+             data-widget-name="launcher"
+             data-widget-mode="iframe"
+             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'>embedded launcher</a></li>
+      <li><a href="//inquisitor.minecraft.pt"
+             data-widget-action="open"
+             data-widget-name="inquisitor"
+             data-widget-mode="iframe"
+             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'>inquisitor</a></li>
       <li><a href="//dynmap.minecraft.pt" data-widget-action="open" data-widget-name="dynmap" data-widget-mode="iframe">dynmap</a></li>
       <li><a href="//minecraft.pt/webchat" data-widget-action="open" data-widget-name="irc" data-widget-mode="iframe">irc/chat</a></li>
     </ul>
@@ -33,12 +42,12 @@
     <ul id="menu3">
       <li><a href="/profile/?id=<?= $user['id'] ?>" data-widget-action="open" data-widget-name="options">opções</a></li>
       <li><a href="/profile/?id=<?= $user['id'] ?>" data-widget-action="open" data-widget-name="profile">perfil</a></li>
-      <li><a href="#">sair</a></li>
+      <li><a href="#" onclick="javascript:top.logout();">sair</a></li>
       </ul>
     </li>
 </ul>
 
-
+<? if ($user['admin'] == 1): ?>
 <ul class="pull-right">
     <li><a href="#"><i class="fa fa-gears"></i> área de admin</a>
       <ul id="menu1">
@@ -48,6 +57,7 @@
       </ul>
     </li>
 </ul>
+<? endif; ?>
 
 
 <div class="pull-right" id="ajax-indicator"></div>

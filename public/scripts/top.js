@@ -8,10 +8,9 @@ jQuery.fn.visibilityToggle = function() {
 
 // call top.logout() to terminate your session!
 window.logout = function() {
-    var form = $('<form></form>');
+    var form = $('<form class="noajax"></form>');
     form.attr("method", "post");
     form.attr("action", "/logout");
-
     var field = $('<input></input>');
     field.attr("type", "hidden");
     field.attr("name", "logout");

@@ -43,7 +43,7 @@ $(function() {
     return false;
   });
 
-  $(document).on('submit', 'form', function(e) {
+  $(document).on('submit', 'form:not(.noajax)', function(e) {
     var action = $(this).attr("action");
     var type = $(this).attr("method");
     var data = $(this).serialize();

@@ -53,6 +53,8 @@ require_once('controllers/webchat/index.php');
 
 require_once('controllers/widgets/players.php');
 
+require_once('controllers/launcher/index.php');
+
 require_once('controllers/errors.php');
 
 require_once('controllers/test/index.php');
@@ -102,6 +104,8 @@ $r->map('GET',  '/widgets/players', 'widgets_players');
 
 $r->map('GET', '/irc', 'irc_index');
 $r->map('GET', '/webchat', 'webchat_index');
+
+$r->map('GET', '/launcher', 'launcher_index');
 
 $r->map('GET', '/forbidden', 'forbidden');
 

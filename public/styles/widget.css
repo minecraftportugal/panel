@@ -5,17 +5,16 @@
 
 div.widget {
   position: absolute;
-  background: linear-gradient(to bottom right, #000000, #151515);
+  background: linear-gradient(to top right, #000000, #222222);
   border: none;
 
   padding: 0px 0px 0px 0px;
   z-index: 2;
   color: #FFF;
-  font-family: monospace;
-  font-size: 14px;
+
   z-index: 0;
-  border: 2px inset #000000;
-  box-shadow: 1px 1px 1px #222222;
+  border: 1px solid #000000;
+  box-shadow: 0px 0px 4px #000000;
   border-radius: 6px;
   border-bottom-right-radius: 0px;
 }
@@ -23,6 +22,11 @@ div.widget {
 div.widget.maximized {
   border-radius: 0px;
   box-shadow: none;
+}
+
+div.widget.maximized div.widget-titlebar {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
 
 div.widget-ajax {
@@ -35,7 +39,7 @@ div.widget-iframe {
 
 div.widget-body {
   position: absolute;
-  top: 20px;
+  top: 19px;
   right: 0px;
   bottom: 0px;
   left: 0px;
@@ -54,22 +58,30 @@ div.widget-body iframe {
 
 div.widget-titlebar {
   position: absolute;
-  background-color:rgba(0,0,0,1);
-  border-bottom 1px solid #101010;
-  height: 22px;
+  background: linear-gradient(to top, #050505, #222222);
+  border-bottom: 1px solid #000000;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  height: 18px;
   top: 0px;
   left: 0px;
   right: 0px;
 }
 
+div.widget.widget-active div.widget-titlebar {
+  background: linear-gradient(to top, #050505, #353535);
+}
+
+div.widget.widget-active div.widget-titlebar .fa {
+  color: #1C1C1C;
+}
+
 div.widget-button, div.widget-title {
-  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-variant: small-caps;
+  
 }
 
 div.widget-ui {
   position: absolute;
-  background-color:rgba(50,50,255,0.5);
   text-align: center;
   color: #000000;
 }
@@ -80,9 +92,30 @@ div.widget-title {
   color: #FFFFFF;
 }
 
-div.widget-ui:hover {
-  background-color:rgba(50,50,255,0.9);
+div.widget-titlebar .fa {
+    color: #181818;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    position: absolute;
+    top: 0px;
+    left: 4px;
 }
+
+div.widget-ui:hover .fa {
+    color: #050505;
+}
+
+
+div.widget-ui:hover {
+  background-color:rgba(255,255,255,0.1);
+}
+
+div.widget.widget-active div.widget-ui:hover {
+  background-color:rgba(255,255,255,0.1);
+}
+
+
 
 div.widget-close {
   position: absolute;
@@ -139,8 +172,8 @@ div#widget-container {
   position: absolute;
   left: 0px;
   right: 0px;
-  top: 36px;
-  bottom: 36px;
+  top: 30px;
+  bottom: 30px;
 }
 
 /*BOTTOM BUTTONS*/
@@ -151,8 +184,8 @@ div.widget-button {
   cursor: pointer;
   position: relative;
   color: #FFFFFF;
-  height: 36px;
-  line-height: 36px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
   width: 140px;
   overflow: hidden;
@@ -182,8 +215,6 @@ div.widget-button.minimized:hover {
 div.widget-button.minimized:active {
   background: linear-gradient(to top, #050505, #050505, #202020);
 }
-
-
 
 div.widget-button.activity {
   background: rgba(0,0,255,0.5) url('/images/icons/chatnew.png') no-repeat 5px center !important;

@@ -8,24 +8,63 @@ body {
   background-size: 100% auto;
 }
 
-/* unselectable */  
-* {
-   -moz-user-select: -moz-none;
-   -khtml-user-select: none;
-   -webkit-user-select: none;
+.w20 {
+  width: 20%;
+}
 
-   /*
-     Introduced in IE 10.
-     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-   */
-   -ms-user-select: none;
-   user-select: none;
+.w25 {
+  width: 25%;
+}
+
+.w5 {
+  width: 10%;
+}
+
+.w10 {
+  width: 15%;
+}
+
+.w50 {
+  width: 50%;
+}
+
+.w70 {
+  width:  70%;
+}
+
+.w80 {
+  width: 80%;
+}
+
+.w80 {
+  width: 90%;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.w200px {
+  width: 200px;
 }
 
 
 
 
 
+div.listing-filters {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100px;
+}
+
+div.listing-filters:hover {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100px;
+}
 
 
 
@@ -241,87 +280,9 @@ span.itemname {
   text-overflow: ellipsis;
 }
 
-table.admin {
-  border-collapse: collapse;
-  border-spacing: 0px;
-  table-layout: fixed;
-}
-
-table.admin.alt-rows td {
-  line-height: 16px;
-}
-
-table.admin.options {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
- table.admin.options th, table.admin.options td {
-  padding: 0.5em;
- }
-
-table.admin .cellc {
-  text-align: center;
-  vertical-align: middle
-}
-
-table.admin .cella {
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  padding-bottom: 0.5em;
-}
-
-.overflowh {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 
 
-div.meh {
-
-  margin-bottom: 0.5em;
-}
-
-table.admin td, table.admin th {
-  padding: 0em;
-  text-align: left;
-}
-
-td.shortcell {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.cella {
-  width: 80px;
-}
-
-.cellb {
-  width: 70px;
-}
-
-.cellc {
-  width: 12px;
-}
-
-.celld {
-  width: 6px;
-}
-
-.cellz {
-  width: 40px;
-  text-align: center !important;
-  vertical-align: middle;
-}
-
-.cellz h2 {
-  cursor: pointer;
-}
-
-.cellz input {
-  float: none !important;
-}
 td.online {
   background-color: rgba(0,255,0,0.1) !important;
 }
@@ -390,28 +351,7 @@ table.admin h2#select-all-delete {
   cursor: pointer;
 }
 
-.w25 {
-  width: 25%;
-}
 
-.w5 {
-  width: 10%;
-}
-
-.w10 {
-  width: 15%;
-}
-
-.w50 {
-  width: 50%;
-}
-
-.w70 {
-  width:  70%;
-}
-.w100 {
-  width: 100%;
-}
 
 /*
    █  █                        █

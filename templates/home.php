@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/styles/style.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/desktop.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/widget.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/styles/scrollbar.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/font-awesome.min.css" media="screen" type="text/css">
   <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" >
   <link rel="shortcut icon" href="favicon.ico" >
@@ -38,7 +39,14 @@
 
 
   <div id="widget-container"><div></div></div>
-  <div id="widget-button-container"></div>
+  <div id="widget-button-container">
+    <div id="widget-button-container-context">
+      <div class="widget-context-button" onclick="javascript: Widget.tile();"><i class="fa fa-th-large"></i></div>
+    </div>
+    <div id="widget-button-container-context">
+      <div class="widget-context-button" onclick="javascript: Widget.cascade();"><i class="fa fa-align-justify"></i></div>
+    </div>
+  </div>
 
   <!-- <iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> -->
 
@@ -47,10 +55,10 @@
     <div id="widget-template">
       <div class="widget">
         <div class="widget-titlebar">
-          <div class="widget-close widget-ui" title="click to close"><div></div></div>
-          <div class="widget-title widget-drag widget-ui" title="drag to move"><div></i></div></div>
-          <div class="widget-maximize widget-ui" title="click to maximize"><div></div></div>
-          <div class="widget-minimize widget-ui" title="click to minimize"><div></div></div>
+          <div class="widget-close widget-ui" title="click to close"><i class="fa fa-square"></i></div>
+          <div class="widget-title widget-drag widget-ui" title="drag to move"><div></div></div>
+          <div class="widget-maximize widget-ui" title="click to maximize"><i class="fa fa-plus-square"></i></div>
+          <div class="widget-minimize widget-ui" title="click to minimize"><i class="fa fa-minus-square"></i></div>
         </div>
         <div class="widget-body">
         </div>

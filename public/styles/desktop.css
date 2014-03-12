@@ -1,12 +1,26 @@
+/* unselectable */  
+* {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+
 div#top-bar {
   color: #FFFFFF;
-  background: linear-gradient(to bottom, #050505, #252525);
+  background: linear-gradient(to bottom, #050505, #303030);
   position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
-  height: 36px;
-  line-height: 36px;
+  height: 30px;
+  line-height: 30px;
   z-index: 1000;
 
 }
@@ -16,7 +30,7 @@ div#top-bar a.button {
   background-repeat: no-repeat;
   display: inline-block;
   min-width: 30px;
-  height: 36px;
+  height: 30px;
 }
 
 /*
@@ -44,8 +58,8 @@ div#top-bar > ul:active {
 
 div#top-bar li a {
   display: block;
-  height: 36px;
-  line-height: 36px;
+  height: 30px;
+  line-height: 30px;
   padding: 0px 6px 0px 6px;
 }
 
@@ -91,7 +105,7 @@ div#top-bar a.button:active {
 
 div#top-bar .fa {
     color: #AAAAAA;
-    font-size: 0.95em;
+    font-size: 0.9em;
 }
 
 div#widget-button-container {
@@ -100,14 +114,43 @@ div#widget-button-container {
   left: 0px;
   right: 0px;
   bottom: 0px;
-  height: 36px;
+  height: 30px;
   z-index: 1000;
 }
 
+
+div#widget-button-container-context {
+  float: right;
+}
+
+div.widget-context-button  {
+  display: table-cell;
+  float: left;
+  cursor: pointer;
+  position: relative;
+  color: #FFFFFF;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  width: 30px;
+  overflow: hidden;
+  border-right: 1px solid #101010;
+}
+
+div.widget-context-button:hover {
+  background: linear-gradient(to top, #050505, #050505, #252525);
+}
+
+div.widget-context-button:active {
+  color: #888888;
+  background: linear-gradient(to top, #000000, #000000, #101010);
+}
+
+
 div#ajax-indicator {
-  width: 140px;
-  height: 36px;
-  margin-right: 40px;
+  width: 32px;
+  height: 30px;
+  margin-right: 10px;
 }
 
 div#ajax-indicator.ajax-loading {
