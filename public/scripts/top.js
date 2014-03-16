@@ -40,9 +40,8 @@ function chatHilight(command) {
 }
 
 $(function() {
-
-
-  widgetTest = new Widget({
+ 
+/*  widgetTest = new Widget({
     'name': 'test',
     'url' : '/news', 
     'title' : 'Test Title'
@@ -74,6 +73,7 @@ $(function() {
   //   'title':'Blog',
   //   'useIframe':true
   // });
+  // */
 });
 
 var widgetTest, widget2, w3, w4, w5;

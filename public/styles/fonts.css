@@ -1,4 +1,12 @@
-body {
-  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
-  font-variant: small-caps;
+div#top-bar, div#widget-button-container, div.widget-ui {
+  font-family: 'Overlock', cursive;
+  text-transform: lowercase;
+}
+
+div.widget-ui {
+  font-size: 0.9em;
+}
+
+div.widget {
+  font-family: monospace;
 }

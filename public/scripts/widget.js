@@ -1,33 +1,31 @@
 function Widget(options) {
 
   Widget.options = {
-    'url' : '/colorbars',
-    'title' : 'Title',
-    'useIframe' : false,
-    'alwaysCreate' : false,
-    'css' : {
-      'normal' : {
-        'top': '0px',
-        'left': '0px',
-        'width' : '800px',
-        'height' : '600px',
-        'min-width' : '480px',
-        'min-height' : '360px',
-        'max-width' : null, //'700px',
-        'max-height' : null //'700px' 
-      },
-      'maximized' : {
-        'top' :'0px',
-        'left' :'0px',
-        'width' : 'calc(100% - 2px)', //parseInt($('div#widget-container').css('width')) - 5 + 'px' ,
-        'height' : '100%'//parseInt($('div#widget-container').css('height')) - 8 + 'px'
-      }
+    "url" : "/colorbars",
+    "title" : "Title",
+    "useIframe" : false,
+    "alwaysCreate" : false,
+    "css" : {
+      "top": "0px",
+      "left": "0px",
+      "width" : "800px",
+      "height" : "400px",
+      "min-width" : "480px",
+      "min-height" : "360px",
+      "max-width" : null, //"700px",
+      "max-height" : null //"700px" 
     }
   }
 
   this.options = {};
+  this.options.css = {};
+
   $.extend(this.options, Widget.options);
   $.extend(this.options, options);
+
+  if (options.css !== undefined) {
+    $.extend(this.options.css, options.css);
+  }
 
   if (this.options.alwaysCreate) {
     this.options.name += new Date().getTime();
@@ -94,7 +92,7 @@ Widget.prototype._init = function() {
   $(button).html(this.options.title);
   $(button).appendTo("div#widget-button-container");
 
-  $(this.selector).css(this.options.css.normal);
+  $(this.selector).css(this.options.css);
 
   var widgetInstance = this;
 
@@ -111,11 +109,11 @@ Widget.prototype._init = function() {
     snapMode: "outer",
     containment: "parent",
     start: function(event, ui) {
-      $("iframe").css('pointer-events', 'none');
+      $("iframe").css("pointer-events", "none");
     },
 
     stop: function(event, ui) {
-      $("iframe").css('pointer-events', 'auto');
+      $("iframe").css("pointer-events", "auto");
     }
 
   });
@@ -125,18 +123,21 @@ Widget.prototype._init = function() {
     iframeFix: true,
     addClasses: false,
     cancel: ".nointeraction",
-    handle: "div.widget-drag",
     snap: true,
     snapMode: "outer",
     containment: "parent",
     start: function(event, ui) {
-      $("iframe").css('pointer-events', 'none');
+      $("iframe").css("pointer-events", "none");
     },
 
     stop: function(event, ui) {
-      $("iframe").css('pointer-events', 'auto');
+      $("iframe").css("pointer-events", "auto");
     }
 
+  });
+
+  $(this.selector).find("div.widget-refresh").click(function() {
+    widgetInstance._load();
   });
 
   $(this.selector).find("div.widget-maximize").click(function() {
@@ -183,11 +184,11 @@ Widget.prototype._init = function() {
 
 Widget.prototype._load = function() {
   if (this.options.useIframe == true) {
-    this.iframeId = this.id + '-iframe';
+    this.iframeId = this.id + "-iframe";
     var jq_tag = $("<iframe></iframe>");
     jq_tag.attr("id", this.iframeId) ;
     jq_tag.attr("src", this.options.url) ;
-    $(this.selector).find("div.widget-body").append(jq_tag);
+    $(this.selector).find("div.widget-body").html(jq_tag);
     $(this.selector).addClass("widget-iframe");
 
   } else {
@@ -206,18 +207,26 @@ Widget.prototype._load = function() {
 
 Widget.prototype._pushState = function() {
   var state = {
-    'top': $(this.selector).css('top'),
-    'left': $(this.selector).css('left'),
-    'width': $(this.selector).css('width'),
-    'height': $(this.selector).css('height')
+    "css" : {
+      "top": $(this.selector).css("top"),
+      "left": $(this.selector).css("left"),
+      "width": $(this.selector).css("width"),
+      "height": $(this.selector).css("height")
+    },
+    "maximized" : $(this.selector).hasClass("maximized")
   }
+
   this.states.push(state);
 }
 
 Widget.prototype._popState = function() {
   var state = this.states.pop();
   if (state !== undefined) {
-    $(this.selector).css(state);
+    if (state.maximized) {
+      this.maximize();
+    } else {
+      $(this.selector).css(state.css);
+    }
   }
 }
 
@@ -258,11 +267,13 @@ Widget.prototype.bringTop = function() {
 
 Widget.cascade = function() {
   Widget.counter = 0;
-  $.each(Widget.widgets, function(n, e) { 
+  $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
+  $.each(Widget.widgets, function(n, e) {
     Widget.counter += 1;
     e.shrink();
     e._initPosition();
     e.bringTop();
+
   });
 }
 
@@ -291,18 +302,16 @@ Widget.tile = function() {
 Widget.embiggen = function() {
   $.each(Widget.widgets, function(n, e) { 
     e.maximize();
-    e.bringTop();
-    e.setActive();
+    //e.bringTop();
+    //e.setActive();
   });
 }
-
 
 Widget.prototype.maximize = function() {
   $(this.selector).show();
   this._pushState();
-  $(this.selector).css(this.options.css.maximized);
   $(this.buttonSelector).removeClass("minimized");
-  $(this.selector).addClass("maximized");
+  $(this.selector).addClass("maximized"); //css in class
   this.bringTop();
   this.setActive();
 
@@ -310,9 +319,9 @@ Widget.prototype.maximize = function() {
 
 Widget.prototype.restore = function() {
   $(this.selector).show();
-  this._popState();
   $(this.buttonSelector).removeClass("minimized");
   $(this.selector).removeClass("maximized");
+  this._popState();
   this.bringTop();
   this.setActive();
 }
@@ -321,9 +330,21 @@ Widget.prototype.shrink = function() {
   $(this.selector).show();
   $(this.buttonSelector).removeClass("minimized");
   $(this.selector).removeClass("maximized");
+
+  var len = Widget.widgets.length;
+  // var gridSizeH = Math.ceil(len / 2);
+  // var gridSizeV = Math.ceil(len / 2);
+  // var width = parseInt($("div#widget-container").css("width"));
+  // var height = parseInt($("div#widget-container").css("height"));
+  //var newWidth = (width / gridSizeV);
+  ///var newHeight = (height / gridSizeH);
+  //console.log(width, height, gridSizeH, gridSizeV)
+
+  var newWidth = this.options.css["min-width"];
+  var newHeight = this.options.css["min-height"];
   $(this.selector).css({
-     "width" : this.options.css.normal["min-width"],
-     "height" : this.options.css.normal["min-height"]
+     "width" : newWidth,
+     "height" : newHeight 
   });
   this.bringTop();
   this.setActive();
@@ -361,17 +382,16 @@ $(document).on("click", "[data-widget-action]", function(event) {
   var title = $(this).data("widget-title") || name;
   var href = $(this).attr("href");
   var useIframe = $(this).data("widget-mode") == "iframe";
-  var css = $(this).data("widget-css") || Widget.options;
-  css = css["css"];
+  var css = $(this).data("widget-css")
 
   switch (action) {
 
     case "open":
-      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'title' : title, 'css' : css});
+      var createdWidget = new Widget({"name" : name, "url" : href, "title" : name, "useIframe" : useIframe, "title" : title, "css" : css});
       break;
 
     case "open-always":
-      var createdWidget = new Widget({'name' : name, 'url' : href, 'title' : name, 'useIframe' : useIframe, 'title' : title, 'css' : css, 'alwaysCreate' : true});
+      var createdWidget = new Widget({"name" : name, "url" : href, "title" : name, "useIframe" : useIframe, "title" : title, "css" : css, "alwaysCreate" : true});
       break;
 
     default:

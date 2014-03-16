@@ -29,7 +29,7 @@ $.ajaxSetup({
 
 $(function() {
 
-  $(document).on('click', 'div.widget a:not(.noajax)', function(e) {
+  $(document).on('click', 'div.widget a:not(.noajax)', function(event) {
     var href = $(this).attr("href");
     var container = $(this).closest("div.widget-body");
     
@@ -40,10 +40,10 @@ $(function() {
         container.html(data);
       }
     })
-    return false;
+    event.preventDefault(); 
   });
 
-  $(document).on('submit', 'form:not(.noajax)', function(e) {
+  $(document).on('submit', 'form:not(.noajax)', function(event) {
     var action = $(this).attr("action");
     var type = $(this).attr("method");
     var data = $(this).serialize();
@@ -56,7 +56,7 @@ $(function() {
         container.html(data);
       }
     })
-    return false;
+    event.preventDefault();
   });
 
 });

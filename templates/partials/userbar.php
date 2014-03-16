@@ -1,22 +1,26 @@
 <ul class="pull-left">
   <li><a href="#"><i class="fa fa-trello"></i> apps/crap</a>
     <ul>
-      <li><a href="/launcher"
+      <li><a id="menu-item-launcher"
+             href="/launcher"
              data-widget-action="open"
              data-widget-name="launcher"
              data-widget-title="Minecraft Launcher"
              data-widget-mode="iframe"
-             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'><i class="fa fa-money"></i> embedded launcher</a></li>
-      <li><a href="//inquisitor.minecraft.pt"
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> launcher</a></li>
+      <li><a id="menu-item-inquisitor"
+             href="//inquisitor.minecraft.pt"
              data-widget-action="open"
              data-widget-name="inquisitor"
              data-widget-mode="iframe"
-             data-widget-css='{"css" : { "normal" : { "width" : "854px", "height" : "500px" } } }'><i class="fa fa-tachometer"></i> inquisitor</a></li>
-      <li><a href="//dynmap.minecraft.pt"
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-tachometer"></i> inquisitor</a></li>
+      <li><a id="menu-item-dynmap"
+             href="//dynmap.minecraft.pt"
              data-widget-action="open-always"
              data-widget-name="dynmap"
              data-widget-mode="iframe"><i class="fa fa-picture-o"></i> dynmap</a></li>
-      <li><a href="//minecraft.pt/webchat"
+      <li><a id="menu-item-webchat"
+             href="//minecraft.pt/webchat"
              data-widget-action="open"
              data-widget-name="irc"
              data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> irc/chat</a></li>
@@ -27,14 +31,16 @@
 <ul class="pull-left">
   <li><a href="#"><i class="fa fa-globe"></i> servidor</a>
     <ul>
-      <li><a href="/news" 
+      <li><a id="menu-item-news"
+             href="/news" 
              data-widget-action="open"
              data-widget-name="widget-news"
-             data-widget-title="Notícias"><i class="fa fa-users"></i> notícias</a></li>
-      <li><a href="/directory"
+             data-widget-title="Notícias"><i class="fa fa-columns"></i> notícias</a></li>
+      <li><a id="menu-item-directory"
+             href="/directory"
              data-widget-action="open"
              data-widget-name="widget-directory"
-             data-widget-title="Jogadores">Jogadores</a></li>
+             data-widget-title="Jogadores"><i class="fa fa-users"></i> jogadores</a></li>
     </ul>
   </li>
 </ul>
@@ -42,10 +48,19 @@
 <? if ($user['admin'] == 1): ?>
 <ul class="pull-left">
     <li><a href="#"><i class="fa fa-gears"></i> área de admin</a>
-      <ul id="menu1">
-        <li><a href="/admin/accounts" data-widget-action="open" data-widget-name="admin-accounts"><i class="fa fa-users"></i> contas</a></li>
-        <li><a href="/admin/sessions" data-widget-action="open" data-widget-name="admin-sessions"><i class="fa fa-group"></i> sessões</a></li>
-        <li><a href="/admin/drops" data-widget-action="open" data-widget-name="admin-drops"><i class="fa fa-th-list"></i> item drops</a></li>
+      <ul>
+        <li><a id="menu-item-admin-accounts"
+               href="/admin/accounts" 
+               data-widget-action="open"
+               data-widget-name="admin-accounts"><i class="fa fa-users"></i> contas</a></li>
+        <li><a id="menu-item-admin-sessions"
+               href="/admin/sessions"
+               data-widget-action="open"
+               data-widget-name="admin-sessions"><i class="fa fa-group"></i> sessões</a></li>
+        <li><a id="menu-item-admin-drops"
+               href="/admin/drops"
+               data-widget-action="open"
+               data-widget-name="admin-drops"><i class="fa fa-th-list"></i> item drops</a></li>
       </ul>
     </li>
 </ul>
@@ -70,9 +85,9 @@
     <ul id="menu3">
       <li><a href="/profile/?id=<?= $user['id'] ?>"
              data-widget-action="open"
-             data-widget-name="options">opções</a></li>
+             data-widget-name="options"><i class="fa fa-gear"></i> opções</a></li>
       <li><a href="/profile/?id=<?= $user['id'] ?>"
-             data-widget-action="open" data-widget-name="profile">perfil</a></li>
+             data-widget-action="open" data-widget-name="profile"><i class="fa fa-user"></i> perfil</a></li>
       <li><a href="#"
              onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> sair</a></li>
       </ul>

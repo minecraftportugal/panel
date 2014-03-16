@@ -30,7 +30,7 @@ function directory_index() {
 
   $link_after = PaginationHelper::make_link($p);
 
-  $page_navigation = PaginationHelper::navigation($p['page'], $total, $p['per_page'], '', $link_after);
+  $page_navigation = PaginationHelper::navigation($p['page'], $total, $p['per_page'], '/directory', $link_after);
 
   require('templates/directory/index.php');
 }

@@ -223,6 +223,14 @@ a:active {
   float: right;
 }
 
+.pull-clear {
+  clear: both;
+}
+
+.sep {
+  height: 10px;
+}
+
 .half-width {
   width: 50%;
 }

@@ -14,7 +14,11 @@
   <link rel="stylesheet" href="/styles/widget.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/scrollbar.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/font-awesome.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/styles/page-presentation.css" media="screen" type="text/css">
   <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" >
+  
+  <link href='http://fonts.googleapis.com/css?family=Overlock:400,700,900' rel='stylesheet' type='text/css'>
+  
   <link rel="shortcut icon" href="favicon.ico" >
 
   <script type="text/javascript" src="/scripts/jquery.js"></script>
@@ -41,13 +45,13 @@
   <div id="widget-container"><div></div></div>
   <div id="widget-button-container">
     <div id="widget-button-container-context">
-      <div class="widget-context-button" onclick="javascript: Widget.tile();"><i class="fa fa-th-large"></i></div>
+      <div class="widget-context-button" onclick="javascript: Widget.tile();" title="Janelas Maximizadas"><i class="fa fa-th-large"></i></div>
     </div>
     <div id="widget-button-container-context">
-      <div class="widget-context-button" onclick="javascript: Widget.cascade();"><i class="fa fa-align-justify"></i></div>
+      <div class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cacata"><i class="fa fa-align-justify"></i></div>
     </div>
     <div id="widget-button-container-context">
-      <div class="widget-context-button" onclick="javascript: Widget.embiggen();"><i class="fa fa-list-alt  "></i></div>
+      <div class="widget-context-button" onclick="javascript: Widget.embiggen();" title="Janelas Alinhadas"><i class="fa fa-list-alt  "></i></div>
     </div>
   </div>
 
@@ -58,14 +62,15 @@
     <div id="widget-template">
       <div class="widget">
         <div class="widget-titlebar">
-          <div class="widget-close widget-ui" title="click to close"><i class="fa fa-square"></i></div>
-          <div class="widget-title widget-drag widget-ui" title="drag to move"><div></div></div>
-          <div class="widget-maximize widget-ui" title="click to maximize"><i class="fa fa-plus-square"></i></div>
-          <div class="widget-minimize widget-ui" title="click to minimize"><i class="fa fa-minus-square"></i></div>
+          <div class="widget-close widget-ui" title="fechar"><i class="fa fa-times"></i></div>
+          <div class="widget-title widget-drag widget-ui" title="arrastar para mover"><div></div></div>
+          <div class="widget-refresh widget-ui" title="refresh"><i class="fa fa-refresh"></i></div>
+          <div class="widget-maximize widget-ui" title="maximizar"><i class="fa fa-plus"></i></div>
+          <div class="widget-minimize widget-ui" title="minimizar"><i class="fa fa-minus"></i></div>
         </div>
         <div class="widget-body">
         </div>
-        <div class="ui-resizable-handle ui-resizable-se widget-resize widget-interact widget-resize" title="drag to resize"></div>
+        <div class="ui-resizable-handle ui-resizable-se widget-resize" title="drag to resize"></div>
       </div>
     </div>
 
