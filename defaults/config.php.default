@@ -30,4 +30,8 @@ $cfg_phpmailer_email    = "";
 /* lightIRC */
 $cfg_lightirc_path = "/vendors/lightIRC/lightIRC.swf";
 
+/* Minotar */
+//$cfg_minotar_server = "//minotar.minecraft.pt";
+$cfg_minotar_server = "//minotar.net";
+
 ?>

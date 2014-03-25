@@ -5,7 +5,7 @@
 
 div.widget {
   position: absolute;
-  background: linear-gradient(to top right, #000000, #222222);
+  background: linear-gradient(to top right, #000000, #282828);
   border: none;
 
   padding: 0px 0px 0px 0px;
@@ -77,7 +77,7 @@ div.widget.widget-active div.widget-titlebar {
 }
 
 div.widget.widget-active div.widget-titlebar .fa {
-  color: #2C2C2C;
+  color: #323232;
 }
 
 div.widget-button, div.widget-title {
@@ -97,7 +97,7 @@ div.widget-title {
 }
 
 div.widget-titlebar .fa {
-    color: #181818;
+    color: #2C2C2C;
     font-size: 12px;
     height: 18px;
     line-height: 18px;
@@ -119,17 +119,6 @@ div.widget.widget-active div.widget-ui:hover {
   background-color:rgba(255,255,255,0.1);
 }
 
-
-
-div.widget-close {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 10px;
-  height: 10px;
-  cursor: pointer;
-}
-
 div.widget-title {
   padding-left: 4px;
 }
@@ -141,7 +130,7 @@ div.widget-drag {
   cursor: move;
 }
 
-div.widget-close {
+div.widget-refresh {
   left: 0px;
   width: 18px;
   height: 18px;
@@ -149,7 +138,7 @@ div.widget-close {
 }
 
 
-div.widget-refresh {
+div.widget-minimize {
   right: 40px;
   width: 18px;
   height: 18px;
@@ -163,7 +152,7 @@ div.widget-maximize {
   cursor: pointer;
 }
 
-div.widget-minimize {
+div.widget-close {
   right: 0px;
   width: 18px;
   height: 18px;

@@ -16,10 +16,6 @@ function news_index() {
 
     $new_drops_pages = DropModel::get(["per_page" => 6, "accountid" => $_SESSION["id"]]);
 
-    $lootmessage = getLootMessage();
-
-    $loottitle = getLootTitles();
-
     $top_players = AccountModel::get(["per_page" => 15], "totalTime DESC");
     
     $newest_players = AccountModel::get(["per_page" => 15, "yeslogin" => 1], "a.registerdate DESC");

@@ -70,7 +70,7 @@ class PaginationHelper {
 
         if ($show_expand) {
             $per_page_expand = $per_page + 100;
-            $html .= "<li><a href=\"$link_before?$page_var=$page&$per_page_var=$per_page_expand$link_after\">&nbsp;&nbsp;&gt;&gt;&gt;</a></li>";
+            $html .= "<li><a href=\"$link_before?$page_var=$page&$per_page_var=$per_page_expand$link_after\">&gt;&gt;&gt;</a></li>";
         }
 
         $html .= "</ul>";

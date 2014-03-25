@@ -1,7 +1,9 @@
-  <div id="widget-accounts" c>
-    <h1><a href="#widget-accounts-f" class="noajax collapsible"> Utilizadores (<?= $total ?>)</a></h1>
-    
-    <div class="listing-filters" id="widget-accounts-f" style="display: none;" >
+<div id="widget-accounts">
+
+  <h1>Utilizadores (<?= $total ?>)</h1>  
+    <div class="page-filters">
+    <div class="page-filters-body">
+      <div class="page-filters-snap"></div>
       <form name="manage_users_filters" action="/admin/accounts" method="GET" autocomplete="off">
         <table class="admin options">
           <thead>
@@ -146,72 +148,71 @@
         </table>
       </form>
     </div>
-    <div class="admin-form-body w100 pull-right">
-      <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-        <table class="admin alt-rows">
-          <thead>
-            <tr>
-              <th class="cella"><h2 title="Nome do Jogador">Nome<h2></th>
-              <th class="cellb"><h2 title="Ultima entrada no servidor">Ultima Entrada no servidor</h2></th>
-              <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
-              <th class="cellc"><h2 title="Administrador">@</h2></th>
-              <th class="cellc"><h2 id="select-all-active" title="Conta Activa">A</h2></th>
-              <th class="cellc"><h2 id="select-all-delete" title="APAGAR A CONTA!">X</h2></th>
-              <th class="celld"></th>
-            </tr>
-          </thead>
-          <tbody>
-          <? foreach((array)$page as $r): ?>
-            <tr>
-              <td class="shortcell cella">
-                <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
-                   href="/profile?id=<?= $r['id'] ?>"
-                   title="<?= $r["email"] ?>"
-                   class="noajax"
-                   data-widget-action="open"
-                   data-widget-name="profile-<?= $r['playername'] ?>">
-                  <? $head_url = "http://s3.amazonaws.com/MinecraftSkins/".$r['playername'].".png"; ?>
-                  <span class="stevehead">
-                    <img class="pixels" src="/images/steve.png" data-src="<?= $head_url ?>" alt="Skin" />
-                  </span>
-                  <span class="name-label pull-left"><?= $r["playername"] ?></span>
-                  <span class="online pull-left" title="O jogador está online!"></span>
-                </a>
-              </td>
-
-              <td class="shortcell cellb">
-                <a href="/admin?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
-                  <span class="pull-left"><?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?></span>
-                </a>
-              </td>
-              <td class="cellc center">
-                <input class="gridy fakecheckbox" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
-                <input name="admin[<?= $r["id"] ?>]" value="<?= $r["admin"] ?>" type="hidden" />
-              </td>
-              <td class="cellc center">
-                <input class="gridy fakecheckbox fake-active" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
-                <input name="active[<?= $r["id"] ?>]" value="<?= $r["active"] ?>" type="hidden" />
-              </td>
-              <td class="cellc center">
-                <input class="gridy check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
-              </td>
-              <td class="celld"></td>
-            </tr>
-          <? endforeach; ?>
-          </tbody>
-        </table>
-        </div>
-        <table>
-          <tbody>
-            <tr>
-              <td class="center">
-                <input type="submit" value="OK" />
-                <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
-              </td>
-            </tr>
-            <tr><td colspan="5" class="nav"><?= $navigation ?></td></tr>
-          </tbody>
-        </table>
-      </form>
-    </div>
   </div>
+
+  <div class="page-body">
+    <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
+      <table class="admin alt-rows">
+        <thead>
+          <tr>
+            <th class="cella"><h2 title="Nome do Jogador">Nome<h2></th>
+            <th class="cellb"><h2 title="Ultima entrada no servidor">Ultima Entrada no servidor</h2></th>
+            <th class="cellb"><h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2></th>
+            <th class="cellc"><h2 title="Administrador">@</h2></th>
+            <th class="cellc"><h2 id="select-all-active" title="Conta Activa">A</h2></th>
+            <th class="cellc"><h2 id="select-all-delete" title="APAGAR A CONTA!">X</h2></th>
+            <th class="celld"></th>
+          </tr>
+        </thead>
+        <tbody>
+        <? foreach((array)$page as $r): ?>
+          <tr>
+            <td class="shortcell cella">
+              <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
+                 href="/profile?id=<?= $r['id'] ?>"
+                 title="<?= $r["email"] ?>"
+                 class="noajax"
+                 data-widget-action="open"
+                 data-widget-name="profile-<?= $r['playername'] ?>">
+                <span class="pull-left"><?= \helpers\minotar\MinotarHelper::head($r['playername'], 16) ?></span>
+                <span class="name-label pull-left"><?= $r["playername"] ?></span>
+                <span class="online pull-left" title="O jogador está online!"></span>
+              </a>
+            </td>
+
+            <td class="shortcell cellb">
+              <a href="/admin?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
+                <span class="pull-left"><?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?></span>
+              </a>
+            </td>
+            <td class="cellc center">
+              <input class="gridy fakecheckbox" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
+              <input name="admin[<?= $r["id"] ?>]" value="<?= $r["admin"] ?>" type="hidden" />
+            </td>
+            <td class="cellc center">
+              <input class="gridy fakecheckbox fake-active" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
+              <input name="active[<?= $r["id"] ?>]" value="<?= $r["active"] ?>" type="hidden" />
+            </td>
+            <td class="cellc center">
+              <input class="gridy check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
+            </td>
+            <td class="celld"></td>
+          </tr>
+        <? endforeach; ?>
+        </tbody>
+      </table>
+
+
+              <input type="submit" value="OK" />
+              <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+            
+    </form>
+
+    <div class="nav"><?= $navigation ?></div>
+
+  </div>
+
+  <div class="page-footer">
+  </div>
+
+</div>

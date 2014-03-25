@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/styles/scrollbar.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/font-awesome.min.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/page-presentation.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/styles/page-presentation-forms.css" media="screen" type="text/css">
   <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" >
   
   <link href='http://fonts.googleapis.com/css?family=Overlock:400,700,900' rel='stylesheet' type='text/css'>
@@ -62,11 +63,11 @@
     <div id="widget-template">
       <div class="widget">
         <div class="widget-titlebar">
-          <div class="widget-close widget-ui" title="fechar"><i class="fa fa-times"></i></div>
-          <div class="widget-title widget-drag widget-ui" title="arrastar para mover"><div></div></div>
           <div class="widget-refresh widget-ui" title="refresh"><i class="fa fa-refresh"></i></div>
-          <div class="widget-maximize widget-ui" title="maximizar"><i class="fa fa-plus"></i></div>
+          <div class="widget-title widget-drag widget-ui" title="arrastar para mover"><div></div></div>
           <div class="widget-minimize widget-ui" title="minimizar"><i class="fa fa-minus"></i></div>
+          <div class="widget-maximize widget-ui" title="maximizar"><i class="fa fa-plus"></i></div>
+          <div class="widget-close widget-ui" title="fechar"><i class="fa fa-times"></i></div>
         </div>
         <div class="widget-body">
         </div>

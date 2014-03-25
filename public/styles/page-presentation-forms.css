@@ -1,0 +1,87 @@
+form > ul {
+
+}
+
+form > ul > li {
+  margin-bottom: 10px;
+  width: 220px;
+}
+
+form > ul > h2 {
+ background: rgba(255, 255, 255, 0.05);
+}
+
+form > ul > li > ul > li {
+  float: right;
+  margin-bottom: 5px;
+  width: 160px;
+}
+
+div.page-filters-body form input,
+div.page-filters-body form label {
+  width: 100%;
+}
+
+div.page-filters-body form label {
+  padding: 0px;
+}
+
+select#itemid_sel {
+  width: 285px !important;
+}
+
+select, input, label.checkbox {
+ font-family: Consolas, monaco, monospace !important;
+ font-size: 12px;
+ border-radius: 3px;
+ border: 1px solid #333333;
+ background: rgba(255, 255, 255, 0.05);
+ color: #EEEEEE;
+ padding: 5px;
+ cursor: pointer;
+}
+
+input:hover, label.checkbox:hover {
+ background: rgba(255,255,255,0.1);
+}
+
+select option {
+ background: rgba(0, 0, 0, 0.8);
+}
+
+input[type=text], input[type=password] {
+  outline: none;
+}
+
+input[type=text], input[type=password], label[for] { 
+  display: block;
+}
+
+input[type=submit], input[type=reset] {
+}
+
+input[type=checkbox] {
+  cursor: pointer;
+  display: inline;
+}
+
+input[type=checkbox] {
+  float: left;
+}
+
+input[type=submit]:active, input[type=reset]:active {
+ background: rgba(255,255,255,0.4);
+ cursor: pointer;
+}
+
+input[type="date"] {
+  /*width: 70%; */
+}
+
+input[type="date"]::-webkit-inner-spin-button{
+  display: none;
+}
+
+input[type="number"] {
+  /* width: 60px; */
+}

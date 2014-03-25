@@ -1,12 +1,11 @@
 <?
-require_once('config.php');
-require_once('lib/users.php');
+
+use models\account\AccountModel;
 
 function widgets_players() {
-  global $cfg_lightirc_path;
  
-  $onlinePlayers = getOnlinePlayers();
-  $n = count($onlinePlayers);
+  $online_players = AccountModel::get(["per_page" => 100, "online" => 1]);
+  $total_online_players = count($online_players);
 
   require('templates/widgets/players.php');
 }

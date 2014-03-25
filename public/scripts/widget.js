@@ -5,6 +5,7 @@ function Widget(options) {
     "title" : "Title",
     "useIframe" : false,
     "alwaysCreate" : false,
+    "maximized" : false,
     "css" : {
       "top": "0px",
       "left": "0px",
@@ -93,6 +94,10 @@ Widget.prototype._init = function() {
   $(button).appendTo("div#widget-button-container");
 
   $(this.selector).css(this.options.css);
+
+  if (this.options.maximized) {
+    this.maximize();
+  }
 
   var widgetInstance = this;
 
@@ -203,6 +208,18 @@ Widget.prototype._load = function() {
   }
   this.bringTop();
   this.setActive();
+}
+
+Widget._serializeState = function() {
+
+}
+
+Widget._saveState = function() {
+
+}
+
+Widget._loadState = function() {
+
 }
 
 Widget.prototype._pushState = function() {
@@ -383,15 +400,33 @@ $(document).on("click", "[data-widget-action]", function(event) {
   var href = $(this).attr("href");
   var useIframe = $(this).data("widget-mode") == "iframe";
   var css = $(this).data("widget-css")
+  var maximized = $(this).data("widget-maximized") || false;
 
   switch (action) {
 
     case "open":
-      var createdWidget = new Widget({"name" : name, "url" : href, "title" : name, "useIframe" : useIframe, "title" : title, "css" : css});
+      var createdWidget = new Widget({
+        "name" : name,
+        "url" : href,
+        "title" : name,
+        "useIframe" : useIframe,
+        "title" : title,
+        "css" : css,
+        "maximized" : maximized
+      });
       break;
 
     case "open-always":
-      var createdWidget = new Widget({"name" : name, "url" : href, "title" : name, "useIframe" : useIframe, "title" : title, "css" : css, "alwaysCreate" : true});
+      var createdWidget = new Widget({
+        "name" : name,
+        "url" : href,
+        "title" : name,
+        "useIframe" : useIframe,
+        "title" : title,
+        "css" : css,
+        "maximized" : maximized,
+        "alwaysCreate" : true
+      });
       break;
 
     default:

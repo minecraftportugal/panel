@@ -57,6 +57,36 @@ class DropModel {
     }
   }
 
+  public static function create($accountid, $itemdrop, $itemnumber, $itemaux) {
+
+    $q = "INSERT INTO itemdrops(accountid,itemdrop, itemaux, itemnumber, dropdate)
+    VALUES(:accountid, :itemdrop, :itemaux, :itemnumber, NOW())";
+
+    $result = Bitch::source('default')->query($q, 
+      compact('accountid', 'itemdrop', 'itemaux', 'itemnumber'));
+
+
+    if (!$result) {
+      die('Invalid query');
+    }
+
+    return true;
+  }
+
+  public static function delete($delete) {
+    if (count($delete) > 0) {
+      $sql_in = implode(',', array_fill(0, count($delete), '?'));
+
+      $q = "DELETE FROM itemdrops
+      WHERE id IN ($sql_in);";
+      $result = Bitch::source('default')->query($q, $delete);
+      if (!$result) { die('Invalid query'); }
+    }
+
+    return true;
+  }
+
+
 }
 
 ?>

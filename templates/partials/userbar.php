@@ -8,6 +8,13 @@
              data-widget-title="Minecraft Launcher"
              data-widget-mode="iframe"
              data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> launcher</a></li>
+      <li><a id="menu-item-wiki"
+             href="http://minecraft.gamepedia.com/Minecraft_Wiki"
+             data-widget-action="open"
+             data-widget-name="launcher"
+             data-widget-title="Minecraft Wiki"
+             data-widget-mode="iframe"
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> minecraft wiki</a></li>
       <li><a id="menu-item-inquisitor"
              href="//inquisitor.minecraft.pt"
              data-widget-action="open"
@@ -40,6 +47,7 @@
              href="/directory"
              data-widget-action="open"
              data-widget-name="widget-directory"
+             data-widget-maximized="true"
              data-widget-title="Jogadores"><i class="fa fa-users"></i> jogadores</a></li>
     </ul>
   </li>
@@ -47,7 +55,7 @@
 
 <? if ($user['admin'] == 1): ?>
 <ul class="pull-left">
-    <li><a href="#"><i class="fa fa-gears"></i> área de admin</a>
+    <li><a href="#"><i class="fa fa-gears"></i> admin</a>
       <ul>
         <li><a id="menu-item-admin-accounts"
                href="/admin/accounts" 

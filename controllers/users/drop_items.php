@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/itemdrops.php');
+use models\drop\DropModel;
 
 function users_drop_items () {
 
@@ -19,7 +19,13 @@ function users_drop_items () {
     return;
   }
 
-  $status = saveDrop($id, $itemid, $itemqt, $itemaux);
+  if (($itemdrop <= 0) or ($itemnumber <= 0) or ($itemaux < 0)) {
+    setFlash('error', 'Item ID ou quantidade inválida.');
+    header("Location: /profile?id=$id#itemdrops");
+    return;
+  }
+
+  $status = DropModel::create($id, $itemid, $itemqt, $itemaux);
   if ($status) {
     setFlash('success', 'Item drop criada.');
     header("Location: /profile?id=$id#itemdrops");
@@ -39,7 +45,8 @@ function users_delete_drops() {
   $accountid = isset($_POST['id']) ? $_POST['id'] : null;
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
-  $status = dropsConfigure($delete);
+  $status = DropModel::delete($delete);
+
   if ($status) {
     setFlash('success', 'Item drops apagados.');
     header("Location: /profile?id=$accountid#itemdrops");

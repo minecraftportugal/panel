@@ -4,6 +4,9 @@ require_once('lib/sessions.php');
 require_once('lib/i18n.php');
 require_once('helpers/date.php');
 
+
+use models\drop\DropModel;
+
 function users_show () {
   validateSession();
 
@@ -68,7 +71,7 @@ function users_show () {
   $drops_page = isset($_GET['drops_page']) ? $_GET['drops_page'] : 1;
   $drops_page = intval($drops_page);
   $drops_per_page = intval($drops_per_page);
-  $drops_pages = getDrops(($drops_page-1)*$drops_per_page, $drops_per_page, $profileId, 0);
+  $drops_pages = DropModel::get(["accountid" => $profileId, "undelivered" => 0]);
   $link_after = "";
   $link_after .= "&id=$profileId";
   $link_after .= "#itemdrops";
@@ -77,11 +80,11 @@ function users_show () {
   $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, $admin, 'drops_page', 'drops_per_page');
 
   // Item Drops!
-  $new_drops_pages = getDrops(0, 6, $_SESSION["id"], 1); //mostrar até 6 itens
+  $new_drops_pages = DropModel::get(["per_page" => 6, "accountid" => $_SESSION["id"], "undelivered" => 1]); //mostrar até 6 itens
   $total_new_drops = $new_drops_pages["total"];
   $new_drops = $new_drops_pages["pages"];
-  $lootmessage = getLootMessage();
-  $loottitle = getLootTitles();
+  $lootmessage = "WOW";
+  $loottitle = "very items";
 
   
   $profileSkin = "http://s3.amazonaws.com/MinecraftSkins/".$profile['playername'].".png?cache=".nocachetag();

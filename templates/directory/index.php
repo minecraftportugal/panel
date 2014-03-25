@@ -2,25 +2,40 @@
 
   <h1>Jogadores</h1>
   <div class="page-filters">
-    <div class="page-filters-tab">Filtros</div>
+    <div class="page-filters-snap"></div>
     <div class="page-filters-body">
       <form name="directory_users_filters" action="/directory" method="GET" autocomplete="off">
-
-        <h2>Nome</h2>
-        <input type="text" name="playername" placeholder="steve" value="<?= $p['playername']; ?>">
-
-        <h2>Critérios</h2>
-        <input id="staff" type="checkbox" name="staff" value="1" <?= $p['staff'] == 1 ? 'checked="checked"' : '' ?> />
-        <label class="checkbox" for="staff">staff</label>
-        <input id="contributor" type="checkbox" name="contributor" value="1" <?= $p['contributor'] == 1 ? 'checked="checked"' : '' ?> />
-        <label class="checkbox" for="contributor">contribuidor</label>
-        <input id="donor" type="checkbox" name="donor" value="1" <?= $p['donor'] == 1 ? 'checked="checked"' : '' ?> />
-        <label class="checkbox" for="donor">dador</label>
-        <input id="premium" type="checkbox" name="premium" value="1" <?= $p['premium'] == 1 ? 'checked="checked"' : '' ?> />
-        <label class="checkbox" for="premium">premium</label>
-        <input id="isonline" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
-        <label class="checkbox" for="isonline">online</label>
-        <input type="submit" value="pesquisar" />
+        <ul>
+          <li><h2>Nome</h2></li>
+          <li><input type="text" name="playername" placeholder="steve" value="<?= $p['playername']; ?>"></li>
+          <li><h2>Critérios</h2></li>
+          <li>
+            <ul>
+              <li>
+                <input id="staff" type="checkbox" name="staff" value="1" <?= $p['staff'] == 1 ? 'checked="checked"' : '' ?> />
+                <label class="checkbox" for="staff">staff</label>
+              </li>
+              <li>
+                <input id="contributor" type="checkbox" name="contributor" value="1" <?= $p['contributor'] == 1 ? 'checked="checked"' : '' ?> />
+                <label class="checkbox" for="contributor">contribuidor</label>
+              </li>
+              <li>
+                <input id="donor" type="checkbox" name="donor" value="1" <?= $p['donor'] == 1 ? 'checked="checked"' : '' ?> />
+                <label class="checkbox" for="donor">dador</label>
+              </li>
+              <li>
+                <input id="premium" type="checkbox" name="premium" value="1" <?= $p['premium'] == 1 ? 'checked="checked"' : '' ?> />
+                <label class="checkbox" for="premium">premium</label>
+              </li>
+              <li>
+                <input id="isonline" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
+                <label class="checkbox" for="isonline">online</label>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <input type="submit" value="pesquisar" />
+          </li>
       </form>
     </div>
   </div>
@@ -32,21 +47,23 @@
 
       <? $badges = getUserBadges($r["id"]); ?>
 
-      <div class="directory-player pull-left">
+      <div class="player-cell pull-left">
         <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>">
-        <div class="pull-clear sep"></div>
+        <div class="section-1">
+          
+            <?= \helpers\minotar\MinotarHelper::head($r['playername'], 64) ?>
+        </div>
+
+
+        <div class="section-2">
+          <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
+            <?= $r["playername"] ?>
+          </span>
+        </div>
+
         
-          <?= \helpers\minotar\MinotarHelper::head($r['playername'], 40) ?>
 
-         <div class="pull-clear sep"></div>
-
-        <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
-          <?= $r["playername"] ?>
-        </span>
-
-        <div class="pull-clear sep"></div>
-
-        <div class="badges">
+        <div class="section-3">
 
           <? if ($badges['member'] == 1): ?>
             <span title="Membro" class="badge2 badge-member"></span>
@@ -76,20 +93,7 @@
             <span title="Conta Desactivada" class="badge2 badge-deactivated"></span>
           <? endif; ?>
 
-          <? if (($badges['premium'] == 1)
-          or  ($badges['admin'] == 1)
-          or  ($badges['operator'] == 1)
-          or  ($badges['donor'] == 1)
-          or  ($badges['contributor'] == 1)
-          or  ($badges['active'] != 1)
-          or  ($badges['member'] == 1)):
-          ?>
-            <div style="height:10px;clear:both;"></div>
-          <? endif; ?>
-
         </div>
-
-      <div class="pull-clear sep"></div>
 
       </a>
     </div>
@@ -99,8 +103,11 @@
     
 
   <? endif; ?>
+    <div class="nav"><?= $navigation ?></div>
   </div>
 
-  <div class="nav"><?= $page_navigation ?></div>
+  <div class="page-footer">
+  </div>
+
 
 </div>

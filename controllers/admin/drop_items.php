@@ -1,6 +1,6 @@
 <?php
 
-require_once('lib/itemdrops.php');
+use models\drop\DropModel;
 
 function admin_delete_drops() {
 
@@ -10,7 +10,7 @@ function admin_delete_drops() {
 
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
-  $status = dropsConfigure($delete);
+  $status = DropModel::delete($delete);
   if ($status) {
     setFlash('success', 'Item drops apagados.');
     header("Location: /admin#drops");

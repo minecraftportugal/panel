@@ -17,7 +17,7 @@ function directory_index() {
     'premium' => 0,
     'online' => 0,
     'page' => 1,
-    'per_page' => 21
+    'per_page' => 80
   ];
 
   $p = RequestHelper::process($_GET, $parameters);
@@ -30,7 +30,7 @@ function directory_index() {
 
   $link_after = PaginationHelper::make_link($p);
 
-  $page_navigation = PaginationHelper::navigation($p['page'], $total, $p['per_page'], '/directory', $link_after);
+  $navigation = PaginationHelper::navigation($p['page'], $total, $p['per_page'], '/directory', $link_after, 4, true);
 
   require('templates/directory/index.php');
 }
