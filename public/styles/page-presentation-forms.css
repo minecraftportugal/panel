@@ -1,52 +1,43 @@
-form > ul {
-
-}
-
-form > ul > li {
-  margin-bottom: 10px;
-  width: 220px;
-}
-
-form > ul > h2 {
- background: rgba(255, 255, 255, 0.05);
-}
-
-form > ul > li > ul > li {
-  float: right;
-  margin-bottom: 5px;
-  width: 160px;
-}
-
-div.page-filters-body form input,
-div.page-filters-body form label {
-  width: 100%;
-}
-
-div.page-filters-body form label {
-  padding: 0px;
-}
 
 select#itemid_sel {
   width: 285px !important;
 }
+  
+div.page-filters form select,
+div.page-filters form input:not([type=checkbox]),
+div.page-filters form label {
+  font-family: Consolas, monaco, monospace !important;
+  width: 180px;
+  font-size: 12px;
+  border-radius: 3px;
+  border: 1px solid #333333;
+  background: rgba(255, 255, 255, 0.05);
+  color: #EEEEEE;
+  padding: 4px;
+  outline: none;
+}
 
-select, input, label.checkbox {
- font-family: Consolas, monaco, monospace !important;
- font-size: 12px;
- border-radius: 3px;
- border: 1px solid #333333;
- background: rgba(255, 255, 255, 0.05);
- color: #EEEEEE;
- padding: 5px;
- cursor: pointer;
+
+div.page-filters form label {
+  cursor: pointer;
+}
+
+div.page-filters form input[type=submit],
+div.page-filters form input[type=reset] {
+  cursor: pointer;
+  width: 190px;
+}
+
+div.page-filters form input[type=checkbox] {
+  margin-top: 5px;
 }
 
 input:hover, label.checkbox:hover {
- background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.1);
 }
 
 select option {
- background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
 }
 
 input[type=text], input[type=password] {
@@ -70,8 +61,8 @@ input[type=checkbox] {
 }
 
 input[type=submit]:active, input[type=reset]:active {
- background: rgba(255,255,255,0.4);
- cursor: pointer;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
 }
 
 input[type="date"] {

@@ -147,120 +147,6 @@ div.sep {
 
 
 
-/*
-         █    ███
-   █       █    █
-   █       █    █
- █████  ░███░  █▓██   █   ███   ▒███▒
-   █  █▒ ▒█  █▓ ▓█  █  ▓▓ ▒█  █▒ ░█
-   █    █  █   █  █  █   █  █▒░
-   █  ▒████  █   █  █  █████  ░███▒
-   █  █▒  █  █   █  █  █     ▒█
-   █░   █░ ▓█  █▓ ▓█  █░   ▓▓  █  █░ ▒█
-   ▒██  ▒██▒█  █▓██   ▒██   ███▒  ▒███▒
-*/
-
-/* Admin Table */
-table {
-  width: 100%;
-  white-space: nowrap;
-}
-
-td, th {
-  padding: 0.3em;
-}
-
-tr.padup {
-  margin-top: 0.5em;
-}
-
-table.drops tr {
-  height: 30px
-}
-
-table.drops tr td {
-  vertical-align: middle;
-}
-
-span.itemname {
-  margin-left: 5px;
-  float: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-
-
-
-td.online {
-  background-color: rgba(0,255,0,0.1) !important;
-}
-
-td.offline {
-  background-color: rgba(255,0,0,0.1) !important;
-}
-
-
-table.alt-rows tr th,
-table.alt-rows2 tr th {
-  background: rgba(0,0,0, 0.8);
-}
-
-table.alt-rows tr:nth-child(even) td {
-  background: rgba(0,0,0, 0.2);
-}
-
-table.alt-rows tr:nth-child(odd) td {
-   background: rgba(255,255,255, 0.05);
-}
-
-table.alt-rows2 tr:nth-child(4n) td, 
-table.alt-rows2 tr:nth-child(4n-1) td {
-  background: rgba(0,0,0, 0.1);
-}
-
-table.alt-rows2 tr:nth-child(4n-2) td, 
-table.alt-rows2 tr:nth-child(4n-3) td {
-  background: rgba(255,255,255, 0.1);
-}
-
-
-
-table.pretty {
-  border-collapse: separate;
-  border-spacing: 2px;
-}
-
-  
-table.pretty td {
-  background: rgba(0, 0, 0, 0.2);
-  color: #DDD;
-}
-
-table.pretty th {
-  font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
-  text-transform: lowercase;
-  text-align: left;
-  color: #777;
-  font-size: 1.2em;
-  color: #FFF;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-table tbody {
-  color: #ddd;
-}
-
-td.shortcol {
-  width: 5%;
-}
-
-table.admin h2#select-all-active,
-table.admin h2#select-all-delete {
-  cursor: pointer;
-}
-
-
 
 /*
    █  █                        █
@@ -334,15 +220,7 @@ div#buttons {
 }
 
 
-div.error {
- background-color: rgba(255,0,0,0.3) !important;
- margin-bottom: 0.5em;
-}
 
-div.success {
- background-color: rgba(0,255,0,0.3) !important;
- margin-bottom: 0.5em;
-}
 
 div.itemdrops {
  background-color: rgba(0,155,255,0.3) !important;
@@ -352,9 +230,6 @@ div.itemdrops h2 {
   color: #009FFF !important;
 }
 
-div.itemdrops table tr td {
-  vertical-align: middle;
-}
 
 div#skin {
   width: 100%;
@@ -745,10 +620,6 @@ span.item > div.damage > div {
   width: 20px;
 }
 
-tr.line3 > td {
-  border: 0.3em solid gray;
-  padding: 0px;
-}
 
 td.enchanted {
   background: url('/images/enchanted.gif') center center !important;
@@ -773,61 +644,6 @@ div.inventory {
   -ms-interpolation-mode: nearest-neighbor;   // IE
 }
 
-span.badges {
-  width: 50%;
-  float:right;
-}
-
-span.badge {
-  display: block;
-  width: 24px;
-  height: 24px;
-  float: right;
-  margin-left: 2px;
-}
-
-span.badge2 {
-  display: block;
-  float: left;
-  width: 24px;
-  height: 24px;
-}
-
-span.badge-premium {
-  background-image: url(/images/icons/badge_premium.png);
-}
-
-span.badge-donor {
-  background-image: url(/images/icons/badge_donor.png);
-}
-
-span.badge-contributor {
-  background-image: url(/images/icons/badge_contributor.png);
-}
-
-span.badge-administrator {
-  background-image: url(/images/icons/badge_administrator.png);
-}
-
-span.badge-operator {
-  background-image: url(/images/icons/badge_operator.png);
-}
-
-span.badge-member {
-  background-image: url(/images/icons/badge_member.png);
-}
-
-span.badge-deactivated {
-  background-image: url(/images/icons/badge_deactivated.png);
-}
-
-td.nav {
-  color: #000;
-  text-align: center !important;
-  height: 3em;
-  vertical-align: middle;
-  padding: 0 !important;
-}
 
 
 /*

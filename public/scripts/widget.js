@@ -6,6 +6,7 @@ function Widget(options) {
     "useIframe" : false,
     "alwaysCreate" : false,
     "maximized" : false,
+    "classes" : "widget-not-scrollable",
     "css" : {
       "top": "0px",
       "left": "0px",
@@ -94,6 +95,8 @@ Widget.prototype._init = function() {
   $(button).appendTo("div#widget-button-container");
 
   $(this.selector).css(this.options.css);
+
+  $(this.selector).find("div.widget-body").addClass(this.options.classes);
 
   if (this.options.maximized) {
     this.maximize();
@@ -204,7 +207,6 @@ Widget.prototype._load = function() {
         $(widgetInstance.selector).find("div.widget-body").html(response);
       }
     });
-    $(this.selector).find("div.widget-body").addClass("widget-ajax");
   }
   this.bringTop();
   this.setActive();
@@ -401,6 +403,7 @@ $(document).on("click", "[data-widget-action]", function(event) {
   var useIframe = $(this).data("widget-mode") == "iframe";
   var css = $(this).data("widget-css")
   var maximized = $(this).data("widget-maximized") || false;
+  var classes = $(this).data("widget-classes") || "widget-not-scrollable";
 
   switch (action) {
 
@@ -412,7 +415,8 @@ $(document).on("click", "[data-widget-action]", function(event) {
         "useIframe" : useIframe,
         "title" : title,
         "css" : css,
-        "maximized" : maximized
+        "maximized" : maximized,
+        "classes" : classes
       });
       break;
 
@@ -425,6 +429,7 @@ $(document).on("click", "[data-widget-action]", function(event) {
         "title" : title,
         "css" : css,
         "maximized" : maximized,
+        "classes" : classes,
         "alwaysCreate" : true
       });
       break;

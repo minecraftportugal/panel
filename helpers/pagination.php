@@ -16,23 +16,24 @@ class PaginationHelper {
         return $str . $suffix;
     }
 
-    function navigation(
-        $page,
-        $total,
-        $per_page,
-        $link_before = null,
-        $link_after = null,
-        $page_margin = 4,
-        $show_expand = false,
-        $page_var = 'page',
-        $per_page_var = 'per_page'
+    function pagination(
+        $page,                      // current page
+        $total,                     // total_pages
+        $per_page,                  // how many items per page
+        $link_before = null,        // append to link before pagination parameters
+        $link_after = null,         // append to link after pagination parameters
+        $page_links = 4,            // show this many page links left and right
+        $expand = 0,                // increment per_page by these pages
+        $page_var = 'page',         // page variable
+        $per_page_var = 'per_page'  // per page variable
     ) {
 
-        if ($total == 0)
+        if (($total == 0) || (false)) {
             return "";
+        }
 
         $total_pages = ceil($total/$per_page);
-        $html = "<ul class=\"navigation\">";
+        $html = "<ul class=\"pagination\">";
         $html .= "<li><a href=\"$link_before?$page_var=1$link_after\">&lt;&lt;</a></li>";
 
         $ellipsis_l = false;
@@ -44,7 +45,7 @@ class PaginationHelper {
             //$html .= "<li>&lt;</li>";
         }
         for ($i=1; $i <= $total_pages; $i++) {
-            if (($i >= $page-$page_margin) && ($i <= $page+$page_margin)) {
+            if (($i >= $page-$page_links) && ($i <= $page+$page_links)) {
                 if ($page == $i) {
                     $html .= "<li class=\"current\">$i</li>";
                 } else {
@@ -68,8 +69,8 @@ class PaginationHelper {
         }
         $html .= "<li><a href=\"$link_before?$page_var=$total_pages$link_after\">&gt;&gt;</a></li>";
 
-        if ($show_expand) {
-            $per_page_expand = $per_page + 100;
+        if ($expand > 0) {
+            $per_page_expand = $per_page + $expand;
             $html .= "<li><a href=\"$link_before?$page_var=$page&$per_page_var=$per_page_expand$link_after\">&gt;&gt;&gt;</a></li>";
         }
 

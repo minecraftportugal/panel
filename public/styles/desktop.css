@@ -44,7 +44,7 @@ div#top-bar .bg-icon {
 }
 
 div#top-bar > ul {
-  min-width: 130px;
+  min-width: 140px;
 }
 
 div#top-bar > ul:hover {
@@ -109,6 +109,12 @@ div#top-bar .fa {
     font-size: 0.9em;
 }
 
+div#top-bar li.separator {
+  height: 1px;
+  background-color: #353535;
+}
+
+
 div#widget-button-container {
   background: linear-gradient(to bottom, #252525, #050505);
   position: absolute;
@@ -171,4 +177,14 @@ div#ajax-indicator.ajax-error {
   background-image: url("/images/loader3.gif");
   background-position: center center;
   background-repeat: no-repeat;
+}
+
+div.error {
+ background-color: rgba(255,0,0,0.3) !important;
+ margin-bottom: 0.5em;
+}
+
+div.success {
+ background-color: rgba(0,255,0,0.3) !important;
+ margin-bottom: 0.5em;
 }

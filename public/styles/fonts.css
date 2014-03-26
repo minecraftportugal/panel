@@ -8,5 +8,17 @@ div.widget-ui {
 }
 
 div.widget {
-  font-family: monospace;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+div.widget-body {
+  font-size: 12px;
+} 
+
+.font-normal {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.font-mono {
+  font-family: Consolas, monaco, monospace;
 }

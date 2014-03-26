@@ -33,8 +33,16 @@ div.widget.maximized div.widget-titlebar {
   border-top-right-radius: 0px;
 }
 
-div.widget-ajax {
+div.widget-scrollable-y {
   overflow-y: scroll;
+}
+
+div.widget-scrollable-x {
+  overflow-x: scroll;
+}
+
+div.widget-not-scrollable {
+  overflow: hidden;
 }
 
 div.widget-iframe {

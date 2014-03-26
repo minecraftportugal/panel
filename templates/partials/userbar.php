@@ -8,13 +8,6 @@
              data-widget-title="Minecraft Launcher"
              data-widget-mode="iframe"
              data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> launcher</a></li>
-      <li><a id="menu-item-wiki"
-             href="http://minecraft.gamepedia.com/Minecraft_Wiki"
-             data-widget-action="open"
-             data-widget-name="launcher"
-             data-widget-title="Minecraft Wiki"
-             data-widget-mode="iframe"
-             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> minecraft wiki</a></li>
       <li><a id="menu-item-inquisitor"
              href="//inquisitor.minecraft.pt"
              data-widget-action="open"
@@ -79,6 +72,13 @@
     <ul>
       <li><a href="#">como jogar</a></li>
       <li><a href="#">it's a trap</a></li>
+      <li><a id="menu-item-wiki"
+             href="http://minecraft.gamepedia.com/Minecraft_Wiki"
+             data-widget-action="open"
+             data-widget-name="launcher"
+             data-widget-title="Minecraft Wiki"
+             data-widget-mode="iframe"
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> minecraft wiki</a></li>
     </ul>
   </li>
 </ul>
@@ -96,6 +96,7 @@
              data-widget-name="options"><i class="fa fa-gear"></i> opções</a></li>
       <li><a href="/profile/?id=<?= $user['id'] ?>"
              data-widget-action="open" data-widget-name="profile"><i class="fa fa-user"></i> perfil</a></li>
+      <li class="separator"></li>
       <li><a href="#"
              onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> sair</a></li>
       </ul>
