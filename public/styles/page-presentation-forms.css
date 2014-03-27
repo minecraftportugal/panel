@@ -1,11 +1,8 @@
 
-select#itemid_sel {
-  width: 285px !important;
-}
-  
-div.page-filters form select,
-div.page-filters form input:not([type=checkbox]),
-div.page-filters form label {
+
+form select,
+form input:not([type=checkbox]),
+label {
   font-family: Consolas, monaco, monospace !important;
   width: 180px;
   font-size: 12px;
@@ -17,19 +14,23 @@ div.page-filters form label {
   outline: none;
 }
 
-
-div.page-filters form label {
+form label {
   cursor: pointer;
 }
 
-div.page-filters form input[type=submit],
-div.page-filters form input[type=reset] {
+form input[type=submit],
+form input[type=reset] {
   cursor: pointer;
   width: 190px;
+  background: linear-gradient(to bottom, #000000, #303030);
 }
 
 div.page-filters form input[type=checkbox] {
   margin-top: 5px;
+}
+
+div.page-panel-body form input:not([type=checkbox]) {
+  margin: auto;
 }
 
 input:hover, label.checkbox:hover {
@@ -61,7 +62,7 @@ input[type=checkbox] {
 }
 
 input[type=submit]:active, input[type=reset]:active {
-  background: rgba(255,255,255,0.4);
+  background: linear-gradient(to bottom, #000000, #000000, #202020);
   cursor: pointer;
 }
 

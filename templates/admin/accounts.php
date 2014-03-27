@@ -72,8 +72,10 @@
           <input id="yesgame" type="checkbox" name="yesgame" value="1" <?= $p['yesgame'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="yesgame">já jogou</label>
         </li>
+        <li>
           <input id="inactive" type="checkbox" name="inactive" value="1" <?= $p['inactive'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="inactive">inactivo</label>
+        </li>
         <li>
           <input id="admin" type="checkbox" name="admin" value="1" <?= $p['admin'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="admin">admin</label>
@@ -110,44 +112,50 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-      <table class="admin alt-rows">
-        <thead>
+      <table class="alt-rows">
+        <thead class="font-normal">
           <tr>
+            <td style="width: 30px;">
+            </td>
 
-            <th>
-              <h2 title="Nome do Jogador">Nome<h2>
-            </th>
+            <td style="width 25%;" class="column-sortable">
+              <div title="Nome do Jogador">Nome<div>
+            </td>
 
-            <th>
-              <h2 title="Ultima entrada no servidor">Data de registo</h2>
-            </th>
+            <td style="width 25%;" class="column-sortable">
+              <div title="Ultima entrada no servidor">Data de registo</div>
+            </td>
 
-            <th>
-              <h2 title="Ultima entrada no servidor">Ultimo login</h2>
-            </th>
+            <td style="width 25%;" class="column-sortable">
+              <div title="Ultima entrada no servidor">Ultimo login</div>
+            </td>
 
-            <th>
-              <h2 title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</h2>
-            </th>
+            <td style="width 25%;" class="column-sortable">
+              <div title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</div>
+            </td>
 
-            <th>
-              <h2 title="Administrador">@</h2>
-            </th>
+            <td style="width: 18px;" class="center">
+              <div title="Administrador">@</div>
+            </td>
 
-            <th>
-              <h2 id="select-all-active" title="Conta Activa">A</h2>
-            </th>
+            <td style="width: 18px;" class="center">
+              <div id="select-all-active" title="Conta Activa">A</div>
+            </td>
 
-            <th>
-              <h2 id="select-all-delete" title="APAGAR A CONTA!">X</h2>
-            </th>
+            <td style="width: 18px;" class="center">
+              <div id="select-all-delete" title="APAGAR A CONTA!">X</div>
+            </td>
 
           </tr>
         </thead>
-        <tbody>
+        <tbody class="font-mono">
         <? foreach((array)$page as $r): ?>
           <tr>
-
+            <td>
+              <div >
+                <?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
+              </div>
+            </td>
             <td class="">
               <div>
                 <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
@@ -156,9 +164,8 @@
                    class="noajax"
                    data-widget-action="open"
                    data-widget-name="profile-<?= $r['playername'] ?>">
-                  <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24) ?></span>
-                  <span><?= $r["playername"] ?></span>
-                  <span class="online" title="O jogador está online!"></span>
+                  <span class="pull-left"><?= $r["playername"] ?></span>
+                  <span class="pull-left online" title="O jogador está online!"></span>
                 </a>
               </div>
             </td>
@@ -209,20 +216,32 @@
 
           </tr>
         <? endforeach; ?>
-          <tr colspan="7">
-            <td>
+
+        <? if ($total == 0): ?>
+          <tr>
+            <td colspan="8" class="center">
               <div>
-                <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
-                <input type="submit" value="OK" />
+                Não foram encontrados jogadores através dos critérios especificados!
               </div>
             </td>
+
           </tr>
+        <? endif; ?>
+        
         </tbody>
       </table>
-            
+
+      <div class="separator"></div>
+
+      <div class="center">
+        <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+        <input type="submit" value="OK" />
+      </div>            
     </form>
 
-    <div class="navigation"><?= $pagination ?></div>
+    <div class="separator"></div>
+
+    <div class="navigation center"><?= $pagination ?></div>
 
   </div>
 

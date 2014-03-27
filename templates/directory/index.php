@@ -53,43 +53,47 @@
 
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
-    <? if (!empty($pages)): ?>
 
-      <? foreach((array)$pages as $r): ?>
+    <? foreach((array)$pages as $r): ?>
 
-        <div class="player-cell pull-left">
-          <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>">
+      <div class="player-cell pull-left">
+        <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>">
 
-          <div class="section-1">
-            <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
-              <?= $r["playername"] ?>
-            </span>
-          </div>
-          
-          <div class="section-2 font-mono">
-              <?= \helpers\minotar\MinotarHelper::head($r['playername'], 64) ?>
-          </div>
+        <div class="section-1">
+          <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
+            <?= $r["playername"] ?>
+          </span>
+        </div>
+        
+        <div class="section-2 font-mono">
+            <?= \helpers\minotar\MinotarHelper::head($r['playername'], 64) ?>
+        </div>
 
 
-          <div class="section-3">
-            <?
-              $badges = getUserBadges($r["id"]);
-              require(__DIR__."/../partials/badges.php"); 
-            ?>
-          </div>
+        <div class="section-3">
+          <?
+            $badges = getUserBadges($r["id"]);
+            require(__DIR__."/../partials/badges.php"); 
+          ?>
+        </div>
 
-        </a>
-      </div>
+      </a>
+    </div>
 
-      <? endforeach; ?>
+    <? endforeach; ?>
 
-      <div class="separator"></div>
+      <? if ($total == 0): ?>
+        <div class="center">
+          Não foram encontrados jogadores através dos critérios especificados!
+        </div>
+      <? endif; ?>
 
-      <div class="pagination">
-        <?= $pagination ?>
-      </div>
+    <div class="separator"></div>
 
-    <? endif; ?>
+    <div class="pagination center">
+      <?= $pagination ?>
+    </div>
+
   </div>
 
 </div>

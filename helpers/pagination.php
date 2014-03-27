@@ -25,7 +25,8 @@ class PaginationHelper {
         $page_links = 4,            // show this many page links left and right
         $expand = 0,                // increment per_page by these pages
         $page_var = 'page',         // page variable
-        $per_page_var = 'per_page'  // per page variable
+        $per_page_var = 'per_page', // per page variable
+        $page_guide = true
     ) {
 
         if (($total == 0) || (false)) {
@@ -36,18 +37,22 @@ class PaginationHelper {
         $html = "<ul class=\"pagination\">";
         $html .= "<li><a href=\"$link_before?$page_var=1$link_after\">&lt;&lt;</a></li>";
 
-        $ellipsis_l = false;
-        $ellipsis_r = false;
+        $ellipsis_l = true; //false;
+        $ellipsis_r = true; //  false;
 
         if ($page > 1) {
             $html .= "<li><a href=\"$link_before?$page_var=".($page-1)."$link_after\">&lt;</a></li>";
         } else {
-            //$html .= "<li>&lt;</li>";
+            $html .= "<li class=\"inactive\">&lt;</li>";
         }
         for ($i=1; $i <= $total_pages; $i++) {
-            if (($i >= $page-$page_links) && ($i <= $page+$page_links)) {
+
+            $delta_left = $total_pages - $page <= $page_links ? ($page_links - ($total_pages - $page)) * (-1) : 0;
+            $delta_right = $page <= $page_links ? $page_links - ($page-1) : 0;
+
+            if (($i >= $page - $page_links + $delta_left) && ($i <= $page + $page_links + $delta_right)) {
                 if ($page == $i) {
-                    $html .= "<li class=\"current\">$i</li>";
+                    $html .= "<li class=\"current inactive\">$i/$total_pages</li>";
                 } else {
                     $html .= "<li><a href=\"$link_before?$page_var=$i$link_after\">$i</a></li>";
                 }
@@ -65,7 +70,7 @@ class PaginationHelper {
         if ($page < $total_pages) {
             $html .= "<li class=\"lishort\"><a href=\"$link_before?$page_var=".($page+1)."$link_after\">&gt;</a></li>";
         } else {
-            //$html .= "<li>&gt;</li>";
+            $html .= "<li class=\"inactive\">&gt;</li>";
         }
         $html .= "<li><a href=\"$link_before?$page_var=$total_pages$link_after\">&gt;&gt;</a></li>";
 

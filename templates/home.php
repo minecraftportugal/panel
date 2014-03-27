@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="/styles/font-awesome.min.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/page-presentation.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/page-presentation-forms.css" media="screen" type="text/css">
-  <link rel="alternate" href="<?= $cfg_wp_url ?>?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" >
   
   <link href='http://fonts.googleapis.com/css?family=Overlock:400,700,900' rel='stylesheet' type='text/css'>
   
@@ -42,14 +41,14 @@
     <? require("partials/userbar.php"); ?>
   </div>
 
-
   <div id="widget-container"><div></div></div>
+  
   <div id="widget-button-container">
     <div id="widget-button-container-context">
       <div class="widget-context-button" onclick="javascript: Widget.tile();" title="Janelas Maximizadas"><i class="fa fa-th-large"></i></div>
     </div>
     <div id="widget-button-container-context">
-      <div class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cacata"><i class="fa fa-align-justify"></i></div>
+      <div class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cascata"><i class="fa fa-align-justify"></i></div>
     </div>
     <div id="widget-button-container-context">
       <div class="widget-context-button" onclick="javascript: Widget.embiggen();" title="Janelas Alinhadas"><i class="fa fa-list-alt  "></i></div>

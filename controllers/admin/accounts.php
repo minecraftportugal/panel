@@ -41,7 +41,7 @@ function admin_accounts() {
 
   $link_after = PaginationHelper::make_link($p);
 
-  $pagination = PaginationHelper::pagination($p['page'], $total, $p['per_page'], '/admin/accounts', $link_after, 4, true);
+  $pagination = PaginationHelper::pagination($p['page'], $total, $p['per_page'], '/admin/accounts', $link_after, 4, 20);
 
   require('templates/admin/accounts.php');
 }
