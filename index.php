@@ -2,8 +2,6 @@
 
 session_start();
 
-die();
-
 require_once('config.php');
 require_once('bootstrap.php');
 require_once('environment.php');

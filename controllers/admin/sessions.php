@@ -1,4 +1,4 @@
-s<?
+<?
 
 require_once('lib/sessions.php');
 
