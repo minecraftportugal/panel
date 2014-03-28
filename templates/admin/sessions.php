@@ -110,14 +110,6 @@
 
             <td>
               <div>
-                <span class="pull-left">
-                  <?= $r["lastlogindate"] ?>
-                </span>
-              </div>
-            </td>
-
-            <td>
-              <div>
                 <span class="pull-left center">
                   <?= $r["websession"] ?>
                 </span>

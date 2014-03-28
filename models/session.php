@@ -45,8 +45,10 @@ class SessionModel {
       return Bitch::source('default')->first($q, $args)["total"];
     }
 
-    public static function get($args = [], $order = "id ASC") {
+    public static function get($args = []) {
         $args = array_merge(SessionModel::$args, $args);
+        $order_by = $args["order_by"];
+        $asc_desc = $args["asc_desc"];
 
         $q = "SELECT * FROM (
           SELECT id, playername, lastloginip,
@@ -67,7 +69,7 @@ class SessionModel {
           AND ((:invalid = 0) OR ((:invalid = 1) AND (DATE_ADD(logintime, INTERVAL :length SECOND) <= NOW())))
           AND ((:online = 0) OR (:online = 1 AND online = 1))
           AND ((:websession = 0) OR (:websession = 1 AND websession = 1))
-          ORDER BY logintime DESC
+          ORDER BY $order_by $asc_desc
         ) pages LIMIT :index, :per_page";
 
         $args["index"] = ($args["page"] - 1) * $args["per_page"];

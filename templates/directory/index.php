@@ -91,7 +91,7 @@
     <div class="separator"></div>
 
     <div class="pagination center">
-      <?= $pagination ?>
+      <?= $pagination->render() ?>
     </div>
 
   </div>

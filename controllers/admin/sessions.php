@@ -24,7 +24,9 @@ function admin_sessions() {
         'valid' => 0,
         'invalid' => 0,
         'online' => 0,
-        'web' => 0
+        'web' => 0,
+        'order_by' => 'logintime_df',
+        'asc_desc' => 'desc'
     ];
 
     $p = ArgumentsHelper::process($_GET, $parameters);
@@ -67,23 +69,16 @@ function admin_sessions() {
 
     $table->add_column([
         'width' => '25%',
-        'label' => 'Ultimo login (session)',
+        'label' => 'Ultimo login',
         'label_title' => 'Data',
         'order_by' => 'logintime_df'
     ]);
 
     $table->add_column([
         'width' => '25%',
-        'label' => 'Ultimo login (account)',
-        'label_title' => 'Data',
-        'order_by' => 'lastlogindate_df'
-    ]);
-
-    $table->add_column([
-        'width' => '18px',
-        'alignment' => 'center',
-        'label' => '<i class="fa fa-star"></i>',
-        'label_title' => 'Tipo Sessão'
+        'label' => 'Tipo de Sessão',
+        'label_title' => 'Tipo Sessão',
+        'order_by' => 'websession'
     ]);
 
     $table->add_column([

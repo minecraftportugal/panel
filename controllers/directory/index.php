@@ -1,38 +1,50 @@
 <?
 
 use models\account\AccountModel;
-use helpers\request\RequestHelper;
+use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\notice\NoticeHelper;
 
 function directory_index() {
 
-  validateSession();
+    validateSession();
 
-  $parameters = [
-    'playername' => null,
-    'staff' => 0,
-    'contributor' => 0,
-    'donor' => 0,
-    'premium' => 0,
-    'online' => 0,
-    'page' => 1,
-    'per_page' => 30
-  ];
+    $action_url = '/directory';
 
-  $p = RequestHelper::process($_GET, $parameters);
+    $parameters = [
+        'playername' => null,
+        'staff' => 0,
+        'contributor' => 0,
+        'donor' => 0,
+        'premium' => 0,
+        'online' => 0,
+        'page' => 1,
+        'per_page' => 30,
+        'order_by' => 'registerdate_df',
+        'asc_desc' => 'asc'
+    ];
 
-  $total = AccountModel::count($p);
+    $p = ArgumentsHelper::process($_GET, $parameters);
 
-  $pages = AccountModel::get($p);
+    $total = AccountModel::count($p);
 
-  $notice = NoticeHelper::get();
+    $pages = AccountModel::get($p);
 
-  $link_after = PaginationHelper::make_link($p);
+    $notice = NoticeHelper::get();
 
-  $pagination = PaginationHelper::pagination($p['page'], $total, $p['per_page'], '/directory', $link_after, 4, 20);
+    $link_after = ArgumentsHelper::serialize($p);
 
-  require('templates/directory/index.php');
+    $pagination = new PaginationHelper([
+        "page" => $p['page'],
+        "total" => $total,
+        "per_page" => $p['per_page'],
+        "link_before" => $action_url,
+        "link_after" => $link_after,
+        "show_pages" => 4,
+        "expand" => 20
+    ]);
+
+    require('templates/directory/index.php');
 }
 
 ?>

@@ -137,6 +137,15 @@
                 </a>
               </div>
             </td>
+            
+            <td>
+              <div>
+                <?
+                  $badges = getUserBadges($r["id"]);
+                  require(__DIR__."/../partials/badges.php"); 
+                ?>
+              </div>
+            </td>
 
             <td>
               <div>
