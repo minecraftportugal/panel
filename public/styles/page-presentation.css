@@ -1,92 +1,94 @@
 div.page-panel-header {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  height: 24px;
-  background: linear-gradient(to bottom, #050505, #353535);
-  border-bottom: 1px solid #000000;
-  padding: 0px 5px 0px 5px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+    height: 24px;
+    background: linear-gradient(to bottom, #050505, #353535);
+    border-bottom: 1px solid #000000;
+    padding: 0px 5px 0px 5px;
 }
 
 div.page-panel-body {
-  position: absolute;
-  top: 24px;
-  bottom: 0px;
-  right: 0px;
-  left: 0px;
-  padding: 5px 5px 5px 5px;
+    position: absolute;
+    top: 24px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    padding: 5px 5px 5px 5px;
 }
 
 div.page-panel-scrollable {
-  overflow-y: scroll;
+    overflow-y: scroll;
 }
 
 div.page-panel-scrollable-auto {
-  overflow-y: auto;
+    overflow-y: auto;
 }
 
 div.page-panel-left {
-  position: absolute;
-  left: 0px;
-  width: 200px;
+    position: absolute;
+    left: 0px;
+    width: 200px;
 }
 
 div.page-panel-top.page-panel-left {
-  width: 200px;
+    width: 200px;
 }
 
 div.page-panel-top.page-panel-right {
-  width: 200px;
+    width: 200px;
 }
 
 div.page-panel-right {
-  position: absolute;
-  left: 210px;
-  right: 0px;
+    position: absolute;
+    left: 210px;
+    right: 0px;
 }
 
 div.page-panel-header h1 {
-  line-height: 26px;
-  font-size: 12px;
+    line-height: 26px;
+    font-size: 12px;
 }
 
 div.page-panel-header h1 i {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 div.page-panel-header.page-panel-left:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 div.page-panel-header.page-panel-left:active {
-  color: #AAAAAA;
-  background: linear-gradient(to bottom, #000000, #252525);
+    color: #AAAAAA;
+    background: linear-gradient(to bottom, #000000, #252525);
 }
 
 div.page-panel-body.page-panel-left ul {
-  width: 180px;
+    width: 180px;
 }
 
 div.page-panel-body.page-panel-left ul li {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 /* Tables */
 div.page-panel-body.page-panel-right table {
-  table-layout: fixed;
-  width: 100%;
-  white-space: nowrap;
-  border: 1px solid #222222;
+    table-layout: fixed;
+    width: 100%;
+    white-space: nowrap;
+    border: 1px solid #222222;
 }
 
 div.page-panel-body.page-panel-right table div input[type=checkbox] {
-  height: 30px;
-  width: 14px;
-  line-height: 30px;
+    height: 30px;
+    width: 14px;
+    line-height: 30px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 div.page-panel-body.page-panel-right table thead {
-  background: linear-gradient(to bottom, #353535, #050505);
+    background: linear-gradient(to bottom, #353535, #050505);
 }
 
 div.page-panel-body.page-panel-right table tbody { 
@@ -98,103 +100,111 @@ div.page-panel-body.page-panel-right table tr {
 }
 
 div.page-panel-body.page-panel-right table tr td {
-  text-align: left;
-  padding: 0px 8px 0px 8px;
+    text-align: left;
+    padding: 0px 8px 0px 8px;
 }
 
 div.page-panel-body.page-panel-right table tr td div,
 div.page-panel-body.page-panel-right table tr th h2 {
-  height: 30px;
-  line-height: 30px;
-  overflow: hidden;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+}
+
+div.page-panel-body.page-panel-right table thead tr td a {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    width: 100%;
 }
 
 div.page-panel-body.page-panel-right table.alt-rows tr th,
 div.page-panel-body.page-panel-right table.alt-rows-2 tr th {
-  background: rgba(0, ,0 0, 0.05);
+    background: rgba(0, ,0 0, 0.05);
 }
 
 div.page-panel-body.page-panel-right table.alt-rows tr:nth-child(even) td {
-  background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 
 div.page-panel-body.page-panel-right table.alt-rows tr.footer td {
-  background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0);
 }
 
 div.page-panel-body.page-panel-right table.alt-rows tr:nth-child(odd) td {
-   background: rgba(255, 255, 255, 0.05);
+     background: rgba(255, 255, 255, 0.05);
 }
 
 div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n) td, 
 div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n-1) td {
-  background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n-2) td, 
 div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n-3) td {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 
 div.page-panel-body.page-panel-right table thead td.column-sortable {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 div.page-panel-body.page-panel-right table thead td.column-sortable:active {
-  color: #AAAAAA;
-  background: linear-gradient(to bottom, #000000, #252525) !important;
+    color: #AAAAAA;
+    background: linear-gradient(to bottom, #000000, #252525) !important;
 }
 
 div.page-panel-body.page-panel-right table tbody tr:hover td {
-  background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 td.align-center {
-    text-align: center;
+        text-align: center;
 }
 
 td.align-left {
-    text-align: left;
+        text-align: left;
 }
 
 td.align-right {
-    text-align: right;
+        text-align: right;
 }
 
 /*
  * Directory & Player Cells
  */
 div.player-cell {
-  border: 1px solid #222222;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  text-align: center;
-  width: 125px;
-  height: 125px;
-  background: linear-gradient(to bottom, #000000, #303030);
+    border: 1px solid #222222;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    width: 125px;
+    height: 125px;
+    background: linear-gradient(to bottom, #000000, #303030);
 }
 
 div.player-cell:hover {
-  background: rgba(255, 255, 255, 0.1);
-  cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
 }
 
 div.player-cell div.section-1 {
-  height: 25px;
-  line-height: 25px;
+    height: 25px;
+    line-height: 25px;
 }
 
 div.player-cell div.section-2 {
-  height: 74px;
+    height: 74px;
 }
 
 div.player-cell div.section-3 {
-  height: 26px;
-  text-align: center;
+    height: 26px;
+    text-align: center;
 }
 
 div.pagination {
@@ -202,63 +212,63 @@ div.pagination {
 }
 
 div.separator {
-  clear: both;
-  height: 20px;
-  display: block;
+    clear: both;
+    height: 20px;
+    display: block;
 }
 
 ul.pagination {
-  width: 100%;
+    width: 100%;
 
 }
 
 ul.pagination li {
-  display: inline-block;
-  border-top: 1px solid #222222;
-  border-bottom: 1px solid #222222;
-  height: 25px;
-  min-width: 32px;
-  line-height: 25px;
-  text-align: center;
-  background: linear-gradient(to bottom, #000000, #303030);
+    display: inline-block;
+    border-top: 1px solid #222222;
+    border-bottom: 1px solid #222222;
+    height: 25px;
+    min-width: 32px;
+    line-height: 25px;
+    text-align: center;
+    background: linear-gradient(to bottom, #000000, #303030);
 }
 
 ul.pagination li:hover:not(.inactive) {
-  background: linear-gradient(to bottom, #000000, #101010, #303030);
+    background: linear-gradient(to bottom, #000000, #101010, #303030);
 }
 
 ul.pagination li:active:not(.inactive) {
-  background: linear-gradient(to bottom, #000000, #151515, #101010, #303030);
+    background: linear-gradient(to bottom, #000000, #151515, #101010, #303030);
 }
 
 ul.pagination a {
-  display: block;
-  width: 30px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
+    display: block;
+    width: 30px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
 }
 
 ul.pagination li:first-child {
-  border-left: 1px solid #222222;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+    border-left: 1px solid #222222;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 ul.pagination li:last-child {
-  border-right: 1px solid #222222;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+    border-right: 1px solid #222222;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 ul.pagination li:not(:last-child) {
-  border-right: 1px solid #222222;
+    border-right: 1px solid #222222;
 }
 
 ul.pagination li.current {
-  color: #AAAAAA !important;
-  background: linear-gradient(to bottom right, #151515, #454545) !important;
-  padding: 0px 6px 0px 6px;
+    color: #AAAAAA !important;
+    background: linear-gradient(to bottom right, #151515, #454545) !important;
+    padding: 0px 6px 0px 6px;
 }
 
 ul.pagination li.inactive {
@@ -269,37 +279,37 @@ ul.pagination li.inactive {
 
 /* Badges */
 span.badge {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  margin: 0px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0px;
 }
 
 span.badge-premium {
-  background-image: url(/images/icons/badge_premium.png);
+    background-image: url(/images/icons/badge_premium.png);
 }
 
 span.badge-donor {
-  background-image: url(/images/icons/badge_donor.png);
+    background-image: url(/images/icons/badge_donor.png);
 }
 
 span.badge-contributor {
-  background-image: url(/images/icons/badge_contributor.png);
+    background-image: url(/images/icons/badge_contributor.png);
 }
 
 span.badge-administrator {
-  background-image: url(/images/icons/badge_administrator.png);
+    background-image: url(/images/icons/badge_administrator.png);
 }
 
 span.badge-operator {
-  background-image: url(/images/icons/badge_operator.png);
+    background-image: url(/images/icons/badge_operator.png);
 }
 
 span.badge-member {
-  background-image: url(/images/icons/badge_member.png);
+    background-image: url(/images/icons/badge_member.png);
 }
 
 span.badge-deactivated {
-  background-image: url(/images/icons/badge_deactivated.png);
+    background-image: url(/images/icons/badge_deactivated.png);
 }
 

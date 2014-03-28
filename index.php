@@ -2,6 +2,8 @@
 
 session_start();
 
+die();
+
 require_once('config.php');
 require_once('bootstrap.php');
 require_once('environment.php');
@@ -9,8 +11,11 @@ require_once('router.php');
 
 if ($cfg_wp_enabled) {
   require_once("$cfg_wp_location/wp-config.php");
-  $wp->init(); $wp->parse_request(); $wp->query_posts();
-  $wp->register_globals(); $wp->send_headers();
+  $wp->init();
+  $wp->parse_request();
+  $wp->query_posts();
+  $wp->register_globals();
+  $wp->send_headers();
 }
 
 require_once('models/account.php');
@@ -61,9 +66,10 @@ require_once('controllers/test/index.php');
 
 require_once('helpers/flash.php');
 require_once('helpers/pagination.php');
-require_once('helpers/request.php');
+require_once('helpers/arguments.php');
 require_once('helpers/notice.php');
 require_once('helpers/minotar.php');
+require_once('helpers/table.php');
 
 $r = new Router();
 

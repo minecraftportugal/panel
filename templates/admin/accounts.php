@@ -113,41 +113,9 @@
   <div class="page-panel-body page-panel-right page-panel-scrollable">
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="alt-rows">
-        <thead class="font-normal">
-          <tr>
-            <td style="width: 30px;">
-            </td>
+        
+        <?= $table->render_header(); ?>
 
-            <td style="width 25%;" class="column-sortable">
-              <div title="Nome do Jogador">Nome<div>
-            </td>
-
-            <td style="width 25%;" class="column-sortable">
-              <div title="Ultima entrada no servidor">Data de registo</div>
-            </td>
-
-            <td style="width 25%;" class="column-sortable">
-              <div title="Ultima entrada no servidor">Ultimo login</div>
-            </td>
-
-            <td style="width 25%;" class="column-sortable">
-              <div title="Ultimo IP (não actualizado se entrar não registado/logado)">Ultimo IP</div>
-            </td>
-
-            <td style="width: 18px;" class="center">
-              <div title="Administrador">@</div>
-            </td>
-
-            <td style="width: 18px;" class="center">
-              <div id="select-all-active" title="Conta Activa">A</div>
-            </td>
-
-            <td style="width: 18px;" class="center">
-              <div id="select-all-delete" title="APAGAR A CONTA!">X</div>
-            </td>
-
-          </tr>
-        </thead>
         <tbody class="font-mono">
         <? foreach((array)$page as $r): ?>
           <tr>
@@ -191,6 +159,13 @@
                 <a href="/admin?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
                   <span class="pull-left"><?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?></span>
                 </a>
+              </div>
+            </td>
+
+            <td class="center">
+              <div>
+                <input class="fakecheckbox" type="checkbox" <?= $r["operator"] == 1 ? 'checked="checked"' : '' ?> />
+                <input name="operator[<?= $r["id"] ?>]" value="<?= $r["operator"] ?>" type="hidden" />
               </div>
             </td>
 
@@ -241,7 +216,11 @@
 
     <div class="separator"></div>
 
-    <div class="navigation center"><?= $pagination ?></div>
+    <div class="navigation center">
+      <?= $pagination->render() ?>
+    </div>
+
+    <div class="separator"></div>
 
   </div>
 

@@ -49,9 +49,11 @@ class SessionModel {
         $args = array_merge(SessionModel::$args, $args);
 
         $q = "SELECT * FROM (
-          SELECT id, playername, lastloginip, lastlogindate, logintime, websession,
-            DATE_FORMAT(logintime, '%b %d %H:%i:%s %Y') AS logintimef,
-            DATE_FORMAT(lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindatef,
+          SELECT id, playername, lastloginip,
+            lastlogindate as lastlogindate_df, 
+            logintime as logintime_df, websession,
+            DATE_FORMAT(logintime, '%b %d %H:%i:%s %Y') AS logintime,
+            DATE_FORMAT(lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindate,
             IF(DATE_ADD(logintime, INTERVAL :length SECOND) > NOW(), 1, 0) as valid
           FROM accounts a INNER JOIN sessions s on a.id = s.accountid LEFT JOIN (
           SELECT 1 as online, name FROM inquisitor.players
