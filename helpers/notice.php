@@ -4,7 +4,7 @@ namespace helpers\notice;
 
 class NoticeHelper {
 
-  function setFlash($type, $message) {
+  function set($type, $message) {
     if (!isset($_SESSION["notice"])) {
        $_SESSION["notice"] = [];
     }
@@ -18,7 +18,7 @@ class NoticeHelper {
        $_SESSION["notice"] = [];
     }
 
-    if ($type = null) {
+    if ($type == null) {
 
       $notice = $_SESSION["notice"];
       unset($_SESSION["notice"]);
@@ -27,12 +27,26 @@ class NoticeHelper {
     } else {
 
       if (isset($_SESSION["notice"][$type])) {
-        $flash = $_SESSION["notice"][$type];
+        $notice = $_SESSION["notice"][$type];
         unset($_SESSION["notice"][$type]);
-        return $flash;
+        return $notice;
       }  else {
         return false;
       }
+    }
+
+  }
+
+  function render() {
+    
+    $error = NoticeHelper::get('error');
+    if ($error != false) {
+      return "<div class=\"section error\">$error</div>";
+    }
+  
+    $success = NoticeHelper::get('success');
+    if ($success != false) {
+      return "<div class=\"section success\">$success</div>";
     }
 
   }

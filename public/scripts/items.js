@@ -102,7 +102,7 @@ $(function() {
     /*
      * Item Names
      */
-    $('span.itemname').each(function() {
+    $('span.item-name').each(function() {
       var d = $(this).attr('data-item').split(' ');
       var enchantments = $(this).attr('data-enchantments').split(' ');
 

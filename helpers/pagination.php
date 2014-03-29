@@ -64,7 +64,7 @@ class PaginationHelper {
                 } else {
                     $html .= "<li><a href=\"$this->link_before?$this->page_var=$i$this->link_after\">$i</a></li>";
                 }
-                } else {
+            } else { 
                 if ($i < $this->page && !$ellipsis_l) {
                     $html .= "<li><a href=\"$this->link_before?$this->page_var=$i$this->link_after\">&hellip;</a></li>";
                     $ellipsis_l = true;
@@ -84,7 +84,7 @@ class PaginationHelper {
 
         if ($this->expand > 0) {
             $per_page_expand = $this->per_page + $this->expand;
-            $html .= "<li><a href=\"$this->link_before?$this->page_var=$this->page&$this->per_page_var=$per_page_expand$this->link_after\">&gt;&gt;&gt;</a></li>";
+            $html .= "<li><a href=\"$this->link_before?$this->page_var=$this->page&$this->per_page_var=$per_page_expand&$this->link_after\">&gt;&gt;&gt;</a></li>";
         }
 
         $html .= "</ul>";

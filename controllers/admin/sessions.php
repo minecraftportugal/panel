@@ -4,6 +4,7 @@ require_once('lib/sessions.php');
 
 use models\session\SessionModel;
 use helpers\arguments\ArgumentsHelper;
+use helpers\notice\NoticeHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\table\TableHelper;
 
@@ -37,6 +38,8 @@ function admin_sessions() {
 
     $link_after = ArgumentsHelper::serialize($p);
 
+    $notices = NoticeHelper::render();
+
     $pagination = new PaginationHelper([
         "page" => $p['page'],
         "total" => $total,
@@ -55,15 +58,13 @@ function admin_sessions() {
 
     $table->add_column([
         'width' => '25%',
-        'label' => 'Nome',
-        'label_title' => 'Nome do jogador',
+        'label' => 'Jogador',
         'order_by' => 'playername'
     ]);
 
     $table->add_column([
         'width' => '25%',
         'label' => 'IP Sessão',
-        'label_title' => 'Endereço IP da sessão',
         'order_by' => 'lastloginip'
     ]);
 
@@ -87,8 +88,6 @@ function admin_sessions() {
         'label' => '<i class="fa fa-trash-o"></i>',
         'label_title' => 'Apagar'
     ]);
-
-
 
     require('templates/admin/sessions.php');
 }

@@ -44,7 +44,7 @@ class TableHelper {
             $params["asc_desc"] = "asc";
         }
 
-        return $this->action . ArgumentsHelper::serialize($params);
+        return $this->action . ArgumentsHelper::serialize($params, true);
     }
 
     public function render_header() {

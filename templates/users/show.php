@@ -1,23 +1,11 @@
+<script type="text/javascript" src="/scripts/profile.js"></script>
+
 <div class="widget-show">
   <?
     if ($total_new_drops > 0) {
       require __DIR__.'/../partials/itemdrops.php';
     }
   ?>
-  
-  <? 
-    $error = getFlash('error');
-    if ($error != false):
-  ?>
-    <div class="section error"><?= $error ?></div>
-  <? endif; ?>
-  
-  <? 
-    $success = getFlash('success');
-    if ($success != false):
-  ?>
-    <div class="section success"><?= $success ?></div>
-  <? endif; ?>
 
   <div id="player" class="collapsible section default">
     <a href="#player" class="noajax">

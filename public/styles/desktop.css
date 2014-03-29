@@ -181,10 +181,12 @@ div#ajax-indicator.ajax-error {
 
 div.error {
  background-color: rgba(255,0,0,0.3) !important;
+ border: 1px solid #FF0000;
  margin-bottom: 0.5em;
 }
 
 div.success {
  background-color: rgba(0,255,0,0.3) !important;
+ border: 1px solid #00FF00;
  margin-bottom: 0.5em;
 }

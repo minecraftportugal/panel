@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="/styles/desktop.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/widget.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/scrollbar.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/styles/items.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/font-awesome.min.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/page-presentation.css" media="screen" type="text/css">
   <link rel="stylesheet" href="/styles/page-presentation-forms.css" media="screen" type="text/css">
@@ -23,6 +24,7 @@
 
   <script type="text/javascript" src="/scripts/jquery.js"></script>
   <script type="text/javascript" src="/scripts/jqueryui.js"></script>
+  <script type="text/javascript" src="/scripts/Three.js"></script>
   <script type="text/javascript" src="/scripts/ajax.js"></script>
   <script type="text/javascript" src="/scripts/widget.js"></script>
   <script type="text/javascript" src="/scripts/desktop.js"></script>
@@ -32,7 +34,6 @@
   <script type="text/javascript" src="/scripts/top.js"></script>
   <script type="text/javascript" src="/scripts/sidebar.js"></script>
   <script type="text/javascript" src="/scripts/profile.js"></script>
-  <script type="text/javascript" src="/scripts/items.js"></script>
 
 </head> 
 <body>
@@ -81,3 +82,4 @@
 
 </body>
 </html>
+

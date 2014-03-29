@@ -9,7 +9,7 @@
   </div>
 
     <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
-    <form name="manage_sessions_filter" action="/admin/accounts" method="GET" autocomplete="off">
+    <form name="manage_sessions_filter" action="<?= $action_url ?>" method="GET" autocomplete="off">
       <ul>
         <li>
           <h2>Nome</h2>
@@ -65,6 +65,9 @@
   </div>
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
+    
+    <?= $notices ?>
+
     <form name="manage_users" action="/sessions/configure" method="POST" autocomplete="off">
       <table class="alt-rows">
         
@@ -74,12 +77,9 @@
         <? foreach((array)$page as $r): ?>
           <tr>
             <td>
-              <div >
-                <?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
-              </div>
+                <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
             </td>
             <td class="">
-              <div>
                 <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
                    href="/profile?id=<?= $r['id'] ?>"
                    title="<?= $r["email"] ?>"
@@ -89,37 +89,24 @@
                   <span class="pull-left"><?= $r["playername"] ?></span>
                   <span class="pull-left online" title="O jogador está online!"></span>
                 </a>
-              </div>
             </td>
 
            <td>
-              <div>
                 <a href="/admin?ipaddress=<?= $r["lastloginip"] ?>">
-                  <span class="pull-left"><?= $r["lastloginip"] ?></span>
+                  <?= $r["lastloginip"] ?>
                 </a>
-              </div>
             </td>
 
             <td>
-              <div>
-                <span class="pull-left">
-                  <?= $r["logintime"] ?>
-                </span>
-              </div>
+                <?= $r["logintime"] ?>
             </td>
 
             <td>
-              <div>
-                <span class="pull-left center">
-                  <?= $r["websession"] ?>
-                </span>
-              </div>
+                <?= $r["websession"] ?>
             </td>
 
             <td class="center">
-              <div>
                 <input class="check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
-              </div>
             </td>
 
           </tr>
@@ -129,7 +116,7 @@
           <tr>
             <td colspan="8" class="center">
               <div>
-                Não foram encontrados jogadores através dos critérios especificados!
+                Não foram encontradas sessões através dos critérios especificados!
               </div>
             </td>
 

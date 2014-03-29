@@ -1,6 +1,7 @@
 <?php
 
 use models\drop\DropModel;
+use helpers\Notice\NoticeHelper;
 
 function admin_delete_drops() {
 
@@ -12,11 +13,11 @@ function admin_delete_drops() {
 
   $status = DropModel::delete($delete);
   if ($status) {
-    setFlash('success', 'Item drops apagados.');
-    header("Location: /admin#drops");
+    NoticeHelper::set('success', 'Item drops apagados.');
+    header("Location: /admin/drops");
   } else {
-    setFlash('error', 'Erro ao apagar item drops!');
-    header("Location: /admin#drops");
+    NoticeHelper::set('error', 'Erro ao apagar item drops!');
+    header("Location: /admin/drops");
   }
 
 }

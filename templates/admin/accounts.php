@@ -9,7 +9,7 @@
   </div>
 
   <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
-    <form name="manage_users_filters" action="/admin/accounts" method="GET" autocomplete="off">
+    <form name="manage_users_filters" action="<?= $action_url ?>" method="GET" autocomplete="off">
       <ul>
         <li>
           <h2>Nome</h2>
@@ -111,6 +111,9 @@
   </div>
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
+
+    <?= $notices ?>
+
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="alt-rows">
         
@@ -119,13 +122,12 @@
         <tbody class="font-mono">
         <? foreach((array)$page as $r): ?>
           <tr>
+          
             <td>
-              <div >
-                <?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
-              </div>
+                <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
             </td>
+
             <td class="">
-              <div>
                 <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
                    href="/profile?id=<?= $r['id'] ?>"
                    title="<?= $r["email"] ?>"
@@ -135,67 +137,48 @@
                   <span class="pull-left"><?= $r["playername"] ?></span>
                   <span class="pull-left online" title="O jogador está online!"></span>
                 </a>
-              </div>
             </td>
             
             <td>
-              <div>
                 <?
                   $badges = getUserBadges($r["id"]);
                   require(__DIR__."/../partials/badges.php"); 
                 ?>
-              </div>
             </td>
 
             <td>
-              <div>
-                <span class="pull-left">
-                  <?= $r["registerdate"] ?>
-                </span>
-              </div>
+                <?= $r["registerdate"] ?>
             </td>
 
             <td>
-              <div>
-                <span class="pull-left">
-                  <?= $r["lastlogindate"] != NULL ? $r["lastlogindate"] : "<i>".$r["registerdate"]."</i>" ?>
-                </span>
-              </div>
+  
+                <?= $r["lastlogindate"] != NULL ? $r["lastlogindate"] : "<i>".$r["registerdate"]."</i>" ?>
+
             </td>
 
             <td>
-              <div>
-                <a href="/admin?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
+                <a href="/admin/accounts?ipaddress=<?= $r["lastloginip"] != NULL ? $r["lastloginip"] : $r["registerip"] ?>" title="<?= $r["lastlogindate"] ? $r["lastlogindate"] : $r["registerdate"] . "*" ?>">
                   <span class="pull-left"><?= $r["lastloginip"] != NULL ? $r["lastloginip"] : "<i>".$r["registerip"]."</i>" ?></span>
                 </a>
-              </div>
             </td>
 
             <td class="center">
-              <div>
                 <input class="fakecheckbox" type="checkbox" <?= $r["operator"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="operator[<?= $r["id"] ?>]" value="<?= $r["operator"] ?>" type="hidden" />
-              </div>
             </td>
 
             <td class="center">
-              <div>
                 <input class="fakecheckbox" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="admin[<?= $r["id"] ?>]" value="<?= $r["admin"] ?>" type="hidden" />
-              </div>
             </td>
 
             <td class="center">
-              <div>
                 <input class="fakecheckbox fake-active" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="active[<?= $r["id"] ?>]" value="<?= $r["active"] ?>" type="hidden" />
-              </div>
             </td>
 
             <td class="center">
-              <div>
                 <input class="check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
-              </div>
             </td>
 
           </tr>

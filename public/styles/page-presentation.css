@@ -99,15 +99,11 @@ div.page-panel-body.page-panel-right table tr {
 
 }
 
-div.page-panel-body.page-panel-right table tr td {
+div.page-panel-body.page-panel-right table tr td,
+div.page-panel-body.page-panel-right table tr th {
     text-align: left;
+    vertical-align: middle;
     padding: 0px 8px 0px 8px;
-}
-
-div.page-panel-body.page-panel-right table tr td div,
-div.page-panel-body.page-panel-right table tr th h2 {
-    height: 30px;
-    line-height: 30px;
     overflow: hidden;
 }
 
@@ -117,6 +113,11 @@ div.page-panel-body.page-panel-right table thead tr td a {
     line-height: 30px;
     overflow: hidden;
     width: 100%;
+}
+
+div.page-panel-body.page-panel-right table tr td div {
+    height: 30px;
+    line-height: 30px;
 }
 
 div.page-panel-body.page-panel-right table.alt-rows tr th,

@@ -4,6 +4,7 @@ require_once('lib/sessions.php');
 
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
+use helpers\notice\NoticeHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\table\TableHelper;
 
@@ -46,6 +47,8 @@ function admin_accounts() {
 
     $link_after = ArgumentsHelper::serialize($p);
 
+    $notices = NoticeHelper::render();
+    
     $pagination = new PaginationHelper([
         "page" => $p['page'],
         "total" => $total,
@@ -64,8 +67,7 @@ function admin_accounts() {
 
     $table->add_column([
         'width' => '20%',
-        'label' => 'Nome',
-        'label_title' => 'Nome do jogador',
+        'label' => 'Jogador',
         'order_by' => 'playername'
     ]);
 
@@ -75,15 +77,13 @@ function admin_accounts() {
 
     $table->add_column([
         'width' => '20%',
-        'label' => 'Data de registo',
-        'label_title' => 'Ultima entrada no servidor',
+        'label' => 'Registo',
         'order_by' => 'registerdate_df'
     ]);
 
     $table->add_column([
         'width' => '20%',
         'label' => 'Ultimo login',
-        'label_title' => 'Ultima entrada no servidor',
         'order_by' => 'lastlogindate_df'
     ]);
 

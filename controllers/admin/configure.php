@@ -2,13 +2,14 @@
 
 require_once('config.php');
 require_once('lib/sessions.php');
-require_once('lib/i18n.php');
 
+use helpers\Notice\NoticeHelper;
 
 function admin_configure() {
 
   //session: admin
   validateSession(true);
+
   validateXSRFToken();
 
   $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
@@ -16,9 +17,11 @@ function admin_configure() {
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
   $status = usersConfigure($admin, $active, $delete);
-  if (!$status) {
+  if ($status) {
+    NoticeHelper::set('success', 'alterações gravadas');
     header("Location: /admin/accounts");
   } else {
+    NoticeHelper::set('error', 'erro ao gravar alterações');
     header("Location: /admin/accounts");
   }
 }

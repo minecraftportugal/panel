@@ -3,6 +3,8 @@ require_once('config.php');
 require_once('lib/sessions.php');
 require_once('lib/i18n.php');
 
+use helpers\Notice\NoticeHelper;
+
 function sessions_configure () {
 
   validateSession();
@@ -11,11 +13,15 @@ function sessions_configure () {
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
   $status = sessionsConfigure($delete);
-  if (!$status) {
-    header("Location: /admin#sessions");
+
+  if ($status) {
+    NoticeHelper::set('success', 'Sessões apagadas.');
+    header("Location: /admin/sessions");
   } else {
-    header("Location: /admin#sessions");
+  	NoticeHelper::set('error', 'Erro ao apagar sessões.');
+    header("Location: /admin/sessions");
   }
+
 }
 
 ?>

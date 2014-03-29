@@ -6,6 +6,7 @@ require_once('helpers/date.php');
 
 
 use models\drop\DropModel;
+use helpers\pagination\PaginationHelper;
 
 function users_show () {
   validateSession();
@@ -77,7 +78,18 @@ function users_show () {
   $link_after .= "#itemdrops";
   $total_drops = $drops_pages["total"];
   $itemdrops = $drops_pages["pages"];
-  $drops_page_navigation = navigation($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, $admin, 'drops_page', 'drops_per_page');
+
+  $drops_page_navigation   = new PaginationHelper([
+    "page" => $p['page'],
+    "total" => $total,
+    "per_page" => $p['per_page'],
+    "link_before" => $action_url,
+    "link_after" => $link_after,
+    "show_pages" => 4,
+    "expand" => 20
+  ]);
+
+  $drops_page_navigation = new PaginationHelper($drops_page, $total_drops, $drops_per_page, "", $link_after, 4, $admin, 'drops_page', 'drops_per_page');
 
   // Item Drops!
   $new_drops_pages = DropModel::get(["per_page" => 6, "accountid" => $_SESSION["id"], "undelivered" => 1]); //mostrar até 6 itens

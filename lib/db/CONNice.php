@@ -14,7 +14,6 @@ class CONNice {
 
   protected static $_status = [];
 
-
   public function __construct() {}
   public function __clone() {}
 

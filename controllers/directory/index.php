@@ -30,8 +30,6 @@ function directory_index() {
 
     $pages = AccountModel::get($p);
 
-    $notice = NoticeHelper::get();
-
     $link_after = ArgumentsHelper::serialize($p);
 
     $pagination = new PaginationHelper([

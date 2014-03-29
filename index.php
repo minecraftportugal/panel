@@ -44,7 +44,7 @@ require_once('controllers/admin/drops.php');
 require_once('controllers/admin/sessions.php');
 require_once('controllers/admin/configure.php');
 require_once('controllers/admin/register.php');
-require_once('controllers/admin/drop_items.php');
+require_once('controllers/admin/delete_drops.php');
 
 require_once('controllers/directory/index.php');
 

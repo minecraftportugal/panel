@@ -24,7 +24,7 @@ class ArgumentsHelper {
         return $array;
     }
 
-    function serialize($args, $separator = true) {
+    function serialize($args, $separator = false) {
         $str = '';
 
         $first = true && $separator;
