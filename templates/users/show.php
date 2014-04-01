@@ -1,15 +1,56 @@
-<script type="text/javascript" src="/scripts/profile.js"></script>
+<script type="text/javascript" src="/scripts/skin3d.js"></script>
 
-<div class="widget-show">
-  <?
-    if ($total_new_drops > 0) {
-      require __DIR__.'/../partials/itemdrops.php';
-    }
-  ?>
+<div id="widget-show">
 
-  <div id="player" class="collapsible section default">
-    <a href="#player" class="noajax">
-      <h1>
+    <div class="layout-row">
+
+        <div class="layout-col layout-col-13">
+
+            <?= $player['playername'] ?>
+
+            <span>
+                <?= \helpers\minotar\MinotarHelper::head($player['playername'], 24, 3) ?></span>
+            </span>
+
+            <span>
+                <? require(__DIR__."/../partials/badges.php"); ?>
+            </span>
+
+
+            <span>
+                <? require(__DIR__."/../partials/skin3d.php"); ?>
+            </span>
+
+
+        </div>
+
+        <div class="layout-col-23">
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="widget-show" style="display: none;">
+
+  <div id="player" class="section default">
+
           <span style="float: left; height: 20px; padding-top: 4px;" class="playername">
             <span class="stevehead">
               <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
@@ -18,37 +59,19 @@
           </span>
           
           <span class="badges">
-            
-              <? if ($badges['member'] == 1): ?>
-                <span title="Membro" class="badge badge-member"></span>
-              <? endif; ?>
-              <? if ($badges['admin'] == 1): ?>
-                <span title="Administrador do Servidor" class="badge badge-administrator"></span>
-              <? endif; ?>
-              <? if ($badges['operator'] == 1): ?>
-                <span title="Operador do Servidor" class="badge badge-operator"></span>
-              <? endif; ?>
-              <? if ($badges['donor'] == 1): ?>
-                <span title="Dador" class="badge badge-donor"></span>
-              <? endif; ?>
-              <? if ($badges['contributor'] == 1): ?>
-                <span title="Contribuidor" class="badge badge-contributor"></span>
-              <? endif; ?>
-              <? if ($badges['premium'] == 1): ?>
-                <span title="Premium" class="badge badge-premium"></span>
-              <? endif; ?>
-              <? if ($badges['active'] != 1): ?>
-                <span title="Conta Desactivada" class="badge badge-deactivated"></span>
-              <? endif; ?>
+
+                <?
+                  $badges = \models\account\AccountModel::badges($profile['id']);
+                  require(__DIR__."/../partials/badges.php"); 
+                ?>
 
           </span>
-      </h1>
-    </a>
+
+
+
 
     <div class="inside">  
-      <div id="skin">
-        <img id="skinDisplay" style="display:none" src="<?= $profileSkin ?>" data-playerid="<?= $profileId ?>" alt="Skin" />
-      </div>
+
 
       <table class="pretty">
         <tbody>
@@ -96,7 +119,7 @@
   </div>
 
   <? if ($inquisitor) : ?>
-  <div id="playerstats" class="collapsible section">
+  <div id="playerstats" class="section">
     <a href="#playerstats" class="noajax">
       <h1>Estatísticas</h1>
     </a>
@@ -140,7 +163,7 @@
   </div>
 
   
-  <div id="playerinventory" class="collapsible section">
+  <div id="playerinventory" class="section">
     <a href="#playerinventory"  class="noajax">
       <h1>Inventário</h1>
     </a>
@@ -166,7 +189,7 @@
   <? endif; ?>
 
   <? if (($own and $total_drops > 0) or $admin): ?>
-  <div id="itemdrops" class="collapsible section">
+  <div id="itemdrops" class="section">
     <a href="#itemdrops" class="noajax"><h1>Drops</h1></a>
     <div class="inside">
       <div class="section">
@@ -257,7 +280,7 @@
   <? endif; ?> 
 
   <? if ($admin): ?>
-  <div id="resetpw" class="collapsible section">
+  <div id="resetpw" class="section">
     <a href="#resetpw" class="noajax"><h1>Reenviar Password</h1></a>
     <div class="inside">
       <div class="section">
@@ -283,7 +306,7 @@
     </div>
   </div>
 
-  <div id="adminactions" class="collapsible section">
+  <div id="adminactions" class="section">
     <a href="#adminactions" class="noajax">
       <h1>Gestão</h1>
     </a>
@@ -358,7 +381,7 @@
   <? endif; ?>
 
   <? if ($own): ?>
-  <div id="irc" class="collapsible section">
+  <div id="irc" class="section">
     <a href="#irc" class="noajax"><h1>Configurar  IRC</h1></a>
     <div class="inside">
       <div class="section">
@@ -391,7 +414,7 @@
     </div>
   </div>
 
-  <div id="changepw" class="collapsible section">
+  <div id="changepw" class="section">
     <a href="#changepw" class="noajax"><h1>Alterar Password</h1></a>
     <div class="inside">
       <div class="section">

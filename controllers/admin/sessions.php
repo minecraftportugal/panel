@@ -38,7 +38,7 @@ function admin_sessions() {
 
     $link_after = ArgumentsHelper::serialize($p);
 
-    $notices = NoticeHelper::render();
+    $notices = NoticeHelper::render(['classes' => 'pull-right']);
 
     $pagination = new PaginationHelper([
         "page" => $p['page'],

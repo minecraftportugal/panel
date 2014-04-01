@@ -83,6 +83,22 @@ class SessionModel {
         }
     }
 
+    public static function delete($args = []) {
+
+        if (is_array($args)) {
+            $sql_in = implode(",", array_fill(0, count($args), "?"));
+        } else {
+            $sql_in = "?";
+        }
+
+        $q = "DELETE FROM sessions
+        WHERE accountid IN ($sql_in);";
+
+        $result = Bitch::source('default')->query($q, $args);
+        
+        return $result;
+    }
+
 }
 
 ?>

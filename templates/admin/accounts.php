@@ -5,7 +5,8 @@
   </div>
 
   <div class="page-panel-header page-panel-right">
-    <h1>Utilizadores (<?= $total ?>)</h1>
+    <h1 class="pull-left">Utilizadores (<?= $total ?>)</h1>
+    <?= $notices ?>
   </div>
 
   <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
@@ -112,8 +113,6 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
-    <?= $notices ?>
-
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
       <table class="alt-rows">
         
@@ -138,12 +137,16 @@
                   <span class="pull-left online" title="O jogador está online!"></span>
                 </a>
             </td>
-            
+
             <td>
                 <?
-                  $badges = getUserBadges($r["id"]);
+                  $badges = \models\account\AccountModel::badges($r['id']);
                   require(__DIR__."/../partials/badges.php"); 
                 ?>
+            </td>
+
+            <td>
+                <?= $r["email"] ?>
             </td>
 
             <td>
@@ -151,9 +154,7 @@
             </td>
 
             <td>
-  
                 <?= $r["lastlogindate"] != NULL ? $r["lastlogindate"] : "<i>".$r["registerdate"]."</i>" ?>
-
             </td>
 
             <td>
@@ -163,17 +164,17 @@
             </td>
 
             <td class="center">
-                <input class="fakecheckbox" type="checkbox" <?= $r["operator"] == 1 ? 'checked="checked"' : '' ?> />
+                <input class="fake-checkbox" type="checkbox" <?= $r["operator"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="operator[<?= $r["id"] ?>]" value="<?= $r["operator"] ?>" type="hidden" />
             </td>
 
             <td class="center">
-                <input class="fakecheckbox" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
+                <input class="fake-checkbox" type="checkbox" <?= $r["admin"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="admin[<?= $r["id"] ?>]" value="<?= $r["admin"] ?>" type="hidden" />
             </td>
 
             <td class="center">
-                <input class="fakecheckbox fake-active" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
+                <input class="fake-checkbox fake-active" type="checkbox" <?= $r["active"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="active[<?= $r["id"] ?>]" value="<?= $r["active"] ?>" type="hidden" />
             </td>
 

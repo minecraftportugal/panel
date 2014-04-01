@@ -47,7 +47,7 @@ function admin_accounts() {
 
     $link_after = ArgumentsHelper::serialize($p);
 
-    $notices = NoticeHelper::render();
+    $notices = NoticeHelper::render(['classes' => 'pull-right']);
     
     $pagination = new PaginationHelper([
         "page" => $p['page'],
@@ -66,29 +66,35 @@ function admin_accounts() {
     ]);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '16.667%',
         'label' => 'Jogador',
         'order_by' => 'playername'
     ]);
 
     $table->add_column([
-        'width' => '20%'
+        'width' => '16.667%'
     ]);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '16.667%',
+        'label' => 'Endereço E-mail',
+        'order_by' => 'email'
+    ]);
+
+    $table->add_column([
+        'width' => '16.667%',
         'label' => 'Registo',
         'order_by' => 'registerdate_df'
     ]);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '16.667%',
         'label' => 'Ultimo login',
         'order_by' => 'lastlogindate_df'
     ]);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '16.667%',
         'label' => 'Ultimo IP',
         'label_title' => 'Ultimo IP (não actualizado se entrar não registado/logado)',
         'order_by' => 'lastloginip'

@@ -7,7 +7,8 @@
   </div>
 
   <div class="page-panel-header page-panel-right">
-    <h1>Drops (<?= $total ?>)</h1>
+    <h1 class="pull-left">Drops (<?= $total ?>)</h1>
+    <?= $notices ?>
   </div>
 
   <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
@@ -35,8 +36,6 @@
   </div>
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
-
-    <?= $notices ?>
 
     <form name="manage_users" action="/admin/delete_drops" method="POST" autocomplete="off">
       <table class="alt-rows">

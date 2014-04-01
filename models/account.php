@@ -115,6 +115,113 @@ class AccountModel {
         }
     }
 
+    public static function first($args = []) {
+        $result = AccountModel::get($args);
+
+        if (!is_array($result)) {
+            return null;
+        } else if (count($result) == 0) {
+            return null;
+        } else {
+            return $result[0];
+        }
+    }
+
+    public static function delete($args = []) {
+
+        if (is_array($args) && count($args) > 0) {
+            $sql_in = implode(",", array_fill(0, count($args), "?"));
+        } else if (is_scalar($args)) {
+            $sql_in = "?";
+        } else {
+            return false;
+        }
+
+        $q = "DELETE FROM accounts
+        WHERE id IN ($sql_in);";
+
+        $result = Bitch::source('default')->query($q, $args);
+        
+        return $result;
+    }
+
+
+    /* Set/Unset Admin Account Privilege */
+    public static function privilege($args = []) {
+
+        if (count($args) == 0) {
+            return false;
+        }
+
+        foreach ($args as $id => $val) {
+            
+            $q = "UPDATE accounts
+            SET admin = :val
+            WHERE id = :id";
+            
+            $result = Bitch::source('default')->query($q, compact('val', 'id'));
+            
+            if (!$result) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+
+    /* Set/Unset Admin Account Privilege */
+    public static function active($args = []) {
+
+        if (count($args) == 0) {
+            return false;
+        }
+
+        foreach ($args as $id => $val) {
+            
+            $q = "UPDATE accounts
+            SET active = :val
+            WHERE id = :id";
+            
+            $result = Bitch::source('default')->query($q, compact('val', 'id'));
+            
+            if (!$result) {
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
+    function badges($id) {
+
+        // premium, admin, donor
+        $q = "SELECT playername, active, premium, donor, contributor, admin, operator FROM accounts WHERE id = :id;";
+        $result = Bitch::source('default')->first($q, compact('id'));
+
+        $badges = [
+        'premium' => $result['premium'],
+        'admin' => $result['admin'],
+        'donor' => $result['donor'],
+        'contributor' => $result['contributor'],
+        'operator' => $result['operator'],
+        'active' => $result['active']
+        ];
+
+        $q = "SELECT totalTime FROM players WHERE name = :playername";
+        $playername = $result['playername'];
+        $result = Bitch::source('inquisitor')->first($q, compact('playername'));
+
+        $totalTime = intval($result['totalTime']);
+        $badges["member"] = $totalTime > 3600 * 10 ? 1 : 0;
+
+        return $badges;
+
+    }
+
+
 }
 
 ?>

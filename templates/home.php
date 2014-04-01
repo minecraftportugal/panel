@@ -26,6 +26,7 @@
   <script type="text/javascript" src="/scripts/jqueryui.js"></script>
   <script type="text/javascript" src="/scripts/Three.js"></script>
   <script type="text/javascript" src="/scripts/ajax.js"></script>
+  <script type="text/javascript" src="/scripts/behaviour.js"></script>
   <script type="text/javascript" src="/scripts/widget.js"></script>
   <script type="text/javascript" src="/scripts/desktop.js"></script>
   <script type="text/javascript" src="/scripts/widgets-definition.js"></script>
@@ -33,7 +34,6 @@
   <script type="text/javascript" src="/scripts/sop.js"></script>
   <script type="text/javascript" src="/scripts/top.js"></script>
   <script type="text/javascript" src="/scripts/sidebar.js"></script>
-  <script type="text/javascript" src="/scripts/profile.js"></script>
 
 </head> 
 <body>

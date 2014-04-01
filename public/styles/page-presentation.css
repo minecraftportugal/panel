@@ -47,7 +47,7 @@ div.page-panel-right {
 }
 
 div.page-panel-header h1 {
-    line-height: 26px;
+    line-height: 24px;
     font-size: 12px;
 }
 
@@ -313,4 +313,3 @@ span.badge-member {
 span.badge-deactivated {
     background-image: url(/images/icons/badge_deactivated.png);
 }
-

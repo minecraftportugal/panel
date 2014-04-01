@@ -1,4 +1,4 @@
 config.php
 robots.txt
 *.sublime-workspace
-
+.idea

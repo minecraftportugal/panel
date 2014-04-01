@@ -10,8 +10,8 @@ function AjaxIndicator() {
 
   this.disappear = function() {
     setTimeout(function() {
-        $("div#ajax-indicator").removeClass("ajax-loading ajax-error ajax-loading-httops");
-    }, 1000);
+        $("div#ajax-indicator").removeClass("ajax-loading ajax-error ajax-loading-https");
+    }, 10);
     
   }
 }

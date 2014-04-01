@@ -19,34 +19,6 @@ function getInquisitor($username) {
   return $result;
 }
 
-/*
- * getUserBadges: returns the badges of a user
- */
-function getUserBadges($id) {
-
-  // premium, admin, donor
-  $q = "SELECT playername, active, premium, donor, contributor, admin, operator FROM accounts WHERE id = :id;";
-  $result = Bitch::source('default')->first($q, compact('id'));
-
-  $badges = [
-    'premium' => $result['premium'],
-    'admin' => $result['admin'],
-    'donor' => $result['donor'],
-    'contributor' => $result['contributor'],
-    'operator' => $result['operator'],
-    'active' => $result['active']
-  ];
-
-  $q = "SELECT totalTime FROM players WHERE name = :playername";
-  $playername = $result['playername'];
-  $result = Bitch::source('inquisitor')->first($q, compact('playername'));
-
-  $totalTime = intval($result['totalTime']);
-  $badges["member"] = $totalTime > 3600*10 ? 1 : 0;
-
-  return $badges;
-}
-
 function getPopularAddresses() {
 
   $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
@@ -215,56 +187,6 @@ function userConfigure($id, $admin, $operator, $active, $donor, $contributor, $d
 
   setFlash('success', 'Utilizador alterado.');
   return 1;
-}
-
-function usersConfigure($admin, $active, $delete) {
-
-  /*
-   *  Set/Unset Admin Account Privilege
-   */
-  if (count($admin) > 0) {
-    foreach ($admin as $id => $val) {
-      $q = "UPDATE accounts
-      SET admin = :val
-      WHERE id = :id";
-      $result = Bitch::source('default')->query($q, compact('val', 'id'));
-      if (!$result) { die('Invalid query'); }
-    }
-  }
-
-  /*
-   * Set/Unset Active Accounts
-   */
-  if (count($active) > 0) {
-    foreach ($active as $id => $val) {
-      $q = "UPDATE accounts
-      SET active = :val
-      WHERE id = :id";
-      $result = Bitch::source('default')->query($q, compact('val', 'id'));
-      if (!$result) { die('Invalid query'); }
-    }
-  }
-
-  /*
-   * Delete users
-   */
-  if (count($delete) > 0) {
-    $sql_in = implode(',', array_fill(0, count($delete), '?'));
-
-    // Delete Accounts
-    $q = "DELETE FROM accounts
-    WHERE id IN ($sql_in);";
-    $result = Bitch::source('default')->query($q, $delete);
-    if (!$result) { die('Invalid query'); }
-
-    $q = "DELETE FROM sessions
-    WHERE accountid IN ($sql_in);";
-    $result = Bitch::source('default')->query($q, $delete);
-    if (!$result) { die('Invalid query'); }
-  }
-
-  setFlash('success', 'Yay ;-) Alterações Efectuadas.');
-  return true;
 }
 
 function sessionsConfigure($delete) {

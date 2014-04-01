@@ -3,27 +3,56 @@
 require_once('config.php');
 require_once('lib/sessions.php');
 
+use models\account\AccountModel;
+use helpers\arguments\ArgumentsHelper;
 use helpers\Notice\NoticeHelper;
 
 function admin_configure() {
 
-  //session: admin
-  validateSession(true);
+    validateSession(true); //session: admin
+    validateXSRFToken();
 
-  validateXSRFToken();
+    $action_url = '/admin/configure';
 
-  $admin = isset($_POST['admin']) ? $_POST['admin'] : array();
-  $active = isset($_POST['active']) ? $_POST['active'] : array();
-  $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
+    $parameters = [
+        'admin' => [],
+        'delete' => [],
+        'active' => [],
+        'operator' => []
+    ];
 
-  $status = usersConfigure($admin, $active, $delete);
-  if ($status) {
-    NoticeHelper::set('success', 'alterações gravadas');
-    header("Location: /admin/accounts");
-  } else {
-    NoticeHelper::set('error', 'erro ao gravar alterações');
-    header("Location: /admin/accounts");
-  }
+    $p = ArgumentsHelper::process($_POST, $parameters);
+
+    $status = AccountModel::privilege($p['admin']);
+
+    if (!$status) {
+        NoticeHelper::set('error', 'erro ao actualizar contas');
+        header('Location: /admin/accounts');
+        return;
+    }
+
+
+    $status = AccountModel::active($p['active']);
+    if (!$status) {
+        NoticeHelper::set('error', 'erro ao actualizar contas');
+        header('Location: /admin/accounts');
+        return;
+    }
+
+    if (count($p['delete']) > 0) {
+
+        $status = AccountModel::delete($p['delete']);
+    
+        if (!$status) {
+            NoticeHelper::set('error', 'erro ao apagar contas');
+            header('Location: /admin/accounts');
+            return;
+        }
+    
+    }
+    NoticeHelper::set('success', 'alterações efectuadas');
+    header('Location: /admin/accounts');
+
 }
 
 ?>

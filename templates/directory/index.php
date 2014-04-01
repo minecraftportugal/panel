@@ -57,7 +57,11 @@
     <? foreach((array)$pages as $r): ?>
 
       <div class="player-cell pull-left">
-        <a href="/profile?id=<?= $r['id'] ?>" title="<?= $r["registerdate"] ?>">
+        <a href="/profile?id=<?= $r['id'] ?>"
+           title="<?= $r["registerdate"] ?>"
+           class="noajax"
+           data-widget-action="open"
+           data-widget-name="profile-<?= $r["playername"] ?>">
 
         <div class="section-1">
           <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
@@ -72,7 +76,7 @@
 
         <div class="section-3">
           <?
-            $badges = getUserBadges($r["id"]);
+            $badges = \models\account\AccountModel::badges($r['id']);
             require(__DIR__."/../partials/badges.php"); 
           ?>
         </div>
