@@ -66,28 +66,34 @@ class AccountModel {
         return Bitch::source('default')->first($q, $args)["total"];
     }
 
-    public static function get($args = []) {
+    public static function get($args = [], $inquisitor_full = false) {
         $args = array_merge(AccountModel::$args, $args);
         $order_by = $args["order_by"];
         $asc_desc = $args["asc_desc"];
+
+        if ($inquisitor_full) {
+            $inquisitor_fields = "name, lastUpdate, lastJoin, mapped, totalItemsPickedUp, totalDistanceTraveled, lastKick,
+                lavaBucketsEmptied, totalMobsKilled, lastKickMessage, portalsCrossed, sessionTime, level,
+                mooshroomsMilked, potionEffects, deaths, foodLevel, lastMobKill, groups, chatMessages, joins,
+                waterBucketsEmptied, totalBlocksPlaced, lastDeathMessage, lastQuit, firstJoin, health,
+                totalPlayersKilled, lastDeath, mooshroomsSheared, timesSlept, arrowsShot, exp, itemsEnchanted,
+                lifetimeExperience, totalTime, sheepDyed, totalExperience, remainingAir, exhaustion, armor,
+                sheepSheared, online, money, lavaBucketsFilled, totalItemsCrafted, itemEnchantmentLevels, bedServer,
+                bedCoords, quits, firesStarted, totalBlocksBroken, fishCaught, heldItemSlot, lastPlayerKilled,
+                fireTicks, lastPlayerKill, totalItemsDropped, gameMode, cowsMilked, coords, lastMobKilled, address,
+                saturation, inventory, waterBucketsFilled, server, displayName, bedWorld";
+        } else {
+            $inquisitor_fields = "name, online";
+        }
 
         $q = "SELECT * FROM (
             SELECT id, playername, email, admin, operator, active,
                 DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
                 DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip,
-                registerdate as registerdate_df, lastlogindate as lastlogindate_df,
+                registerdate as registerdate_df, lastlogindate AS lastlogindate_df,
                 o.*
             FROM accounts a LEFT JOIN (
-                SELECT name, lastUpdate, lastJoin, mapped, totalItemsPickedUp, totalDistanceTraveled, lastKick,
-                  lavaBucketsEmptied, totalMobsKilled, lastKickMessage, portalsCrossed, sessionTime, level,
-                  mooshroomsMilked, potionEffects, deaths, foodLevel, lastMobKill, groups, chatMessages, joins,
-                  waterBucketsEmptied, totalBlocksPlaced, lastDeathMessage, lastQuit, firstJoin, health,
-                  totalPlayersKilled, lastDeath, mooshroomsSheared, timesSlept, arrowsShot, exp, itemsEnchanted,
-                  lifetimeExperience, totalTime, sheepDyed, totalExperience, remainingAir, exhaustion, armor,
-                  sheepSheared, online, money, lavaBucketsFilled, totalItemsCrafted, itemEnchantmentLevels, bedServer,
-                  bedCoords, quits, firesStarted, totalBlocksBroken, fishCaught, heldItemSlot, lastPlayerKilled,
-                  fireTicks, lastPlayerKill, totalItemsDropped, gameMode, cowsMilked, coords, lastMobKilled, address,
-                  saturation, inventory, waterBucketsFilled, server, displayName, bedWorld
+                SELECT $inquisitor_fields
                 FROM inquisitor.players
             ) o ON (o.name = a.playername)
             WHERE playername = ifnull(:playername, playername)
@@ -124,8 +130,8 @@ class AccountModel {
         }
     }
 
-    public static function first($args = []) {
-        $result = AccountModel::get($args);
+    public static function first($args = [], $inquisitor_full = false) {
+        $result = AccountModel::get($args, $inquisitor_full);
 
         if (!is_array($result)) {
             return null;

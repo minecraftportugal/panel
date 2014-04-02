@@ -71,8 +71,8 @@
                     <div class="widget-close widget-ui" title="fechar"><i class="fa fa-times"></i></div>
                 </div>
                 <div class="widget-body">
-                    <div class="widget-loading-indicator"></div>
                 </div>
+                <div class="widget-loading"></div>
                 <div class="ui-resizable-handle ui-resizable-se widget-resize" title="drag to resize"></div>
             </div>
         </div>

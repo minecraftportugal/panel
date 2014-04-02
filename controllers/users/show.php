@@ -29,16 +29,10 @@ function users_show () {
 
     $p = ArgumentsHelper::process($_GET, $parameters);
     if (is_null($p['id'])) {
-        // /!\
         die("No ID given");
     }
 
-    $player = AccountModel::first($p);
-
-    if (is_null($p['id'])) {
-        // /!\
-        die("No ID given");
-    }
+    $player = AccountModel::first($p, true); // true : fetch all inquisitor data
 
     $drops = DropModel::get([
         "page" => 1,

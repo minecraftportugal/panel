@@ -15,7 +15,7 @@ function Widget(options) {
       "min-width" : "480px",
       "min-height" : "360px",
       "max-width" : null, //"700px",
-      "max-height" : null //"700px" 
+      "max-height" : null //"700px"
     }
   }
 
@@ -126,7 +126,7 @@ Widget.prototype._init = function() {
 
   });
 
-  $(this.selector).resizable({ 
+  $(this.selector).resizable({
 
     iframeFix: true,
     addClasses: false,
@@ -201,10 +201,19 @@ Widget.prototype._load = function() {
 
   } else {
     var widgetInstance = this;
+    var loading_blocker = $(widgetInstance.selector).find("div.widget-body").next();
+
     $.ajax({
       url: widgetInstance.options.url,
+      beforeSend: function() {
+          loading_blocker.addClass("block-enabled");
+      },
       success: function(response) {
-        $(widgetInstance.selector).find("div.widget-body").html(response);
+          $(widgetInstance.selector).find("div.widget-body").html(response);
+          loading_blocker.removeClass("block-enabled");
+      },
+      error: function() {
+          loading_blocker.removeClass("block-enabled");
       }
     });
   }
@@ -263,13 +272,13 @@ Widget.prototype._initPosition = function() {
 Widget.prototype.setActive = function() {
   this.unsetActive();
   $(this.selector).addClass("widget-active");
-  $(this.buttonSelector).addClass("widget-button-active"); 
+  $(this.buttonSelector).addClass("widget-button-active");
 }
 
 Widget.prototype.unsetActive = function() {
   $.each(Widget.widgets, function (n, elem) {
-    $(elem.selector).removeClass("widget-active"); 
-    $(this.buttonSelector).removeClass("widget-button-active"); 
+    $(elem.selector).removeClass("widget-active");
+    $(this.buttonSelector).removeClass("widget-button-active");
   });
 }
 
@@ -299,7 +308,7 @@ Widget.cascade = function() {
 Widget.tile = function() {
   var wLeft = 0;
   var wTop = 0;
-  $.each(Widget.widgets, function(n, e) { 
+  $.each(Widget.widgets, function(n, e) {
     e.shrink();
     $(this.selector).css("left", wLeft + "px");
     $(this.selector).css("top", wTop + "px");
@@ -319,7 +328,7 @@ Widget.tile = function() {
 }
 
 Widget.embiggen = function() {
-  $.each(Widget.widgets, function(n, e) { 
+  $.each(Widget.widgets, function(n, e) {
     e.maximize();
     //e.bringTop();
     //e.setActive();
@@ -363,7 +372,7 @@ Widget.prototype.shrink = function() {
   var newHeight = this.options.css["min-height"];
   $(this.selector).css({
      "width" : newWidth,
-     "height" : newHeight 
+     "height" : newHeight
   });
   this.bringTop();
   this.setActive();

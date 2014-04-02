@@ -66,12 +66,15 @@ div.widget-body {
     border: none;
 }
 
-div.widget-body.widget-loading div.widget-loading-indicator {
+div.widget-loading.block-enabled{
     position: absolute;
     width: 100%;
     top: 22px;
-    height: 438px;
-    background-color: rgba(255, 0, 0, 0.25);
+    height: calc(100% - 22px);
+    background-color: rgba(0, 0, 0, 0.25);
+    background-image: url('/images/loader3.gif');
+    background-repeat: no-repeat;
+    background-position: center center;
     z-index: 2147483647;
 }
 
@@ -81,6 +84,7 @@ div.widget-body iframe {
     height: 100%;
     top: 0px;
     left: 0px;
+    bottom: 0px;
     bottom: 0px;
     right: 0px;
 }
