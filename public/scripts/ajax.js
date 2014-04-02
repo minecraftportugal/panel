@@ -38,8 +38,10 @@ $(function() {
       type : "GET",
       beforeSend: function() {
           container.addClass("widget-loading");
+          ajaxIndicator.indicate();
       },
       success : function(data) {
+        container.addClass("widget-loading");
         container.html(data);
       }
     })
