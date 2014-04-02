@@ -9,6 +9,7 @@ use models\account\AccountModel;
 use models\drop\DropModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
+use helpers\dynmap\DynmapHelper;
 
 function users_show () {
 
@@ -52,8 +53,7 @@ function users_show () {
     $badges = AccountModel::badges($player['id']);
 
 
-
-
+    $v_dynmap_widget = DynmapHelper::map($player['playername']);
 
 
 

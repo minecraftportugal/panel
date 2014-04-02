@@ -67,6 +67,7 @@ require_once('helpers/arguments.php');
 require_once('helpers/notice.php');
 require_once('helpers/minotar.php');
 require_once('helpers/table.php');
+require_once('helpers/dynmap.php');
 
 $r = new Router();
 

@@ -61,6 +61,7 @@
            title="<?= $r["registerdate"] ?>"
            class="noajax"
            data-widget-action="open"
+           data-widget-classes="widget-scrollable-y"
            data-widget-name="profile-<?= $r["playername"] ?>">
 
         <div class="section-1">

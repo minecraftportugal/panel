@@ -1,30 +1,64 @@
 <script type="text/javascript" src="/scripts/skin3d.js"></script>
+<link rel="stylesheet" href="/styles/page-presentation-profile.css" media="screen" type="text/css">
 
 <div id="widget-show">
 
     <div class="layout-row">
 
-        <div class="layout-col layout-col-13">
+        <div class="layout-col layout-col-1">
+            <div class="layout-col-title">
+                <span class="pull-left">
+                  <?= \helpers\minotar\MinotarHelper::head($player['playername'], 16, 3) ?>
+                </span>
+                <span class="pull-left">
+                  <?= $player['playername'] ?>
+                </span>
+            </div>
 
-            <?= $player['playername'] ?>
+            <div class="layout-col-sec">
+                <div>
 
-            <span>
-                <?= \helpers\minotar\MinotarHelper::head($player['playername'], 24, 3) ?></span>
-            </span>
+                </div>
+            </div>
 
-            <span>
-                <? require(__DIR__."/../partials/badges.php"); ?>
-            </span>
-
-
-            <span>
+            <div class="text-center layout-col-sec">
                 <? require(__DIR__."/../partials/skin3d.php"); ?>
-            </span>
+            </div>
 
+            <div class="text-center layout-col-sec">
+                <? require(__DIR__."/../partials/badges.php"); ?>
+            </div>
+
+            <div class="layout-col-sec">
+                Registo: <?= $player['registerdate'] ?>
+
+                <? if ($player['lastlogindate'] != null): ?>
+                    Activo: <?= $player['lastlogindate'] ?>
+                <? endif; ?>
+
+            </div>
 
         </div>
 
-        <div class="layout-col-23">
+        <div class="layout-col layout-col-2 iframe">
+            <div class="layout-col-title">
+                <h1>Posição</h1>
+            </div>
+
+            <?= $v_dynmap_widget ?>
+
+        </div>
+
+        <div class="layout-col layout-col-3">
+            <div class="layout-col-title">
+                <h1>Posição</h1>
+            </div>
+
+            <div class="widget-dynmap">
+
+            </div>
+
+            <pre> <?= var_dump($player); ?> </pre>
 
         </div>
 
@@ -49,19 +83,31 @@
 
 <div class="widget-show" style="display: none;">
 
+<div class="health">
+    <? for ($i = 0, $h = (is_array($player['health'])) ? $player['health'] : 0; $i < 10; $i++, $h-=2): ?>
+        <span class="<?= ($h > 1)? "full" : (($h <= 0)? "empty" : "half") ?>"></span>
+    <? endfor; ?>
+</div>
+
+<div class="hunger">
+    <? for ($i = 0, $f = $h = ($player) ? $player['foodLevel'] : 0; $i < 10; $i++, $f-=2): ?>
+        <span class="<?= ($f > 1)? "full" : (($f <= 0)? "empty" : "half") ?>"></span>
+    <? endfor; ?>
+</div>
+
   <div id="player" class="section default">
 
           <span style="float: left; height: 20px; padding-top: 4px;" class="playername">
             <span class="stevehead">
-              <img class="pixels" src="/images/steve.png" data-src="<?= $profileSkin ?>" alt="Skin" />
+              <img class="pixels" src="/images/steve.png" data-src="<?= $playerSkin ?>" alt="Skin" />
             </span>
-            <?= $profile["playername"] ?>
+            <?= $player["playername"] ?>
           </span>
           
           <span class="badges">
 
                 <?
-                  $badges = \models\account\AccountModel::badges($profile['id']);
+                  $badges = \models\account\AccountModel::badges($player['id']);
                   require(__DIR__."/../partials/badges.php"); 
                 ?>
 
@@ -73,52 +119,11 @@
     <div class="inside">  
 
 
-      <table class="pretty">
-        <tbody>
-          <? if ($inquisitor) : ?>
-          <tr>
-            <td colspan="2">
-              <div class="health">
-              <? for ($i = 0, $h = ($inquisitor) ? $inquisitor['health'] : 0; $i < 10; $i++, $h-=2): ?>
-                <span class="<?= ($h > 1)? "full" : (($h <= 0)? "empty" : "half") ?>"></span>
-              <? endfor; ?>
-              </div>
-              <div class="hunger">
-              <? for ($i = 0, $f = $h = ($inquisitor) ? $inquisitor['foodLevel'] : 0; $i < 10; $i++, $f-=2): ?>
-                <span class="<?= ($f > 1)? "full" : (($f <= 0)? "empty" : "half") ?>"></span>
-              <? endfor; ?>
-            </td>
-          </tr>
-          <? endif; ?>
 
-          <? if ($inquisitor): ?>
-          <tr><th>Status</th><td class="<?= $inquisitor['online'] == 1 ? 'online' : 'offline' ?>"><?= $inquisitor['online'] == 1 ? 'online' : 'offline' ?></td></tr>
-          <? endif; ?>
-      
-          <? if ($own): ?> 
-          <tr>
-            <th>Email</th><td><?= $profile['email'] ?></td>
-          </tr>
-          <? endif; ?>
-
-          <tr>
-            <th>Registo</th>
-            <td><?= $profile['registerdate'] ?></td>
-          </tr>
-
-          <? if ($profile['logintime'] != null): ?>
-          <tr>
-            <th>Activo</th>
-            <td><?= $profile['logintime'] ?></td>
-          </tr>
-          <? endif; ?>
-
-        </tbody>
-      </table>
     </div>
   </div>
 
-  <? if ($inquisitor) : ?>
+  <? if ($player) : ?>
   <div id="playerstats" class="section">
     <a href="#playerstats" class="noajax">
       <h1>Estatísticas</h1>
@@ -126,36 +131,36 @@
     <div class="inside">
       <table class="pretty">
         <tbody>
-          <tr><th>Level</th><td><?= $inquisitor['level'] ?></td></tr>
-          <tr><th>XP</th><td><?= $inquisitor['totalExperience'] ?>/<?= $inquisitor['lifetimeExperience'] ?></td></tr>
-          <tr><th>Tempo total</th><td> <?= secs_to_h($inquisitor['totalTime']) ?></td></tr>
-          <tr><th>Ultima sessão</th><td> <?= secs_to_h($inquisitor['sessionTime']) ?></td></tr>
-          <tr><th>KMs Percorridos</th><td> <?= round($inquisitor['totalDistanceTraveled']/1000,2) ?> km</td></tr>
-          <tr><th>Modo de Jogo</th><td> <?= $inquisitor['gameMode'] ?></td></tr>
-          <tr><th>World</th><td> <?= $inquisitor['world'] ?></td></tr>
+          <tr><th>Level</th><td><?= $player['level'] ?></td></tr>
+          <tr><th>XP</th><td><?= $player['totalExperience'] ?>/<?= $player['lifetimeExperience'] ?></td></tr>
+          <tr><th>Tempo total</th><td> <?= secs_to_h($player['totalTime']) ?></td></tr>
+          <tr><th>Ultima sessão</th><td> <?= secs_to_h($player['sessionTime']) ?></td></tr>
+          <tr><th>KMs Percorridos</th><td> <?= round($player['totalDistanceTraveled']/1000,2) ?> km</td></tr>
+          <tr><th>Modo de Jogo</th><td> <?= $player['gameMode'] ?></td></tr>
+          <tr><th>World</th><td> <?= $player['world'] ?></td></tr>
           <tr><th colspan="2">Entradas</th></tr>
-          <tr><th>Total</th><td> <?= $inquisitor['joins'] ?></td></tr>
-          <tr><th>Primeira</th><td> <?= $inquisitor['firstJoin'] ?></td></tr>
-          <tr><th>Última</th><td> <?= $inquisitor['lastJoin'] ?></td></tr>
-        <? if ($inquisitor['kicks'] > 0): ?>
+          <tr><th>Total</th><td> <?= $player['joins'] ?></td></tr>
+          <tr><th>Primeira</th><td> <?= $player['firstJoin'] ?></td></tr>
+          <tr><th>Última</th><td> <?= $player['lastJoin'] ?></td></tr>
+        <? if ($player['kicks'] > 0): ?>
           <tr><th colspan="2">Kicks</th></tr>
-          <tr><th>Total</th><td> <?= $inquisitor['kicks'] ?></td></tr>
-          <tr><th>Ultimo</th><td> <?= $inquisitor['lastKick'] ?></td></tr>
+          <tr><th>Total</th><td> <?= $player['kicks'] ?></td></tr>
+          <tr><th>Ultimo</th><td> <?= $player['lastKick'] ?></td></tr>
         <? endif; ?>
-        <? if ($inquisitor['quits'] > 0): ?>
+        <? if ($player['quits'] > 0): ?>
           <tr><th colspan="2">Quits</th></tr>
-          <tr><th>Total</th><td> <?= $inquisitor['quits'] ?></td></tr>
-          <tr><th>Ultimo</th><td> <?= $inquisitor['lastQuit'] ?></td></tr>
+          <tr><th>Total</th><td> <?= $player['quits'] ?></td></tr>
+          <tr><th>Ultimo</th><td> <?= $player['lastQuit'] ?></td></tr>
         <? endif; ?>
           <tr><th colspan="2">Blocos</th></tr>
-          <tr><th>Destruidos</th><td> <?= $inquisitor['totalBlocksBroken'] ?></td></tr>
-          <tr><th>Colocados</th><td> <?= $inquisitor['totalBlocksPlaced'] ?></td></tr>
+          <tr><th>Destruidos</th><td> <?= $player['totalBlocksBroken'] ?></td></tr>
+          <tr><th>Colocados</th><td> <?= $player['totalBlocksPlaced'] ?></td></tr>
           <tr><th colspan="2">Mortes</th></tr>
-          <tr><th>Morreu</th><td> <?= $inquisitor['deaths'] ?></td></tr>
-        <? if ($inquisitor['totalPlayersKilled'] > 0): ?>
-          <tr><th>Matou</th><td> <?= $inquisitor['totalPlayersKilled'] ?></td></tr>
-          <tr><th>Último Morto</th><td> <?= $inquisitor['lastPlayerKilled'] ?></td></tr>
-          <tr><th>Em</th><td> <?= $inquisitor['lastPlayerKill'] ?></td></tr>
+          <tr><th>Morreu</th><td> <?= $player['deaths'] ?></td></tr>
+        <? if ($player['totalPlayersKilled'] > 0): ?>
+          <tr><th>Matou</th><td> <?= $player['totalPlayersKilled'] ?></td></tr>
+          <tr><th>Último Morto</th><td> <?= $player['lastPlayerKilled'] ?></td></tr>
+          <tr><th>Em</th><td> <?= $player['lastPlayerKill'] ?></td></tr>
         <? endif; ?>
         </tbody>
       </table>
@@ -238,7 +243,7 @@
             <td colspan="4" class="center">
               <input type="submit" value="apagar" />
               <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
-              <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+              <input type="hidden" name="id" value="<?= $player['id'] ?>" />
             </td>
           </tr>
         </table>
@@ -268,7 +273,7 @@
               <td colspan="6" class="center">
                 <input type="submit" value="drop" />
                 <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
-                <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+                <input type="hidden" name="id" value="<?= $player['id'] ?>" />
               </td>
             </tr>
           </table>
@@ -291,7 +296,7 @@
               <td>
                 <input id="reset_pass_check" type="checkbox" name="reset_pass_check" value="1" />
                 <label class="checkbox" for="reset_pass_check">Confirmar</label>
-                <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+                <input type="hidden" name="id" value="<?= $player['id'] ?>" />
               </td>
             </tr>
             <tr>
@@ -314,16 +319,16 @@
       <form name="manage_users" action="/users/configure" method="POST" autocomplete="off">
       <table class="form">
         <tbody>
-          <tr><th><h2>Reg. IP</h2></th><td><a href="/admin/accounts/?ipaddress=<?= $profile["registerip"] ?>"><?= $profile['registerip'] ?></a></td></tr>
-          <? if (isset($profile['lastloginip'])): ?>
-            <tr><th><h2>Login IP</h2></th><td><a href="/admin/accounts?ipaddress=<?= $profile["lastloginip"] ?>"><?= $profile['lastloginip'] ?></a></td></tr>
+          <tr><th><h2>Reg. IP</h2></th><td><a href="/admin/accounts/?ipaddress=<?= $player["registerip"] ?>"><?= $player['registerip'] ?></a></td></tr>
+          <? if (isset($player['lastloginip'])): ?>
+            <tr><th><h2>Login IP</h2></th><td><a href="/admin/accounts?ipaddress=<?= $player["lastloginip"] ?>"><?= $player['lastloginip'] ?></a></td></tr>
           <? endif; ?>
-            <tr><th><h2>Sessão</h2></th><td><?= $profile['logintime'] != "" ? $profile['logintime'] : "Sem Sessão" ?></td></tr>
-            <tr><th><h2>Email</h2></th><td><a href="/admin/accounts?emailaddress=<?= $profile["email"] ?>"><?= $profile['email'] ?></a></td></tr>
-          <? if ($inquisitor): ?>
-            <tr><th><h2>Inq. IP</h2></th><td><a href="/admin/accounts?ipaddress=<?= $inquisitor['address'] ?>"><?= $inquisitor['address'] ?></a></td></tr>
-            <tr><th><h2>Servidor</h2></th><td><?= $inquisitor['server'] ?></td></tr>
-            <tr><th><h2>Entrada</h2></th><td><?= date('M d H:i Y', strtotime($inquisitor['lastJoin'])) ?></td></tr>
+            <tr><th><h2>Sessão</h2></th><td><?= $player['logintime'] != "" ? $player['logintime'] : "Sem Sessão" ?></td></tr>
+            <tr><th><h2>Email</h2></th><td><a href="/admin/accounts?emailaddress=<?= $player["email"] ?>"><?= $player['email'] ?></a></td></tr>
+          <? if ($player): ?>
+            <tr><th><h2>Inq. IP</h2></th><td><a href="/admin/accounts?ipaddress=<?= $player['address'] ?>"><?= $player['address'] ?></a></td></tr>
+            <tr><th><h2>Servidor</h2></th><td><?= $player['server'] ?></td></tr>
+            <tr><th><h2>Entrada</h2></th><td><?= date('M d H:i Y', strtotime($player['lastJoin'])) ?></td></tr>
             <tr><th><h2 title="">Blocos/Hr</h2></th><td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td></tr>
             <tr><th><h2 title="">Dim/Hr</h2></th><td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td></tr>
             <? if ($total > 0): ?>
@@ -332,19 +337,19 @@
           <? endif; ?>
             <tr><th rowspan="6"><h2>Atributos</h2></th>
             <td>
-              <input id="chk_admin" type="checkbox" name="admin" value="1" <?= $profile['admin'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="chk_admin" type="checkbox" name="admin" value="1" <?= $player['admin'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="chk_admin">administrador
             </td>
           </tr>
           <tr>
             <td>
-              <input id="chk_operator" type="checkbox" name="operator" value="1" <?= $profile['operator'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="chk_operator" type="checkbox" name="operator" value="1" <?= $player['operator'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="chk_operator">operador
             </td>
           </tr>
           <tr>
             <td>
-              <input id="chk_active" type="checkbox" name="active" value="1" <?= $profile['active'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="chk_active" type="checkbox" name="active" value="1" <?= $player['active'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="chk_active">activo
             </td>
           </tr>
@@ -369,7 +374,7 @@
           <tr class="padup" >
             <td colspan="2" class="center">
               <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
-              <input type="hidden" name="id" value="<?= $profile['id'] ?>" />
+              <input type="hidden" name="id" value="<?= $player['id'] ?>" />
               <input type="submit" value="OK" />
             </td>
           </tr>
@@ -389,16 +394,16 @@
           <table class="form">
             <tr>
               <th><label for="irc_nickname"><h2>Nickname IRC</h2></label></th>
-              <td><input id="irc_nickname" type="text" name="irc_nickname" value="<?= $profile['ircnickname'] ?>" placeholder="irc nickname"></td>
+              <td><input id="irc_nickname" type="text" name="irc_nickname" value="<?= $player['ircnickname'] ?>" placeholder="irc nickname"></td>
             </tr>
             <tr>
               <th><label for="irc_password"><h2>Password Nickname</h2></label></th>
-              <td><input id="irc_password" type="password" name="irc_password" value="<?= $profile['ircpassword'] ?>" placeholder="nickserv password"></td>
+              <td><input id="irc_password" type="password" name="irc_password" value="<?= $player['ircpassword'] ?>" placeholder="nickserv password"></td>
             </tr>
             <tr>
               <th><label><h2>Opções</h2></label></th>
               <td>
-                <input id="irc_auto" type="checkbox" name="irc_auto" value="1" <?= $profile['ircauto'] == 1 ? 'checked="checked"' : '' ?> />
+                <input id="irc_auto" type="checkbox" name="irc_auto" value="1" <?= $player['ircauto'] == 1 ? 'checked="checked"' : '' ?> />
                 <label class="checkbox" for="irc_auto">ligação automática</label>
               </td>
             </tr>
