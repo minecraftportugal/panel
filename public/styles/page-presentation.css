@@ -122,7 +122,7 @@ div.page-panel-body.page-panel-right table tr td div {
 
 div.page-panel-body.page-panel-right table.alt-rows tr th,
 div.page-panel-body.page-panel-right table.alt-rows-2 tr th {
-    background: rgba(0, ,0 0, 0.05);
+    background: rgba(0,0, 0, 0.05);
 }
 
 div.page-panel-body.page-panel-right table.alt-rows tr:nth-child(even) td {
@@ -276,8 +276,6 @@ ul.pagination li.inactive {
 
 }
 
-
-
 /* Badges */
 span.badge {
     display: inline-block;
@@ -312,4 +310,8 @@ span.badge-member {
 
 span.badge-deactivated {
     background-image: url(/images/icons/badge_deactivated.png);
+}
+
+.text-center {
+    text-align: center;
 }

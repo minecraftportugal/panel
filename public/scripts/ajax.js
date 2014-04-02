@@ -36,6 +36,9 @@ $(function() {
     $.ajax({
       url : href,
       type : "GET",
+      beforeSend: function() {
+          container.addClass("widget-loading");
+      },
       success : function(data) {
         container.html(data);
       }

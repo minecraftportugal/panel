@@ -502,7 +502,7 @@ $(document).ready(function() {
 
         var canvas = document.createElement("canvas");
 
-        img.onload = function () {
+        img.onload = function() {
             var ps = new PlayerSkin(elem);
             if(this.width < 64 || this.height < 32) {
                 ps.setSkin("/images/steve.png");
