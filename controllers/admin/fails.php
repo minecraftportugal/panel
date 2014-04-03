@@ -46,33 +46,34 @@ function admin_fails() {
     $table = new TableHelper($action_url, $p);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '15%',
         'label' => 'Time',
         'order_by' => 'time'
     ]);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '15%',
         'label' => 'Event Type',
         'order_by' => 'event_type'
     ]);
 
     $table->add_column([
-        'width' => '20%',
+        'width' => '15%',
         'label' => 'IP Address',
         'order_by' => 'time'
     ]);
 
     $table->add_column([
-        'width' => '20%',
-        'label' => 'Player',
-        'order_by' => 'accountid'
+        'width' => '55%',
+        'label' => 'Descrição',
+        'order_by' => 'comment'
     ]);
 
     $table->add_column([
-        'width' => '20%',
-        'label' => 'Comment',
-        'order_by' => 'comment'
+        'width' => '18px',
+        'alignment' => 'center',
+        'label' => '<i class="fa fa-trash-o"></i>',
+        'label_title' => 'Apagar'
     ]);
 
     require('templates/admin/fails.php');

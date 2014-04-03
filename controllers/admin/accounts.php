@@ -66,35 +66,35 @@ function admin_accounts() {
     ]);
 
     $table->add_column([
-        'width' => '16.667%',
+        'width' => '15%',
         'label' => 'Jogador',
         'order_by' => 'playername'
     ]);
 
     $table->add_column([
-        'width' => '16.667%'
+        'width' => '15%'
     ]);
 
     $table->add_column([
-        'width' => '16.667%',
+        'width' => '25%',
         'label' => 'Endereço E-mail',
         'order_by' => 'email'
     ]);
 
     $table->add_column([
-        'width' => '16.667%',
+        'width' => '15%',
         'label' => 'Registo',
         'order_by' => 'registerdate_df'
     ]);
 
     $table->add_column([
-        'width' => '16.667%',
+        'width' => '15%',
         'label' => 'Ultimo login',
         'order_by' => 'lastlogindate_df'
     ]);
 
     $table->add_column([
-        'width' => '16.667%',
+        'width' => '15%',
         'label' => 'Ultimo IP',
         'label_title' => 'Ultimo IP (não actualizado se entrar não registado/logado)',
         'order_by' => 'lastloginip'

@@ -29,7 +29,7 @@
 
     <form name="manage_users" action="/admin/delete_drops" method="POST" autocomplete="off">
       <table class="alt-rows">
-        
+
         <?= $table->render_header(); ?>
 
         <tbody class="font-mono">
@@ -45,11 +45,11 @@
             </td>
 
             <td>
-                <?= $r["accountid"] ?>
+                <?= $r["ipaddress"] ?>
             </td>
 
             <td>
-                <?= $r["ipaddress"] ?>
+                <?= $r["comment"] ?>
             </td>
 
             <td class="center">
@@ -66,7 +66,6 @@
                 Não foram encontrados eventos através dos critérios especificados!
               </div>
             </td>
-
           </tr>
         <? endif; ?>
         

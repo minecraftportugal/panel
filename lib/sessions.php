@@ -3,6 +3,7 @@
 require('config.php');
 require('lib/xauth.php');
 
+use models\fail\FailModel;
 use minecraftia\db\Bitch;
 
 /*
@@ -17,6 +18,8 @@ function validateLogin($username, $password) {
       return true;
     }
   }
+
+  FailModel::create('failed_login', null, $_SERVER['REMOTE_ADDR'], "Username: $username, Password: $password");
 
   return false;
 }
@@ -78,6 +81,13 @@ function isValidXSRFToken($token) {
  */
 function validateSession($admin = false) {
     if (!isLoggedIn($admin)) {
+
+      if ($admin) {
+          FailModel::create('failed_admin_action', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], "Failed at ".$_SERVER[REQUEST_URI]);
+      } else {
+          FailModel::create('failed_session_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], "Failed at ".$_SERVER[REQUEST_URI]);
+      }
+
       header('Location: /login');
       exit();
     }
@@ -90,6 +100,7 @@ function validateXSRFToken() {
     $token = getSubmittedXSRFToken();
 
     if (!isValidXSRFToken($token)) {
+      FailModel::create('failed_xsrf_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], "Failed at ".$_SERVER[REQUEST_URI]." with xsrf token $token");
       header('Location: /forbidden');
       exit();
     }
