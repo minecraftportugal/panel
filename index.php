@@ -19,6 +19,7 @@ if ($cfg_wp_enabled) {
 require_once('models/account.php');
 require_once('models/session.php');
 require_once('models/drop.php');
+require_once('models/fail.php');
 
 require_once('controllers/home.php');
 require_once('controllers/news/index.php');
@@ -44,6 +45,7 @@ require_once('controllers/admin/sessions.php');
 require_once('controllers/admin/configure.php');
 require_once('controllers/admin/register.php');
 require_once('controllers/admin/delete_drops.php');
+require_once('controllers/admin/fails.php');
 
 require_once('controllers/directory/index.php');
 
@@ -94,6 +96,7 @@ $r->map('GET',  '/admin', 'admin_index');
 $r->map('GET',  '/admin/accounts', 'admin_accounts');
 $r->map('GET',  '/admin/sessions', 'admin_sessions');
 $r->map('GET',  '/admin/drops', 'admin_drops');
+$r->map('GET',  '/admin/fails', 'admin_fails');
 
 $r->map('POST', '/admin/configure', 'admin_configure');
 $r->map('POST', '/admin/register', 'admin_register');
@@ -125,12 +128,12 @@ $x = $r->match($method, $path);
 
 // match route
 if ($x != NULL) {
-	$x();
+    $x();
 } 
 
 // else 404
 else {
-	notfound();
+    notfound();
 }
 
 ?>

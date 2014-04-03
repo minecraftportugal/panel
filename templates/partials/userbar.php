@@ -62,6 +62,11 @@
                href="/admin/drops"
                data-widget-action="open"
                data-widget-name="admin-drops"><i class="fa fa-th-list"></i> item drops</a></li>
+        <li><a id="menu-item-admin-fails"
+               href="/admin/fails"
+               data-widget-action="open"
+               data-widget-name="admin-fail"><i class="fa fa-warning"></i> fail log</a></li>
+
       </ul>
     </li>
 </ul>

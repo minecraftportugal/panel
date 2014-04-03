@@ -69,8 +69,8 @@ div.widget-body {
 div.widget-loading.block-enabled {
     position: absolute;
     width: 100%;
-    top: 22px;
-    height: calc(100% - 22px);
+    top: 18px;
+    height: calc(100% - 18px);
     background-color: rgba(0, 0, 0, 0.75);
     background-image: url('/images/loader3.gif');
     background-repeat: no-repeat;
