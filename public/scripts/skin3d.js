@@ -493,9 +493,9 @@ function PlayerSkin(container, scale) {
 
 $(document).ready(function() {
 
+    // /!\ This is called for every skin each time a profile is loaded. This sucks, change it.
     $("div.skin-display").each(function(n, elem) {
         var src = $(elem).data("src");
-        console.log(src);
 
         var img = new Image();
         img.crossOrigin = "Anonymous";

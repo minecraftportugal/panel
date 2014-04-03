@@ -1,7 +1,7 @@
 <script type="text/javascript" src="/scripts/skin3d.js"></script>
 <link rel="stylesheet" href="/styles/page-presentation-profile.css" media="screen" type="text/css">
 
-<div id="widget-show">
+<div id="widget-show-<?= $player['playername'] ?>">
 
     <div class="layout-row">
 

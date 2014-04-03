@@ -192,6 +192,7 @@ Widget.prototype._init = function() {
 
 Widget.prototype._load = function() {
   if (this.options.useIframe == true) {
+
     this.iframeId = this.id + "-iframe";
     var jq_tag = $("<iframe></iframe>");
     jq_tag.attr("id", this.iframeId) ;
@@ -200,6 +201,7 @@ Widget.prototype._load = function() {
     $(this.selector).addClass("widget-iframe");
 
   } else {
+
     var widgetInstance = this;
     var loading_blocker = $(widgetInstance.selector).find("div.widget-body").next();
 

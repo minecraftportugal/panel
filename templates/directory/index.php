@@ -99,6 +99,8 @@
       <?= $pagination->render() ?>
     </div>
 
+    <div class="separator"></div>
+
   </div>
 
 </div>

@@ -72,7 +72,7 @@ class AccountModel {
         $asc_desc = $args["asc_desc"];
 
         if ($inquisitor_full) {
-            $inquisitor_fields = "name, lastUpdate, lastJoin, mapped, totalItemsPickedUp, totalDistanceTraveled, lastKick,
+            $inquisitor_fields = "name, world, lastUpdate, lastJoin, mapped, totalItemsPickedUp, totalDistanceTraveled, lastKick,
                 lavaBucketsEmptied, totalMobsKilled, lastKickMessage, portalsCrossed, sessionTime, level,
                 mooshroomsMilked, potionEffects, deaths, foodLevel, lastMobKill, groups, chatMessages, joins,
                 waterBucketsEmptied, totalBlocksPlaced, lastDeathMessage, lastQuit, firstJoin, health,
@@ -83,7 +83,7 @@ class AccountModel {
                 fireTicks, lastPlayerKill, totalItemsDropped, gameMode, cowsMilked, coords, lastMobKilled, address,
                 saturation, inventory, waterBucketsFilled, server, displayName, bedWorld";
         } else {
-            $inquisitor_fields = "name, online";
+            $inquisitor_fields = "name, world, online";
         }
 
         $q = "SELECT * FROM (

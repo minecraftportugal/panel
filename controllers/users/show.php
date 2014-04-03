@@ -33,7 +33,7 @@ function users_show () {
     }
 
     $player = AccountModel::first($p, true); // true : fetch all inquisitor data
-
+    //$player_mapped = json_decode($player['mapped'], true);
     $drops = DropModel::get([
         "page" => 1,
         "per_page" => 1,
@@ -46,8 +46,16 @@ function users_show () {
 
     $badges = AccountModel::badges($player['id']);
 
-
-    $v_dynmap_widget = DynmapHelper::map($player['playername']);
+    if ($player['online'] == 1) {
+        $v_dynmap_widget = DynmapHelper::map($player['playername']);
+    } else {
+        if (!is_null($player['coords'])) {
+            $coords = explode(',', $player['coords']);
+            $v_dynmap_widget = DynmapHelper::map_position($coords, $player['world']);
+        } else {
+            $v_dynmap_widget = DynmapHelper::map();
+        }
+    }
 
 
 

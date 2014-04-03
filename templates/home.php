@@ -34,7 +34,7 @@
     <script type="text/javascript" src="/scripts/cookies.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
     <script type="text/javascript" src="/scripts/top.js"></script>
-    <script type="text/javascript" src="/scripts/sidebar.js"></script>
+    <script type="text/javascript" src="/scripts/dynmap.js"></script>
 
 </head> 
 <body>

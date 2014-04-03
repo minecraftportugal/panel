@@ -1,17 +1,21 @@
-div.sidebar {
+div.sidebar,
+.compass,
+div.leaflet-control-container,
+div.largeclock
+{
 	display: none !important;
 }
 
-.compass, .compass_NE, .compass_SE, .compass_NW, .compass_SW {
-  left:32px !important;
-  right: auto;
-}
+/*.compass, .compass_NE, .compass_SE, .compass_NW, .compass_SW {*/
+  /*left:32px !important;*/
+  /*right: auto;*/
+/*}*/
 
 
-.leaflet-top {
-	top: 100px;
-}
+/*.leaflet-top {*/
+	/*top: 100px;*/
+/*}*/
 
-.leaflet-left {
-  font-family: Consolas, monaco, monospace !important;
-};
+/*.leaflet-left {*/
+  /*font-family: Consolas, monaco, monospace !important;*/
+/*}*/
