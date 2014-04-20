@@ -64,6 +64,12 @@ function admin_fails() {
     ]);
 
     $table->add_column([
+        'width' => '15%',
+        'label' => 'Jogador',
+        'order_by' => 'playername'
+    ]);
+
+    $table->add_column([
         'width' => '55%',
         'label' => 'Descrição',
         'order_by' => 'comment'

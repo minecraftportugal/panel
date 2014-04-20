@@ -181,26 +181,14 @@ div#ajax-indicator.ajax-error {
 
 .notice {
     padding: 0px 5px 0px 5px;
-    min-width: 150px;
 }
 
 .error {
-    background-color: rgba(255, 0, 0, 0.075) !important;
+    background-color: rgba(255,0,0,0.1) !important;
     color: #DD0000;
 }
 
 .success {
-    background-color: rgba(0, 255, 0, 0.075) !important;
+    background-color: rgba(0,255,0,0.101010) !important;
     color: #00DD00;
-}
-
-span.close-parent {
-    position: absolute;
-    right: 0px;
-    display: inline-block;
-    cursor: pointer;
-    font-size: 0.9em;
-    height: 24px;
-    width: 24px;
-    line-height: 24px;
 }

@@ -49,6 +49,10 @@
             </td>
 
             <td>
+                <?= $r["playername"] ?>
+            </td>
+
+            <td>
                 <?= $r["comment"] ?>
             </td>
 
