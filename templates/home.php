@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/styles/page-presentation-forms.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/page-presentation-profile.css" media="screen" type="text/css">
     
-    <link href='http://fonts.googleapis.com/css?family=Overlock:400,700,900' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Overlock:400,700,900' rel='stylesheet' type='text/css'>
     
     <link rel="shortcut icon" href="favicon.ico" >
 
