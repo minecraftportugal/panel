@@ -132,6 +132,7 @@
                    title="<?= $r["email"] ?>"
                    class="noajax"
                    data-widget-action="open"
+                   data-widget-classes="widget-scrollable-y"
                    data-widget-name="profile-<?= $r['playername'] ?>">
                   <span class="pull-left"><?= $r["playername"] ?></span>
                   <span class="pull-left online" title="O jogador está online!"></span>

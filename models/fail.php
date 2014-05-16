@@ -38,7 +38,7 @@ class FailModel {
         $args = array_intersect_key($args, array_flip(["accountid", "event_type", "page", "per_page"]));
 
         $q = "SELECT * FROM (
-            SELECT fl.time, fl.event_type, fl.accountid, fl.ipaddress, fl.comment, a.playername
+            SELECT fl.id, fl.time, fl.event_type, fl.accountid, fl.ipaddress, fl.comment, a.playername
             FROM fail_log fl LEFT JOIN accounts a ON fl.accountid = a.id
             WHERE ((:accountid IS NULL) OR (fl.accountid = :accountid))
             AND ((:event_type IS NULL) OR (fl.event_type = :event_type))

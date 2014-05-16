@@ -45,6 +45,8 @@ require_once('controllers/admin/sessions.php');
 require_once('controllers/admin/configure.php');
 require_once('controllers/admin/register.php');
 require_once('controllers/admin/delete_drops.php');
+require_once('controllers/admin/delete_fails.php');
+
 require_once('controllers/admin/fails.php');
 
 require_once('controllers/directory/index.php');
@@ -101,6 +103,7 @@ $r->map('GET',  '/admin/fails', 'admin_fails');
 $r->map('POST', '/admin/configure', 'admin_configure');
 $r->map('POST', '/admin/register', 'admin_register');
 $r->map('POST', '/admin/delete_drops', 'admin_delete_drops');
+$r->map('POST', '/admin/delete_fails', 'admin_delete_fails');
 
 $r->map('GET',  '/directory', 'directory_index');
 

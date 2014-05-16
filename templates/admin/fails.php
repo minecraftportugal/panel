@@ -10,7 +10,7 @@
   </div>
 
   <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
-    <form name="manage_failss_filters" action="<?= $action_url ?>" method="GET" autocomplete="off">
+    <form name="manage_fails_filters" action="<?= $action_url ?>" method="GET" autocomplete="off">
       <ul>
         <li>
           <h2>Critérios</h2>
@@ -27,7 +27,7 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
-    <form name="manage_users" action="/admin/delete_drops" method="POST" autocomplete="off">
+    <form name="manage_fails" action="/admin/delete_fails" method="POST" autocomplete="off">
       <table class="alt-rows">
 
         <?= $table->render_header(); ?>

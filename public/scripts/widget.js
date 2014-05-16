@@ -1,4 +1,4 @@
-function Widget(options) {
+function Widget(options, states) {
 
   Widget.options = {
     "url" : "/colorbars",
@@ -22,6 +22,8 @@ function Widget(options) {
   this.options = {};
   this.options.css = {};
 
+  this.states = states || [];
+
   $.extend(this.options, Widget.options);
   $.extend(this.options, options);
 
@@ -39,7 +41,7 @@ function Widget(options) {
   this.buttonId = "button-widget-" + this.options.name;
   this.buttonSelector = "div#button-widget-" + this.options.name;
 
-  this.states = [];
+
 
   if (Widget.counter === undefined) {
     Widget.counter = 1;
@@ -224,24 +226,60 @@ Widget.prototype._load = function() {
 }
 
 Widget._serializeState = function() {
+    var serializedWidgets = [];
+    $.each(Widget.widgets, function(n, widget) {
+
+        widget._pushState();
+
+        var serializedObject = JSON.stringify({
+            options : widget.options,
+            states : widget.states
+        });
+
+        serializedWidgets.push(serializedObject);
+    });
+
+    var serializedObject = JSON.stringify(serializedWidgets, function(name, value) {
+        return value;
+    });
+
+    return serializedObject;
 
 }
 
 Widget._saveState = function() {
-
+    var serializedObject = Widget._serializeState();
+    var base64Object = btoa(serializedObject);
+    setCookie("widgetState", base64Object);
 }
 
 Widget._loadState = function() {
+    var base64Object = getCookie("widgetState");
+    if (base64Object === undefined) {
+        return;
+    }
 
+    var serializedObject = atob(base64Object);
+    var object = JSON.parse(serializedObject);
+
+    $.each(object, function(n, serializedObject) {
+
+        var object = JSON.parse(serializedObject);
+        var createdWidget = new Widget(object.options, object.states);
+
+        createdWidget._popState();
+    })
 }
 
 Widget.prototype._pushState = function() {
+  var maximized =  $(this.selector).hasClass("maximized");
   var state = {
     "css" : {
       "top": $(this.selector).css("top"),
       "left": $(this.selector).css("left"),
       "width": $(this.selector).css("width"),
-      "height": $(this.selector).css("height")
+      "height": $(this.selector).css("height"),
+      "z-index": $(this.selector).css("z-index")
     },
     "maximized" : $(this.selector).hasClass("maximized")
   }
@@ -368,7 +406,7 @@ Widget.prototype.shrink = function() {
   // var height = parseInt($("div#widget-container").css("height"));
   //var newWidth = (width / gridSizeV);
   ///var newHeight = (height / gridSizeH);
-  //console.log(width, height, gridSizeH, gridSizeV)
+  //console.log(width, height, gridSizeH, gridSizeV);
 
   var newWidth = this.options.css["min-width"];
   var newHeight = this.options.css["min-height"];
@@ -404,7 +442,6 @@ Widget.prototype.close = function() {
     Widget.widgets.splice(elementIndex, 1);
   }
 }
-
 
 $(document).on("click", "[data-widget-action]", function(event) {
   var action = $(this).data("widget-action");
@@ -452,3 +489,11 @@ $(document).on("click", "[data-widget-action]", function(event) {
 
   event.preventDefault();
 });
+
+$(document).on("mouseup", function(e) {
+    Widget._saveState();
+})
+
+$(function() {
+    Widget._loadState();
+})
