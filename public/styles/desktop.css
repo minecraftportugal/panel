@@ -105,8 +105,8 @@ div#top-bar a.button:active {
 
 div#widget-button-container .fa,
 div#top-bar .fa {
-        color: #AAAAAA;
-        font-size: 0.9em;
+    color: #AAAAAA;
+    font-size: 0.9em;
 }
 
 div#top-bar li.separator {
@@ -115,25 +115,71 @@ div#top-bar li.separator {
 }
 
 
-div#widget-button-container {
+div#widget-taskbar {
     background: linear-gradient(to bottom, #252525, #050505);
     position: absolute;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: 30px;
     z-index: 1000;
     overflow: hidden;
+    white-space: nowrap;
+}
+
+div#widget-button-container-scroll-left {
+    border-right: 1px solid #101010;
+    position: absolute;
+    left: 0;
+    bottom: 0;
 }
 
 
-div#widget-button-container-context {
-    float: right;
+div#widget-button-container {
+    position: absolute;
+    left: 11px;
+    right: 151px;
+    bottom: 0;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div#widget-button-container-scroll-right {
+    border-left: 1px solid #101010;
+    border-right: 1px solid #101010;
+    position: absolute;
+    right: 121px;
+    bottom: 0;
+    height: 30px;
+}
+
+div#widget-button-container-minimize-all {
+    position: absolute;
+    right: 91px;
+    bottom: 0;
+}
+
+div#widget-button-container-tile {
+    position: absolute;
+    right: 61px;
+    bottom: 0;
+}
+
+div#widget-button-container-cascade {
+    position: absolute;
+    right: 31px;
+    bottom: 0;
+}
+
+div#widget-button-container-embiggen {
+    position: absolute;
+    right: 0px;
+    bottom: 0;
 }
 
 div.widget-context-button    {
-    display: table-cell;
-    float: left;
+    display: inline-block;
     cursor: pointer;
     position: relative;
     color: #FFFFFF;
@@ -150,6 +196,26 @@ div.widget-context-button:hover {
 }
 
 div.widget-context-button:active {
+    color: #888888;
+    background: linear-gradient(to top, #000000, #000000, #101010);
+}
+
+
+div.widget-button-container-scroll {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 10px;
+    cursor: pointer;
+}
+
+
+div.widget-button-container-scroll:hover {
+    background: linear-gradient(to top, #050505, #050505, #252525);
+}
+
+div.widget-button-container-scroll:active {
     color: #888888;
     background: linear-gradient(to top, #000000, #000000, #101010);
 }

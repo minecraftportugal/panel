@@ -24,6 +24,11 @@
              data-widget-action="open"
              data-widget-name="irc"
              data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> irc/chat</a></li>
+        <li><a id="menu-item-forum"
+               href="//forum.minecraft.pt/"
+               data-widget-action="open"
+               data-widget-name="forum"
+               data-widget-mode="iframe"><i class="fa fa-institution"></i> fórum</a></li>
     </ul>
   </li>
 </ul>

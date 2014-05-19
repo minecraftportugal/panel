@@ -209,8 +209,7 @@ div#widget-container {
 /*BOTTOM BUTTONS*/
 
 div.widget-button {
-    display: table-cell;
-    float: left;
+    display: inline-block;
     cursor: pointer;
     position: relative;
     color: #FFFFFF;
@@ -262,3 +261,4 @@ div.widget-button.activity:hover {
 div.widget-button.activity:active {
     background: rgba(0,0,255,0.7) url('/images/icons/chatnew.png') no-repeat 5px center !important;
 }
+

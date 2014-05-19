@@ -24,6 +24,7 @@
     <link rel="shortcut icon" href="favicon.ico" >
 
     <script type="text/javascript" src="/scripts/jquery.js"></script>
+    <script type="text/javascript" src="/scripts/jquery.scrollto.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/Three.js"></script>
     <script type="text/javascript" src="/scripts/ajax.js"></script>
@@ -43,24 +44,43 @@
         <? require("partials/userbar.php"); ?>
     </div>
 
-    <div id="widget-container"><div></div></div>
+    <div id="widget-container">
+        <div></div>
+    </div>
     
-    <div id="widget-button-container">
-        <div id="widget-button-container-context">
-            <div class="widget-context-button" onclick="javascript: Widget.tile();" title="Janelas Maximizadas"><i class="fa fa-th-large"></i></div>
+    <div id="widget-taskbar">
+        <div id="widget-button-container-scroll-left" class="widget-button-container-scroll" >
         </div>
-        <div id="widget-button-container-context">
-            <div class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cascata"><i class="fa fa-align-justify"></i></div>
+
+        <div id="widget-button-container">
+
         </div>
-        <div id="widget-button-container-context">
-            <div class="widget-context-button" onclick="javascript: Widget.embiggen();" title="Janelas Alinhadas"><i class="fa fa-list-alt    "></i></div>
+
+        <div id="widget-button-container-minimize-all" class="widget-context-button" onclick="javascript: Widget.minimizeAll();" title="Janelas Minimizadas">
+            <i class="fa fa-minus-circle"></i>
         </div>
+
+        <div id="widget-button-container-tile" class="widget-context-button" onclick="javascript: Widget.tile();" title="Janelas Maximizadas">
+            <i class="fa fa-th-large"></i>
+        </div>
+
+        <div id="widget-button-container-cascade" class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cascata">
+            <i class="fa fa-align-justify"></i>
+        </div>
+
+        <div id="widget-button-container-embiggen" class="widget-context-button" onclick="javascript: Widget.embiggen();" title="Janelas Alinhadas">
+            <i class="fa fa-list-alt"></i>
+        </div>
+
+        <div id="widget-button-container-scroll-right" class="widget-button-container-scroll">
+        </div>
+
     </div>
 
     <!-- <iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> -->
 
     <? /* /!\ move html templates somewher else ? */ ?>
-    <div id="html-templates" style="display: none;">
+    <div id="html-templates">
         <div id="widget-template">
             <div class="widget">
                 <div class="widget-titlebar">

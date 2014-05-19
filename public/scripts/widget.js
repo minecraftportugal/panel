@@ -22,10 +22,10 @@ function Widget(options, states) {
   this.options = {};
   this.options.css = {};
 
-  this.states = states || [];
-
   $.extend(this.options, Widget.options);
   $.extend(this.options, options);
+
+  this.states = states || [];
 
   if (options.css !== undefined) {
     $.extend(this.options.css, options.css);
@@ -66,9 +66,12 @@ function Widget(options, states) {
   if (existing == null) {
     this.widget = this;
     Widget.widgets.push(this);
-    this._init();
-    this._load();
-    this._initPosition();
+
+    var notApplyingStates = states === undefined;
+    this.init(notApplyingStates);
+
+    this.load();
+    this.initPosition();
   } else {
     this.bringTop();
     this.setActive();
@@ -80,7 +83,7 @@ function Widget(options, states) {
 
 }
 
-Widget.prototype._init = function() {
+Widget.prototype.init = function(notApplyingStates) {
 
   var widget = $("div#html-templates div#widget-template > div").clone();
   var button = $("div#html-templates div#widget-button-template > div").clone();
@@ -100,8 +103,12 @@ Widget.prototype._init = function() {
 
   $(this.selector).find("div.widget-body").addClass(this.options.classes);
 
-  if (this.options.maximized) {
-    this.maximize();
+  if (notApplyingStates) {
+    this.bringTop();
+    this.setActive();
+    if (this.options.maximized) {
+      this.maximize();
+    }
   }
 
   var widgetInstance = this;
@@ -147,15 +154,18 @@ Widget.prototype._init = function() {
   });
 
   $(this.selector).find("div.widget-refresh").click(function() {
-    widgetInstance._load();
+    widgetInstance.load();
   });
 
   $(this.selector).find("div.widget-maximize").click(function() {
-    if ($(widgetInstance.selector).hasClass("maximized")) {
+    var maximized = $(widgetInstance.selector).hasClass("maximized");
+
+    if (maximized) {
       widgetInstance.restore();
     } else {
       widgetInstance.maximize();
     }
+
   });
 
   $(this.selector).find("div.widget-minimize").click(function() {
@@ -192,7 +202,7 @@ Widget.prototype._init = function() {
 
 }
 
-Widget.prototype._load = function() {
+Widget.prototype.load = function() {
   if (this.options.useIframe == true) {
 
     this.iframeId = this.id + "-iframe";
@@ -221,25 +231,31 @@ Widget.prototype._load = function() {
       }
     });
   }
-  this.bringTop();
-  this.setActive();
+//  this.bringTop();
+//  this.setActive();
 }
 
-Widget._serializeState = function() {
-    var serializedWidgets = [];
+Widget.serializeState = function() {
+    var widgets = [];
+
+    if (Widget.widgets === undefined) {
+        Widget.widgets = [];
+    }
+
     $.each(Widget.widgets, function(n, widget) {
 
-        widget._pushState();
+        widget.pushState();
 
-        var serializedObject = JSON.stringify({
+        var object = {
             options : widget.options,
             states : widget.states
-        });
+        };
 
-        serializedWidgets.push(serializedObject);
+        widgets.push(object);
     });
 
-    var serializedObject = JSON.stringify(serializedWidgets, function(name, value) {
+
+    var serializedObject = JSON.stringify(widgets, function(name, value) {
         return value;
     });
 
@@ -247,31 +263,34 @@ Widget._serializeState = function() {
 
 }
 
-Widget._saveState = function() {
-    var serializedObject = Widget._serializeState();
-    var base64Object = btoa(serializedObject);
-    setCookie("widgetState", base64Object);
+Widget.saveState = function() {
+    var serializedObject = Widget.serializeState();
+    var base64Object = btoa(serializedObject); // serializedObject; //btoa(serializedObject);
+    //setCookie("widgetState", base64Object);
+    localStorage.setItem("widgetState", base64Object);
 }
 
-Widget._loadState = function() {
-    var base64Object = getCookie("widgetState");
+Widget.loadState = function() {
+    //var base64Object = getCookie("widgetState");
+    var base64Object = localStorage.getItem("widgetState");
     if (base64Object === undefined) {
         return;
     }
 
-    var serializedObject = atob(base64Object);
+
+    var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
     var object = JSON.parse(serializedObject);
 
-    $.each(object, function(n, serializedObject) {
+    $.each(object, function(n, object) {
 
-        var object = JSON.parse(serializedObject);
         var createdWidget = new Widget(object.options, object.states);
+        createdWidget.popState();
 
-        createdWidget._popState();
-    })
+    });
+
 }
 
-Widget.prototype._pushState = function() {
+Widget.prototype.pushState = function() {
   var maximized =  $(this.selector).hasClass("maximized");
   var state = {
     "css" : {
@@ -281,24 +300,47 @@ Widget.prototype._pushState = function() {
       "height": $(this.selector).css("height"),
       "z-index": $(this.selector).css("z-index")
     },
-    "maximized" : $(this.selector).hasClass("maximized")
+    "maximized" : $(this.selector).hasClass("maximized"),
+    "minimized" : $(this.buttonSelector).hasClass("minimized"),
+    "active" : $(this.selector).hasClass("widget-active")
   }
 
   this.states.push(state);
+  //console.log("push", this.states);
 }
 
-Widget.prototype._popState = function() {
+Widget.prototype.popState = function() {
+
+
   var state = this.states.pop();
+
   if (state !== undefined) {
     if (state.maximized) {
       this.maximize();
-    } else {
-      $(this.selector).css(state.css);
     }
+
+    if (state.minimized) {
+      this.minimize();
+    }
+
+    if (state.active) {
+      this.setActive();
+    }
+
+    if (state.maximized) {
+        delete state.css.height;
+        delete state.css.width;
+        delete state.css.top;
+        delete state.css.left;
+    }
+
+    $(this.selector).css(state.css);
   }
+
+  //console.log("pop", state);
 }
 
-Widget.prototype._initPosition = function() {
+Widget.prototype.initPosition = function() {
   var wLeft = 5;
   var wTop = 5;
   var leftStep = (Widget.counter - 1 % 5);
@@ -311,11 +353,13 @@ Widget.prototype._initPosition = function() {
 
 Widget.prototype.setActive = function() {
   this.unsetActive();
+  Widget.active = this.selector;
   $(this.selector).addClass("widget-active");
   $(this.buttonSelector).addClass("widget-button-active");
 }
 
 Widget.prototype.unsetActive = function() {
+  Widget.active = undefined;
   $.each(Widget.widgets, function (n, elem) {
     $(elem.selector).removeClass("widget-active");
     $(this.buttonSelector).removeClass("widget-button-active");
@@ -339,7 +383,7 @@ Widget.cascade = function() {
   $.each(Widget.widgets, function(n, e) {
     Widget.counter += 1;
     e.shrink();
-    e._initPosition();
+    e.initPosition();
     e.bringTop();
 
   });
@@ -375,9 +419,15 @@ Widget.embiggen = function() {
   });
 }
 
+Widget.minimizeAll = function() {
+    $.each(Widget.widgets, function(n, widget) {
+        console.log(widget);
+        widget.minimize();
+    });
+}
+
 Widget.prototype.maximize = function() {
   $(this.selector).show();
-  this._pushState();
   $(this.buttonSelector).removeClass("minimized");
   $(this.selector).addClass("maximized"); //css in class
   this.bringTop();
@@ -389,7 +439,6 @@ Widget.prototype.restore = function() {
   $(this.selector).show();
   $(this.buttonSelector).removeClass("minimized");
   $(this.selector).removeClass("maximized");
-  this._popState();
   this.bringTop();
   this.setActive();
 }
@@ -421,7 +470,6 @@ Widget.prototype.shrink = function() {
 
 Widget.prototype.minimize = function() {
   $(this.selector).hide();
-  this._pushState();
   $(this.buttonSelector).addClass("minimized");
   $(this.selector).removeClass("maximized");
 }
@@ -490,10 +538,10 @@ $(document).on("click", "[data-widget-action]", function(event) {
   event.preventDefault();
 });
 
-$(document).on("mouseup", function(e) {
-    Widget._saveState();
-})
+$(window).on("unload", function() {
+    Widget.saveState();
+});
 
 $(function() {
-    Widget._loadState();
-})
+    Widget.loadState();
+});

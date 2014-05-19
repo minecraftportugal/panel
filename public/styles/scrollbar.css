@@ -25,3 +25,13 @@
     border-radius: 4px;
     background: rgba(255,255,255, 0.4);
 }
+
+div {
+    scrollbar-face-color: #474747;
+    scrollbar-3dlight-color: #1A1A1A;
+    scrollbar-highlight-color: #1A1A1A;
+    scrollbar-track-color: #1A1A1A;
+    scrollbar-arrow-color: #1A1A1A;
+    scrollbar-shadow-color: #1A1A1A;;
+    scrollbar-dark-shadow-color: #1A1A1A;
+}
