@@ -83,7 +83,10 @@ class AccountModel {
                 fireTicks, lastPlayerKill, totalItemsDropped, gameMode, cowsMilked, coords, lastMobKilled, address,
                 saturation, inventory, waterBucketsFilled, server, displayName, bedWorld";
         } else {
-            $inquisitor_fields = "name, world, online";
+            $inquisitor_fields = "name, world, online,
+              totalTime as totalTime_df, sessionTime as sessionTime_df,
+              TIME_FORMAT(SEC_TO_TIME(totalTime),'%Hh %im') totalTime,
+              TIME_FORMAT(SEC_TO_TIME(sessionTime),'%Hh %im') sessionTime";
         }
 
         $q = "SELECT * FROM (

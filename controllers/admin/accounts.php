@@ -97,7 +97,21 @@ function admin_accounts() {
         'width' => '15%',
         'label' => 'Ultimo IP',
         'label_title' => 'Ultimo IP (não actualizado se entrar não registado/logado)',
-        'order_by' => 'lastloginip'
+        'order_by' => 'lastloginip_df'
+    ]);
+
+    $table->add_column([
+        'width' => '15%',
+        'label' => 'Tempo total',
+        'label_title' => 'Tempo total em jogo',
+        'order_by' => 'totalTime_df'
+    ]);
+
+    $table->add_column([
+        'width' => '15%',
+        'label' => 'Tempo da Sessão',
+        'label_title' => 'Tempo da última sessão',
+        'order_by' => 'sessionTime_df'
     ]);
 
     $table->add_column([

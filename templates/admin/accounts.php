@@ -164,6 +164,14 @@
                 </a>
             </td>
 
+            <td>
+              <?= $r["totalTime"] ?>
+            </td>
+
+            <td>
+              <?= $r["sessionTime"] ?>
+            </td>
+
             <td class="center">
                 <input class="fake-checkbox" type="checkbox" <?= $r["operator"] == 1 ? 'checked="checked"' : '' ?> />
                 <input name="operator[<?= $r["id"] ?>]" value="<?= $r["operator"] ?>" type="hidden" />
