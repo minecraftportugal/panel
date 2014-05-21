@@ -2,7 +2,6 @@
 require_once('config.php');
 require_once('lib/sessions.php');
 require_once('lib/i18n.php');
-require_once('helpers/date.php');
 
 
 use models\account\AccountModel;
@@ -10,6 +9,7 @@ use models\drop\DropModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\dynmap\DynmapHelper;
+use helpers\datetime\DateTimeHelper;
 
 function users_show () {
 

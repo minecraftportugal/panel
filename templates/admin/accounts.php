@@ -165,11 +165,11 @@
             </td>
 
             <td>
-              <?= $r["totalTime"] ?>
+                <?= \helpers\datetime\DateTimeHelper::stoh($r["totalTime"]) ?>
             </td>
 
             <td>
-              <?= $r["sessionTime"] ?>
+                <?= \helpers\datetime\DateTimeHelper::stoh($r["sessionTime"]) ?>
             </td>
 
             <td class="center">

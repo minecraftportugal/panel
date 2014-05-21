@@ -7,6 +7,7 @@ use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\table\TableHelper;
+use helpers\datetime\DateTimeHelper;
 
 function admin_accounts() {
 
@@ -97,21 +98,21 @@ function admin_accounts() {
         'width' => '15%',
         'label' => 'Ultimo IP',
         'label_title' => 'Ultimo IP (não actualizado se entrar não registado/logado)',
-        'order_by' => 'lastloginip_df'
+        'order_by' => 'lastloginip'
     ]);
 
     $table->add_column([
         'width' => '15%',
         'label' => 'Tempo total',
         'label_title' => 'Tempo total em jogo',
-        'order_by' => 'totalTime_df'
+        'order_by' => 'totalTime'
     ]);
 
     $table->add_column([
         'width' => '15%',
         'label' => 'Tempo da Sessão',
         'label_title' => 'Tempo da última sessão',
-        'order_by' => 'sessionTime_df'
+        'order_by' => 'sessionTime'
     ]);
 
     $table->add_column([

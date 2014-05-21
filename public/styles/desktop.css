@@ -12,6 +12,19 @@
      user-select: none;
 }
 
+p, td, th, span {
+    -moz-user-select: -moz-text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+
+    /*
+        Introduced in IE 10.
+        See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: text;
+    user-select: text;
+}
+
 div#top-bar {
     color: #FFFFFF;
     background: linear-gradient(to bottom, #050505, #303030);
