@@ -123,6 +123,7 @@ div.widget-title {
     line-height: 18px;
     text-align: left;
     color: #FFFFFF;
+    text-align: center;
 }
 
 div.widget-titlebar .fa {
@@ -146,10 +147,6 @@ div.widget-ui:hover {
 
 div.widget.widget-active div.widget-ui:hover {
     background-color:rgba(255,255,255,0.1);
-}
-
-div.widget-title {
-    padding-left: 4px;
 }
 
 div.widget-drag {

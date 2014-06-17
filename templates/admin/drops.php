@@ -22,7 +22,7 @@
           <label class="checkbox" for="chk_undelivered" title="drop não entregue">não entregue</label>
         </li>
         <li>
-          <input id="chk_delivered" type="checkbox" name="delivered" value="1" <?= $p['drops_delivered'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk_delivered" type="checkbox" name="delivered" value="1" <?= $p['delivered'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="chk_delivered" title="drop entregue">entregue</label>
         </li>
         <li>

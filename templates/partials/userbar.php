@@ -1,76 +1,85 @@
 <ul class="pull-left">
-  <li><a href="#"><i class="fa fa-trello"></i> apps/crap</a>
+  <li><a href="#"><i class="fa fa-trello"></i> Comunidade</a>
     <ul>
       <li><a id="menu-item-launcher"
              href="/launcher"
              data-widget-action="open"
              data-widget-name="launcher"
-             data-widget-title="Minecraft Launcher"
+             data-widget-title="<i class='fa fa-money'></i> Launcher"
              data-widget-mode="iframe"
-             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> launcher</a></li>
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> Launcher</a></li>
       <li><a id="menu-item-inquisitor"
              href="//inquisitor.minecraft.pt"
              data-widget-action="open"
-             data-widget-name="inquisitor"
              data-widget-mode="iframe"
-             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-tachometer"></i> inquisitor</a></li>
+             data-widget-name="launcher"
+             data-widget-title="<i class='fa fa-money'></i> Launcher"
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-tachometer"></i> Inquisitor</a></li>
       <li><a id="menu-item-dynmap"
              href="//dynmap.minecraft.pt"
              data-widget-action="open-always"
-             data-widget-name="dynmap"
-             data-widget-mode="iframe"><i class="fa fa-picture-o"></i> dynmap</a></li>
+             data-widget-name="Dynmap"
+             data-widget-title="<i class='fa fa-picture-o'></i> Dynmap"
+             data-widget-mode="iframe"><i class='fa fa-picture-o'></i> Dynmap</a></li>
       <li><a id="menu-item-webchat"
              href="//minecraft.pt/webchat"
              data-widget-action="open"
              data-widget-name="irc"
-             data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> irc/chat</a></li>
+             data-widget-title="<i class='fa fa-keyboard-o'></i> IRC"
+             data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> IRC</a></li>
         <li><a id="menu-item-forum"
                href="//forum.minecraft.pt/"
                data-widget-action="open"
                data-widget-name="forum"
-               data-widget-mode="iframe"><i class="fa fa-institution"></i> fórum</a></li>
+               data-widget-title="<i class='fa fa-institution'></i> Fórum"
+               data-widget-mode="iframe"><i class="fa fa-institution"></i> Fórum</a></li>
     </ul>
   </li>
 </ul>
 
 <ul class="pull-left">
-  <li><a href="#"><i class="fa fa-globe"></i> servidor</a>
+  <li><a href="#"><i class="fa fa-globe"></i> Servidor</a>
     <ul>
       <li><a id="menu-item-news"
              href="/news" 
              data-widget-action="open"
              data-widget-name="widget-news"
-             data-widget-title="Notícias"><i class="fa fa-columns"></i> notícias</a></li>
+             data-widget-title="<i class='fa fa-columns'></i> Notícias"><i class="fa fa-columns"></i> Notícias</a></li>
       <li><a id="menu-item-directory"
              href="/directory"
              data-widget-action="open"
              data-widget-name="widget-directory"
              data-widget-maximized="true"
-             data-widget-title="Jogadores"><i class="fa fa-users"></i> jogadores</a></li>
+             data-widget-title="<i class='fa fa-users'></i> Jogadores"
+             data-widget-title="Jogadores"><i class="fa fa-users"></i> Jogadores</a></li>
     </ul>
   </li>
 </ul>
 
 <? if ($user['admin'] == 1): ?>
 <ul class="pull-left">
-    <li><a href="#"><i class="fa fa-gears"></i> admin</a>
+    <li><a href="#"><i class="fa fa-gears"></i> Admin</a>
       <ul>
         <li><a id="menu-item-admin-accounts"
                href="/admin/accounts" 
                data-widget-action="open"
-               data-widget-name="admin-accounts"><i class="fa fa-users"></i> contas</a></li>
+               data-widget-title="<i class='fa fa-users'></i> Contas"
+               data-widget-name="admin-accounts"><i class="fa fa-users"></i> Contas</a></li>
         <li><a id="menu-item-admin-sessions"
                href="/admin/sessions"
                data-widget-action="open"
-               data-widget-name="admin-sessions"><i class="fa fa-group"></i> sessões</a></li>
+               data-widget-title="<i class='fa fa-group'></i> Sessões"
+               data-widget-name="admin-sessions"><i class="fa fa-group"></i> Sessões</a></li>
         <li><a id="menu-item-admin-drops"
                href="/admin/drops"
                data-widget-action="open"
-               data-widget-name="admin-drops"><i class="fa fa-th-list"></i> item drops</a></li>
+               data-widget-title="<i class='fa fa-th-list'></i> Drops"
+               data-widget-name="admin-drops"><i class="fa fa-th-list"></i> Drops</a></li>
         <li><a id="menu-item-admin-fails"
                href="/admin/fails"
                data-widget-action="open"
-               data-widget-name="admin-fail"><i class="fa fa-warning"></i> fail log</a></li>
+               data-widget-title="<i class='fa fa-warning'></i> Logs"
+               data-widget-name="admin-log"><i class="fa fa-warning"></i> Log</a></li>
 
       </ul>
     </li>
@@ -78,17 +87,17 @@
 <? endif; ?>
 
 <ul class="pull-left">
-  <li><a href="#"><i class="fa fa-question-circle"></i> ajuda</a>
+  <li><a href="#"><i class="fa fa-question-circle"></i> Ajuda</a>
     <ul>
-      <li><a href="#">como jogar</a></li>
-      <li><a href="#">it's a trap</a></li>
+      <li><a href="#"><i class="fa fa-help"></i> Iniciantes</a></li>
+      <li><a href="#"><i class="fa fa-help"></i> FAQ</a></li>
       <li><a id="menu-item-wiki"
              href="http://minecraft.gamepedia.com/Minecraft_Wiki"
              data-widget-action="open"
              data-widget-name="launcher"
-             data-widget-title="Minecraft Wiki"
+             data-widget-title="<i class='fa fa-money'></i> Minecraft Wiki"
              data-widget-mode="iframe"
-             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> minecraft wiki</a></li>
+             data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> Minecraft Wiki</a></li>
     </ul>
   </li>
 </ul>
@@ -103,12 +112,15 @@
     <ul id="menu3">
       <li><a href="/profile/?id=<?= $user['id'] ?>"
              data-widget-action="open"
-             data-widget-name="options"><i class="fa fa-gear"></i> opções</a></li>
+             data-widget-title="<i class='fa fa-gear'></i> Opções"
+             data-widget-name="options"><i class="fa fa-gear"></i> Opções</a></li>
       <li><a href="/profile/?id=<?= $user['id'] ?>"
-             data-widget-action="open" data-widget-name="profile"><i class="fa fa-user"></i> perfil</a></li>
+             data-widget-action="open"
+             data-widget-title="<i class='fa fa-user'e></i> Perfil"
+             data-widget-name="profile"><i class="fa fa-user"></i> Perfil</a></li>
       <li class="separator"></li>
       <li><a href="#"
-             onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> sair</a></li>
+             onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> Sair</a></li>
       </ul>
     </li>
 </ul>

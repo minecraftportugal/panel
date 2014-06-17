@@ -277,7 +277,6 @@ Widget.loadState = function() {
         return;
     }
 
-
     var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
     var object = JSON.parse(serializedObject);
 
@@ -287,7 +286,6 @@ Widget.loadState = function() {
         createdWidget.popState();
 
     });
-
 }
 
 Widget.prototype.pushState = function() {

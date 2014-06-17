@@ -57,7 +57,7 @@ div#top-bar .bg-icon {
 }
 
 div#top-bar > ul {
-    min-width: 140px;
+    min-width: 100px;
 }
 
 div#top-bar > ul:hover {
