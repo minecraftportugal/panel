@@ -266,19 +266,24 @@ Widget.serializeState = function() {
 Widget.saveState = function() {
     var serializedObject = Widget.serializeState();
     var base64Object = btoa(serializedObject); // serializedObject; //btoa(serializedObject);
-    //setCookie("widgetState", base64Object);
     localStorage.setItem("widgetState", base64Object);
 }
 
 Widget.loadState = function() {
     //var base64Object = getCookie("widgetState");
     var base64Object = localStorage.getItem("widgetState");
-    if (base64Object === undefined) {
+    if ((base64Object === undefined) || (base64Object === null)) {
         return;
     }
 
     var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
-    var object = JSON.parse(serializedObject);
+    var object = [];
+    try {
+        object = JSON.parse(serializedObject);
+    } catch(e) {
+        console.log("Couldn't load widget states from localStorage")
+    }
+
 
     $.each(object, function(n, object) {
 
