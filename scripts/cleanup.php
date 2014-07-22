@@ -48,8 +48,6 @@ $sql['inquisitor_accounts'] = "
 
 function do_delete($sql) {
   
-  global $drop_definitions;
-
   $start = microtime(true);
 
   $result = Bitch::source('default')->query($sql);
