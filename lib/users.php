@@ -281,7 +281,7 @@ function resetPassword($id) {
 }
 
 function emailConfirmation($playername, $password, $email, $email_ip = false) {
-  global $cfg_phpmailer_username, $cfg_phpmailer_password, $cfg_phpmailer_email, $cfg_web_root;
+  global $cfg_phpmailer_username, $cfg_phpmailer_password, $cfg_phpmailer_email, $cfg_phpmailer_bcc, $cfg_web_root;
 
   $mail = new PHPMailer();
 
@@ -300,6 +300,7 @@ function emailConfirmation($playername, $password, $email, $email_ip = false) {
   $name = $playername; // Recipient's name
   $mail->From = $webmaster_email;
   $mail->FromName = "Comunidade Minecraft Portugal";
+  $mail->AddBCC($cfg_phpmailer_bcc);
   $mail->AddAddress($email,$name);
   $mail->WordWrap = 50; // set word wrap
   $mail->IsHTML(true); // send as HTML

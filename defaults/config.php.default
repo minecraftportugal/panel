@@ -25,7 +25,8 @@ $cfg_wp_url = "http://blog.minecraft.pt";
 /* gmail email */
 $cfg_phpmailer_username = "";
 $cfg_phpmailer_password = "";
-$cfg_phpmailer_email    = "";
+$cfg_phpmailer_email = "";
+$cfg_phpmailer_bcc = "";
 
 /* lightIRC */
 $cfg_lightirc_path = "/vendors/lightIRC/lightIRC.swf";
