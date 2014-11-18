@@ -1,15 +1,17 @@
-
 $(function() {
     if (window.menuOpened === undefined) {
         window.menuOpened = false; // <3 window
     }
 
-    $(document).on("click", "div#top-bar ul li", function(event) {
-        $(this).parent().parent().children("ul").removeClass("menu-selected");
-        $(this).parent().addClass("menu-selected");
+    $(document).on("click", "div#widget-button-home-menu", function(event) {
+        $("")
         event.stopPropagation();
     });
 
+    $(document).on("click", "div#widget-button-container-minimize-all", function(event) {
+        Widget.minimizeAll();
+        event.stopPropagation();
+    });
 
 
     $(document).mousedown(function(event) {
@@ -35,3 +37,4 @@ $(function() {
         })
     });
 });
+

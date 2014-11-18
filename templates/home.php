@@ -40,41 +40,19 @@
 </head> 
 <body>
 
-    <div id="top-bar">
-        <? require("partials/userbar.php"); ?>
-    </div>
 
     <div id="widget-container">
         <div></div>
     </div>
     
     <div id="widget-taskbar">
-        <div id="widget-button-container-scroll-left" class="widget-button-container-scroll" >
-        </div>
 
-        <div id="widget-button-container">
+        <? require("partials/taskbar.php"); ?>
 
-        </div>
+    </div>
 
-        <div id="widget-button-container-minimize-all" class="widget-context-button" onclick="javascript: Widget.minimizeAll();" title="Janelas Minimizadas">
-            <i class="fa fa-minus-circle"></i>
-        </div>
-
-        <div id="widget-button-container-tile" class="widget-context-button" onclick="javascript: Widget.tile();" title="Janelas Maximizadas">
-            <i class="fa fa-th-large"></i>
-        </div>
-
-        <div id="widget-button-container-cascade" class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cascata">
-            <i class="fa fa-align-justify"></i>
-        </div>
-
-        <div id="widget-button-container-embiggen" class="widget-context-button" onclick="javascript: Widget.embiggen();" title="Janelas Alinhadas">
-            <i class="fa fa-list-alt"></i>
-        </div>
-
-        <div id="widget-button-container-scroll-right" class="widget-button-container-scroll">
-        </div>
-
+    <div id="widget-homemenu">
+        <? require("partials/homemenu.php") ?>
     </div>
 
     <!-- <iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> -->

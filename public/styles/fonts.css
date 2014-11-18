@@ -1,21 +1,16 @@
+body {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-size: 12px;
+}
 div#top-bar, div#widget-button-container, div.widget-ui {
   /*font-family: 'Overlock', cursive;*/
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
   font-size: 12px;
   /*text-transform: lowercase;*/
 }
 
 div.widget-ui {
-  font-size: 0. 9em;
+  font-size: 0.9em;
 }
-
-div.widget {
-  font-family: "Trebuchet MS", Helvetica, sans-serif;
-}
-
-div.widget-body {
-  font-size: 12px;
-} 
 
 .font-normal {
   font-family: "Trebuchet MS", Helvetica, sans-serif;
