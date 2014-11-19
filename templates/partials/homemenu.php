@@ -10,26 +10,12 @@
            data-widget-title="<i class='fa fa-money'></i> Launcher"
            data-widget-mode="iframe"
            data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> Launcher</a></li>
-    <li class="separator"></li>
-    <li><a id="menu-item-inquisitor"
-           href="//inquisitor.minecraft.pt"
-           data-widget-action="open"
-           data-widget-mode="iframe"
-           data-widget-name="launcher"
-           data-widget-title="<i class='fa fa-money'></i> Launcher"
-           data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-tachometer"></i> Inquisitor</a></li>
-    <li><a id="menu-item-dynmap"
-           href="//dynmap.minecraft.pt"
-           data-widget-action="open-always"
-           data-widget-name="Dynmap"
-           data-widget-title="<i class='fa fa-picture-o'></i> Dynmap"
-           data-widget-mode="iframe"><i class='fa fa-picture-o'></i> Dynmap</a></li>
     <li><a id="menu-item-webchat"
            href="//minecraft.pt/webchat"
            data-widget-action="open"
            data-widget-name="irc"
-           data-widget-title="<i class='fa fa-keyboard-o'></i> IRC"
-           data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> IRC</a></li>
+           data-widget-title="<i class='fa fa-keyboard-o'></i> IRC Chat"
+           data-widget-mode="iframe"><i class="fa fa-keyboard-o"></i> IRC Chat</a></li>
     <li><a id="menu-item-forum"
              href="//forum.minecraft.pt/"
              data-widget-action="open"
@@ -44,7 +30,20 @@
   <li><i class="fa fa-globe"></i> Servidor</li>
   <li>
   <ul>
-    <li><a id="menu-item-news"
+    <li><a id="menu-item-dynmap"
+           href="//dynmap.minecraft.pt"
+           data-widget-action="open-always"
+           data-widget-name="Dynmap"
+           data-widget-title="<i class='fa fa-picture-o'></i> Dynmap"
+           data-widget-mode="iframe"><i class='fa fa-picture-o'></i> Dynmap</a></li>
+    <li><a id="menu-item-inquisitor"
+           href="//inquisitor.minecraft.pt"
+           data-widget-action="open"
+           data-widget-mode="iframe"
+           data-widget-name="launcher"
+           data-widget-title="<i class='fa fa-money'></i> Launcher"
+           data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-tachometer"></i> Inquisitor</a></li>
+    <li class="separator"><a id="menu-item-news"
            href="/news"
            data-widget-action="open"
            data-widget-name="widget-news"
@@ -56,6 +55,14 @@
            data-widget-maximized="true"
            data-widget-title="<i class='fa fa-users'></i> Jogadores"
            data-widget-title="Jogadores"><i class="fa fa-users"></i> Jogadores</a></li>
+    <li><a id="menu-item-factions"
+           href="/factions"
+           data-widget-action="open"
+           data-widget-name="widget-factions"
+           data-widget-maximized="false"
+           data-widget-title="<i class='fa fa-users'></i> Facções"
+           data-widget-title="Facções"><i class="fa fa-users"></i> Facções</a></li>
+
   </ul>
   </li>
 </ul>
@@ -109,8 +116,8 @@
 </ul>
 
 <ul class="pull-right">
-  <li class="bg-icon"
-      style="background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 16) ?>');">
+  <li>
+    <i class="bg-icon" style=" background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 16) ?>');"></i>
     <?= $user['playername'] ?>
   </li>
   <li>
@@ -123,8 +130,7 @@
            data-widget-action="open"
            data-widget-title="<i class='fa fa-user'e></i> Perfil"
            data-widget-name="profile"><i class="fa fa-user"></i> Perfil</a></li>
-      <li class="separator"></li>
-      <li><a href="#"
+      <li class="separator"><a href="#"
            onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> Sair</a></li>
     </ul>
   </li>

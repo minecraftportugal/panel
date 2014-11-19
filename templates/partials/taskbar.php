@@ -31,6 +31,5 @@
 <div id="widget-button-usermenu" class="widget-context-button">
     <a id="usermenu-small" href="#" title="Utilizador" class="bg-icon"
        style="background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 16) ?>');">
-       <?= $user['playername'] ?>
     </a>
 </div>

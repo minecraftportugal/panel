@@ -1,10 +1,21 @@
 $(function() {
-    if (window.menuOpened === undefined) {
-        window.menuOpened = false; // <3 window
-    }
 
     $(document).on("click", "div#widget-button-home-menu", function(event) {
-        $("")
+        var menuVisible = $("div#widget-homemenu").is(":visible");
+        console.log(menuVisible);
+
+        if (!menuVisible) {
+            $("div#widget-homemenu").slideDown(100, function() {
+                $(document).one("click", function(event) {
+                    $("div#widget-homemenu").slideUp(100);
+                    $("div#widget-button-home-menu").removeClass("active");
+                });
+            });
+            $("div#widget-button-home-menu").addClass("active");
+        } else {
+            $("div#widget-homemenu").slideUp(100);
+            $("div#widget-button-home-menu").removeClass("active");
+        }
         event.stopPropagation();
     });
 

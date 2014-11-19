@@ -35,19 +35,6 @@ p, td, th, span {
     padding-left: 30px;
 }
 
-
-div#widget-button-container .fa,
-div#top-bar .fa {
-    color: #AAAAAA;
-    font-size: 0.9em;
-}
-
-div#top-bar li.separator {
-    height: 1px;
-    background-color: #353535;
-}
-
-
 div#widget-taskbar {
     background: linear-gradient(to bottom, #252525, #050505);
     position: absolute;
@@ -55,7 +42,7 @@ div#widget-taskbar {
     right: 0;
     bottom: 0;
     height: 30px;
-    z-index: 1000;
+    z-index: 2147483647;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -65,6 +52,10 @@ div#widget-button-home-menu {
     left: 0;
     bottom: 0;
     height: 30px;
+}
+
+div#widget-button-home-menu.active {
+    background: linear-gradient(to bottom, #555555, #353535);
 }
 
 div#widget-button-container-scroll-left {
@@ -206,28 +197,48 @@ div#ajax-indicator.ajax-error {
     color: #00DD00;
 }
 div#widget-homemenu {
-    position: absolute;
+     display: none;
+     position: absolute;
+     height: 300px;
+     left: 0px;
+     bottom: 29px;
+     background: red;
+     border: 1px solid #252525;
+     box-shadow: 0 0 40px 5px #000;
 
-    height: 300px;
-    left: 2px;
-    bottom: 32px;
+     background: linear-gradient(to bottom, #454545, #252525);
+}
+
+div#widget-homemenu {
+    display: none;
+    position: absolute;
+    height: 200px;
+    left: 0px;
+    bottom: 29px;
     background: red;
     border: 1px solid #252525;
+    box-shadow: 0 0 40px 5px #000;
+
     background: linear-gradient(to bottom, #454545, #252525);
 }
 
 div#widget-homemenu {
     color: #FFFFFF;
+    z-index: 2147483646;
+}
+
+div#widget-homemenu i {
+    color: #888888;
 }
 
 div#widget-homemenu > ul {
     width: 140px;
     float: left;
-    height: 292px;
+    height: 300px;
 
 }
 
-div#widget-homemenu > ul:not(:last-child) {
+div#widget-homemenu > ul:not(:first-child) {
     border-left: 1px solid #252525;
 }
 
@@ -236,33 +247,47 @@ div#widget-homemenu li {
     line-height: 25px;
 }
 
-div#widget-homemenu li.bg-icon {
-    padding-left: 30px !important;
+div#widget-homemenu li.separator {
+    border-top: 1px solid #252525;
+}
+
+div#widget-homemenu a {
+    display: block;
+}
+
+div#widget-homemenu .bg-icon {
+    background: linear-gradient(to bottom, #454545, #252525);
+    background-repeat: no-repeat;
+    background-position: 0 center !important;
+    padding-left: 20px !important;
 }
 
 div#widget-homemenu > ul > li:first-child {
     vertical-align: middle !important;
-    padding-left: 4px;
-    background-color: rgba(0, 0, 0, 0.3);
+    padding-left: 6px;
+    background: linear-gradient(to bottom, #454545, #252525);
+    height: 30px !important;
+    line-height: 30px;
 }
 
 div#widget-homemenu > ul:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 div#widget-homemenu > ul:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 
-div#widget-homemenu > ul > li > ul > li {
-    padding-left: 4px;
+div#widget-homemenu > ul > li > ul > li > a {
+    padding-left: 6px;
 }
 
-div#widget-homemenu ul > li > ul > li:nth-child(even) {
-    background: rgba(0, 0, 0, 0.1);
+div#widget-homemenu > ul > li > ul > li > a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-div#widget-homemenu ul > li > ul > li:nth-child(odd) {
-    background: rgba(0, 0, 0, 0.07);
+div#widget-homemenu > ul > li > ul > li > a:active {
+    background-color: rgba(255, 255, 255, 0.1);
 }
+
