@@ -3,11 +3,6 @@ html {
   overflow: hidden;
 }
 
-body {
-  background: url('/images/backgrounds/app/pattern1.jpg');
-  background-size: 100% auto;
-}
-
 .w20 {
   width: 20%;
 }

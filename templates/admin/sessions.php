@@ -91,8 +91,8 @@
             </td>
 
            <td>
-                <a href="/admin?ipaddress=<?= $r["lastloginip"] ?>">
-                  <?= $r["lastloginip"] ?>
+                <a href="/sessions?ipaddress=<?= $r["ipaddress"] ?>">
+                  <?= $r["ipaddress"] ?>
                 </a>
             </td>
 

@@ -43,7 +43,7 @@ $(function() {
  
 /*  widgetTest = new Widget({
     'name': 'test',
-    'url' : '/news', 
+    'url' : '/server',
     'title' : 'Test Title'
   });
 

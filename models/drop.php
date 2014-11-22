@@ -10,6 +10,10 @@ class DropModel {
         "page" => 1,
         "per_page" => 20,
         "accountid" => null,
+        "drop_date_begin" => null,
+        "drop_date_end" => null,
+        "taken_date_begin" => null,
+        "taken_date_end" => null,
         "delivered" => 0,
         "undelivered" => 0,
         "order_by" => "1",
@@ -20,11 +24,15 @@ class DropModel {
         $args = array_merge(DropModel::$args, $args);
 
         /* Other models don't need this. Why? /!\ */
-        $args = array_intersect_key($args, array_flip(["accountid", "undelivered", "delivered"]));
+        $args = array_intersect_key($args, array_flip(["accountid", "drop_date_begin", "drop_date_end", "taken_date_begin", "taken_date_end", "undelivered", "delivered"]));
 
         $q = "SELECT COUNT(1) AS total
         FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id
         WHERE ((:accountid IS NULL) OR (accountid = :accountid))
+        AND ((:drop_date_begin IS NULL) OR (:drop_date_begin <= date(dropdate)))
+        AND ((:drop_date_end IS NULL) OR (:drop_date_end >= date(dropdate)))
+        AND ((:taken_date_begin IS NULL) OR (:taken_date_begin <= date(takendate)))
+        AND ((:taken_date_end IS NULL) OR (:taken_date_end >= date(takendate)))
         AND ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
         AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))";
 
@@ -46,6 +54,10 @@ class DropModel {
                 a.playername, a.id as accountid
                 FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id
                 WHERE ((:accountid IS NULL) OR (accountid = :accountid))
+                AND ((:drop_date_begin IS NULL) OR (:drop_date_begin <= date(dropdate)))
+                AND ((:drop_date_end IS NULL) OR (:drop_date_end >= date(dropdate)))
+                AND ((:taken_date_begin IS NULL) OR (:taken_date_begin <= date(takendate)))
+                AND ((:taken_date_end IS NULL) OR (:taken_date_end >= date(takendate)))
                 AND ((:undelivered = 0) OR (:undelivered = 1 AND takendate IS NULL))
                 AND ((:delivered = 0) OR (:delivered = 1 AND takendate IS NOT NULL))
             ORDER BY $order_by $asc_desc

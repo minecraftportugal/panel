@@ -293,6 +293,10 @@ Widget.loadState = function() {
     });
 }
 
+Widget.clearState = function() {
+    localStorage.clear();
+}
+
 Widget.prototype.pushState = function() {
   var maximized =  $(this.selector).hasClass("maximized");
   var state = {
@@ -510,9 +514,8 @@ $(document).on("click", "[data-widget-action]", function(event) {
       var createdWidget = new Widget({
         "name" : name,
         "url" : href,
-        "title" : name,
-        "useIframe" : useIframe,
         "title" : title,
+        "useIframe" : useIframe,
         "css" : css,
         "maximized" : maximized,
         "classes" : classes
@@ -523,9 +526,8 @@ $(document).on("click", "[data-widget-action]", function(event) {
       var createdWidget = new Widget({
         "name" : name,
         "url" : href,
-        "title" : name,
-        "useIframe" : useIframe,
         "title" : title,
+        "useIframe" : useIframe,
         "css" : css,
         "maximized" : maximized,
         "classes" : classes,

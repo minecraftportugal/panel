@@ -22,6 +22,9 @@ require_once('models/drop.php');
 require_once('models/fail.php');
 
 require_once('controllers/home.php');
+
+require_once('controllers/status/index.php');
+
 require_once('controllers/news/index.php');
 
 require_once('controllers/sessions/new.php');
@@ -55,8 +58,6 @@ require_once('controllers/maps/index.php');
 
 require_once('controllers/irc/index.php');
 
-require_once('controllers/webchat/index.php');
-
 require_once('controllers/widgets/players.php');
 
 require_once('controllers/launcher/index.php');
@@ -77,6 +78,9 @@ require_once('helpers/datetime.php');
 $r = new Router();
 
 $r->map('GET',  '', 'home');
+
+$r->map('GET',  '/status', 'status_index');
+
 $r->map('GET',  '/news', 'news_index');
 
 $r->map('GET',  '/login', 'sessions_new');
@@ -113,7 +117,6 @@ $r->map('GET',  '/maps', 'maps_index');
 $r->map('GET',  '/widgets/players', 'widgets_players');
 
 $r->map('GET', '/irc', 'irc_index');
-$r->map('GET', '/webchat', 'webchat_index');
 
 $r->map('GET', '/launcher', 'launcher_index');
 

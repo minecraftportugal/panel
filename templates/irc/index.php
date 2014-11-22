@@ -12,7 +12,8 @@
  <script type="text/javascript" src="/scripts/sop.js"></script>
  <style type="text/css">
     html { height: 100%; overflow: hidden; }
-    body { 
+    body {
+      background: linear-gradient(to bottom, #050505, #252525);
       height:100%;
       margin:0;
       padding:0;
@@ -50,14 +51,17 @@ $(function() {
  </div>
  -->
 
+ <!--
+ <?= var_dump($player); ?>
+
+ -->
  <script type="text/javascript">
     params.realname = "Minecraftia User: <?=$_SESSION['username']?>";
     params.wmode = "transparent";
-  <? $p = getUserById($_SESSION['id']) ?>
 
-  <? if ($p['ircnickname'] != NULL): ?>
-    params.nick = "<?=$p['ircnickname']?>";
-    params.identifyPassword = "<?=$p['ircpassword']?>";
+  <? if ($player['ircnickname'] != NULL): ?>
+    params.nick = "<?=$player['ircnickname']?>";
+    params.identifyPassword = "<?=$player['ircpassword']?>";
     params.ident = "<?=dechex(ip2long($_SERVER['REMOTE_ADDR']))?>X";
   <? else: ?>
     params.nick = "<?=$_SESSION['username']?>";
@@ -66,11 +70,12 @@ $(function() {
     params.identifyMessage = "NickServ:Nick registado e protegido";
   <? endif; ?>
 
-  <? if ($p['ircauto'] != 1): ?>
+  <? if ($player['ircauto'] != 1): ?>
     params.showNickSelection = "true";
   <? else: ?>
     params.showNickSelection = "false";
   <? endif; ?>
+    console.log(params);
 
     swfobject.embedSWF("<?= $cfg_lightirc_path ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
  </script>

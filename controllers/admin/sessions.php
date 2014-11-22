@@ -65,7 +65,7 @@ function admin_sessions() {
     $table->add_column([
         'width' => '25%',
         'label' => 'IP Sessão',
-        'order_by' => 'lastloginip'
+        'order_by' => 'ipaddress'
     ]);
 
     $table->add_column([

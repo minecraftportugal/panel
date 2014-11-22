@@ -1,4 +1,10 @@
 
+div.skin-display {
+    height: 282px;
+    display: block;
+
+}
+
 div.layout-col {
     border: solid 1px #353535;
     border-radius-left-top: 4px;
@@ -14,7 +20,7 @@ div.layout-col.iframe iframe {
     position: relative;
     width: 100%;
     top: 0px;
-    height: 438px;
+    height: 388px;
 
 }
 
@@ -22,7 +28,7 @@ div.layout-col div.iframe-block {
     position: absolute;
     width: 100%;
     top: 22px;
-    height: 438px;
+    height: 368px;
     background-color: rgba(0, 0, 0, 0.10);
     z-index: 2147483647;
 }
@@ -43,16 +49,17 @@ div.layout-col-title {
 
 div.layout-col-1 {
     position: absolute;
-    width: 290px;
-    height: 460px;
+    width: 250px;
+    height: 410px;
     left: 5px;
     top: 5px;
 }
 
+
 div.layout-col-2 {
     position: absolute;
-    width: calc(100% - 308px);
-    height: 460px;
+    width: calc(100% - 268px);
+    height: 410px;
     right: 5px;
     top: 5px;
 }
@@ -60,11 +67,27 @@ div.layout-col-2 {
 div.layout-col-3 {
     position: absolute;
     width: calc(100% - 12px);
-    height: 460px;
+    min-height: 400px%;
     right: 5px;
-    top: 471px;
+    top: 421px;
 }
 
+div.layout-col-a {
+    margin: 5px 0 0 5px;
+    display: block;
+    width: calc(100% - 11px);
+}
+
+div.layout-col-b {
+    margin: 5px 0 0 5px;
+    display: block;
+    width: calc(50% - 9px);
+    float: left;
+}
+
+div.layout-col-content {
+    margin: 5px 0 0 5px;
+}
 
 /*
  * Tables
@@ -86,23 +109,71 @@ div.layout-col table th {
     background: rgba(255, 255, 255, 0.5);
 }
 
-div.layout-col table td {
+/*
+ * Squares
+ */
+
+div.square-container {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #353535;
+    margin: 2px 0 0 2px;
+    display: inline-block;
+    background: linear-gradient(to bottom, #151515, #000000);
+    font-family: monospace;
+    font-size: 12px;
+}
+
+div.square-container h1 {
+    font-size: 22px;
+}
+
+div.square-container h2 {
 
 }
 
-table.pretty {
+div.square-container h1, div.square-container h2 {
+    display: block;
+    position: relative;
+}
 
+div.square-container h2:first-child {
+    top: 0;
+}
+
+div.square-container h2:last-child {
+    bottom: 0;
+}
+
+/*
+ * Player List 
+ */
+ul.player-list li {
+    width: calc(100% - 4px);
+    margin: 2px;
+    vertical-align: middle;
+    clear: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+ul.player-list li a {
+    padding: 5px;
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    width: 100%;
 }
 
 
-table.pretty td {
-
+ul.player-list li a:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
-table.pretty th {
-
+ul.player-list li img {
+    float: left;
+    margin-right: 5px !important;
 }
-
 
 /*
  * Health Hunger
@@ -146,3 +217,4 @@ div.hunger > span.full
 {
     background-position: -18px -9px;
 }
+

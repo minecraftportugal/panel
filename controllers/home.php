@@ -14,6 +14,8 @@ function home() {
 
     $user = AccountModel::get(['id' => $_SESSION['id']])[0];
 
+    $background_image = '/images/backgrounds/login/bg5.jpg';
+
     /* 
      * URL do dynmap.
      *    Abrir por defeito o mapa em que o jogador está 

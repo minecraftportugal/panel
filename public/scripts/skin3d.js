@@ -503,7 +503,7 @@ $(document).ready(function() {
         var canvas = document.createElement("canvas");
 
         img.onload = function() {
-            var ps = new PlayerSkin(elem);
+            var ps = new PlayerSkin(elem, 8);
             if(this.width < 64 || this.height < 32) {
                 ps.setSkin("/images/steve.png");
             } else {
@@ -512,7 +512,7 @@ $(document).ready(function() {
         }
 
         img.onerror = function() {
-            var ps = new PlayerSkin(elem);
+            var ps = new PlayerSkin(elem, 8);
             ps.setSkin("/images/steve.png");
         }
 

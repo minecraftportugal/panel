@@ -90,6 +90,11 @@ function onClientCommand(command) {
   return command;
 }
 
+/* This method gets called every time the user changes the active window */
+function onActiveWindowChange(window) {
+	//alert("Active window: "+window);
+}
+
 /* This event ensures that lightIRC sends the default quit message when the user closes the browser window */
 window.onbeforeunload = function() {
   swfobject.getObjectById('lightIRC').sendQuit();

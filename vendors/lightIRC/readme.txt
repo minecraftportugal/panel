@@ -1,9 +1,9 @@
-Welcome to lightIRC 1.3.2! 
+Welcome to lightIRC 1.3.3!
  _ _       _     _   _____ _____   _____     __    ____    ____
 | (_)     | |   | | |_   _|  __ \ / ____|   /_ |  |__  |  |__  |
 | |_  __ _| |__ | |_  | | | |__) | |         | |   __| |   __| |
-| | |/ _` | '_ \| __| | | |  _  /| |         | |  |__  |  |  __|
-| | | (_| | | | | |_ _| |_| | \ \| |____     | |_  __| |_ | |__
+| | |/ _` | '_ \| __| | | |  _  /| |         | |  |__  |  |__  |
+| | | (_| | | | | |_ _| |_| | \ \| |____     | |_  __| |_  __| |
 |_|_|\__, |_| |_|\__|_____|_|  \_\\_____|    |_(_)|____(_)|____|
       __/ |
      |___/
@@ -16,6 +16,12 @@ www.lightIRC.com
 Important information for upgrades from lightIRC 1.1, 1.2 or earlier:
 - Replace all old language files in the language folder and make sure that you upload the new lib folder!
 - lightIRC 1.3 has a new way of handling licenses. You have to upgrade your old license on www.lightirc.com/buy.html
+
+Changes in lightIRC 1.3.3 (07. August 2014):
+- Webcam streams can be recorded with parameter webcamRecord=true
+- Added onActiveWindowChange JavaScript callback
+- Fix: IP/Host naming in whois changed
+- Fix: User modes were sometimes shown incorrectly
 
 Changes in lightIRC 1.3.2 (15. July 2013):
 - Added CSS selectors for many message types

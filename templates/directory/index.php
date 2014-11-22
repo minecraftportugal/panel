@@ -62,7 +62,8 @@
            class="noajax"
            data-widget-action="open"
            data-widget-classes="widget-scrollable-y"
-           data-widget-name="profile-<?= $r["playername"] ?>">
+           data-widget-name="profile-<?= $r["playername"] ?>"
+           data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>">
 
         <div class="section-1">
           <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">

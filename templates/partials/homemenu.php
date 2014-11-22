@@ -11,7 +11,7 @@
            data-widget-mode="iframe"
            data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> Launcher</a></li>
     <li><a id="menu-item-webchat"
-           href="//minecraft.pt/webchat"
+           href="/irc"
            data-widget-action="open"
            data-widget-name="irc"
            data-widget-title="<i class='fa fa-keyboard-o'></i> IRC Chat"
@@ -30,6 +30,20 @@
   <li><i class="fa fa-globe"></i> Servidor</li>
   <li>
   <ul>
+    <li><a id="menu-item-news"
+           href="/news"
+           data-widget-action="open"
+           data-widget-name="widget-news"
+           data-widget-classes="widget-scrollable-y"
+           data-widget-css='{"min-width" : "422px", "max-width" : "422px", "min-height" : "500px"}'
+           data-widget-title="<i class='fa fa-newspaper-o'></i> Servidor"><i class="fa fa-newspaper-o"></i> Noticias</a></li>
+    <li><a id="menu-item-news"
+           href="/status"
+           data-widget-action="open"
+           data-widget-name="widget-status"
+           data-widget-classes="widget-scrollable-y"
+           data-widget-css='{"min-width" : "422px", "max-width" : "422px", "min-height" : "500px"}'
+           data-widget-title="<i class='fa fa-columns'></i> Servidor"><i class="fa fa-columns"></i> Status</a></li>
     <li><a id="menu-item-dynmap"
            href="//dynmap.minecraft.pt"
            data-widget-action="open-always"
@@ -43,11 +57,6 @@
            data-widget-name="launcher"
            data-widget-title="<i class='fa fa-money'></i> Launcher"
            data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-tachometer"></i> Inquisitor</a></li>
-    <li class="separator"><a id="menu-item-news"
-           href="/news"
-           data-widget-action="open"
-           data-widget-name="widget-news"
-           data-widget-title="<i class='fa fa-columns'></i> Notícias"><i class="fa fa-columns"></i> Notícias</a></li>
     <li><a id="menu-item-directory"
            href="/directory"
            data-widget-action="open"

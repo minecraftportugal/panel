@@ -1,3 +1,7 @@
+div.clearer {
+    clear: both;
+}
+
 div.page-panel-header {
     position: absolute;
     top: 0px;

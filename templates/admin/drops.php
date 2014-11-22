@@ -15,6 +15,30 @@
     <form name="manage_drops_filters" action="<?= $action_url ?>" method="GET" autocomplete="off">
       <ul>
         <li>
+          <h2 title="Apenas serão mostradas item drops após esta data">Dropped após</h2>
+        </li>
+        <li>
+          <input type="date" name="drop_date_begin" value="<?= $p['drop_date_begin'] ?>">
+        </li>
+        <li>
+          <h2 title="Apenas serão mostradas item drops até esta data">Dropped até</h2>
+        </li>
+        <li>
+          <input type="date" name="drop_date_end" value="<?= $p['drop_date_end'] ?>">
+        </li>
+          <li>
+              <h2 title="Apenas serão mostradas item drops claimed após esta data">Taken após</h2>
+          </li>
+          <li>
+              <input type="date" name="taken_date_begin" value="<?= $p['taken_date_begin'] ?>">
+          </li>
+          <li>
+              <h2 title="Apenas serão mostradas item drops claimed até esta data">Taken até</h2>
+          </li>
+          <li>
+              <input type="date" name="taken_date_end" value="<?= $p['taken_date_end'] ?>">
+          </li>
+        <li>
           <h2>Critérios</h2>
         </li>
         <li>

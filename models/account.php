@@ -87,10 +87,12 @@ class AccountModel {
         }
 
         $q = "SELECT * FROM (
-            SELECT id, playername, email, admin, operator, active,
-                DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
-                DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip,
-                registerdate as registerdate_df, lastlogindate AS lastlogindate_df,
+            SELECT id, playername, password, pwtype, email,
+            active, resetpw, premium, admin, operator, donor, contributor,
+            ircnickname, ircpassword, ircauto,
+            DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
+            DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip,
+            registerdate as registerdate_df, lastlogindate AS lastlogindate_df,
                 o.*
             FROM accounts a LEFT JOIN (
                 SELECT $inquisitor_fields

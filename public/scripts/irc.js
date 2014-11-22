@@ -27,7 +27,7 @@ params.styleURL                     = "css/transparent.css";
 //params.nick                         = "minecraft_%";
 
 /* Channel to be joined after connecting. Multiple channels can be added like this: #lightIRC,#test,#help */
-params.autojoin                     = "#minecraft";
+params.autojoin                     = "#minecraft-dev";
 /* Commands to be executed after connecting. E.g.: /mode %nick% +x */
 params.perform                      = "";
 
@@ -36,34 +36,35 @@ params.showServerWindow             = true;
 
 /* Show a popup to enter a nickname */
 //params.showNickSelection            = false;
+
 /* Adds a password field to the nick selection box */
 params.showIdentifySelection        = false;
 
 /* Show button to register a nickname */
-params.showRegisterNicknameButton   = false;
+params.showRegisterNicknameButton   = true;
 /* Show button to register a channel */
 params.showRegisterChannelButton    = false;
 
 /* Opens new queries in background when set to true */
 params.showNewQueriesInBackground   = true;
-params.enableQueries   = false;
+params.enableQueries   = true;
 
 /* Position of the navigation container (where channel and query buttons appear). Valid values: left, right, top, bottom */
 params.navigationPosition           = "bottom";
 
-params.showNickPrefixes = false;
+params.showNickPrefixes = true;
 
 /* See more parameters at http://redmine.lightirc.com/projects/lightirc/wiki/Customization_parameters */
 //params.charset 			   = "ISO-8859-15";
 params.charset 			   = "utf-8";
 params.fontSize			   = "11";
-params.showTimestamps = "false";
-params.timestampFormat = "[hh:mm]";
+params.showTimestamps = "true";
+params.timestampFormat = "hh:mm";
 params.showEmoticonsButton 	   = false;
-params.showRichTextControls 	   = false;
-params.showMenuButton 	   	   = false;
-params.showSubmitButton 	   = false;
-params.showChannelHeader	   = false;
+params.showRichTextControls 	   = true;
+params.showMenuButton 	   	   = true;
+params.showSubmitButton 	   = true;
+params.showChannelHeader	   = true;
 params.soundAlerts 		   = false;
 params.channelHeader 	 	   = "%channel% (%users%): %topic%";
 params.realname 		   = "#minecraft user";
@@ -71,11 +72,11 @@ params.quitMessage		   = "see you, minecraftia :(";
 params.nickPrefix 		   = "";
 params.nickPostfix		   = ": ";
 params.rememberNickname		   = false;
-params.showServerWindow		   = false;
+params.showServerWindow		   = true;
 params.emoticonList 		   = "";
-params.userListWidth		   = "0";
-params.blockedCommands		   = "join,notice,part";
-params.showNavigation		   = false;
+params.userListWidth		   = "100";
+params.blockedCommands		   = "";
+params.showNavigation		   = true;
 
 params.identifyCommand = "NickServ login %nick% %pass%";
 

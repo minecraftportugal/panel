@@ -42,7 +42,7 @@
         <li>
           <input type="date" name="login_date_end" value="<?= $p['login_date_end'] ?>">
         </li>
-        <li>
+          <li>
           <h2 title="Apenas serão mostradas contas registadas após esta data">Registo após</h2>
         </li>
         <li>
