@@ -1,23 +1,26 @@
 $(function() {
 
-    $(document).on("click", "div#widget-button-home-menu", function(event) {
-        var menuVisible = $("div#widget-homemenu").is(":visible");
-        console.log(menuVisible);
+    $(document).on("click", "div[data-open-menu]", function(event) {
+        var $button = $(this);
+        var menu_selector = $button.data("open-menu");
+        var $menu = $(menu_selector);
 
+        var menuVisible = $menu.is(":visible");
         if (!menuVisible) {
-            $("div#widget-homemenu").slideDown(100, function() {
+            $menu.slideDown(100, function() {
                 $(document).one("click", function(event) {
-                    $("div#widget-homemenu").slideUp(100);
-                    $("div#widget-button-home-menu").removeClass("active");
+                    $menu.slideUp(100);
+                    $button.removeClass("active");
                 });
             });
-            $("div#widget-button-home-menu").addClass("active");
+            $button.addClass("active");
         } else {
-            $("div#widget-homemenu").slideUp(100);
-            $("div#widget-button-home-menu").removeClass("active");
+            $menu.slideUp(100);
+            $button.removeClass("active");
         }
-        event.stopPropagation();
+        //event.stopPropagation();
     });
+
 
     $(document).on("click", "div#widget-button-container-minimize-all", function(event) {
         Widget.minimizeAll();

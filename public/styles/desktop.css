@@ -196,24 +196,34 @@ div#ajax-indicator.ajax-error {
     background-color: rgba(0,255,0,0.101010) !important;
     color: #00DD00;
 }
-div#widget-homemenu {
+div.widget-menu {
      display: none;
      position: absolute;
      height: 300px;
-     left: 0px;
      bottom: 29px;
      background: red;
      border: 1px solid #252525;
      box-shadow: 0 0 40px 5px #000;
-
      background: linear-gradient(to bottom, #454545, #252525);
 }
 
+div.widget-menu i {
+    width: 15px;
+    display; inline-block;
+}
+
 div#widget-homemenu {
+    left: 0px;
+}
+
+div#widget-usermenu {
+    right: 0px;
+}
+
+div.widget-menu {
     display: none;
     position: absolute;
     height: 200px;
-    left: 0px;
     bottom: 29px;
     background: red;
     border: 1px solid #252525;
@@ -222,47 +232,47 @@ div#widget-homemenu {
     background: linear-gradient(to bottom, #454545, #252525);
 }
 
-div#widget-homemenu {
+div.widget-menu {
     color: #FFFFFF;
     z-index: 2147483646;
 }
 
-div#widget-homemenu i {
+div.widget-menu i {
     color: #888888;
 }
 
-div#widget-homemenu > ul {
+div.widget-menu > ul {
     width: 140px;
     float: left;
     height: 300px;
 
 }
 
-div#widget-homemenu > ul:not(:first-child) {
+div.widget-menu > ul:not(:first-child) {
     border-left: 1px solid #252525;
 }
 
-div#widget-homemenu li {
+div.widget-menu li {
     height: 25px;
     line-height: 25px;
 }
 
-div#widget-homemenu li.separator {
+div.widget-menu li.separator {
     border-top: 1px solid #252525;
 }
 
-div#widget-homemenu a {
+div.widget-menu a {
     display: block;
 }
 
-div#widget-homemenu .bg-icon {
+div.widget-menu .bg-icon {
     background: linear-gradient(to bottom, #454545, #252525);
     background-repeat: no-repeat;
     background-position: 0 center !important;
     padding-left: 20px !important;
 }
 
-div#widget-homemenu > ul > li:first-child {
+div.widget-menu > ul > li:first-child {
     vertical-align: middle !important;
     padding-left: 6px;
     background: linear-gradient(to bottom, #454545, #252525);
@@ -270,24 +280,23 @@ div#widget-homemenu > ul > li:first-child {
     line-height: 30px;
 }
 
-div#widget-homemenu > ul:nth-child(odd) {
+div.widget-menu > ul:nth-child(odd) {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-div#widget-homemenu > ul:nth-child(even) {
+div.widget-menu > ul:nth-child(even) {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
 
-div#widget-homemenu > ul > li > ul > li > a {
+div.widget-menu > ul > li > ul > li > a {
     padding-left: 6px;
 }
 
-div#widget-homemenu > ul > li > ul > li > a:hover {
+div.widget-menu > ul > li > ul > li > a:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-div#widget-homemenu > ul > li > ul > li > a:active {
+div.widget-menu > ul > li > ul > li > a:active {
     background-color: rgba(255, 255, 255, 0.1);
 }
-

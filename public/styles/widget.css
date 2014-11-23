@@ -78,6 +78,14 @@ div.widget-loading.block-enabled {
     z-index: 2147483645;
 }
 
+div.widget:not(.widget-active) div.widget-cover {
+    position: absolute;
+    width: 100%;
+    top: 18px;
+    height: calc(100% - 18px);
+    z-index: 2147483645;   
+}
+
 div.widget-body iframe {
     position: absolute;
     width: 100%;

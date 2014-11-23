@@ -94,7 +94,7 @@ div.layout-col-content {
  */
 
 div.layout-col table {
-    width: 100%;
+    width: calc(100% - 20px);
     margin: 10px;
     border-collapse: separate;
 
@@ -102,13 +102,16 @@ div.layout-col table {
 
 div.layout-col table th,
 div.layout-col table td {
-    padding: 2px;
+    padding: 4px;
 }
 
 div.layout-col table th {
-    background: rgba(255, 255, 255, 0.5);
+    color: #666666;
 }
 
+div.layout-badge-container {
+    height: 30px;
+}
 /*
  * Squares
  */

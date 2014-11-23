@@ -30,11 +30,22 @@
             </div>
 
             <div class="layout-col-sec">
-                Registo: <?= $player['registerdate'] ?>
+                <table class="font-mono">
+                    <tr>
+                        <th class="align-left">Registo a</th>
+                        <td class="align-right"><?= $player['registerdate'] ?></td>
+                    </tr>
+                    <? if ($player['lastlogindate'] != null): ?>
+                    <tr>
+                        <th class="align-left">Ultimo login</th>
+                        <td class="align-right"><?= $player['lastlogindate'] ?></td>
+                    </tr>
+                    <? endif; ?>
 
-                <? if ($player['lastlogindate'] != null): ?>
-                    Activo: <?= $player['lastlogindate'] ?>
-                <? endif; ?>
+                </table>
+
+                
+
 
             </div>
 
@@ -52,16 +63,21 @@
         <div class="layout-col layout-col-3">
             <div class="layout-col-title">
                 <h1>Stats</h1>
-            </div><div class="square-container">
-                <h2>level</h2>
-                <h1><?= $player["level"] ?></h1>
-                <h2>things</h2>
-                    <!--  (${(player.exp * 100)?round}% to level ${player.level + 1}) -->
-            </div><div class="square-container">
-                <h2>XP</h2>
-                <h1><?= $player["totalExperience"] ?></h1>
             </div>
-
+            <div>
+                <div class="square-container">
+                    <h2>level</h2>
+                    <h1><?= $player["level"] ?></h1>
+                    <h2>things</h2>
+                        <!--  (${(player.exp * 100)?round}% to level ${player.level + 1}) -->
+                </div><div class="square-container">
+                    <h2>XP</h2>
+                    <h1><?= $player["totalExperience"] ?></h1>
+                </div><div class="square-container">
+                    <h2>XP</h2>
+                    <h1><?= $player["totalExperience"] ?></h1>
+                </div>
+            </div>
 
         </div>
 

@@ -54,13 +54,15 @@
     </div>
     
     <div id="widget-taskbar">
-
         <? require("partials/taskbar.php"); ?>
-
     </div>
 
-    <div id="widget-homemenu">
+    <div class="widget-menu" id="widget-homemenu">
         <? require("partials/homemenu.php") ?>
+    </div>
+
+    <div class="widget-menu" id="widget-usermenu">
+        <? require("partials/usermenu.php") ?>
     </div>
 
     <!-- <iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> -->

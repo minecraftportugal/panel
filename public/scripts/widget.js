@@ -19,6 +19,8 @@ function Widget(options, states) {
     }
   }
 
+  Widget.saveOnExit = true;
+
   this.options = {};
   this.options.css = {};
 
@@ -294,7 +296,9 @@ Widget.loadState = function() {
 }
 
 Widget.clearState = function() {
+    Widget.saveOnExit = false;
     localStorage.clear();
+    window.location.reload();
 }
 
 Widget.prototype.pushState = function() {
@@ -313,7 +317,6 @@ Widget.prototype.pushState = function() {
   }
 
   this.states.push(state);
-  //console.log("push", this.states);
 }
 
 Widget.prototype.popState = function() {
@@ -544,7 +547,11 @@ $(document).on("click", "[data-widget-action]", function(event) {
 });
 
 $(window).on("unload", function() {
-    Widget.saveState();
+    if (Widget.saveOnExit) {
+        Widget.saveState();
+    } else {
+        Widget.saveOnExit = true;
+    }
 });
 
 $(function() {

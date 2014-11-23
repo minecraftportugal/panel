@@ -36,7 +36,7 @@
            data-widget-name="widget-news"
            data-widget-classes="widget-scrollable-y"
            data-widget-css='{"min-width" : "422px", "max-width" : "422px", "min-height" : "500px"}'
-           data-widget-title="<i class='fa fa-newspaper-o'></i> Servidor"><i class="fa fa-newspaper-o"></i> Noticias</a></li>
+           data-widget-title="<i class='fa fa-newspaper-o'></i> Noticias"><i class="fa fa-newspaper-o"></i> Noticias</a></li>
     <li><a id="menu-item-news"
            href="/status"
            data-widget-action="open"
@@ -120,27 +120,6 @@
            data-widget-title="<i class='fa fa-money'></i> Minecraft Wiki"
            data-widget-mode="iframe"
            data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> Wiki</a></li>
-    </ul>
-  </li>
-</ul>
-
-<ul class="pull-right">
-  <li>
-    <i class="bg-icon" style=" background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 16) ?>');"></i>
-    <?= $user['playername'] ?>
-  </li>
-  <li>
-    <ul>
-      <li><a href="/profile/?id=<?= $user['id'] ?>"
-           data-widget-action="open"
-           data-widget-title="<i class='fa fa-gear'></i> Opções"
-           data-widget-name="options"><i class="fa fa-gear"></i> Opções</a></li>
-      <li><a href="/profile/?id=<?= $user['id'] ?>"
-           data-widget-action="open"
-           data-widget-title="<i class='fa fa-user'e></i> Perfil"
-           data-widget-name="profile"><i class="fa fa-user"></i> Perfil</a></li>
-      <li class="separator"><a href="#"
-           onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> Sair</a></li>
     </ul>
   </li>
 </ul>
