@@ -1,3 +1,16 @@
+a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.center {
+  text-align: center !important;
+}
+
 div.clearer {
     clear: both;
 }
@@ -15,10 +28,10 @@ div.page-panel-header {
 
 div.page-panel-body {
     position: absolute;
-    top: 24px;
     bottom: 0px;
     right: 0px;
     left: 0px;
+    top: 0px;
     padding: 5px 5px 5px 5px;
 }
 
@@ -44,9 +57,20 @@ div.page-panel-top.page-panel-right {
     width: 200px;
 }
 
+div.page-panel-body.page-panel-left,
+div.page-panel-body.page-panel-right {
+    top: 24px;
+}
+
 div.page-panel-right {
     position: absolute;
     left: 210px;
+    right: 0px;
+}
+
+div.page-panel-full {
+    position: absolute;
+    left: 0px;
     right: 0px;
 }
 
@@ -77,41 +101,42 @@ div.page-panel-body.page-panel-left ul li {
 }
 
 /* Tables */
-div.page-panel-body.page-panel-right table {
+div.page-panel-body table {
     table-layout: fixed;
     width: 100%;
     white-space: nowrap;
     border: 1px solid #222222;
 }
 
-div.page-panel-body.page-panel-right table div input[type=checkbox] {
+div.page-panel-body table div input[type=checkbox] {
     height: 30px;
     width: 14px;
     line-height: 30px;
     margin-top: 0px;
     margin-bottom: 0px;
 }
-div.page-panel-body.page-panel-right table thead {
+div.page-panel-body table thead {
     background: linear-gradient(to bottom, #353535, #050505);
 }
 
-div.page-panel-body.page-panel-right table tbody { 
+div.page-panel-body table tbody { 
 
 }
 
-div.page-panel-body.page-panel-right table tr {
+div.page-panel-body table tr {
 
 }
 
-div.page-panel-body.page-panel-right table tr td,
-div.page-panel-body.page-panel-right table tr th {
+div.page-panel-body table tr td,
+div.page-panel-body table tr th {
     text-align: left;
     vertical-align: middle;
     padding: 0px 8px 0px 8px;
     overflow: hidden;
+    height: 30px;
 }
 
-div.page-panel-body.page-panel-right table thead tr td a {
+div.page-panel-body table thead tr td a {
     display: block;
     height: 30px;
     line-height: 30px;
@@ -119,50 +144,50 @@ div.page-panel-body.page-panel-right table thead tr td a {
     width: 100%;
 }
 
-div.page-panel-body.page-panel-right table tr td div {
+div.page-panel-body table tr td div {
     height: 30px;
     line-height: 30px;
 }
 
-div.page-panel-body.page-panel-right table.alt-rows tr th,
-div.page-panel-body.page-panel-right table.alt-rows-2 tr th {
+div.page-panel-body table.alt-rows tr th,
+div.page-panel-body table.alt-rows-2 tr th {
     background: rgba(0,0, 0, 0.05);
 }
 
-div.page-panel-body.page-panel-right table.alt-rows tr:nth-child(even) td {
+div.page-panel-body table.alt-rows tr:nth-child(even) td {
     background: rgba(0, 0, 0, 0.05);
 }
 
 
-div.page-panel-body.page-panel-right table.alt-rows tr.footer td {
+div.page-panel-body table.alt-rows tr.footer td {
     background: rgba(0, 0, 0, 0);
 }
 
-div.page-panel-body.page-panel-right table.alt-rows tr:nth-child(odd) td {
+div.page-panel-body table.alt-rows tr:nth-child(odd) td {
      background: rgba(255, 255, 255, 0.05);
 }
 
-div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n) td, 
-div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n-1) td {
+div.page-panel-body table.alt-rows-2 tr:nth-child(4n) td, 
+div.page-panel-body table.alt-rows-2 tr:nth-child(4n-1) td {
     background: rgba(0, 0, 0, 0.05);
 }
 
-div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n-2) td, 
-div.page-panel-body.page-panel-right table.alt-rows-2 tr:nth-child(4n-3) td {
+div.page-panel-body table.alt-rows-2 tr:nth-child(4n-2) td, 
+div.page-panel-body table.alt-rows-2 tr:nth-child(4n-3) td {
     background: rgba(255, 255, 255, 0.1);
 }
 
 
-div.page-panel-body.page-panel-right table thead td.column-sortable {
+div.page-panel-body table thead td.column-sortable {
     cursor: pointer;
 }
 
-div.page-panel-body.page-panel-right table thead td.column-sortable:active {
+div.page-panel-body table thead td.column-sortable:active {
     color: #AAAAAA;
     background: linear-gradient(to bottom, #000000, #252525) !important;
 }
 
-div.page-panel-body.page-panel-right table tbody tr:hover td {
+div.page-panel-body table tbody tr:hover td {
     background: rgba(255, 255, 255, 0.1) !important;
 }
 

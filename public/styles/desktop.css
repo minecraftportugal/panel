@@ -40,7 +40,7 @@ div#widget-taskbar {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    top: 0;
     height: 30px;
     z-index: 2147483647;
     overflow: hidden;
@@ -196,16 +196,6 @@ div#ajax-indicator.ajax-error {
     background-color: rgba(0,255,0,0.101010) !important;
     color: #00DD00;
 }
-div.widget-menu {
-     display: none;
-     position: absolute;
-     height: 300px;
-     bottom: 29px;
-     background: red;
-     border: 1px solid #252525;
-     box-shadow: 0 0 40px 5px #000;
-     background: linear-gradient(to bottom, #454545, #252525);
-}
 
 div.widget-menu i {
     width: 15px;
@@ -214,22 +204,23 @@ div.widget-menu i {
 
 div#widget-homemenu {
     left: 0px;
+    height: 180px;
 }
 
 div#widget-usermenu {
     right: 0px;
+    height: 132px;
 }
 
-div.widget-menu {
-    display: none;
-    position: absolute;
-    height: 200px;
-    bottom: 29px;
-    background: red;
-    border: 1px solid #252525;
-    box-shadow: 0 0 40px 5px #000;
 
-    background: linear-gradient(to bottom, #454545, #252525);
+div.widget-menu {
+     display: none;
+     position: absolute;
+     top: 30px;
+     background: red;
+     border: 1px solid #252525;
+     box-shadow: 0 0 40px 5px #000;
+     background: linear-gradient(to bottom, #454545, #252525);
 }
 
 div.widget-menu {
@@ -244,8 +235,7 @@ div.widget-menu i {
 div.widget-menu > ul {
     width: 140px;
     float: left;
-    height: 300px;
-
+    height: 100%;
 }
 
 div.widget-menu > ul:not(:first-child) {

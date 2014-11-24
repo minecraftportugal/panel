@@ -3,7 +3,7 @@
 <head>
     <meta charset=utf-8 />
     <meta name="keywords" content="minecraft, Portugal, pt, tuga, blog, server, servidor, notícias, registo">
-    <title><?= m("L_TITLE") ?></title>
+    <title>Comunidade Minecraft Portugal</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
     <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
@@ -19,17 +19,17 @@
 <body id="register">
   <div id="content">
     <div id="motd">
-      <h1><?= m("L_REGISTER0") ?></h1>
-      <p><?= m("L_REGISTER1") ?></p>
-      <p><?= m("L_WELCOME3"); ?></p>
+      <h1>Novo Registo</h1>
+      <p>Utiliza o <u>mesmo</u> nome de utilizador que usas para jogar Minecraft e um endereço de email onde possas receber a tua password.</p>
+      <p>Para estares a par de todas as novidades, visita o nosso blog em <a href=\"//blog.minecraft.pt\" target=\"_blank\">blog.minecraft.pt</a>.</p>
     </div>
 
     <? if ($cfg_enable_registrations): ?>
     <div id="actions">
       <form name="login" method="post" action="/register">
-        <span class="center"><input type="text" id="username" name="username" placeholder="<?= m("L_USERNAMEA") ?>" /></span>
-        <span class="center"><input type="text" id="email" name="email" placeholder="<?= m("L_EMAILA") ?>" /></span>
-        <span class="center"><input type="submit" value="<?= m("L_CREATEACC") ?>"/></span>
+        <span class="center"><input type="text" id="username" name="username" placeholder="esteves" /></span>
+        <span class="center"><input type="text" id="email" name="email" placeholder="esteves@minecraft.pt" /></span>
+        <span class="center"><input type="submit" value="Registar!"/></span>
         <span>
         <? 
           $error = getFlash('error');

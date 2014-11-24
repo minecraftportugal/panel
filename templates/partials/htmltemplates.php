@@ -9,8 +9,8 @@
         </div>
         <div class="widget-body">
         </div>
-        <div class="widget-cover"></div>
         <div class="widget-loading"></div>
+        <div class="widget-cover"></div>
         <div class="ui-resizable-handle ui-resizable-se widget-resize" title="drag to resize"></div>
     </div>
 </div>

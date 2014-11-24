@@ -120,7 +120,7 @@ div.square-container {
     width: 80px;
     height: 80px;
     border: 1px solid #353535;
-    margin: 2px 0 0 2px;
+    margin: 4px 0 0 4px;
     display: inline-block;
     background: linear-gradient(to bottom, #151515, #000000);
     font-family: monospace;

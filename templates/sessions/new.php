@@ -3,7 +3,7 @@
 <head>
     <meta charset=utf-8 />
     <meta name="keywords" content="minecraft, Portugal, pt, tuga, blog, server, servidor, notícias, login">
-    <title><?= m("L_TITLE") ?></title>
+    <title>Comunidade Minecraft Portugal</title>
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
     <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
     <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />

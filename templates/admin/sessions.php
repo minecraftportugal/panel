@@ -40,19 +40,19 @@
           <h2>Critérios</h2>
         </li>
         <li>
-              <input id="session_valid" type="checkbox" name="session_valid" value="1" <?= $session_valid == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="session_valid" title="sessão não expirada">sessão válida</label>
+              <input id="login" type="checkbox" name="login" value="1" <?= $p['login'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="login" title="apenas logins">login</label>
         </li>
         <li>
-              <input id="session_invalid" type="checkbox" name="session_invalid" value="1" <?= $session_invalid == 1 ? 'checked="checked"' : '' ?> />
-              <label class="checkbox" for="session_invalid" title="sessão expirada">sessão inválida</label>
+              <input id="logout" type="checkbox" name="logout" value="1" <?= $p['logout'] == 1 ? 'checked="checked"' : '' ?> />
+              <label class="checkbox" for="logout" title="apenas logouts">logout</label>
         </li>
         <li>
-              <input id="session_online" type="checkbox" name="session_online" value="1" <?= $session_online == 1 ? 'checked="checked"' : '' ?> />
+              <input id="session_online" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="session_online">online</label>
         </li>
         <li>
-              <input id="session_web" type="checkbox" name="session_web" value="1" <?= $session_web == 1 ? 'checked="checked"' : '' ?> />
+              <input id="session_web" type="checkbox" name="web" value="1" <?=$p['web'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="session_web">sessão web</label>
         </li>
         <li>
@@ -67,9 +67,8 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
-    <form name="manage_users" action="/sessions/configure" method="POST" autocomplete="off">
       <table class="alt-rows">
-        
+
         <?= $table->render_header(); ?>
 
         <tbody class="font-mono">
@@ -79,33 +78,30 @@
                 <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
             </td>
             <td class="">
-                <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
-                   href="/profile?id=<?= $r['id'] ?>"
-                   title="<?= $r["email"] ?>"
-                   class="noajax"
-                   data-widget-action="open"
-                   data-widget-name="profile-<?= $r['playername'] ?>">
+              <a href="/profile?id=<?= $r['id'] ?>"
+                 title="<?= $r["registerdate"] ?>"
+                 class="noajax"
+                 data-widget-action="open"
+                 data-widget-classes="widget-scrollable-y"
+                 data-widget-name="profile-<?= $r["playername"] ?>"
+                 data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>"
+                 data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
                   <span class="pull-left"><?= $r["playername"] ?></span>
                   <span class="pull-left online" title="O jogador está online!"></span>
                 </a>
             </td>
 
            <td>
-                <a href="/sessions?ipaddress=<?= $r["ipaddress"] ?>">
+                <a href="/admin/sessions?ipaddress=<?= $r["ipaddress"] ?>">
                   <?= $r["ipaddress"] ?>
                 </a>
             </td>
 
             <td>
-                <?= $r["logintime"] ?>
+                <?= $r["time_df"] ?>
             </td>
-
             <td>
-                <?= $r["websession"] ?>
-            </td>
-
-            <td class="center">
-                <input class="check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
+                <?= $r["event"] == 2 ? "<i class='fa fa-sign-out'></i> Logout" : "<i class='fa fa-sign-in'></i> Login" ?> <?= $r["websession"] == 1 ? "(no Site)" : "(In-Game)" ?>
             </td>
 
           </tr>
@@ -121,17 +117,10 @@
 
           </tr>
         <? endif; ?>
-        
+
         </tbody>
       </table>
 
-      <div class="separator"></div>
-
-      <div class="center">
-        <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
-        <input type="submit" value="OK" />
-      </div>            
-    </form>
 
     <div class="separator"></div>
 

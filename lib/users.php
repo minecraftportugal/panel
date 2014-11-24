@@ -4,36 +4,6 @@ require_once("config.php");
 
 use minecraftia\db\Bitch;
 
-/*
- * getShit
- */
-
-/*
- * getInquisitor: returns inquisitor data for a given playername;
- */
-function getInquisitor($username) {
-  $q = "SELECT * FROM players WHERE name = :username;";
-
-  $result = Bitch::source('inquisitor')->first($q, compact('username'));
-
-  return $result;
-}
-
-function getPopularAddresses() {
-
-  $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
-    FROM (
-      SELECT ifnull(lastloginip,registerip) lastip, playername
-      FROM accounts
-    ) x 
-    GROUP BY x.lastip 
-    HAVING total > 1
-    ORDER BY total DESC";
-
-  $result = Bitch::source('default')->all($q);
-
-  return $result;
-}
 
 function getUser($username) {
 

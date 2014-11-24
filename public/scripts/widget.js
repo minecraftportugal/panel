@@ -81,6 +81,8 @@ function Widget(options, states) {
     if ($(this.buttonSelector).hasClass("minimized")) {
       this.restore();
     }
+
+    console.log("using url " + this.options.url);
   }
 
 }
@@ -126,6 +128,7 @@ Widget.prototype.init = function(notApplyingStates) {
     handle: "div.widget-drag",
     snap: true,
     snapMode: "outer",
+    snapTolerance: 10,
     containment: "parent",
     start: function(event, ui) {
       $("iframe").css("pointer-events", "none");
@@ -204,13 +207,15 @@ Widget.prototype.init = function(notApplyingStates) {
 
 }
 
-Widget.prototype.load = function() {
-  if (this.options.useIframe == true) {
+Widget.prototype.load = function(url) {
+    var url = url || this.options.url;
+
+    if (this.options.useIframe == true) {
 
     this.iframeId = this.id + "-iframe";
     var jq_tag = $("<iframe></iframe>");
     jq_tag.attr("id", this.iframeId) ;
-    jq_tag.attr("src", this.options.url) ;
+    jq_tag.attr("src", url) ;
     $(this.selector).find("div.widget-body").html(jq_tag);
     $(this.selector).addClass("widget-iframe");
 
@@ -220,7 +225,7 @@ Widget.prototype.load = function() {
     var loading_blocker = $(widgetInstance.selector).find("div.widget-body").next();
 
     $.ajax({
-      url: widgetInstance.options.url,
+      url: url,
       beforeSend: function() {
           loading_blocker.addClass("block-enabled");
       },

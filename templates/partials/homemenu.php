@@ -96,12 +96,19 @@
            data-widget-action="open"
            data-widget-title="<i class='fa fa-th-list'></i> Drops"
            data-widget-name="admin-drops"><i class="fa fa-th-list"></i> Drops</a></li>
-      <li><a id="menu-item-admin-fails"
-           href="/admin/fails"
+      <li><a id="menu-item-admin-logs"
+           href="/admin/logs"
            data-widget-action="open"
            data-widget-title="<i class='fa fa-warning'></i> Logs"
            data-widget-name="admin-log"><i class="fa fa-warning"></i> Log</a></li>
-
+      <li><a id="menu-item-admin-ip-addresses"
+           href="/admin/ip_addresses"
+           data-widget-action="open"
+           data-widget-title="<i class='fa fa-wifi'></i> Endereços IP"
+           data-widget-name="admin-ip">
+            <i class="fa fa-wifi"></i> Endereços IP
+          </a>
+      </li>
     </ul>
   </li>
 </ul>

@@ -198,26 +198,6 @@ a, a:visited, a:active {
   color: white;
 }
 
-a[data-lang=pt_PT] {
- background: url('/images/icons/flag_pt.png') no-repeat left center;
-}
-
-a[data-lang=en_GB] {
- background: url('/images/icons/flag_gb.png') no-repeat left center;
-}
-
-a.i18n {
-  background-position: center center;
-  background-repeat: no-repeat;
-  display: block;
-  width: 52px;
-  height: 36px;
-}
-
-a.i18n:active {
-  background-position: 75% 75%;
-}
-
 a.socialicon {
   background-position: center center;
   background-repeat: no-repeat;

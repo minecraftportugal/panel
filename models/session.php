@@ -14,8 +14,8 @@ class SessionModel {
         "ipaddress" => null,
         "date_begin" => null,
         "date_end" => null,
-        "valid" => 0,
-        "invalid" => 0,
+        "login" => 0,
+        "logout" => 0,
         "online" => 0,
         "websession" => 0,
         "order_by" => "1",
@@ -41,8 +41,8 @@ class SessionModel {
         AND (sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress))
         AND ((:date_begin IS NULL) OR (:date_begin <= date(sh.logintime)))
         AND ((:date_end IS NULL) OR (:date_end >= date(sh.logintime)))
-        AND ((:valid = 0) OR ((:valid = 1) AND (DATE_ADD(sh.logintime, INTERVAL :length SECOND) > NOW())))
-        AND ((:invalid = 0) OR ((:invalid = 1) AND (DATE_ADD(sh.logintime, INTERVAL :length SECOND) <= NOW())))
+        AND ((:login = 0) OR ((:login = 1) AND (sh.event IN (0, 1))))
+        AND ((:logout = 0) OR ((:logout = 1) AND (sh.event = 2)))
         AND ((:online = 0) OR (:online = 1 AND o.online = 1))
         AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1));";
         // ORDER BY id DESC;";
@@ -61,7 +61,9 @@ class SessionModel {
                 a.lastlogindate AS lastlogindate_df,
                 sh.logintime AS logintime_df,
                 sh.websession AS websession,
+                sh.event AS event,
                 DATE_FORMAT(sh.logintime, '%b %d %H:%i:%s %Y') AS logintime,
+                DATE_FORMAT(sh.time, '%b %d %H:%i:%s %Y') AS time_df,
                 DATE_FORMAT(a.lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindate,
                 IF(DATE_ADD(sh.logintime, INTERVAL :length SECOND) > NOW(), 1, 0) as valid
             FROM accounts a
@@ -75,8 +77,8 @@ class SessionModel {
             AND (sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress))
             AND ((:date_begin IS NULL) OR (:date_begin <= date(sh.logintime)))
             AND ((:date_end IS NULL) OR (:date_end >= date(sh.logintime)))
-            AND ((:valid = 0) OR ((:valid = 1) AND (DATE_ADD(sh.logintime, INTERVAL :length SECOND) > NOW())))
-            AND ((:invalid = 0) OR ((:invalid = 1) AND (DATE_ADD(sh.logintime, INTERVAL :length SECOND) <= NOW())))
+            AND ((:login = 0) OR ((:login = 1) AND (sh.event IN (0, 1))))
+            AND ((:logout = 0) OR ((:logout = 1) AND (sh.event = 2)))
             AND ((:online = 0) OR (:online = 1 AND o.online = 1))
             AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1))
             ORDER BY $order_by $asc_desc

@@ -22,11 +22,11 @@ function admin_sessions() {
         'ipaddress' => null,
         'date_begin' => null,
         'date_end' => null,
-        'valid' => 0,
-        'invalid' => 0,
+        'login' => 0,
+        'logout' => 0,
         'online' => 0,
         'web' => 0,
-        'order_by' => 'logintime_df',
+        'order_by' => 'time',
         'asc_desc' => 'desc'
     ];
 
@@ -70,23 +70,15 @@ function admin_sessions() {
 
     $table->add_column([
         'width' => '25%',
-        'label' => 'Ultimo login',
-        'label_title' => 'Data',
-        'order_by' => 'logintime_df'
+        'label' => 'Data',
+        'label_title' => 'Timestamp',
+        'order_by' => 'time'
     ]);
 
     $table->add_column([
         'width' => '25%',
-        'label' => 'Tipo de Sessão',
-        'label_title' => 'Tipo Sessão',
-        'order_by' => 'websession'
-    ]);
-
-    $table->add_column([
-        'width' => '18px',
-        'alignment' => 'center',
-        'label' => '<i class="fa fa-trash-o"></i>',
-        'label_title' => 'Apagar'
+        'label' => 'Informação',
+        'label_title' => 'Informação',
     ]);
 
     require('templates/admin/sessions.php');

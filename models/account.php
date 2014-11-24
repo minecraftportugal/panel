@@ -212,6 +212,24 @@ class AccountModel {
 
     }
 
+    function ip_addresses() {
+
+        $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
+        FROM (
+          SELECT ifnull(lastloginip,registerip) lastip, playername
+          FROM accounts
+        ) x 
+        GROUP BY x.lastip 
+        HAVING total > 1
+        ORDER BY total DESC";
+
+        $result = Bitch::source('default')->all($q);
+
+        $result = $result != null ? $result : [];
+
+        return $result;
+    }
+
     function badges($id) {
 
         // premium, admin, donor

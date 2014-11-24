@@ -78,7 +78,7 @@ div.widget-loading.block-enabled {
     z-index: 2147483645;
 }
 
-div.widget:not(.widget-active) div.widget-cover {
+div.widget.widget-iframe:not(.widget-active) div.widget-cover {
     position: absolute;
     width: 100%;
     top: 18px;
@@ -207,8 +207,8 @@ div#widget-container {
     position: absolute;
     left: 0px;
     right: 0px;
-    top: 0px;
-    bottom: 30px;
+    bottom: 2px;
+    top: 30px;
 }
 
 /*BOTTOM BUTTONS*/

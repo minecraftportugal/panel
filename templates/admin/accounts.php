@@ -127,13 +127,14 @@
             </td>
 
             <td class="">
-                <a data-online="<?= $r['online'] ? 'true' : 'false' ?>"
-                   href="/profile?id=<?= $r['id'] ?>"
-                   title="<?= $r["email"] ?>"
+                <a href="/profile?id=<?= $r['id'] ?>"
+                   title="<?= $r["registerdate"] ?>"
                    class="noajax"
                    data-widget-action="open"
                    data-widget-classes="widget-scrollable-y"
-                   data-widget-name="profile-<?= $r['playername'] ?>">
+                   data-widget-name="profile-<?= $r["playername"] ?>"
+                   data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>"
+                   data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
                   <span class="pull-left"><?= $r["playername"] ?></span>
                   <span class="pull-left online" title="O jogador está online!"></span>
                 </a>

@@ -9,7 +9,6 @@
 
     <link rel="stylesheet" href="/styles/reset.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/fonts.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/style.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/desktop.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/widget.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/scrollbar.css" media="screen" type="text/css">
@@ -74,4 +73,3 @@
 
 </body>
 </html>
-
