@@ -1,7 +1,5 @@
 <?
 
-require_once('config.php');
-
 use models\account\Account;
 
 function test_index() {

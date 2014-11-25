@@ -1,8 +1,6 @@
 <?
 
-require_once('config.php');
 require_once('lib/sessions.php');
-
 
 function users_configure() {
 
@@ -18,7 +16,7 @@ function users_configure() {
   $contributor = isset($_POST['contributor']) ? $_POST['contributor'] : 0;
   $delete = isset($_POST['delete']) ? $_POST['delete'] : 0;
   
-  $status = userConfigure($id, $admin, $operator, $active, $donor, $contributor, $delete);
+  $status = AccountModel::configure($id, $admin, $operator, $active, $donor, $contributor, $delete);
   
   if ($status == 1) {
     header("Location: /profile?id=$id#adminactions");

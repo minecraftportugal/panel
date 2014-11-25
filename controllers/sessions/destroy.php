@@ -1,5 +1,5 @@
 <?
-require_once('config.php');
+
 require_once('lib/sessions.php');
 
 function sessions_destroy () {

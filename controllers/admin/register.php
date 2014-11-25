@@ -1,6 +1,5 @@
 <?
 
-require_once('config.php');
 require_once('lib/sessions.php');
 
 function admin_register() {
@@ -12,7 +11,7 @@ function admin_register() {
   $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
   $email = isset($_POST['email']) ? $_POST['email'] : NULL;
 
-  $status = register($username, $email, $email_ip = false);
+  $status = AccountModel::register($username, $email, $email_ip = false);
   
   if (!$status) {
     header("Location: /admin");

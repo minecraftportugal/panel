@@ -4,7 +4,6 @@ use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 
 function irc_index() {
-    global $cfg_lightirc_path;
 
     validateSession();
 

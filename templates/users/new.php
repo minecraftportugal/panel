@@ -24,7 +24,7 @@
       <p>Para estares a par de todas as novidades, visita o nosso blog em <a href=\"//blog.minecraft.pt\" target=\"_blank\">blog.minecraft.pt</a>.</p>
     </div>
 
-    <? if ($cfg_enable_registrations): ?>
+    <? if (ENABLE_REGISTRATIONS): ?>
     <div id="actions">
       <form name="login" method="post" action="/register">
         <span class="center"><input type="text" id="username" name="username" placeholder="esteves" /></span>

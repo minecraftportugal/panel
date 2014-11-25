@@ -1,7 +1,5 @@
 <?php
 
-require("config.php");
-
 use minecraftia\db\Bitch;
 
 /*

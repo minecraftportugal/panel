@@ -7,14 +7,11 @@ require_once('bootstrap.php');
 require_once('environment.php');
 require_once('router.php');
 
-if ($cfg_wp_enabled) {
-  require_once("$cfg_wp_location/wp-config.php");
-  $wp->init();
-  $wp->parse_request();
-  $wp->query_posts();
-  $wp->register_globals();
-  $wp->send_headers();
+/* Wordpress */
+if (WP_ENABLED) {
+    require_once(WP_LOCATION . "/wp-config.php");
 }
+require_once('models/wordpress.php');
 
 require_once('models/account.php');
 require_once('models/session.php');
@@ -25,7 +22,8 @@ require_once('controllers/home.php');
 
 require_once('controllers/status/index.php');
 
-require_once('controllers/news/index.php');
+require_once('controllers/posts/index.php');
+require_once('controllers/posts/show.php');
 
 require_once('controllers/sessions/new.php');
 require_once('controllers/sessions/create.php');
@@ -36,7 +34,6 @@ require_once('controllers/users/new.php');
 require_once('controllers/users/create.php');
 require_once('controllers/users/show.php');
 require_once('controllers/users/drop_items.php');
-
 require_once('controllers/users/update.php');
 require_once('controllers/users/configure.php');
 require_once('controllers/users/reset_password.php');
@@ -49,7 +46,6 @@ require_once('controllers/admin/configure.php');
 require_once('controllers/admin/register.php');
 require_once('controllers/admin/delete_drops.php');
 require_once('controllers/admin/delete_logs.php');
-
 require_once('controllers/admin/logs.php');
 
 require_once('controllers/directory/index.php');
@@ -66,6 +62,8 @@ require_once('controllers/errors.php');
 
 require_once('controllers/test/index.php');
 
+
+
 require_once('helpers/flash.php');
 require_once('helpers/pagination.php');
 require_once('helpers/arguments.php');
@@ -80,8 +78,6 @@ $r = new Router();
 $r->map('GET',  '', 'home');
 
 $r->map('GET',  '/status', 'status_index');
-
-$r->map('GET',  '/news', 'news_index');
 
 $r->map('GET',  '/login', 'sessions_new');
 $r->map('POST', '/login', 'sessions_create');
@@ -104,6 +100,9 @@ $r->map('GET',  '/admin/sessions', 'admin_sessions');
 $r->map('GET',  '/admin/drops', 'admin_drops');
 $r->map('GET',  '/admin/logs', 'admin_logs');
 $r->map('GET',  '/admin/ip_addresses', 'admin_ip_addresses');
+
+$r->map('GET',  '/posts', 'posts_index');
+$r->map('GET',  '/posts/show', 'posts_show');
 
 $r->map('POST', '/admin/configure', 'admin_configure');
 $r->map('POST', '/admin/register', 'admin_register');

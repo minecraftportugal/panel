@@ -2,9 +2,8 @@
 
 namespace models\account;
 
-require_once("config.php");
-
 use minecraftia\db\Bitch;
+use helpers\mail\MailHelper;
 
 class AccountModel {
 
@@ -212,7 +211,7 @@ class AccountModel {
 
     }
 
-    function ip_addresses() {
+    public static function ip_addresses() {
 
         $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
         FROM (
@@ -230,7 +229,7 @@ class AccountModel {
         return $result;
     }
 
-    function badges($id) {
+    public static function badges($id) {
 
         // premium, admin, donor
         $q = "SELECT playername, active, premium, donor, contributor, admin, operator FROM accounts WHERE id = :id;";
@@ -256,6 +255,185 @@ class AccountModel {
 
     }
 
+
+    /* Registers a user */
+    public static function register($username, $email, $email_ip = false) {
+
+        // check for dupe email
+        $q = "SELECT count(*) AS total
+            FROM accounts
+            WHERE email = :email";
+        $result = Bitch::source('default')->first($q, compact('email'))['total']; // /!\ array index applied to function call
+
+        if ($result != "0") {
+            setFlash('error', 'Email já foi tomado.');
+            return false;
+        }
+
+        // check for dupe username
+        $q = "SELECT count(*) AS total
+            FROM accounts
+            WHERE playername = :username;";
+        $result = Bitch::source('default')->first($q, compact('username'))['total']; // /!\ array index applied to function call
+
+        if ($result != "0") {
+            setFlash('error', 'Username já foi tomado.');
+            return false;
+        }
+
+        // check for valid email
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            setFlash('error', 'Email inválido.');
+            return false;
+        }
+
+        // check for valid username
+        if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
+            setFlash('error', 'Username inválido.');
+            return false;
+        }
+
+        // check for registration spam
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $q = "SELECT count(*) AS n
+            FROM accounts
+            WHERE registerip = :ip
+            AND now()-registerdate < 500";
+        $result = Bitch::source('default')->first($q, compact('ip'));
+
+        if ($result['n'] > 0) {
+            setFlash('error', '1 registo por IP a cada 5m');
+            return false;
+        }
+
+        $password = substr(md5(rand()), 0, 7);
+        $plain_password = $password;
+        $password = encryptPassword($password);
+        $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active)
+            VALUES(:username, :password, '0', :email, sysdate(), :ip, 1)";
+        $result = Bitch::source('default')->query($q, compact('username', 'password', 'email', 'ip'));
+
+        if (!$result) {
+            die('Invalid query');
+        }
+
+        MailHelper::welcome($username, $plain_password, $email, $email_ip);
+        setFlash('success', 'Verifica o teu Email');
+
+        return true;
+    }
+
+    public static function configure($id, $admin, $operator, $active, $donor, $contributor, $delete) {
+
+        $admin = ($admin == '1' ? 1 : 0);
+        $operator = ($operator == '1' ? 1 : 0);
+        $active = ($active == '1' ? 1 : 0);
+        $donor = ($donor == '1' ? 1 : 0);
+        $contributor = ($contributor == '1' ? 1 : 0);
+        $delete = ($delete == '1' ? 1 : 0);
+
+        if ($delete == 1) {
+            // Delete Accounts
+            $q = "DELETE FROM accounts
+                WHERE id=:id;";
+
+            $result = Bitch::source('default')->query($q, compact('id'));
+            if (!$result) { die('Invalid query'); }
+
+            setFlash('success', 'Utilizador apagado.');
+            return 2;
+        }
+
+
+        $q = "UPDATE accounts
+        SET admin=:admin,
+            operator=:operator,
+            active=:active,
+            donor=:donor,
+            contributor=:contributor
+        WHERE id = :id";
+
+        $result = Bitch::source('default')->query($q, compact('admin','operator', 'active', 'donor', 'contributor', 'id'));
+        if (!$result) { die('Invalid query'); }
+
+        setFlash('success', 'Utilizador alterado.');
+        return 1;
+    }
+
+    public static function changePassword($username, $password, $new_password, $confirm_password) {
+
+        $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
+
+        if (!($result = Bitch::source('default')->first($q, compact('username')))
+            or  (!checkPassword($password, $result['password']))) {
+            setFlash('error', 'Password original errada.');
+            return false;
+        }
+
+        if ($new_password == $confirm_password) {
+
+            if (strlen($new_password) < 6) {
+                setFlash('error', 'Password deve ter pelo menos 6 characters.');
+                return false;
+            }
+
+            $password = encryptPassword($new_password);
+            $q = "UPDATE accounts
+                SET password = :password
+                WHERE playername = :username";
+            $result = Bitch::source('default')->query($q, compact('password', 'username'));
+            if (!$result) { die('Invalid query'); }
+
+
+            setFlash('success', 'Password alterada.');
+            return true;
+
+        } else {
+
+            setFlash('error', 'Password não confirmada');
+            return false;
+        }
+
+    }
+
+    public static function changeIRC($username, $ircnickname, $ircpassword, $ircauto) {
+
+        $q = "UPDATE accounts
+        SET ircnickname = :ircnickname,
+            ircpassword = :ircpassword,
+            ircauto = :ircauto
+        WHERE playername = :username";
+        $result = Bitch::source('default')->query($q, compact('ircnickname', 'ircpassword', 'ircauto', 'username'));
+        if (!$result) { die('Invalid query'); }
+
+        setFlash('success', 'Alterações Efectuadas.');
+        return true;
+    }
+
+    public static function resetPassword($id) {
+
+        $u = getUserById($id);
+        $username = $u['playername'];
+        $email = $u['email'];
+        $password = substr(md5(rand()), 0, 7);
+        $plain_password = $password;
+        $password = encryptPassword($password);
+
+        $q = "UPDATE accounts
+            SET password = :password
+            WHERE id = :id";
+        $result = Bitch::source('default')->query($q, compact('password', 'id'));
+
+        if (!$result) {
+            die('Invalid query');
+        }
+
+        MailHelper::welcome($username, $plain_password, $email);
+
+        setFlash('success', 'Nova password enviada por email.');
+
+        return true;
+    }
 
 }
 

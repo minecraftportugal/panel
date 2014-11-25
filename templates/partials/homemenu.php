@@ -31,7 +31,7 @@
   <li>
   <ul>
     <li><a id="menu-item-news"
-           href="/news"
+           href="/posts"
            data-widget-action="open"
            data-widget-name="widget-news"
            data-widget-classes="widget-scrollable-y"

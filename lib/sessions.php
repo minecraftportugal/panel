@@ -1,6 +1,5 @@
 <?
 
-require('config.php');
 require('lib/xauth.php');
 
 use models\log\LogModel;

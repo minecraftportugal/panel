@@ -77,7 +77,7 @@ $(function() {
   <? endif; ?>
     console.log(params);
 
-    swfobject.embedSWF("<?= $cfg_lightirc_path ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
+    swfobject.embedSWF("<?= LIGHTIRC_PATH ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
  </script>
 </body>
 </html>

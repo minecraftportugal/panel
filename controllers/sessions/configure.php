@@ -1,5 +1,5 @@
 <?
-require_once('config.php');
+
 require_once('lib/sessions.php');
 
 use helpers\Notice\NoticeHelper;

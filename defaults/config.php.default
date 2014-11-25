@@ -1,37 +1,36 @@
 <?
 
-/* */
-$cfg_web_root = "/home/notch/dev/minecraftia";
+define('WEB_ROOT', "/home/notch/dev/minecraftia");
 
 /* DYNMAP URL */
-$cfg_dynmap_url = "//dynmap.minecraft.pt/";
-//$cfg_dynmap_url = "//ticklemynausea.net/?mute";
+define('DYNMAP_URL', "//dynmap.minecraft.pt/");
+//define('DYNMAP_URL', "//ticklemynausea.net/?mute");
 
 /* main xAuth db */
-$cfg_mysql_addr = "localhost";
-$cfg_mysql_db = "minecraft_auth";
-$cfg_mysql_user = "minecraft";
-$cfg_mysql_pass = "minecr4ft";
+define('MYSQL_ADDR', "localhost");
+define('MYSQL_DB', "minecraft_auth");
+define('MYSQL_USER', "minecraft");
+define('MYSQL_PASS', "minecr4ft");
 
 /* unused */
-$cfg_enable_registrations = true;
-$cfg_recaptcha_public_key = "";
+define('ENABLE_REGISTRATIONS', true);
+define('RECAPTCHA_PUBLIC_KEY', "");
 
 /* wordpress  */
-$cfg_wp_enabled = false;
-$cfg_wp_location = "/home/minecraft/web/wordpress";
-$cfg_wp_url = "http://blog.minecraft.pt";
+define('WP_ENABLED', true);
+define('WP_LOCATION', "/home/mario/dev/wordpress");
+define('WP_URL', "http://wp.hof.ticklemynausea.net");
 
 /* gmail email */
-$cfg_phpmailer_username = "";
-$cfg_phpmailer_password = "";
-$cfg_phpmailer_email    = "";
+define('PHPMAILER_USERNAME', "");
+define('PHPMAILER_PASSWORD', "");
+define('PHPMAILER_EMAIL   ', "");
 
 /* lightIRC */
-$cfg_lightirc_path = "/vendors/lightIRC/lightIRC.swf";
+define('LIGHTIRC_PATH', "/vendors/lightIRC/lightIRC.swf");
 
 /* Minotar */
-//$cfg_minotar_server = "//minotar.minecraft.pt";
-$cfg_minotar_server = "//minotar.net";
+define('MINOTAR_SERVER', "//minotar.minecraft.pt");
+//define('MINOTAR_SERVER', "//minotar.net");
 
 ?>
