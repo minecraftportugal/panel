@@ -55,64 +55,54 @@ function users_show () {
         }
     }
 
+//
+//    $own    = ($profileId == $_SESSION['id']) ? true : false;
+//    $admin = ($_SESSION['admin'] == '1') ? true : false;
 
 
+    // prepare inquisitor data
+    $inventory = json_decode($player['inventory']);
 
+    $playerinv = array();
+    foreach($inventory as $slot) {
 
+        if ($slot) {
+            $itemdata = "".$slot->type;
+            $itemdata .= " ".$slot->data;
+            $itemdata .= " ".$slot->amount;
+            $itemdata .= " ".$slot->durability;
 
-    //$own    = ($profileId == $_SESSION['id']) ? true : false;
-    //$admin = ($_SESSION['admin'] == '1') ? true : false;
-//
-//
-//    $inquisitor = getInquisitor($profile['playername']);
-//
-//    // prepare inquisitor data
-//    if ($inquisitor) {
-//        $inventory = json_decode($inquisitor['inventory']);
-//
-//        $playerinv = array();
-//
-//        foreach($inventory as $slot)
-//        {
-//            if ($slot) {
-//                $itemdata = "".$slot->type;
-//                $itemdata .= " ".$slot->data;
-//                $itemdata .= " ".$slot->amount;
-//                $itemdata .= " ".$slot->durability;
-//
-//                $enchantments = array();
-//                foreach($slot->enchantments as $name => $level)
-//                {
-//                    array_push($enchantments, "$name".":".$level);
-//                }
-//                $enchantments = implode(" ", $enchantments);
-//                array_push($playerinv, array(
-//                    "itemdata" => $itemdata,
-//                    "enchantments" => $enchantments
-//                ));
-//            }
-//            else
-//            {
-//                array_push($playerinv, array(
-//                    "itemdata" => "",
-//                    "enchantments" => ""
-//                ));
-//            }
-//        }
-//
-//        $a = array_slice($playerinv, 0, 9);
-//        $b = array_slice($playerinv, 9);
-//        $playerinv = array_merge($b, $a);
-//
-//        // 'mapped' data
-//        $mapped = json_decode($inquisitor['mapped'], true);
-//        $blocksBroken = $mapped['blocksBroken'];
-//        $total = empty($blocksBroken) ? 0 : array_sum($blocksBroken);
-//        $diamond = $mapped['blocksBroken']['Diamond Ore'];
-//        $diamond = $diamond != null ? $diamond : 0;
-//        $hours = round($inquisitor['totalTime']/60/60);
-//        $hours = $hours > 0 ? $hours : 1;
-//    }
+            $enchantments = array();
+            foreach($slot->enchantments as $name => $level)
+            {
+                array_push($enchantments, "$name".":".$level);
+            }
+            $enchantments = implode(" ", $enchantments);
+            array_push($playerinv, array(
+                "itemdata" => $itemdata,
+                "enchantments" => $enchantments
+            ));
+        } else {
+            array_push($playerinv, array(
+                "itemdata" => "",
+                "enchantments" => ""
+            ));
+        }
+
+    }
+
+    $a = array_slice($playerinv, 0, 9);
+    $b = array_slice($playerinv, 9);
+    $playerinv = array_merge($b, $a);
+
+    // 'mapped' data
+    $mapped = json_decode($player['mapped'], true);
+    $blocksBroken = $mapped['blocksBroken'];
+    $total = empty($blocksBroken) ? 0 : array_sum($blocksBroken);
+    $diamond = $mapped['blocksBroken']['Diamond Ore'];
+    $diamond = $diamond != null ? $diamond : 0;
+    $hours = round($player['totalTime']/60/60);
+    $hours = $hours > 0 ? $hours : 1;
 //
 //    // item drops
 //    $drops_per_page = isset($_GET['']) ? $_GET['drops_per_page'] : 10;

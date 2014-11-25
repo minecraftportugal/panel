@@ -119,7 +119,7 @@ div.page-panel-body table thead {
     background: linear-gradient(to bottom, #353535, #050505);
 }
 
-div.page-panel-body table tbody { 
+div.page-panel-body table tbody {
 
 }
 
@@ -167,12 +167,12 @@ div.page-panel-body table.alt-rows tr:nth-child(odd) td {
      background: rgba(255, 255, 255, 0.05);
 }
 
-div.page-panel-body table.alt-rows-2 tr:nth-child(4n) td, 
+div.page-panel-body table.alt-rows-2 tr:nth-child(4n) td,
 div.page-panel-body table.alt-rows-2 tr:nth-child(4n-1) td {
     background: rgba(0, 0, 0, 0.05);
 }
 
-div.page-panel-body table.alt-rows-2 tr:nth-child(4n-2) td, 
+div.page-panel-body table.alt-rows-2 tr:nth-child(4n-2) td,
 div.page-panel-body table.alt-rows-2 tr:nth-child(4n-3) td {
     background: rgba(255, 255, 255, 0.1);
 }

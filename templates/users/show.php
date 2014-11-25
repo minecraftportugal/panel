@@ -1,4 +1,7 @@
 <script type="text/javascript" src="/scripts/skin3d.js"></script>
+
+<script type="text/javascript" src="/scripts/items.js"></script>
+
 <link rel="stylesheet" href="/styles/page-presentation-profile.css" media="screen" type="text/css">
 
 <div id="widget-show-<?= $player['playername'] ?>">
@@ -65,18 +68,104 @@
                 <h1>Stats</h1>
             </div>
             <div>
-                <div class="square-container">
-                    <h2>level</h2>
-                    <h1><?= $player["level"] ?></h1>
-                    <h2>things</h2>
-                        <!--  (${(player.exp * 100)?round}% to level ${player.level + 1}) -->
-                </div><div class="square-container">
-                    <h2>XP</h2>
-                    <h1><?= $player["totalExperience"] ?></h1>
-                </div><div class="square-container">
-                    <h2>XP</h2>
-                    <h1><?= $player["totalExperience"] ?></h1>
-                </div>
+
+            <? /***********/ ?>
+            <table class="monospace">
+                <tbody>
+                <? if ($player) : ?>
+                    <tr>
+                        <td colspan="2">
+                            <div class="health">
+                                <? for ($i = 0, $h = ($player) ? $player['health'] : 0; $i < 10; $i++, $h-=2): ?>
+                                    <span class="<?= ($h > 1)? "full" : (($h <= 0)? "empty" : "half") ?>"></span>
+                                <? endfor; ?>
+                            </div>
+                            <div class="hunger">
+                                <? for ($i = 0, $f = $h = ($player) ? $player['foodLevel'] : 0; $i < 10; $i++, $f-=2): ?>
+                                    <span class="<?= ($f > 1)? "full" : (($f <= 0)? "empty" : "half") ?>"></span>
+                                <? endfor; ?>
+                        </td>
+                    </tr>
+                <? endif; ?>
+
+                <? if ($player): ?>
+                    <tr><th>Status</th><td class="<?= $player['online'] == 1 ? 'online' : 'offline' ?>"><?= $player['online'] == 1 ? 'online' : 'offline' ?></td></tr>
+                <? endif; ?>
+
+                <? if ($own): ?>
+                    <tr>
+                        <th>Email</th><td><?= $profile['email'] ?></td>
+                    </tr>
+                <? endif; ?>
+
+                <tr>
+                    <th>Registo</th>
+                    <td><?= $profile['registerdate'] ?></td>
+                </tr>
+
+                <? if ($profile['logintime'] != null): ?>
+                    <tr>
+                        <th>Activo</th>
+                        <td><?= $profile['logintime'] ?></td>
+                    </tr>
+                <? endif; ?>
+
+                </tbody>
+            </table>
+
+            <table class="monospace">
+                <tbody>
+                <tr><th>Level</th><td><?= $player['level'] ?></td></tr>
+                <tr><th>XP</th><td><?= $player['totalExperience'] ?>/<?= $player['lifetimeExperience'] ?></td></tr>
+                <tr><th>Tempo total</th><td> <?= \helpers\datetime\DateTimeHelper::stoh($player['totalTime']) ?></td></tr>
+                <tr><th>Ultima sessÃ£o</th><td> <?= \helpers\datetime\DateTimeHelper::stoh($player['sessionTime']) ?></td></tr>
+                <tr><th>KMs Percorridos</th><td> <?= round($player['totalDistanceTraveled']/1000,2) ?> km</td></tr>
+                <tr><th>Modo de Jogo</th><td> <?= $player['gameMode'] ?></td></tr>
+                <tr><th>World</th><td> <?= $player['world'] ?></td></tr>
+                <tr><th colspan="2">Entradas</th></tr>
+                <tr><th>Total</th><td> <?= $player['joins'] ?></td></tr>
+                <tr><th>Primeira</th><td> <?= $player['firstJoin'] ?></td></tr>
+                <tr><th>Ãšltima</th><td> <?= $player['lastJoin'] ?></td></tr>
+                <? if ($player['kicks'] > 0): ?>
+                    <tr><th colspan="2">Kicks</th></tr>
+                    <tr><th>Total</th><td> <?= $player['kicks'] ?></td></tr>
+                    <tr><th>Ultimo</th><td> <?= $player['lastKick'] ?></td></tr>
+                <? endif; ?>
+                <? if ($player['quits'] > 0): ?>
+                    <tr><th colspan="2">Quits</th></tr>
+                    <tr><th>Total</th><td> <?= $player['quits'] ?></td></tr>
+                    <tr><th>Ultimo</th><td> <?= $player['lastQuit'] ?></td></tr>
+                <? endif; ?>
+                <tr><th colspan="2">Blocos</th></tr>
+                <tr><th>Destruidos</th><td> <?= $player['totalBlocksBroken'] ?></td></tr>
+                <tr><th>Colocados</th><td> <?= $player['totalBlocksPlaced'] ?></td></tr>
+                <tr><th colspan="2">Mortes</th></tr>
+                <tr><th>Morreu</th><td> <?= $player['deaths'] ?></td></tr>
+                <? if ($player['totalPlayersKilled'] > 0): ?>
+                    <tr><th>Matou</th><td> <?= $player['totalPlayersKilled'] ?></td></tr>
+                    <tr><th>Ãšltimo Morto</th><td> <?= $player['lastPlayerKilled'] ?></td></tr>
+                    <tr><th>Em</th><td> <?= $player['lastPlayerKill'] ?></td></tr>
+                <? endif; ?>
+                </tbody>
+            </table>
+
+            <div class="inventory">
+                <table class="monospace">
+                    <tbody>
+                    <? for ($j = 0; $j < 4; $j++): ?>
+                        <tr class="line<?= $j ?>">
+                            <? for ($i = 0; $i < 9; $i++): ?>
+                                <td>
+                                    <? $pi = $playerinv[$i + 9 * $j]; ?>
+                                    <span class="item" data-item="<?= $pi['itemdata'] ?>" data-enchantments="<?= $pi['enchantments'] ?>"></span>
+                                </td>
+                            <? endfor; ?>
+                        </tr>
+                    <? endfor; ?>
+                    </tbody>
+                </table>
+
+            <? /***********/ ?>
             </div>
 
         </div>
@@ -151,7 +240,7 @@
       <h1>Estatísticas</h1>
     </a>
     <div class="inside">
-      <table class="pretty">
+      <table class="monospace">
         <tbody>
           <tr><th>Level</th><td><?= $player['level'] ?></td></tr>
           <tr><th>XP</th><td><?= $player['totalExperience'] ?>/<?= $player['lifetimeExperience'] ?></td></tr>
@@ -196,7 +285,7 @@
     </a>
     <div class="inside">
       <div class="inventory">
-        <table class="pretty">
+        <table class="monospace">
           <tbody>
           <? for ($j = 0; $j < 4; $j++): ?>
             <tr class="line<?= $j ?>">

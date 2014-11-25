@@ -112,41 +112,6 @@ div.layout-col table th {
 div.layout-badge-container {
     height: 30px;
 }
-/*
- * Squares
- */
-
-div.square-container {
-    width: 80px;
-    height: 80px;
-    border: 1px solid #353535;
-    margin: 4px 0 0 4px;
-    display: inline-block;
-    background: linear-gradient(to bottom, #151515, #000000);
-    font-family: monospace;
-    font-size: 12px;
-}
-
-div.square-container h1 {
-    font-size: 22px;
-}
-
-div.square-container h2 {
-
-}
-
-div.square-container h1, div.square-container h2 {
-    display: block;
-    position: relative;
-}
-
-div.square-container h2:first-child {
-    top: 0;
-}
-
-div.square-container h2:last-child {
-    bottom: 0;
-}
 
 /*
  * Player List 
