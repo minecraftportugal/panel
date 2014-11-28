@@ -4,8 +4,9 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
     <meta name="xsrf_token" content="<?= getXSRFToken() ?>" >
+    <meta name="username" content="<?= $user["playername"] ?>" >
 
-    <title>Comunidade Minecraft Portugal: Servidor Oficial</title>
+    <title>minecraft.pt | MinePanel 3.0</title>
 
     <link rel="stylesheet" href="/styles/reset.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/fonts.css" media="screen" type="text/css">
@@ -17,8 +18,7 @@
     <link rel="stylesheet" href="/styles/page-presentation.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/page-presentation-forms.css" media="screen" type="text/css">
     <link rel="stylesheet" href="/styles/page-presentation-profile.css" media="screen" type="text/css">
-    
-    <link href='//fonts.googleapis.com/css?family=Overlock:400,700,900' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/styles/page-presentation-wp.css" media="screen" type="text/css">
     
     <link rel="shortcut icon" href="favicon.ico" >
 
@@ -36,13 +36,7 @@
     <script type="text/javascript" src="/scripts/top.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
 
-    <style>
-        body {
-            background: url(<?= $background_image ?>);
-            background-size: 100% auto;
-        }
-
-    </style>
+    <? require("partials/background-css.php"); ?>
 
 </head> 
 <body>

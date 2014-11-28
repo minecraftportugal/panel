@@ -1,6 +1,7 @@
 <?php
 
 use models\drop\DropModel;
+use helpers\notice\NoticeHelper;
 
 function users_drop_items () {
 
@@ -13,25 +14,26 @@ function users_drop_items () {
   $itemaux = isset($_POST['itemaux']) && $_POST['itemaux'] != "" ? $_POST['itemaux'] : 0;
   $itemqt = isset($_POST['itemid']) && $_POST['itemqt'] != "" ? $_POST['itemqt'] : null;
 
+
   if (($itemid == null) or ($itemqt == null)) {
-    setFlash('error', 'Item ID ou quantidade inválida.');
-    header("Location: /profile?id=$id#itemdrops");
+    NoticeHelper::set('error', 'Item ID ou quantidade inválida.');
+    header("Location: /profile?id=$id");
     return;
   }
 
-  if (($itemdrop <= 0) or ($itemnumber <= 0) or ($itemaux < 0)) {
-    setFlash('error', 'Item ID ou quantidade inválida.');
-    header("Location: /profile?id=$id#itemdrops");
+  if (($itemid <= 0) or ($itemaux < 0) or ($itemqt <= 0)) {
+    NoticeHelper::set('error', 'Item ID ou quantidade inválida.');
+    header("Location: /profile?id=$id");
     return;
   }
 
   $status = DropModel::create($id, $itemid, $itemqt, $itemaux);
   if ($status) {
-    setFlash('success', 'Item drop criada.');
-    header("Location: /profile?id=$id#itemdrops");
+    NoticeHelper::set('success', 'Item drop criada.');
+    header("Location: /profile?id=$id");
   } else {
-    setFlash('error', 'Erro ao criar itemdrop!');
-    header("Location: /profile?id=$id#itemdrops");
+    NoticeHelper::set('error', 'Erro ao criar itemdrop!');
+    header("Location: /profile?id=$id");
   }
 
 }
@@ -48,11 +50,11 @@ function users_delete_drops() {
   $status = DropModel::delete($delete);
 
   if ($status) {
-    setFlash('success', 'Item drops apagados.');
-    header("Location: /profile?id=$accountid#itemdrops");
+    NoticeHelper::set('success', 'Item drops apagados.');
+    header("Location: /profile?id=$accountid");
   } else {
-    setFlash('error', 'Erro ao apagar item drops!');
-    header("Location: /profile?id=$accountid#itemdrops");
+    NoticeHelper::set('error', 'Erro ao apagar item drops!');
+    header("Location: /profile?id=$accountid");
   }
 
 }

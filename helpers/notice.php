@@ -48,8 +48,8 @@ class NoticeHelper {
         $error = NoticeHelper::get('error');
         if ($error != false) {
             return "<span class=\"" . $args['classes'] . " closeable notice error\">
-                      <h1>$error
-                      <span class=\"close-parent\">
+                      <h1><i class=\"fa fa-warning\"></i> $error
+                      <span class=\"close-parent pull-right\">
                         <i class=\"fa fa-times\"></i></a>
                       </span>
                       </h1>
@@ -59,8 +59,8 @@ class NoticeHelper {
         $success = NoticeHelper::get('success');
         if ($success != false) {
             return "<span class=\"" . $args['classes'] . " closeable notice success\">
-                      <h1>$success
-                      <span class=\"close-parent\">
+                      <h1><i class=\"fa fa-check-circle\"></i> $success
+                      <span class=\"close-parent pull-right\">
                         <i class=\"fa fa-times\"></i>
                       </span>
                       </h1>

@@ -4,6 +4,7 @@ namespace models\account;
 
 use minecraftia\db\Bitch;
 use helpers\mail\MailHelper;
+use helpers\notice\NoticeHelper;
 
 class AccountModel {
 
@@ -340,7 +341,7 @@ class AccountModel {
             $result = Bitch::source('default')->query($q, compact('id'));
             if (!$result) { die('Invalid query'); }
 
-            setFlash('success', 'Utilizador apagado.');
+            NoticeHelper::set('success', 'Utilizador apagado.');
             return 2;
         }
 
@@ -356,65 +357,65 @@ class AccountModel {
         $result = Bitch::source('default')->query($q, compact('admin','operator', 'active', 'donor', 'contributor', 'id'));
         if (!$result) { die('Invalid query'); }
 
-        setFlash('success', 'Utilizador alterado.');
+        NoticeHelper::set('success', 'Utilizador alterado.');
         return 1;
     }
 
-    public static function changePassword($username, $password, $new_password, $confirm_password) {
+    public static function changePassword($id, $password, $new_password, $confirm_password) {
 
-        $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
+        $q = "SELECT id, playername, password, admin FROM accounts WHERE id = :id AND active = 1;";
 
-        if (!($result = Bitch::source('default')->first($q, compact('username')))
+        if (!($result = Bitch::source('default')->first($q, compact('id')))
             or  (!checkPassword($password, $result['password']))) {
-            setFlash('error', 'Password original errada.');
+            NoticeHelper::set('error', 'a password original que escreveste está errada');
             return false;
         }
 
         if ($new_password == $confirm_password) {
 
             if (strlen($new_password) < 6) {
-                setFlash('error', 'Password deve ter pelo menos 6 characters.');
+                NoticeHelper::set('error', 'a nova password deve ter pelo menos 6 caracteres');
                 return false;
             }
 
             $password = encryptPassword($new_password);
             $q = "UPDATE accounts
                 SET password = :password
-                WHERE playername = :username";
-            $result = Bitch::source('default')->query($q, compact('password', 'username'));
+                WHERE id = :id";
+            $result = Bitch::source('default')->query($q, compact('password', 'id'));
             if (!$result) { die('Invalid query'); }
 
 
-            setFlash('success', 'Password alterada.');
+            NoticeHelper::set('success', 'a password foi alterada com sucesso');
             return true;
 
         } else {
 
-            setFlash('error', 'Password não confirmada');
+            NoticeHelper::set('error', 'a nova password é diferente da sua confirmação');
             return false;
         }
 
     }
 
-    public static function changeIRC($username, $ircnickname, $ircpassword, $ircauto) {
+    public static function changeIRC($id, $ircnickname, $ircpassword, $ircauto) {
 
         $q = "UPDATE accounts
         SET ircnickname = :ircnickname,
             ircpassword = :ircpassword,
             ircauto = :ircauto
-        WHERE playername = :username";
-        $result = Bitch::source('default')->query($q, compact('ircnickname', 'ircpassword', 'ircauto', 'username'));
+        WHERE id = :id";
+        $result = Bitch::source('default')->query($q, compact('ircnickname', 'ircpassword', 'ircauto', 'id'));
         if (!$result) { die('Invalid query'); }
 
-        setFlash('success', 'Alterações Efectuadas.');
+        NoticeHelper::set('success', 'alterações efectuadas');
         return true;
     }
 
     public static function resetPassword($id) {
 
-        $u = getUserById($id);
-        $username = $u['playername'];
-        $email = $u['email'];
+        $player = AccountModel::first(['id' => $id]);
+        $username = $player['playername'];
+        $email = $player['email'];
         $password = substr(md5(rand()), 0, 7);
         $plain_password = $password;
         $password = encryptPassword($password);
@@ -429,8 +430,6 @@ class AccountModel {
         }
 
         MailHelper::welcome($username, $plain_password, $email);
-
-        setFlash('success', 'Nova password enviada por email.');
 
         return true;
     }

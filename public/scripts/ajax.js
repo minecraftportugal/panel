@@ -12,7 +12,7 @@ function AjaxIndicator() {
         setTimeout(function() {
                 $("div#ajax-indicator").removeClass("ajax-loading ajax-error ajax-loading-https");
         }, 10);
-        
+
     }
 }
 

@@ -13,7 +13,7 @@ class DynmapHelper {
         }
 
         if ($block) {
-            $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe><div class=\"iframe-block\"></div>";
+            $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe> <div class=\"iframe-block\"></div>";
         } else {
             $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe>";
         }
@@ -39,6 +39,13 @@ class DynmapHelper {
         return $html;
     }
 
+    function map_offline() {
+        $url = "/testpattern";
+
+        $html = "<iframe src=\"$url\"></iframe><div class=\"iframe-block\"></div>";
+
+        return $html;
+    }
 
 }
 

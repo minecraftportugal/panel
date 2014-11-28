@@ -145,5 +145,4 @@ function admin_accounts() {
 
     require('templates/admin/accounts.php');
 }
-
 ?>

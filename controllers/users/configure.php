@@ -2,6 +2,8 @@
 
 require_once('lib/sessions.php');
 
+use models\account\AccountModel;
+
 function users_configure() {
 
   //session: admin

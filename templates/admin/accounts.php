@@ -114,7 +114,7 @@
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
     <form name="manage_users" action="/admin/configure" method="POST" autocomplete="off">
-      <table class="alt-rows">
+      <table class="listing alt-rows">
         
         <?= $table->render_header(); ?>
 

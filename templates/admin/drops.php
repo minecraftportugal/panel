@@ -61,8 +61,8 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
-    <form name="manage_users" action="/admin/delete_drops" method="POST" autocomplete="off">
-      <table class="alt-rows">
+    <form name="manage_drops" action="/admin/delete_drops" method="POST" autocomplete="off">
+      <table class="listing alt-rows">
         
         <?= $table->render_header(); ?>
 
@@ -146,4 +146,3 @@
 
     <div class="separator"></div>
 </div>
-

@@ -187,6 +187,24 @@ div#ajax-indicator.ajax-error {
     padding: 0px 5px 0px 5px;
 }
 
+.hover-notice {
+    position: absolute;
+    width: 400px;
+    margin: auto;
+    top: 10px;
+    left: 50%;
+    padding: 5px;
+    margin-left: -200px;
+}
+
+.hover-notice.error {
+    border: 1px solid #ff4444;
+}
+
+.hover-notice.success {
+    border: 1px solid #44ff44;
+}
+
 .error {
     background-color: rgba(255,0,0,0.1) !important;
     color: #DD0000;

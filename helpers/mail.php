@@ -6,7 +6,7 @@ class MailHelper {
 
     public static function welcome($playername, $password, $email, $email_ip = false) {
 
-        $mail = new PHPMailer();
+        $mail = new \PHPMailer();
 
         $mail->IsSMTP(true); // send via SMTP
 
@@ -28,7 +28,7 @@ class MailHelper {
         $mail->IsHTML(true); // send as HTML
 
         $mail->Subject = "Comunidade Minecraft Portugal: Registo!";
-        $body = file_get_contents(WEB_ROOT . "templates/email/registo.html");
+        $body = file_get_contents(WEB_ROOT . "/templates/email/registo.html");
         $body = str_replace('$playername', $playername, $body);
         $body = str_replace('$password', $password, $body);
 
@@ -45,3 +45,5 @@ class MailHelper {
         }
     }
 }
+
+?>

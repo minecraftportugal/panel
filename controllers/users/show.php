@@ -4,9 +4,11 @@ require_once('lib/sessions.php');
 
 use models\account\AccountModel;
 use models\drop\DropModel;
+use helpers\notice\NoticeHelper;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\dynmap\DynmapHelper;
+use helpers\table\TableHelper;
 use helpers\datetime\DateTimeHelper;
 
 function users_show () {
@@ -31,34 +33,39 @@ function users_show () {
     }
 
     $player = AccountModel::first($p, true); // true : fetch all inquisitor data
-    //$player_mapped = json_decode($player['mapped'], true);
-    $drops = DropModel::get([
-        "page" => 1,
-        "per_page" => 1,
-        "accountid" => $player["id"],
-        "delivered" => 0,
-        "undelivered" => 0,
-        "order_by" => "1",
-        "asc_desc" => "desc"
-    ]);
+
+    $own = ($player['id'] == $_SESSION['id']) ? true : false;
+
+    $admin = ($_SESSION['admin'] == '1') ? true : false;
+
+    $notices = NoticeHelper::render(['classes' => 'hover-notice']);
 
     $badges = AccountModel::badges($player['id']);
 
-    if ($player['online'] == 1) {
-        $v_dynmap_widget = DynmapHelper::map($player['playername']);
-    } else {
-        if (!is_null($player['coords'])) {
-            $coords = explode(',', $player['coords']);
-            $v_dynmap_widget = DynmapHelper::map_position($coords, $player['world']);
+    // ja jogou?
+    $has_played = !is_null($player['name']);
+
+    /** Mini Map **/
+
+    if ($has_played) {
+        if ($player['online'] == 1) {
+            $v_dynmap_widget = DynmapHelper::map($player['playername']);
         } else {
-            $v_dynmap_widget = DynmapHelper::map();
+            if (!is_null($player['coords'])) {
+                $coords = explode(',', $player['coords']);
+                $v_dynmap_widget = DynmapHelper::map_position($coords, $player['world']);
+            } else {
+                $v_dynmap_widget = DynmapHelper::map();
+            }
         }
+    } else {
+        $v_dynmap_widget = DynmapHelper::map_offline();
     }
 
-//
-//    $own    = ($profileId == $_SESSION['id']) ? true : false;
-//    $admin = ($_SESSION['admin'] == '1') ? true : false;
 
+    /*
+     * stats and inventory
+     */
 
     // prepare inquisitor data
     $inventory = json_decode($player['inventory']);
@@ -103,29 +110,59 @@ function users_show () {
     $diamond = $diamond != null ? $diamond : 0;
     $hours = round($player['totalTime']/60/60);
     $hours = $hours > 0 ? $hours : 1;
-//
-//    // item drops
-//    $drops_per_page = isset($_GET['']) ? $_GET['drops_per_page'] : 10;
-//    $drops_page = isset($_GET['drops_page']) ? $_GET['drops_page'] : 1;
-//    $drops_page = intval($drops_page);
-//    $drops_per_page = intval($drops_per_page);
-//    $drops_pages = DropModel::get(["accountid" => $profileId, "undelivered" => 0]);
-//    $link_after = "";
-//    $link_after .= "&id=$profileId";
-//    $link_after .= "#itemdrops";
-//    $total_drops = $drops_pages["total"];
-//    $itemdrops = $drops_pages["pages"];
-//
-//    $drops_page_navigation = new PaginationHelper([
-//        "page" => $p['page'],
-//        "total" => $total,
-//        "per_page" => $p['per_page'],
-//        "link_before" => $action_url,
-//        "link_after" => $link_after,
-//        "show_pages" => 4,
-//        "expand" => 20
-//    ]);
-//
+
+
+    /*
+     * ItemDrops Table
+     */
+    $drops = DropModel::get([
+        "page" => 1,
+        "per_page" => 10,
+        "accountid" => $player["id"],
+        "delivered" => 0,
+        "undelivered" => 0,
+        "order_by" => "1",
+        "asc_desc" => "desc"
+    ]);
+
+    $table = new TableHelper($action_url, $p);
+
+    $table->add_column([
+        'width' => '30px'
+    ]);
+
+    $table->add_column([
+        'width' => '40%',
+        'label' => 'Item',
+        'order_by' => 'itemdrop'
+    ]);
+
+    $table->add_column([
+        'width' => '20%',
+        'label' => 'Dropped',
+        'order_by' => 'dropdate_df'
+    ]);
+
+    $table->add_column([
+        'width' => '20%',
+        'label' => 'Recebido',
+        'order_by' => 'takendate_df'
+    ]);
+
+
+    $table->add_column([
+        'width' => '20%',
+        'label' => 'Recebido após',
+        'order_by' => 'idledroptime'
+    ]);
+
+    $table->add_column([
+        'width' => '18px',
+        'alignment' => 'center',
+        'label' => '<i class="fa fa-trash-o"></i>',
+        'label_title' => 'Apagar'
+    ]);
+
 //    // Item Drops!
 //    $new_drops_pages = DropModel::get([
 //        "per_page" => 6,
@@ -138,6 +175,9 @@ function users_show () {
 //    $lootmessage = "WOW";
 //    $loottitle = "very items";
 
+    /*
+     * Render Page
+     */
 
     require('templates/users/show.php');
 }

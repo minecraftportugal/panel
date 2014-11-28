@@ -36,6 +36,7 @@ require_once('controllers/users/show.php');
 require_once('controllers/users/drop_items.php');
 require_once('controllers/users/update.php');
 require_once('controllers/users/configure.php');
+require_once('controllers/users/options.php');
 require_once('controllers/users/reset_password.php');
 
 require_once('controllers/admin/ip_addresses.php');
@@ -63,7 +64,7 @@ require_once('controllers/errors.php');
 require_once('controllers/test/index.php');
 
 
-
+require_once('helpers/mail.php');
 require_once('helpers/flash.php');
 require_once('helpers/pagination.php');
 require_once('helpers/arguments.php');
@@ -86,9 +87,11 @@ $r->map('POST', '/sessions/configure', 'sessions_configure');
 
 $r->map('GET',  '/register', 'users_new');
 $r->map('GET',  '/profile', 'users_show');
+
 $r->map('POST', '/register', 'users_create');
 $r->map('POST', '/reset_password', 'users_reset_password');
 
+$r->map('GET',  '/options', 'users_options_show');
 $r->map('POST', '/users/update_irc', 'users_update_irc'); // Should be a put -- LOL REST
 $r->map('POST', '/users/update_password', 'users_update_password');
 $r->map('POST', '/users/configure', 'users_configure');

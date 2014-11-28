@@ -25,11 +25,15 @@ form input[type=reset] {
   background: linear-gradient(to bottom, #000000, #303030);
 }
 
-div.page-filters form input[type=checkbox] {
+form ul li {
+    margin-bottom: 5px;
+}
+
+form ul li input[type=checkbox] {
   margin-top: 5px;
 }
 
-div.page-panel-body form input:not([type=checkbox]) {
+form ul li input:not([type=checkbox]) {
   margin: auto;
 }
 
@@ -45,8 +49,25 @@ input[type=text], input[type=password] {
   outline: none;
 }
 
-input[type=text], input[type=password], label[for] { 
+input[type=text], input[type=password], label[for]:not(.input-label) { 
   display: block;
+}
+
+form[name=drop_items] select#itemid_sel {
+  width: 204px;
+}
+
+form[name=drop_items] input[type=submit] {
+  width: 244px
+}
+
+form[name=drop_items] input#itemid {
+  width: 45px;
+}
+
+form[name=drop_items] input#itemqt, 
+form[name=drop_items] input#itemaux {
+  width: 30px;
 }
 
 input[type=submit], input[type=reset] {

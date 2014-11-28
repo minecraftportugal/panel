@@ -67,7 +67,7 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
-      <table class="alt-rows">
+      <table class="listing alt-rows">
 
         <?= $table->render_header(); ?>
 

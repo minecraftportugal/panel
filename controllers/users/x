@@ -1,0 +1,38 @@
+
+<table class="admin drops alt-rows">
+    <thead>
+    <tr>
+        <th class="cella" style="width: 24px;"><h2 title="Item">Item</h2></th>
+        <th class="cella" style="width: 50%;"></th>
+        <th class="cella" style="width: 50%;"><h2 title="Data Dropped/Recebido"><i>Dropped</i>/Recebido</h2></th>
+        <? if ($admin): ?>
+        <th class="cellz"><h2 id="select-all-delete-drops">X</h2></th>
+        <? endif; ?>
+    </tr>
+    </thead>
+    <tbody>
+    <? foreach((array)$itemdrops as $i): ?>
+    <tr>
+        <td class="cella" style="width: 30px;" title="Item ID #<?= $i['itemdrop'] ?>">
+            <span class="item" data-item="<?= $i['itemdrop'] ?> <?= $i['itemaux'] ?> <?= $i['itemnumber']?>" data-enchantments=""></span>
+        </td>
+        <td class="cella" title="Item ID #<?= $i['itemaux'] != 0 ? $i['itemdrop'].":".$i['itemaux'] : $i['itemdrop'] ?>">
+        <span style="width: 120px;" class="itemname" data-item="<?= $i['itemdrop'] ?> <?= $i['itemaux'] ?>" data-enchantments=""></span>
+    </td>
+    <? if (isset($i['takendate'])): ?>
+    <td class="cella" title="Dropped a <?= $i['dropdate'] ?> (<?= $i['idledroptime'] ?>)"><?= $i['takendate'] ?></td>
+    <? else: ?>
+    <td class="cella" title="Não Entregue"><i><?= $i['dropdate'] ?></i></td>
+    <? endif; ?>
+    <? if ($admin): ?>
+    <td class="cellz">
+        <input class="check-delete-drops" name="delete[]" value="<?= $i["id"] ?>" type="checkbox" />
+    </td>
+    <? endif; ?>
+    </tr>
+    <? endforeach; ?>
+</tbody>
+        </table>
+<table>
+<tr><td colspan="3" class="nav"><?= $drops_page_navigation ?></td></tr>
+</table>

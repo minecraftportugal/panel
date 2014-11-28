@@ -35,7 +35,7 @@
            data-widget-action="open"
            data-widget-name="widget-news"
            data-widget-classes="widget-scrollable-y"
-           data-widget-css='{"min-width" : "422px", "max-width" : "422px", "min-height" : "500px"}'
+           data-widget-css='{"min-width" : "452px", "max-width" : "452px", "min-height" : "500px"}'
            data-widget-title="<i class='fa fa-newspaper-o'></i> Noticias"><i class="fa fa-newspaper-o"></i> Noticias</a></li>
     <li><a id="menu-item-news"
            href="/status"
@@ -118,13 +118,13 @@
   <li><i class="fa fa-question-circle"></i> Ajuda</li>
   <li>
     <ul>
-      <li><a href="#"><i class="fa fa-help"></i> Iniciantes</a></li>
-      <li><a href="#"><i class="fa fa-help"></i> FAQ</a></li>
+      <li><a href="#"><i class="fa fa-life-ring"></i> Iniciantes</a></li>
+      <li><a href="#"><i class="fa fa-life-ring"></i> FAQ</a></li>
       <li><a id="menu-item-wiki"
            href="http://minecraft.gamepedia.com/Minecraft_Wiki"
            data-widget-action="open"
            data-widget-name="launcher"
-           data-widget-title="<i class='fa fa-money'></i> Minecraft Wiki"
+           data-widget-title="<i class='fa fa-life-ring'></i> Minecraft Wiki"
            data-widget-mode="iframe"
            data-widget-css='{"width" : "854px", "height" : "500px"}'><i class="fa fa-money"></i> Wiki</a></li>
     </ul>

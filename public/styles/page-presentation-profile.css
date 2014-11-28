@@ -1,15 +1,24 @@
 
 div.skin-display {
-    height: 282px;
+    height: 210px;
     display: block;
 
 }
 
+div.skin-display canvas {
+    position: relative;
+    top: 5px;
+    left: -13px;
+}
+
+div.layout-row {
+
+}
+
 div.layout-col {
+    margin: 5px 0px 0px 5px;
     border: solid 1px #353535;
-    border-radius-left-top: 4px;
-    border-radius-right-top: 4px;
-    background: linear-gradient(to bottom, #252525, #101010);
+    background: linear-gradient(to bottom, #050505, #101010);
 }
 
 div.layout-col canvas {
@@ -20,19 +29,21 @@ div.layout-col.iframe iframe {
     position: relative;
     width: 100%;
     top: 0px;
-    height: 388px;
+    height: calc(350px - 22px);
 
 }
 
 div.layout-col div.iframe-block {
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: 22px;
-    height: 368px;
-    background-color: rgba(0, 0, 0, 0.10);
+    top: calc(-100% + 20px);
+    height: calc(100% - 20px);
     z-index: 2147483647;
 }
 
+div.layout-col-c {
+    float: left;
+}
 div.layout-col-sec {
     width: 100%;
     margin-bottom: 6px;
@@ -41,76 +52,48 @@ div.layout-col-sec {
 div.layout-col-title {
     background: linear-gradient(to bottom, #252525, #353535);
     color: #FFFFFF;
-    height: 22px;
     font-size: 12px;
     line-height: 22px;
-    padding-left: 4px;
+    padding: 0 4px 0 4px;
 }
 
-div.layout-col-1 {
-    position: absolute;
+div.layout-col-footer {
+    background: linear-gradient(to bottom, #353535, #252525);
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 22px;
+    padding: 0 4px 0 4px;
+}
+
+div.layout-col-character {
     width: 250px;
-    height: 410px;
-    left: 5px;
-    top: 5px;
+    height: 350px;
+    float: left;
+    overflow: hidden;
 }
 
-
-div.layout-col-2 {
-    position: absolute;
+div.layout-col-map {
     width: calc(100% - 268px);
-    height: 410px;
-    right: 5px;
-    top: 5px;
-}
-
-div.layout-col-3 {
-    position: absolute;
-    width: calc(100% - 12px);
-    min-height: 400px%;
-    right: 5px;
-    top: 421px;
-}
-
-div.layout-col-a {
-    margin: 5px 0 0 5px;
-    display: block;
-    width: calc(100% - 11px);
-}
-
-div.layout-col-b {
-    margin: 5px 0 0 5px;
-    display: block;
-    width: calc(50% - 9px);
+    height: 350px;
     float: left;
 }
+
+div.layout-col-full-width {
+    width: calc(100% - 11px);
+    float: left;
+}
+
 
 div.layout-col-content {
     margin: 5px 0 0 5px;
 }
 
-/*
- * Tables
- */
-
-div.layout-col table {
-    width: calc(100% - 20px);
-    margin: 10px;
-    border-collapse: separate;
-
-}
-
-div.layout-col table th,
-div.layout-col table td {
-    padding: 4px;
-}
-
-div.layout-col table th {
-    color: #666666;
-}
-
 div.layout-badge-container {
     height: 30px;
+}
+
+div.layout-col div.padded {
+    padding: 10px;
 }
 
 /*
@@ -186,3 +169,45 @@ div.hunger > span.full
     background-position: -18px -9px;
 }
 
+
+/*
+ * Tables
+ */
+
+table.stats {
+    border-collapse: separate;
+}
+
+table.stats th,
+table.stats td {
+    padding: 4px;
+}
+
+table.stats th {
+    color: #999999;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+
+}
+
+
+table.inventory {
+    border: 2px solid #888888;
+    margin: auto;
+}
+
+table.inventory td {
+    background-color: #111111;
+    border: 1px solid #888888;
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+}
+
+table.inventory tr:nth-child(4) td {
+    border-top: 5px solid #888888;
+}
+
+table.inventory tr:not(:nth-child(4)) td:first-child {
+
+    margin-left: 10px;
+}

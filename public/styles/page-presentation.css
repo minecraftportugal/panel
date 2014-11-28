@@ -11,8 +11,24 @@ a:active {
   text-align: center !important;
 }
 
+.w45p {
+    width: 45%;
+}
+
+.w60 {
+  width: 60%
+}
+
 div.clearer {
     clear: both;
+}
+
+div.push-down {
+    margin-bottom: 5px;
+}
+
+div.pad-up {
+    padding-bottom: 5px;
 }
 
 div.page-panel-header {
@@ -96,39 +112,29 @@ div.page-panel-body.page-panel-left ul {
     width: 180px;
 }
 
-div.page-panel-body.page-panel-left ul li {
-    margin-bottom: 5px;
-}
-
 /* Tables */
-div.page-panel-body table {
+table.listing {
     table-layout: fixed;
     width: 100%;
     white-space: nowrap;
     border: 1px solid #222222;
 }
 
-div.page-panel-body table div input[type=checkbox] {
-    height: 30px;
-    width: 14px;
-    line-height: 30px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
-div.page-panel-body table thead {
+
+table.listing thead {
     background: linear-gradient(to bottom, #353535, #050505);
 }
 
-div.page-panel-body table tbody {
+table.listing tbody {
 
 }
 
-div.page-panel-body table tr {
+table.listing tr {
 
 }
 
-div.page-panel-body table tr td,
-div.page-panel-body table tr th {
+table.listing tr td,
+table.listing tr th {
     text-align: left;
     vertical-align: middle;
     padding: 0px 8px 0px 8px;
@@ -136,7 +142,7 @@ div.page-panel-body table tr th {
     height: 30px;
 }
 
-div.page-panel-body table thead tr td a {
+table.listing thead tr td a {
     display: block;
     height: 30px;
     line-height: 30px;
@@ -144,50 +150,50 @@ div.page-panel-body table thead tr td a {
     width: 100%;
 }
 
-div.page-panel-body table tr td div {
+table.listing tr td div {
     height: 30px;
     line-height: 30px;
 }
 
-div.page-panel-body table.alt-rows tr th,
-div.page-panel-body table.alt-rows-2 tr th {
+table.listing.alt-rows tr th,
+table.listing.alt-rows-2 tr th {
     background: rgba(0,0, 0, 0.05);
 }
 
-div.page-panel-body table.alt-rows tr:nth-child(even) td {
+table.listing.alt-rows tr:nth-child(even) td {
     background: rgba(0, 0, 0, 0.05);
 }
 
 
-div.page-panel-body table.alt-rows tr.footer td {
+table.listing.alt-rows tr.footer td {
     background: rgba(0, 0, 0, 0);
 }
 
-div.page-panel-body table.alt-rows tr:nth-child(odd) td {
+table.listing.alt-rows tr:nth-child(odd) td {
      background: rgba(255, 255, 255, 0.05);
 }
 
-div.page-panel-body table.alt-rows-2 tr:nth-child(4n) td,
-div.page-panel-body table.alt-rows-2 tr:nth-child(4n-1) td {
+table.listing.alt-rows-2 tr:nth-child(4n) td,
+table.listing.alt-rows-2 tr:nth-child(4n-1) td {
     background: rgba(0, 0, 0, 0.05);
 }
 
-div.page-panel-body table.alt-rows-2 tr:nth-child(4n-2) td,
-div.page-panel-body table.alt-rows-2 tr:nth-child(4n-3) td {
+table.listing.alt-rows-2 tr:nth-child(4n-2) td,
+table.listing.alt-rows-2 tr:nth-child(4n-3) td {
     background: rgba(255, 255, 255, 0.1);
 }
 
 
-div.page-panel-body table thead td.column-sortable {
+table.listing thead td.column-sortable {
     cursor: pointer;
 }
 
-div.page-panel-body table thead td.column-sortable:active {
+table.listing thead td.column-sortable:active {
     color: #AAAAAA;
     background: linear-gradient(to bottom, #000000, #252525) !important;
 }
 
-div.page-panel-body table tbody tr:hover td {
+table.listing tbody tr:hover td {
     background: rgba(255, 255, 255, 0.1) !important;
 }
 

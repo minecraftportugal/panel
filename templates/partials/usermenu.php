@@ -6,7 +6,7 @@
   <li>
     <ul>
       <li>
-          <a href="/profile/?id=<?= $user['id'] ?>"
+          <a href="/options"
              data-widget-action="open"
              data-widget-title="<i class='fa fa-gear'></i> Opções"
              data-widget-name="options"><i class="fa fa-gear"></i> Opções</a>
@@ -14,8 +14,9 @@
       <li>
           <a href="/profile/?id=<?= $user['id'] ?>"
              data-widget-action="open"
-             data-widget-title="<i class='fa fa-user'e></i> Perfil"
-             data-widget-name="profile"><i class="fa fa-user"></i> Perfil</a>
+             data-widget-classes="widget-scrollable-y"
+             data-widget-title="<i class='fa fa-user'e></i> <?= $user['playername'] ?>"
+             data-widget-name="profile-<?= $user['playername'] ?>"><i class="fa fa-user"></i> Perfil</a>
       </li>
       <li class="separator">
           <a href="#" onclick="javascript:Widget.clearState();"><i class="fa fa-sign-out"></i> Reset Widgets</a>

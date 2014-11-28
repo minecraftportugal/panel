@@ -2,9 +2,12 @@
 
 require_once('lib/sessions.php');
 
+use models\account\AccountModel;
+use helpers\notice\NoticeHelper;
+
 function users_reset_password() {
   
-  validateSession();
+  validateSession(true);
   validateXSRFToken();
 
   $id = isset($_POST['id']) ? $_POST['id'] : NULL;
@@ -12,14 +15,16 @@ function users_reset_password() {
   $admin = isset($_SESSION['admin']) ? $_SESSION['admin'] : NULL;
   
   if ((($admin == "1") or ($_SESSION[id] == $id)) and ($reset_pass_check == "1")) {
-    $status = resetPassword($id);
+    $status = AccountModel::resetPassword($id);
   } else {
-    setFlash('error', "Password inalterada");
+      NoticeHelper::set('error', 'password inalterada');
   }
   
   if (!$status) {
+    NoticeHelper::set('error', 'password inalterada');
     header("Location: /profile?id=$id#resetpw");
   } else {
+    NoticeHelper::set('success', 'alterações efectuadas');
     header("Location: /profile?id=$id#resetpw");
   }
 }

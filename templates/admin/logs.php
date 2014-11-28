@@ -28,7 +28,7 @@
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
     <form name="manage_logs" action="/admin/delete_logs" method="POST" autocomplete="off">
-      <table class="alt-rows">
+      <table class="listing alt-rows">
 
         <?= $table->render_header(); ?>
 
