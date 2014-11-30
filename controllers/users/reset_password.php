@@ -1,14 +1,13 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\notice\NoticeHelper;
 
 function users_reset_password() {
   
-  validateSession(true);
-  validateXSRFToken();
+  Session::validateSession(true);
+  Session::validateXSRFToken();
 
   $id = isset($_POST['id']) ? $_POST['id'] : NULL;
   $reset_pass_check = isset($_POST['reset_pass_check']) ? $_POST['reset_pass_check'] : NULL;

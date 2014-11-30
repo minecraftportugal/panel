@@ -1,14 +1,13 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\request\RequestHelper;
 use helpers\table\TableHelper;
 
 function admin_ip_addresses() {
 
-    validateSession(true);
+    Session::validateSession(true);
 
     $addresses = AccountModel::ip_addresses();
 

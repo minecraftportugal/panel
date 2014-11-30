@@ -1,7 +1,6 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\session\SessionModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
@@ -10,7 +9,7 @@ use helpers\table\TableHelper;
 
 function admin_sessions() {
 
-    validateSession(true);
+    Session::validateSession(true);
 
     $action_url = '/admin/sessions';
 

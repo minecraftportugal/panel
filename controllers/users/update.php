@@ -1,13 +1,12 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use \models\account\AccountModel;
 
 function users_update_irc() {
 
-  validateSession();
-  validateXSRFToken();
+  Session::validateSession();
+  Session::validateXSRFToken();
   
   $id = $_SESSION['id'];
   $irc_nickname = isset($_POST['irc_nickname']) ? $_POST['irc_nickname'] : NULL;
@@ -25,8 +24,8 @@ function users_update_irc() {
 
 function users_update_password() {
 
-  validateSession();
-  validateXSRFToken();
+  Session::validateSession();
+  Session::validateXSRFToken();
   
   $id = $_SESSION['id'];
   $password = isset($_POST['password']) ? $_POST['password'] : NULL;

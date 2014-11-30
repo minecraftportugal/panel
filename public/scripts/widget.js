@@ -44,7 +44,6 @@ function Widget(options, states) {
     this.buttonSelector = "div#button-widget-" + this.options.name;
 
 
-
     if (Widget.counter === undefined) {
         Widget.counter = 1;
     } else {
@@ -84,6 +83,139 @@ function Widget(options, states) {
 
         this.load(this.options.url);
     }
+
+}
+
+Widget.serializeState = function() {
+
+        var widgets = [];
+
+        if (Widget.widgets === undefined) {
+                Widget.widgets = [];
+        }
+
+        $.each(Widget.widgets, function(n, widget) {
+
+                widget.pushState();
+
+                var object = {
+                        options : widget.options,
+                        states : widget.states
+                };
+
+                widgets.push(object);
+        });
+
+
+        var serializedObject = JSON.stringify(widgets, function(name, value) {
+                return value;
+        });
+
+        return serializedObject;
+
+}
+
+Widget.saveState = function() {
+
+        var serializedObject = Widget.serializeState();
+        var base64Object = btoa(serializedObject);
+        localStorage.setItem("widgetState", base64Object);
+
+}
+
+Widget.loadState = function() {
+
+        var base64Object = localStorage.getItem("widgetState");
+        if ((base64Object === undefined) || (base64Object === null)) {
+                return;
+        }
+
+        var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
+        var object = [];
+        try {
+                object = JSON.parse(serializedObject);
+        } catch(e) {
+                console.log("Couldn't load widget states from localStorage")
+        }
+
+
+        $.each(object, function(n, object) {
+
+                var createdWidget = new Widget(object.options, object.states);
+                createdWidget.popState();
+
+        });
+
+}
+
+Widget.clearState = function() {
+        Widget.saveOnExit = false;
+        localStorage.clear();
+        window.location.reload();
+}
+
+
+Widget.cascade = function() {
+    Widget.counter = 0;
+    $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
+    $.each(Widget.widgets, function(n, e) {
+        Widget.counter += 1;
+        e.shrink();
+        e.initPosition();
+        e.bringTop();
+
+    });
+}
+
+Widget.tile = function() {
+    var wLeft = 0;
+    var wTop = 0;
+    $.each(Widget.widgets, function(n, e) {
+        e.shrink();
+        $(this.selector).css("left", wLeft + "px");
+        $(this.selector).css("top", wTop + "px");
+        e.bringTop();
+
+        wLeft = wLeft + parseInt($(this.selector).css("width"));
+
+        if (wLeft > $("div#widget-container").width()) {
+            wTop = wTop + parseInt($(this.selector).css("height"));
+            wLeft = 0;
+
+            if (wTop > $("div#widget-container").height()) {
+                wTop = 0;
+            }
+        }
+    });
+}
+
+Widget.embiggen = function() {
+    $.each(Widget.widgets, function(n, e) {
+        e.maximize();
+        //e.bringTop();
+        //e.setActive();
+    });
+}
+
+Widget.minimizeAll = function() {
+    $.each(Widget.widgets, function(n, widget) {
+            console.log(widget);
+            widget.minimize();
+    });
+}
+
+Widget.getByName = function(name) {
+
+
+    var widget;
+    $.each(Widget.widgets, function(n, e) {
+        if (e.options.name == name) {
+            widget = e;
+            return false;
+        }
+    });
+
+    return widget;
 
 }
 
@@ -208,9 +340,10 @@ Widget.prototype.init = function(notApplyingStates) {
 }
 
 Widget.prototype.load = function(url) {
-        var url = url || this.options.url;
-
-        if (this.options.useIframe == true) {
+ 
+    var url = url || this.options.url;
+ 
+    if (this.options.useIframe == true) {
 
         this.iframeId = this.id + "-iframe";
         var jq_tag = $("<iframe></iframe>");
@@ -222,92 +355,18 @@ Widget.prototype.load = function(url) {
     } else {
 
         var widgetInstance = this;
+        var container = $(widgetInstance.selector).find("div.widget-body");
         var loading_blocker = $(widgetInstance.selector).find("div.widget-body").next();
 
-        $.ajax({
-            url: url,
-            beforeSend: function() {
-                    loading_blocker.addClass("block-enabled");
-            },
-            success: function(response) {
-                    $(widgetInstance.selector).find("div.widget-body").html(response);
-                    loading_blocker.removeClass("block-enabled");
-            },
-            error: function() {
-                    loading_blocker.removeClass("block-enabled");
-            }
-        });
+        Ajax.request(url, undefined, "GET", container, loading_blocker);
+
     }
-//    this.bringTop();
-//    this.setActive();
-}
 
-Widget.serializeState = function() {
-        var widgets = [];
-
-        if (Widget.widgets === undefined) {
-                Widget.widgets = [];
-        }
-
-        $.each(Widget.widgets, function(n, widget) {
-
-                widget.pushState();
-
-                var object = {
-                        options : widget.options,
-                        states : widget.states
-                };
-
-                widgets.push(object);
-        });
-
-
-        var serializedObject = JSON.stringify(widgets, function(name, value) {
-                return value;
-        });
-
-        return serializedObject;
+    //    this.bringTop();
+    //    this.setActive();
 
 }
 
-Widget.saveState = function() {
-
-        var serializedObject = Widget.serializeState();
-        var base64Object = btoa(serializedObject);
-        localStorage.setItem("widgetState", base64Object);
-
-}
-
-Widget.loadState = function() {
-
-        var base64Object = localStorage.getItem("widgetState");
-        if ((base64Object === undefined) || (base64Object === null)) {
-                return;
-        }
-
-        var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
-        var object = [];
-        try {
-                object = JSON.parse(serializedObject);
-        } catch(e) {
-                console.log("Couldn't load widget states from localStorage")
-        }
-
-
-        $.each(object, function(n, object) {
-
-                var createdWidget = new Widget(object.options, object.states);
-                createdWidget.popState();
-
-        });
-
-}
-
-Widget.clearState = function() {
-        Widget.saveOnExit = false;
-        localStorage.clear();
-        window.location.reload();
-}
 
 Widget.prototype.pushState = function() {
     var maximized =    $(this.selector).hasClass("maximized");
@@ -394,56 +453,6 @@ Widget.prototype.bringTop = function() {
     $(this.selector).css("z-index", max_z + 1);
 }
 
-
-Widget.cascade = function() {
-    Widget.counter = 0;
-    $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
-    $.each(Widget.widgets, function(n, e) {
-        Widget.counter += 1;
-        e.shrink();
-        e.initPosition();
-        e.bringTop();
-
-    });
-}
-
-Widget.tile = function() {
-    var wLeft = 0;
-    var wTop = 0;
-    $.each(Widget.widgets, function(n, e) {
-        e.shrink();
-        $(this.selector).css("left", wLeft + "px");
-        $(this.selector).css("top", wTop + "px");
-        e.bringTop();
-
-        wLeft = wLeft + parseInt($(this.selector).css("width"));
-
-        if (wLeft > $("div#widget-container").width()) {
-            wTop = wTop + parseInt($(this.selector).css("height"));
-            wLeft = 0;
-
-            if (wTop > $("div#widget-container").height()) {
-                wTop = 0;
-            }
-        }
-    });
-}
-
-Widget.embiggen = function() {
-    $.each(Widget.widgets, function(n, e) {
-        e.maximize();
-        //e.bringTop();
-        //e.setActive();
-    });
-}
-
-Widget.minimizeAll = function() {
-        $.each(Widget.widgets, function(n, widget) {
-                console.log(widget);
-                widget.minimize();
-        });
-}
-
 Widget.prototype.maximize = function() {
     $(this.selector).show();
     $(this.buttonSelector).removeClass("minimized");
@@ -507,6 +516,19 @@ Widget.prototype.close = function() {
     if (elementIndex !== null) {
         Widget.widgets.splice(elementIndex, 1);
     }
+}
+
+
+Widget.prototype.hilight = function(data) {
+  
+    if ($(this.buttonSelector).hasClass("minimized")) {
+        $(this.buttonSelector).addClass("activity");
+
+        $(this.buttonSelector).one("click", function() {
+            $(this).removeClass("activity");
+        });
+    }
+
 }
 
 $(document).on("click", "[data-widget-action]", function(event) {

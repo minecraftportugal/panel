@@ -1,7 +1,6 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\log\LogModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
@@ -10,7 +9,7 @@ use helpers\table\TableHelper;
 
 function admin_logs() {
 
-    validateSession(true);
+    Session::validateSession(true);
 
     $action_url = '/admin/logs';
 

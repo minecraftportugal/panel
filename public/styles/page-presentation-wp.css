@@ -1,0 +1,13 @@
+div.post img {
+  max-width: 100%;
+  height: auto;
+}
+
+div.post p {
+  line-height: 1.1em;
+  margin: bottom: 2em;
+}
+
+div.post p:first-letter {
+  font-size: 1.2em;
+}

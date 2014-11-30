@@ -1,11 +1,10 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 
 function launcher_index() {  
-  validateSession();
+  Session::validateSession();
   
   $user = AccountModel::get(['id' => $_SESSION['id']])[0];
 

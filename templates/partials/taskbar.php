@@ -13,15 +13,15 @@
     <i class="fa fa-minus-circle"></i>
 </div>
 
-<div id="widget-button-container-tile" class="widget-context-button" onclick="javascript: Widget.tile();" title="Janelas Maximizadas">
+<div id="widget-button-container-tile" class="widget-context-button" title="Janelas Maximizadas">
     <i class="fa fa-th-large"></i>
 </div>
 
-<div id="widget-button-container-cascade" class="widget-context-button" onclick="javascript: Widget.cascade();" title="Janelas em Cascata">
+<div id="widget-button-container-cascade" class="widget-context-button" title="Janelas em Cascata">
     <i class="fa fa-align-justify"></i>
 </div>
 
-<div id="widget-button-container-embiggen" class="widget-context-button" onclick="javascript: Widget.embiggen();" title="Janelas Alinhadas">
+<div id="widget-button-container-embiggen" class="widget-context-button" title="Janelas Alinhadas">
     <i class="fa fa-list-alt"></i>
 </div>
 

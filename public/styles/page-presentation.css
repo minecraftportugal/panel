@@ -319,6 +319,10 @@ span.badge {
     margin: 0px;
 }
 
+table tr td span.badge {
+    margin: 3px 0 3px 0;
+}
+
 span.badge-premium {
     background-image: url(/images/icons/badge_premium.png);
 }
@@ -345,6 +349,14 @@ span.badge-member {
 
 span.badge-deactivated {
     background-image: url(/images/icons/badge_deactivated.png);
+}
+
+span.badge-online {
+    background-image: url(/images/icons/badge_online.png);
+}
+
+span.badge-offline {
+    background-image: url(/images/icons/badge_offline.png);
 }
 
 .text-center {

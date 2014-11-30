@@ -27,6 +27,35 @@ $(function() {
         event.stopPropagation();
     });
 
+    $(document).on("click", "div#widget-button-container-tile", function(event) {
+        Widget.tile();
+        event.stopPropagation();
+    });
+
+    $(document).on("click", "div#widget-button-container-tile", function(event) {
+        Widget.tile();
+        event.stopPropagation();
+    });
+
+    $(document).on("click", "div#widget-button-container-cascade", function(event) {
+        Widget.cascade();
+        event.stopPropagation();
+    });
+    
+    $(document).on("click", "div#widget-button-container-embiggen", function(event) {
+        Widget.embiggen();
+        event.stopPropagation();
+    });
+
+    $(document).on("click", "a#menu-reset-widgets", function(event) {
+        Widget.clearState();
+        event.stopPropagation();
+    });
+
+    $(document).on("click", "a#menu-logout", function(event) {
+        App.logout();
+        event.stopPropagation();
+    });
 
     $(document).mousedown(function(event) {
         $("ul.menu-selected").removeClass("menu-selected");

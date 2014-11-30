@@ -10,7 +10,7 @@
 
     <div class="layout-row">
 
-        <div class="layout-col layout-col-a">
+        <div class="layout-col layout-col-full">
             
             <div class="layout-col-title">
                 <h1><?= count($online_players) ?> jogadores Online</h1>
@@ -65,7 +65,7 @@
 
     <div class="layout-row">
 
-        <div class="layout-col layout-col-b">
+        <div class="layout-col layout-col-half">
             <div class="layout-col-title">
                 <h1 title="Time Wasters ;)">Mais Activos</h1>
             </div>
@@ -93,7 +93,7 @@
             </div>
         </div>
 
-        <div class="layout-col layout-col-b">
+        <div class="layout-col layout-col-half">
             <div class="layout-col-title">
                 <h1 title="noobs">Novos Jogadores</h1>
             </div>

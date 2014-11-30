@@ -1,13 +1,14 @@
 <?php
 
+use lib\session\Session;
 use models\fail\FailModel;
 use helpers\Notice\NoticeHelper;
 
 function admin_delete_logs() {
 
   //session: admin
-  validateSession(true);
-  validateXSRFToken();
+  Session::validateSession(true);
+  Session::validateXSRFToken();
 
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 

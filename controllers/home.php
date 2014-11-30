@@ -1,13 +1,12 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\minotar\MinotarHelper;
 
 function home() {
 
-    validateSession();
+    Session::validateSession();
 
     $user = AccountModel::get(['id' => $_SESSION['id']])[0];
 

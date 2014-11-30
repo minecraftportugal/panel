@@ -3,7 +3,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-    <meta name="xsrf_token" content="<?= getXSRFToken() ?>" >
+    <meta name="xsrf_token" content="<?= \lib\session\Session::getXSRFToken() ?>" >
     <meta name="username" content="<?= $user["playername"] ?>" >
 
     <title>minecraft.pt | MinePanel 3.0</title>
@@ -26,6 +26,8 @@
     <script type="text/javascript" src="/scripts/jquery.scrollto.js"></script>
     <script type="text/javascript" src="/scripts/jqueryui.js"></script>
     <script type="text/javascript" src="/scripts/Three.js"></script>
+
+    <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/scripts/ajax.js"></script>
     <script type="text/javascript" src="/scripts/behaviour.js"></script>
     <script type="text/javascript" src="/scripts/widget.js"></script>
@@ -33,7 +35,6 @@
     <script type="text/javascript" src="/scripts/widgets-definition.js"></script>
     <script type="text/javascript" src="/scripts/cookies.js"></script>
     <script type="text/javascript" src="/scripts/sop.js"></script>
-    <script type="text/javascript" src="/scripts/top.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
 
     <? require("partials/background-css.php"); ?>

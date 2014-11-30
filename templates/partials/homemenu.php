@@ -42,7 +42,7 @@
            data-widget-action="open"
            data-widget-name="widget-status"
            data-widget-classes="widget-scrollable-y"
-           data-widget-css='{"min-width" : "422px", "max-width" : "422px", "min-height" : "500px"}'
+           data-widget-css='{"min-width" : "424px", "max-width" : "424px", "min-height" : "500px"}'
            data-widget-title="<i class='fa fa-columns'></i> Servidor"><i class="fa fa-columns"></i> Status</a></li>
     <li><a id="menu-item-dynmap"
            href="//dynmap.minecraft.pt"

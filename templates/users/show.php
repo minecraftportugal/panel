@@ -42,7 +42,7 @@
                 <? endif; ?>
                     <tr>
                         <th>In-Game IP</th>
-                        <td><?= $player['address'] ?></td>
+                        <td><?= $player['address'] != "" ? $player['address'] : "Sem Sessão" ?></td>
                     </tr>
                     <tr>
                         <th>Sessão</th>
@@ -56,11 +56,12 @@
                                data-widget-title="<i class='fa fa-users'></i> Contas"
                                data-widget-name="admin-accounts"><?= $player['email'] ?></a></td>
                     </tr>
-                <? if ($player): ?>
+                <? if ($has_played): ?>
                     <tr>
                         <th>Servidor</th>
                         <td><?= $player['server'] ?></td>
                     </tr>
+
                     <tr>
                         <th>Entrada</th>
                         <td><?= date('M d H:i Y', strtotime($player['lastJoin'])) ?></td>
@@ -80,6 +81,7 @@
                         <td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td>
                     </tr>
                 <? endif; ?>
+
 
                 <? endif; ?>
                     </tbody>
@@ -118,7 +120,7 @@
                                 <label class="checkbox" for="chk_delete_<?= $player['id'] ?>">apagar
                             </li>
                             <li>
-                                <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+                                <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
                                 <input type="hidden" name="id" value="<?= $player['id'] ?>" />
                                 <input type="submit" value="OK" />
                             </li>
@@ -150,7 +152,7 @@
                         </li>
                         <li>
                             <input type="submit" value="drop" />
-                            <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+                            <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
                             <input type="hidden" name="id" value="<?= $player['id'] ?>" />
                         </li>
                         </ul>
@@ -172,7 +174,7 @@
                             </li>
                             <li>
                                 <input type="submit" value="OK" />
-                                <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+                                <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
                             </li>
                         </ul>
                     </form>
@@ -196,6 +198,7 @@
                 <span class="pull-left">
                   <?= $player['playername'] ?>
                 </span>
+                <div class="clearer"></div>
             </div>
 
             <div class="text-center layout-col-sec">

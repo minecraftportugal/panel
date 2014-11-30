@@ -79,7 +79,7 @@
       <div class="separator"></div>
 
       <div class="center">
-        <input type="hidden" name="xsrf_token" value="<?= getXSRFToken() ?>" />
+        <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
         <input type="submit" value="OK" />
       </div>            
     </form>

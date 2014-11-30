@@ -1,23 +1,23 @@
 <?
 
-require_once('lib/sessions.php');
+use lib\session\Session;
 
 function admin_register() {
-  
-  //session: admin
-  validateSession(true);
-  validateXSRFToken();
-  
-  $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
-  $email = isset($_POST['email']) ? $_POST['email'] : NULL;
+    
+    //session: admin
+    Session::validateSession(true);
+    Session::validateXSRFToken();
+    
+    $username = isset($_POST['playername']) ? $_POST['playername'] : NULL;
+    $email = isset($_POST['email']) ? $_POST['email'] : NULL;
 
-  $status = AccountModel::register($username, $email, $email_ip = false);
-  
-  if (!$status) {
-    header("Location: /admin");
-  } else {
-    header("Location: /admin");
-  }
+    $status = AccountModel::register($username, $email, $email_ip = false);
+    
+    if (!$status) {
+        header("Location: /admin");
+    } else {
+        header("Location: /admin");
+    }
 }
 
 ?>

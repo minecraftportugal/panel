@@ -2,6 +2,7 @@
 
 namespace models\account;
 
+use lib\xauth\xAuth;
 use minecraftia\db\Bitch;
 use helpers\mail\MailHelper;
 use helpers\notice\NoticeHelper;
@@ -237,20 +238,21 @@ class AccountModel {
         $result = Bitch::source('default')->first($q, compact('id'));
 
         $badges = [
-        'premium' => $result['premium'],
-        'admin' => $result['admin'],
-        'donor' => $result['donor'],
-        'contributor' => $result['contributor'],
-        'operator' => $result['operator'],
-        'active' => $result['active']
+            'premium' => $result['premium'],
+            'admin' => $result['admin'],
+            'donor' => $result['donor'],
+            'contributor' => $result['contributor'],
+            'operator' => $result['operator'],
+            'active' => $result['active']
         ];
 
-        $q = "SELECT totalTime FROM players WHERE name = :playername";
+        $q = "SELECT online, totalTime FROM players WHERE name = :playername";
         $playername = $result['playername'];
         $result = Bitch::source('inquisitor')->first($q, compact('playername'));
 
         $totalTime = intval($result['totalTime']);
         $badges["member"] = $totalTime > 3600 * 10 ? 1 : 0;
+        $badges["online"] = $result["online"] ? 1 : 0;
 
         return $badges;
 
@@ -309,7 +311,7 @@ class AccountModel {
 
         $password = substr(md5(rand()), 0, 7);
         $plain_password = $password;
-        $password = encryptPassword($password);
+        $password = xAuth::encryptPassword($password);
         $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active)
             VALUES(:username, :password, '0', :email, sysdate(), :ip, 1)";
         $result = Bitch::source('default')->query($q, compact('username', 'password', 'email', 'ip'));
@@ -366,7 +368,7 @@ class AccountModel {
         $q = "SELECT id, playername, password, admin FROM accounts WHERE id = :id AND active = 1;";
 
         if (!($result = Bitch::source('default')->first($q, compact('id')))
-            or  (!checkPassword($password, $result['password']))) {
+            or  (!xAuth::checkPassword($password, $result['password']))) {
             NoticeHelper::set('error', 'a password original que escreveste está errada');
             return false;
         }
@@ -378,7 +380,7 @@ class AccountModel {
                 return false;
             }
 
-            $password = encryptPassword($new_password);
+            $password = xAuth::encryptPassword($new_password);
             $q = "UPDATE accounts
                 SET password = :password
                 WHERE id = :id";
@@ -418,7 +420,7 @@ class AccountModel {
         $email = $player['email'];
         $password = substr(md5(rand()), 0, 7);
         $plain_password = $password;
-        $password = encryptPassword($password);
+        $password = xAuth::encryptPassword($password);
 
         $q = "UPDATE accounts
             SET password = :password

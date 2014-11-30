@@ -1,9 +1,9 @@
 <?
 
-require_once('lib/sessions.php');
+use lib\session\Session;
 
 function sessions_new () {
-  if (isLoggedIn()) {
+  if (Session::isLoggedIn()) {
     header('Location: /');
     exit();
   }

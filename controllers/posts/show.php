@@ -1,11 +1,12 @@
 <?
-require_once('lib/sessions.php');
+
+use lib\session\Session;
 
 function posts_show() {
 
-    validateSession();
+    Session::validateSession();
 
-    require('templates/posts/index.php');
+    require('templates/posts/show.php');
 }
 
 ?>

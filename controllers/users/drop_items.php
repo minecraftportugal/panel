@@ -1,13 +1,14 @@
 <?php
 
+use lib\session\Session;
 use models\drop\DropModel;
 use helpers\notice\NoticeHelper;
 
 function users_drop_items () {
 
   //session: admin
-  validateSession(true);
-  validateXSRFToken();
+  Session::validateSession(true);
+  Session::validateXSRFToken();
 
   $id = isset($_POST['id']) && $_POST['id'] != "" ? $_POST['id'] : null;
   $itemid = isset($_POST['itemid']) && $_POST['itemid'] != "" ? $_POST['itemid'] : null;
@@ -41,8 +42,8 @@ function users_drop_items () {
 function users_delete_drops() {
 
   //session: admin
-  validateSession(true);
-  validateXSRFToken();
+  Session::validateSession(true);
+  Session::validateXSRFToken();
 
   $accountid = isset($_POST['id']) ? $_POST['id'] : null;
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();

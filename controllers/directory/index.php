@@ -1,5 +1,6 @@
 <?
 
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
@@ -7,7 +8,7 @@ use helpers\notice\NoticeHelper;
 
 function directory_index() {
 
-    validateSession();
+    Session::validateSession();
 
     $action_url = '/directory';
 

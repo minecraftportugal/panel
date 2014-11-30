@@ -41,6 +41,16 @@ div.layout-col div.iframe-block {
     z-index: 2147483647;
 }
 
+div.layout-col-full {
+    width: calc(100% - 13px);
+    float: left;
+}
+
+div.layout-col-half {
+    width: calc(50% - 10px);
+    float: left;
+}
+
 div.layout-col-c {
     float: left;
 }

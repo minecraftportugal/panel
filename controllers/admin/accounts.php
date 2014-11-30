@@ -1,7 +1,6 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
@@ -11,7 +10,7 @@ use helpers\datetime\DateTimeHelper;
 
 function admin_accounts() {
 
-    validateSession(true);
+    Session::validateSession(true);
 
     $action_url = '/admin/accounts';
 

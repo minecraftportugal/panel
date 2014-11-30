@@ -1,13 +1,14 @@
 <?php
 
+use lib\session\Session;
 use models\drop\DropModel;
 use helpers\Notice\NoticeHelper;
 
 function admin_delete_drops() {
 
   //session: admin
-  validateSession(true);
-  validateXSRFToken();
+  Session::validateSession(true);
+  Session::validateXSRFToken();
 
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 

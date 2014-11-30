@@ -1,14 +1,13 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 
 function users_configure() {
 
   //session: admin
-  validateSession(true);
-  validateXSRFToken();
+  Session::validateSession(true);
+  Session::validateXSRFToken();
 
   $id = $_POST['id'];
   $admin = isset($_POST['admin']) ? $_POST['admin'] : 0;

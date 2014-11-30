@@ -1,11 +1,12 @@
 <?
 
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 
 function irc_index() {
 
-    validateSession();
+    Session::validateSession();
 
     $parameters = [
         "page" => 1,

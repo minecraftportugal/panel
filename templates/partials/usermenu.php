@@ -19,11 +19,10 @@
              data-widget-name="profile-<?= $user['playername'] ?>"><i class="fa fa-user"></i> Perfil</a>
       </li>
       <li class="separator">
-          <a href="#" onclick="javascript:Widget.clearState();"><i class="fa fa-sign-out"></i> Reset Widgets</a>
+          <a id="menu-reset-widgets" href="#"><i class="fa fa-sign-out"></i> Reset Widgets</a>
       </li>
       <li class="separator">
-          <a href="#"
-            onclick="javascript:top.logout();"><i class="fa fa-sign-out"></i> Sair</a>
+          <a id="menu-logout" href="#"><i class="fa fa-sign-out"></i> Sair</a>
       </li>
     </ul>
   </li>

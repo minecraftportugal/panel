@@ -1,10 +1,10 @@
 <?
 
-require_once('lib/sessions.php');
+use lib\session\Session;
 
 function maps_index() {
 
-  validateSession();
+  Session::validateSession();
 
   require('templates/maps/index.php');
 

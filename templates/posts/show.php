@@ -1,7 +1,11 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mario
- * Date: 24-11-2014
- * Time: 23:14
- */ 
+<?
+require_once('lib/sessions.php');
+
+function posts_index() {
+
+    validateSession();
+
+    require('templates/posts/show.php');
+}
+
+?>

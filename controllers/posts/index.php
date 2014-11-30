@@ -1,9 +1,10 @@
 <?
-require_once('lib/sessions.php');
+
+use lib\session\Session;
 
 function posts_index() {
 
-    validateSession();
+    Session::validateSession();
 
     require('templates/posts/index.php');
 }

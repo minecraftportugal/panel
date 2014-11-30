@@ -1,12 +1,12 @@
 <?
-require_once('lib/sessions.php');
 
+use lib\session\Session;
 use models\account\AccountModel;
 use models\drop\DropModel;
 
 function status_index() {
 
-    validateSession();
+    Session::validateSession();
 
     $online_players = AccountModel::get(["per_page" => 100, "online" => 1]);
 

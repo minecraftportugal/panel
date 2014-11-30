@@ -7,6 +7,8 @@ require_once('bootstrap.php');
 require_once('environment.php');
 require_once('router.php');
 
+require('lib/xauth.php');
+
 /* Wordpress */
 if (WP_ENABLED) {
     require_once(WP_LOCATION . "/wp-config.php");

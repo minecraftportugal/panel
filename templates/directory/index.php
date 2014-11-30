@@ -66,7 +66,7 @@
            data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>">
 
         <div class="section-1">
-          <span data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
+          <span>
             <?= $r["playername"] ?>
           </span>
         </div>

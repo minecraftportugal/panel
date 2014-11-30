@@ -254,18 +254,6 @@ div.widget-button.minimized:active {
     background: linear-gradient(to top, #050505, #050505, #202020);
 }
 
-div.widget-button.activity {
-    background: rgba(0,0,255,0.5) url('/images/icons/chatnew.png') no-repeat 5px center !important;
-}
-
-div.widget-button.activity:hover {
-    background: rgba(0,0,255,0.6) url('/images/icons/chatnew.png') no-repeat 5px center !important;
-}
-
-div.widget-button.activity:active {
-    background: rgba(0,0,255,0.7) url('/images/icons/chatnew.png') no-repeat 5px center !important;
-}
-
 div.widget-home-button {
     background: rgba(255, 255, 255, 0.1);
 }
@@ -279,3 +267,62 @@ div.widget-home-button:active {
     background: rgba(255, 255, 255, 0.01);
 }
 
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
+.activity {
+    -webkit-animation: activity 1s linear infinite;
+    -moz-animation: activity 1s linear infinite;
+    -ms-animation: activity 1s linear infinite;
+    animation: activity 1s linear infinite;
+    color: #CCCCCC !important;
+}
+
+@keyframes "activity" {
+ 0% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+ 50% {
+    background-color: rgba(0, 0, 255, 0.5);  
+ }
+ 100% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+}
+
+@-moz-keyframes activity {
+ 0% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+ 50% {
+    background-color: rgba(0, 0, 255, 0.5);  
+ }
+ 100% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+}
+
+@-webkit-keyframes "activity" {
+ 0% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+ 50% {
+    background-color: rgba(0, 0, 255, 0.5);  
+ }
+ 100% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+}
+
+@-ms-keyframes "activity" {
+ 0% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+ 50% {
+    background-color: rgba(0, 0, 255, 0.5);  
+ }
+ 100% {
+    background-color: rgba(0, 0, 255, 0.25);
+ }
+}

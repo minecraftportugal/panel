@@ -1,13 +1,12 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use helpers\Notice\NoticeHelper;
 
 function sessions_configure () {
 
-  validateSession();
-  validateXSRFToken();
+  Session::validateSession();
+  Session::validateXSRFToken();
 
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 

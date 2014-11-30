@@ -1,15 +1,14 @@
 <?
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\Notice\NoticeHelper;
 
 function admin_configure() {
 
-    validateSession(true); //session: admin
-    validateXSRFToken();
+    Session::validateSession(true); //session: admin
+    Session::validateXSRFToken();
 
     $action_url = '/admin/configure';
 

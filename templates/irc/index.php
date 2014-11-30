@@ -8,8 +8,9 @@
  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
  <script type="text/javascript" src="/scripts/irc.js"></script>
  <script type="text/javascript" src="/scripts/jquery.js"></script>
- <script type="text/javascript" src="/scripts/frames.js"></script>
+ 
  <script type="text/javascript" src="/scripts/sop.js"></script>
+
  <style type="text/css">
     html { height: 100%; overflow: hidden; }
     body {
@@ -33,36 +34,25 @@
 
 
  </style>
-<script type="text/javascript">
-$(function() {
-    $("div#buttons").click(function() {
-        parent.toggleChat();
-    });
-});
-</script>
+
 </head>
 
 <body>
  <div id="lightIRC" style="height:100%; text-align:center;">
   <p><a href="//www.adobe.com/go/getflashplayer"><img src="//www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a></p>
  </div>
-<!-- <div id="buttons">
- <a id="close" href="#">×</a>
- </div>
- -->
 
- <!--
- <?= var_dump($player); ?>
-
- -->
  <script type="text/javascript">
+
     params.realname = "Minecraftia User: <?=$_SESSION['username']?>";
     params.wmode = "transparent";
 
   <? if ($player['ircnickname'] != NULL): ?>
+
     params.nick = "<?=$player['ircnickname']?>";
     params.identifyPassword = "<?=$player['ircpassword']?>";
     params.ident = "<?=dechex(ip2long($_SERVER['REMOTE_ADDR']))?>X";
+
   <? else: ?>
     params.nick = "<?=$_SESSION['username']?>";
     params.nickAlternate = "<?=$_SESSION['username']?>_";
@@ -75,7 +65,6 @@ $(function() {
   <? else: ?>
     params.showNickSelection = "false";
   <? endif; ?>
-    console.log(params);
 
     swfobject.embedSWF("<?= LIGHTIRC_PATH ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
  </script>
