@@ -315,7 +315,6 @@ Widget.clearState = function() {
         window.location.reload();
 }
 
-
 Widget.cascade = function() {
     Widget.counter = 0;
     $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
@@ -360,7 +359,6 @@ Widget.embiggen = function() {
 
 Widget.minimizeAll = function() {
     $.each(Widget.widgets, function(n, widget) {
-            console.log(widget);
             widget.minimize();
     });
 }

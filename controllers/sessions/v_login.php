@@ -8,7 +8,7 @@ function v_login() {
     exit();
   }
 
-  require('templates/sessions/new.php');
+  require('templates/sessions/v_login.php');
 }
 
 ?>

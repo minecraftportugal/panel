@@ -97,7 +97,7 @@ function v_admin_drops() {
         'label_title' => 'Apagar'
     ]);
 
-    require('templates/admin/drops.php');
+    require('templates/admin/v_admin_drops.php');
 }
 
 ?>

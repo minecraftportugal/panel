@@ -82,7 +82,7 @@ function v_admin_sessions() {
         'label_title' => 'Informação',
     ]);
 
-    require('templates/admin/sessions.php');
+    require('templates/admin/v_admin_sessions.php');
 }
 
 ?>

@@ -6,7 +6,7 @@ function v_admin_register() {
 
     Session::validateSession(true);
 
-    require('templates/admin/register.php');
+    require('templates/admin/v_admin_register.php');
 }
 
 ?>

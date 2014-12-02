@@ -40,8 +40,9 @@ class AccountModel {
         $args = array_merge(AccountModel::$args, $args);
 
         $q = "SELECT count(1) AS total
-            FROM accounts a LEFT JOIN (
-            SELECT online, totalTime, name, world FROM inquisitor.players
+        FROM accounts a LEFT JOIN (
+            SELECT online, totalTime, name, world
+            FROM inquisitor.players
         ) o ON (o.name = a.playername)
         WHERE playername = ifnull(:playername, playername)
         AND (id = ifnull(:id, id))

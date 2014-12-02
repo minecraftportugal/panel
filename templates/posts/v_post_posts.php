@@ -7,8 +7,6 @@
 ?>
 
 
-
-
 <div id="widget-news" class="pad-up">
 
 <? if (have_posts()) : while (have_posts()) : the_post(); ?>

@@ -6,7 +6,7 @@ function maps_index() {
 
   Session::validateSession();
 
-  require('templates/maps/index.php');
+  require('templates/maps/v_maps.php');
 
 }
 

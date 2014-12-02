@@ -6,7 +6,7 @@ function v_post_posts() {
 
     Session::validateSession();
 
-    require('templates/posts/index.php');
+    require('templates/posts/v_post_posts.php');
 }
 
 ?>

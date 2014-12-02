@@ -8,7 +8,7 @@ function launcher_index() {
   
   $user = AccountModel::get(['id' => $_SESSION['id']])[0];
 
-  require('templates/launcher/index.php');
+  require('templates/launcher/v_launcher.php');
 }
 
 ?>

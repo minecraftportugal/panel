@@ -16,7 +16,7 @@ function v_status() {
     
     $newest_players = AccountModel::get(["per_page" => 15, "yeslogin" => 1], "a.registerdate DESC");
 
-    require('templates/status/status.php');
+    require('templates/status/v_status.php');
 }
 
 ?>

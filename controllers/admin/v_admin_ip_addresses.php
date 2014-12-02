@@ -30,7 +30,7 @@ function v_admin_ip_addresses() {
     ]);
 
 
-    require('templates/admin/ip_addresses.php');
+    require('templates/admin/v_admin_ip_addresses.php');
 }
 
 ?>

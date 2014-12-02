@@ -83,7 +83,7 @@ function v_admin_logs() {
         'label_title' => 'Apagar'
     ]);
 
-    require('templates/admin/logs.php');
+    require('templates/admin/v_admin_logs.php');
 }
 
 ?>
