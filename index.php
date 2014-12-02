@@ -20,50 +20,96 @@ require_once('models/session.php');
 require_once('models/drop.php');
 require_once('models/log.php');
 
-require_once('controllers/home.php');
+/* Error Controllers */
+require_once('controllers/v_403_forbidden.php');
+require_once('controllers/v_404_not_found.php');
+require_once('controllers/v_home.php');
+require_once('controllers/v_test_pattern.php');
 
-require_once('controllers/status/index.php');
 
-require_once('controllers/posts/index.php');
-require_once('controllers/posts/show.php');
+/* Home */
+require_once('controllers/v_home.php');
 
-require_once('controllers/sessions/new.php');
-require_once('controllers/sessions/create.php');
-require_once('controllers/sessions/destroy.php');
-require_once('controllers/sessions/configure.php');
+/* Login / Logout */
 
-require_once('controllers/users/new.php');
-require_once('controllers/users/create.php');
-require_once('controllers/users/show.php');
-require_once('controllers/users/drop_items.php');
-require_once('controllers/users/update.php');
-require_once('controllers/users/configure.php');
-require_once('controllers/users/options.php');
-require_once('controllers/users/reset_password.php');
+require_once('controllers/sessions/v_login.php');
+require_once('controllers/sessions/u_login.php');
+require_once('controllers/sessions/u_logout.php');
 
-require_once('controllers/admin/ip_addresses.php');
-require_once('controllers/admin/accounts.php');
-require_once('controllers/admin/drops.php');
-require_once('controllers/admin/sessions.php');
-require_once('controllers/admin/configure.php');
-require_once('controllers/admin/register.php');
-require_once('controllers/admin/delete_drops.php');
-require_once('controllers/admin/delete_logs.php');
-require_once('controllers/admin/logs.php');
+/* * Users * */
 
-require_once('controllers/directory/index.php');
+/* Novo Registo */
+require_once('controllers/users/v_user_register.php');
+require_once('controllers/users/u_user_register.php');
 
+/* Perfil e Configuração */
+require_once('controllers/users/v_user.php');
+require_once('controllers/users/u_user_configure.php');
+require_once('controllers/users/v_user_options.php');
+require_once('controllers/users/u_user_drops_drop.php');
+require_once('controllers/users/u_user_drops_delete.php');
+require_once('controllers/users/u_user_reset_password.php');
+require_once('controllers/users/u_user_update_irc.php');
+require_once('controllers/users/u_user_update_password.php');
+
+/* Posts */
+require_once('controllers/posts/v_post_posts.php');
+require_once('controllers/posts/v_post.php');
+
+/* Status */
+require_once('controllers/status/v_status.php');
+
+
+/* Directory */
+require_once('controllers/directory/v_directory.php');
+
+/* * Widgets * */
+/* Players */
+require_once('controllers/widgets/v_widget_players.php');
+
+/* IRC */
+require_once('controllers/irc/v_irc.php');
+
+
+
+/* * Admin * */
+/* Registar Utilizador */
+require_once('controllers/admin/v_admin_register.php');
+require_once('controllers/admin/u_admin_register.php');
+
+/* Contas */
+require_once('controllers/admin/v_admin_accounts.php');
+require_once('controllers/admin/u_admin_accounts.php');
+
+/* Sessões */
+require_once('controllers/admin/v_admin_sessions.php');
+require_once('controllers/admin/u_admin_sessions.php');
+
+/* Drops */
+require_once('controllers/admin/v_admin_drops.php');
+require_once('controllers/admin/u_admin_drops.php');
+
+/* Logs */
+require_once('controllers/admin/v_admin_logs.php');
+require_once('controllers/admin/u_admin_logs.php');
+
+/* Endereços IP */
+require_once('controllers/admin/v_admin_ip_addresses.php');
+
+/* */
+
+/* */
+/* Test Purposes */
+require_once('controllers/test/v_test.php');
+
+/* Maps */
 require_once('controllers/maps/index.php');
 
-require_once('controllers/irc/index.php');
-
-require_once('controllers/widgets/players.php');
-
+/* Launcher */
 require_once('controllers/launcher/index.php');
 
-require_once('controllers/errors.php');
 
-require_once('controllers/test/index.php');
+
 
 
 require_once('helpers/mail.php');
@@ -78,57 +124,87 @@ require_once('helpers/datetime.php');
 
 $r = new Router();
 
-$r->map('GET',  '', 'home');
+/* Home */
+$r->map('GET',  '', 'v_home');
 
-$r->map('GET',  '/status', 'status_index');
+/* Login / Logout */
+$r->map('GET',  '/login', 'v_login');
+$r->map('POST', '/login', 'u_login');
+$r->map('POST', '/logout', 'u_logout');
 
-$r->map('GET',  '/login', 'sessions_new');
-$r->map('POST', '/login', 'sessions_create');
-$r->map('POST', '/logout', 'sessions_destroy');
-$r->map('POST', '/sessions/configure', 'sessions_configure');
+/* * Utilizadores * */
 
-$r->map('GET',  '/register', 'users_new');
-$r->map('GET',  '/profile', 'users_show');
+/* Novo Registo */
+$r->map('GET',  '/register', 'v_user_register');
+$r->map('POST', '/register', 'u_user_register');
 
-$r->map('POST', '/register', 'users_create');
-$r->map('POST', '/reset_password', 'users_reset_password');
+/* Perfil e Configuração */
+$r->map('GET',  '/profile', 'v_user');
+$r->map('GET',  '/options', 'v_user_options');
+$r->map('POST', '/users/drop_items', 'u_user_drops_drop');
+$r->map('POST', '/users/delete_drops', 'u_user_drops_delete');
+$r->map('POST', '/users/configure', 'u_user_configure');
+$r->map('POST', '/reset_password', 'u_user_reset_password');
+$r->map('POST', '/users/update_password', 'u_user_update_password');
+$r->map('POST', '/users/update_irc', 'u_user_update_irc'); // Should be a put -- LOL REST
 
-$r->map('GET',  '/options', 'users_options_show');
-$r->map('POST', '/users/update_irc', 'users_update_irc'); // Should be a put -- LOL REST
-$r->map('POST', '/users/update_password', 'users_update_password');
-$r->map('POST', '/users/configure', 'users_configure');
-$r->map('POST', '/users/drop_items', 'users_drop_items');
-$r->map('POST', '/users/delete_drops', 'users_delete_drops');
+/* Posts */
+$r->map('GET',  '/posts', 'v_post_posts');
+$r->map('GET',  '/posts/show', 'v_post');
 
-$r->map('GET',  '/admin/accounts', 'admin_accounts');
-$r->map('GET',  '/admin/sessions', 'admin_sessions');
-$r->map('GET',  '/admin/drops', 'admin_drops');
-$r->map('GET',  '/admin/logs', 'admin_logs');
-$r->map('GET',  '/admin/ip_addresses', 'admin_ip_addresses');
+/* Status */
+$r->map('GET',  '/status', 'v_status');
 
-$r->map('GET',  '/posts', 'posts_index');
-$r->map('GET',  '/posts/show', 'posts_show');
+/* Directory */
+$r->map('GET',  '/directory', 'v_directory');
 
-$r->map('POST', '/admin/configure', 'admin_configure');
-$r->map('POST', '/admin/register', 'admin_register');
-$r->map('POST', '/admin/delete_drops', 'admin_delete_drops');
-$r->map('POST', '/admin/delete_logs', 'admin_delete_logs');
+/* * Widgets * */
+/* Players */
+$r->map('GET', '/widgets/players', 'v_widget_players');
 
-$r->map('GET',  '/directory', 'directory_index');
-
-$r->map('GET',  '/maps', 'maps_index');
-
-$r->map('GET',  '/widgets/players', 'widgets_players');
-
+/* IRC */
 $r->map('GET', '/irc', 'irc_index');
 
+
+
+/* * Admin * */
+
+/* Registar Utilizador */
+$r->map('GET', '/admin/register', 'v_admin_register');
+$r->map('POST', '/admin/register', 'u_admin_register');
+
+/* Contas */
+$r->map('GET',  '/admin/accounts', 'v_admin_accounts');
+$r->map('POST', '/admin/accounts', 'u_admin_accounts');
+
+/* Sessões */
+$r->map('GET',  '/admin/sessions', 'v_admin_sessions');
+$r->map('POST', '/admin/sessions', 'u_admin_sessions');
+
+/* Drops */
+$r->map('GET',  '/admin/drops', 'v_admin_drops');
+$r->map('POST', '/admin/drops', 'u_admin_drops');
+
+/* Logs */
+$r->map('GET',  '/admin/logs', 'v_admin_logs');
+$r->map('POST', '/admin/logs', 'u_admin_logs');
+
+/* Endereços IP */
+$r->map('GET',  '/admin/ip_addresses', 'v_ip_addresses');
+
+
+/* Test Purposes */
+$r->map('GET', '/test', 'test_index');
+
+/* Maps */
+$r->map('GET',  '/maps', 'maps_index');
+
+/* Launcher */
 $r->map('GET', '/launcher', 'launcher_index');
 
 $r->map('GET', '/forbidden', 'forbidden');
 
 $r->map('GET', '/testpattern', 'testpattern');
-
-$r->map('GET', '/test', 'test_index');
 
 $path = getPathInfo();
 $path = rtrim($path, '/');

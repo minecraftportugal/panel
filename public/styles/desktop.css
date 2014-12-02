@@ -59,12 +59,20 @@ div#widget-button-home-menu.active {
 }
 
 div#widget-button-container-scroll-left {
+    background: linear-gradient(to bottom, #252525, #050505);
     border-right: 1px solid #101010;
     position: absolute;
     left: 131px;
     bottom: 0;
 }
 
+div#widget-button-container-scroll-left:hover {
+    background: linear-gradient(to top, #050505, #050505, #252525);
+}
+
+div#widget-button-container-scroll-left:active {
+    background: linear-gradient(to top, #000000, #000000, #101010);
+}
 
 div#widget-button-container {
     position: absolute;
@@ -77,12 +85,21 @@ div#widget-button-container {
 }
 
 div#widget-button-container-scroll-right {
+    background: linear-gradient(to bottom, #252525, #050505);
     border-left: 1px solid #101010;
     border-right: 1px solid #101010;
     position: absolute;
     right: 151px;
     bottom: 0;
     height: 30px;
+}
+
+div#widget-button-container-scroll-right:hover {
+    background: linear-gradient(to top, #050505, #050505, #252525);
+}
+
+div#widget-button-container-scroll-right:active {
+    background: linear-gradient(to top, #000000, #000000, #101010);
 }
 
 div#widget-button-container-minimize-all {

@@ -1,10 +1,13 @@
 function Widget(options, states) {
 
+    /* Defaults/Options */
+
     Widget.options = {
         "url" : "/colorbars",
         "title" : "Title",
         "useIframe" : false,
         "alwaysCreate" : false,
+        "alwaysReload" : true,
         "maximized" : false,
         "classes" : "widget-not-scrollable",
         "css" : {
@@ -19,7 +22,157 @@ function Widget(options, states) {
         }
     }
 
+    /* Settings */
+
     Widget.saveOnExit = true;
+
+    Widget.widgetStore = {
+
+        "test" : {
+            "name" : "test",
+            "url" : "/testpattern",
+            "title" : "Omg Test",
+            "useIframe" : true,
+            "css" : { "min-width" : "480px", "min-height" : "360px" },
+            "maximized" : false,
+            "classes" : "",
+            "alwaysCreate" : true
+        },
+
+        "launcher" : {
+            "name" : "launcher",
+            "url" : "/launcher",
+            "title" : "<i class='fa fa-money'></i> Launcher",
+            "useIframe" : true,
+            "css" : {"width" : "854px", "height" : "500px"}
+        },
+
+        "forum" : {
+            "name" : "forum",
+            "url" : "//forum.minecraft.pt/",
+            "title" : "<i class='fa fa-institution'></i> Fórum",
+            "useIframe" : true
+        },
+
+        "irc" : {
+            "name" : "irc",
+            "url" : "/irc",
+            "title" : "<i class='fa fa-keyboard-o'></i> IRC Chat",
+            "useIframe" : true,
+            "alwaysReload" : false
+        },
+
+        "news" : {
+            "name" : "news",
+            "url" : "/posts",
+            "classes" : "widget-scrollable-y",
+            "css" : {"min-width" : "452px", "max-width" : "452px", "min-height" : "500px"},
+            "title" : "<i class='fa fa-newspaper-o'></i> Noticias"
+        },
+
+        "status" : {
+            "name" : "status",
+            "url" : "/status",
+            "classes" : "widget-scrollable-y",
+            "css" : {"min-width" : "424px", "max-width" : "424px", "min-height" : "500px"},
+            "title" : "<i class='fa fa-columns'></i> Servidor"
+        },
+
+        "dynmap" : {
+            "name" : "dynmap",
+            "url" : "//dynmap.minecraft.pt/",
+            "alwaysCreate" : true,
+            "title" : "<i class='fa fa-picture-o'></i> Dynmap",
+            "useIframe" : true
+        },
+
+        "inquisitor" : {
+            "name" : "inquisitor",
+            "url" : "//inquisitor.minecraft.pt",
+            "alwaysCreate" : true,
+            "title" : "<i class='fa fa-tachometer'></i> Inquisitor",
+            "useIframe" : true,
+            "css" : {"min-width" : "854px", "min-height" : "500px"}
+        },
+
+        "directory" : {
+            "name" : "directory",
+            "url" : "/directory",
+            "maximized" : true,
+            "title" : "<i class='fa fa-users'></i> Jogadores"
+        },
+
+        "factions" : {
+            "name" : "factions",
+            "url" : "/factions",
+            "title" : "<i class='fa fa-users'></i> Facções"
+        },
+
+        "admin-register" : {
+            "name" : "admin-register",
+            "url" : "/admin/register",
+            "title" : "<i class='fa fa-paper-plane'></i> Registar Utilizador"
+        },
+        "admin-accounts" : {
+            "name" : "admin-accounts",
+            "url" : "/admin/accounts",
+            "title" : "<i class='fa fa-users'></i> Contas"
+        },
+
+        "admin-sessions" : {
+            "name" : "admin-sessions",
+            "url" : "/admin/sessions",
+            "title" : "<i class='fa fa-group'></i> Sessões"
+        },
+
+        "admin-drops" : {
+            "name" : "admin-drops",
+            "url" : "/admin/drops",
+            "title" : "<i class='fa fa-th-list'></i> Drops"
+        },
+
+
+        "admin-logs" : {
+            "name" : "admin-logs",
+            "url" : "/admin/logs",
+            "title" : "<i class='fa fa-warning'></i> Logs"
+        },
+
+        "admin-ip-addresses" : {
+            "name" : "admin-ip-addresses",
+            "url" : "/admin/ip_addresses",
+            "title" : " <i class='fa fa-wifi'></i> Endereços IP"
+        },
+
+        "admin-ip-addresses" : {
+            "name" : "admin-ip-addresses",
+            "url" : "/admin/ip_addresses",
+            "title" : " <i class='fa fa-wifi'></i> Endereços IP"
+        },
+
+        "help-wiki" : {
+            "name" : "help-wiki",
+            "url" : "http://minecraft.gamepedia.com/Minecraft_Wiki",
+            "alwaysCreate" : true,
+            "title" : "<i class='fa fa-life-ring'></i> Minecraft Wiki",
+            "useIframe" : true,
+            "css" : {"min-width" : "854px", "min-height" : "500px"}
+        },
+
+
+        "user-options" : {
+            "name" : "user-options",
+            "url" : "/options",
+            "title" : "<i class='fa fa-gear'></i> Opções"
+        }
+    };
+
+    /* Init stops here */
+    if (options === undefined) {
+        return false;
+    }
+
+    /* Innards */
 
     this.options = {};
     this.options.css = {};
@@ -65,6 +218,7 @@ function Widget(options, states) {
     }
 
     if (existing == null) {
+
         this.widget = this;
         Widget.widgets.push(this);
 
@@ -73,7 +227,9 @@ function Widget(options, states) {
 
         this.load();
         this.initPosition();
+
     } else {
+
         this.bringTop();
         this.setActive();
 
@@ -81,8 +237,13 @@ function Widget(options, states) {
             this.restore();
         }
 
-        this.load(this.options.url);
+        if (this.options.alwaysReload) {
+            this.load(this.options.url);
+        }
+
     }
+
+    return true;
 
 }
 
@@ -217,6 +378,27 @@ Widget.getByName = function(name) {
 
     return widget;
 
+}
+
+Widget.open = function(param) {
+
+    if (typeof(param) === typeof({})) {
+
+        var createdWidget = new Widget(param);
+
+    } else if (typeof(param) === typeof("")) {
+
+        if (param in Widget.widgetStore) {
+
+            var config = Widget.widgetStore[param];
+
+            var createdWidget = new Widget(config);
+
+        } else {
+
+            console.log("No widget named " + param);
+        }
+    }
 }
 
 Widget.prototype.init = function(notApplyingStates) {
@@ -537,26 +719,16 @@ $(document).on("click", "[data-widget-action]", function(event) {
     var title = $(this).data("widget-title") || name;
     var href = $(this).attr("href");
     var useIframe = $(this).data("widget-mode") == "iframe";
-    var css = $(this).data("widget-css")
+    var css = $(this).data("widget-css");
     var maximized = $(this).data("widget-maximized") || false;
+    var alwaysCreate = $(this).data("widget-always-create") || false;
+    var alwaysReload = $(this).data("widget-always-reload") || true;
     var classes = $(this).data("widget-classes") || "widget-not-scrollable";
 
     switch (action) {
 
         case "open":
-            var createdWidget = new Widget({
-                "name" : name,
-                "url" : href,
-                "title" : title,
-                "useIframe" : useIframe,
-                "css" : css,
-                "maximized" : maximized,
-                "classes" : classes
-            });
-            break;
-
-        case "open-always":
-            var createdWidget = new Widget({
+            Widget.open({
                 "name" : name,
                 "url" : href,
                 "title" : title,
@@ -564,7 +736,8 @@ $(document).on("click", "[data-widget-action]", function(event) {
                 "css" : css,
                 "maximized" : maximized,
                 "classes" : classes,
-                "alwaysCreate" : true
+                "alwaysCreate" : alwaysCreate,
+                "alwaysReload" : alwaysReload
             });
             break;
 
@@ -572,6 +745,14 @@ $(document).on("click", "[data-widget-action]", function(event) {
             break;
 
     }
+
+    event.preventDefault();
+});
+
+$(document).on("click", "[data-widget-open]", function(event) {
+    var name = $(this).data("widget-open");
+
+    Widget.open(name);
 
     event.preventDefault();
 });
@@ -585,5 +766,6 @@ $(window).on("unload", function() {
 });
 
 $(function() {
+        Widget();
         Widget.loadState();
 });
