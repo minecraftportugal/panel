@@ -16,14 +16,14 @@ function u_user_reset_password() {
   if ((($admin == "1") or ($_SESSION[id] == $id)) and ($reset_pass_check == "1")) {
     $status = AccountModel::resetPassword($id);
   } else {
-      NoticeHelper::set('error', 'password inalterada');
+      NoticeHelper::set('error', 'Password inalterada.');
   }
   
   if (!$status) {
-    NoticeHelper::set('error', 'password inalterada');
+    NoticeHelper::set('error', 'Password inalterada.');
     header("Location: /profile?id=$id#resetpw");
   } else {
-    NoticeHelper::set('success', 'alterações efectuadas');
+    NoticeHelper::set('success', 'Nova password enviada por email!');
     header("Location: /profile?id=$id#resetpw");
   }
 }

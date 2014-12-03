@@ -270,7 +270,7 @@ class AccountModel {
         $result = Bitch::source('default')->first($q, compact('email'))['total']; // /!\ array index applied to function call
 
         if ($result != "0") {
-            setFlash('error', 'Email já foi tomado.');
+            NoticeHelper::set('error', 'Email já foi tomado.');
             return false;
         }
 
@@ -281,19 +281,19 @@ class AccountModel {
         $result = Bitch::source('default')->first($q, compact('username'))['total']; // /!\ array index applied to function call
 
         if ($result != "0") {
-            setFlash('error', 'Username já foi tomado.');
+            NoticeHelper::set('error', 'Username já foi tomado.');
             return false;
         }
 
         // check for valid email
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            setFlash('error', 'Email inválido.');
+            NoticeHelper::set('error', 'Email inválido.');
             return false;
         }
 
         // check for valid username
         if (!eregi("^([a-zA-Z0-9_]){4,26}$", $username)) {
-            setFlash('error', 'Username inválido.');
+            NoticeHelper::set('error', 'Username inválido.');
             return false;
         }
 
@@ -306,7 +306,7 @@ class AccountModel {
         $result = Bitch::source('default')->first($q, compact('ip'));
 
         if ($result['n'] > 0) {
-            setFlash('error', '1 registo por IP a cada 5m');
+            NoticeHelper::set('error', '1 registo por IP a cada 5m');
             return false;
         }
 
@@ -322,7 +322,7 @@ class AccountModel {
         }
 
         MailHelper::welcome($username, $plain_password, $email, $email_ip);
-        setFlash('success', 'Verifica o teu Email');
+        NoticeHelper::set('success', 'Verifica o teu Email');
 
         return true;
     }

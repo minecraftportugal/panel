@@ -10,7 +10,7 @@ function v_home() {
 
     $user = AccountModel::get(['id' => $_SESSION['id']])[0];
 
-    $background_image = '/images/backgrounds/login/bg5.jpg';
+    $background_image = '/images/backgrounds/login/bg7.jpg';
 
     require('templates/v_home.php');
 }

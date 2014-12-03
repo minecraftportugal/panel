@@ -31,17 +31,11 @@
         <span class="center"><input type="text" id="email" name="email" placeholder="esteves@minecraft.pt" /></span>
         <span class="center"><input type="submit" value="Registar!"/></span>
         <span>
-        <? 
-          $error = getFlash('error');
-          if ($error != false):
-        ?>
+        <? if ($error != false): ?>
           <label class="error"><?= $error ?></label>
         <? endif; ?>
         
-        <? 
-          $success = getFlash('success');
-          if ($success != false):
-        ?>
+        <? if ($success != false): ?>
           <label class="success"><?= $success ?></label>
         <? endif; ?>
         </span>

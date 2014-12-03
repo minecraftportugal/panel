@@ -46,7 +46,7 @@
                     </tr>
                     <tr>
                         <th>Sessão</th>
-                        <td><?= $player['logintime_df'] != "" ? $player['logintime_df'] : "Sem Sessão" ?></td>
+                        <td><?= $player['lastlogindate_df'] != "" ? $player['lastlogindate_df'] : "Sem Sessão" ?></td>
                     </tr>
                     <tr>
                         <th>Email</th>
@@ -294,10 +294,10 @@
                             <td><?= $player['registerdate'] ?></td>
                         </tr>
 
-                        <? if ($player['logintime'] != null): ?>
+                        <? if ($player['lastlogindate'] != null): ?>
                             <tr>
                                 <th>Activo</th>
-                                <td><?= $profile['$player'] ?></td>
+                                <td><?= $player['lastlogindate'] ?></td>
                             </tr>
                         <? endif; ?>
                         <tr><th>Level</th><td><?= $player['level'] ?></td></tr>
@@ -327,7 +327,7 @@
                 </div>
             </div>
 
-            <? if ($player['kicks'] > 0): ?>
+            <? if (array_key_exists('kicks', $player) && $player['kicks']  > 0): ?>
             <div class="layout-col layout-col-c">
                 <div class="layout-col-title">
                     Kicks
@@ -426,7 +426,7 @@
 
     <? endif; ?>
 
-    <? if (($own and $total_drops > 0) or $admin): ?>
+    <? if (($own and count($drops) > 0) or $admin): ?>
     <div class="layout-row">
 
         <div class="layout-col layout-col-full-width pad-up">
@@ -473,7 +473,7 @@
                             </tr>
                         <? endforeach; ?>
 
-                        <? if ($total == 0): ?>
+                        <? if (count($drops) == 0): ?>
                             <tr>
                                 <td colspan="8" class="center">
                                     <div>

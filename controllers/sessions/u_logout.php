@@ -2,6 +2,7 @@
 
 use lib\session\Session;
 use \lib\xauth\xAuth;
+use helpers\notice\NoticeHelper;
 
 function u_logout() {
 
@@ -16,7 +17,9 @@ function u_logout() {
     session_destroy();
     
     session_start();
-    setFlash('success', 'sessão terminada');
+
+    NoticeHelper::set('success', 'sessão terminada');
+
     header('Location: /login');
 }
 

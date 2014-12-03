@@ -6,6 +6,7 @@ class MailHelper {
 
     public static function welcome($playername, $password, $email, $email_ip = false) {
 
+
         $mail = new \PHPMailer();
 
         $mail->IsSMTP(true); // send via SMTP

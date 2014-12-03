@@ -196,7 +196,7 @@
 
         <? if ($total == 0): ?>
           <tr>
-            <td colspan="8" class="center">
+            <td colspan="13" class="center">
               <div>
                 Não foram encontrados jogadores através dos critérios especificados!
               </div>

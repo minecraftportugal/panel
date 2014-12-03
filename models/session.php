@@ -59,6 +59,7 @@ class SessionModel {
             SELECT a.id, a.playername,
                 sh.ipaddress AS ipaddress,
                 a.lastlogindate AS lastlogindate_df,
+                DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate,
                 sh.logintime AS logintime_df,
                 sh.websession AS websession,
                 sh.event AS event,

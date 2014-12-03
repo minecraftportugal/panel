@@ -9,6 +9,10 @@ function v_user_register() {
     exit();
   }
 
+  $error = NoticeHelper::get('error');
+
+  $success = NoticeHelper::get('success');
+
   require('templates/users/v_user_register.php');
 }
 

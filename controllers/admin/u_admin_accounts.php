@@ -3,7 +3,7 @@
 use lib\session\Session;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
-use helpers\Notice\NoticeHelper;
+use helpers\notice\NoticeHelper;
 
 function u_admin_accounts() {
 

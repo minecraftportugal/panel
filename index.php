@@ -6,33 +6,13 @@ require_once('config.php');
 
 require_once('bootstrap.php');
 
+require_once('lib/autoloader.php');
+
 require_once('lib/environment.php');
+
 require_once('lib/router.php');
+
 require_once('lib/sessions.php');
-require_once('lib/xauth.php');
-
-
-/* Wordpress */
-if (WP_ENABLED) {
-    require_once(WP_LOCATION . "/wp-config.php");
-}
-
-/* Models */
-require_once('models/wordpress.php');
-require_once('models/account.php');
-require_once('models/session.php');
-require_once('models/drop.php');
-require_once('models/log.php');
-
-require_once('helpers/mail.php');
-require_once('helpers/flash.php');
-require_once('helpers/pagination.php');
-require_once('helpers/arguments.php');
-require_once('helpers/notice.php');
-require_once('helpers/minotar.php');
-require_once('helpers/table.php');
-require_once('helpers/dynmap.php');
-require_once('helpers/datetime.php');
 
 $r = new Router();
 
@@ -100,7 +80,7 @@ $r->map('GET',  '/admin/logs', 'v_admin_logs', 'controllers/admin/v_admin_logs.p
 $r->map('POST', '/admin/logs', 'u_admin_logs', 'controllers/admin/u_admin_logs.php');
 
 /* Endereços IP */
-$r->map('GET',  '/admin/ip_addresses', 'v_ip_addresses', 'controllers/admin/v_admin_ip_addresses.php');
+$r->map('GET',  '/admin/ip_addresses', 'v_admin_ip_addresses', 'controllers/admin/v_admin_ip_addresses.php');
 
 
 /* Test Purposes */

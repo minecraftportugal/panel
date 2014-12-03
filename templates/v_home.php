@@ -60,8 +60,6 @@
         <? require("partials/usermenu.php") ?>
     </div>
 
-    <!-- <iframe id="map" name="mapa" src="<?= $dynmap_url ?>" frameborder="0" marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe> -->
-
     <? /* /!\ move html templates somewher else ? */ ?>
     <div id="html-templates">
     <? require("partials/htmltemplates.php") ?>

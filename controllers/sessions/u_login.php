@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use helpers\notice\NoticeHelper;
 
 function u_login() {
 
@@ -9,11 +10,16 @@ function u_login() {
     
     $session = Session::validateLogin($username, $password);
 
-    if ($session == NULL) {
-    	setFlash('error', 'username/password inválidos');
+    if (is_null($session)) {
+
+        NoticeHelper::set('error', 'username/password inválidos');
+
         header('Location: /login');
+
     } else {
+
         header('Location: /');
+
     }
 }
 

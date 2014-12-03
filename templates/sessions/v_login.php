@@ -44,17 +44,11 @@
         <span class="center"><input type="password" name="password" placeholder="password" /></span>
         <span class="center"><input type="submit" value="Login"/></span>
         <span>
-        <? 
-          $error = getFlash('error');
-          if ($error != false):
-        ?>
+        <? if ($error != false): ?>
           <label class="error"><?= $error ?></label>
         <? endif; ?>
         
-        <? 
-          $success = getFlash('success');
-          if ($success != false):
-        ?>
+        <? if ($success != false): ?>
           <label class="success"><?= $success ?></label>
         <? endif; ?>
         <span>

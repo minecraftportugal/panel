@@ -2,6 +2,7 @@
 
 use lib\session\Session;
 use models\account\AccountModel;
+use helpers\notice\NoticeHelper;
 
 function u_user_configure() {
 
@@ -10,6 +11,7 @@ function u_user_configure() {
   Session::validateXSRFToken();
 
   $id = $_POST['id'];
+
   $admin = isset($_POST['admin']) ? $_POST['admin'] : 0;
   $operator = isset($_POST['operator']) ? $_POST['operator'] : 0;
   $active = isset($_POST['active']) ? $_POST['active'] : 0;

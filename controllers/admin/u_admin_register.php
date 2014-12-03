@@ -1,6 +1,8 @@
 <?
 
 use lib\session\Session;
+use models\account\AccountModel;
+
 
 function u_admin_register() {
     
@@ -14,9 +16,9 @@ function u_admin_register() {
     $status = AccountModel::register($username, $email, $email_ip = false);
     
     if (!$status) {
-        header("Location: /admin");
+        header("Location: /admin/register");
     } else {
-        header("Location: /admin");
+        header("Location: /admin/register");
     }
 }
 

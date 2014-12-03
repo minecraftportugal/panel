@@ -84,13 +84,12 @@
 
             <td class="">
                 <a href="/profile?id=<?= $r['id'] ?>"
-                   title="<?= $r["registerdate"] ?>"
+                   title="<?= $r["playername"] ?>"
                    class="noajax"
                    data-widget-action="open"
                    data-widget-classes="widget-scrollable-y"
                    data-widget-name="profile-<?= $r["playername"] ?>"
-                   data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>"
-                   data-online="<?=$r["online"] == "1" ? 'true' : 'false' ?>">
+                   data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>">
                   <span class="pull-left"><?= $r["playername"] ?></span>
                   <span class="pull-left online" title="O jogador está online!"></span>
                 </a>

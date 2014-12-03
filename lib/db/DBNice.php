@@ -20,7 +20,7 @@ class DBNice {
 
 
   /**
-   * Did anyone called for a constructor?
+   * Did anyone call for a constructor?
    * @param array $config configs to override the defaults
    */
   public function __construct(array $config = []) {

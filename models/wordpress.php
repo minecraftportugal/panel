@@ -1,7 +1,6 @@
 <?
 
-namespace models\session;
-
+namespace models\wordpress;
 use minecraftia\db\Bitch;
 
 class WordpressModel {
@@ -11,11 +10,12 @@ class WordpressModel {
     ];
 
     public static function init() {
-        $wp->init();
-        $wp->query_posts();
-        $wp->parse_request();
-        $wp->register_globals();
-        $wp->send_headers();
+
+        /* Wordpress */
+        if (WP_ENABLED) {
+            require_once(WP_LOCATION . "/wp-config.php");
+        }
+
     }
 
     public static function count($args = []) {
