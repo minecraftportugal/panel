@@ -81,7 +81,6 @@
                                data-online="<?= $r['online'] == 1? 'true' : 'false' ?>"
                                style="<?= $r['id'] == null ? 'text-decoration: line-through;' : '' ?>">
                                 <?= \helpers\minotar\MinotarHelper::head($r['playername'], 25) ?>
-                                <?= $user['r'] ?>
                                 <span class="name-label pull-left"><?= $r["playername"] ?></span>
                                 <span class="online pull-left" title="O jogador está online!"></span>
                             </a>
@@ -109,7 +108,6 @@
                                data-online="<?= $r['online'] == 1? 'true' : 'false' ?>"
                                style="<?= $r['id'] == null ? 'text-decoration: line-through;' : '' ?>">
                                 <?= \helpers\minotar\MinotarHelper::head($r['playername'], 25) ?>
-                                <?= $user['r'] ?>
                                 <span class="name-label pull-left"><?= $r["playername"] ?></span>
                                 <span class="online pull-left" title="O jogador está online!"></span>
                             </a>

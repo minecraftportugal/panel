@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use helpers\notice\NoticeHelper;
 
 function v_user_register() {
 

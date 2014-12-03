@@ -6,9 +6,9 @@ function autoloader($name) {
 
     if (count($parts) == 3) {
 
-        if (in_array($parts[0], ["helpers", "models", "lib"])) {
+        if (in_array($parts[0], ['helpers', 'models', 'lib'])) {
 
-            $require_str = $parts[0] . "/" . $parts[1] . ".php";
+            $require_str = $parts[0] . '/' . $parts[1] . '.php';
 
             require_once($require_str);
 
@@ -22,8 +22,8 @@ function autoloader($name) {
 
         switch ($parts[0]) {
 
-            case "PHPMailer":
-                require_once("vendors/PHPMailer/class.phpmailer.php");
+            case 'PHPMailer':
+                require_once('vendors/PHPMailer/class.phpmailer.php');
                 break;
 
             default:
@@ -40,6 +40,6 @@ function autoloader($name) {
 
 }
 
-$result = spl_autoload_register("autoloader", true, true);
+$result = spl_autoload_register('autoloader', true, true);
 
 ?>

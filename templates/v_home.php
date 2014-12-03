@@ -53,11 +53,11 @@
     </div>
 
     <div class="widget-menu" id="widget-homemenu">
-        <? require("partials/homemenu.php") ?>
+        <? require("partials/menus/home.php") ?>
     </div>
 
     <div class="widget-menu" id="widget-usermenu">
-        <? require("partials/usermenu.php") ?>
+        <? require("partials/menus/user.php") ?>
     </div>
 
     <? /* /!\ move html templates somewher else ? */ ?>

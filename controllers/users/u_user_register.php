@@ -1,7 +1,6 @@
 <?php
 
-require_once('lib/sessions.php');
-
+use lib\session\Session;
 use models\account\AccountModel;
 
 function u_user_register () {

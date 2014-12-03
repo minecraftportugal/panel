@@ -1,10 +1,13 @@
 <?
 
+namespace lib\environment;
 
 class Environment {
 
-    public static function getRequestMethod() {
-        return $_SERVER['REQUEST_METHOD'];
+    public static function get($variable) {
+        $variable = strtoupper($variable);
+
+        return array_key_exists($variable, $_SERVER) ? $_SERVER[$variable] : null;
     }
 
     /*

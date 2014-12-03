@@ -13,7 +13,7 @@ class Session {
      * validateLogin: validates user logins
      */
     public static function validateLogin($username, $password) {
-        $q = "SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;";
+        $q = 'SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;';
 
         if ($result = Bitch::source('default')->first($q, compact('username'))) {
             if (xAuth::checkPassword($password, $result['password'])) {
@@ -22,7 +22,7 @@ class Session {
             }
         }
 
-        LogModel::create('failed_login', null, $_SERVER['REMOTE_ADDR'], "Username: $username, Password: $password");
+        LogModel::create('failed_login', null, $_SERVER['REMOTE_ADDR'], 'Username: $username, Password: $password');
 
         return false;
     }
@@ -57,6 +57,9 @@ class Session {
         return $val;
     }
 
+    public static function get($variable) {
+        return array_key_exists($variable, $_SERVER) ? $_SERVER[$variable] : null;
+    }
 
     /*
      * getXSRFToken: wraps the sessions' XRSF token
@@ -86,9 +89,9 @@ class Session {
             if (!Session::isLoggedIn($admin)) {
 
                     if ($admin) {
-                            LogModel::create('failed_admin_action', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], "Loged at ".$_SERVER[REQUEST_URI]);
+                            LogModel::create('failed_admin_action', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], 'Loged at '.$_SERVER['REQUEST_URI']);
                     } else {
-                            LogModel::create('failed_session_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], "Loged at ".$_SERVER[REQUEST_URI]);
+                            LogModel::create('failed_session_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], 'Loged at '.$_SERVER['REQUEST_URI']);
                     }
 
                     if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -109,7 +112,7 @@ class Session {
             $token = Session::getSubmittedXSRFToken();
 
             if (!Session::isValidXSRFToken($token)) {
-                LogModel::create('failed_xsrf_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], "Loged at ".$_SERVER[REQUEST_URI]." with xsrf token $token");
+                LogModel::create('failed_xsrf_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], 'Loged at '.$_SERVER['REQUEST_URI'].' with xsrf token $token');
                 header('Location: /forbidden');
                 exit();
             }

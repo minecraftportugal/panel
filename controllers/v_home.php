@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\render\Render;
 use models\account\AccountModel;
 use helpers\minotar\MinotarHelper;
 
@@ -12,7 +13,11 @@ function v_home() {
 
     $background_image = '/images/backgrounds/login/bg7.jpg';
 
-    require('templates/v_home.php');
+    // Render::template('v_home'); ...
+
+    require_once('templates/v_home.php');
+
+
 }
 
 ?>

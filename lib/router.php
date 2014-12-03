@@ -1,5 +1,9 @@
 <?
 
+namespace lib\router;
+
+use lib\environment\Environment;
+
 class Route {
 
     public function __construct($pattern, $value, $phpfile) {
@@ -60,21 +64,23 @@ class Router {
         $path = Environment::getPathInfo();
 
         $path = rtrim($path, '/');
-        $method = Environment::getRequestMethod();
 
-        $x = $this->match($method, $path);
+        $method = Environment::get('request_method');
+
+        $callback = $this->match($method, $path);
 
         // match route
-        if ($x != NULL) {
+        if (!is_null($callback)) {
 
-            $x();
+            $callback();
 
         }
 
         // else 404
         else {
 
-            require_once("controllers/v_404_not_found.php");
+            require_once('controllers/v_404_not_found.php');
+
             v_404_not_found();
 
         }
