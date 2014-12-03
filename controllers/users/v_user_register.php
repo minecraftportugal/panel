@@ -1,20 +1,32 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use helpers\notice\NoticeHelper;
 
 function v_user_register() {
 
-  if (Session::isLoggedIn()) {
-    header('Location: /');
-    exit();
-  }
+    if (Session::isLoggedIn()) {
+        header('Location: /');
+        exit();
+    }
 
-  $error = NoticeHelper::get('error');
+    $template = Template::init('users/v_user_register');
 
-  $success = NoticeHelper::get('success');
+    $error = NoticeHelper::get('error');
 
-  require('templates/users/v_user_register.php');
+    $success = NoticeHelper::get('success');
+
+    $icon_path = "/images/icons";
+
+    $template->assign('error', $error);
+
+    $template->assign('success', $success);
+
+    $template->assign('icon_path', $icon_path);
+
+    $template->render();
+
 }
 
 ?>

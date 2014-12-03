@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
 use helpers\notice\NoticeHelper;
 
@@ -8,11 +9,17 @@ function v_user_options() {
 
     Session::validateSession();
 
+    $template = Template::init('users/v_user_options');
+
     $player = AccountModel::first(["id" => $_SESSION["id"]]);
 
     $notices = NoticeHelper::render(['classes' => 'hover-notice']);
 
-    require('templates/users/v_user_options.php');
+    $template->assign('player', $player);
+
+    $template->assign('notices', $notices);
+
+    $template->render();
 }
 
 ?>

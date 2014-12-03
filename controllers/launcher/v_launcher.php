@@ -1,14 +1,21 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
 
-function launcher_index() {  
-  Session::validateSession();
-  
-  $user = AccountModel::get(['id' => $_SESSION['id']])[0];
+function v_launcher() {
 
-  require('templates/launcher/v_launcher.php');
+    Session::validateSession();
+
+    $template = Template::init('launcher/v_launcher');
+
+    $user = AccountModel::first(['id' => Session::get('id')]);
+
+    $template->assign('user', $user);
+
+    $template->render();
+
 }
 
 ?>

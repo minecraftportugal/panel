@@ -1,9 +1,16 @@
 <?
 
+use lib\environment\Environment;
+use lib\template\Template;
+
 function v_404_not_found() {
-  http_response_code("404");
-  require('helpers/selfurl.php');
-  require('templates/v_404_not_found.php');
+    
+  $template = Template::init('v_404_not_found');
+
+  $template->assign('self_url', Environment::getSelfURL());
+
+  $template->render(404);
+
 }
 
 ?>

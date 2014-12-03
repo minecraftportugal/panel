@@ -1,7 +1,7 @@
 <?
 
 use lib\session\Session;
-use lib\render\Render;
+use lib\template\Template;
 use models\account\AccountModel;
 use helpers\minotar\MinotarHelper;
 
@@ -9,14 +9,13 @@ function v_home() {
 
     Session::validateSession();
 
-    $user = AccountModel::get(['id' => $_SESSION['id']])[0];
+    $template = Template::init('v_home');
 
-    $background_image = '/images/backgrounds/login/bg7.jpg';
+    $template->assign('user', AccountModel::get(['id' => $_SESSION['id']])[0]);
 
-    // Render::template('v_home'); ...
+    $template->assign('background_image', '/images/backgrounds/login/bg7.jpg');
 
-    require_once('templates/v_home.php');
-
+    $template->render();
 
 }
 

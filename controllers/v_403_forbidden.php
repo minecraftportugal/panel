@@ -1,10 +1,13 @@
 <?
 
+use lib\template\Template;
+
 function v_403_forbidden() {
+  
+    $template = Template::init('v_403_forbidden');
 
-  http_response_code("403");
+    $template->render(403);
 
-  require('templates/v_403_forbidden.php');
 }
 
 ?>

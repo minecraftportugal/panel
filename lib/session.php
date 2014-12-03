@@ -2,6 +2,7 @@
 
 namespace lib\session;
 
+use lib\environment\Environment;
 use lib\xauth\xAuth;
 use models\log\LogModel;
 use minecraftia\db\Bitch;
@@ -22,7 +23,7 @@ class Session {
             }
         }
 
-        LogModel::create('failed_login', null, $_SERVER['REMOTE_ADDR'], 'Username: $username, Password: $password');
+        LogModel::create('failed_login', null, Environment::get('REMOTE_ADDR'), 'Username: $username, Password: $password');
 
         return false;
     }
@@ -31,10 +32,10 @@ class Session {
      * initSession: initializes a users' session
      */
     private static function initSession($id, $username, $admin) {
-        $_SESSION['id'] = $id;
-        $_SESSION['username'] = $username;
-        $_SESSION['admin'] = $admin;
-        $_SESSION['xsrf_token'] = substr(md5(rand()), 0, 32);
+        Session::set('id', $id);
+        Session::set('username', $username);
+        Session::set('admin', $admin);
+        Session::set('xsrf_token', substr(md5(rand()), 0, 32));
         
         xAuth::refreshxAuthSession($id);
     }
@@ -46,11 +47,11 @@ class Session {
         $val = false;
 
         if (!$admin) {
-            if (isset($_SESSION['username'])) {
+            if (!is_null(Session::get('username'))) {
                 $val = true;
             }
         } else {
-            if (isset($_SESSION['username']) && isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+            if (!is_null(Session::get('username')) && !is_null(Session::get('admin')) && Session::get('admin') == 1) {
                 $val = true;
             }
         }
@@ -58,14 +59,18 @@ class Session {
     }
 
     public static function get($variable) {
-        return array_key_exists($variable, $_SERVER) ? $_SERVER[$variable] : null;
+        return array_key_exists($variable, $_SESSION) ? $_SESSION[$variable] : null;
+    }
+
+    public static function set($variable, $value) {
+        $_SESSION[$variable] = $value;
     }
 
     /*
      * getXSRFToken: wraps the sessions' XRSF token
      */
     public static function getXSRFToken() {
-        return isset($_SESSION['xsrf_token']) ? $_SESSION['xsrf_token'] : NULL;
+        return !is_null(Session::get('xsrf_token')) ? Session::get('xsrf_token') : NULL;
     }
 
     /*
@@ -86,15 +91,16 @@ class Session {
      * validateSession: validates a users' session, optionally as an admin. redirects to login if invalid
      */
     public static function validateSession($admin = false) {
+
             if (!Session::isLoggedIn($admin)) {
 
                     if ($admin) {
-                            LogModel::create('failed_admin_action', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], 'Loged at '.$_SERVER['REQUEST_URI']);
+                            LogModel::create('failed_admin_action', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI'));
                     } else {
-                            LogModel::create('failed_session_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], 'Loged at '.$_SERVER['REQUEST_URI']);
+                            LogModel::create('failed_session_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI'));
                     }
 
-                    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+                    if (!is_null(Environment::get('HTTP_X_REQUESTED_WITH')) && !strcasecmp(Environment::get('HTTP_X_REQUESTED_WITH'), 'XMLHttpRequest')) {
                             http_response_code(401);
                     } else {
                             header('Location: /login');
@@ -112,7 +118,7 @@ class Session {
             $token = Session::getSubmittedXSRFToken();
 
             if (!Session::isValidXSRFToken($token)) {
-                LogModel::create('failed_xsrf_validation', $_SESSION['id'], $_SERVER['REMOTE_ADDR'], 'Loged at '.$_SERVER['REQUEST_URI'].' with xsrf token $token');
+                LogModel::create('failed_xsrf_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI') . ' with xsrf token ' . $token);
                 header('Location: /forbidden');
                 exit();
             }

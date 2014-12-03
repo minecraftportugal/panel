@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 
@@ -8,7 +9,9 @@ function v_irc() {
 
     Session::validateSession();
 
-    $parameters = [
+    $template = Template::init('irc/v_irc');
+
+    $parameters = ArgumentsHelper::process($_GET, [
         "page" => 1,
         "per_page" => 1,
         "id" => $_SESSION['id'],
@@ -16,17 +19,16 @@ function v_irc() {
         "undelivered" => 0,
         "order_by" => "1",
         "asc_desc" => "desc"
-    ];
+    ]);
 
-    $p = ArgumentsHelper::process($_GET, $parameters);
+    assert(!is_null(Session::get('id')));
 
-    if (is_null($_SESSION['id'])) {
-        die("No ID given");
-    }
+    $user = AccountModel::first($parameters, false); // false : don't fetch all inquisitor data
 
-    $player = AccountModel::first($p, false); // false : don't fetch all inquisitor data
+    $template->assign('user', $user);
 
-    require('templates/irc/v_irc.php');
+    $template->render();
+
 }
 
 ?>

@@ -5,7 +5,6 @@
 <link rel="stylesheet" type="text/css" href="/styles/reset.css">
 <link rel="stylesheet" type="text/css" href="/styles/colorbars.css">
 <link rel="shortcut icon" href="favicon.ico" />
-<script type="text/javascript" src="/scripts/noframes.js"></script>
 </head>
 <body>
 <div id="top">
@@ -36,18 +35,5 @@
   <div class="b53 d"></div>
   <div class="b6"></div>
 </div>
-<div id="center">
-  <h1>Erro 404</h1>
-  <div>
-    Oops! A página a que tentaste aceder (<?= $self_url ?>) não foi encontrada ou está temporariamente indisponível!
-    É possível que o site esteja em manutenção ou que a página simplesmente não exista.
-  </div>
-  <div>
-    Se houver um problema, <a href="/webchat">podemos ajudar.</a>
-  </div>
-  <div>
-    Ou então, <a href="/">volta ao inicio!</a>
-  </div>
- </div>
 </body>
 </html>

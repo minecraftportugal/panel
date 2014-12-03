@@ -1,12 +1,14 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
 use models\drop\DropModel;
 use helpers\notice\NoticeHelper;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\dynmap\DynmapHelper;
+use helpers\inventory\InventoryHelper;
 use helpers\table\TableHelper;
 use helpers\datetime\DateTimeHelper;
 
@@ -14,9 +16,9 @@ function v_user () {
 
     Session::validateSession();
 
-    $action_url = '/admin/accounts';
+    $template = Template::init('users/v_user');
 
-    $parameters = [
+    $parameters = ArgumentsHelper::process($_GET, [
         "page" => 1,
         "per_page" => 1,
         "id" => null,
@@ -24,18 +26,17 @@ function v_user () {
         "undelivered" => 0,
         "order_by" => "1",
         "asc_desc" => "desc"
-    ];
+    ]);
 
-    $p = ArgumentsHelper::process($_GET, $parameters);
-    if (is_null($p['id'])) {
-        die("No ID given");
-    }
+    assert(!is_null($parameters['id']));
 
-    $player = AccountModel::first($p, true); // true : fetch all inquisitor data
+    $action_url = '/profile';
 
-    $own = ($player['id'] == $_SESSION['id']) ? true : false;
+    $player = AccountModel::first($parameters, true); // true : fetch all inquisitor data
 
-    $admin = ($_SESSION['admin'] == '1') ? true : false;
+    $own = ($parameters['id'] == Session::get('id'));
+
+    $admin = (Session::get('admin') == '1') ? true : false;
 
     $notices = NoticeHelper::render(['classes' => 'hover-notice']);
 
@@ -45,73 +46,44 @@ function v_user () {
     $has_played = !is_null($player['name']);
 
     /** Mini Map **/
+    $dynmap = null;
 
     if ($has_played) {
         if ($player['online'] == 1) {
-            $v_dynmap_widget = DynmapHelper::map($player['playername']);
+            $dynmap = DynmapHelper::map($player['playername']);
         } else {
             if (!is_null($player['coords'])) {
                 $coords = explode(',', $player['coords']);
-                $v_dynmap_widget = DynmapHelper::map_position($coords, $player['world']);
+                $dynmap = DynmapHelper::map_position($coords, $player['world']);
             } else {
-                $v_dynmap_widget = DynmapHelper::map();
+                $dynmap = DynmapHelper::map();
             }
         }
     } else {
-        $v_dynmap_widget = DynmapHelper::map_offline();
+        $dynmap = DynmapHelper::map_offline();
     }
 
 
-    /*
-     * stats and inventory
-     */
-
-    // prepare inquisitor data
+    /** stats and inventory **/
     if ($has_played) {
 
-        $inventory = json_decode($player['inventory']);
-
-        $playerinv = array();
-        foreach($inventory as $slot) {
-
-            if ($slot) {
-                $itemdata = "".$slot->type;
-                $itemdata .= " ".$slot->data;
-                $itemdata .= " ".$slot->amount;
-                $itemdata .= " ".$slot->durability;
-
-                $enchantments = array();
-                foreach($slot->enchantments as $name => $level)
-                {
-                    array_push($enchantments, "$name".":".$level);
-                }
-                $enchantments = implode(" ", $enchantments);
-                array_push($playerinv, array(
-                    "itemdata" => $itemdata,
-                    "enchantments" => $enchantments
-                ));
-            } else {
-                array_push($playerinv, array(
-                    "itemdata" => "",
-                    "enchantments" => ""
-                ));
-            }
-
-        }
-
-        $a = array_slice($playerinv, 0, 9);
-        $b = array_slice($playerinv, 9);
-        $playerinv = array_merge($b, $a);
+        $inventory = InventoryHelper::inventory(json_decode($player['inventory']));
 
         // 'mapped' data
         $mapped = json_decode($player['mapped'], true);
-        $blocksBroken = $mapped['blocksBroken'];
-        $total = empty($blocksBroken) ? 0 : array_sum($blocksBroken);
-        $diamond = $mapped['blocksBroken']['Diamond Ore'];
-        $diamond = $diamond != null ? $diamond : 0;
-        $hours = round($player['totalTime']/60/60);
-        $hours = $hours > 0 ? $hours : 1;
+        $blocks_broken = $mapped['blocksBroken'];
+        $count_blocks = empty($blocks_broken) ? 0 : array_sum($blocks_broken);
+        $count_diamond = $mapped['blocksBroken']['Diamond Ore'];
+        $count_diamond = $count_diamond != null ? $count_diamond : 0;
+        $count_hours = round($player['totalTime']/60/60);
+        $count_hours = $count_hours > 0 ? $count_hours : 1;
 
+
+    } else {
+        $inventory = null;
+        $count_blocks = 0;
+        $count_diamond = 0;
+        $count_hours = 0;
     }
 
     /*
@@ -127,7 +99,9 @@ function v_user () {
         "asc_desc" => "desc"
     ]);
 
-    $table = new TableHelper($action_url, $p);
+    $count_drops = count($drops);
+
+    $table = new TableHelper($action_url, $parameters);
 
     $table->add_column([
         'width' => '30px'
@@ -165,23 +139,35 @@ function v_user () {
         'label_title' => 'Apagar'
     ]);
 
-//    // Item Drops!
-//    $new_drops_pages = DropModel::get([
-//        "per_page" => 6,
-//        "accountid" => $_SESSION["id"],
-//        "undelivered" => 1
-//    ]); //mostrar até 6 items
-//
-//    $total_new_drops = $new_drops_pages["total"];
-//    $new_drops = $new_drops_pages["pages"];
-//    $lootmessage = "WOW";
-//    $loottitle = "very items";
+    $template->assign('player', $player);
 
-    /*
-     * Render Page
-     */
+    $template->assign('own', $own);
 
-    require('templates/users/v_user.php');
+    $template->assign('admin', $admin);
+
+    $template->assign('notices', $notices);
+
+    $template->assign('badges', $badges);
+
+    $template->assign('has_played', $has_played);
+
+    $template->assign('dynmap', $dynmap);
+
+    $template->assign('inventory', $inventory);
+
+    $template->assign('table', $table);
+
+    $template->assign('count_blocks', $count_blocks);
+
+    $template->assign('count_diamond', $count_diamond);
+
+    $template->assign('count_hours', $count_hours);
+
+    $template->assign('drops', $drops);
+
+    $template->assign('count_drops', $count_drops);
+
+    $template->render();
 }
 
 ?>

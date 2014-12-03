@@ -18,35 +18,35 @@
           <h2 title="Apenas serão mostradas item drops após esta data">Dropped após</h2>
         </li>
         <li>
-          <input type="date" name="drop_date_begin" value="<?= $p['drop_date_begin'] ?>">
+          <input type="date" name="drop_date_begin" value="<?= $parameters['drop_date_begin'] ?>">
         </li>
         <li>
           <h2 title="Apenas serão mostradas item drops até esta data">Dropped até</h2>
         </li>
         <li>
-          <input type="date" name="drop_date_end" value="<?= $p['drop_date_end'] ?>">
+          <input type="date" name="drop_date_end" value="<?= $parameters['drop_date_end'] ?>">
         </li>
           <li>
               <h2 title="Apenas serão mostradas item drops claimed após esta data">Taken após</h2>
           </li>
           <li>
-              <input type="date" name="taken_date_begin" value="<?= $p['taken_date_begin'] ?>">
+              <input type="date" name="taken_date_begin" value="<?= $parameters['taken_date_begin'] ?>">
           </li>
           <li>
               <h2 title="Apenas serão mostradas item drops claimed até esta data">Taken até</h2>
           </li>
           <li>
-              <input type="date" name="taken_date_end" value="<?= $p['taken_date_end'] ?>">
+              <input type="date" name="taken_date_end" value="<?= $parameters['taken_date_end'] ?>">
           </li>
         <li>
           <h2>Critérios</h2>
         </li>
         <li>
-          <input id="chk_undelivered" type="checkbox" name="undelivered" value="1" <?= $p['undelivered'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk_undelivered" type="checkbox" name="undelivered" value="1" <?= $parameters['undelivered'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="chk_undelivered" title="drop não entregue">não entregue</label>
         </li>
         <li>
-          <input id="chk_delivered" type="checkbox" name="delivered" value="1" <?= $p['delivered'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk_delivered" type="checkbox" name="delivered" value="1" <?= $parameters['delivered'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="chk_delivered" title="drop entregue">entregue</label>
         </li>
         <li>

@@ -16,89 +16,89 @@
           <h2>Nome</h2>
         </li>
         <li>
-          <input type="text" name="playername" placeholder="steve" value="<?= $p['playername'] ?>">
+          <input type="text" name="playername" placeholder="steve" value="<?= $parameters['playername'] ?>">
         </li>
         <li>
           <h2>Endereço de Email</h2>
         </li>
         <li>
-          <input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $p['emailaddress'] ?>">
+          <input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $parameters['emailaddress'] ?>">
         </li>
         <li>
           <h2>Endereço IP</h2>
         </li>
         <li>
-          <input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $p['ipaddress'] ?>">
+          <input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $parameters['ipaddress'] ?>">
         </li>
         <li>
           <h2 title="Apenas serão mostradas contas onde houve um login após esta data">Login após</h2>
         </li>
         <li>
-          <input type="date" name="login_date_begin" value="<?= $p['login_date_begin'] ?>">
+          <input type="date" name="login_date_begin" value="<?= $parameters['login_date_begin'] ?>">
         </li>
         <li>
           <h2 title="Apenas serão mostradas contas onde houve um login até esta data">Login até</h2>
         </li>
         <li>
-          <input type="date" name="login_date_end" value="<?= $p['login_date_end'] ?>">
+          <input type="date" name="login_date_end" value="<?= $parameters['login_date_end'] ?>">
         </li>
           <li>
           <h2 title="Apenas serão mostradas contas registadas após esta data">Registo após</h2>
         </li>
         <li>
-          <input type="date" name="register_date_begin" value="<?= $p['register_date_begin'] ?>">
+          <input type="date" name="register_date_begin" value="<?= $parameters['register_date_begin'] ?>">
         </li>
         <li>
           <h2 title="Apenas serão mostradas contas registadas até esta data">Registo até</h2>
         </li>
         <li>
-          <input type="date" name="register_date_end" value="<?= $p['register_date_end'] ?>">
+          <input type="date" name="register_date_end" value="<?= $parameters['register_date_end'] ?>">
         </li>
         <li>
           <h2>Critérios</h2>
         </li>
         <li>
-          <input id="nologin" type="checkbox" name="nologin" value="1" <?= $p['nologin'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="nologin" type="checkbox" name="nologin" value="1" <?= $parameters['nologin'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="nologin">nunca fez login</label>
         </li>
         <li>
-          <input id="yeslogin" type="checkbox" name="yeslogin" value="1" <?= $p['yeslogin'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="yeslogin" type="checkbox" name="yeslogin" value="1" <?= $parameters['yeslogin'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="yeslogin">já fez login</label>
         </li>
         <li>
-          <input id="nogame" type="checkbox" name="nogame" value="1" <?= $p['nogame'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="nogame" type="checkbox" name="nogame" value="1" <?= $parameters['nogame'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="nogame">nunca jogou</label>
         </li>
         <li>
-          <input id="yesgame" type="checkbox" name="yesgame" value="1" <?= $p['yesgame'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="yesgame" type="checkbox" name="yesgame" value="1" <?= $parameters['yesgame'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="yesgame">já jogou</label>
         </li>
         <li>
-          <input id="inactive" type="checkbox" name="inactive" value="1" <?= $p['inactive'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="inactive" type="checkbox" name="inactive" value="1" <?= $parameters['inactive'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="inactive">inactivo</label>
         </li>
         <li>
-          <input id="admin" type="checkbox" name="admin" value="1" <?= $p['admin'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="admin" type="checkbox" name="admin" value="1" <?= $parameters['admin'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="admin">admin</label>
         </li>
         <li>
-          <input id="operator" type="checkbox" name="operator" value="1" <?= $p['operator'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="operator" type="checkbox" name="operator" value="1" <?= $parameters['operator'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="operator">operador</label>
         </li>
         <li>
-          <input id="contributor" type="checkbox" name="contributor" value="1" <?= $p['contributor'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="contributor" type="checkbox" name="contributor" value="1" <?= $parameters['contributor'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="contributor">contribuidor</label>
         </li>
         <li>
-          <input id="donor" type="checkbox" name="donor" value="1" <?= $p['donor'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="donor" type="checkbox" name="donor" value="1" <?= $parameters['donor'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="donor">dador</label>
         </li>
         <li>
-          <input id="premium" type="checkbox" name="premium" value="1" <?= $p['premium'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="premium" type="checkbox" name="premium" value="1" <?= $parameters['premium'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="premium">premium</label>
         </li>
         <li>
-          <input id="isonline" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="isonline" type="checkbox" name="online" value="1" <?= $parameters['online'] == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="isonline">online</label>
         </li>
         <li>

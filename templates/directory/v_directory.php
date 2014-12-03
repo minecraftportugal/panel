@@ -16,29 +16,29 @@
           <h2>Nome</h2>
         </li>
         <li>
-          <input type="text" name="playername" placeholder="steve" value="<?= $p['playername']; ?>">
+          <input type="text" name="playername" placeholder="steve" value="<?= $parameters['playername']; ?>">
         </li>
         <li>
           <h2>Critérios</h2>
         </li>
         <li>
-          <input id="chk-staff" type="checkbox" name="staff" value="1" <?= $p['staff'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk-staff" type="checkbox" name="staff" value="1" <?= $parameters['staff'] == 1 ? 'checked="checked"' : '' ?> />
           <label for="chk-staff">staff</label>
         </li>
         <li>
-          <input id="chk-contributor" type="checkbox" name="contributor" value="1" <?= $p['contributor'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk-contributor" type="checkbox" name="contributor" value="1" <?= $parameters['contributor'] == 1 ? 'checked="checked"' : '' ?> />
           <label for="chk-contributor">contribuidor</label>
         </li>
         <li>
-          <input id="chk-donor" type="checkbox" name="donor" value="1" <?= $p['donor'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk-donor" type="checkbox" name="donor" value="1" <?= $parameters['donor'] == 1 ? 'checked="checked"' : '' ?> />
           <label for="chk-donor">dador</label>
         </li>
         <li>
-          <input id="chk-premium" type="checkbox" name="premium" value="1" <?= $p['premium'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk-premium" type="checkbox" name="premium" value="1" <?= $parameters['premium'] == 1 ? 'checked="checked"' : '' ?> />
           <label for="chk-premium">premium</label>
         </li>
         <li>
-          <input id="chk-isonline" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk-isonline" type="checkbox" name="online" value="1" <?= $parameters['online'] == 1 ? 'checked="checked"' : '' ?> />
           <label for="chk-isonline">online</label>
         </li>
         <li>
@@ -54,7 +54,7 @@
 
   <div class="page-panel-body page-panel-right page-panel-scrollable">
 
-    <? foreach((array)$pages as $r): ?>
+    <? foreach((array)$page as $r): ?>
 
       <div class="player-cell pull-left">
         <a href="/profile?id=<?= $r['id'] ?>"

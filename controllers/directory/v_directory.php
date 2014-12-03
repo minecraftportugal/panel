@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
@@ -10,9 +11,9 @@ function v_directory() {
 
     Session::validateSession();
 
-    $action_url = '/directory';
+    $template = Template::init('directory/v_directory');
 
-    $parameters = [
+    $parameters = ArgumentsHelper::process($_GET, [
         'playername' => null,
         'staff' => 0,
         'contributor' => 0,
@@ -23,27 +24,40 @@ function v_directory() {
         'per_page' => 30,
         'order_by' => 'registerdate_df',
         'asc_desc' => 'asc'
-    ];
+    ]);
 
-    $p = ArgumentsHelper::process($_GET, $parameters);
+    $action_url = '/directory';
 
-    $total = AccountModel::count($p);
+    $total = AccountModel::count($parameters);
 
-    $pages = AccountModel::get($p);
+    $page = AccountModel::get($parameters);
 
-    $link_after = ArgumentsHelper::serialize($p);
+    $link_after = ArgumentsHelper::serialize($parameters);
 
     $pagination = new PaginationHelper([
-        "page" => $p['page'],
+        "page" => $parameters['page'],
         "total" => $total,
-        "per_page" => $p['per_page'],
+        "per_page" => $parameters['per_page'],
         "link_before" => $action_url,
         "link_after" => $link_after,
         "show_pages" => 4,
         "expand" => 20
     ]);
 
-    require('templates/directory/v_directory.php');
+    $template->assign('action_url', $action_url);
+
+    $template->assign('parameters', $parameters);
+
+    $template->assign('total', $total);
+
+    $template->assign('page', $page);
+
+    // $template->assign('table', $table);
+
+    $template->assign('pagination', $pagination);
+
+    $template->render();
+
 }
 
 ?>

@@ -1,8 +1,13 @@
 <?
 
+use lib\template\Template;
+
 function v_test_pattern() {
 
-    require('templates/v_test_pattern.html');
+    
+    $template = Template::init('v_test_pattern');
+    
+    $template->render();
 
 }
 

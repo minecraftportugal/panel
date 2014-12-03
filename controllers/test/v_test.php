@@ -1,16 +1,13 @@
 <?
 
-use models\account\Account;
+use lib\template\Template;
 
 function v_test() {
 
-  $account = new Account();
+    $template = Template::init('test/v_test');
 
-  echo"<pre>";
-  var_dump($account->get([], "id desc"));
-  echo "</pre>";
+    $template->render();
 
-  require('templates/test/index.php');
 }
 
 ?>

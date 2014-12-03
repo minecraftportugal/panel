@@ -1,12 +1,15 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 
-function maps_index() {
+function v_maps() {
 
-  Session::validateSession();
+    Session::validateSession();
 
-  require('templates/maps/v_maps.php');
+    $template = Template::init('maps/v_maps');
+
+    $template->render();
 
 }
 

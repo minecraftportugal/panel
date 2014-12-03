@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\session\SessionModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
@@ -11,11 +12,9 @@ function v_admin_sessions() {
 
     Session::validateSession(true);
 
-    $action_url = '/admin/sessions';
+    $template = Template::init('admin/v_admin_sessions');
 
-    $form_url = '/admin/sessions';
-
-    $parameters = [
+    $parameters = ArgumentsHelper::process($_GET, [
         'page' => 1,
         'length' => 3600,
         'per_page' => 20,
@@ -29,29 +28,31 @@ function v_admin_sessions() {
         'web' => 0,
         'order_by' => 'time',
         'asc_desc' => 'desc'
-    ];
+    ]);
 
-    $p = ArgumentsHelper::process($_GET, $parameters);
+    $action_url = '/admin/sessions';
 
-    $total = SessionModel::count($p);
+    $form_url = '/admin/sessions';
 
-    $page = SessionModel::get($p);
+    $total = SessionModel::count($parameters);
 
-    $link_after = ArgumentsHelper::serialize($p);
+    $page = SessionModel::get($parameters);
+
+    $link_after = ArgumentsHelper::serialize($parameters);
 
     $notices = NoticeHelper::render(['classes' => 'pull-right']);
 
     $pagination = new PaginationHelper([
-        "page" => $p['page'],
+        "page" => $parameters['page'],
         "total" => $total,
-        "per_page" => $p['per_page'],
+        "per_page" => $parameters['per_page'],
         "link_before" => $action_url,
         "link_after" => $link_after,
         "show_pages" => 4,
         "expand" => 20
     ]);
 
-    $table = new TableHelper($action_url, $p);
+    $table = new TableHelper($action_url, $parameters);
 
     $table->add_column([
         'width' => '30px'
@@ -82,7 +83,24 @@ function v_admin_sessions() {
         'label_title' => 'Informação',
     ]);
 
-    require('templates/admin/v_admin_sessions.php');
+    $template->assign('action_url', $action_url);
+
+    $template->assign('form_url', $form_url);
+
+    $template->assign('parameters', $parameters);
+
+    $template->assign('total', $total);
+
+    $template->assign('page', $page);
+
+    $template->assign('notices', $notices);
+
+    $template->assign('table', $table);
+
+    $template->assign('pagination', $pagination);
+
+    $template->render();
+
 }
 
 ?>

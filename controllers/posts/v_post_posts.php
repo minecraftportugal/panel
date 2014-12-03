@@ -1,15 +1,16 @@
 <?
 
-use models\wordpress\WordpressModel;
 use lib\session\Session;
+use lib\template\Template;
 
 function v_post_posts() {
 
     Session::validateSession();
 
-    WordpressModel::init();
+    $template = Template::init('posts/v_post_posts', WP_LOCATION . '/wp-config.php');
 
-    require('templates/posts/v_post_posts.php');
+    $template->render();
+
 }
 
 ?>

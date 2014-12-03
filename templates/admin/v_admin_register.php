@@ -12,7 +12,7 @@
             <tr>
                 <td colspan="2" class="center">
                     <input type="submit" value="OK" />
-                    <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+                    <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
                 </td>
             </tr>
         </table>

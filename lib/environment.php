@@ -50,6 +50,27 @@ class Environment {
         return $path_info;
     }
 
+    function getSelfURL() { 
+        
+        function strleft($s1, $s2) { return substr($s1, 0, strpos($s1, $s2)); }
+
+        $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : ""; 
+        
+        $protocol = strleft(strtolower($_SERVER["SERVER_PROTOCOL"]), "/").$s; 
+        
+        if (($_SERVER["SERVER_PORT"] == "80") || ($_SERVER["SERVER_PORT"] == "443")) {
+        
+            $port = "";
+        
+        } else {
+        
+            $port = ":" . $_SERVER["SERVER_PORT"];
+
+        }
+        
+        return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI']; 
+    }
+
 
 }
 

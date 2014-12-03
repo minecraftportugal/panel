@@ -68,17 +68,17 @@
                     </tr>
                     <tr>
                         <th>Blocos/Hr</th>
-                        <td><?= $total ?>/<?= $hours ?> (<?= round($total/$hours, 2) ?>)</td>
+                        <td><?= $count_blocks ?>/<?= $count_hours ?> (<?= round($count_blocks/$count_hours, 2) ?>)</td>
                     </tr>
                     <tr>
                         <th>Dim/Hr</th>
-                        <td><?= $diamond ?>/<?= $hours ?> (<?= round($diamond/$hours, 2) ?>)</td>
+                        <td><?= $count_diamond ?>/<?= $count_hours ?> (<?= round($count_diamond/$count_hours, 2) ?>)</td>
                     </tr>
 
-                <? if ($total > 0): ?>
+                <? if ($count_blocks > 0): ?>
                     <tr>
                         <th>Dim/Blocos</th>
-                        <td><?= $diamond ?>/<?= $total ?> (<?= round($diamond/$total, 2) ?>)</td>
+                        <td><?= $count_diamond ?>/<?= $count_blocks ?> (<?= round($count_diamond/$count_blocks, 2) ?>)</td>
                     </tr>
                 <? endif; ?>
 
@@ -255,7 +255,7 @@
             <div class="layout-col-title">
                 <i class="fa fa-globe"></i> Posição
             </div>
-            <?= $v_dynmap_widget ?>
+            <?= $dynmap ?>
         </div>
 
         <div class="clearer"></div>
@@ -398,20 +398,7 @@
                     Items
                 </div>
                 <div class="padded">
-                    <table class="inventory">
-                        <tbody>
-                        <? for ($j = 0; $j < 4; $j++): ?>
-                            <tr class="line<?= $j ?>">
-                                <? for ($i = 0; $i < 9; $i++): ?>
-                                    <td>
-                                        <? $pi = $playerinv[$i + 9 * $j]; ?>
-                                        <span class="item" data-item="<?= $pi['itemdata'] ?>" data-enchantments="<?= $pi['enchantments'] ?>"></span>
-                                    </td>
-                                <? endfor; ?>
-                            </tr>
-                        <? endfor; ?>
-                        </tbody>
-                    </table>
+                    <?= $inventory ?>
                 </div>
             </div>
 

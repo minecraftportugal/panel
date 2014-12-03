@@ -16,43 +16,43 @@
           <h2>Nome</h2>
         </li>
         <li>
-          <input type="text" name="playername" placeholder="steve" value="<?= $p['playername'] ?>">
+          <input type="text" name="playername" placeholder="steve" value="<?= $parameters['playername'] ?>">
         </li>
         <li>
           <h2>Endereço IP</h2>
         </li>
         <li>
-          <input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $p['ipaddress'] ?>">
+          <input type="text" name="ipaddress" placeholder="192.168.0.1" value="<?= $parameters['ipaddress'] ?>">
         </li>
         <li>
           <h2 title="Apenas serão sessões iniciadas após esta data">Iniciada desde</h2>
         </li>
         <li>
-          <input type="date" name="date_begin" value="<?= $p['date_begin'] ?>">
+          <input type="date" name="date_begin" value="<?= $parameters['date_begin'] ?>">
         </li>
         <li>
           <h2 title="Apenas serão sessões iniciadas até esta data">Iniciada até</h2>
         </li>
         <li>
-          <input type="date" name="date_end" value="<?= $p['date_end'] ?>">
+          <input type="date" name="date_end" value="<?= $parameters['date_end'] ?>">
         </li>
         <li>
           <h2>Critérios</h2>
         </li>
         <li>
-              <input id="login" type="checkbox" name="login" value="1" <?= $p['login'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="login" type="checkbox" name="login" value="1" <?= $parameters['login'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="login" title="apenas logins">login</label>
         </li>
         <li>
-              <input id="logout" type="checkbox" name="logout" value="1" <?= $p['logout'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="logout" type="checkbox" name="logout" value="1" <?= $parameters['logout'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="logout" title="apenas logouts">logout</label>
         </li>
         <li>
-              <input id="session_online" type="checkbox" name="online" value="1" <?= $p['online'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="session_online" type="checkbox" name="online" value="1" <?= $parameters['online'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="session_online">online</label>
         </li>
         <li>
-              <input id="session_web" type="checkbox" name="web" value="1" <?=$p['web'] == 1 ? 'checked="checked"' : '' ?> />
+              <input id="session_web" type="checkbox" name="web" value="1" <?=$parameters['web'] == 1 ? 'checked="checked"' : '' ?> />
               <label class="checkbox" for="session_web">sessão web</label>
         </li>
         <li>

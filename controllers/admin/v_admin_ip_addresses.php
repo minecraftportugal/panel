@@ -1,13 +1,15 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
-use helpers\request\RequestHelper;
 use helpers\table\TableHelper;
 
 function v_admin_ip_addresses() {
 
     Session::validateSession(true);
+
+    $template = Template::init('admin/v_admin_ip_addresses');
 
     $addresses = AccountModel::ip_addresses();
 
@@ -29,8 +31,15 @@ function v_admin_ip_addresses() {
         'label' => 'Jogadores'
     ]);
 
+    $template->assign('addresses', $addresses);
 
-    require('templates/admin/v_admin_ip_addresses.php');
+    $template->assign('total', $total);
+
+    $template->assign('table', $table);
+
+    $template->assign('addresses', $addresses);
+
+    $template->render();
 }
 
 ?>

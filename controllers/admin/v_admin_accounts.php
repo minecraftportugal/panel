@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
@@ -12,11 +13,9 @@ function v_admin_accounts() {
 
     Session::validateSession(true);
 
-    $action_url = '/admin/accounts';
+    $template = Template::init('admin/v_admin_accounts');
 
-    $form_url = '/admin/accounts';
-
-    $parameters = [
+    $parameters = ArgumentsHelper::process($_GET, [
         'page' => 1,
         'per_page' => 20,
         'playername' => null,
@@ -39,29 +38,31 @@ function v_admin_accounts() {
         'online' => 0,
         'order_by' => 'registerdate_df',
         'asc_desc' => 'desc'
-    ];
+    ]);
 
-    $p = ArgumentsHelper::process($_GET, $parameters);
+    $action_url = '/admin/accounts';
 
-    $total = AccountModel::count($p);
+    $form_url = '/admin/accounts';
 
-    $page = AccountModel::get($p);
+    $total = AccountModel::count($parameters);
 
-    $link_after = ArgumentsHelper::serialize($p);
+    $page = AccountModel::get($parameters);
+
+    $link_after = ArgumentsHelper::serialize($parameters);
 
     $notices = NoticeHelper::render(['classes' => 'pull-right']);
     
     $pagination = new PaginationHelper([
-        "page" => $p['page'],
+        "page" => $parameters['page'],
         "total" => $total,
-        "per_page" => $p['per_page'],
+        "per_page" => $parameters['per_page'],
         "link_before" => $action_url,
         "link_after" => $link_after,
         "show_pages" => 4,
         "expand" => 20
     ]);
 
-    $table = new TableHelper($action_url, $p);
+    $table = new TableHelper($action_url, $parameters);
 
     $table->add_column([
         'width' => '30px'
@@ -144,6 +145,24 @@ function v_admin_accounts() {
         'label_title' => 'Apagar'
     ]);
 
-    require('templates/admin/v_admin_accounts.php');
+    $template->assign('action_url', $action_url);
+
+    $template->assign('form_url', $form_url);
+
+    $template->assign('parameters', $parameters);
+
+    $template->assign('total', $total);
+
+    $template->assign('page', $page);
+
+    $template->assign('notices', $notices);
+
+    $template->assign('table', $table);
+
+    $template->assign('pagination', $pagination);
+
+    $template->render();
+
 }
+
 ?>

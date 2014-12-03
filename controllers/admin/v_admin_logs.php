@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\template\Template;
 use models\log\LogModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
@@ -11,40 +12,41 @@ function v_admin_logs() {
 
     Session::validateSession(true);
 
+    $template = Template::init('admin/v_admin_logs');
+
     $action_url = '/admin/logs';
 
     $form_url = '/admin/logs';
 
-    $parameters = [
+    $parameters = ArgumentsHelper::process($_GET, [
         "page" => 1,
         "per_page" => 20,
         "accountid" => null,
         "event_type" => null,
         "order_by" => "time",
         "asc_desc" => "desc"
-    ];
+    ]);
 
-    $p = ArgumentsHelper::process($_GET, $parameters);
 
-    $total = LogModel::count($p);
+    $total = LogModel::count($parameters);
     
-    $page = LogModel::get($p);
+    $page = LogModel::get($parameters);
 
-    $link_after = ArgumentsHelper::serialize($p);
+    $link_after = ArgumentsHelper::serialize($parameters);
 
     $notices = NoticeHelper::render(['classes' => 'pull-right']);
 
     $pagination = new PaginationHelper([
-      "page" => $p['page'],
+      "page" => $parameters['page'],
       "total" => $total,
-      "per_page" => $p['per_page'],
+      "per_page" => $parameters['per_page'],
       "link_before" => $action_url,
       "link_after" => $link_after,
       "show_pages" => 4,
       "expand" => 20,
     ]);
 
-    $table = new TableHelper($action_url, $p);
+    $table = new TableHelper($action_url, $parameters);
 
     $table->add_column([
         'width' => '15%',
@@ -83,7 +85,24 @@ function v_admin_logs() {
         'label_title' => 'Apagar'
     ]);
 
-    require('templates/admin/v_admin_logs.php');
+    $template->assign('action_url', $action_url);
+
+    $template->assign('form_url', $form_url);
+
+    $template->assign('parameters', $parameters);
+
+    $template->assign('total', $total);
+
+    $template->assign('page', $page);
+
+    $template->assign('notices', $notices);
+
+    $template->assign('table', $table);
+
+    $template->assign('pagination', $pagination);
+
+    $template->render();
+
 }
 
 ?>

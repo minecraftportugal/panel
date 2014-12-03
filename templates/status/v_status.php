@@ -1,22 +1,16 @@
 <div id="widget-status">
 
-    <?
-    if ($total_new_drops > 0) {
-        require __DIR__.'/../partials/itemdrops.php';
-    }
-    ?>
-
     <div class="layout-row">
 
         <div class="layout-col layout-col-full">
             
             <div class="layout-col-title">
-                <h1><?= count($online_players) ?> jogadores Online</h1>
+                <h1><?= $count['online'] ?> jogadores Online</h1>
             </div>
 
             <div class="layout-col-content">
-                <? if (count($online_players) > 0): ?>
-                    <? foreach($online_players as $r): ?>
+                <? if ($count['online'] > 0): ?>
+                    <? foreach($players['online'] as $r): ?>
                         <div class="player-cell pull-left">
                             <a href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
                                title="<?= $r["registerdate"] ?>"
@@ -69,7 +63,7 @@
             </div>
             <div>
                 <ul class="player-list">
-                    <? foreach($top_players as $r): ?>
+                    <? foreach($players['top'] as $r): ?>
                         <li>
                             <a href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
                                title="<?= $r["registerdate"] ?>"
@@ -96,7 +90,7 @@
             </div>
             <div>
                 <ul class="player-list">
-                    <? foreach($newest_players as $r): ?>
+                    <? foreach($players['new'] as $r): ?>
                         <li>
                             <a href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
                                title="<?= $r["registerdate"] ?>"
