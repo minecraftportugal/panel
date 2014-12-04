@@ -1,7 +1,7 @@
 <ul>
 
   <li>
-    <i class="bg-icon" style=" background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 16) ?>');"></i> <?= $user['playername'] ?>
+    <i class="bg-icon" style=" background-image: url('<?= $head_url ?>');"></i> <?= $user['playername'] ?>
   </li>
 
   <li>

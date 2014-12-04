@@ -5,7 +5,7 @@ namespace helpers\datetime;
 class DateTimeHelper {
 
     /* http://csl.name/php-secs-to-human-text/ */
-    function stoh($secs)
+    public static function stoh($secs)
     {
         $units = array(
             "week"   => 7*24*3600,

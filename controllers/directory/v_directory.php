@@ -5,6 +5,7 @@ use lib\template\Template;
 use models\account\AccountModel;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
+use helpers\minotar\MinotarHelper;
 use helpers\notice\NoticeHelper;
 
 function v_directory() {
@@ -31,6 +32,19 @@ function v_directory() {
     $total = AccountModel::count($parameters);
 
     $page = AccountModel::get($parameters);
+
+    /** Filters: Change and add new data */
+    foreach ($page as $k => $v) {
+
+        $badges = Template::init('partials/badges');
+
+        $badges->assign('badges', AccountModel::badges($page[$k]['id']));
+
+        $page[$k]['badges'] = $badges;
+
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], 64);
+
+    }
 
     $link_after = ArgumentsHelper::serialize($parameters);
 
@@ -59,5 +73,7 @@ function v_directory() {
     $template->render();
 
 }
+
+
 
 ?>

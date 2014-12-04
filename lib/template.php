@@ -14,6 +14,19 @@ class Template {
 
     }
 
+    public function __toString() {
+
+        ob_start();
+
+        $this->render();
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        return $result;
+    }
+
     public function assign($variable, $value) {
         
         $this->_map[$variable] = $value;
@@ -32,7 +45,7 @@ class Template {
             require_once($this->_require);
         }
 
-        require_once($this->_name);
+        require($this->_name);
 
     }
 

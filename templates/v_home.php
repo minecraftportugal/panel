@@ -3,7 +3,7 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
-    <meta name="xsrf_token" content="<?= \lib\session\Session::getXSRFToken() ?>" >
+    <meta name="xsrf_token" content="<?= $xsrf_token ?>" >
     <meta name="username" content="<?= $user["playername"] ?>" >
 
     <title>minecraft.pt | MinePanel 3.0</title>
@@ -38,7 +38,7 @@
     <script type="text/javascript" src="/scripts/sop.js"></script>
     <script type="text/javascript" src="/scripts/dynmap.js"></script>
 
-    <? require("partials/background-css.php"); ?>
+    <?= $background_css  ?>
 
 </head> 
 <body>
@@ -49,20 +49,20 @@
     </div>
     
     <div id="widget-taskbar">
-        <? require("partials/taskbar.php"); ?>
+        <?= $taskbar ?>
     </div>
 
     <div class="widget-menu" id="widget-homemenu">
-        <? require("partials/menus/home.php") ?>
+        <?= $menu_home ?>
     </div>
 
     <div class="widget-menu" id="widget-usermenu">
-        <? require("partials/menus/user.php") ?>
+        <?= $menu_user ?>
     </div>
 
     <? /* /!\ move html templates somewher else ? */ ?>
     <div id="html-templates">
-    <? require("partials/htmltemplates.php") ?>
+        <?= $html_templates ?>
     </div>
 
 </body>

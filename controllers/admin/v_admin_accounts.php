@@ -7,6 +7,7 @@ use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\table\TableHelper;
+use helpers\minotar\MinotarHelper;
 use helpers\datetime\DateTimeHelper;
 
 function v_admin_accounts() {
@@ -47,6 +48,23 @@ function v_admin_accounts() {
     $total = AccountModel::count($parameters);
 
     $page = AccountModel::get($parameters);
+
+    /** Filters: Change and add new data */
+    foreach ($page as $k => $v) {
+
+        $badges = Template::init('partials/badges');
+
+        $badges->assign('badges', AccountModel::badges($page[$k]['id']));
+
+        $page[$k]['badges'] = $badges;
+
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], 24, 3);
+
+        $page[$k]['totalTime'] = DateTimeHelper::stoh($page[$k]["totalTime"]);
+
+        $page[$k]['sessionTime'] = DateTimeHelper::stoh($page[$k]["sessionTime"]);
+
+    }
 
     $link_after = ArgumentsHelper::serialize($parameters);
 
@@ -160,6 +178,8 @@ function v_admin_accounts() {
     $template->assign('table', $table);
 
     $template->assign('pagination', $pagination);
+
+    $template->assign('xsrf_token', Session::getXSRFToken());
 
     $template->render();
 

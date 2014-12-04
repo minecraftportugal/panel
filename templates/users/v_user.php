@@ -12,7 +12,7 @@
         <div class="layout-col-title">
             <i class="fa fa-cogs"></i> Admin
         </div>
-        <div>
+
 
             <div class="layout-col layout-col-c">
                 <div class="layout-col-title">
@@ -108,11 +108,11 @@
                                 <label class="checkbox" for="chk_active_<?= $player['id'] ?>">activo
                             </li>
                             <li>
-                                <input id="chk_contributor_<?= $player['id'] ?>" type="checkbox" name="contributor" value="1" <?= $badges['contributor'] == 1 ? 'checked="checked"' : '' ?> />
+                                <input id="chk_contributor_<?= $player['id'] ?>" type="checkbox" name="contributor" value="1" <?= $player['contributor'] == 1 ? 'checked="checked"' : '' ?> />
                                 <label class="checkbox" for="chk_contributor_<?= $player['id'] ?>">contribuidor
                             </li>
                             <li>
-                                <input id="chk_donor_<?= $player['id'] ?>" type="checkbox" name="donor" value="1" <?= $badges['donor'] == 1 ? 'checked="checked"' : '' ?> />
+                                <input id="chk_donor_<?= $player['id'] ?>" type="checkbox" name="donor" value="1" <?= $player['donor'] == 1 ? 'checked="checked"' : '' ?> />
                                 <label class="checkbox" for="chk_donor_<?= $player['id'] ?>">dador
                             </li>
                             <li>
@@ -202,22 +202,18 @@
             </div>
 
             <div class="text-center layout-col-sec">
-                <? require(__DIR__."/../partials/skin3d.php"); ?>
+                <?= $skin3d ?>
             </div>
 
             <? if ($player) : ?>
             <div class="layout-col-sec push-down">
                 <div>
                     <div class="health">
-                        <? for ($i = 0, $h = ($player) ? $player['health'] : 0; $i < 10; $i++, $h-=2): ?>
-                            <span class="<?= ($h > 1)? "full" : (($h <= 0)? "empty" : "half") ?>"></span>
-                        <? endfor; ?>
+                        <?= $health ?>
                     </div>
                     <div class="clearer"></div>
                     <div class="hunger">
-                        <? for ($i = 0, $f = $h = ($player) ? $player['foodLevel'] : 0; $i < 10; $i++, $f-=2): ?>
-                            <span class="<?= ($f > 1)? "full" : (($f <= 0)? "empty" : "half") ?>"></span>
-                        <? endfor; ?>
+                        <?= $hunger ?>
                     </div>
                     <div class="clearer"></div>
                 </div>
@@ -226,7 +222,7 @@
             <? endif; ?>
 
             <div class="text-center layout-col-sec">
-                <? require(__DIR__."/../partials/badges.php"); ?>
+                <?= $badges ?>
             </div>
 
             <div class="layout-col-sec">
@@ -243,9 +239,6 @@
                     <? endif; ?>
 
                 </table>
-
-                
-
 
             </div>
 
@@ -467,7 +460,6 @@
                                         Não foram encontrados drops através dos critérios especificados!
                                     </div>
                                 </td>
-
                             </tr>
                         <? endif; ?>
 

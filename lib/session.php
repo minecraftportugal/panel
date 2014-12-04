@@ -58,12 +58,25 @@ class Session {
         return $val;
     }
 
+    /*
+     * isAdmin: returns wether a user is an admin or not
+     */
+    public static function isAdmin() {
+
+        return Session::get('admin') == 1;
+
+    }
+
     public static function get($variable) {
+
         return array_key_exists($variable, $_SESSION) ? $_SESSION[$variable] : null;
+
     }
 
     public static function set($variable, $value) {
+
         $_SESSION[$variable] = $value;
+
     }
 
     /*

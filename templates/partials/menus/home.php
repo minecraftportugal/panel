@@ -86,7 +86,7 @@
 
 </ul>
 
-<? if ($user['admin'] == 1): ?>
+<? if ($admin): ?>
 <ul>
 
     <li>

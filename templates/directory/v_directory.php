@@ -72,14 +72,12 @@
         </div>
         
         <div class="section-2 font-mono">
-            <?= \helpers\minotar\MinotarHelper::head($r['playername'], 64) ?>
+            <?= $r['head'] ?>
         </div>
 
 
         <div class="section-3">
-          <?
-            $badges = \models\account\AccountModel::badges($r['id']);
-            require(__DIR__."/../partials/badges.php"); 
+          <?= $r['badges'] ?>
           ?>
         </div>
 

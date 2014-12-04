@@ -40,10 +40,33 @@ function v_user () {
 
     $notices = NoticeHelper::render(['classes' => 'hover-notice']);
 
-    $badges = AccountModel::badges($player['id']);
-
     // ja jogou?
     $has_played = !is_null($player['name']);
+
+    /** Skin 3d **/
+    $skin3d = Template::init('partials/skin3d');
+
+    $skin3d->assign('player', $player);
+
+    /** Skin 3d **/
+    $skin3d = Template::init('partials/skin3d');
+
+    $skin3d->assign('player', $player);
+
+    /** Health / Hunger **/
+    $health = Template::init('partials/health');
+
+    $health->assign('level', $player['health']);
+
+    $hunger = Template::init('partials/hunger');
+
+    $hunger->assign('level', $player['foodLevel']);
+
+    /** Badges */
+    $badges = Template::init('partials/badges');
+
+    $badges->assign('badges', AccountModel::badges($player['id']));
+
 
     /** Mini Map **/
     $dynmap = null;
@@ -73,17 +96,19 @@ function v_user () {
         $mapped = json_decode($player['mapped'], true);
         $blocks_broken = $mapped['blocksBroken'];
         $count_blocks = empty($blocks_broken) ? 0 : array_sum($blocks_broken);
-        $count_diamond = $mapped['blocksBroken']['Diamond Ore'];
+        $count_diamond = array_key_exists('Diamond Ore', $mapped['blocksBroken']) ? $mapped['blocksBroken']['Diamond Ore'] : 0 ;
         $count_diamond = $count_diamond != null ? $count_diamond : 0;
         $count_hours = round($player['totalTime']/60/60);
         $count_hours = $count_hours > 0 ? $count_hours : 1;
 
 
     } else {
+
         $inventory = null;
         $count_blocks = 0;
         $count_diamond = 0;
         $count_hours = 0;
+
     }
 
     /*
@@ -147,9 +172,15 @@ function v_user () {
 
     $template->assign('notices', $notices);
 
-    $template->assign('badges', $badges);
-
     $template->assign('has_played', $has_played);
+
+    $template->assign('skin3d', $skin3d);
+
+    $template->assign('health', $health);
+
+    $template->assign('hunger', $hunger);
+
+    $template->assign('badges', $badges);
 
     $template->assign('dynmap', $dynmap);
 

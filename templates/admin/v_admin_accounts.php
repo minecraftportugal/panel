@@ -123,7 +123,7 @@
           <tr>
           
             <td>
-                <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
+                <span><?= $r['head'] ?></span>
             </td>
 
             <td class="">
@@ -140,10 +140,7 @@
             </td>
 
             <td>
-                <?
-                  $badges = \models\account\AccountModel::badges($r['id']);
-                  require(__DIR__."/../partials/badges.php"); 
-                ?>
+                <?= $r['badges'] ?>
             </td>
 
             <td>
@@ -165,11 +162,11 @@
             </td>
 
             <td>
-                <?= \helpers\datetime\DateTimeHelper::stoh($r["totalTime"]) ?>
+                <?= $r["totalTime"] ?>
             </td>
 
             <td>
-                <?= \helpers\datetime\DateTimeHelper::stoh($r["sessionTime"]) ?>
+                <?= $r["sessionTime"] ?>
             </td>
 
             <td class="center">
@@ -211,7 +208,7 @@
       <div class="separator"></div>
 
       <div class="center">
-        <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+        <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
         <input type="submit" value="OK" />
       </div>            
     </form>

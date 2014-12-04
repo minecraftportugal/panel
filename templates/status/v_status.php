@@ -9,7 +9,7 @@
             </div>
 
             <div class="layout-col-content">
-                <? if ($count['online'] > 0): ?>
+                <? if ($count['online'] = 0): ?>
                     <? foreach($players['online'] as $r): ?>
                         <div class="player-cell pull-left">
                             <a href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
@@ -27,24 +27,19 @@
                                 </div>
 
                                 <div class="section-2 font-mono">
-                                    <?= \helpers\minotar\MinotarHelper::head($r['playername'], 64) ?>
+                                    <?= $r["head"] ?>
                                 </div>
 
 
                                 <div class="section-3">
-                                    <?
-                                    $badges = \models\account\AccountModel::badges($r['id']);
-                                    require(__DIR__."/../partials/badges.php");
-                                    ?>
+                                    <?= $r['badges'] ?>
                                 </div>
 
                             </a>
                         </div>
                     <? endforeach; ?>
                 <? else: ?>
-                    <div style="text-align: center; margin-top: 10px;">
-                        <img src="/images/bed.png" alt="IT'S A BED" title="O servidor está vazio... :(">
-                    </div>
+                    <?= $empty_server ?>
                 <? endif; ?>
 
                 <div class="clearer"></div>
@@ -74,7 +69,7 @@
                                data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>"
                                data-online="<?= $r['online'] == 1? 'true' : 'false' ?>"
                                style="<?= $r['id'] == null ? 'text-decoration: line-through;' : '' ?>">
-                                <?= \helpers\minotar\MinotarHelper::head($r['playername'], 25) ?>
+                                <?= $r['head'] ?>
                                 <span class="name-label pull-left"><?= $r["playername"] ?></span>
                                 <span class="online pull-left" title="O jogador está online!"></span>
                             </a>
@@ -101,7 +96,7 @@
                                data-widget-title="<i class='fa fa-user'></i> <?= $r["playername"] ?>"
                                data-online="<?= $r['online'] == 1? 'true' : 'false' ?>"
                                style="<?= $r['id'] == null ? 'text-decoration: line-through;' : '' ?>">
-                                <?= \helpers\minotar\MinotarHelper::head($r['playername'], 25) ?>
+                                <?= $r['head'] ?>
                                 <span class="name-label pull-left"><?= $r["playername"] ?></span>
                                 <span class="online pull-left" title="O jogador está online!"></span>
                             </a>

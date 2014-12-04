@@ -30,6 +30,6 @@
 
 <div id="widget-button-usermenu" class="widget-context-button" data-open-menu="div#widget-usermenu">
     <a id="usermenu-small" href="#" title="Utilizador" class="bg-icon"
-       style="background-image: url('<?= \helpers\minotar\MinotarHelper::url($user['playername'], 16) ?>');">
+       style="background-image: url('<?= $head_url ?>');">
     </a>
 </div>
