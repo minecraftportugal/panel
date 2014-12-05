@@ -1,8 +1,8 @@
 <?php
 
 use lib\session\Session;
-use models\Log\LogModel;
-use helpers\Notice\NoticeHelper;
+use models\log\LogModel;
+use helpers\notice\NoticeHelper;
 
 function u_admin_logs() {
 

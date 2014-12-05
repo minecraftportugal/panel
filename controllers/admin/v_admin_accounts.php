@@ -14,6 +14,8 @@ function v_admin_accounts() {
 
     Session::validateSession(true);
 
+    $xsrf_token = Session::getXSRFToken();
+
     $template = Template::init('admin/v_admin_accounts');
 
     $parameters = ArgumentsHelper::process($_GET, [
@@ -66,9 +68,9 @@ function v_admin_accounts() {
 
     }
 
-    $link_after = ArgumentsHelper::serialize($parameters);
-
     $notices = NoticeHelper::render(['classes' => 'pull-right']);
+
+    $link_after = ArgumentsHelper::serialize($parameters);
     
     $pagination = new PaginationHelper([
         "page" => $parameters['page'],
@@ -179,7 +181,7 @@ function v_admin_accounts() {
 
     $template->assign('pagination', $pagination);
 
-    $template->assign('xsrf_token', Session::getXSRFToken());
+    $template->assign('xsrf_token', $xsrf_token);
 
     $template->render();
 

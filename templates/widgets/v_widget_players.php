@@ -22,7 +22,7 @@
         <? foreach((array)$players as $r): ?>
             <li>
                 <span class="stevehead">
-                    <?= \helpers\minotar\MinotarHelper::head($r['playername'], 32) ?>
+                    <?= $r['head'] ?>
                 </span>
                 <span class="name">
                     <?= $r['playername'] ?>

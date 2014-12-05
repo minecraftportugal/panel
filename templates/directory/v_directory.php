@@ -78,9 +78,9 @@
 
         <div class="section-3">
           <?= $r['badges'] ?>
-          ?>
         </div>
 
+        <div class="separator"></div>
       </a>
     </div>
 

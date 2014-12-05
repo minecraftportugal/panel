@@ -18,8 +18,13 @@ function v_user_options() {
     $template->assign('player', $player);
 
     $template->assign('notices', $notices);
+    
+    $xsrf_token = Session::getXSRFToken();
+
+    $template->assign('xsrf_token', $xsrf_token);
 
     $template->render();
+
 }
 
 ?>

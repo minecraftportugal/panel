@@ -7,6 +7,7 @@ use models\drop\DropModel;
 use helpers\notice\NoticeHelper;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
+use helpers\minotar\MinotarHelper;
 use helpers\dynmap\DynmapHelper;
 use helpers\inventory\InventoryHelper;
 use helpers\table\TableHelper;
@@ -15,12 +16,14 @@ use helpers\datetime\DateTimeHelper;
 function v_user () {
 
     Session::validateSession();
+    
+    $xsrf_token = Session::getXSRFToken();
 
     $template = Template::init('users/v_user');
 
     $parameters = ArgumentsHelper::process($_GET, [
         "page" => 1,
-        "per_page" => 1,
+        "per_page" => 20,
         "id" => null,
         "delivered" => 0,
         "undelivered" => 0,
@@ -28,11 +31,13 @@ function v_user () {
         "asc_desc" => "desc"
     ]);
 
-    assert(!is_null($parameters['id']));
+    $id = $parameters['id'];
+
+    assert(!is_null($id));
 
     $action_url = '/profile';
 
-    $player = AccountModel::first($parameters, true); // true : fetch all inquisitor data
+    $player = AccountModel::first(['id' => $id], true); // true : fetch all inquisitor data
 
     $own = ($parameters['id'] == Session::get('id'));
 
@@ -43,15 +48,14 @@ function v_user () {
     // ja jogou?
     $has_played = !is_null($player['name']);
 
-    /** Skin 3d **/
-    $skin3d = Template::init('partials/skin3d');
-
-    $skin3d->assign('player', $player);
+    $head = MinotarHelper::head($player['playername'], 16, 3);
 
     /** Skin 3d **/
     $skin3d = Template::init('partials/skin3d');
 
-    $skin3d->assign('player', $player);
+    $skin_url = MinotarHelper::skin_url($player['playername']);
+
+    $skin3d->assign('skin_url', $skin_url);
 
     /** Health / Hunger **/
     $health = Template::init('partials/health');
@@ -72,6 +76,7 @@ function v_user () {
     $dynmap = null;
 
     if ($has_played) {
+
         if ($player['online'] == 1) {
             $dynmap = DynmapHelper::map($player['playername']);
         } else {
@@ -82,8 +87,14 @@ function v_user () {
                 $dynmap = DynmapHelper::map();
             }
         }
+
+        $player['totalTime'] = DateTimeHelper::stoh($player['totalTime']);
+        $player['sessionTime'] = DateTimeHelper::stoh($player['sessionTime']);
+
     } else {
+
         $dynmap = DynmapHelper::map_offline();
+
     }
 
 
@@ -114,17 +125,25 @@ function v_user () {
     /*
      * ItemDrops Table
      */
-    $drops = DropModel::get([
-        "page" => 1,
-        "per_page" => 10,
-        "accountid" => $player["id"],
-        "delivered" => 0,
-        "undelivered" => 0,
-        "order_by" => "1",
-        "asc_desc" => "desc"
-    ]);
 
-    $count_drops = count($drops);
+    $parameters['accountid'] = $parameters['id'];
+
+
+    $drops = DropModel::get($parameters);
+
+    $count_drops = DropModel::count($parameters);
+    
+    $link_after = ArgumentsHelper::serialize($parameters);
+
+    $pagination = new PaginationHelper([
+        "page" => $parameters['page'],
+        "total" => $count_drops,
+        "per_page" => $parameters['per_page'],
+        "link_before" => $action_url,
+        "link_after" => $link_after,
+        "show_pages" => 4,
+        "expand" => 20
+    ]);
 
     $table = new TableHelper($action_url, $parameters);
 
@@ -157,12 +176,23 @@ function v_user () {
         'order_by' => 'idledroptime'
     ]);
 
-    $table->add_column([
-        'width' => '18px',
-        'alignment' => 'center',
-        'label' => '<i class="fa fa-trash-o"></i>',
-        'label_title' => 'Apagar'
-    ]);
+    if ($admin) {
+
+        $table->add_column([
+            'width' => '18px',
+            'alignment' => 'center',
+            'label' => '<i class="fa fa-trash-o"></i>',
+            'label_title' => 'Apagar'
+        ]);
+        
+        $drops_action = '/users/delete_drops';
+
+    } else {
+
+        $drops_action = '';
+    
+    }
+
 
     $template->assign('player', $player);
 
@@ -173,7 +203,9 @@ function v_user () {
     $template->assign('notices', $notices);
 
     $template->assign('has_played', $has_played);
-
+    
+    $template->assign('head', $head);
+    
     $template->assign('skin3d', $skin3d);
 
     $template->assign('health', $health);
@@ -198,7 +230,14 @@ function v_user () {
 
     $template->assign('count_drops', $count_drops);
 
+    $template->assign('pagination', $pagination);
+
+    $template->assign('drops_action', $drops_action);
+
+    $template->assign('xsrf_token', $xsrf_token);
+
     $template->render();
+
 }
 
 ?>

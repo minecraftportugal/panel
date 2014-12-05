@@ -14,7 +14,7 @@ function v_status() {
 
     $players = [];
     
-    $players['online'] = AccountModel::get(["per_page" => 10, "online" => 1]);
+    $players['online'] = AccountModel::get(["per_page" => 100, "online" => 1]);
 
     foreach ($players['online'] as $k => $v) {
 
@@ -28,7 +28,7 @@ function v_status() {
 
     }
 
-    $players['top'] = AccountModel::get(["per_page" => 15], "totalTime DESC");
+    $players['top'] = AccountModel::get(["per_page" => 15, "yesgame" => 1], "totalTime DESC");
 
     foreach ($players['top'] as $k => $v) {
 

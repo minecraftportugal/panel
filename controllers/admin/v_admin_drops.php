@@ -4,6 +4,7 @@ use lib\session\Session;
 use lib\template\Template;
 use models\drop\DropModel;
 use helpers\arguments\ArgumentsHelper;
+use helpers\minotar\MinotarHelper;
 use helpers\notice\NoticeHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\table\TableHelper;
@@ -11,6 +12,8 @@ use helpers\table\TableHelper;
 function v_admin_drops() {
 
     Session::validateSession(true);
+
+    $xsrf_token = Session::getXSRFToken();
 
     $template = Template::init('admin/v_admin_drops');
 
@@ -35,6 +38,13 @@ function v_admin_drops() {
     $total = DropModel::count($parameters);
 
     $page = DropModel::get($parameters);
+
+    /** Filters: Change and add new data */
+    foreach ($page as $k => $v) {
+
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], 24, 3);
+
+    }
 
     $link_after = ArgumentsHelper::serialize($parameters);
 
@@ -113,6 +123,8 @@ function v_admin_drops() {
     $template->assign('table', $table);
 
     $template->assign('pagination', $pagination);
+
+    $template->assign('xsrf_token', $xsrf_token);
 
     $template->render();
 

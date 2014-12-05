@@ -75,7 +75,7 @@
         <? foreach((array)$page as $r): ?>
           <tr>
             <td>
-                <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
+                <span><?= $r['head'] ?></span>
             </td>
             <td class="">
               <a href="/profile?id=<?= $r['id'] ?>"

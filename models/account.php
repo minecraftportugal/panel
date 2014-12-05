@@ -40,30 +40,28 @@ class AccountModel {
         $args = array_merge(AccountModel::$args, $args);
 
         $q = "SELECT count(1) AS total
-        FROM accounts a LEFT JOIN (
-            SELECT online, totalTime, name, world
-            FROM inquisitor.players
-        ) o ON (o.name = a.playername)
-        WHERE playername = ifnull(:playername, playername)
-        AND (id = ifnull(:id, id))
-        AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
-        AND email = ifnull(:emailaddress, email)
-        AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate IS NULL))
-        AND ((:yeslogin = 0) OR (:yeslogin = 1 AND lastlogindate IS NOT null))
-        AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
-        AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
-        AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
-        AND ((:staff = 0) OR (:staff = 1 AND (admin = 1 OR operator = 1)))
-        AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
-        AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
-        AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
-        AND ((:online = 0) OR (:online = 1 AND online = 1))
-        AND ((:nogame = 0) OR (:nogame = 1 AND playername NOT IN (SELECT name FROM inquisitor.players)))
-        AND ((:yesgame = 0) OR (:yesgame = 1 AND playername IN (SELECT name FROM inquisitor.players)))
-        AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
-        AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
-        AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
-        AND ((:register_date_end IS NULL) OR (:register_date_end >= date(registerdate)));";
+            FROM accounts a
+                LEFT JOIN inquisitor.players i ON i.name = a.playername
+            WHERE a.playername = ifnull(:playername, a.playername)
+            AND (a.id = ifnull(:id, a.id))
+            AND (a.lastloginip = ifnull(:ipaddress, a.lastloginip) OR a.registerip = ifnull(:ipaddress, a.registerip))
+            AND a.email = ifnull(:emailaddress, a.email)
+            AND ((:nologin = 0) OR (:nologin = 1 AND a.lastlogindate IS NULL))
+            AND ((:yeslogin = 0) OR (:yeslogin = 1 AND a.lastlogindate IS NOT NULL))
+            AND ((:inactive = 0) OR (:inactive = 1 AND a.active = 0))
+            AND ((:admin = 0) OR (:admin = 1 AND a.admin = 1))
+            AND ((:operator = 0) OR (:operator = 1 AND a.operator = 1))
+            AND ((:staff = 0) OR (:staff = 1 AND (a.admin = 1 OR a.operator = 1)))
+            AND ((:contributor = 0) OR (:contributor = 1 AND a.contributor = 1))
+            AND ((:donor = 0) OR (:donor = 1 AND a.donor = 1))
+            AND ((:premium = 0) OR (:premium = 1 AND a.premium = 1))
+            AND ((:online = 0) OR (:online = 1 AND i.online = 1 AND a.lastlogindate IS NOT NULL))
+            AND ((:nogame = 0) OR (:nogame = 1 AND  i.name IS NULL)) -- a.playername NOT IN (SELECT name FROM inquisitor.players)))
+            AND ((:yesgame = 0) OR (:yesgame = 1 AND i.name IS NOT NULL)) -- a.playername IN (SELECT name FROM inquisitor.players)))
+            AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(a.lastlogindate)))
+            AND ((:login_date_end IS NULL) OR (:login_date_end >= date(a.lastlogindate)))
+            AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(a.registerdate)))
+            AND ((:register_date_end IS NULL) OR (:register_date_end >= date(a.registerdate)))";
         
         return Bitch::source('default')->first($q, $args)["total"];
     }
@@ -74,52 +72,50 @@ class AccountModel {
         $asc_desc = $args["asc_desc"];
 
         if ($inquisitor_full) {
-            $inquisitor_fields = "name, world, lastUpdate, lastJoin, mapped, totalItemsPickedUp, totalDistanceTraveled, lastKick,
-                lavaBucketsEmptied, totalMobsKilled, lastKickMessage, portalsCrossed, sessionTime, level,
-                mooshroomsMilked, potionEffects, deaths, foodLevel, lastMobKill, groups, chatMessages, joins,
-                waterBucketsEmptied, totalBlocksPlaced, lastDeathMessage, lastQuit, firstJoin, health,
-                totalPlayersKilled, lastDeath, mooshroomsSheared, timesSlept, arrowsShot, exp, itemsEnchanted,
-                lifetimeExperience, totalTime, sheepDyed, totalExperience, remainingAir, exhaustion, armor,
-                sheepSheared, online, money, lavaBucketsFilled, totalItemsCrafted, itemEnchantmentLevels, bedServer,
-                bedCoords, quits, firesStarted, totalBlocksBroken, fishCaught, heldItemSlot, lastPlayerKilled,
-                fireTicks, lastPlayerKill, totalItemsDropped, gameMode, cowsMilked, coords, lastMobKilled, address,
-                saturation, inventory, waterBucketsFilled, server, displayName, bedWorld";
+            $inquisitor_fields = "i.name, i.world, i.lastUpdate, i.lastJoin, i.mapped, i.totalItemsPickedUp, i.totalDistanceTraveled, i.lastKick,
+                i.lavaBucketsEmptied, i.totalMobsKilled, i.lastKickMessage, i.portalsCrossed, i.sessionTime, i.level,
+                i.mooshroomsMilked, i.potionEffects, i.deaths, i.foodLevel, i.lastMobKill, i.groups, i.chatMessages, i.joins,
+                i.waterBucketsEmptied, i.totalBlocksPlaced, i.lastDeathMessage, i.lastQuit, i.firstJoin, i.health,
+                i.totalPlayersKilled, i.lastDeath, i.mooshroomsSheared, i.timesSlept, i.arrowsShot, i.exp, i.itemsEnchanted,
+                i.lifetimeExperience, i.totalTime, i.sheepDyed, i.totalExperience, i.remainingAir, i.exhaustion, i.armor,
+                i.sheepSheared, i.online, i.money, i.lavaBucketsFilled, i.totalItemsCrafted, i.itemEnchantmentLevels, i.bedServer,
+                i.bedCoords, i.quits, i.firesStarted, i.totalBlocksBroken, i.fishCaught, i.heldItemSlot, i.lastPlayerKilled,
+                i.fireTicks, i.lastPlayerKill, i.totalItemsDropped, i.gameMode, i.cowsMilked, i.coords, i.lastMobKilled, i.address,
+               i.saturation, i.inventory, i.waterBucketsFilled, i.server, i.displayName, i.bedWorld";
         } else {
-            $inquisitor_fields = "name, world, online, totalTime, sessionTime";
+            $inquisitor_fields = "i.name, i.world, i.online, i.totalTime, i.sessionTime";
         }
 
         $q = "SELECT * FROM (
-            SELECT id, playername, password, pwtype, email,
-            active, resetpw, premium, admin, operator, donor, contributor,
-            ircnickname, ircpassword, ircauto,
-            DATE_FORMAT(registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
-            DATE_FORMAT(lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip,
-            registerdate as registerdate_df, lastlogindate AS lastlogindate_df,
-                o.*
-            FROM accounts a LEFT JOIN (
-                SELECT $inquisitor_fields
-                FROM inquisitor.players
-            ) o ON (o.name = a.playername)
-            WHERE playername = ifnull(:playername, playername)
-            AND (id = ifnull(:id, id))
-            AND (lastloginip = ifnull(:ipaddress, lastloginip) OR registerip = ifnull(:ipaddress, registerip))
-            AND email = ifnull(:emailaddress, email)
-            AND ((:nologin = 0) OR (:nologin = 1 AND lastlogindate IS NULL))
-            AND ((:yeslogin = 0) OR (:yeslogin = 1 AND lastlogindate IS NOT null))
-            AND ((:inactive = 0) OR (:inactive = 1 AND active = 0))
-            AND ((:admin = 0) OR (:admin = 1 AND admin = 1))
-            AND ((:operator = 0) OR (:operator = 1 AND operator = 1))
-            AND ((:staff = 0) OR (:staff = 1 AND (admin = 1 OR operator = 1)))
-            AND ((:contributor = 0) OR (:contributor = 1 AND contributor = 1))
-            AND ((:donor = 0) OR (:donor = 1 AND donor = 1))
-            AND ((:premium = 0) OR (:premium = 1 AND premium = 1))
-            AND ((:online = 0) OR (:online = 1 AND online = 1))
-            AND ((:nogame = 0) OR (:nogame = 1 AND playername NOT IN (SELECT name FROM inquisitor.players)))
-            AND ((:yesgame = 0) OR (:yesgame = 1 AND playername IN (SELECT name FROM inquisitor.players)))
-            AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(lastlogindate)))
-            AND ((:login_date_end IS NULL) OR (:login_date_end >= date(lastlogindate)))
-            AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(registerdate)))
-            AND ((:register_date_end IS NULL) OR (:register_date_end >= date(registerdate)))
+            SELECT a.id, a.playername, a.password, a.pwtype, a.email,
+                a.active, a.resetpw, a.premium, a.admin, a.operator, a.donor, a.contributor,
+                a.ircnickname, a.ircpassword, a.ircauto,
+                DATE_FORMAT(a.registerdate, '%b %d %H:%i %Y') AS registerdate, registerip,
+                DATE_FORMAT(a.lastlogindate, '%b %d %H:%i %Y') AS lastlogindate, lastloginip,
+                a.registerdate as registerdate_df, a.lastlogindate AS lastlogindate_df,
+                $inquisitor_fields
+            FROM accounts a
+                LEFT JOIN inquisitor.players i ON i.name = a.playername
+            WHERE a.playername = ifnull(:playername, a.playername)
+            AND (a.id = ifnull(:id, a.id))
+            AND (a.lastloginip = ifnull(:ipaddress, a.lastloginip) OR a.registerip = ifnull(:ipaddress, a.registerip))
+            AND a.email = ifnull(:emailaddress, a.email)
+            AND ((:nologin = 0) OR (:nologin = 1 AND a.lastlogindate IS NULL))
+            AND ((:yeslogin = 0) OR (:yeslogin = 1 AND a.lastlogindate IS NOT null))
+            AND ((:inactive = 0) OR (:inactive = 1 AND a.active = 0))
+            AND ((:admin = 0) OR (:admin = 1 AND a.admin = 1))
+            AND ((:operator = 0) OR (:operator = 1 AND a.operator = 1))
+            AND ((:staff = 0) OR (:staff = 1 AND (a.admin = 1 OR a.operator = 1)))
+            AND ((:contributor = 0) OR (:contributor = 1 AND a.contributor = 1))
+            AND ((:donor = 0) OR (:donor = 1 AND a.donor = 1))
+            AND ((:premium = 0) OR (:premium = 1 AND a.premium = 1))
+            AND ((:online = 0) OR (:online = 1 AND i.online = 1 AND a.lastlogindate IS NOT NULL))
+            AND ((:nogame = 0) OR (:nogame = 1 AND  i.name IS NULL))
+            AND ((:yesgame = 0) OR (:yesgame = 1 AND i.name IS NOT NULL))
+            AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(a.lastlogindate)))
+            AND ((:login_date_end IS NULL) OR (:login_date_end >= date(a.lastlogindate)))
+            AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(a.registerdate)))
+            AND ((:register_date_end IS NULL) OR (:register_date_end >= date(a.registerdate)))
             ORDER BY $order_by $asc_desc
         ) pages LIMIT :index, :per_page";
 

@@ -9,7 +9,7 @@
             </div>
 
             <div class="layout-col-content">
-                <? if ($count['online'] = 0): ?>
+                <? if ($count['online'] > 0): ?>
                     <? foreach($players['online'] as $r): ?>
                         <div class="player-cell pull-left">
                             <a href="<?= $r['id'] != null ? '/profile?id='.$r['id'] : '#' ?>"
@@ -108,3 +108,5 @@
     </div>
 
 </div>
+
+<div class="separator2"></div>

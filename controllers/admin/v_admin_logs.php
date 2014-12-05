@@ -12,6 +12,8 @@ function v_admin_logs() {
 
     Session::validateSession(true);
 
+    $xsrf_token = Session::getXSRFToken();
+
     $template = Template::init('admin/v_admin_logs');
 
     $action_url = '/admin/logs';
@@ -100,6 +102,8 @@ function v_admin_logs() {
     $template->assign('table', $table);
 
     $template->assign('pagination', $pagination);
+
+    $template->assign('xsrf_token', $xsrf_token);
 
     $template->render();
 

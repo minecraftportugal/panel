@@ -42,11 +42,11 @@
                 <? endif; ?>
                     <tr>
                         <th>In-Game IP</th>
-                        <td><?= $player['address'] != "" ? $player['address'] : "Sem Sessão" ?></td>
+                        <td><?= $player['address'] != "" ? $player['address'] : "(nunca jogou)" ?></td>
                     </tr>
                     <tr>
-                        <th>Sessão</th>
-                        <td><?= $player['lastlogindate_df'] != "" ? $player['lastlogindate_df'] : "Sem Sessão" ?></td>
+                        <th>Data Login</th>
+                        <td><?= $player['lastlogindate_df'] != "" ? $player['lastlogindate_df'] : "(nunca fez login)" ?></td>
                     </tr>
                     <tr>
                         <th>Email</th>
@@ -120,7 +120,7 @@
                                 <label class="checkbox" for="chk_delete_<?= $player['id'] ?>">apagar
                             </li>
                             <li>
-                                <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+                                <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
                                 <input type="hidden" name="id" value="<?= $player['id'] ?>" />
                                 <input type="submit" value="OK" />
                             </li>
@@ -152,7 +152,7 @@
                         </li>
                         <li>
                             <input type="submit" value="drop" />
-                            <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+                            <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
                             <input type="hidden" name="id" value="<?= $player['id'] ?>" />
                         </li>
                         </ul>
@@ -174,7 +174,7 @@
                             </li>
                             <li>
                                 <input type="submit" value="OK" />
-                                <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+                                <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
                             </li>
                         </ul>
                     </form>
@@ -193,7 +193,7 @@
         <div class="layout-col layout-col-character">
             <div class="layout-col-title">
                 <span class="pull-left">
-                  <?= \helpers\minotar\MinotarHelper::head($player['playername'], 16, 3) ?>
+                  <?= $head ?>
                 </span>
                 <span class="pull-left">
                   <?= $player['playername'] ?>
@@ -295,8 +295,8 @@
                         <? endif; ?>
                         <tr><th>Level</th><td><?= $player['level'] ?></td></tr>
                         <tr><th>XP</th><td><?= $player['totalExperience'] ?>/<?= $player['lifetimeExperience'] ?></td></tr>
-                        <tr><th>Tempo total</th><td> <?= \helpers\datetime\DateTimeHelper::stoh($player['totalTime']) ?></td></tr>
-                        <tr><th>Ultima sessão</th><td> <?= \helpers\datetime\DateTimeHelper::stoh($player['sessionTime']) ?></td></tr>
+                        <tr><th>Tempo total</th><td> <?= $player['totalTime'] ?></td></tr>
+                        <tr><th>Ultima sessão</th><td> <?= $player['sessionTime'] ?></td></tr>
                         <tr><th>KMs Percorridos</th><td> <?= round($player['totalDistanceTraveled']/1000,2) ?> km</td></tr>
                         <tr><th>Modo de Jogo</th><td> <?= $player['gameMode'] ?></td></tr>
                         <tr><th>World</th><td> <?= $player['world'] ?></td></tr>
@@ -415,7 +415,7 @@
             </div>
 
             <div class="padded">
-                <form name="manage_drops" action="/admin/delete_drops" method="POST" autocomplete="off">
+                <form name="manage_drops" action="<?= $drops_action ?>" method="POST" autocomplete="off">
 
                     <table class="listing alt-rows">
 
@@ -445,10 +445,11 @@
                                     <?= $r["idledroptime"] ?>
                                 </td>
 
-
+                            <? if ($admin): ?>
                                 <td class="center">
                                     <input class="check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
                                 </td>
+                            <? endif; ?>
 
                             </tr>
                         <? endforeach; ?>
@@ -465,12 +466,31 @@
 
                         </tbody>
                     </table>
+
+                    <? if ($admin): ?>
+                    <div class="separator"></div>
+
+                    <div class="center">
+                        <input type="hidden" name="accountid" value="<?= $player['id'] ?>" />
+                        <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
+                        <input type="submit" value="OK" />
+                    </div>
+
+                    <? endif; ?>
                 </form>
+
+                <div class="separator"></div>
+
+                <div class="navigation center">
+                    <?= $pagination->render() ?>
+                </div>
+
             </div>
          </div>
     </div>
 
-    <div class="clearer"></div>
     <? endif; ?>
 
 </div>
+
+<div class="separator2"></div>

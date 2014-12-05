@@ -30,21 +30,17 @@ class SessionModel {
         $args = array_merge(SessionModel::$args, $args);
 
         $q = "SELECT count(1) AS total
-        FROM accounts a
-        LEFT JOIN sessions_history sh on a.id = sh.accountid
-        LEFT JOIN (
-            SELECT 1 as online, name
-            FROM inquisitor.players
-            WHERE online = 1
-        ) o ON (o.name = a.playername)
-        WHERE a.playername = IFNULL(:playername, playername)
-        AND (sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress))
+        FROM sessions_history sh
+        LEFT JOIN accounts a on a.id = sh.accountid
+        LEFT JOIN inquisitor.players i ON i.name = a.playername
+        WHERE a.playername = IFNULL(:playername, a.playername)
+        AND sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress)
         AND ((:date_begin IS NULL) OR (:date_begin <= date(sh.logintime)))
         AND ((:date_end IS NULL) OR (:date_end >= date(sh.logintime)))
         AND ((:login = 0) OR ((:login = 1) AND (sh.event IN (0, 1))))
         AND ((:logout = 0) OR ((:logout = 1) AND (sh.event = 2)))
-        AND ((:online = 0) OR (:online = 1 AND o.online = 1))
-        AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1));";
+        AND ((:online = 0) OR (:online = 1 AND i.online = 1))
+        AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1))";
         // ORDER BY id DESC;";
 
         return Bitch::source('default')->first($q, $args)["total"];
@@ -67,20 +63,16 @@ class SessionModel {
                 DATE_FORMAT(sh.time, '%b %d %H:%i:%s %Y') AS time_df,
                 DATE_FORMAT(a.lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindate,
                 IF(DATE_ADD(sh.logintime, INTERVAL :length SECOND) > NOW(), 1, 0) as valid
-            FROM accounts a
-            LEFT JOIN sessions_history sh on a.id = sh.accountid
-                LEFT JOIN (
-                SELECT 1 as online, name
-                FROM inquisitor.players
-                WHERE online = 1
-            ) o ON (o.name = a.playername)
-            WHERE a.playername = IFNULL(:playername, playername)
-            AND (sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress))
+            FROM sessions_history sh
+            LEFT JOIN accounts a on a.id = sh.accountid
+            LEFT JOIN inquisitor.players i ON i.name = a.playername
+            WHERE a.playername = IFNULL(:playername, a.playername)
+            AND sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress)
             AND ((:date_begin IS NULL) OR (:date_begin <= date(sh.logintime)))
             AND ((:date_end IS NULL) OR (:date_end >= date(sh.logintime)))
             AND ((:login = 0) OR ((:login = 1) AND (sh.event IN (0, 1))))
             AND ((:logout = 0) OR ((:logout = 1) AND (sh.event = 2)))
-            AND ((:online = 0) OR (:online = 1 AND o.online = 1))
+            AND ((:online = 0) OR (:online = 1 AND i.online = 1))
             AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1))
             ORDER BY $order_by $asc_desc
         ) pages LIMIT :index, :per_page";

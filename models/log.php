@@ -22,7 +22,7 @@ class LogModel {
         $args = array_intersect_key($args, array_flip(["accountid", "event_type"]));
 
         $q = "SELECT COUNT(1) AS total
-        FROM logs l
+        FROM logs l LEFT JOIN accounts a ON l.accountid = a.id
         WHERE ((:accountid IS NULL) OR (l.accountid = :accountid))
         AND ((:event_type IS NULL) OR (l.event_type = :event_type))";
 

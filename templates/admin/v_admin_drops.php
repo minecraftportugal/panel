@@ -79,7 +79,7 @@
             </td>
 
             <td>
-                <span><?= \helpers\minotar\MinotarHelper::head($r['playername'], 24, 3) ?></span>
+                <span><?= $r['head'] ?></span>
             </td>
 
             <td class="">
@@ -132,8 +132,8 @@
       <div class="separator"></div>
 
       <div class="center">
-        <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
-        <input type="submit" value="OK" />
+        <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>">
+        <input type="submit" value="OK">
       </div>            
     </form>
 

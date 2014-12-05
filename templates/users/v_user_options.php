@@ -38,7 +38,7 @@
                                     <input id="confirm_password" type="password" name="confirm_password" placeholder="confirmar password">
                                 </li>
                                 <li>
-                                    <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+                                    <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
                                     <input type="submit" value="OK" />
                                 </li>
                             </ul>
@@ -70,7 +70,7 @@
                                     <label class="checkbox" for="irc_auto">ligação automática</label>
                                 </li>
                                 <li>
-                                    <input type="hidden" name="xsrf_token" value="<?= \lib\session\Session::getXSRFToken() ?>" />
+                                    <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
                                     <input type="submit" value="OK" />
                                 </li>
                             </ul>
