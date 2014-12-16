@@ -1,17 +1,13 @@
 <div id="widget-accounts">
 
-  <div class="page-panel-header page-panel-left">
-    <h1><i class="fa fa-chevron-circle-right"></i> Filtros</h1>
-  </div>
-
-  <div class="page-panel-header page-panel-right">
-    <h1 class="pull-left">Sessões (<?= $total ?>)</h1>
     <?= $notices ?>
-  </div>
-
+  
     <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
     <form name="manage_sessions_filter" action="<?= $action_url ?>" method="GET" autocomplete="off">
       <ul>
+        <li>
+          Sessões (<?= $total ?>)
+        </li>
         <li>
           <h2>Nome</h2>
         </li>

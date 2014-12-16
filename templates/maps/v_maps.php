@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" media="screen" href="/styles/dynmap.css" />
 
-<script type="text/javascript" src="/scripts/dynmap.js"></script>
+<script type="text/javascript" src="/js/dynmap.js"></script>
 
 
 <div>

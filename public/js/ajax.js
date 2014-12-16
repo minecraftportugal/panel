@@ -83,7 +83,7 @@ Ajax.handleError = function(jqXHR, textStatus, errorThrown) {
     switch (jqXHR.status) {
 
         case 401:
-            console.log("AUTHORIZATION REQUIRED");
+            window.location.href = "/";
             break;
     }
 

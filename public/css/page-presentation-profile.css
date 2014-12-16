@@ -37,7 +37,7 @@ div.layout-col div.iframe-block {
     width: 100%;
     top: calc(-100% + 20px);
     height: calc(100% - 20px);
-    z-index: 2147483647;
+    z-index: 2147483646;
 }
 
 div.layout-col-full {

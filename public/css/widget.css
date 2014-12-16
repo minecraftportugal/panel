@@ -33,6 +33,19 @@ div.widget.maximized div.widget-titlebar {
     border-top-right-radius: 0px;
 }
 
+/* pinned widgets */
+div.widget.pinned {
+
+}
+
+div.widget.pinned div.widget-titlebar {
+    display: none;
+}
+
+div.widget.pinned div.widget-body {
+    top: 0px;
+}
+
 div.widget-scrollable-y {
     overflow-x: hidden;
     overflow-y: scroll;
@@ -54,7 +67,7 @@ div.widget-not-scrollable {
 }
 
 div.widget-iframe {
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 div.widget-body {
@@ -71,11 +84,11 @@ div.widget-loading.block-enabled {
     width: 100%;
     top: 18px;
     height: calc(100% - 18px);
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.25);
     background-image: url('/images/loader3.gif');
     background-repeat: no-repeat;
     background-position: center center;
-    z-index: 2147483645;
+    z-index: 2147483644;
 }
 
 div.widget.widget-iframe:not(.widget-active) div.widget-cover {
@@ -83,7 +96,7 @@ div.widget.widget-iframe:not(.widget-active) div.widget-cover {
     width: 100%;
     top: 18px;
     height: calc(100% - 18px);
-    z-index: 2147483645;   
+    z-index: 2147483644;
 }
 
 div.widget-body iframe {
@@ -118,7 +131,7 @@ div.widget.widget-active div.widget-titlebar .fa {
 }
 
 div.widget-button, div.widget-title {
-    
+
 }
 
 div.widget-ui {
@@ -129,7 +142,6 @@ div.widget-ui {
 
 div.widget-title {
     line-height: 18px;
-    text-align: left;
     color: #FFFFFF;
     text-align: center;
 }

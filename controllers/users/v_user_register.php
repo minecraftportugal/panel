@@ -13,6 +13,33 @@ function v_user_register() {
 
     $template = Template::init('users/v_user_register');
 
+    /* scripts */
+    $scripts = [
+
+        "lib/jquery/jquery",
+
+        "cookies",
+
+        "register",
+
+        "sop",
+
+    ];
+
+    $template->assign('scripts', $scripts);
+
+    /* styles */
+    $styles = [
+
+        "reset",
+
+        "public",
+
+    ];
+
+    $template->assign('styles', $styles);
+
+
     $error = NoticeHelper::get('error');
 
     $success = NoticeHelper::get('success');

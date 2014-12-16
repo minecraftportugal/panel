@@ -5,18 +5,23 @@
     <meta charset=utf-8 />
     <meta name="keywords" content="minecraft, Portugal, pt, tuga, blog, server, servidor, notícias, login">
     <title>Comunidade Minecraft Portugal</title>
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" Src="/scripts/login.js"></script>
-    <script type="text/javascript" src="/scripts/sop.js"></script>
+
+    <link rel="shortcut icon" href="favicon.ico" >
+
+<? foreach ($styles as $style): ?>
+    <link rel="stylesheet" href="/css/<?= $style ?>.css" media="screen" type="text/css">
+<? endforeach; ?>
+
+<? foreach ($scripts as $script): ?>
+    <script type="text/javascript" src="js/<?= $script ?>.js"></script>
+<? endforeach; ?>
 
     <style type="text/css">
         body#login {
             background: #000 url('/images/backgrounds/login/bg<?= rand(5,8) ?>.jpg') no-repeat top center;
         }
     </style>
+
 </head>
 
 <body id="login">

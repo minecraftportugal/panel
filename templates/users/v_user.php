@@ -1,6 +1,6 @@
-<script type="text/javascript" src="/scripts/skin3d.js"></script>
+<script type="text/javascript" src="/js/skin3d.js"></script>
 
-<script type="text/javascript" src="/scripts/items.js"></script>
+<script type="text/javascript" src="/js/items.js"></script>
 
 <?= $notices ?>
 

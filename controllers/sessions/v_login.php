@@ -13,6 +13,30 @@ function v_login() {
 
     $template = Template::init('sessions/v_login');
 
+    /* scripts */
+    $scripts = [
+
+        "lib/jquery/jquery",
+
+        "login",
+
+        "sop",
+
+    ];
+
+    $template->assign('scripts', $scripts);
+
+    /* styles */
+    $styles = [
+
+        "reset",
+
+        "public",
+
+    ];
+
+    $template->assign('styles', $styles);
+
     $error = NoticeHelper::get('error');
 
     $success = NoticeHelper::get('success');

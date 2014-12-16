@@ -1,7 +1,4 @@
 <?
-
-    $args = "cat=13&posts_per_page=10";
-
     query_posts($args);
 
 ?>

@@ -1,14 +1,19 @@
-function setCookie(c_name,value,exdays)
+App.Cookies = {
+
+}
+
+App.Cookies.set = function(c_name, value, exdays)
 {
 	var exdate=new Date();
 	exdate.setDate(exdate.getDate() + exdays);
-	var c_value=escape(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
+	var c_value=encodeURI(value) + ((exdays==null) ? "" : "; expires="+exdate.toUTCString());
 	document.cookie=c_name + "=" + c_value + "; path=/";
 
     console.log("setcookie", c_name.length, c_value.length);
+
 }
 
-function getCookie(c_name)
+App.Cookies.get = function(c_name)
 {
 	var i,x,y,ARRcookies=document.cookie.split(";");
 	for (i=0;i<ARRcookies.length;i++)
@@ -18,7 +23,7 @@ function getCookie(c_name)
 		x=x.replace(/^\s+|\s+$/g,"");
 		if (x==c_name)
 		{
-			return unescape(y);
+			return decodeURI(y);
 		}
 	}
 }

@@ -8,15 +8,16 @@
 
     <title>Comunidade Minecraft Portugal</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/public.css" />
-    <link rel="alternate" href="/blog/?feed=rss2" title="Minecraftia! RSS feed" type="applications/rss+xml" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="shortcut icon" href="favicon.ico" >
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/cookies.js"></script>
-    <script type="text/javascript" src="/scripts/register.js"></script>
-    <script type="text/javascript" src="/scripts/sop.js"></script>
+<? foreach ($styles as $style): ?>
+    <link rel="stylesheet" href="/css/<?= $style ?>.css" media="screen" type="text/css">
+<? endforeach; ?>
+
+
+<? foreach ($scripts as $script): ?>
+    <script type="text/javascript" src="js/<?= $script ?>.js"></script>
+<? endforeach; ?>
 
 </head>
 

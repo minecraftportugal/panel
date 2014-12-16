@@ -8,35 +8,16 @@
 
     <title>minecraft.pt | MinePanel 3.0</title>
 
-    <link rel="stylesheet" href="/styles/reset.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/fonts.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/desktop.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/widget.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/scrollbar.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/items.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/font-awesome.min.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/page-presentation.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/page-presentation-forms.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/page-presentation-profile.css" media="screen" type="text/css">
-    <link rel="stylesheet" href="/styles/page-presentation-wp.css" media="screen" type="text/css">
-    
     <link rel="shortcut icon" href="favicon.ico" >
 
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/jquery.scrollto.js"></script>
-    <script type="text/javascript" src="/scripts/jqueryui.js"></script>
-    <script type="text/javascript" src="/scripts/Three.js"></script>
+<? foreach ($styles as $style): ?>
+    <link rel="stylesheet" href="/css/<?= $style ?>.css" media="screen" type="text/css">
+<? endforeach; ?>
 
-    <script type="text/javascript" src="/scripts/init.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script type="text/javascript" src="/scripts/ajax.js"></script>
-    <script type="text/javascript" src="/scripts/behaviour.js"></script>
-    <script type="text/javascript" src="/scripts/widget.js"></script>
-    <script type="text/javascript" src="/scripts/desktop.js"></script>
-    <script type="text/javascript" src="/scripts/widgets-definition.js"></script>
-    <script type="text/javascript" src="/scripts/cookies.js"></script>
-    <script type="text/javascript" src="/scripts/sop.js"></script>
-    <script type="text/javascript" src="/scripts/dynmap.js"></script>
+
+<? foreach ($scripts as $script): ?>
+    <script type="text/javascript" src="js/<?= $script ?>.js"></script>
+<? endforeach; ?>
 
     <?= $background_css  ?>
 
@@ -64,6 +45,8 @@
     <div id="html-templates">
         <?= $html_templates ?>
     </div>
+
+    <div class="modal-blocker"></div>
 
 </body>
 </html>

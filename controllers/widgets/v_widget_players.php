@@ -8,6 +8,26 @@ function v_widget_players() {
 
     $template = Template::init('widgets/v_widget_players');
 
+    /* scripts */
+    $scripts = [
+
+        "lib/jquery/jquery",
+
+        "widget_players"
+    ];
+
+    $template->assign('scripts', $scripts);
+
+    $styles = [
+
+        "reset",
+
+        "widget_players"
+
+    ];
+
+    $template->assign('styles', $styles);
+
     $players = AccountModel::get(["per_page" => 100, "online" => 1]);
 
     /** Filters: Change and add new data */

@@ -25,4 +25,13 @@ $(function() {
         $(this).closest(".closeable").remove();
     })
 
+    $(document).on("click", "input[type=reset]", function() {
+        var $form = $(this).closest("form");
+        $form.find("input[type=text]").attr("value", "");
+        $form.find("input[type=date]").attr("value", "");
+        $form.find("input[type=checkbox]").attr("checked", false);
+
+        $form.submit();
+    });
+
 });

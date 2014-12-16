@@ -4,11 +4,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
     <meta name="language" content="en" />
     <meta name="author" content="Comunidade Minecraft Portugal" />
-    <script type="text/javascript" src="/scripts/jquery.js"></script>
-    <script type="text/javascript" src="/scripts/widget_players.js"></script>
-    <link href='//fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/reset.css" />
-    <link rel="stylesheet" type="text/css" media="screen" href="/styles/widget_players.css" />
+
+<? foreach ($styles as $style): ?>
+    <link rel="stylesheet" href="/css/<?= $style ?>.css" media="screen" type="text/css">
+<? endforeach; ?>
+
+
+<? foreach ($scripts as $script): ?>
+    <script type="text/javascript" src="/js/<?= $script ?>.js"></script>
+<? endforeach; ?>
+
 </head>
 
 <body>
