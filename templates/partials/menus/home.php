@@ -148,13 +148,13 @@
         <ul>
 
             <li>
-                    <a id="menu-item-ring" href="#" data-widget-open="help-noob">
+                <a id="menu-item-ring" href="#" data-widget-open="help-noob">
                     <i class="fa fa-life-ring"></i> Iniciantes
                 </a>
             </li>
 
             <li>
-                    <a id="menu-item-faq" href="#" data-widget-open="help-faq">
+                <a id="menu-item-faq" href="#" data-widget-open="help-faq">
                     <i class="fa fa-life-ring"></i> FAQ
                 </a>
             </li>
@@ -162,6 +162,13 @@
             <li>
                 <a id="menu-item-wiki" href="#" data-widget-open="help-wiki">
                     <i class="fa fa-money"></i> Wiki
+                </a>
+            </li>
+
+
+            <li class="separator">
+                <a id="menu-item-about" href="#" data-widget-open="help-about">
+                    <i class="fa fa-quote-left"></i> Sobre
                 </a>
             </li>
 

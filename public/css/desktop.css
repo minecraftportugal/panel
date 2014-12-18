@@ -42,7 +42,7 @@ div#widget-taskbar {
     right: 0;
     top: 0;
     height: 30px;
-    z-index: 2147483646;
+    z-index: 1000000001;
     overflow: hidden;
     white-space: nowrap;
 }
@@ -256,11 +256,8 @@ div.widget-menu {
      border: 1px solid #252525;
      box-shadow: 0 0 40px 5px #000;
      background: linear-gradient(to bottom, #454545, #252525);
-}
-
-div.widget-menu {
-    color: #FFFFFF;
-    z-index: 2147483645;
+     color: #FFFFFF;
+     z-index: 2000000000;
 }
 
 div.widget-menu i {

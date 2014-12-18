@@ -1,7 +1,9 @@
 <div id="widget-template">
     <div class="widget">
+        <div class="widget-pinned-invisible-bar"></div>
         <div class="widget-titlebar">
             <div class="widget-refresh widget-ui" title="refresh"><i class="fa fa-refresh"></i></div>
+            <div class="widget-pin widget-ui" title="pin"><i class="fa fa-dot-circle-o"></i></div>
             <div class="widget-title title widget-drag widget-ui" title="arrastar para mover"><div></div></div>
             <div class="widget-minimize widget-ui" title="minimizar"><i class="fa fa-minus"></i></div>
             <div class="widget-maximize widget-ui" title="maximizar"><i class="fa fa-square-o"></i></div>
@@ -11,6 +13,7 @@
         </div>
         <div class="widget-loading"></div>
         <div class="widget-cover"></div>
+        <div class="ui-resizable-handle ui-resizable-sw widget-resize" title="drag to resize"></div>
         <div class="ui-resizable-handle ui-resizable-se widget-resize" title="drag to resize"></div>
     </div>
 </div>
@@ -28,6 +31,7 @@
         </div>
         <div class="modal-body body">
         </div>
+        <div class="widget-loading"></div>
         <div class="modal-buttons">
         </div>
     </div>

@@ -51,6 +51,14 @@ Widget.widgetStore = {
         "title" : "<i class='fa fa-columns'></i> Servidor"
     },
 
+    "drops" : {
+        "name" : "drops",
+        "source" : "/users/drops",
+        "classes" : "widget-scrollable-y",
+        "css" : {"min-width" : "424px", "max-width" : "424px", "min-height" : "500px"},
+        "title" : "<i class='fa fa-star'></i> Novas Drops!"
+    },
+
     "dynmap" : {
         "name" : "dynmap",
         "source" : "//dynmap.minecraft.pt/",
@@ -124,6 +132,21 @@ Widget.widgetStore = {
         "title" : "<i class='fa fa-life-ring'></i> Minecraft Wiki",
         "mode" : "iframe",
         "css" : {"min-width" : "854px", "min-height" : "500px"}
+    },
+
+    "help-about" : {
+        "name" : "help-about",
+        "source" : "/page?page=about",
+        "modal" : true,
+        "title" : " <i class='fa fa-quote-left'></i> Sobre",
+        "modalButtons" : {
+            "Fechar" : function() {
+                return false;
+            }
+        },
+        "cssBody" : {
+            "overflow" : "hidden"
+        }
     },
 
     "user-options" : {

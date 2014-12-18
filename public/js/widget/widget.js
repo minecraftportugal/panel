@@ -17,6 +17,7 @@ Widget.options = {
     "title" : "Title",
     "mode" : "ajax",
     "modal" : false,
+    "pinned" : false,
     "modalButtons" : {},
     "alwaysCreate" : false,
     "alwaysReload" : true,
@@ -31,6 +32,9 @@ Widget.options = {
         "min-height" : "360px",
         "max-width" : null, //"700px",
         "max-height" : null //"700px"
+    },
+    "cssBody" : {
+
     }
 };
 
@@ -183,6 +187,7 @@ Widget.get = function(name) {
             widget = e;
             return false;
         }
+        return true;
     });
 
     return widget;
@@ -191,9 +196,11 @@ Widget.get = function(name) {
 
 Widget.open = function(param) {
 
+    var createdWidget;
+
     if (typeof(param) === typeof({})) {
 
-        var createdWidget = new Widget(param);
+        createdWidget = new Widget(param);
 
     } else if (typeof(param) === typeof("")) {
 
@@ -201,13 +208,15 @@ Widget.open = function(param) {
 
             var config = Widget.widgetStore[param];
 
-            var createdWidget = new Widget(config);
+            createdWidget = new Widget(config);
 
         } else {
 
             console.log("No widget named " + param);
         }
     }
+
+    return createdWidget;
 }
 
 Widget.prototype.init = function(options, states) {
@@ -238,19 +247,19 @@ Widget.prototype.init = function(options, states) {
 
     if (this.options.modal) {
 
-        this.id = "widget-" + this.options.name;
-        this.selector = "div#widget-" + this.options.name;
-
-        this.buttonId = "button-widget-" + this.options.name;
-        this.buttonSelector = "div#button-widget-" + this.options.name;
-
-    } else {
-
         this.id = "modal-" + this.options.name;
         this.selector = "div#modal-" + this.options.name;
 
         this.buttonId = null;
         this.buttonSelector = null;
+
+    } else {
+
+        this.id = "widget-" + this.options.name;
+        this.selector = "div#widget-" + this.options.name;
+
+        this.buttonId = "button-widget-" + this.options.name;
+        this.buttonSelector = "div#button-widget-" + this.options.name;
 
     }
 
@@ -330,6 +339,8 @@ Widget.prototype.build = function(notApplyingStates) {
 
     $(this.selector).css(this.options.css);
 
+    $(this.selector).find("div.body").css(this.options.cssBody);
+
     $(this.selector).find("div.widget-body").addClass(this.options.classes);
 
     if (notApplyingStates) {
@@ -370,6 +381,7 @@ Widget.prototype.build = function(notApplyingStates) {
     (!this.options.modal) && $(this.selector).resizable({
 
         iframeFix: true,
+        handles : 'sw, se',
         addClasses: false,
         cancel: ".nointeraction",
         snap: true,
@@ -390,6 +402,54 @@ Widget.prototype.build = function(notApplyingStates) {
         widgetInstance.load();
     });
 
+    /* Widget pin button */
+    (!this.options.modal) && $(this.selector).find("div.widget-pin").click(function() {
+        if ($(widgetInstance.selector).hasClass("pinned")) {
+            widgetInstance.unpin();
+        } else {
+            widgetInstance.pin();
+        }
+    });
+
+    /* Pinned widget hover for titlebar */
+    (!this.options.modal) && $(this.selector).find("div.widget-pinned-invisible-bar").mouseenter(function() {
+
+        if (!widgetInstance.timeoutId) {
+            widgetInstance.timeoutId = window.setTimeout(function() {
+
+                widgetInstance.timeoutId = null; // EDIT: added this line
+                $(widgetInstance.selector).find("div.widget-titlebar").fadeIn(100);
+            }, 1000);
+        }
+
+        return false;
+    }).mouseleave(function() {
+
+        window.clearTimeout(widgetInstance.timeoutId);
+        widgetInstance.timeoutId = null;
+
+        return false;
+    });
+
+    (!this.options.modal) && $(this.selector).find("div.widget-titlebar").mouseleave(function () {
+
+        if ($(widgetInstance.selector).hasClass("pinned")) {
+            if (widgetInstance.timeoutId) {
+                window.clearTimeout(widgetInstance.timeoutId);
+                widgetInstance.timeoutId = null;
+            }
+            else {
+                widgetInstance.timeoutId = window.setTimeout(function() {
+                    widgetInstance.timeoutId = null;
+                    $(widgetInstance.selector).find("div.widget-titlebar").fadeOut(100);
+                }, 200);
+            }
+        }
+
+        return false;
+
+    });
+
     /* Widget maximize button */
     (!this.options.modal) && $(this.selector).find("div.widget-maximize").click(function() {
         var maximized = $(widgetInstance.selector).hasClass("maximized");
@@ -402,8 +462,24 @@ Widget.prototype.build = function(notApplyingStates) {
 
     });
 
+    /* Widget titlebar double click */
+    (!this.options.modal) && $(this.selector).find("div.widget-title").dblclick(function() {
+        var maximized = $(widgetInstance.selector).hasClass("maximized");
+
+        if (maximized) {
+            widgetInstance.restore();
+        } else {
+            widgetInstance.maximize();
+        }
+
+    });
+
+
     /* Widget minimize button */
     (!this.options.modal) && $(this.selector).find("div.widget-minimize").click(function() {
+        if ($(widgetInstance.selector).hasClass("pinned")) {
+            widgetInstance.unpin();
+        }
         widgetInstance.minimize();
     });
 
@@ -443,8 +519,7 @@ Widget.prototype.build = function(notApplyingStates) {
     if (this.options.modal) {
 
         /* modal blocker*/
-        var max_z = Widget.getMaxZindex();
-        $("div.modal-blocker").css("z-index", max_z-1);
+        var max_z = Widget.getMaxZindex("div.widget.modal");
         $("div.modal-blocker").fadeIn(100);
         widgetInstance.bringTop();
 
@@ -475,7 +550,6 @@ Widget.prototype.initButtons = function() {
                 $btn.click(function() {
 
                     if (!(v())) {
-                        console.log("wat");
                         that.close();
                     }
 
@@ -611,27 +685,38 @@ Widget.prototype.unsetActive = function() {
     });
 };
 
-Widget.getMaxZindex = function (exclude_modal) {
+Widget.getMaxZindex = function(selector) {
+
+    var selector = selector || "div.widget";
     var max_z = 0;
-    $(Widget.widgets).each(function(n, e) {
+    $(selector).each(function(n, e) {
 
-        // excluir dialogos modais deste cálculo
-        if (e.options.modal && exclude_modal) {
-            return true;
-        }
+        var z = parseInt($(e).css("z-index"));
 
-        var z = parseInt($(e.selector).css("z-index"));
         if (z > max_z) {
             max_z = z;
         }
+
     });
 
     return max_z;
 };
 
 Widget.prototype.bringTop = function() {
-    var max_z = Widget.getMaxZindex(true);
-    //console.log("set max-z", max_z)
+
+    var max_z;
+
+    if (this.options.pinned) {
+        max_z = Widget.getMaxZindex("div.widget.pinned");
+        max_z = max_z == 0 ? 10 : max_z;
+    } else if (this.options.modal) {
+        max_z = Widget.getMaxZindex("div.widget.modal");
+        max_z = max_z == 0 ? 2000000000 : max_z;
+    } else {
+        max_z = Widget.getMaxZindex("div.widget");
+        max_z = max_z == 0 ? 1000000000 : max_z;
+    }
+
     $(this.selector).css("z-index", max_z + 1);
 };
 
@@ -722,16 +807,26 @@ Widget.prototype.hilight = function(data) {
 
 Widget.prototype.pin = function() {
 
+    this.options.pinned = true;
     $(this.selector).addClass("pinned");
+    $(this.selector).css("z-index", 10);
+    $(this.buttonSelector).fadeOut(100);
 
 };
 
 Widget.prototype.unpin = function() {
 
+    this.options.pinned = false;
     $(this.selector).removeClass("pinned");
+    $(this.selector).css("z-index", 1000000000);
+    $(this.buttonSelector).fadeIn(100);
 
 };
 
+/*
+ * Data API - Widget.open
+ * Describe widget to open using data- tags
+ */
 $(document).on("click", "[data-widget-action]", function(event) {
     var action = $(this).data("widget-action");
     var name = $(this).data("widget-name");
@@ -768,6 +863,10 @@ $(document).on("click", "[data-widget-action]", function(event) {
     event.preventDefault();
 });
 
+/*
+ * Data API - Widget.open
+ * Open a widget referencing it by name
+ */
 $(document).on("click", "[data-widget-open]", function(event) {
     var name = $(this).data("widget-open");
 

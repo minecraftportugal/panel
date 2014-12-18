@@ -24,7 +24,6 @@
 </head> 
 <body>
 
-
     <div id="widget-container">
         <div></div>
     </div>
