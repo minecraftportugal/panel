@@ -37,6 +37,7 @@ class AccountModel {
     ];
 
     public static function count($args = []) {
+
         $args = array_merge(AccountModel::$args, $args);
 
         $q = "SELECT count(1) AS total
@@ -67,6 +68,7 @@ class AccountModel {
     }
 
     public static function get($args = [], $inquisitor_full = false) {
+
         $args = array_merge(AccountModel::$args, $args);
         $order_by = $args["order_by"];
         $asc_desc = $args["asc_desc"];

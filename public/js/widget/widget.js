@@ -1,18 +1,16 @@
 /* Constructor: creates a new Widget instance */
 function Widget(options, states) {
 
-    if (Widget.widgets === undefined) {
-        Widget.widgets = [];
-    }
-
     this.init(options, states);
 
 }
 
+/* Store opened widgets here */
+Widget.widgets = [];
 
-/* Defaults/Options */
+/* Defaults */
 
-Widget.options = {
+Widget.defaults = {
     "source" : "/testpattern",
     "title" : "Title",
     "mode" : "ajax",
@@ -132,6 +130,21 @@ Widget.clearState = function() {
     window.location.reload();
 }
 
+Widget.closeAll = function() {
+
+    var toClose = [];
+
+    $.each(Widget.widgets, function(n, widget) {
+        if (!widget.options.modal && !widget.options.pinned) {
+            toClose.push(widget);
+        }
+    });
+
+    $.each(toClose, function(n, widget) {
+        widget.close();
+    });
+}
+
 Widget.cascade = function() {
     Widget.counter = 0;
     $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
@@ -225,7 +238,7 @@ Widget.prototype.init = function(options, states) {
     this.options.css = {};
 
     /* Mix given options and defaults */
-    $.extend(this.options, Widget.options);
+    $.extend(this.options, Widget.defaults);
     $.extend(this.options, options);
 
     /* Mix CSS */
@@ -381,7 +394,7 @@ Widget.prototype.build = function(notApplyingStates) {
     (!this.options.modal) && $(this.selector).resizable({
 
         iframeFix: true,
-        handles : 'sw, se',
+        handles : 'nw, ne, sw, se',
         addClasses: false,
         cancel: ".nointeraction",
         snap: true,

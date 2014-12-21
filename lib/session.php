@@ -23,8 +23,6 @@ class Session {
             }
         }
 
-        LogModel::create('failed_login', null, Environment::get('REMOTE_ADDR'), 'Username: $username, Password: $password');
-
         return false;
     }
 

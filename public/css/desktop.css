@@ -89,7 +89,7 @@ div#widget-button-container-scroll-right {
     border-left: 1px solid #101010;
     border-right: 1px solid #101010;
     position: absolute;
-    right: 151px;
+    right: 62px;
     bottom: 0;
     height: 30px;
 }
@@ -102,30 +102,11 @@ div#widget-button-container-scroll-right:active {
     background: linear-gradient(to top, #000000, #000000, #101010);
 }
 
-div#widget-button-container-minimize-all {
-    position: absolute;
-    right: 121px;
-    bottom: 0;
-}
-
-div#widget-button-container-tile {
-    position: absolute;
-    right: 91px;
-    bottom: 0;
-}
-
-div#widget-button-container-cascade {
-    position: absolute;
-    right: 61px;
-    bottom: 0;
-}
-
-div#widget-button-container-embiggen {
+div#widget-button-desktopmenu {
     position: absolute;
     right: 31px;
     bottom: 0;
 }
-
 
 div#widget-button-usermenu {
     position: absolute;
@@ -244,9 +225,13 @@ div#widget-homemenu {
 
 div#widget-usermenu {
     right: 0px;
-    height: 132px;
+    height: 106px;
 }
 
+div#widget-desktopmenu {
+    right: 31px;
+    height: 182px;
+}
 
 div.widget-menu {
      display: none;

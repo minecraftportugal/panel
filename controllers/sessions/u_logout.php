@@ -1,7 +1,9 @@
 <?
 
 use lib\session\Session;
-use \lib\xauth\xAuth;
+use lib\environment\Environment;
+use lib\xauth\xAuth;
+use models\log\LogModel;
 use helpers\notice\NoticeHelper;
 
 function u_logout() {
@@ -10,7 +12,10 @@ function u_logout() {
     Session::validateSession();
     Session::validateXSRFToken();
 
-    if (isset($_SESSION['id'])) {
+    if (!is_null(Session::get('id'))) {
+
+        LogModel::create('logout', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
+
         xAuth::terminatexAuthSession($_SESSION['id']);
     }
 

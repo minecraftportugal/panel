@@ -43,15 +43,15 @@ class PaginationHelper {
 
         $total_pages = ceil($this->total/$this->per_page);
         $html = "<ul class=\"pagination\">";
-        $html .= "<li><a href=\"$this->link_before?$this->page_var=1$this->link_after\">&lt;&lt;</a></li>";
+        $html .= "<li><a href=\"$this->link_before?$this->page_var=1$this->link_after\"><i class=\"fa fa-angle-double-left\"></i></a></li>";
 
         $ellipsis_l = true; //false;
         $ellipsis_r = true; //  false;
 
         if ($this->page > 1) {
-            $html .= "<li><a href=\"$this->link_before?$this->page_var=".($this->page-1)."$this->link_after\">&lt;</a></li>";
+            $html .= "<li><a href=\"$this->link_before?$this->page_var=".($this->page-1)."$this->link_after\"><i class=\"fa fa-angle-left\"></i></a></li>";
         } else {
-            $html .= "<li class=\"inactive\">&lt;</li>";
+            $html .= "<li class=\"inactive\"><i class=\"fa fa-angle-left\"></i></li>";
         }
         for ($i=1; $i <= $total_pages; $i++) {
 
@@ -76,15 +76,15 @@ class PaginationHelper {
             }
         }
         if ($this->page < $total_pages) {
-            $html .= "<li class=\"lishort\"><a href=\"$this->link_before?$this->page_var=".($this->page+1)."$this->link_after\">&gt;</a></li>";
+            $html .= "<li class=\"lishort\"><a href=\"$this->link_before?$this->page_var=".($this->page+1)."$this->link_after\"><i class=\"fa fa-angle-right\"></i></a></li>";
         } else {
-            $html .= "<li class=\"inactive\">&gt;</li>";
+            $html .= "<li class=\"inactive\"><i class=\"fa fa-angle-right\"></i></li>";
         }
-        $html .= "<li><a href=\"$this->link_before?$this->page_var=$total_pages$this->link_after\">&gt;&gt;</a></li>";
+        $html .= "<li><a href=\"$this->link_before?$this->page_var=$total_pages$this->link_after\"><i class=\"fa fa-angle-double-right\"></i></a></li>";
 
         if ($this->expand > 0) {
             $per_page_expand = $this->per_page + $this->expand;
-            $html .= "<li><a href=\"$this->link_before?$this->page_var=$this->page&$this->per_page_var=$per_page_expand&$this->link_after\">&gt;&gt;&gt;</a></li>";
+            $html .= "<li><a href=\"$this->link_before?$this->page_var=$this->page&$this->per_page_var=$per_page_expand&$this->link_after\"><i class=\"fa fa-angle-double-right\"></i><i class=\"fa fa-angle-right\"></i></a></li>";
         }
 
         $html .= "</ul>";

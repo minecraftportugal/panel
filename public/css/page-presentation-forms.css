@@ -2,12 +2,20 @@ form select,
 form input:not([type=checkbox]),
 label {
   font-family: Consolas, monaco, monospace !important;
-  width: 180px;
   font-size: 12px;
   border-radius: 3px;
   border: 1px solid #333333;
   padding: 4px;
   outline: none;
+}
+
+form input:not([type=checkbox]),
+label {
+  width: 180px;
+}
+
+form select {
+  width: 190px;
 }
 
 form select,
@@ -29,7 +37,7 @@ form input[type=submit],
 form input[type=reset] {
   cursor: pointer;
   width: 190px;
-  background: linear-gradient(to bottom, #000000, #303030);
+  background: linear-gradient(to bottom, #050505, #101010, #202020);
 }
 
 form ul li {
@@ -87,7 +95,7 @@ input[type=checkbox] {
 }
 
 input[type=submit]:active, input[type=reset]:active {
-  background: linear-gradient(to bottom, #000000, #000000, #202020);
+  background: linear-gradient(to bottom, #000000, #050505, #151515);
   cursor: pointer;
 }
 

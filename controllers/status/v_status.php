@@ -24,7 +24,7 @@ function v_status() {
 
         $players['online'][$k]['badges'] = $badges;
 
-        $players['online'][$k]['head'] =  MinotarHelper::head($players['online'][$k]['playername'], 64);
+        $players['online'][$k]['head'] =  MinotarHelper::head($players['online'][$k]['playername'], "64px");
 
     }
 
@@ -32,7 +32,7 @@ function v_status() {
 
     foreach ($players['top'] as $k => $v) {
 
-        $players['top'][$k]['head'] =  MinotarHelper::head($players['top'][$k]['playername'], 25);
+        $players['top'][$k]['head'] =  MinotarHelper::head($players['top'][$k]['playername'], "25px");
 
     }
 
@@ -40,7 +40,7 @@ function v_status() {
 
     foreach ($players['top'] as $k => $v) {
 
-        $players['new'][$k]['head'] =  MinotarHelper::head($players['new'][$k]['playername'], 25);
+        $players['new'][$k]['head'] =  MinotarHelper::head($players['new'][$k]['playername'], "25px");
 
     }
 

@@ -1,9 +1,10 @@
 
 span.item {
-  background: url('/images/items.png');
+  background: url('/images/sprites.png');
   display: block;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
+  margin: 2px;
   float: left;
   position: relative;
 }

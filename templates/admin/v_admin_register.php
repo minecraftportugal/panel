@@ -1,5 +1,6 @@
-<div id="widget-register">
+<?= $notices ?>
 
+<div id="widget-register">
 
     <div class="layout-row">
 

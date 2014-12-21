@@ -60,7 +60,7 @@ function v_admin_accounts() {
 
         $page[$k]['badges'] = $badges;
 
-        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], 24, 3);
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], "24px", "3px");
 
         $page[$k]['totalTime'] = DateTimeHelper::stoh($page[$k]["totalTime"]);
 

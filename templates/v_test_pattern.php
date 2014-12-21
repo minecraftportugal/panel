@@ -2,8 +2,8 @@
 <head>
 <title>Oops!</title>
 <meta charset="utf-8" />
-<link rel="stylesheet" type="text/css" href="/styles/reset.css">
-<link rel="stylesheet" type="text/css" href="/styles/colorbars.css">
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+<link rel="stylesheet" type="text/css" href="/css/colorbars.css">
 <link rel="shortcut icon" href="favicon.ico" />
 </head>
 <body>

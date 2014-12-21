@@ -33,7 +33,7 @@ function v_widget_players() {
     /** Filters: Change and add new data */
     foreach ($players as $k => $v) {
 
-        $players[$k]['head'] = MinotarHelper::head($players[$k]['playername'], 32);
+        $players[$k]['head'] = MinotarHelper::head($players[$k]['playername'], "32px");
 
     }
 

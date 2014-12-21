@@ -79,6 +79,34 @@
 
                 </div>
 
+
+                <div class="layout-col layout-col-c">
+                    <div class="layout-col-title">
+                        <h1><i class="fa fa-keyboard-o"></i> Desktop Background</h1>
+                    </div>
+                    <div class="padded">
+                        <form name="bg_settings" action="/users/update_background" method="POST" autocomplete="off">
+                            <ul>
+                                <li>
+                                    <label for="bg_select">Background Image</label>
+                                </li>
+                                <li>
+                                    <select id="bg_select">
+                                    <? foreach ($images as $image): ?>
+                                        <option value=""><?= $image["name"] ?></option>
+                                    <? endforeach; ?>
+                                    </select>
+                                </li>
+                                <li>
+                                    <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
+                                    <input type="submit" value="OK" />
+                                </li>
+                            </ul>    
+                        </form>
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="clearer"></div>
@@ -86,6 +114,7 @@
         </div>
 
     </div>
+
 
     <div class="clearer"></div>
 

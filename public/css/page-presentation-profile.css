@@ -62,7 +62,9 @@ div.layout-col-title {
     background: linear-gradient(to bottom, #252525, #353535);
     color: #FFFFFF;
     font-size: 12px;
+    height: 22px;
     line-height: 22px;
+    vertical-align: middle;
     padding: 0 4px 0 4px;
 }
 
@@ -207,9 +209,8 @@ table.inventory {
 table.inventory td {
     background-color: #111111;
     border: 1px solid #888888;
-    width: 24px;
-    height: 24px;
-    padding: 4px;
+    width: 32px;
+    height: 32px;
 }
 
 table.inventory tr:nth-child(4) td {

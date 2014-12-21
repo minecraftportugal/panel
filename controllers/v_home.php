@@ -115,6 +115,12 @@ function v_home() {
 
     $template->assign('menu_user', $menu_user);
 
+    /* Desktop menu */
+    $menu_desktop = Template::init('partials/menus/desktop');
+
+    $template->assign('menu_desktop', $menu_desktop);
+
+
     /* HTML templates for javascript content*/
     $html_templates = Template::init('partials/html-templates');
 

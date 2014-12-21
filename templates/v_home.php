@@ -39,7 +39,11 @@
     <div class="widget-menu" id="widget-usermenu">
         <?= $menu_user ?>
     </div>
-
+    
+    <div class="widget-menu" id="widget-desktopmenu">
+        <?= $menu_desktop ?>
+    </div>
+    
     <? /* /!\ move html templates somewher else ? */ ?>
     <div id="html-templates">
         <?= $html_templates ?>

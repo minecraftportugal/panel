@@ -5,8 +5,9 @@ namespace helpers\minotar;
 
 class MinotarHelper {
 
-    public static function head($username, $size, $margin = 0) {
-        return "<img style=\"width: $size"."px; height: $size"."px; margin: $margin"."px;\" src=\"" . MINOTAR_SERVER . "/avatar/$username/$size\">"; // /!\
+    public static function head($username, $size, $margin = "0px") {
+        $intsize = intval($size);
+        return "<img style=\"width: $size; height: $size; margin: $margin;\" src=\"" . MINOTAR_SERVER . "/avatar/$username/$intsize\">"; // /!\
     }
 
     public static function skin($username) {

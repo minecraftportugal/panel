@@ -42,7 +42,7 @@ function v_admin_drops() {
     /** Filters: Change and add new data */
     foreach ($page as $k => $v) {
 
-        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], 24, 3);
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], "24px", "3px");
 
     }
 

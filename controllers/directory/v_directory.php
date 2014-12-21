@@ -42,7 +42,7 @@ function v_directory() {
 
         $page[$k]['badges'] = $badges;
 
-        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], 64);
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], "64px");
 
     }
 

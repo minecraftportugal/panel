@@ -1,4 +1,6 @@
 $(function() {
+    
+    var spriteWidth = 32;
 
 	$.getJSON('/js/data/itemsprite.json', function(sd) {
 
@@ -6,16 +8,16 @@ $(function() {
          * Items in Player Inventory
          */
         $('span.item').each(function() {
-            var EMPTY_ITEM_X = 19;
-            var EMPTY_ITEM_Y = 17;
+            var EMPTY_ITEM_X = 13;
+            var EMPTY_ITEM_Y = 30;
 
             var d = $(this).attr('data-item').split(' ');
             var enchantments = $(this).attr('data-enchantments').split(' ');
 
             if (d[0] == "") // empty
             {
-                var x=-(EMPTY_ITEM_X)*24;
-                var y=-(EMPTY_ITEM_Y)*24;
+                var x=-(EMPTY_ITEM_X)*spriteWidth;
+                var y=-(EMPTY_ITEM_Y)*spriteWidth;
                 $(this).attr('style', 'background-position:'+x+'px '+y+'px');
                 return;
             }
@@ -86,13 +88,13 @@ $(function() {
 
                 $(this).attr('title', title);
 
-                var x=-(info[0])*24;
-                var y=-(info[1])*24;
+                var x=-(info[0])*spriteWidth;
+                var y=-(info[1])*spriteWidth;
                 $(this).attr('style', 'background-position:'+x+'px '+y+'px');
             }
             else { // empty
-                var x=-(EMPTY_ITEM_X)*24;
-                var y=-(EMPTY_ITEM_Y)*24;
+                var x=-(EMPTY_ITEM_X)*spriteWidth;
+                var y=-(EMPTY_ITEM_Y)*spriteWidth;
                 $(this).attr('style', 'background-position:'+x+'px '+y+'px');
             }
  

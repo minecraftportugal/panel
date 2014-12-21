@@ -21,12 +21,6 @@
       </li>
 
       <li class="separator">
-        <a id="menu-reset-widgets" href="#">
-          <i class="fa fa-sign-out"></i> Reset Widgets
-        </a>
-      </li>
-
-      <li class="separator">
         <a id="menu-logout" href="#">
           <i class="fa fa-sign-out"></i> Sair
         </a>

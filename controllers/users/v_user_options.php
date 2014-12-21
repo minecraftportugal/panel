@@ -23,6 +23,17 @@ function v_user_options() {
 
     $template->assign('xsrf_token', $xsrf_token);
 
+    /* background images */
+    $images = [
+      ["name" => "Ilha Morena", "filename" => "bg5.jpg"],
+      ["name" => "Limbo Church Night", "filename" => "bg6.jpg"],
+      ["name" => "Na Colina", "filename" => "bg7.jpg"],
+      ["name" => "Vila", "filename" => "bg8.jpg"],
+    ];
+
+
+    $template->assign('images', $images);
+
     $template->render();
 
 }

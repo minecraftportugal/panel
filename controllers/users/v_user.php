@@ -48,7 +48,7 @@ function v_user () {
     // ja jogou?
     $has_played = !is_null($player['name']);
 
-    $head = MinotarHelper::head($player['playername'], 16, 3);
+    $head = MinotarHelper::head($player['playername'], "16px", "2px 4px 0 0");
 
     /** Skin 3d **/
     $skin3d = Template::init('partials/skin3d');
