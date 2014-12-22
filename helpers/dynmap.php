@@ -13,9 +13,9 @@ class DynmapHelper {
         }
 
         if ($block) {
-            $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe> <div class=\"iframe-block\"></div>";
+            $html = "<iframe src=\"$url\" onload=\"App.Iframe.loadCSS(this, 'dynmap/clean');\"></iframe> <div class=\"iframe-block\"></div>";
         } else {
-            $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe>";
+            $html = "<iframe src=\"$url\" onload=\"App.Iframe.loadCSS(this, 'dynmap/clean');\"></iframe>";
         }
 
         return $html;
@@ -31,9 +31,9 @@ class DynmapHelper {
 
 
         if ($block) {
-            $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe><div class=\"iframe-block\"></div>";
+            $html = "<iframe src=\"$url\" onload=\"App.Iframe.loadCSS(this, 'dynmap/clean');\"></iframe><div class=\"iframe-block\"></div>";
         } else {
-            $html = "<iframe src=\"$url\" onload=\"apply_css(this);\"></iframe>";
+            $html = "<iframe src=\"$url\" onload=\"App.Iframe.loadCSS(this, 'dynmap/clean');\"></iframe>";
         }
 
         return $html;

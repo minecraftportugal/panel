@@ -64,7 +64,10 @@ Widget.widgetStore = {
         "source" : "//dynmap.minecraft.pt/",
         "alwaysCreate" : true,
         "title" : "<i class='fa fa-picture-o'></i> Dynmap",
-        "mode" : "iframe"
+        "mode" : "iframe",
+        "iframe" : {
+            "onload" : "App.Iframe.loadCSS(this, 'dynmap/widget')"
+        }
     },
 
     "inquisitor" : {

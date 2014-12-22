@@ -73,6 +73,7 @@ class LogModel {
     }
 
     public static function delete($delete) {
+
         if (count($delete) > 0) {
             $sql_in = implode(',', array_fill(0, count($delete), '?'));
 
@@ -83,8 +84,27 @@ class LogModel {
         }
 
         return true;
+
     }
 
+    public static function event_types() {
+
+        $q = "SELECT SUBSTRING(column_type, 5) AS types
+        FROM information_schema.columns isc
+        WHERE isc.table_schema = 'minecraft_auth'
+        AND isc.table_name = 'logs'
+        AND column_name = 'event_type';";
+
+        $result = Bitch::source('default')->first($q);
+        $result = $result['types'];
+        $result = trim($result, '(');
+        $result = trim($result, ')');
+        $result = str_replace('\'', '', $result);
+        $result = explode(',', $result);
+
+        return $result;
+
+    }
 
 }
 

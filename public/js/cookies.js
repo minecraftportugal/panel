@@ -1,6 +1,6 @@
 App.Cookies = {
 
-}
+};
 
 App.Cookies.set = function(c_name, value, exdays)
 {
@@ -11,7 +11,7 @@ App.Cookies.set = function(c_name, value, exdays)
 
     console.log("setcookie", c_name.length, c_value.length);
 
-}
+};
 
 App.Cookies.get = function(c_name)
 {
@@ -26,4 +26,4 @@ App.Cookies.get = function(c_name)
 			return decodeURI(y);
 		}
 	}
-}
+};

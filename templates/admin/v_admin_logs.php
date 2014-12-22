@@ -11,6 +11,12 @@
         <li>
           <h2>Critérios</h2>
         </li>
+      <? foreach($event_types as $event_type): ?>
+        <li>
+          <input id="chk_<?= $event_type ?>" type="checkbox" name="<?= $event_type ?>" value="1" <?= 1 == 1 ? 'checked="checked"' : '' ?> />
+          <label class="checkbox" for="chk_<?= $event_type ?>" title="<?= $event_type ?>"><?= $event_type ?></label>
+        </li>
+      <? endforeach; ?>
         <li>
           <input type="submit" value="pesquisa" />
         </li>

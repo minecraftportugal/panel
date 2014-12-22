@@ -33,6 +33,9 @@ Widget.defaults = {
     },
     "cssBody" : {
 
+    },
+    "iframe" : {
+
     }
 };
 
@@ -432,10 +435,11 @@ Widget.prototype.build = function(notApplyingStates) {
 
                 widgetInstance.timeoutId = null; // EDIT: added this line
                 $(widgetInstance.selector).find("div.widget-titlebar").fadeIn(100);
-            }, 1000);
+            }, 500);
         }
 
         return false;
+
     }).mouseleave(function() {
 
         window.clearTimeout(widgetInstance.timeoutId);
@@ -450,8 +454,7 @@ Widget.prototype.build = function(notApplyingStates) {
             if (widgetInstance.timeoutId) {
                 window.clearTimeout(widgetInstance.timeoutId);
                 widgetInstance.timeoutId = null;
-            }
-            else {
+            } else {
                 widgetInstance.timeoutId = window.setTimeout(function() {
                     widgetInstance.timeoutId = null;
                     $(widgetInstance.selector).find("div.widget-titlebar").fadeOut(100);
@@ -588,7 +591,12 @@ Widget.prototype.load = function(source) {
             this.iframeId = this.id + "-iframe";
             var jq_tag = $("<iframe></iframe>");
             jq_tag.attr("id", this.iframeId) ;
-            jq_tag.attr("src", source) ;
+            jq_tag.attr("src", source);
+
+            $.each(this.options.iframe, function(k, v) {
+                jq_tag.attr(k, v);
+            });
+
             $(this.selector).find("div.widget-body").html(jq_tag);
             $(this.selector).addClass("widget-iframe");
 
@@ -898,4 +906,5 @@ $(window).on("unload", function() {
 
 $(function() {
         Widget.loadState();
+        $("div#widget-button-container").sortable();
 });

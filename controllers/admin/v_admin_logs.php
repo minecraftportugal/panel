@@ -29,7 +29,6 @@ function v_admin_logs() {
         "asc_desc" => "desc"
     ]);
 
-
     $total = LogModel::count($parameters);
     
     $page = LogModel::get($parameters);
@@ -47,6 +46,8 @@ function v_admin_logs() {
       "show_pages" => 4,
       "expand" => 20,
     ]);
+
+    $event_types = LogModeL::event_types();
 
     $table = new TableHelper($action_url, $parameters);
 
@@ -98,6 +99,8 @@ function v_admin_logs() {
     $template->assign('page', $page);
 
     $template->assign('notices', $notices);
+
+    $template->assign('event_types', $event_types);
 
     $template->assign('table', $table);
 

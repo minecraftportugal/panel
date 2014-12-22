@@ -1,6 +1,8 @@
 App = function() {
 
-}
+};
+
+App.url = '//dev.minecraft.pt';
 
 App.logout = function() {
     var form = $('<form class="noajax"></form>');
@@ -23,4 +25,4 @@ App.logout = function() {
 
     $(document.body).append(form);
     form.submit(); 
-}
+};

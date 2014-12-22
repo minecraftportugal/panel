@@ -15,7 +15,7 @@ body {
 }
 
 body#login {
-  background: #000 url('/images/backgrounds/login/bg2.jpg') no-repeat top center;
+  background: #000 url('/images/backgrounds/bg2.jpg') no-repeat top center;
 }
 
 body#login div#content {
@@ -37,11 +37,11 @@ body#login div#actions {
 }
 
 body#register {
-  background: #000 url('/images/backgrounds/register/1.jpg');
+  background: #000 url('/images/backgrounds/bg8.jpg');
 }
 
 body#register div#content {
-  background: rgba(0,0,0,0.2) url('/images/ByVLNWz.png') no-repeat right -15px;
+  background: rgba(0,0,0,0.2) url('/images/registration.png') no-repeat right -15px;
 }
 
 body#register div#motd {

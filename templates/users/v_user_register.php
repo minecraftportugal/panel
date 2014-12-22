@@ -19,6 +19,12 @@
     <script type="text/javascript" src="js/<?= $script ?>.js"></script>
 <? endforeach; ?>
 
+    <style type="text/css">
+        body#register {
+            background: #000 url('/images/backgrounds/bg<?= rand(5,8) ?>.jpg') no-repeat top center;
+        }
+    </style>
+
 </head>
 
 <body id="register">
@@ -31,7 +37,7 @@
 
         <? if (ENABLE_REGISTRATIONS): ?>
         <div id="actions">
-            <form name="login" method="post" action="/register">
+            <form name="register" method="post" action="/register">
                 <span class="center">
                     <input type="text" id="username" name="username" placeholder="esteves" />
                 </span>

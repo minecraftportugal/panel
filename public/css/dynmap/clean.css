@@ -1,0 +1,7 @@
+div.sidebar,
+.compass,
+div.leaflet-control-container,
+div.largeclock
+{
+  display: none !important;
+}

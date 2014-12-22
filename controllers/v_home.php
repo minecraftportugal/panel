@@ -49,7 +49,7 @@ function v_home() {
 
         "sop",
 
-        "dynmap"
+        "iframe"
     ];
 
     $template->assign('scripts', $scripts);
@@ -86,7 +86,7 @@ function v_home() {
     /* page background */
     $background_css = Template::init('partials/background-css');
 
-    $background_css->assign('background_image', '/images/backgrounds/login/bg7.jpg');
+    $background_css->assign('background_image', '/images/backgrounds/bg7.jpg');
 
     $template->assign('background_css', $background_css);
 
