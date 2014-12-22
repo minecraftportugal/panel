@@ -156,31 +156,6 @@ div.widget-button-container-scroll:active {
     background: linear-gradient(to top, #000000, #000000, #101010);
 }
 
-
-div#ajax-indicator {
-    width: 32px;
-    height: 30px;
-    margin-right: 10px;
-}
-
-div#ajax-indicator.ajax-loading {
-    background-image: url("/images/loader1.gif");
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-div#ajax-indicator.ajax-loading-https {
-    background-image: url("/images/loader2.gif");
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
-div#ajax-indicator.ajax-error {
-    background-image: url("/images/loader3.gif");
-    background-position: center center;
-    background-repeat: no-repeat;
-}
-
 .notice {
     padding: 0px 5px 0px 5px;
 }

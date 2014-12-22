@@ -394,7 +394,7 @@ Widget.prototype.build = function(notApplyingStates) {
     (!this.options.modal) && $(this.selector).resizable({
 
         iframeFix: true,
-        handles : 'nw, ne, sw, se',
+        handles : 'nw, n, ne, e, se, s, sw, w',
         addClasses: false,
         cancel: ".nointeraction",
         snap: true,

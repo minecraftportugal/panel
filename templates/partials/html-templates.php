@@ -11,12 +11,20 @@
         </div>
         <div class="widget-body body">
         </div>
-        <div class="widget-loading"></div>
+        <div class="widget-loading">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
         <div class="widget-cover"></div>
+
         <div class="ui-resizable-handle ui-resizable-nw widget-resize" title="drag to resize"></div>
+        <div class="ui-resizable-handle ui-resizable-n widget-resize" title="drag to resize"></div>            
         <div class="ui-resizable-handle ui-resizable-ne widget-resize" title="drag to resize"></div>
-        <div class="ui-resizable-handle ui-resizable-sw widget-resize" title="drag to resize"></div>
+        <div class="ui-resizable-handle ui-resizable-e widget-resize" title="drag to resize"></div>
         <div class="ui-resizable-handle ui-resizable-se widget-resize" title="drag to resize"></div>
+        <div class="ui-resizable-handle ui-resizable-s widget-resize" title="drag to resize"></div>
+        <div class="ui-resizable-handle ui-resizable-sw widget-resize" title="drag to resize"></div>
+        <div class="ui-resizable-handle ui-resizable-w widget-resize" title="drag to resize"></div>
+        
     </div>
 </div>
 
@@ -33,7 +41,9 @@
         </div>
         <div class="modal-body body">
         </div>
-        <div class="widget-loading"></div>
+        <div class="widget-loading">
+            <i class="fa fa-spinner fa-spin fa-3x"></i>
+        </div>
         <div class="modal-buttons">
         </div>
     </div>

@@ -25,7 +25,7 @@ div.widget.maximized {
     top: 0px !important;
     left: 0px !important;
     width: calc(100% - 2px) !important;
-    height: 100% !important;
+    height: calc(100% - 2px) !important;
 }
 
 div.widget.maximized div.widget-titlebar {
@@ -107,16 +107,26 @@ div.widget-body {
     border: none;
 }
 
-div.widget-loading.block-enabled {
+div.widget-loading {
     position: absolute;
     width: 100%;
     top: 18px;
     height: calc(100% - 18px);
-    background-color: rgba(0, 0, 0, 0.25);
-    background-image: url('/images/loader3.gif');
+    background-color: rgba(0, 0, 0, 0.5);
     background-repeat: no-repeat;
     background-position: center center;
     z-index: 2147483644;
+    display: none;
+    text-align: center;
+}
+
+div.widget-loading i {
+    position: absolute;
+    top: calc(50% - 30px);
+}
+
+div.widget-loading.block-enabled {
+    display: block;
 }
 
 div.widget.widget-iframe:not(.widget-active) div.widget-cover {
@@ -224,7 +234,6 @@ div.widget-pin {
     cursor: pointer;
 }
 
-
 div.widget-minimize {
     right: 40px;
     width: 18px;
@@ -248,35 +257,85 @@ div.widget-close {
 
 div.widget-resize {
     position: absolute;
-    width: 6px;
-    height: 6px;
     z-index: 12;
-}
-
-div.widget-resize.ui-resizable-ne {
-    cursor: ne-resize;
-    top: 0;
-    right: 0;
 }
 
 div.widget-resize.ui-resizable-nw {
     cursor: nw-resize;
+    width: 6px;
+    height: 6px;
     top: 0;
     left: 0;
 }
 
+
+div.widget-resize.ui-resizable-n {
+    cursor: n-resize;
+    height: 4px;
+    top: 0;
+    left: 7px;
+    right: 7px;
+}
+
+div.widget-resize.ui-resizable-ne {
+    cursor: ne-resize;
+    width: 6px;
+    height: 6px;
+    top: 0;
+    right: 0;
+}
+
+div.widget-resize.ui-resizable-e {
+    cursor: e-resize;
+    width: 4px;
+    right: 0;
+    top: 7px;
+    bottom: 7px;
+}
+
 div.widget-resize.ui-resizable-se {
     cursor: se-resize;
+    width: 6px;
+    height: 6px;
     bottom: 0;
     right: 0;
 }
 
+div.widget-resize.ui-resizable-s {
+    cursor: s-resize;
+    height: 4px;
+    bottom: 0;
+    left: 7px;
+    right: 7px;
+}
+
 div.widget-resize.ui-resizable-sw {
     cursor: sw-resize;
+    width: 6px;
+    height: 6px;
     bottom: 0;
     left: 0;
 }
 
+div.widget-resize.ui-resizable-w {
+    cursor: w-resize;
+    width: 4px;
+    left: 0;
+    top: 7px;
+    bottom: 7px;
+}
+
+div.maximized div.widget-resize.ui-resizable-nw,
+div.maximized div.widget-resize.ui-resizable-n,
+div.maximized div.widget-resize.ui-resizable-ne,
+div.maximized div.widget-resize.ui-resizable-e,
+div.maximized div.widget-resize.ui-resizable-se,
+div.maximized div.widget-resize.ui-resizable-s,
+div.maximized div.widget-resize.ui-resizable-sw,
+div.maximized div.widget-resize.ui-resizable-w {
+    cursor: pointer;
+    display: none;
+}
 
 div#widget-container {
     position: absolute;
@@ -287,7 +346,6 @@ div#widget-container {
 }
 
 /*BOTTOM BUTTONS*/
-
 div.widget-button {
     display: inline-block;
     cursor: pointer;
