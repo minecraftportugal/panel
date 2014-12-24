@@ -78,7 +78,7 @@ Ajax.request = function(url, data, type, container, loading_blocker) {
 
 $(function() {
 
-    $(document).on('click', 'div.widget a:not(.noajax)', function(event) {
+    $(document).on('click', 'div.widget a:not(.noajax)[href!=#]', function(event) {
         Ajax.initiator(this);
         event.preventDefault(); 
     });

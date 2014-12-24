@@ -16,11 +16,11 @@ function v_login() {
     /* scripts */
     $scripts = [
 
+        "sop",
+
         "lib/jquery/jquery",
 
-        "login",
-
-        "sop",
+        "pages/login",
 
     ];
 

@@ -16,13 +16,13 @@ function v_user_register() {
     /* scripts */
     $scripts = [
 
+        "sop",
+
         "lib/jquery/jquery",
 
         "cookies",
 
-        "register",
-
-        "sop",
+        "pages/register",
 
     ];
 

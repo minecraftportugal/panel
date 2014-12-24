@@ -15,7 +15,7 @@ function v_irc() {
 
         "lib/swf/swfobject-2.2",
 
-        "irc",
+        "pages/irc",
 
         "sop",
 

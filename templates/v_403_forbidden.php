@@ -5,7 +5,6 @@
 <link rel="stylesheet" type="text/css" href="/css/reset.css">
 <link rel="stylesheet" type="text/css" href="/css/colorbars.css">
 <link rel="shortcut icon" href="favicon.ico" />
-<script type="text/javascript" src="/js/noframes.js"></script>
 </head>
 <body>
 <div id="top">

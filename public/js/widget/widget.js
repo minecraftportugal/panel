@@ -11,6 +11,7 @@ Widget.widgets = [];
 /* Defaults */
 
 Widget.defaults = {
+
     "source" : "/testpattern",
     "title" : "Title",
     "mode" : "ajax",
@@ -21,6 +22,7 @@ Widget.defaults = {
     "alwaysReload" : true,
     "maximized" : false,
     "classes" : "widget-not-scrollable",
+
     "css" : {
         "top": "0px",
         "left": "0px",
@@ -31,17 +33,23 @@ Widget.defaults = {
         "max-width" : null, //"700px",
         "max-height" : null //"700px"
     },
+
     "cssBody" : {
 
     },
+
     "iframe" : {
 
     }
+
 };
 
 /* Settings */
-Widget.saveOnExit = true;
+Widget.settings = {
+    "saveOnExit" : true
+};
 
+/* * * * Static Methods * * * /
 /*
  * Widget.count
  */
@@ -128,7 +136,7 @@ Widget.loadState = function() {
 }
 
 Widget.clearState = function() {
-    Widget.saveOnExit = false;
+    Widget.settings.saveOnExit = false;
     localStorage.clear();
     window.location.reload();
 }
@@ -257,10 +265,13 @@ Widget.prototype.init = function(options, states) {
         this.options.name += new Date().getTime();
     }
 
+    /* Event timeouts for this widget (used with timers) */
+    this.timeouts = {
+
+    };
+
     /* Widget and taskbar button - ID and CSS selector */
     /* Modal Widgets do not have buttons */
-
-
     if (this.options.modal) {
 
         this.id = "modal-" + this.options.name;
@@ -428,43 +439,111 @@ Widget.prototype.build = function(notApplyingStates) {
     });
 
     /* Pinned widget hover for titlebar */
-    (!this.options.modal) && $(this.selector).find("div.widget-pinned-invisible-bar").mouseenter(function() {
+    (!this.options.modal) && $(this.selector).find("div.widget-pinned-invisible-bar").hover(
 
-        if (!widgetInstance.timeoutId) {
-            widgetInstance.timeoutId = window.setTimeout(function() {
 
-                widgetInstance.timeoutId = null; // EDIT: added this line
-                $(widgetInstance.selector).find("div.widget-titlebar").fadeIn(100);
-            }, 500);
-        }
+            function() {
+                //console.log("ghostBar mouseEnter " + widgetInstance.timeouts.titleBarGhost);
 
-        return false;
+                if (!widgetInstance.timeouts.titleBarGhost) {
+                    widgetInstance.timeouts.titleBarGhost = window.setTimeout(function() {
 
-    }).mouseleave(function() {
+                        widgetInstance.timeouts.titleBarGhost = null; // EDIT: added this line
+                        $(widgetInstance.selector).find("div.widget-titlebar").fadeIn(100, function() {
 
-        window.clearTimeout(widgetInstance.timeoutId);
-        widgetInstance.timeoutId = null;
+                        });
+                    }, 500);
+                }
 
-        return false;
-    });
+                return false;
 
-    (!this.options.modal) && $(this.selector).find("div.widget-titlebar").mouseleave(function () {
+            },
 
-        if ($(widgetInstance.selector).hasClass("pinned")) {
-            if (widgetInstance.timeoutId) {
-                window.clearTimeout(widgetInstance.timeoutId);
-                widgetInstance.timeoutId = null;
+            function() {
+                //console.log("ghostBar mouseLeave "  + widgetInstance.timeouts.titleBarGhost);
+
+                window.clearTimeout(widgetInstance.timeouts.titleBarGhost);
+
+                widgetInstance.timeouts.titleBarGhost = null;
+
+                return false;
+            }
+
+    );
+
+    (!this.options.modal) && $(this.selector).find("div.widget-titlebar").hover(
+
+
+        function() {
+            //console.log("titleBar mouseEnter " + widgetInstance.timeouts.titleBar);
+        },
+
+        function() {
+            //console.log("titleBar mouseLeave " + widgetInstance.timeouts.titleBar);
+
+            if (!$(widgetInstance.selector).hasClass("pinned")) {
+                return false;
+            }
+
+            if (widgetInstance.timeouts.titleBar) {
+
+                window.clearTimeout(widgetInstance.timeouts.titleBar);
+
+                widgetInstance.timeouts.titleBar = null;
+
             } else {
-                widgetInstance.timeoutId = window.setTimeout(function() {
-                    widgetInstance.timeoutId = null;
-                    $(widgetInstance.selector).find("div.widget-titlebar").fadeOut(100);
+                widgetInstance.timeouts.titleBar = window.setTimeout(function() {
+
+                    widgetInstance.timeouts.titleBar = null;
+
+                    $(widgetInstance.selector).find("div.widget-titlebar").fadeOut(100, function(){
+
+                    });
+
                 }, 200);
             }
+
+            return false;
         }
 
-        return false;
-
-    });
+    );
+//    (!this.options.modal) && $(this.selector).find("div.widget-pinned-invisible-bar").mouseenter(function() {
+//
+//        if (!widgetInstance.timeoutId) {
+//            widgetInstance.timeoutId = window.setTimeout(function() {
+//
+//                widgetInstance.timeoutId = null; // EDIT: added this line
+//                $(widgetInstance.selector).find("div.widget-titlebar").fadeIn(100);
+//            }, 500);
+//        }
+//
+//        return false;
+//
+//    }).mouseleave(function() {
+//
+//        window.clearTimeout(widgetInstance.timeoutId);
+//        widgetInstance.timeoutId = null;
+//
+//        return false;
+//    });
+//
+//    (!this.options.modal) && $(this.selector).find("div.widget-titlebar").mouseleave(function () {
+//
+//        if ($(widgetInstance.selector).hasClass("pinned")) {
+//            if (widgetInstance.timeoutId) {
+//                window.clearTimeout(widgetInstance.timeoutId);
+//                widgetInstance.timeoutId = null;
+//            } else {
+//                widgetInstance.timeoutId = window.setTimeout(function() {
+//                    widgetInstance.timeoutId = null;
+//                    $(widgetInstance.selector).find("div.widget-titlebar").fadeOut(100);
+//                }, 200);
+//            }
+//        }
+//
+//        return false;
+//
+//    });
 
     /* Widget maximize button */
     (!this.options.modal) && $(this.selector).find("div.widget-maximize").click(function() {
@@ -849,6 +928,7 @@ Widget.prototype.unpin = function() {
  * Describe widget to open using data- tags
  */
 $(document).on("click", "[data-widget-action]", function(event) {
+
     var action = $(this).data("widget-action");
     var name = $(this).data("widget-name");
     var title = $(this).data("widget-title") || name;
@@ -882,6 +962,7 @@ $(document).on("click", "[data-widget-action]", function(event) {
     }
 
     event.preventDefault();
+
 });
 
 /*
@@ -889,18 +970,35 @@ $(document).on("click", "[data-widget-action]", function(event) {
  * Open a widget referencing it by name
  */
 $(document).on("click", "[data-widget-open]", function(event) {
-    var name = $(this).data("widget-open");
 
-    Widget.open(name);
+    var name = $(this).data("widget-open");
+    var override = $(this).data("widget-open-override");
+
+    if (override !== undefined) {
+        //override = JSON.parse(override);
+        var params = Widget.widgetStore[name];
+        if (params === undefined) {
+            console.log('No widget named ' + name);
+            return false;
+        }
+        var newParams = {};
+        $.extend(newParams, params);
+        $.extend(newParams, override);
+        console.log(params, override, newParams);
+        Widget.open(newParams);
+    } else {
+        Widget.open(name);
+    }
 
     event.preventDefault();
+
 });
 
 $(window).on("unload", function() {
-        if (Widget.saveOnExit) {
+        if (Widget.settings.saveOnExit) {
                 Widget.saveState();
         } else {
-                Widget.saveOnExit = true;
+                Widget.settings.saveOnExit = true;
         }
 });
 

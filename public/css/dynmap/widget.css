@@ -1,0 +1,178 @@
+div.dynmap-custom-controls {
+    font-family: "Trebuchet MS", Helvetica, sans-serif !important;
+    font-size: 12px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+}
+
+div.leaflet-bar {
+    border: 0;
+}
+
+div.dynmap-custom-controls div.leaflet-control-zoom {
+
+}
+
+div.leaflet-control-zoom,
+div.leaflet-control-layers,
+div.dynmap-custom-controls,
+div.coord-control,
+div.worldlist,
+div.playerlist {
+    float: left;
+    clear: none;
+}
+
+div.leaflet-control-zoom a,
+div.leaflet-control-layers,
+div.coord-control,
+div.worldlist,
+div.playerlist {
+    border: 1px solid #111111;
+    border-radius: 0px;
+    height: 28px;
+    line-height: 26px;
+    width: 28px;
+    margin: 5px 0px 5px 5px;
+    color: #FFFFFF;
+    background: linear-gradient(to top, #111111, #111111, #222222);
+}
+
+div.leaflet-control-layers-expanded {
+    height: auto;
+    width: 200px;
+}
+
+a.leaflet-control-layers-toggle {
+    background-position: 25% 25% !important;
+    background-size: 60% 60% !important;
+}
+
+div.coord-control {
+    width: 90px;
+    height: 50px;
+    line-height: 25px;
+}
+
+div.coord-control span.coord-control-label,
+div.coord-control span.coord-control-value,
+div.largeclock {
+    float: left;
+    margin-left: 5px;
+}
+
+div.worldlist, div.playerlist {
+    z-index: 1;
+    position: relative;
+    width: auto !important;
+    height: 28px;
+    overflow-y: hidden;
+    padding: 0 5px 0 5px;
+}
+
+div.worldlist:hover, div.playerlist:hover {
+
+    height: 100%;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+div.worldlist > ul, div.playerlist > ul {
+    position: relative;
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+div.worldlist > ul > li, div.playerlist > ul > li {
+    clear: both;
+}
+
+ul.maplist {
+    position: relative;
+    display: block;
+    width: auto !important;
+    height: auto !important;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.maplist li {
+    background-color: transparent !important;
+    float: left;
+    margin: 2px;
+}
+
+ul.maplist li a {
+    color: #FFFFFF;
+    display: block;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: 50% 5px;
+    line-height: 65px;
+    border: 1px solid #333333;
+}
+
+ul.maplist li a:hover {
+    color: #FFFFFF;
+    background-color: #666666;
+    border: 1px solid #000000;
+
+}
+
+ul.playerlist {
+    margin: 5px;
+}
+
+ul.playerlist li {
+    height: 20px;
+    margin: 5px;
+    padding: 4px 8px 4px 8px;
+    border: 1px solid #333333;
+}
+
+
+ul.playerlist li a {
+    color: #FFFFFF;
+
+    display: inline-block;
+}
+
+ul.playerlist li:hover {
+    cursor: pointer;
+    color: #333333;
+    background-color: #666666;
+    border: 1px solid #000000;
+}
+
+ul.playerlist li span.playerIcon {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+ul.playerlist li img {
+
+}
+
+div.largeclock {
+    height: 62px;
+    border: 1px solid #111111;
+    border-radius: 0px;
+    position: relative;
+    margin: 5px 0px 5px 5px;
+    background: linear-gradient(to top, #111111, #111111, #222222);
+}
+
+div.compass {
+    bottom: 20px;
+    top: auto;
+}

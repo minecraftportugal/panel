@@ -10,7 +10,7 @@
 var params = {};
 
 /* Change these parameters */
-params.host = "uevora.ptnet.org";
+params.host = "vianetworks.ptnet.org";
 params.port = 6667;
 params.policyPort = 843;
 
@@ -60,8 +60,8 @@ params.charset = "utf-8";
 params.fontSize = "11";
 params.showTimestamps = "true";
 params.timestampFormat = "hh:mm";
-params.showEmoticonsButton = true;
-params.showRichTextControls = true;
+params.showEmoticonsButton = false;
+params.showRichTextControls = false;
 params.showMenuButton = true;
 params.showSubmitButton = true;
 params.showChannelHeader = true;
@@ -74,13 +74,13 @@ params.nickPostfix = ": ";
 params.rememberNickname = false;
 params.showServerWindow = true;
 params.emoticonList = "";
-params.userListWidth = "100";
+params.userListWidth = "110";
 params.blockedCommands = "";
 params.showNavigation = true;
 
 params.identifyCommand = "NickServ login %nick% %pass%";
 
-params.loopServerCommands = true; 
+params.loopServerCommands = true;
 
 /* Use this method to send a command to lightIRC with JavaScript */
 function sendCommand(command) {
@@ -111,10 +111,15 @@ function onContextMenuSelect(type, nick, ident, realname) {
 /* This method gets called if you use the parameter loopServerCommands */
 /* */
 function onServerCommand(command) {
+
+
     if (command.substring(0,4) != "PING") {
-        parent.Widget.getByName("irc").hilight(command);
+        parent.Widget.get("irc").hilight(command);
+        return command;
     }
-    return command.replace(/:MemoServ!suporte@PTnet.org PRIVMSG/, ":MemoServ!suporte@PTnet.org NOTICE");
+
+    return command;
+    //return command.replace(/:MemoServ!suporte@PTnet.org PRIVMSG/, ":MemoServ!suporte@PTnet.org NOTICE");
 }
 
 window.onbeforeunload = function() {

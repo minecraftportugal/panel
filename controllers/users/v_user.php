@@ -74,17 +74,21 @@ function v_user () {
 
     /** Mini Map **/
     $dynmap = null;
+    $dynmap_url = null;
 
     if ($has_played) {
 
         if ($player['online'] == 1) {
             $dynmap = DynmapHelper::map($player['playername']);
+            $dynmap_url = DynmapHelper::url($player['playername']);
         } else {
             if (!is_null($player['coords'])) {
                 $coords = explode(',', $player['coords']);
                 $dynmap = DynmapHelper::map_position($coords, $player['world']);
+                $dynmap_url = DynmapHelper::url_position($coords, $player['world']);
             } else {
                 $dynmap = DynmapHelper::map();
+                $dynmap_url = DynmapHelper::url();
             }
         }
 
@@ -94,6 +98,7 @@ function v_user () {
     } else {
 
         $dynmap = DynmapHelper::map_offline();
+        $dynmap_url = DynmapHelper::url_offline();
 
     }
 
@@ -105,10 +110,15 @@ function v_user () {
 
         // 'mapped' data
         $mapped = json_decode($player['mapped'], true);
-        $blocks_broken = $mapped['blocksBroken'];
-        $count_blocks = empty($blocks_broken) ? 0 : array_sum($blocks_broken);
-        $count_diamond = array_key_exists('Diamond Ore', $mapped['blocksBroken']) ? $mapped['blocksBroken']['Diamond Ore'] : 0 ;
-        $count_diamond = $count_diamond != null ? $count_diamond : 0;
+        if (array_key_exists('blocksBroken', $mapped) and !is_null($mapped['blocksBroken'])) {
+            $blocks_broken = $mapped['blocksBroken'];
+            $count_blocks = empty($blocks_broken) ? 0 : array_sum($blocks_broken);
+            $count_diamond = array_key_exists('Diamond Ore', $mapped['blocksBroken']) ? $mapped['blocksBroken']['Diamond Ore'] : 0 ;
+            $count_diamond = $count_diamond != null ? $count_diamond : 0;
+        } else {
+            $count_blocks = 0;
+            $count_diamond = 0;
+        }
         $count_hours = round($player['totalTime']/60/60);
         $count_hours = $count_hours > 0 ? $count_hours : 1;
 
@@ -215,6 +225,7 @@ function v_user () {
     $template->assign('badges', $badges);
 
     $template->assign('dynmap', $dynmap);
+    $template->assign('dynmap_url', $dynmap_url);
 
     $template->assign('inventory', $inventory);
 

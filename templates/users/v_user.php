@@ -1,6 +1,10 @@
-<script type="text/javascript" src="/js/skin3d.js"></script>
+<script type="text/javascript" src="/js/pages/skin3d.js"></script>
 
-<script type="text/javascript" src="/js/items.js"></script>
+<script type="text/javascript" src="/js/pages/items.js"></script>
+
+<script type="text/javascript">
+    $("div#widget-show-<?= $player['playername'] ?> a[data-widget-open=dynmap]").data("widget-open-override", { "source" : "<?= $dynmap_url ?>" });
+</script>
 
 <?= $notices ?>
 
@@ -9,7 +13,7 @@
     <? if ($admin): ?>
     <div class="layout-row">
     <div class="layout-col layout-col-full-width pad-up">
-        <div class="layout-col-title">
+        <div class="layout-col-title layout-col-clickable layout-col-collapsable">
             <i class="fa fa-cogs"></i> Admin
         </div>
 
@@ -245,9 +249,11 @@
         </div>
 
         <div class="layout-col layout-col-map iframe">
-            <div class="layout-col-title">
+            <a href="#" data-widget-open="dynmap">
+            <div class="layout-col-title layout-col-clickable">
                 <i class="fa fa-globe"></i> Posição
             </div>
+            </a>
             <?= $dynmap ?>
         </div>
 

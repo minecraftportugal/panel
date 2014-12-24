@@ -21,6 +21,8 @@ function v_home() {
     /* scripts */
     $scripts = [
 
+        "sop",
+
         "lib/jquery/jquery",
 
         "lib/jquery/jquery.scrollto",
@@ -28,8 +30,6 @@ function v_home() {
         "lib/jquery/jqueryui",
 
         "lib/Three",
-
-        "init",
 
         "app",
 
@@ -46,8 +46,6 @@ function v_home() {
         "desktop",
 
         "cookies",
-
-        "sop",
 
         "iframe"
     ];

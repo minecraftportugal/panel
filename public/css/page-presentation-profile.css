@@ -8,20 +8,14 @@ div.skin-display {
 div.skin-display canvas {
     position: relative;
     top: 5px;
-}
-
-div.layout-row {
-
+    left: -10px;
+    margin: auto;
 }
 
 div.layout-col {
     margin: 5px 0px 0px 5px;
     border: solid 1px #353535;
     background: linear-gradient(to bottom, #050505, #101010);
-}
-
-div.layout-col canvas {
-    margin: auto;
 }
 
 div.layout-col.iframe iframe {
@@ -66,6 +60,15 @@ div.layout-col-title {
     line-height: 22px;
     vertical-align: middle;
     padding: 0 4px 0 4px;
+}
+
+div.layout-col-clickable:hover {
+    cursor: pointer;
+    background: linear-gradient(to bottom, #353535, #454545);
+}
+
+div.layout-col-clickable:active {
+    background: linear-gradient(to bottom, #151515, #252525);
 }
 
 div.layout-col-footer {

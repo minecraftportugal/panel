@@ -405,57 +405,69 @@ div.widget-home-button:active {
 
 
 .activity {
-    -webkit-animation: activity 1s linear infinite;
-    -moz-animation: activity 1s linear infinite;
-    -ms-animation: activity 1s linear infinite;
-    animation: activity 1s linear infinite;
-    color: #CCCCCC !important;
+    -webkit-animation: activity 2s linear infinite;
+    -moz-animation: activity 2s linear infinite;
+    -ms-animation: activity 2s linear infinite;
+    animation: activity 2s linear infinite;
+    color: #FFFFFF !important;
 }
 
-@keyframes "activity" {
- 0% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
- 50% {
-    background-color: rgba(0, 0, 255, 0.5);  
- }
- 100% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
+@keyframes activity {
+    0% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    25% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
+    50% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    75% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
 }
 
 @-moz-keyframes activity {
- 0% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
- 50% {
-    background-color: rgba(0, 0, 255, 0.5);  
- }
- 100% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
+    0% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    25% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
+    50% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    75% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
 }
 
-@-webkit-keyframes "activity" {
- 0% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
- 50% {
-    background-color: rgba(0, 0, 255, 0.5);  
- }
- 100% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
+@-webkit-keyframes activity {
+    0% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    25% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
+    50% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    75% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
 }
 
-@-ms-keyframes "activity" {
- 0% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
- 50% {
-    background-color: rgba(0, 0, 255, 0.5);  
- }
- 100% {
-    background-color: rgba(0, 0, 255, 0.25);
- }
+@-ms-keyframes activity {
+    0% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    25% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
+    50% {
+        background-color: rgba(0, 0, 255, 0.25);
+    }
+    75% {
+        background-color: rgba(0, 0, 255, 0.5);
+    }
 }

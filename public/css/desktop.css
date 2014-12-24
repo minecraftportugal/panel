@@ -16,6 +16,10 @@
      user-select: none;
 }
 
+body {
+    overflow: hidden;
+}
+
 p, td, th, span {
     -moz-user-select: -moz-text;
     -khtml-user-select: text;
@@ -186,11 +190,6 @@ div.widget-button-container-scroll:active {
 .success {
     background-color: rgba(0,255,0,0.101010) !important;
     color: #00DD00;
-}
-
-div.widget-menu i {
-    width: 15px;
-    display; inline-block;
 }
 
 div#widget-homemenu {

@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/js/items.js"></script>
+<script type="text/javascript" src="/js/pages/items.js"></script>
 
 <div id="widget-drops">
 
