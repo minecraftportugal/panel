@@ -164,12 +164,36 @@ App.Widget.widgetStore = {
         "source" : "/options",
         "title" : "<i class='fa fa-gear'></i> Opções",
         "css" : {
-            "width" : "672px",
             "min-width" : "672px",
             "max-width" : "672px",
-            "height" : "304px",
             "min-height" : "304px",
             "max-height" : "304px"
+        }
+    },
+
+    "logout" : {
+        "name" : "logout-confirm",
+        "source" : "Tem a certeza que deseja sair?",
+        "mode" : "static",
+        "modal" : true,
+        "title" : " <i class='fa fa-question'></i> Sair",
+        "modalButtons" : {
+            "<i class='fa fa-sign-in'></i> Cancelar" : function() {
+                return false;
+            },
+            "<i class='fa fa-sign-in'></i> Sair" : function() {
+                App.logout();
+            }
+        },
+        "css" : {
+            "width" : "450px",
+            "height" : "90px"
+        },
+        "cssBody" : {
+            "overflow" : "hidden",
+            "height" : "30px",
+            "line-height" : "30px",
+            "text-align" : "center"
         }
     },
 

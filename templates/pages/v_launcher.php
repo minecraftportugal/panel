@@ -2,7 +2,7 @@
 <html>
 
     <head>
-      <link rel="stylesheet" href="/styles/reset.css" media="screen" type="text/css">
+      <link rel="stylesheet" href="/css/reset.css" media="screen" type="text/css">
     </head>
 
     <body>

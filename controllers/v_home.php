@@ -45,7 +45,9 @@ function v_home() {
 
         "iframe",
 
-        "desktop",
+        "toaster",
+
+        "sound",
 
         "init"
     ];

@@ -43,10 +43,6 @@ $r->map('GET',  '/status', 'v_status', 'controllers/status/v_status.php');
 /* Directory */
 $r->map('GET',  '/directory', 'v_directory', 'controllers/directory/v_directory.php');
 
-/* * Widgets * */
-/* Players */
-$r->map('GET', '/widgets/players', 'v_widget_players', 'controllers/widgets/v_widget_players.php');
-
 /* IRC */
 $r->map('GET', '/irc', 'v_irc', 'controllers/irc/v_irc.php');
 
@@ -75,13 +71,7 @@ $r->map('POST', '/admin/logs', 'u_admin_logs', 'controllers/admin/u_admin_logs.p
 /* Endereços IP */
 $r->map('GET',  '/admin/ip_addresses', 'v_admin_ip_addresses', 'controllers/admin/v_admin_ip_addresses.php');
 
-
-/* Test Purposes */
-$r->map('GET', '/test', 'v_test', 'controllers/test/v_test.php');
-
-/* Launcher */
-$r->map('GET', '/launcher', 'v_launcher', 'controllers/launcher/v_launcher.php');
-
+/* Error Pages */
 $r->map('GET', '/forbidden', 'v_403_forbidden', 'controllers/v_403_forbidden.php');
 
 $r->map('GET', '/testpattern', 'v_test_pattern', 'controllers/v_test_pattern.php');

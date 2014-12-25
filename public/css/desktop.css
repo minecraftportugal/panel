@@ -65,7 +65,7 @@ div#widget-button-home-menu.active {
 div#widget-button-container-scroll-left {
     border-right: 1px solid #101010;
     position: absolute;
-    left: 131px;
+    left: 111px;
     bottom: 0;
 }
 
@@ -79,7 +79,7 @@ div#widget-button-container-scroll-left:active {
 
 div#widget-button-container {
     position: absolute;
-    left: 142px;
+    left: 122px;
     right: 74px;
     bottom: 0;
     height: 30px;

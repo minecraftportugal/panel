@@ -1,5 +1,10 @@
 <?
 
+/* Website URLs */
+define('URL', "//site.minecraft/");
+define('VALID_REFERER', "/^https?:\/\/[a-zA-Z0-9\.\-]+\.site\.minecraft/");
+
+/* Web Root */
 define('WEB_ROOT', "/home/notch/dev/minecraftia");
 
 /* DYNMAP URL */

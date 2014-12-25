@@ -55,8 +55,7 @@ $(function() {
 
     /* Click on Button: logout */
     $(document).on("click", "a#menu-logout", function(event) {
-        App.logout();
-        event.stopPropagation();
+        App.Widget.open("logout");
     });
 
     /* OnMouseDown: hide opened menus */
@@ -119,7 +118,7 @@ $(function() {
                     classes += " otherside";
                 }
 
-                App.Desktop.toasterFadeIn({
+                App.Toaster.fadeIn({
                     "title" : title,
                     "message" : message,
                     "duration" : 0,
@@ -129,7 +128,9 @@ $(function() {
             }
         },
         function() {
-            App.Desktop.toasterFadeOut();
+
+            App.Toaster.fadeOut();
+
         }
     );
 
