@@ -30,12 +30,3 @@ App.logout = function() {
     $(document.body).append(form);
     form.submit(); 
 };
-
-/* */
-
-$(function() {
-
-    /* it's hash time! */
-    window.location = "#";
-
-});

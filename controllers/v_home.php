@@ -37,15 +37,17 @@ function v_home() {
 
         "widget/widget",
 
+        "widget/modal",
+
         "widget/definition",
-
-        "modal",
-
-        "desktop",
 
         "cookies",
 
-        "iframe"
+        "iframe",
+
+        "desktop",
+
+        "init"
     ];
 
     $template->assign('scripts', $scripts);

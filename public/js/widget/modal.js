@@ -1,6 +1,6 @@
-App.Modal = function(options) {
+App.Widget.Modal = function(options) {
 
-    App.Modal.options = {
+    App.Widget.Modal.options = {
         "name" : "default",
         "title" : "Title",
         "body" : undefined,
@@ -9,19 +9,19 @@ App.Modal = function(options) {
 
             "OK" : {
                 "callback" : function() {
-                    App.Modal.hide();
+                    App.Widget.Modal.hide();
                 }
             },
 
             "Cancel" : {
                 "callback" : function() {
-                    App.Modal.hide();
+                    App.Widget.Modal.hide();
                 }
             }
         }
     }
 
-    App.Modal.modalStore = {
+    App.Widget.Modal.modalStore = {
 
     }
 
@@ -33,7 +33,7 @@ App.Modal = function(options) {
     /* Innards */
     this.options = {};
 
-    $.extend(this.options, App.Modal.options);
+    $.extend(this.options, App.Widget.Modal.options);
     $.extend(this.options, options);
 
 
@@ -41,21 +41,21 @@ App.Modal = function(options) {
     this.selector = "div#modal-" + this.options.name;
 }
 
-App.Modal.show = function(options) {
+App.Widget.Modal.show = function(options) {
 
 
 
     var $modal = $("div#modal-template").clone();
 
     $modal.appendTo("div#widget-container");
-    $("div.modal-blocker").fadeIn(100);
+    $("div#modal-blocker").fadeIn(100);
 }
 
-App.Modal.hide = function() {
+App.Widget.Modal.hide = function() {
 
     $("div#widget-container").find("div.modal").remove();
-    $("div.modal-blocker").fadeOut(100);
+    $("div#modal-blocker").fadeOut(100);
 
 }
 
-//App.Modal._init();
+//App.Widget.Modal._init();

@@ -1,5 +1,5 @@
 
-Widget.widgetStore = {
+App.Widget.widgetStore = {
 
     "test" : {
         "name" : "test",
@@ -96,7 +96,13 @@ Widget.widgetStore = {
     "admin-register" : {
         "name" : "admin-register",
         "source" : "/admin/register",
-        "title" : "<i class='fa fa-paper-plane'></i> Registar Utilizador"
+        "title" : "<i class='fa fa-paper-plane'></i> Registar Utilizador",
+        "css" : {
+            "min-width" : "222px",
+            "min-height" : "214px",
+            "max-width" : "222px",
+            "max-height" : "214px"
+        }
     },
     "admin-accounts" : {
         "name" : "admin-accounts",

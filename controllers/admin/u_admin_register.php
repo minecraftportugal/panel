@@ -21,7 +21,7 @@ function u_admin_register() {
     if (!$status) {
 
         $adminame = Session::get('username');
-        LogModel::create('admin_register', Environment::get('REMOTE_ADDR'), "New user registration by $adminname: $username / $email");
+        LogModel::create('admin_register', null, Environment::get('REMOTE_ADDR'), "New user registration by $adminname: $username / $email");
 
         header("Location: /admin/register");
 

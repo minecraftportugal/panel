@@ -114,7 +114,7 @@ function onServerCommand(command) {
 
 
     if (command.substring(0,4) != "PING") {
-        parent.Widget.get("irc").hilight(command);
+        parent.App.Widget.get("irc").hilight(command);
         return command;
     }
 

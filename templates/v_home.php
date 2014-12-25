@@ -25,7 +25,7 @@
 <body>
 
     <div id="widget-container">
-        <div></div>
+        <div id="logo"></div>
     </div>
     
     <div id="widget-taskbar">
@@ -49,7 +49,13 @@
         <?= $html_templates ?>
     </div>
 
-    <div class="modal-blocker"></div>
+    <div id="modal-blocker">
+
+    </div>
+
+    <div id="loading-blocker">
+        <i class="fa fa-spinner fa-spin fa-5x"></i>
+    </div>
 
 </body>
 </html>

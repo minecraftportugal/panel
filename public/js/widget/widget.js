@@ -1,16 +1,16 @@
 /* Constructor: creates a new Widget instance */
-function Widget(options, states) {
+App.Widget = function(options, states) {
 
     this.init(options, states);
 
 }
 
 /* Store opened widgets here */
-Widget.widgets = [];
+App.Widget.widgets = [];
 
 /* Defaults */
 
-Widget.defaults = {
+App.Widget.defaults = {
 
     "source" : "/testpattern",
     "title" : "Title",
@@ -45,34 +45,34 @@ Widget.defaults = {
 };
 
 /* Settings */
-Widget.settings = {
+App.Widget.settings = {
     "saveOnExit" : true
 };
 
 /* * * * Static Methods * * * /
 /*
- * Widget.count
+ * App.Widget.count
  */
-Widget.count = function() {
+App.Widget.count = function() {
 
-    if (Widget.counter === undefined) {
-        Widget.counter = 1;
+    if (App.Widget.counter === undefined) {
+        App.Widget.counter = 1;
     } else {
-        Widget.counter += 1;
+        App.Widget.counter += 1;
     }
 
-    return Widget.counter;
+    return App.Widget.counter;
 }
 
-Widget.serializeState = function() {
+App.Widget.serializeState = function() {
 
     var widgets = [];
 
-    if (Widget.widgets === undefined) {
-        Widget.widgets = [];
+    if (App.Widget.widgets === undefined) {
+        App.Widget.widgets = [];
     }
 
-    $.each(Widget.widgets, function(n, widget) {
+    $.each(App.Widget.widgets, function(n, widget) {
 
         /* Don't save modal widgets */
         if (widget.options.modal) {
@@ -102,15 +102,15 @@ Widget.serializeState = function() {
 
 }
 
-Widget.saveState = function() {
+App.Widget.saveState = function() {
 
-    var serializedObject = Widget.serializeState();
+    var serializedObject = App.Widget.serializeState();
     var base64Object = btoa(serializedObject);
     localStorage.setItem("widgetState", base64Object);
 
 }
 
-Widget.loadState = function() {
+App.Widget.loadState = function() {
 
     var base64Object = localStorage.getItem("widgetState");
     if ((base64Object === undefined) || (base64Object === null)) {
@@ -128,24 +128,24 @@ Widget.loadState = function() {
 
     $.each(object, function(n, object) {
 
-        var createdWidget = new Widget(object.options, object.states);
+        var createdWidget = new App.Widget(object.options, object.states);
         createdWidget.popState();
 
     });
 
 }
 
-Widget.clearState = function() {
-    Widget.settings.saveOnExit = false;
+App.Widget.clearState = function() {
+    App.Widget.settings.saveOnExit = false;
     localStorage.clear();
     window.location.reload();
 }
 
-Widget.closeAll = function() {
+App.Widget.closeAll = function() {
 
     var toClose = [];
 
-    $.each(Widget.widgets, function(n, widget) {
+    $.each(App.Widget.widgets, function(n, widget) {
         if (!widget.options.modal && !widget.options.pinned) {
             toClose.push(widget);
         }
@@ -156,21 +156,21 @@ Widget.closeAll = function() {
     });
 }
 
-Widget.cascade = function() {
-    Widget.counter = 0;
+App.Widget.cascade = function() {
+    App.Widget.counter = 0;
     $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
-    $.each(Widget.widgets, function(n, e) {
-        Widget.counter += 1;
+    $.each(App.Widget.widgets, function(n, e) {
+        App.Widget.counter += 1;
         e.shrink();
         e.initPosition();
         e.bringTop();
     });
 }
 
-Widget.tile = function() {
+App.Widget.tile = function() {
     var wLeft = 0;
     var wTop = 0;
-    $.each(Widget.widgets, function(n, e) {
+    $.each(App.Widget.widgets, function(n, e) {
         e.shrink();
         $(e.selector).css("left", wLeft + "px");
         $(e.selector).css("top", wTop + "px");
@@ -189,24 +189,24 @@ Widget.tile = function() {
     });
 }
 
-Widget.embiggen = function() {
-    $.each(Widget.widgets, function(n, e) {
+App.Widget.embiggen = function() {
+    $.each(App.Widget.widgets, function(n, e) {
         e.maximize();
         //e.bringTop();
         //e.setActive();
     });
 }
 
-Widget.minimizeAll = function() {
-    $.each(Widget.widgets, function(n, widget) {
+App.Widget.minimizeAll = function() {
+    $.each(App.Widget.widgets, function(n, widget) {
             widget.minimize();
     });
 }
 
-Widget.get = function(name) {
+App.Widget.get = function(name) {
 
     var widget;
-    $.each(Widget.widgets, function(n, e) {
+    $.each(App.Widget.widgets, function(n, e) {
         if (e.options.name == name) {
             widget = e;
             return false;
@@ -218,21 +218,21 @@ Widget.get = function(name) {
 
 }
 
-Widget.open = function(param) {
+App.Widget.open = function(param) {
 
     var createdWidget;
 
     if (typeof(param) === typeof({})) {
 
-        createdWidget = new Widget(param);
+        createdWidget = new App.Widget(param);
 
     } else if (typeof(param) === typeof("")) {
 
-        if (param in Widget.widgetStore) {
+        if (param in App.Widget.widgetStore) {
 
-            var config = Widget.widgetStore[param];
+            var config = App.Widget.widgetStore[param];
 
-            createdWidget = new Widget(config);
+            createdWidget = new App.Widget(config);
 
         } else {
 
@@ -243,13 +243,13 @@ Widget.open = function(param) {
     return createdWidget;
 }
 
-Widget.prototype.init = function(options, states) {
+App.Widget.prototype.init = function(options, states) {
 
     this.options = {};
     this.options.css = {};
 
     /* Mix given options and defaults */
-    $.extend(this.options, Widget.defaults);
+    $.extend(this.options, App.Widget.defaults);
     $.extend(this.options, options);
 
     /* Mix CSS */
@@ -291,14 +291,14 @@ Widget.prototype.init = function(options, states) {
     }
 
     /* Widget serial number */
-    this.serial = Widget.count();
+    this.serial = App.Widget.count();
 
-    var existing = Widget.get(this.options.name);
+    var existing = App.Widget.get(this.options.name);
 
     if (existing == null) {
 
         this.widget = this;
-        Widget.widgets.push(this);
+        App.Widget.widgets.push(this);
 
         var notApplyingStates = states === undefined;
         this.build(notApplyingStates);
@@ -333,12 +333,12 @@ Widget.prototype.init = function(options, states) {
 
 };
 
-Widget.prototype.setTitle = function(title) {
+App.Widget.prototype.setTitle = function(title) {
 
     $(this.widget).find("div.title").html(this.options.title);
 };
 
-Widget.prototype.build = function(notApplyingStates) {
+App.Widget.prototype.build = function(notApplyingStates) {
 
 
     /* clone markup for the widget */
@@ -614,8 +614,8 @@ Widget.prototype.build = function(notApplyingStates) {
     if (this.options.modal) {
 
         /* modal blocker*/
-        var max_z = Widget.getMaxZindex("div.widget.modal");
-        $("div.modal-blocker").fadeIn(100);
+        var max_z = App.Widget.getMaxZindex("div.widget.modal");
+        $("div#modal-blocker").fadeIn(100);
         widgetInstance.bringTop();
 
     }
@@ -628,7 +628,7 @@ Widget.prototype.build = function(notApplyingStates) {
 
 };
 
-Widget.prototype.initButtons = function() {
+App.Widget.prototype.initButtons = function() {
 
     $(this.selector).css("left", 0);
     $(this.selector).css("top", 0);
@@ -659,7 +659,7 @@ Widget.prototype.initButtons = function() {
 
 };
 
-Widget.prototype.load = function(source) {
+App.Widget.prototype.load = function(source) {
 
     var source = source || this.options.source;
 
@@ -710,7 +710,7 @@ Widget.prototype.load = function(source) {
 }
 
 
-Widget.prototype.pushState = function() {
+App.Widget.prototype.pushState = function() {
     var maximized =    $(this.selector).hasClass("maximized");
     var state = {
         "css" : {
@@ -728,7 +728,7 @@ Widget.prototype.pushState = function() {
     this.states.push(state);
 };
 
-Widget.prototype.popState = function() {
+App.Widget.prototype.popState = function() {
 
 
     var state = this.states.pop();
@@ -759,33 +759,33 @@ Widget.prototype.popState = function() {
     //console.log("pop", state);
 };
 
-Widget.prototype.initPosition = function() {
+App.Widget.prototype.initPosition = function() {
     var wLeft = 5;
     var wTop = 5;
-    var leftStep = (Widget.counter - 1 % 5);
-    var topStep = (Widget.counter - 1 % 5);
+    var leftStep = (App.Widget.counter - 1 % 5);
+    var topStep = (App.Widget.counter - 1 % 5);
     var delta_x = wLeft + 30 * (leftStep + 1);
     var delta_y = wTop + 25 * (topStep + 1);
     $(this.selector).css("left", delta_x + "px");
     $(this.selector).css("top", delta_y + "px");
 };
 
-Widget.prototype.setActive = function() {
+App.Widget.prototype.setActive = function() {
     this.unsetActive();
-    Widget.active = this.selector;
+    App.Widget.active = this.selector;
     $(this.selector).addClass("widget-active");
     $(this.buttonSelector).addClass("widget-button-active");
 };
 
-Widget.prototype.unsetActive = function() {
-    Widget.active = undefined;
-    $.each(Widget.widgets, function (n, elem) {
+App.Widget.prototype.unsetActive = function() {
+    App.Widget.active = undefined;
+    $.each(App.Widget.widgets, function (n, elem) {
         $(elem.selector).removeClass("widget-active");
         $(this.buttonSelector).removeClass("widget-button-active");
     });
 };
 
-Widget.getMaxZindex = function(selector) {
+App.Widget.getMaxZindex = function(selector) {
 
     var selector = selector || "div.widget";
     var max_z = 0;
@@ -802,25 +802,25 @@ Widget.getMaxZindex = function(selector) {
     return max_z;
 };
 
-Widget.prototype.bringTop = function() {
+App.Widget.prototype.bringTop = function() {
 
     var max_z;
 
     if (this.options.pinned) {
-        max_z = Widget.getMaxZindex("div.widget.pinned");
+        max_z = App.Widget.getMaxZindex("div.widget.pinned");
         max_z = max_z == 0 ? 10 : max_z;
     } else if (this.options.modal) {
-        max_z = Widget.getMaxZindex("div.widget.modal");
+        max_z = App.Widget.getMaxZindex("div.widget.modal");
         max_z = max_z == 0 ? 2000000000 : max_z;
     } else {
-        max_z = Widget.getMaxZindex("div.widget");
+        max_z = App.Widget.getMaxZindex("div.widget");
         max_z = max_z == 0 ? 1000000000 : max_z;
     }
 
     $(this.selector).css("z-index", max_z + 1);
 };
 
-Widget.prototype.maximize = function() {
+App.Widget.prototype.maximize = function() {
     $(this.selector).show();
     $(this.buttonSelector).removeClass("minimized");
     $(this.selector).addClass("maximized"); //css in class
@@ -829,7 +829,7 @@ Widget.prototype.maximize = function() {
 
 };
 
-Widget.prototype.restore = function() {
+App.Widget.prototype.restore = function() {
     $(this.selector).show();
     $(this.buttonSelector).removeClass("minimized");
     $(this.selector).removeClass("maximized");
@@ -837,12 +837,12 @@ Widget.prototype.restore = function() {
     this.setActive();
 };
 
-Widget.prototype.shrink = function() {
+App.Widget.prototype.shrink = function() {
     $(this.selector).show();
     $(this.buttonSelector).removeClass("minimized");
     $(this.selector).removeClass("maximized");
 
-    var len = Widget.widgets.length;
+    var len = App.Widget.widgets.length;
     // var gridSizeH = Math.ceil(len / 2);
     // var gridSizeV = Math.ceil(len / 2);
     // var width = parseInt($("div#widget-container").css("width"));
@@ -861,39 +861,39 @@ Widget.prototype.shrink = function() {
     this.setActive();
 };
 
-Widget.prototype.minimize = function() {
+App.Widget.prototype.minimize = function() {
     $(this.selector).hide();
     $(this.buttonSelector).addClass("minimized");
     $(this.selector).removeClass("maximized");
 };
 
-Widget.prototype.close = function() {
+App.Widget.prototype.close = function() {
     $(this.selector).remove();
     $(this.buttonSelector).remove();
 
     var widgetInstance = this;
     var elementIndex = null;
-    $.each(Widget.widgets, function(n, e) {
+    $.each(App.Widget.widgets, function(n, e) {
         if (e.options.name == widgetInstance.options.name) {
             elementIndex = n;
         }
     });
 
     if (elementIndex !== null) {
-        Widget.widgets.splice(elementIndex, 1);
+        App.Widget.widgets.splice(elementIndex, 1);
     }
 
 
     /* Modal widget */
     if (this.options.modal) {
 
-        $("div.modal-blocker").fadeOut(100);
+        $("div#modal-blocker").fadeOut(100);
 
     }
 
 };
 
-Widget.prototype.hilight = function(data) {
+App.Widget.prototype.hilight = function(data) {
   
     if ($(this.buttonSelector).hasClass("minimized")) {
         $(this.buttonSelector).addClass("activity");
@@ -905,7 +905,7 @@ Widget.prototype.hilight = function(data) {
 
 };
 
-Widget.prototype.pin = function() {
+App.Widget.prototype.pin = function() {
 
     this.options.pinned = true;
     $(this.selector).addClass("pinned");
@@ -914,7 +914,7 @@ Widget.prototype.pin = function() {
 
 };
 
-Widget.prototype.unpin = function() {
+App.Widget.prototype.unpin = function() {
 
     this.options.pinned = false;
     $(this.selector).removeClass("pinned");
@@ -924,7 +924,7 @@ Widget.prototype.unpin = function() {
 };
 
 /*
- * Data API - Widget.open
+ * Data API - App.Widget.open
  * Describe widget to open using data- tags
  */
 $(document).on("click", "[data-widget-action]", function(event) {
@@ -943,7 +943,7 @@ $(document).on("click", "[data-widget-action]", function(event) {
     switch (action) {
 
         case "open":
-            Widget.open({
+            App.Widget.open({
                 "name" : name,
                 "source" : href,
                 "title" : title,
@@ -966,7 +966,7 @@ $(document).on("click", "[data-widget-action]", function(event) {
 });
 
 /*
- * Data API - Widget.open
+ * Data API - App.Widget.open
  * Open a widget referencing it by name
  */
 $(document).on("click", "[data-widget-open]", function(event) {
@@ -976,7 +976,7 @@ $(document).on("click", "[data-widget-open]", function(event) {
 
     if (override !== undefined) {
         //override = JSON.parse(override);
-        var params = Widget.widgetStore[name];
+        var params = App.Widget.widgetStore[name];
         if (params === undefined) {
             console.log('No widget named ' + name);
             return false;
@@ -985,9 +985,9 @@ $(document).on("click", "[data-widget-open]", function(event) {
         $.extend(newParams, params);
         $.extend(newParams, override);
         console.log(params, override, newParams);
-        Widget.open(newParams);
+        App.Widget.open(newParams);
     } else {
-        Widget.open(name);
+        App.Widget.open(name);
     }
 
     event.preventDefault();
@@ -995,14 +995,14 @@ $(document).on("click", "[data-widget-open]", function(event) {
 });
 
 $(window).on("unload", function() {
-        if (Widget.settings.saveOnExit) {
-                Widget.saveState();
+        if (App.Widget.settings.saveOnExit) {
+                App.Widget.saveState();
         } else {
-                Widget.settings.saveOnExit = true;
+                App.Widget.settings.saveOnExit = true;
         }
 });
 
 $(function() {
-        Widget.loadState();
+        App.Widget.loadState();
         $("div#widget-button-container").sortable();
 });

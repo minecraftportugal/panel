@@ -18,7 +18,7 @@ function u_user_register () {
 
   } else {
 
-    LogModel::create('register', Environment::get('REMOTE_ADDR'), "New user registration: $username / $email");
+    LogModel::create('register', null, Environment::get('REMOTE_ADDR'), "New user registration: $username / $email");
 
     header('Location: /login');
 

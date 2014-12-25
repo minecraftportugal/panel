@@ -1,6 +1,6 @@
 
 /* modal modals */
-div.modal-blocker {
+div#modal-blocker {
     position: absolute;
     top: 0;
     bottom: 0;

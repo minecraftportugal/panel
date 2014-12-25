@@ -339,3 +339,23 @@ div.toaster-body {
 span[role=toaster-content] {
     display: none;
 }
+
+/* modal modals */
+div#loading-blocker {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 1);
+    background-image: url('/images/logo_s.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 2000000000;
+    color: #FFFFFF;
+}
+div#loading-blocker i {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+}
