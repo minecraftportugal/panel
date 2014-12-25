@@ -4,6 +4,10 @@ App = function() {
 
 App.url = '//dev.minecraft.pt';
 
+App.settings = {
+    "showBaloonTips" : true
+};
+
 App.logout = function() {
     var form = $('<form class="noajax"></form>');
     form.attr("method", "post");

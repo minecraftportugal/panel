@@ -23,8 +23,12 @@
     Este menu contém operações sobre o Desktop
 </span>
 
-<div id="widget-button-usermenu" class="widget-context-button" data-open-menu="div#widget-usermenu">
+<div id="widget-button-usermenu" class="widget-context-button" data-open-menu="div#widget-usermenu" role="toaster-launcher">
     <a id="usermenu-small" href="#" title="Utilizador" class="bg-icon"
        style="background-image: url('<?= $head_url ?>');">
     </a>
 </div>
+
+<span rel="widget-button-usermenu" role="toaster-content">
+    Este é o menu do utilizador. Contém cenas do user.
+</span>

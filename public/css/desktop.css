@@ -112,7 +112,7 @@ div#widget-button-desktopmenu {
 
 div#widget-button-usermenu {
     position: absolute;
-    right: 0px;
+    right: 0;
     bottom: 0;
 }
 
@@ -262,9 +262,13 @@ div.toaster {
     cursor: crosshair;
 }
 
+div.toaster.otherside {
+    left: 20px;
+    right: auto;
+}
 div.toaster.success {
     color: #ffffff;
-    background: rgba(0, 180, 0, 0.5);
+    background: rgba(0, 180, 0, 0.75);
     border: 1px solid #008800;
 }
 
@@ -274,7 +278,7 @@ div.toaster.success div.toaster-titlebar {
 
 div.toaster.error {
     color: #ffffff;
-    background: rgba(180, 0, 0, 0.5);
+    background: rgba(180, 0, 0, 0.75);
     border: 1px solid #880000;
 }
 
@@ -284,7 +288,7 @@ div.toaster.error div.toaster-titlebar {
 
 div.toaster.warning {
     color: #ffffff;
-    background: rgba(180, 180, 100, 0.5);
+    background: rgba(180, 180, 100, 0.75);
     border: 1px solid #ffff20;
 }
 
@@ -294,13 +298,13 @@ div.toaster.warning div.toaster-titlebar {
 
 div.toaster.info {
     color: #FFFFFF;
-    background: rgba(0, 155, 255, 0.5);
+    background: rgba(0, 155, 255, 0.75);
     border: 1px solid #009fff;
 }
 
 div.toaster.neutral {
     color: #ffffff;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.75);
     border: 1px solid #ffffff;
 }
 

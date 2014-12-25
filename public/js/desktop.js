@@ -95,22 +95,22 @@ $(function() {
     });
 
     /* Click on Button: minimize all */
-    $(document).on("click", "a#widget-button-container-minimize-all", function(event) {
+    $(document).on("click", "a#menu-container-minimize-all", function(event) {
         Widget.minimizeAll();
     });
 
     /* Click on Button: tile */
-    $(document).on("click", "a#widget-button-container-tile", function(event) {
+    $(document).on("click", "a#menu-container-tile", function(event) {
         Widget.tile();
     });
 
     /* Click on Button: cascade */
-    $(document).on("click", "a#widget-button-container-cascade", function(event) {
+    $(document).on("click", "a#menu-container-cascade", function(event) {
         Widget.cascade();
     });
 
     /* Click on Button: embiggen */
-    $(document).on("click", "a#widget-button-container-embiggen", function(event) {
+    $(document).on("click", "a#menu-container-embiggen", function(event) {
         Widget.embiggen();
     });
 
@@ -178,20 +178,35 @@ $(function() {
 
     /* OnHover: Show menu toaster context help */
     $("[role=toaster-launcher]").hover(
-        function() {
+        function(event) {
             var title = $(this).html();
             var id = $(this).attr("id");
             var message = $(this).parent().clone().find("span[rel=" + id + "]").html();
 
-            App.Desktop.toasterFadeIn({
-                "title" : title,
-                "message" : message,
-                "duration" : 0
-            });
+            if (App.settings.showBaloonTips) {
+
+                var classes = "neutral";
+                if (event.pageX > window.innerWidth / 2) {
+                    classes += " otherside";
+                }
+
+                App.Desktop.toasterFadeIn({
+                    "title" : title,
+                    "message" : message,
+                    "duration" : 0,
+                    "classes" : classes
+                });
+
+            }
         },
         function() {
             App.Desktop.toasterFadeOut();
         }
     );
+
+    $(document).on("click", function (event) {
+        if (event.which === 2)
+            event.preventDefault();
+    });
 
 });

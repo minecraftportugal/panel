@@ -1,3 +1,18 @@
+/* unselectable */
+* {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
+    /*
+        Introduced in IE 10.
+        See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 div.dynmap-loading-cover {
     position: absolute;
     background: rgba(0, 0, 0, 1);
@@ -38,16 +53,14 @@ div.dynmap-custom-controls div.leaflet-control-zoom {
 }
 
 div.leaflet-control-zoom,
-div.leaflet-control-layers,
 div.dynmap-custom-controls,
 div.coord-control,
 div.overlay_button {
-    float: left;
+    display: inline-block;
     clear: none;
 }
 
 div.leaflet-control-zoom a,
-div.leaflet-control-layers,
 div.coord-control,
 div.overlay_button {
     border: 1px solid #111111;
@@ -60,24 +73,19 @@ div.overlay_button {
     background: linear-gradient(to top, #111111, #111111, #222222);
 }
 
-div.leaflet-control-layers-expanded {
-    height: auto;
-    width: 200px;
-}
-
-a.leaflet-control-layers-toggle {
-    background-position: 25% 25% !important;
-    background-size: 60% 60% !important;
-}
-
 div.coord-control {
+    margin-right: 5px;
     width: 90px;
     height: 50px;
     line-height: 25px;
+    float: right;
+    padding: 5px;
+}
+div.coord-control span.coord-control-label,
+div.coord-control span.coord-control-value {
+    float: left;
 }
 
-div.coord-control span.coord-control-label,
-div.coord-control span.coord-control-value,
 div.largeclock {
     float: left;
     margin-left: 5px;
@@ -86,17 +94,19 @@ div.largeclock {
 div.overlay_button {
     z-index: 20;
     position: relative;
-    width: auto !important;
-    height: 26px;
-    overflow-y: hidden;
-    padding: 0 5px 0 5px;
+    height: 28px;
     cursor: pointer;
+    background-image: linear-gradient(to top, #111111, #111111, #222222);
 }
 
-div.overlay_button:hover, div.overlay_button:hover {
-/*    height: 100%;
-    max-height: 300px;
-    overflow-y: scroll;*/
+div.overlay_button a {
+    display: inline-block;
+    height: 28px;
+    width: 28px;
+    background-image: url('//dynmap.minecraft.pt/images/sign.png');
+    background-position: center center;
+    background-size: 60%;
+    background-repeat: no-repeat;
 }
 
 div.overlay {
@@ -112,33 +122,34 @@ div.overlay {
 
 }
 
-div.overlay-left {
-    width: 50%;
+div.overlay-worlds {
+    width: 33.33%;
     float: left;
 }
 
-div.overlay-right {
-    width: 50%;
-    float: right;
+div.overlay-players {
+    width: 33.33%;
+    float: left;
+}
+
+div.overlay-layers {
+    width: 33.33%;
+    float: left;
 }
 
 div.overlay h1 {
     font-size: 20px;
 }
 
-div.overlay ul {
+div.overlay ul,
+div.overlay form {
     height: auto !important;
-    width: 236px;
     list-style-type: none;
     padding: 0;
 }
 
 ul.worldlist > li {
     clear: both;
-}
-
-ul.worldlist > li:not(:nth-child(2)) {
-    margin-top: 80px;
 }
 
 li.world > div {
@@ -149,7 +160,7 @@ li.world > div {
 ul.worldlist > li > a {
     width: 80%;
     border: 1px solid #000000;
-    border-radius: 5px;
+    border-radius: 4px;
     background-color: rgba(128, 128, 128, 0.5);
 }
 
@@ -159,21 +170,13 @@ ul.worldlist {
     margin: auto;
 }
 
-ul.playerlist {
-    padding-bottom: 10px !important;
-}
-
 ul.playerlist a {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 ul.worldlist,
 ul.playerlist {
     font-size: 16px;
-    border-left: 1px solid #000000;
-    border-right: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-    background-color: rgba(128, 128, 128, 0.1);
     padding: 5px;
     text-align: center;
 }
@@ -191,7 +194,8 @@ ul.maplist {
 
 ul.maplist li {
     background-color: transparent !important;
-    float: left;
+    text-align: center;
+    display: inline-block;
     margin: 5px;
 }
 
@@ -221,23 +225,23 @@ ul.maplist li a:hover {
 
 ul.playerlist {
     margin: auto;
-    width: calc(100% - 40px);
 }
 
 ul.playerlist li {
-    width: 85px;
-    height: 65px;
-    float: left;
-    margin: 10px 0 0 10px;
-    padding: 24px 8px 4px 8px;
+    display: inline-block;
     border: 1px solid #000000;
-    border-radius: 10px;
-    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+    height: 60px;
+    width: 60px;
+    background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+    float: left;
 }
 
 ul.playerlist li img{
-    width: 32px;
+    width: 48px;
 }
 
 ul.playerlist li:hover {
@@ -258,8 +262,7 @@ ul.playerlist li a {
 
 
 ul.playerlist li span.playerIcon {
-    display: inline-block;
-    margin-right: 5px;
+
 }
 
 ul.playerlist li img {
@@ -279,3 +282,44 @@ div.compass {
     bottom: 20px;
     top: auto;
 }
+
+div.overlay-layers form {
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+div.overlay-layers label {
+    font-family: Consolas, monaco, monospace !important;
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid #000000;
+    padding: 4px;
+    outline: none;
+    display: block;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    height: 16px;
+    line-height: 16px;
+    margin: 5px;
+}
+
+div.overlay-layers label:hover {
+    background-color: rgba(128, 128, 128, 0.35);
+}
+
+div.overlay-layers label:active {
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+h1 {
+    text-align: center;
+}
+
+div.overlay-layers input[type=checkbox] {
+    cursor: pointer;
+    display: inline;
+    float: left;
+}
+
+
