@@ -48,3 +48,15 @@
         </div>
     </div>
 </div>
+
+
+<div id="toaster-template">
+    <div class="toaster">
+        <div class="toaster-titlebar">
+            <div class="toaster-title"></div>
+        </div>
+        <div class="clearer"></div>
+        <div class="toaster-body">
+        </div>
+    </div>
+</div>

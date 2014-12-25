@@ -47,24 +47,16 @@ class NoticeHelper {
         
         $error = NoticeHelper::get('error');
         if ($error != false) {
-            return "<span class=\"" . $args['classes'] . " closeable notice error\">
-                      <h1><i class=\"fa fa-warning\"></i> $error
-                      <span class=\"close-parent pull-right\">
-                        <i class=\"fa fa-times\"></i></a>
-                      </span>
-                      </h1>
-                    </span>";
+            return '<script type="text/javascript">
+                App.Desktop.toasterFadeIn({"title" : "<i class=\"fa fa-exclamation-triangle\"></i> Erro!", "message" : "' . $error . '", "classes" : "error", "duration": 3000});
+            </script>';
         }
     
         $success = NoticeHelper::get('success');
         if ($success != false) {
-            return "<span class=\"" . $args['classes'] . " closeable notice success\">
-                      <h1><i class=\"fa fa-check-circle\"></i> $success
-                      <span class=\"close-parent pull-right\">
-                        <i class=\"fa fa-times\"></i>
-                      </span>
-                      </h1>
-                    </span>";
+            return '<script type="text/javascript">
+                App.Desktop.toasterFadeIn({"title" : "<i class=\"fa fa-check-circle\"></i> Sucesso!", "message" : "' . $success . '", "classes" : "success", "duration": 3000});
+            </script>';
         }
 
     }

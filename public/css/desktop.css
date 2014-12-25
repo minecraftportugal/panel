@@ -40,7 +40,7 @@ p, td, th, span {
 }
 
 div#widget-taskbar {
-    background: linear-gradient(to bottom, #252525, #050505);
+    background: linear-gradient(to bottom, #252525, #101010);
     position: absolute;
     left: 0;
     right: 0;
@@ -63,7 +63,6 @@ div#widget-button-home-menu.active {
 }
 
 div#widget-button-container-scroll-left {
-    background: linear-gradient(to bottom, #252525, #050505);
     border-right: 1px solid #101010;
     position: absolute;
     left: 131px;
@@ -89,7 +88,6 @@ div#widget-button-container {
 }
 
 div#widget-button-container-scroll-right {
-    background: linear-gradient(to bottom, #252525, #050505);
     border-left: 1px solid #101010;
     border-right: 1px solid #101010;
     position: absolute;
@@ -158,38 +156,6 @@ div.widget-button-container-scroll:hover {
 div.widget-button-container-scroll:active {
     color: #888888;
     background: linear-gradient(to top, #000000, #000000, #101010);
-}
-
-.notice {
-    padding: 0px 5px 0px 5px;
-}
-
-.hover-notice {
-    position: absolute;
-    width: 400px;
-    margin: auto;
-    top: 10px;
-    left: 50%;
-    padding: 5px;
-    margin-left: -200px;
-}
-
-.hover-notice.error {
-    border: 1px solid #ff4444;
-}
-
-.hover-notice.success {
-    border: 1px solid #44ff44;
-}
-
-.error {
-    background-color: rgba(255,0,0,0.1) !important;
-    color: #DD0000;
-}
-
-.success {
-    background-color: rgba(0,255,0,0.101010) !important;
-    color: #00DD00;
 }
 
 div#widget-homemenu {
@@ -280,4 +246,92 @@ div.widget-menu > ul > li > ul > li > a:hover {
 
 div.widget-menu > ul > li > ul > li > a:active {
     background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* toaster */
+div.toaster {
+
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    min-width: 300px;
+    color: #000000;
+    border: 1px solid #dddddd;
+    z-index: 2147483638;
+    padding: 8px;
+    cursor: crosshair;
+}
+
+div.toaster.success {
+    color: #ffffff;
+    background: rgba(0, 180, 0, 0.5);
+    border: 1px solid #008800;
+}
+
+div.toaster.success div.toaster-titlebar {
+    color: #008800;
+}
+
+div.toaster.error {
+    color: #ffffff;
+    background: rgba(180, 0, 0, 0.5);
+    border: 1px solid #880000;
+}
+
+div.toaster.error div.toaster-titlebar {
+    color: #880000;
+}
+
+div.toaster.warning {
+    color: #ffffff;
+    background: rgba(180, 180, 100, 0.5);
+    border: 1px solid #ffff20;
+}
+
+div.toaster.warning div.toaster-titlebar {
+    color: #ffff20;
+}
+
+div.toaster.info {
+    color: #FFFFFF;
+    background: rgba(0, 155, 255, 0.5);
+    border: 1px solid #009fff;
+}
+
+div.toaster.neutral {
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #ffffff;
+}
+
+div.toaster.neutral div.toaster-titlebar {
+    color: #ffffff;
+}
+
+div.toaster.info div.toaster-titlebar {
+    color: #009fff;
+}
+
+div.toaster-titlebar {
+
+    font-size: 2em;
+    width: 100%;
+
+}
+
+div.toaster-titlebar-icon {
+    float: left;
+    margin-right: 10px;
+}
+
+div.toaster-title {
+    float: left;
+}
+
+div.toaster-body {
+    margin-top: 10px;
+}
+
+span[role=toaster-content] {
+    display: none;
 }

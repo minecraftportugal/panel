@@ -10,7 +10,7 @@ function v_admin_register() {
 
     $template = Template::init('admin/v_admin_register');
 
-    $notices = NoticeHelper::render(['classes' => 'hover-notice']);
+    $notices = NoticeHelper::render();
 
     $xsrf_token = Session::getXSRFToken();
 

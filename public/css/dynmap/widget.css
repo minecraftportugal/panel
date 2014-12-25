@@ -1,11 +1,32 @@
+div.dynmap-loading-cover {
+    position: absolute;
+    background: rgba(0, 0, 0, 1);
+    background-image: url('/images/logo_xs.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+}
+
+div.sidebar {
+    visibility: hidden !important;
+}
+
 div.dynmap-custom-controls {
+    visibility: hidden;
+}
+
+div.dynmap-custom-controls,
+div.overlay {
     font-family: "Trebuchet MS", Helvetica, sans-serif !important;
     font-size: 12px !important;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-
 }
 
 div.leaflet-bar {
@@ -20,8 +41,7 @@ div.leaflet-control-zoom,
 div.leaflet-control-layers,
 div.dynmap-custom-controls,
 div.coord-control,
-div.worldlist,
-div.playerlist {
+div.overlay_button {
     float: left;
     clear: none;
 }
@@ -29,8 +49,7 @@ div.playerlist {
 div.leaflet-control-zoom a,
 div.leaflet-control-layers,
 div.coord-control,
-div.worldlist,
-div.playerlist {
+div.overlay_button {
     border: 1px solid #111111;
     border-radius: 0px;
     height: 28px;
@@ -64,95 +83,179 @@ div.largeclock {
     margin-left: 5px;
 }
 
-div.worldlist, div.playerlist {
-    z-index: 1;
+div.overlay_button {
+    z-index: 20;
     position: relative;
     width: auto !important;
-    height: 28px;
+    height: 26px;
     overflow-y: hidden;
     padding: 0 5px 0 5px;
+    cursor: pointer;
 }
 
-div.worldlist:hover, div.playerlist:hover {
-
-    height: 100%;
+div.overlay_button:hover, div.overlay_button:hover {
+/*    height: 100%;
     max-height: 300px;
-    overflow-y: scroll;
+    overflow-y: scroll;*/
 }
 
-div.worldlist > ul, div.playerlist > ul {
-    position: relative;
-    display: block;
-    width: auto !important;
+div.overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 50;
+    overflow-y: scroll;
+    display: none;
+
+}
+
+div.overlay-left {
+    width: 50%;
+    float: left;
+}
+
+div.overlay-right {
+    width: 50%;
+    float: right;
+}
+
+div.overlay h1 {
+    font-size: 20px;
+}
+
+div.overlay ul {
     height: auto !important;
+    width: 236px;
     list-style-type: none;
     padding: 0;
-    margin: 0;
 }
 
-div.worldlist > ul > li, div.playerlist > ul > li {
+ul.worldlist > li {
     clear: both;
 }
 
+ul.worldlist > li:not(:nth-child(2)) {
+    margin-top: 80px;
+}
+
+li.world > div {
+    height: 25px;
+    line-height: 45px;
+}
+
+ul.worldlist > li > a {
+    width: 80%;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+
+ul.worldlist {
+    padding: 0 0 10px 0 !important;
+    margin: auto;
+}
+
+ul.playerlist {
+    padding-bottom: 10px !important;
+}
+
+ul.playerlist a {
+    font-size: 12px;
+}
+
+ul.worldlist,
+ul.playerlist {
+    font-size: 16px;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    background-color: rgba(128, 128, 128, 0.1);
+    padding: 5px;
+    text-align: center;
+}
+
 ul.maplist {
+    font-size: 12px;
     position: relative;
     display: block;
     width: auto !important;
-    height: auto !important;
+    height: auto;
     list-style-type: none;
-    padding: 0;
-    margin: 0;
+    padding: 5px;
+    margin: 5px;
 }
 
 ul.maplist li {
     background-color: transparent !important;
     float: left;
-    margin: 2px;
+    margin: 5px;
 }
 
 ul.maplist li a {
     color: #FFFFFF;
     display: block;
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     text-align: center;
     background-repeat: no-repeat;
-    background-position: 50% 5px;
-    line-height: 65px;
-    border: 1px solid #333333;
+    background-position: 50% 45%;
+    background-size: 80%;
+    line-height: 90px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+ul.maplist li a:active {
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
 ul.maplist li a:hover {
-    color: #FFFFFF;
-    background-color: #666666;
-    border: 1px solid #000000;
-
+    background-color: rgba(128, 128, 128, 0.35);
 }
 
 ul.playerlist {
-    margin: 5px;
+    margin: auto;
+    width: calc(100% - 40px);
 }
 
 ul.playerlist li {
-    height: 20px;
-    margin: 5px;
-    padding: 4px 8px 4px 8px;
-    border: 1px solid #333333;
+    width: 85px;
+    height: 65px;
+    float: left;
+    margin: 10px 0 0 10px;
+    padding: 24px 8px 4px 8px;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: rgba(128, 128, 128, 0.5);
+    cursor: pointer;
 }
 
+ul.playerlist li img{
+    width: 32px;
+}
+
+ul.playerlist li:hover {
+    background-color: rgba(128, 128, 128, 0.35);
+}
+
+ul.playerlist li:active {
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #000000;
+}
 
 ul.playerlist li a {
     color: #FFFFFF;
 
-    display: inline-block;
+    display: block;
 }
 
-ul.playerlist li:hover {
-    cursor: pointer;
-    color: #333333;
-    background-color: #666666;
-    border: 1px solid #000000;
-}
 
 ul.playerlist li span.playerIcon {
     display: inline-block;

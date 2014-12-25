@@ -13,7 +13,7 @@ function v_user_options() {
 
     $player = AccountModel::first(["id" => $_SESSION["id"]]);
 
-    $notices = NoticeHelper::render(['classes' => 'hover-notice']);
+    $notices = NoticeHelper::render();
 
     $template->assign('player', $player);
 

@@ -35,8 +35,6 @@ function v_home() {
 
         "ajax",
 
-        "behaviour",
-
         "widget/widget",
 
         "widget/definition",

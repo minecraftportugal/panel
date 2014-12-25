@@ -71,6 +71,15 @@ div.layout-col-clickable:active {
     background: linear-gradient(to bottom, #151515, #252525);
 }
 
+div.layout-col-collapsible {
+
+}
+
+div.layout-col.collapsed {
+    height: 14px;
+    overflow: hidden;
+}
+
 div.layout-col-footer {
     background: linear-gradient(to bottom, #353535, #252525);
     color: #FFFFFF;

@@ -35,7 +35,7 @@ function v_admin_logs() {
 
     $link_after = ArgumentsHelper::serialize($parameters);
 
-    $notices = NoticeHelper::render(['classes' => 'pull-right']);
+    $notices = NoticeHelper::render();
 
     $pagination = new PaginationHelper([
       "page" => $parameters['page'],

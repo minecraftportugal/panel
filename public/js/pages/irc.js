@@ -27,7 +27,7 @@ params.styleURL = "css/transparent.css";
 //params.nick = "minecraft_%";
 
 /* Channel to be joined after connecting. Multiple channels can be added like this: #lightIRC,#test,#help */
-params.autojoin = "#minecraft-dev";
+params.autojoin = "#minecraft";
 /* Commands to be executed after connecting. E.g.: /mode %nick% +x */
 params.perform = "";
 
@@ -64,7 +64,7 @@ params.showEmoticonsButton = false;
 params.showRichTextControls = false;
 params.showMenuButton = true;
 params.showSubmitButton = true;
-params.showChannelHeader = true;
+params.showChannelHeader = false;
 params.soundAlerts = false;
 params.channelHeader = "%channel% (%users%): %topic%";
 params.realname = "#minecraft user";

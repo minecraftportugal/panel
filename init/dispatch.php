@@ -79,9 +79,6 @@ $r->map('GET',  '/admin/ip_addresses', 'v_admin_ip_addresses', 'controllers/admi
 /* Test Purposes */
 $r->map('GET', '/test', 'v_test', 'controllers/test/v_test.php');
 
-/* Maps */
-$r->map('GET',  '/maps', 'v_maps', 'controllers/maps/v_maps.php');
-
 /* Launcher */
 $r->map('GET', '/launcher', 'v_launcher', 'controllers/launcher/v_launcher.php');
 

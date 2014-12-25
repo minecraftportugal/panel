@@ -43,7 +43,7 @@ function v_user () {
 
     $admin = (Session::get('admin') == '1') ? true : false;
 
-    $notices = NoticeHelper::render(['classes' => 'hover-notice']);
+    $notices = NoticeHelper::render();
 
     // ja jogou?
     $has_played = !is_null($player['name']);

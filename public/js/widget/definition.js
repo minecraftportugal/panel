@@ -68,7 +68,7 @@ Widget.widgetStore = {
         "iframe" : {
             "onload" : "App.Iframe.loadCSS(this, 'dynmap/widget'); App.Iframe.loadCSS(this, 'scrollbar'); App.Iframe.loadJS(this, 'pages/dynmap');"
         },
-        "css" : {"min-width" : "672px", "min-height" : "400px"}
+        "css" : {"min-width" : "610px", "min-height" : "400px"}
     },
 
     "inquisitor" : {

@@ -56,6 +56,12 @@
 
         <? endif; ?>
 
+        <? if ($user['admin'] == 1): ?>
+
+            params.autojoin = "#minecraft,#minecraft-dev,#minecraft-log adminlogchan";
+
+        <? endif; ?>
+
             var x = swfobject.embedSWF("<?= LIGHTIRC_PATH ?>", "lightIRC", "100%", "100%", "10.0.0", "expressInstall.swf", params, {wmode:"transparent"});
 
         </script>

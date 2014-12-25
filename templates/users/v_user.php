@@ -12,8 +12,8 @@
 
     <? if ($admin): ?>
     <div class="layout-row">
-    <div class="layout-col layout-col-full-width pad-up">
-        <div class="layout-col-title layout-col-clickable layout-col-collapsable">
+    <div class="layout-col layout-col-full-width pad-up collapsed">
+        <div class="layout-col-title layout-col-clickable layout-col-collapsible">
             <i class="fa fa-cogs"></i> Admin
         </div>
 

@@ -68,7 +68,7 @@ function v_admin_accounts() {
 
     }
 
-    $notices = NoticeHelper::render(['classes' => 'pull-right']);
+    $notices = NoticeHelper::render();
 
     $link_after = ArgumentsHelper::serialize($parameters);
     
