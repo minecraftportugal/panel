@@ -1,21 +1,23 @@
-App.Desktop = {
+App.Toaster = {
 
 
 };
 
-App.Desktop.toasters = [];
+App.Toaster.toasters = [];
 
-/* todo: args in object */
-App.Desktop.toasterFadeIn = function(params) {
+App.Toaster.fadeIn = function(params) {
 
     var defaults = {
 
         "title" : "Toaster Title",
         "message" : "The message that goes on the toaster balloon tip! You should add stylings to this!",
         "classes" : "neutral",
+        "fadeInDuration" : 250,
         "duration" : 500,
+        "fadeOutDuration" : 250,
         "unclickable" : false,
-        "hovertip" : false
+        "hovertip" : false,
+        "sound" : null
 
     };
 
@@ -38,18 +40,22 @@ App.Desktop.toasterFadeIn = function(params) {
 
 
     $toaster.click(function() {
-        $toaster.fadeOut(500, function() {
+        $toaster.fadeOut(options.fadeOutDuration, function() {
             $toaster.remove();
         });
     });
 
-    $.each(App.Desktop.toasters, function(n, elem) {
+    $.each(App.Toaster.toasters, function(n, elem) {
        $(elem).remove();
     });
 
-    App.Desktop.toasters.push($toaster);
+    App.Toaster.toasters.push($toaster);
 
-    $toaster.fadeIn(500, function() {
+    $toaster.fadeIn(options.fadeInDuration, function() {
+
+        if (options.sound) {
+            App.Sound.play(options.sound);
+        }
 
         if (options.duration > 0) {
             setTimeout(function() {
@@ -62,8 +68,8 @@ App.Desktop.toasterFadeIn = function(params) {
 
 };
 
-App.Desktop.toasterFadeOut = function() {
-    $.each(App.Desktop.toasters, function(n, elem) {
+App.Toaster.fadeOut = function() {
+    $.each(App.Toaster.toasters, function(n, elem) {
         $(elem).remove();
     });
 };

@@ -1,19 +1,22 @@
-<?
+<?php
 
+use lib\session\Session;
 use lib\template\Template;
 use models\account\AccountModel;
 use helpers\minotar\MinotarHelper;
 
-function v_widget_players() {
+function v_page_players() {
 
-    $template = Template::init('widgets/v_widget_players');
+    Session::refererProtect();
+
+    $template = Template::init('pages/v_players');
 
     /* scripts */
     $scripts = [
 
         "lib/jquery/jquery",
 
-        "widget_players"
+        "pages/players"
     ];
 
     $template->assign('scripts', $scripts);
@@ -22,7 +25,7 @@ function v_widget_players() {
 
         "reset",
 
-        "widget_players"
+        "pages/players"
 
     ];
 
@@ -46,5 +49,4 @@ function v_widget_players() {
     $template->render();
 
 }
-
 ?>

@@ -2,6 +2,7 @@
 
 namespace lib\session;
 
+use lib\template\Template;
 use lib\environment\Environment;
 use lib\xauth\xAuth;
 use models\log\LogModel;
@@ -126,13 +127,37 @@ class Session {
      * validateXSRFToken: validates a user's XSRF token
      */
     public static function validateXSRFToken() {
-            $token = Session::getSubmittedXSRFToken();
+        $token = Session::getSubmittedXSRFToken();
 
-            if (!Session::isValidXSRFToken($token)) {
-                LogModel::create('failed_xsrf_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI') . ' with xsrf token ' . $token);
-                header('Location: /forbidden');
-                exit();
-            }
+        if (!Session::isValidXSRFToken($token)) {
+            LogModel::create('failed_xsrf_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI') . ' with xsrf token ' . $token);
+
+            $template = Template::init('v_403_forbidden');
+            $template->render(403);
+
+            exit();
+        }
+    }
+
+    /*
+     * refererProtect: protects a user's click by forbidding invalid HTTP referers
+     */
+    public static function refererProtect() {
+
+        $referer = Environment::get("HTTP_REFERER");
+
+        $match = preg_match(VALID_REFERER, $referer);
+
+        if ($match === 1) {
+            return true;
+        } else {
+
+            $template = Template::init('v_403_forbidden');
+            $template->render(403);
+
+            exit();
+        }
+
     }
 
 }

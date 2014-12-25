@@ -4,7 +4,7 @@ namespace helpers\arguments;
 
 class ArgumentsHelper {
 
-    public function process($request, $args) {
+    public static function process($request, $args) {
         $array = [];
 
         foreach ($args as $k => $v) {
@@ -24,7 +24,7 @@ class ArgumentsHelper {
         return $array;
     }
 
-    function serialize($args, $separator = false) {
+    public static function serialize($args, $separator = false) {
         $str = '';
 
         $first = true && $separator;

@@ -347,14 +347,24 @@ div#widget-container {
 
 div#logo {
     position: absolute;
-    width: 256px;
-    height: 256px;
+    width: 128px;
+    height: 128px;
     right: 0px;
     bottom: 0px;
-    background-image: url('/images/logo_xs.png');
-    background-position: 100% 100%;
+    background-image: url('/images/logo_xxs.png');
+    background-position: calc(100% - 10px) calc(100% - 10px);
     background-repeat: no-repeat;
     opacity: 0.5;
+    cursor: pointer;
+    -webkit-transition: opacity 0.25s ease-in-out;
+    -moz-transition: opacity 0.25s ease-in-out;
+    -ms-transition: opacity 0.25s ease-in-out;
+    -o-transition: opacity 0.25s ease-in-out;
+    transition: opacity 0.25s ease-in-out;
+}
+
+div#logo:hover {
+    opacity: 0.9;
 }
 
 /*BOTTOM BUTTONS*/
@@ -366,7 +376,7 @@ div.widget-button {
     height: 30px;
     line-height: 30px;
     text-align: center;
-    min-width: 120px;
+    min-width: 100px;
     padding: 0px 5px 0px 5px;
     overflow: hidden;
     border-right: 1px solid #101010;

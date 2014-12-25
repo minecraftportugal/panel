@@ -4,7 +4,7 @@ namespace helpers\notice;
 
 class NoticeHelper {
 
-    function set($type, $message) {
+    public static function set($type, $message) {
         if (!isset($_SESSION["notice"])) {
              $_SESSION["notice"] = [];
         }
@@ -12,7 +12,7 @@ class NoticeHelper {
         $_SESSION["notice"][$type] = $message;
     }
 
-    function get($type = null) {
+    public static function get($type = null) {
 
         if (!isset($_SESSION["notice"])) {
              $_SESSION["notice"] = [];
@@ -37,7 +37,7 @@ class NoticeHelper {
 
     }
 
-    function render($args = []) {
+    public static function render($args = []) {
 
         $defaults = [
             "classes" => ""
@@ -48,14 +48,25 @@ class NoticeHelper {
         $error = NoticeHelper::get('error');
         if ($error != false) {
             return '<script type="text/javascript">
-                App.Desktop.toasterFadeIn({"title" : "<i class=\"fa fa-exclamation-triangle\"></i> Erro!", "message" : "' . $error . '", "classes" : "error", "duration": 3000});
+                App.Toaster.fadeIn({
+                    "title" : "<i class=\"fa fa-exclamation-triangle\"></i> Erro!",
+                    "message" : "' . $error . '",
+                    "classes" : "error",
+                    "duration": 3000,
+                    "sound" : "break"
+                });
             </script>';
         }
     
         $success = NoticeHelper::get('success');
         if ($success != false) {
             return '<script type="text/javascript">
-                App.Desktop.toasterFadeIn({"title" : "<i class=\"fa fa-check-circle\"></i> Sucesso!", "message" : "' . $success . '", "classes" : "success", "duration": 3000});
+                App.Toaster.fadeIn({
+                    "title" : "<i class=\"fa fa-check-circle\"></i> Sucesso!",
+                    "message" : "' . $success . '",
+                    "classes" : "success",
+                    "duration" : 3000
+                });
             </script>';
         }
 

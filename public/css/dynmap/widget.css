@@ -242,6 +242,7 @@ ul.playerlist li {
 
 ul.playerlist li img{
     width: 48px;
+    image-rendering: crisp-edges;
 }
 
 ul.playerlist li:hover {

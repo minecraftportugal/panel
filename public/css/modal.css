@@ -24,8 +24,8 @@ div.modal {
     border-radius: 6px;
     border-bottom-right-radius: 0px;
 
-    width: 600px;
-    height: 400px;
+    width: auto;
+    height: auto;
     margin: auto;
     top: 0;
     left: 0;
@@ -34,6 +34,9 @@ div.modal {
     z-index: 2000000001;
 }
 
+div.modal button {
+    margin: 0 5px 0 5px;
+}
 div.modal-ui {
     position: absolute;
     text-align: center;

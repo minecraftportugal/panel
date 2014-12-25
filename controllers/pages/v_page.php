@@ -1,33 +1,47 @@
 <?
 
-use lib\session\Session;
 use lib\template\Template;
+use lib\session\Session;
 use lib\environment\Environment;
+use helpers\arguments\ArgumentsHelper;
+
 
 function v_page() {
 
-    Session::validateSession();
-
-    $page = $_GET['page'];
-
-    $pages = [
-        'about',
-        'help'
+    $parameters = [
+        'page' => null
     ];
 
-    if (in_array($page, $pages)) {
+    $p = ArgumentsHelper::process($_GET, $parameters);
 
-        $template = Template::init("pages/v_$page");
+    $page = $p['page'];
 
-        switch ($page) {
+    /* null makes it use the default controller */
+    $pages = [
+        'players' => 'v_page_players',
+        'launcher' => 'v_page_launcher',
+        'about' => null,
+        'help'=> null
+    ];
 
-            case "about":
-                $template->assign('page', $page);
-                break;
+    if (array_key_exists($page, $pages)) {
+
+        $controller = $pages[$page];
+        if (!is_null($controller)) {
+
+            require("controllers/pages/$controller.php");
+            $controller();
+
+        } else {
+
+            Session::validateSession();
+
+            $template = Template::init("pages/v_$page");
+            $template->assign('page', $page);
+            $template->render();
 
         }
 
-        $template->render();
 
     } else {
 

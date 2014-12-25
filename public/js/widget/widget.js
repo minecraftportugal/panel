@@ -636,8 +636,9 @@ App.Widget.prototype.initButtons = function() {
     (function(that) {
         $.each(that.options.modalButtons, function(k, v) {
 
-            $btn = $("<input>");
-            $btn.val(k);
+            $btn = $("<button></button>");
+            console.log(k);
+            $btn.html(k);
             $btn.attr("type", "button");
 
             (function(that) {
