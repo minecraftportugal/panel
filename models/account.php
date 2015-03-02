@@ -42,7 +42,7 @@ class AccountModel {
 
         $q = "SELECT count(1) AS total
             FROM accounts a
-                LEFT JOIN inquisitor.players i ON i.name = a.playername
+                LEFT JOIN minecraft_inquisitor.players i ON i.name = a.playername
             WHERE a.playername = ifnull(:playername, a.playername)
             AND (a.id = ifnull(:id, a.id))
             AND (a.lastloginip = ifnull(:ipaddress, a.lastloginip) OR a.registerip = ifnull(:ipaddress, a.registerip))
@@ -57,8 +57,8 @@ class AccountModel {
             AND ((:donor = 0) OR (:donor = 1 AND a.donor = 1))
             AND ((:premium = 0) OR (:premium = 1 AND a.premium = 1))
             AND ((:online = 0) OR (:online = 1 AND i.online = 1 AND a.lastlogindate IS NOT NULL))
-            AND ((:nogame = 0) OR (:nogame = 1 AND  i.name IS NULL)) -- a.playername NOT IN (SELECT name FROM inquisitor.players)))
-            AND ((:yesgame = 0) OR (:yesgame = 1 AND i.name IS NOT NULL)) -- a.playername IN (SELECT name FROM inquisitor.players)))
+            AND ((:nogame = 0) OR (:nogame = 1 AND  i.name IS NULL))
+            AND ((:yesgame = 0) OR (:yesgame = 1 AND i.name IS NOT NULL))
             AND ((:login_date_begin IS NULL) OR (:login_date_begin <= date(a.lastlogindate)))
             AND ((:login_date_end IS NULL) OR (:login_date_end >= date(a.lastlogindate)))
             AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(a.registerdate)))
@@ -97,7 +97,7 @@ class AccountModel {
                 a.registerdate as registerdate_df, a.lastlogindate AS lastlogindate_df,
                 $inquisitor_fields
             FROM accounts a
-                LEFT JOIN inquisitor.players i ON i.name = a.playername
+                LEFT JOIN minecraft_inquisitor.players i ON i.name = a.playername
             WHERE a.playername = ifnull(:playername, a.playername)
             AND (a.id = ifnull(:id, a.id))
             AND (a.lastloginip = ifnull(:ipaddress, a.lastloginip) OR a.registerip = ifnull(:ipaddress, a.registerip))

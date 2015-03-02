@@ -179,7 +179,7 @@ $sql_default = "
       FROM accounts a
       INNER JOIN (
         SELECT name
-          FROM inquisitor.players
+          FROM minecraft_inquisitor.players
           WHERE lastJoin > NOW() - INTERVAL 1 WEEK
           AND world NOT LIKE 'limbo%'
           AND totalTime > 3600
@@ -207,7 +207,7 @@ $sql_default = "
       FROM accounts a
       INNER JOIN (
         SELECT name
-        FROM inquisitor.players
+        FROM minecraft_inquisitor.players
         WHERE lastJoin > NOW() - INTERVAL 1 WEEK
         AND totalTime > 3600
       ) p on a.playername = p.name
@@ -241,7 +241,7 @@ $sql_online = "
     FROM accounts a 
     INNER JOIN (
       SELECT name
-      FROM inquisitor.players
+      FROM minecraft_inquisitor.players
       WHERE online = 1
       AND world NOT LIKE 'limbo%'
       AND totalTime > 300
@@ -276,7 +276,7 @@ $sql_vip = "
       FROM accounts a
       INNER JOIN (
         SELECT name
-          FROM inquisitor.players
+          FROM minecraft_inquisitor.players
           WHERE lastJoin > NOW() - INTERVAL 1 WEEK
           AND world NOT LIKE 'limbo%'
           AND totalTime > 3600
@@ -305,7 +305,7 @@ $sql_vip = "
       FROM accounts a
       INNER JOIN (
         SELECT name
-        FROM inquisitor.players
+        FROM minecraft_inquisitor.players
         WHERE lastJoin > NOW() - INTERVAL 1 WEEK
         AND totalTime > 3600
       ) p on a.playername = p.name

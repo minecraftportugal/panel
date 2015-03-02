@@ -23,7 +23,7 @@ CONNice::add('inquisitor', [
   'prefix' => 'mysql',
   'host' => 'localhost',
   'port' => 3306,
-  'database' => 'inquisitor',
+  'database' => 'minecraft_inquisitor',
   'user' => 'minecraft',
   'password' => 'minecr4ft'
   ]);

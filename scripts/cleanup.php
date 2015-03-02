@@ -31,7 +31,7 @@ $sql['inactive_registrations'] = "
   WHERE lastlogindate < NOW() - INTERVAL 2 MONTH
   AND playername in (
     SELECT name
-    FROM inquisitor.players ip
+    FROM minecraft_inquisitor.players ip
     WHERE (ip.totalTime <= 10*3600 OR ip.totalTime IS NULL)
   );    
 ";
@@ -40,7 +40,7 @@ $sql['inactive_registrations'] = "
 # Apagar todos os registos do inquisitor que nao estao na tabela accounts
 #
 $sql['inquisitor_accounts'] = "
-  DELETE FROM inquisitor.players
+  DELETE FROM minecraft_inquisitor.players
   WHERE name not IN (
     SELECT playername FROM accounts
   );

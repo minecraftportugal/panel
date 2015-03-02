@@ -32,7 +32,7 @@ class SessionModel {
         $q = "SELECT count(1) AS total
         FROM sessions_history sh
         LEFT JOIN accounts a on a.id = sh.accountid
-        LEFT JOIN inquisitor.players i ON i.name = a.playername
+        LEFT JOIN minecraft_inquisitor.players i ON i.name = a.playername
         WHERE a.playername = IFNULL(:playername, a.playername)
         AND sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress)
         AND ((:date_begin IS NULL) OR (:date_begin <= date(sh.logintime)))
@@ -65,7 +65,7 @@ class SessionModel {
                 IF(DATE_ADD(sh.logintime, INTERVAL :length SECOND) > NOW(), 1, 0) as valid
             FROM sessions_history sh
             LEFT JOIN accounts a on a.id = sh.accountid
-            LEFT JOIN inquisitor.players i ON i.name = a.playername
+            LEFT JOIN minecraft_inquisitor.players i ON i.name = a.playername
             WHERE a.playername = IFNULL(:playername, a.playername)
             AND sh.ipaddress = IFNULL(:ipaddress, sh.ipaddress)
             AND ((:date_begin IS NULL) OR (:date_begin <= date(sh.logintime)))

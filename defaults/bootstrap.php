@@ -3,7 +3,6 @@
 define('MINECRAFTIA_PATH', __DIR__);
 define('MINECRAFTIA_NICE_PATH', MINECRAFTIA_PATH . '/lib');
 
-
 require MINECRAFTIA_NICE_PATH . '/db/CONNice.php';
 require MINECRAFTIA_NICE_PATH . '/db/DBNice.php';
 require MINECRAFTIA_NICE_PATH . '/db/Bitch.php';
@@ -23,7 +22,7 @@ CONNice::add('inquisitor', [
   'prefix' => 'mysql',
   'host' => 'localhost',
   'port' => 3306,
-  'database' => 'inquisitor',
+  'database' => 'minecraft_inquisitor',
   'user' => 'minecraft',
   'password' => 'minecr4ft'
   ]);
