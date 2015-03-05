@@ -1,0 +1,1 @@
+<div id="logo" style="background-image: url(<?= $bg_image ?>); height: <?= $bg_height ?>;"></div>

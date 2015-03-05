@@ -25,7 +25,7 @@
 <body>
 
     <div id="widget-container">
-        <div id="logo"></div>
+        <?= $desktop_logo ?>
     </div>
     
     <div id="widget-taskbar">

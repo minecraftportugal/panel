@@ -349,10 +349,9 @@ div#logo {
     position: absolute;
     width: 128px;
     height: 128px;
-    right: 0px;
-    bottom: 0px;
+    right: 10px;
+    bottom: 10px;
     background-image: url('/images/logo_xxs.png');
-    background-position: calc(100% - 10px) calc(100% - 10px);
     background-repeat: no-repeat;
     opacity: 0.5;
     cursor: pointer;

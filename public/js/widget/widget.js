@@ -3,7 +3,7 @@ App.Widget = function(options, states) {
 
     this.init(options, states);
 
-}
+};
 
 /* Store opened widgets here */
 App.Widget.widgets = [];
@@ -62,7 +62,7 @@ App.Widget.count = function() {
     }
 
     return App.Widget.counter;
-}
+};
 
 App.Widget.serializeState = function() {
 
@@ -100,7 +100,7 @@ App.Widget.serializeState = function() {
 
     return serializedObject;
 
-}
+};
 
 App.Widget.saveState = function() {
 
@@ -108,13 +108,13 @@ App.Widget.saveState = function() {
     var base64Object = btoa(serializedObject);
     localStorage.setItem("widgetState", base64Object);
 
-}
+};
 
 App.Widget.loadState = function() {
 
     var base64Object = localStorage.getItem("widgetState");
     if ((base64Object === undefined) || (base64Object === null)) {
-        return;
+        return false;
     }
 
     var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
@@ -133,13 +133,25 @@ App.Widget.loadState = function() {
 
     });
 
-}
+    return true;
+};
+
+App.Widget.loadFixedState = function(name) {
+
+    var object = App.Widget.fixedStates[name];
+
+    $.each(object, function(n, object) {
+        var createdWidget = new App.Widget(object.options, object.states);
+        createdWidget.popState();
+    });
+
+};
 
 App.Widget.clearState = function() {
     App.Widget.settings.saveOnExit = false;
     localStorage.clear();
     window.location.reload();
-}
+};
 
 App.Widget.closeAll = function() {
 
@@ -154,7 +166,7 @@ App.Widget.closeAll = function() {
     $.each(toClose, function(n, widget) {
         widget.close();
     });
-}
+};
 
 App.Widget.cascade = function() {
     App.Widget.counter = 0;
@@ -165,7 +177,7 @@ App.Widget.cascade = function() {
         e.initPosition();
         e.bringTop();
     });
-}
+};
 
 App.Widget.tile = function() {
     var wLeft = 0;
@@ -178,16 +190,17 @@ App.Widget.tile = function() {
 
         wLeft = wLeft + parseInt($(e.selector).css("width"));
 
-        if (wLeft > $("div#widget-container").width()) {
+        var $container = $("div#widget-container");
+        if (wLeft > $container.width()) {
             wTop = wTop + parseInt($(e.selector).css("height"));
             wLeft = 0;
 
-            if (wTop > $("div#widget-container").height()) {
+            if (wTop > $container.height()) {
                 wTop = 0;
             }
         }
     });
-}
+};
 
 App.Widget.embiggen = function() {
     $.each(App.Widget.widgets, function(n, e) {
@@ -195,13 +208,13 @@ App.Widget.embiggen = function() {
         //e.bringTop();
         //e.setActive();
     });
-}
+};
 
 App.Widget.minimizeAll = function() {
     $.each(App.Widget.widgets, function(n, widget) {
             widget.minimize();
     });
-}
+};
 
 App.Widget.get = function(name) {
 
@@ -216,7 +229,7 @@ App.Widget.get = function(name) {
 
     return widget;
 
-}
+};
 
 App.Widget.open = function(param) {
 
@@ -228,9 +241,9 @@ App.Widget.open = function(param) {
 
     } else if (typeof(param) === typeof("")) {
 
-        if (param in App.Widget.widgetStore) {
+        if (param in App.Widget.fixedWidgets) {
 
-            var config = App.Widget.widgetStore[param];
+            var config = App.Widget.fixedWidgets[param];
 
             createdWidget = new App.Widget(config);
 
@@ -241,7 +254,7 @@ App.Widget.open = function(param) {
     }
 
     return createdWidget;
-}
+};
 
 App.Widget.prototype.init = function(options, states) {
 
@@ -637,7 +650,7 @@ App.Widget.prototype.initButtons = function() {
         $.each(that.options.modalButtons, function(k, v) {
 
             $btn = $("<button></button>");
-            console.log(k);
+
             $btn.html(k);
             $btn.attr("type", "button");
 
@@ -977,7 +990,7 @@ $(document).on("click", "[data-widget-open]", function(event) {
 
     if (override !== undefined) {
         //override = JSON.parse(override);
-        var params = App.Widget.widgetStore[name];
+        var params = App.Widget.fixedWidgets[name];
         if (params === undefined) {
             console.log('No widget named ' + name);
             return false;
@@ -985,7 +998,7 @@ $(document).on("click", "[data-widget-open]", function(event) {
         var newParams = {};
         $.extend(newParams, params);
         $.extend(newParams, override);
-        console.log(params, override, newParams);
+
         App.Widget.open(newParams);
     } else {
         App.Widget.open(name);
@@ -1004,6 +1017,10 @@ $(window).on("unload", function() {
 });
 
 $(function() {
-        App.Widget.loadState();
+
+        if (!App.Widget.loadState()) {
+            App.Widget.loadFixedState("basic");
+        }
+
         $("div#widget-button-container").sortable();
 });

@@ -1,5 +1,5 @@
 
-App.Widget.widgetStore = {
+App.Widget.fixedWidgets = {
 
     "test" : {
         "name" : "test",
@@ -249,4 +249,119 @@ App.Widget.widgetStore = {
             "min-height" : "500px"
         }
     }
+};
+
+App.Widget.fixedStates = {
+    "empty" : [],
+    "basic" : [
+        {
+            "options": {
+                "css": {
+                    "min-width": "610px",
+                    "min-height": "400px"
+                },
+                "source": "//dynmap.minecraft.pt/",
+                "title": "<i class='fa fa-picture-o'></i> Dynmap",
+                "mode": "iframe",
+                "modal": false,
+                "pinned": false,
+                "modalButtons": {},
+                "alwaysCreate": true,
+                "alwaysReload": true,
+                "maximized": false,
+                "classes": "widget-not-scrollable",
+                "cssBody": {},
+                "iframe": {
+                    "onload": "App.Iframe.loadCSS(this, 'dynmap/widget'); App.Iframe.loadCSS(this, 'scrollbar'); App.Iframe.loadJS(this, 'pages/dynmap');"
+                },
+                "name": "dynmap1425589706394"
+            },
+            "states": [
+                {
+                    "css": {
+                        "top": "0px",
+                        "left": "0px",
+                        "width": "1330px",
+                        "height": "933px",
+                        "z-index": "1000000020"
+                    },
+                    "maximized": true,
+                    "minimized": false,
+                    "active": false
+                }
+            ]
+        },
+        {
+            "options": {
+                "css": {
+                    "min-width": "424px",
+                    "max-width": "424px",
+                    "min-height": "500px"
+                },
+                "source": "/status",
+                "title": "<i class='fa fa-columns'></i> Servidor",
+                "mode": "ajax",
+                "modal": false,
+                "pinned": false,
+                "modalButtons": {},
+                "alwaysCreate": false,
+                "alwaysReload": true,
+                "maximized": false,
+                "classes": "widget-scrollable-y",
+                "cssBody": {},
+                "iframe": {},
+                "name": "status"
+            },
+            "states": [
+                {
+                    "css": {
+                        "top": "427px",
+                        "left": "6px",
+                        "width": "424px",
+                        "height": "501px",
+                        "z-index": "1000000021"
+                    },
+                    "maximized": false,
+                    "minimized": false,
+                    "active": false
+                }
+            ]
+        },
+        {
+            "options": {
+                "css": {
+                    "min-width": "452px",
+                    "max-width": "452px",
+                    "min-height": "500px"
+                },
+                "source": "/posts",
+                "title": "<i class='fa fa-newspaper-o'></i> Noticias",
+                "mode": "ajax",
+                "modal": false,
+                "pinned": false,
+                "modalButtons": {},
+                "alwaysCreate": false,
+                "alwaysReload": true,
+                "maximized": false,
+                "classes": "widget-scrollable-y",
+                "cssBody": {},
+                "iframe": {},
+                "name": "news"
+            },
+            "states": [
+                {
+                    "css": {
+                        "top": "427px",
+                        "left": "439px",
+                        "width": "452px",
+                        "height": "500px",
+                        "z-index": "1000000022"
+                    },
+                    "maximized": false,
+                    "minimized": false,
+                    "active": true
+                }
+            ]
+        }
+    ]
 };
