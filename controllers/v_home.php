@@ -92,9 +92,11 @@ function v_home() {
     if ($user['donor'] == 1) {
         $desktop_logo->assign('bg_image', '/images/logo_xxs.png');
         $desktop_logo->assign('bg_height', '128px');
+        $desktop_logo->assign('logo_action', 'help-about');
     } else {
         $desktop_logo->assign('bg_image', '/images/pls_xxs.png');
         $desktop_logo->assign('bg_height', '147px');
+        $desktop_logo->assign('logo_action', 'help-donate');
     }
     $template->assign('desktop_logo', $desktop_logo);
 

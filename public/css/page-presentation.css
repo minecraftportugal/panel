@@ -15,8 +15,12 @@ a:active {
     width: 45%;
 }
 
+.w50 {
+    width: 50%
+}
+
 .w60 {
-  width: 60%
+    width: 60%
 }
 
 div.clearer {

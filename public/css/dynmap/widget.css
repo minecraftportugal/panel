@@ -16,7 +16,7 @@
 div.dynmap-loading-cover {
     position: absolute;
     background: rgba(0, 0, 0, 1);
-    background-image: url('/images/logo_xs.png');
+    background-image: url('/images/ajax-loader.gif');
     background-position: center center;
     background-repeat: no-repeat;
     top: 0;

@@ -1,1 +1,1 @@
-<div id="logo" style="background-image: url(<?= $bg_image ?>); height: <?= $bg_height ?>;"></div>
+<div data-widget-open="<?= $logo_action ?>" id="logo" style="background-image: url(<?= $bg_image ?>); height: <?= $bg_height ?>;"></div>
