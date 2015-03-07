@@ -118,8 +118,9 @@ class AccountModel {
             AND ((:login_date_end IS NULL) OR (:login_date_end >= date(a.lastlogindate)))
             AND ((:register_date_begin IS NULL) OR (:register_date_begin <= date(a.registerdate)))
             AND ((:register_date_end IS NULL) OR (:register_date_end >= date(a.registerdate)))
-            ORDER BY $order_by $asc_desc
-        ) pages LIMIT :index, :per_page";
+        ) pages
+        ORDER BY $order_by $asc_desc
+        LIMIT :index, :per_page";
 
         $args["index"] = ($args["page"] - 1) * $args["per_page"];
 

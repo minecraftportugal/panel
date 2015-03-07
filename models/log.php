@@ -42,8 +42,9 @@ class LogModel {
             FROM logs l LEFT JOIN accounts a ON l.accountid = a.id
             WHERE ((:accountid IS NULL) OR (l.accountid = :accountid))
             AND ((:event_type IS NULL) OR (l.event_type = :event_type))
-            ORDER BY $order_by $asc_desc
-        ) x LIMIT :index, :per_page;";
+        ) x
+        ORDER BY $order_by $asc_desc
+        LIMIT :index, :per_page;";
         
         $args["index"] = ($args["page"] - 1) * $args["per_page"];
 

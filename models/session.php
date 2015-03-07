@@ -41,7 +41,6 @@ class SessionModel {
         AND ((:logout = 0) OR ((:logout = 1) AND (sh.event = 2)))
         AND ((:online = 0) OR (:online = 1 AND i.online = 1))
         AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1))";
-        // ORDER BY id DESC;";
 
         return Bitch::source('default')->first($q, $args)["total"];
     }
@@ -74,8 +73,9 @@ class SessionModel {
             AND ((:logout = 0) OR ((:logout = 1) AND (sh.event = 2)))
             AND ((:online = 0) OR (:online = 1 AND i.online = 1))
             AND ((:websession = 0) OR (:websession = 1 AND sh.websession = 1))
-            ORDER BY $order_by $asc_desc
-        ) pages LIMIT :index, :per_page";
+        ) pages
+        ORDER BY $order_by $asc_desc
+        LIMIT :index, :per_page";
 
         $args["index"] = ($args["page"] - 1) * $args["per_page"];
 

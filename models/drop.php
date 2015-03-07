@@ -60,8 +60,9 @@ class DropModel {
             AND ((:taken_date_end IS NULL) OR (:taken_date_end >= date(i.takendate)))
             AND ((:undelivered = 0) OR (:undelivered = 1 AND i.takendate IS NULL))
             AND ((:delivered = 0) OR (:delivered = 1 AND i.takendate IS NOT NULL))
-            ORDER BY $order_by $asc_desc
-        ) x LIMIT :index, :per_page;";
+        ) x
+        ORDER BY $order_by $asc_desc
+        LIMIT :index, :per_page;";
 
         $args["index"] = ($args["page"] - 1) * $args["per_page"];
 
