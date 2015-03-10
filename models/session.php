@@ -58,6 +58,7 @@ class SessionModel {
                 sh.logintime AS logintime_df,
                 sh.websession AS websession,
                 sh.event AS event,
+                sh.time AS time,
                 DATE_FORMAT(sh.logintime, '%b %d %H:%i:%s %Y') AS logintime,
                 DATE_FORMAT(sh.time, '%b %d %H:%i:%s %Y') AS time_df,
                 DATE_FORMAT(a.lastlogindate, '%b %d %H:%i:%s %Y') AS lastlogindate,
