@@ -28,7 +28,7 @@ function v_status() {
 
     }
 
-    $players['top'] = AccountModel::get(["per_page" => 15, "yesgame" => 1], "totalTime DESC");
+    $players['top'] = AccountModel::get(["per_page" => 15, "yesgame" => 1, "order_by" => "totalTime", "asc_desc" => "DESC"]);
 
     foreach ($players['top'] as $k => $v) {
 
@@ -36,7 +36,7 @@ function v_status() {
 
     }
 
-    $players['new'] = AccountModel::get(["per_page" => 15, "yeslogin" => 1], "a.registerdate DESC");
+    $players['new'] = AccountModel::get(["per_page" => 15, "yeslogin" => 1, "order_by" => "registerdate", "asc_desc" => "DESC"]);
 
     foreach ($players['top'] as $k => $v) {
 
