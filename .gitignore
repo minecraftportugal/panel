@@ -3,3 +3,5 @@ robots.txt
 *.sublime-workspace
 .idea
 _*
+node_modules
+assets/production

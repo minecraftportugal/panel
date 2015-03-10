@@ -1,0 +1,26 @@
+{
+  "name": "minepanel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.ticklemynausea.net:9001/minecraft-pt/web-panel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-minify": "0.0.5",
+    "gulp-size": "^1.2.1",
+    "gulp-sym": "0.0.14",
+    "gulp-symlink": "^2.1.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-uglifycss": "^1.0.4",
+    "gulp-util": "^3.0.4"
+  }
+}
