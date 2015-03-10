@@ -7,7 +7,7 @@ var minify = require('gulp-minify');
 var concat = require('gulp-concat');
 var symlink = require('gulp-sym');
 
-gulp.task('default', ['js', 'css', 'fonts', 'images', 'sounds', 'production'], function() {
+gulp.task('default', ['js', 'json', 'css', 'fonts', 'images', 'sounds', 'production'], function() {
     // place code for your default task here
 
 });
@@ -16,6 +16,12 @@ gulp.task('js', function() {
     gulp.src('./assets/development/js/**/*.js')
         .pipe(uglify({mangle: true}))
         //.pipe(concat('all.js'))
+        .pipe(size())
+        .pipe(gulp.dest('./assets/production/js'))
+});
+
+gulp.task('json', function() {
+    gulp.src('./assets/development/js/**/*.json')
         .pipe(size())
         .pipe(gulp.dest('./assets/production/js'))
 });
