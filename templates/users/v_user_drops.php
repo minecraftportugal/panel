@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/js/pages/items.js"></script>
+<script type="text/javascript"> $(function() { App.Items.load(); }); </script>
 
 <div>
   <h2><?= $title ?></h2>

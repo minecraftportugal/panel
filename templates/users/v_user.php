@@ -1,6 +1,4 @@
-<script type="text/javascript" src="/js/pages/skin3d.js"></script>
-
-<script type="text/javascript" src="/js/pages/items.js"></script>
+<script type="text/javascript"> $(function() { App.Items.load(); App.Skin3D.load(); }); </script>
 
 <script type="text/javascript">
     $("div#widget-show-<?= $player['playername'] ?> a[data-widget-open=dynmap]").data("widget-open-override", { "source" : "<?= $dynmap_url ?>" });

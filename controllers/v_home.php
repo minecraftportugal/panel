@@ -45,11 +45,17 @@ function v_home() {
 
         "iframe",
 
+        "pages/items",
+
+        "pages/skin3d",
+
         "toaster",
 
         "sound",
 
-        "init"
+        "unobtrusive",
+
+        "bootstrap",
     ];
 
     $template->assign('scripts', $scripts);

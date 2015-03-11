@@ -1,5 +1,6 @@
+App.Skin3D = {};
 
-function PlayerSkin(container, scale) {
+App.Skin3D.PlayerSkin = function(container, scale) {
 
    var console = {
       assert: function(){},
@@ -489,9 +490,9 @@ function PlayerSkin(container, scale) {
       }
    };
 
-}
+};
 
-$(document).ready(function() {
+App.Skin3D.load = function() {
 
     // /!\ This is called for every skin each time a profile is loaded. This sucks, change it.
     $("div.skin-display").each(function(n, elem) {
@@ -503,7 +504,7 @@ $(document).ready(function() {
         var canvas = document.createElement("canvas");
 
         img.onload = function() {
-            var ps = new PlayerSkin(elem, 6);
+            var ps = new App.Skin3D.PlayerSkin(elem, 6);
             if(this.width < 64 || this.height < 32) {
                 ps.setSkin("/images/steve.png");
             } else {
@@ -512,11 +513,11 @@ $(document).ready(function() {
         }
 
         img.onerror = function() {
-            var ps = new PlayerSkin(elem, 6);
+            var ps = new App.Skin3D.PlayerSkin(elem, 6);
             ps.setSkin("/images/steve.png");
         }
 
         img.src = src;
     });
 
-});
+};

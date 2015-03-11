@@ -1,8 +1,11 @@
-$(function() {
-    
+App.Items = {};
+
+App.Items.load = function() {
+
+
     var spriteWidth = 32;
 
-	$.getJSON('/js/data/itemsprite.json', function(sd) {
+    $.getJSON('/js/data/itemsprite.json', function(sd) {
 
         /*
          * Items in Player Inventory
@@ -72,10 +75,10 @@ $(function() {
                         }
                     });
                 }
-                
+
                 if (enchanted)
                     $(this).parent().addClass("enchanted");
-                
+
                 if (amount > 1)
                     $(this).append('<span class="amount">'+amount+'</span>');
 
@@ -97,11 +100,11 @@ $(function() {
                 var y=-(EMPTY_ITEM_Y)*spriteWidth;
                 $(this).attr('style', 'background-position:'+x+'px '+y+'px');
             }
- 
+
             return;
 
         });
-        
+
         /*
          * Item Names
          */
@@ -159,7 +162,7 @@ $(function() {
                         }
                     });
                 }
-                
+
                 $(this).html(title);
             }
 
@@ -189,4 +192,5 @@ $(function() {
             $("select#itemid_sel").val("");
         });
     });
-});
+
+};
