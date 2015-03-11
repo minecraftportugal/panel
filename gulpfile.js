@@ -13,7 +13,7 @@ gulp.task('default', ['js', 'json', 'css', 'fonts', 'images', 'sounds', 'product
 });
 
 gulp.task('js', function() {
-    gulp.src('./assets/development/js/**/*.js')
+    return gulp.src('./assets/development/js/**/*.js')
         .pipe(uglify({mangle: true}))
         //.pipe(concat('all.js'))
         .pipe(size())
@@ -21,13 +21,13 @@ gulp.task('js', function() {
 });
 
 gulp.task('json', function() {
-    gulp.src('./assets/development/js/**/*.json')
+    return gulp.src('./assets/development/js/**/*.json')
         .pipe(size())
         .pipe(gulp.dest('./assets/production/js'))
 });
 
 gulp.task('css', function() {
-    gulp.src('./assets/development/css/**/*.css')
+    return gulp.src('./assets/development/css/**/*.css')
         .pipe(uglifycss())
         //.pipe(concat('all.js'))
         .pipe(size())
