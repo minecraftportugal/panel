@@ -139,11 +139,6 @@ $(function() {
             event.preventDefault();
     });
 
-    var loadingDelay = Math.round(Math.random() * 1000);
-    var loadingTimeout = setTimeout(function() {
-        $("div#loading-blocker").fadeOut(100);
-    }, loadingDelay);
-
     /* it's hash time! */
     window.location = "#";
 });
