@@ -1,10 +1,10 @@
 <?
 
-namespace models\log;
+namespace models\logs;
 
 use minecraftia\db\Bitch;
 
-class LogModel {
+class Logs {
 
     private static $args = [
         "page" => 1,
@@ -16,7 +16,7 @@ class LogModel {
     ];
 
     public static function count($args = []) {
-        $args = array_merge(LogModel::$args, $args);
+        $args = array_merge(Logs::$args, $args);
 
         /* Other models don't need this. Why? /!\ */
         $args = array_intersect_key($args, array_flip(["accountid", "event_type"]));
@@ -30,7 +30,7 @@ class LogModel {
     }
 
     public static function get($args = []) {
-        $args = array_merge(LogModel::$args, $args);
+        $args = array_merge(Logs::$args, $args);
         $order_by = $args["order_by"];
         $asc_desc = $args["asc_desc"];
 

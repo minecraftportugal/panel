@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 
 function v_page_launcher() {
 
@@ -10,7 +10,7 @@ function v_page_launcher() {
 
     $template = Template::init('pages/v_launcher');
 
-    $user = AccountModel::first(['id' => Session::get('id')]);
+    $user = Accounts::first(['id' => Session::get('id')]);
 
     $template->assign('user', $user);
 

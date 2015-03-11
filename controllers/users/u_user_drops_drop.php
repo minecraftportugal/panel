@@ -1,7 +1,7 @@
 <?
 
 use lib\session\Session;
-use models\drop\DropModel;
+use models\account\drops\AccountDrops;
 use helpers\notice\NoticeHelper;
 
 function u_user_drops_drop() {
@@ -28,7 +28,7 @@ function u_user_drops_drop() {
         return;
     }
 
-    $status = DropModel::create($id, $itemid, $itemqt, $itemaux);
+    $status = AccountDrops::create($id, $itemid, $itemqt, $itemaux);
     if ($status) {
         NoticeHelper::set('success', 'Item drop criada.');
         header("Location: /profile?id=$id");

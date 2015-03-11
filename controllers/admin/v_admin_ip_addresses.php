@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\table\TableHelper;
 
 function v_admin_ip_addresses() {
@@ -11,7 +11,7 @@ function v_admin_ip_addresses() {
 
     $template = Template::init('admin/v_admin_ip_addresses');
 
-    $addresses = AccountModel::ip_addresses();
+    $addresses = Accounts::ip_addresses();
 
     $total = count($addresses);
 

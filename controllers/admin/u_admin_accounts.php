@@ -1,7 +1,7 @@
 <?
 
 use lib\session\Session;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
 
@@ -19,7 +19,7 @@ function u_admin_accounts() {
 
     $p = ArgumentsHelper::process($_POST, $parameters);
 
-    $status = AccountModel::privilege($p['admin']);
+    $status = Accounts::privilege($p['admin']);
 
     if (!$status) {
         NoticeHelper::set('error', 'erro ao actualizar contas');
@@ -28,7 +28,7 @@ function u_admin_accounts() {
     }
 
 
-    $status = AccountModel::active($p['active']);
+    $status = Accounts::active($p['active']);
     if (!$status) {
         NoticeHelper::set('error', 'erro ao actualizar contas');
         header('Location: /admin/accounts');
@@ -37,7 +37,7 @@ function u_admin_accounts() {
 
     if (count($p['delete']) > 0) {
 
-        $status = AccountModel::delete($p['delete']);
+        $status = Accounts::delete($p['delete']);
     
         if (!$status) {
             NoticeHelper::set('error', 'erro ao apagar contas');

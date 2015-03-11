@@ -3,7 +3,7 @@
 use lib\session\Session;
 use lib\environment\Environment;
 use lib\xauth\xAuth;
-use models\log\LogModel;
+use models\logs\Logs;
 use helpers\notice\NoticeHelper;
 
 function u_logout() {
@@ -14,7 +14,7 @@ function u_logout() {
 
     if (!is_null(Session::get('id'))) {
 
-        LogModel::create('logout', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
+        Logs::create('logout', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
 
         xAuth::terminatexAuthSession($_SESSION['id']);
     }

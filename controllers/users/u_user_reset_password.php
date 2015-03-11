@@ -1,7 +1,7 @@
 <?
 
 use lib\session\Session;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\notice\NoticeHelper;
 
 function u_user_reset_password() {
@@ -14,7 +14,7 @@ function u_user_reset_password() {
   $admin = isset($_SESSION['admin']) ? $_SESSION['admin'] : NULL;
   
   if ((($admin == "1") or ($_SESSION[id] == $id)) and ($reset_pass_check == "1")) {
-    $status = AccountModel::resetPassword($id);
+    $status = Accounts::resetPassword($id);
   } else {
       NoticeHelper::set('error', 'Password inalterada.');
   }

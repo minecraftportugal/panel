@@ -2,8 +2,8 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
-use models\drop\DropModel;
+use models\accounts\Accounts;
+use models\account\drops\AccountDrops;
 use helpers\minotar\MinotarHelper;
 
 function v_user_drops() {
@@ -12,7 +12,7 @@ function v_user_drops() {
 
     $template = Template::init('users/v_user_drops');
 
-    $template->assign('drops', DropModel::get([
+    $template->assign('drops', AccountDrops::get([
         "accountid" => Session::get("id"),
         "per_page" => 6,
         "undelivered" => 1

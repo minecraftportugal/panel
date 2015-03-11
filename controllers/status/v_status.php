@@ -2,8 +2,8 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
-use models\drop\DropModel;
+use models\accounts\Accounts;
+use models\account\drops\AccountDrops;
 use helpers\minotar\MinotarHelper;
 
 function v_status() {
@@ -14,13 +14,13 @@ function v_status() {
 
     $players = [];
     
-    $players['online'] = AccountModel::get(["per_page" => 100, "online" => 1]);
+    $players['online'] = Accounts::get(["per_page" => 100, "online" => 1]);
 
     foreach ($players['online'] as $k => $v) {
 
         $badges = Template::init('partials/badges');
 
-        $badges->assign('badges', AccountModel::badges($players['online'][$k]['id']));
+        $badges->assign('badges', Accounts::badges($players['online'][$k]['id']));
 
         $players['online'][$k]['badges'] = $badges;
 
@@ -28,7 +28,7 @@ function v_status() {
 
     }
 
-    $players['top'] = AccountModel::get(["per_page" => 15, "yesgame" => 1, "order_by" => "totalTime", "asc_desc" => "DESC"]);
+    $players['top'] = Accounts::get(["per_page" => 15, "yesgame" => 1, "order_by" => "totalTime", "asc_desc" => "DESC"]);
 
     foreach ($players['top'] as $k => $v) {
 
@@ -36,7 +36,7 @@ function v_status() {
 
     }
 
-    $players['new'] = AccountModel::get(["per_page" => 15, "yeslogin" => 1, "order_by" => "registerdate", "asc_desc" => "DESC"]);
+    $players['new'] = Accounts::get(["per_page" => 15, "yeslogin" => 1, "order_by" => "registerdate", "asc_desc" => "DESC"]);
 
     foreach ($players['top'] as $k => $v) {
 

@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\drop\DropModel;
+use models\account\drops\AccountDrops;
 use helpers\arguments\ArgumentsHelper;
 use helpers\minotar\MinotarHelper;
 use helpers\notice\NoticeHelper;
@@ -35,9 +35,9 @@ function v_admin_drops() {
 
     $form_url = '/admin/drops';
 
-    $total = DropModel::count($parameters);
+    $total = AccountDrops::count($parameters);
 
-    $page = DropModel::get($parameters);
+    $page = AccountDrops::get($parameters);
 
     /** Filters: Change and add new data */
     foreach ($page as $k => $v) {

@@ -1,10 +1,10 @@
 <?
 
-namespace models\drop;
+namespace models\account\drops;
 
 use minecraftia\db\Bitch;
 
-class DropModel {
+class AccountDrops {
 
     private static $args = [
         "page" => 1,
@@ -21,7 +21,7 @@ class DropModel {
     ];
 
     public static function count($args = []) {
-        $args = array_merge(DropModel::$args, $args);
+        $args = array_merge(AccountDrops::$args, $args);
 
         /* Other models don't need this. Why? /!\ */
         $args = array_intersect_key($args, array_flip(["accountid", "drop_date_begin", "drop_date_end", "taken_date_begin", "taken_date_end", "undelivered", "delivered"]));
@@ -40,7 +40,7 @@ class DropModel {
     }
 
     public static function get($args = []) {
-        $args = array_merge(DropModel::$args, $args);
+        $args = array_merge(AccountDrops::$args, $args);
         $order_by = $args["order_by"];
         $asc_desc = $args["asc_desc"];
 

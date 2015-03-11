@@ -1,7 +1,7 @@
 <?
 
 use lib\session\Session;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\notice\NoticeHelper;
 
 function u_user_configure() {
@@ -19,7 +19,7 @@ function u_user_configure() {
   $contributor = isset($_POST['contributor']) ? $_POST['contributor'] : 0;
   $delete = isset($_POST['delete']) ? $_POST['delete'] : 0;
   
-  $status = AccountModel::configure($id, $admin, $operator, $active, $donor, $contributor, $delete);
+  $status = Accounts::configure($id, $admin, $operator, $active, $donor, $contributor, $delete);
   
   if ($status == 1) {
     header("Location: /profile?id=$id#adminactions");

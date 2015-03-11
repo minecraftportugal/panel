@@ -1,13 +1,13 @@
 <?
 
-namespace models\account;
+namespace models\accounts;
 
 use lib\xauth\xAuth;
 use minecraftia\db\Bitch;
 use helpers\mail\MailHelper;
 use helpers\notice\NoticeHelper;
 
-class AccountModel {
+class Accounts {
 
     private static $args = [
         "id" => null,
@@ -38,7 +38,7 @@ class AccountModel {
 
     public static function count($args = []) {
 
-        $args = array_merge(AccountModel::$args, $args);
+        $args = array_merge(Accounts::$args, $args);
 
         $q = "SELECT count(1) AS total
             FROM accounts a
@@ -69,7 +69,7 @@ class AccountModel {
 
     public static function get($args = [], $inquisitor_full = false) {
 
-        $args = array_merge(AccountModel::$args, $args);
+        $args = array_merge(Accounts::$args, $args);
         $order_by = $args["order_by"];
         $asc_desc = $args["asc_desc"];
 
@@ -134,7 +134,7 @@ class AccountModel {
     }
 
     public static function first($args = [], $inquisitor_full = false) {
-        $result = AccountModel::get($args, $inquisitor_full);
+        $result = Accounts::get($args, $inquisitor_full);
 
         if (!is_array($result)) {
             return null;
@@ -415,7 +415,7 @@ class AccountModel {
 
     public static function resetPassword($id) {
 
-        $player = AccountModel::first(['id' => $id]);
+        $player = Accounts::first(['id' => $id]);
         $username = $player['playername'];
         $email = $player['email'];
         $password = substr(md5(rand()), 0, 7);

@@ -2,8 +2,8 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
-use models\drop\DropModel;
+use models\accounts\Accounts;
+use models\account\drops\AccountDrops;
 use helpers\notice\NoticeHelper;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
@@ -37,7 +37,7 @@ function v_user () {
 
     $action_url = '/profile';
 
-    $player = AccountModel::first(['id' => $id], true); // true : fetch all inquisitor data
+    $player = Accounts::first(['id' => $id], true); // true : fetch all inquisitor data
 
     $own = ($parameters['id'] == Session::get('id'));
 
@@ -69,7 +69,7 @@ function v_user () {
     /** Badges */
     $badges = Template::init('partials/badges');
 
-    $badges->assign('badges', AccountModel::badges($player['id']));
+    $badges->assign('badges', Accounts::badges($player['id']));
 
 
     /** Mini Map **/
@@ -139,9 +139,9 @@ function v_user () {
     $parameters['accountid'] = $parameters['id'];
 
 
-    $drops = DropModel::get($parameters);
+    $drops = AccountDrops::get($parameters);
 
-    $count_drops = DropModel::count($parameters);
+    $count_drops = AccountDrops::count($parameters);
     
     $link_after = ArgumentsHelper::serialize($parameters);
 

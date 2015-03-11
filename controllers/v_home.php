@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\minotar\MinotarHelper;
 
 function v_home() {
@@ -14,7 +14,7 @@ function v_home() {
 
     $template->assign('xsrf_token', Session::getXSRFToken());
 
-    $user = AccountModel::first(['id' => Session::get('id')]);
+    $user = Accounts::first(['id' => Session::get('id')]);
 
     $template->assign('user', $user);
 

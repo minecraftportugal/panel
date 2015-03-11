@@ -5,7 +5,7 @@ namespace lib\session;
 use lib\template\Template;
 use lib\environment\Environment;
 use lib\xauth\xAuth;
-use models\log\LogModel;
+use models\logs\Logs;
 use minecraftia\db\Bitch;
 
 class Session {
@@ -107,9 +107,9 @@ class Session {
             if (!Session::isLoggedIn($admin)) {
 
                     if ($admin) {
-                            LogModel::create('failed_admin_action', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI'));
+                            Logs::create('failed_admin_action', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI'));
                     } else {
-                            LogModel::create('failed_session_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI'));
+                            Logs::create('failed_session_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI'));
                     }
 
                     if (!is_null(Environment::get('HTTP_X_REQUESTED_WITH')) && !strcasecmp(Environment::get('HTTP_X_REQUESTED_WITH'), 'XMLHttpRequest')) {
@@ -130,7 +130,7 @@ class Session {
         $token = Session::getSubmittedXSRFToken();
 
         if (!Session::isValidXSRFToken($token)) {
-            LogModel::create('failed_xsrf_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI') . ' with xsrf token ' . $token);
+            Logs::create('failed_xsrf_validation', Session::get('id'), Environment::get('REMOTE_ADDR'), 'Logged at ' . Environment::get('REQUEST_URI') . ' with xsrf token ' . $token);
 
             $template = Template::init('v_403_forbidden');
             $template->render(403);

@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\log\LogModel;
+use models\logs\Logs;
 use helpers\arguments\ArgumentsHelper;
 use helpers\notice\NoticeHelper;
 use helpers\pagination\PaginationHelper;
@@ -29,9 +29,9 @@ function v_admin_logs() {
         "asc_desc" => "desc"
     ]);
 
-    $total = LogModel::count($parameters);
+    $total = Logs::count($parameters);
     
-    $page = LogModel::get($parameters);
+    $page = Logs::get($parameters);
 
     $link_after = ArgumentsHelper::serialize($parameters);
 
@@ -47,7 +47,7 @@ function v_admin_logs() {
       "expand" => 20,
     ]);
 
-    $event_types = LogModeL::event_types();
+    $event_types = Logs::event_types();
 
     $table = new TableHelper($action_url, $parameters);
 

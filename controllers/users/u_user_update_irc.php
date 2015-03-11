@@ -1,7 +1,7 @@
 <?
 
 use lib\session\Session;
-use \models\account\AccountModel;
+use \models\accounts\Accounts;
 
 function u_user_update_irc() {
 
@@ -13,7 +13,7 @@ function u_user_update_irc() {
     $irc_password = isset($_POST['irc_password']) ? $_POST['irc_password'] : NULL;
     $irc_auto = isset($_POST['irc_auto']) ? $_POST['irc_auto'] : 0;
 
-    $status = AccountModel::changeIRC($id, $irc_nickname, $irc_password, $irc_auto);
+    $status = Accounts::changeIRC($id, $irc_nickname, $irc_password, $irc_auto);
 
     if (!$status) {
         header("Location: /options");

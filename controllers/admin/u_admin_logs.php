@@ -1,7 +1,7 @@
 <?php
 
 use lib\session\Session;
-use models\log\LogModel;
+use models\logs\Logs;
 use helpers\notice\NoticeHelper;
 
 function u_admin_logs() {
@@ -12,7 +12,7 @@ function u_admin_logs() {
 
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
-  $status = LogModel::delete($delete);
+  $status = Logs::delete($delete);
   if ($status) {
     NoticeHelper::set('success', 'Logs apagados.');
     header("Location: /admin/logs");

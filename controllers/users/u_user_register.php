@@ -2,15 +2,15 @@
 
 use lib\session\Session;
 use lib\environment\Environment;
-use models\log\LogModel;
-use models\account\AccountModel;
+use models\logs\Logs;
+use models\accounts\Accounts;
 
 function u_user_register () {
   
   $username = $_POST['username'];
   $email = $_POST['email'];
 
-  $result = AccountModel::register($username, $email, $email_ip = true);
+  $result = Accounts::register($username, $email, $email_ip = true);
   
   if (!$result) {
 
@@ -18,7 +18,7 @@ function u_user_register () {
 
   } else {
 
-    LogModel::create('register', null, Environment::get('REMOTE_ADDR'), "New user registration: $username / $email");
+    Logs::create('register', null, Environment::get('REMOTE_ADDR'), "New user registration: $username / $email");
 
     header('Location: /login');
 

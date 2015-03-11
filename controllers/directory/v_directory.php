@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\arguments\ArgumentsHelper;
 use helpers\pagination\PaginationHelper;
 use helpers\minotar\MinotarHelper;
@@ -29,16 +29,16 @@ function v_directory() {
 
     $action_url = '/directory';
 
-    $total = AccountModel::count($parameters);
+    $total = Accounts::count($parameters);
 
-    $page = AccountModel::get($parameters);
+    $page = Accounts::get($parameters);
 
     /** Filters: Change and add new data */
     foreach ($page as $k => $v) {
 
         $badges = Template::init('partials/badges');
 
-        $badges->assign('badges', AccountModel::badges($page[$k]['id']));
+        $badges->assign('badges', Accounts::badges($page[$k]['id']));
 
         $page[$k]['badges'] = $badges;
 

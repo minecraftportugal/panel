@@ -2,7 +2,7 @@
 
 function autoloader($name) {
 
-    $blacklist = [
+    $errorWhitelist = [
         'Translation_Entry', 'Translations', 'NOOP_Translations', 'POMO_Reader', 'POMO_FileReader', 'POMO_StringReader',
         'POMO_CachedFileReader', 'POMO_CachedIntFileReader', 'MO', 'All_in_One_SEO_Pack', 'All_in_One_SEO_Pack_Module',
         'Plugin_Register', 'ExToC', 'Responsive_Addons', 'WC_Dependencies', 'WooCommerce', 'WC_Install', 'WC_Query',
@@ -17,21 +17,21 @@ function autoloader($name) {
 
     $error = false;
 
-    if (count($parts) == 3) {
+    $parts_n = count($parts);
 
-        if (in_array($parts[0], ['helpers', 'models', 'lib'])) {
+    if ($parts_n >= 3) {
 
-            $require_str = $parts[0] . '/' . $parts[1] . '.php';
-
-            require_once($require_str);
-
-        } else {
-
-            $error = true;
-
+        $require_str = '';
+        for ($i = 0; $i < $parts_n - 1; $i++) {
+            $require_str .= $parts[$i];
+            if ($i <  $parts_n - 2) {
+                $require_str .= '/';
+            }
         }
+        $require_str .= '.php';
+        require_once($require_str);
 
-    } else if (count($parts) == 1) {
+    } else if ($parts_n == 1) {
 
 
 
@@ -52,7 +52,7 @@ function autoloader($name) {
 
     }
 
-    if ($error and (!in_array($name, $blacklist))) {
+    if ($error and (!in_array($name, $errorWhitelist))) {
         error_log("Autoloader couldn't handle '$name'");
         return;
     }

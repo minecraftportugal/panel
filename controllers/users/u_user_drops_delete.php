@@ -1,7 +1,7 @@
 <?php
 
 use lib\session\Session;
-use models\drop\DropModel;
+use models\account\drops\AccountDrops;
 use helpers\notice\NoticeHelper;
 
 function u_user_drops_delete() {
@@ -13,7 +13,7 @@ function u_user_drops_delete() {
   $accountid = isset($_POST['accountid']) ? $_POST['accountid'] : null;
   $delete = isset($_POST['delete']) ? $_POST['delete'] : array();
 
-  $status = DropModel::delete($delete);
+  $status = AccountDrops::delete($delete);
 
   if ($status) {
 

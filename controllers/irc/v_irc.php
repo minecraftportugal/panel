@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 
 function v_irc() {
 
@@ -34,7 +34,7 @@ function v_irc() {
 
     assert(!is_null(Session::get('id')));
 
-    $user = AccountModel::first([ "id" => Session::get('id') ], false); // false : don't fetch all inquisitor data
+    $user = Accounts::first([ "id" => Session::get('id') ], false); // false : don't fetch all inquisitor data
 
     $template->assign('user', $user);
 

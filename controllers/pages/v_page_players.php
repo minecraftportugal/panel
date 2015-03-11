@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\minotar\MinotarHelper;
 
 function v_page_players() {
@@ -31,7 +31,7 @@ function v_page_players() {
 
     $template->assign('styles', $styles);
 
-    $players = AccountModel::get(["per_page" => 100, "online" => 1]);
+    $players = Accounts::get(["per_page" => 100, "online" => 1]);
 
     /** Filters: Change and add new data */
     foreach ($players as $k => $v) {

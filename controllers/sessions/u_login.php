@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\environment\Environment;
-use models\log\LogModel;
+use models\logs\Logs;
 use helpers\notice\NoticeHelper;
 
 function u_login() {
@@ -14,13 +14,13 @@ function u_login() {
 
     if ($valid) {
 
-        LogModel::create('login', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
+        Logs::create('login', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
 
         header('Location: /');
 
     } else {
 
-        LogModel::create('failed_login', null, Environment::get('REMOTE_ADDR'), "Username: $username, Password: $password");
+        Logs::create('failed_login', null, Environment::get('REMOTE_ADDR'), "Username: $username, Password: $password");
 
         NoticeHelper::set('error', 'username/password inválidos');
 

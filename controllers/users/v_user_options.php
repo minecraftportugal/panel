@@ -2,7 +2,7 @@
 
 use lib\session\Session;
 use lib\template\Template;
-use models\account\AccountModel;
+use models\accounts\Accounts;
 use helpers\notice\NoticeHelper;
 
 function v_user_options() {
@@ -11,7 +11,7 @@ function v_user_options() {
 
     $template = Template::init('users/v_user_options');
 
-    $player = AccountModel::first(["id" => $_SESSION["id"]]);
+    $player = Accounts::first(["id" => $_SESSION["id"]]);
 
     $notices = NoticeHelper::render();
 

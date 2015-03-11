@@ -2,8 +2,8 @@
 
 use lib\session\Session;
 use lib\environment\Environment;
-use models\log\LogModel;
-use models\account\AccountModel;
+use models\logs\Logs;
+use models\accounts\Accounts;
 
 
 function u_admin_register() {
@@ -16,12 +16,12 @@ function u_admin_register() {
 
     $email = isset($_POST['email']) ? $_POST['email'] : NULL;
 
-    $status = AccountModel::register($username, $email, $email_ip = false);
+    $status = Accounts::register($username, $email, $email_ip = false);
     
     if (!$status) {
 
         $adminame = Session::get('username');
-        LogModel::create('admin_register', null, Environment::get('REMOTE_ADDR'), "New user registration by $adminname: $username / $email");
+        Logs::create('admin_register', null, Environment::get('REMOTE_ADDR'), "New user registration by $adminname: $username / $email");
 
         header("Location: /admin/register");
 
