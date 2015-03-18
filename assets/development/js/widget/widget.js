@@ -256,6 +256,30 @@ App.Widget.open = function(param) {
     return createdWidget;
 };
 
+App.Widget.setBackground = function(image) {
+    var $body = $("body")
+    $body.css("background-repeat", "no-repeat");
+    $body.css("background-position", "center center");
+    $body.css("background-attachment", "fixed");
+    $body.css("-webkit-background-size", "cover");
+    $body.css("-moz-background-size", "cover");
+    $body.css("-o-background-size", "cover");
+    $body.css("background-size", "cover");
+
+    //$body.css("background-image", "url(" + image + ")");
+
+    // http://stackoverflow.com/questions/5057990/how-can-i-check-if-a-background-image-is-loaded
+    $("<img/>").attr("src", image).load(function() {
+        $(this).remove(); // prevent memory leaks as @benweet suggested
+        $("body").css("background-image", "url(" + image + ")");
+
+        var loadingDelay = Math.round(Math.random() * 1000);
+        var loadingTimeout = setTimeout(function () {
+            $("div#loading-blocker").fadeOut(100);
+        }, loadingDelay);
+    });
+};
+
 App.Widget.prototype.init = function(options, states) {
 
     this.options = {};

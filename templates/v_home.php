@@ -19,7 +19,7 @@
     <script type="text/javascript" src="js/<?= $script ?>.js"></script>
 <? endforeach; ?>
 
-    <?= $background_css  ?>
+    <?= /* $background_css */ false ?>
 
 </head> 
 <body>
