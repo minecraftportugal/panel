@@ -1,5 +1,8 @@
 <?
 
+/* Debug Mode */
+define('DEBUG', true);
+
 /* Website URLs */
 define('URL', "//site.minecraft/");
 define('VALID_REFERER', "/^https?:\/\/[a-zA-Z0-9\.\-]+\.site\.minecraft/");
