@@ -1,1 +1,11 @@
-{"background":"8","sounds":true}
+
+{
+    "background": {
+        "image": "http://i.imgur.com/XI7fa.png",
+        "backgroundRepeat": "no-repeat",
+        "backgroundPosition": "center center",
+        "backgroundAttachment": "fixed",
+        "backgroundSize": "cover"
+    },
+    "sounds": true
+}

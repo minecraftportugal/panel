@@ -165,9 +165,9 @@ App.Widget.fixedWidgets = {
         "title" : "<i class='fa fa-gear'></i> Opções",
         "css" : {
             "min-width" : "672px",
-            "max-width" : "672px",
+            "max-width" : "800px",
             "min-height" : "304px",
-            "max-height" : "304px"
+            "max-height" : "504px"
         }
     },
 

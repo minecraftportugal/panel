@@ -9,7 +9,7 @@ class AccountVariables {
 
     private static $args = [
         "accountid" => null,
-        "key" => null,
+        "variable" => null,
         "page" => 1,
         "per_page" => 20,
         "order_by" => "1",
@@ -18,30 +18,34 @@ class AccountVariables {
 
     public static function count($args = []) {
 
-        $args = array_merge(Accounts::$args, $args);
+        $args = array_merge(AccountVariables::$args, $args);
 
         $q = "SELECT count(1) AS total
             FROM accounts_variables a
             WHERE a.accountid = ifnull(:accountid, a.accountid)
-            AND a.key = ifnull(:key, a.key)";
+            AND a.variable = ifnull(:variable, a.variable)";
 
         return Bitch::source('default')->first($q, $args)["total"];
     }
 
     public static function get($args = []) {
 
-        $args = array_merge(Accounts::$args, $args);
+        $args = array_merge(AccountVariables::$args, $args);
         $order_by = $args["order_by"];
         $asc_desc = $args["asc_desc"];
 
-        $q = "SELECT count(1) AS total
-            FROM accounts_variables a
+        $q = "SELECT a.*, a.variable, a.variable_value
+            FROM account_variables a
             WHERE a.accountid = ifnull(:accountid, a.accountid)
-            AND a.key = ifnull(:key, a.key)
+            AND a.variable = ifnull(:variable, a.variable)
         ORDER BY $order_by $asc_desc
         LIMIT :index, :per_page";
 
         $args["index"] = ($args["page"] - 1) * $args["per_page"];
+
+        unset($args["page"]);
+        unset($args["order_by"]);
+        unset($args["asc_desc"]);
 
         $result = Bitch::source('default')->all($q, $args);
 
@@ -52,8 +56,8 @@ class AccountVariables {
         }
     }
 
-    public static function first($args = [], $inquisitor_full = false) {
-        $result = Accounts::get($args, $inquisitor_full);
+    public static function first($args = []) {
+        $result = AccountVariables::get($args);
 
         if (!is_array($result)) {
             return null;
@@ -64,20 +68,20 @@ class AccountVariables {
         }
     }
 
-    public static function getValue($accountid, $key) {
+    public static function getValue($accountid, $variable) {
 
-        $result = AccountVariables::first(compact('accountid', 'key'));
+        $result = AccountVariables::first(compact('accountid', 'variable'));
         return $result;
 
     }
 
-    public static function setValue($accountid, $key, $value) {
+    public static function setValue($accountid, $variable, $variable_value) {
 
-        $q = "INSERT INTO account_variables(accountid, key, value),
-        VALUES(:accountid, :key, :value)
-        ON DUPLICATE KEY UPDATE key = :key, value = :value";
+        $q = "INSERT INTO account_variables(accountid, variable, variable_value)
+        VALUES(:accountid, :variable, :variable_value)
+        ON DUPLICATE KEY UPDATE variable = :variable, variable_value = :variable_value";
 
-        $result = Bitch::source('default')->query($q, compact('accountid', 'key', 'value'));
+        $result = Bitch::source('default')->query($q, compact('accountid', 'variable', 'variable_value'));
 
         if (!$result) {
             die('Invalid query');

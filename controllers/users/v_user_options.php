@@ -11,7 +11,7 @@ function v_user_options() {
 
     $template = Template::init('users/v_user_options');
 
-    $player = Accounts::first(["id" => $_SESSION["id"]]);
+    $player = Accounts::first(["id" => Session::get("id")]);
 
     $notices = NoticeHelper::render();
 

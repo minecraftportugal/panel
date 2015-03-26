@@ -90,14 +90,14 @@
                                     <label class="checkbox" for="chk_sound">Utilizar Sons <i class="fa fa-volume-up"></i></label>
                                 </li>
                                 <li>
-                                    <label for="bg_select">Imagem de fundo</label>
+                                    <label for="bg_select">Imagem de fundo (URL)</label>
                                 </li>
                                 <li>
-                                    <select id="bg_select">
-                                    <? foreach ($images as $image): ?>
-                                        <option value=""><?= $image["name"] ?></option>
-                                    <? endforeach; ?>
-                                    </select>
+                                    <input id="input_url" type="text" name="url" placeholder="URL da imagem">
+                                </li>
+                                <li>
+                                    <input id="chk_sound" type="checkbox" name="active" value="1" <?= $player['active'] == 1 ? 'checked="checked"' : '' ?> />
+                                    <label class="checkbox" for="chk_sound">Utilizar Sons <i class="fa fa-volume-up"></i></label>
                                 </li>
                                 <li>
                                     <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />

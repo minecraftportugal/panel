@@ -1,12 +1,18 @@
 App.bootstrap = function() {
 
     $.ajax({
-        url: "/js/data/userpreferences.json",
-        method: "GET",
-        success: function(data) {
-            var image = '/images/backgrounds/bg' + data.background + '.jpg';
-            App.Widget.setBackground(image);
+        url: "/bootstrap",
+
+        dataType: "json",
+
+        success: function(data, textStatus, jqXHR) {
+            App.Widget.setBackground(data.background);
             console.log(data);
+        },
+
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(data);
+            alert("BOOTSTRAP ERROR! mail@minecraft.pt");
         }
     });
 };
