@@ -267,28 +267,28 @@ div.toaster.otherside {
     right: auto;
 }
 div.toaster.success {
-    color: #ffffff;
+    color: #dddddd;
     background: rgba(0, 180, 0, 0.75);
     border: 1px solid #008800;
 }
 
 div.toaster.success div.toaster-titlebar {
-    color: #008800;
+    color: #dddddd;
 }
 
 div.toaster.error {
-    color: #ffffff;
+    color: #dddddd;
     background: rgba(180, 0, 0, 0.75);
     border: 1px solid #880000;
 }
 
 div.toaster.error div.toaster-titlebar {
-    color: #880000;
+    color: #dddddd;
 }
 
 div.toaster.warning {
     color: #ffffff;
-    background: rgba(180, 180, 100, 0.75);
+    background: rgba(120, 120, 40, 0.75);
     border: 1px solid #ffff20;
 }
 
