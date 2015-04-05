@@ -35,11 +35,11 @@ function v_home() {
 
         "ajax",
 
-        "widget/widget",
+        "desktop/desktop",
 
-        "widget/modal",
+        "desktop/widget",
 
-        "widget/definition",
+        "desktop/definition",
 
         "cookies",
 

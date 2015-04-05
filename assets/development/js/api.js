@@ -8,8 +8,7 @@ App.API.bootstrap = function() {
         dataType: "json",
 
         success: function(data, textStatus, jqXHR) {
-            App.Widget.setBackground(data.background);
-            console.log(data);
+            App.Desktop.setBackground(data.background);
         },
 
         error: function(jqXHR, textStatus, errorThrown) {

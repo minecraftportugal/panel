@@ -25,37 +25,37 @@ $(function() {
 
     /* Click on Button: minimize all */
     $(document).on("click", "a#menu-container-minimize-all", function(event) {
-        App.Widget.minimizeAll();
+        App.Desktop.minimizeAll();
     });
 
     /* Click on Button: tile */
     $(document).on("click", "a#menu-container-tile", function(event) {
-        App.Widget.tile();
+        App.Desktop.tile();
     });
 
     /* Click on Button: cascade */
     $(document).on("click", "a#menu-container-cascade", function(event) {
-        App.Widget.cascade();
+        App.Desktop.cascade();
     });
 
     /* Click on Button: embiggen */
     $(document).on("click", "a#menu-container-embiggen", function(event) {
-        App.Widget.embiggen();
+        App.Desktop.embiggen();
     });
 
     /* Click on Button: close all */
     $(document).on("click", "a#menu-close-all", function(event) {
-        App.Widget.closeAll();
+        App.Desktop.closeAll();
     });
 
     /* Click on Button: reset */
     $(document).on("click", "a#menu-reset-widgets", function(event) {
-        App.Widget.clearState();
+        App.Desktop.clearState();
     });
 
     /* Click on Button: logout */
     $(document).on("click", "a#menu-logout", function(event) {
-        App.Widget.open("logout");
+        App.Desktop.open("logout");
     });
 
     /* OnMouseDown: hide opened menus */
