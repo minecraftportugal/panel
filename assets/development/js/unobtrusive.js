@@ -1,7 +1,7 @@
 /* On DOM loaded... */
 $(function() {
 
-    /* Open menus with oepn-menu data- API */
+    /* Open menus with open-menu data- API */
     $(document).on("click", "div[data-open-menu]", function(event) {
         var $button = $(this);
         var menu_selector = $button.data("open-menu");
@@ -104,35 +104,50 @@ $(function() {
         $(this).closest("div.layout-col").toggleClass("collapsed");
     });
 
+    /* Link behaviour inside widgets */
+    $(document).on('click', 'div.widget a:not(.noajax)[href!=#]', function(event) {
+        App.Ajax.initiator(this);
+        event.preventDefault();
+    });
+
+    /* Form submit behaviour */
+    $(document).on('submit', 'form:not(.noajax)', function(event) {
+        App.Ajax.initiator(this);
+        event.preventDefault();
+    });
+
     /* OnHover: Show menu toaster context help */
-    $("[role=toaster-launcher]").hover(
-        function(event) {
-            var title = $(this).html();
-            var id = $(this).attr("id");
-            var message = $(this).parent().clone().find("span[rel=" + id + "]").html();
+    var launchIn = function(event) {
 
-            if (App.settings.showBaloonTips) {
+        var title = $(this).data("toaster-title") || $(this).html();
+        var id = $(this).attr("id");
+        var message = $(this).parent().clone().find("span[rel=" + id + "]").html();
+        var classes = $(this).data("toaster-classes") || "neutral";
 
-                var classes = "neutral";
-                if (event.pageX > window.innerWidth / 2) {
-                    classes += " otherside";
-                }
+        if (App.settings.showBaloonTips) {
 
-                App.Toaster.fadeIn({
-                    "title" : title,
-                    "message" : message,
-                    "duration" : 0,
-                    "classes" : classes
-                });
-
+            if (event.pageX > window.innerWidth / 2) {
+                classes += " otherside";
             }
-        },
-        function() {
 
-            App.Toaster.fadeOut();
+            App.Toaster.fadeIn({
+                "title" : title,
+                "message" : message,
+                "duration" : 0,
+                "classes" : classes
+            });
 
         }
-    );
+    };
+
+    var launchOut = function() {
+        App.Toaster.fadeOut();
+    };
+
+    $("body").on("mouseenter", "a[role=toaster-launcher]", launchIn);
+    $("body").on("mouseleave", "a[role=toaster-launcher]", launchOut);
+    $("body").on("focusin", "input[role=toaster-launcher]", launchIn);
+    $("body").on("focusout", "input[role=toaster-launcher]", launchOut);
 
     $(document).on("click", function (event) {
         if (event.which === 2)

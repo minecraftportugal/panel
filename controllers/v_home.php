@@ -45,9 +45,9 @@ function v_home() {
 
         "iframe",
 
-        "pages/items",
+        "items",
 
-        "pages/skin3d",
+        "skin3d",
 
         "toaster",
 
@@ -55,7 +55,7 @@ function v_home() {
 
         "unobtrusive",
 
-        "bootstrap",
+        "api",
     ];
 
     $template->assign('scripts', $scripts);

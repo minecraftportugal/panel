@@ -7,7 +7,7 @@
         <div class="layout-col layout-col-full-width pad-up">
 
             <div class="layout-col-title">
-                <h1><i class="fa fa-gear"></i> Opções</h1>
+                <h1><i class="fa fa-gear"></i> Utilizador</h1>
             </div>
 
             <div>
@@ -22,19 +22,19 @@
                                 <li>
                                     <label for="current_password">Password Actual</label>
                                 </li>
-                                <li>
+                                <li class="pushdown">
                                     <input id="current_password" type="password" name="password" placeholder="password actual">
                                 </li>
                                 <li>
                                     <label for="new_password">Nova Password</label>
                                 </li>
-                                <li>
+                                <li class="pushdown">
                                     <input id="new_password" type="password" name="new_password" placeholder="nova password">
                                 </li>
                                 <li>
                                     <label for="confirm_password">Repetir Nova Password</label>
                                 </li>
-                                <li>
+                                <li class="pushdown">
                                     <input id="confirm_password" type="password" name="confirm_password" placeholder="confirmar password">
                                 </li>
                                 <li>
@@ -56,16 +56,16 @@
                                 <li>
                                     <label for="irc_nickname">Nickname a usar no IRC</label>
                                 </li>
-                                <li>
+                                <li class="pushdown">
                                     <input id="irc_nickname" type="text" name="irc_nickname" value="<?= $player['ircnickname'] ?>" placeholder="irc nickname">
                                 </li>
                                 <li>
                                     <label for="irc_password">Password do NickServ deste Nickname</label>
                                 </li>
-                                <li>
+                                <li class="pushdown">
                                     <input id="irc_password" type="password" name="irc_password" value="<?= $player['ircpassword'] ?>" placeholder="nickserv password">
                                 </li>
-                                <li>
+                                <li class="pushdown">
                                     <input id="irc_auto" type="checkbox" name="irc_auto" value="1" <?= $player['ircauto'] == 1 ? 'checked="checked"' : '' ?> />
                                     <label class="checkbox" for="irc_auto">ligação automática</label>
                                 </li>
@@ -78,6 +78,7 @@
                     </div>
                 </div>
 
+
                 <div class="layout-col layout-col-c">
                     <div class="layout-col-title">
                         <h1><i class="fa fa-keyboard-o"></i> Desktop</h1>
@@ -85,19 +86,19 @@
                     <div class="padded">
                         <form name="bg_settings" action="/users/update_background" method="POST" autocomplete="off">
                             <ul>
-                                <li>
+                                <li class="pushdown">
                                     <input id="chk_sound" type="checkbox" name="active" value="1" <?= $player['active'] == 1 ? 'checked="checked"' : '' ?> />
                                     <label class="checkbox" for="chk_sound">Utilizar Sons <i class="fa fa-volume-up"></i></label>
                                 </li>
                                 <li>
                                     <label for="bg_select">Imagem de fundo (URL)</label>
                                 </li>
-                                <li>
-                                    <input id="input_url" type="text" name="url" placeholder="URL da imagem">
-                                </li>
-                                <li>
-                                    <input id="chk_sound" type="checkbox" name="active" value="1" <?= $player['active'] == 1 ? 'checked="checked"' : '' ?> />
-                                    <label class="checkbox" for="chk_sound">Utilizar Sons <i class="fa fa-volume-up"></i></label>
+                                <li class="pushdown">
+                                    <input id="input_url" type="text" name="url" placeholder="URL da imagem"
+                                           role="toaster-launcher" data-toaster-title="<i class='fa fa-exclamation-triangle'></i> Atenção!" data-toaster-classes="warning">
+                            <span rel="input_url" role="toaster-content">
+                                Utiliza apenas imagens alojadas no serviço <b>imgur.com.</b>
+                            </span>
                                 </li>
                                 <li>
                                     <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>" />
@@ -107,7 +108,6 @@
                         </form>
                     </div>
                 </div>
-            </div>
 
             <div class="clearer"></div>
 
@@ -117,5 +117,7 @@
 
 
     <div class="clearer"></div>
+
+
 
 </div>

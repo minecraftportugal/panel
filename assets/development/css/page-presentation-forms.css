@@ -48,12 +48,16 @@ form ul li {
     margin-bottom: 5px;
 }
 
+form ul li.pushdown {
+    margin-bottom: 15px;
+}
+
 form ul li input[type=checkbox] {
   margin-top: 5px;
 }
 
 form ul li input:not([type=checkbox]) {
-  margin: auto;
+
 }
 
 input:hover, label.checkbox:hover, {

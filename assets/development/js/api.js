@@ -1,4 +1,6 @@
-App.bootstrap = function() {
+App.API = {};
+
+App.API.bootstrap = function() {
 
     $.ajax({
         url: "/bootstrap",
@@ -17,5 +19,12 @@ App.bootstrap = function() {
     });
 };
 
-App.saveState()
-App.bootstrap();
+App.API.save = function() {
+
+};
+
+App.API.load = function() {
+
+};
+
+App.API.bootstrap();

@@ -27,8 +27,7 @@ function v_user_bootstrap() {
         AccountVariables::setValue(Session::get("id"), "userdata", $json);
     }
 
-    header('Content-Type: application/json');
-    echo $json;
+    Template::json($json);
 
 }
 

@@ -258,6 +258,8 @@ App.Widget.open = function(param) {
 
 App.Widget.setBackground = function(bg) {
 
+    App.Widget.Desktop.background = bg;
+
     var $body = $("body");
     $body.css("background-repeat", bg.backgroundRepeat);
     $body.css("background-position", bg.backgroundPosition);
@@ -724,7 +726,7 @@ App.Widget.prototype.load = function(source) {
 
             var container = $(this.selector).find("div.body");
             var loading_blocker = $(this.selector).find("div.body").next();
-            Ajax.request(source, undefined, "GET", container, loading_blocker);
+            App.Ajax.request(source, undefined, "GET", container, loading_blocker);
 
             break;
 

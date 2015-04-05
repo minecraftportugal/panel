@@ -1,3 +1,14 @@
+App.Widget.Desktop = {};
+
+App.Widget.Desktop.background = {
+    image: "https://panel.minecraft.pt/images/backgrounds/bg11.jpg",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center center",
+    backgroundAttachment: "fixed",
+    backgroundSize: "cover"
+};
+
+App.Widget.Desktop.sounds = true;
 
 App.Widget.fixedWidgets = {
 

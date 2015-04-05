@@ -49,6 +49,11 @@ class Template {
 
     }
 
+    public function json($json) {
+        header('Content-Type: application/json');
+        echo $json;
+    }
+
     public static function init($name, $require = null) {
 
         return new Template($name, $require);
