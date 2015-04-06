@@ -5,18 +5,14 @@ App.Desktop = (function() {
 
     var Desktop = {};
 
-
     Desktop.widgets = [];
-
-    Desktop.Defaults = {};
-
-    /* Defaults */
-
 
     /* Settings */
     Desktop.settings = {
         "saveOnExit": true
     };
+    $.extend(Desktop.settings, App.Defaults.settings);
+    $.extend(Desktop.settings.background, App.Defaults.settings.background);
 
     /* * * * Static Methods * * * /
      /*
@@ -107,7 +103,7 @@ App.Desktop = (function() {
 
     Desktop.loadFixedState = function (name) {
 
-        var object = App.Desktop.Defaults.fixedStates[name];
+        var object = App.Defaults.fixedStates[name];
 
         $.each(object, function (n, object) {
             var createdWidget = new Desktop.Widget(object.options, object.states);
@@ -213,8 +209,8 @@ App.Desktop = (function() {
 
         } else if (typeof(param) === typeof("")) {
 
-            if (param in App.Desktop.Defaults.fixedWidgets) {
-                var config = App.Desktop.Defaults.fixedWidgets[param];
+            if (param in App.Defaults.fixedWidgets) {
+                var config = App.Defaults.fixedWidgets[param];
                 createdWidget = new Desktop.Widget(config);
             }
 
@@ -238,11 +234,17 @@ App.Desktop = (function() {
             method: "GET",
 
             success: function(data, textStatus, jqXHR) {
-                $.when(Desktop.setBackground(Desktop.Defaults.options.background)).then(function() {
+                var deferred = $.when(Desktop.setBackground(App.Desktop.settings.background));
+
+                deferred.then(function(data) {
                     var loadingDelay = Math.round(Math.random() * 1000);
                     var loadingTimeout = setTimeout(function () {
                         $("div#loading-blocker").fadeOut(100);
                     }, loadingDelay);
+                });
+
+                deferred.fail(function(data) {
+                    App.desktop.settings.background = App.Defaults.settings.background;
                 });
             },
 
@@ -257,28 +259,31 @@ App.Desktop = (function() {
 
     Desktop.setBackground = function (bg) {
 
-        var dfd = $.Deferred();
+        var background = $.extend({}, App.Defaults.settings.background);
+        $.extend(background, bg);
 
-        Desktop.background = bg;
+        var dfd = $.Deferred();
+        Desktop.background = background;
 
         var $body = $("body");
-        $body.css("background-repeat", bg.backgroundRepeat);
-        $body.css("background-position", bg.backgroundPosition);
-        $body.css("background-attachment", bg.backgroundAttachment);
-        $body.css("-webkit-background-size", bg.backgroundSize);
-        $body.css("-moz-background-size", bg.backgroundSize);
-        $body.css("-o-background-size", bg.backgroundSize);
-        $body.css("background-size", bg.backgroundSize);
-
-        //$body.css("background-image", "url(" + image + ")");
+        $body.css("background-repeat", background.backgroundRepeat);
+        $body.css("background-position", background.backgroundPosition);
+        $body.css("background-attachment", background.backgroundAttachment);
+        $body.css("-webkit-background-size", background.backgroundSize);
+        $body.css("-moz-background-size", background.backgroundSize);
+        $body.css("-o-background-size", background.backgroundSize);
+        $body.css("background-size", background.backgroundSize);
 
         // http://stackoverflow.com/questions/5057990/how-can-i-check-if-a-background-image-is-loaded
-        $("<img/>").attr("src", bg.image).load(function () {
+        $("<img/>").attr("src", background.image).load(function () {
             $(this).remove(); // prevent memory leaks as @benweet suggested
-            $("body").css("background-image", "url(" + bg.image + ")");
-
-            return dfd.promise();
+            $("body").css("background-image", "url(" + background.image + ")");
+            dfd.resolve(background);
+        }).error(function(e) {
+            dfd.reject(background);
         });
+
+        return dfd;
     };
 
     /* DOM event initializations */
@@ -336,7 +341,7 @@ App.Desktop = (function() {
 
             if (override !== undefined) {
                 //override = JSON.parse(override);
-                var params = App.Desktop.Defaults.fixedWidgets[name];
+                var params = App.Defaults.fixedWidgets[name];
                 if (params === undefined) {
                     console.log('No widget named ' + name);
                     return false;

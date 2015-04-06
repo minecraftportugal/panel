@@ -255,6 +255,7 @@ div.toaster {
     right: 20px;
     top: 20px;
     min-width: 300px;
+    max-width: 400px;
     color: #000000;
     border: 1px solid #dddddd;
     z-index: 2147483638;

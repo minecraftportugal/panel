@@ -22,7 +22,7 @@ App.Sound.init = function() {
 };
 
 App.Sound.play = function(sound) {
-    if (App.Widget.Desktop.sounds) {
+    if (App.Desktop.settings.sounds) {
         App.Sound.bank[sound].play();
     }
 };

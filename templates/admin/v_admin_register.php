@@ -17,13 +17,13 @@
                         <li>
                             <label for="playername">Username</label>
                         </li>
-                        <li>
+                        <li class="pushdown">
                             <input id="playername" type="text" name="playername" placeholder="username">
                         </li>
                         <li>
                             <label for="email">Email</label>
                         </li>
-                        <li>
+                        <li class="pushdown">
                           <input id="email" type="text" name="email" placeholder="email">
                         </li>
                         <li>

@@ -3,28 +3,27 @@
 use lib\session\Session;
 use lib\template\Template;
 use models\account\variables\AccountVariables;
-use helpers\notice\NoticeHelper;
+use helpers\arguments\ArgumentsHelper;
 
 function v_user_bootstrap() {
 
     Session::validateSession();
 
+
+    $parameters = ArgumentsHelper::process($_GET, [
+        "timestamp" => 0,
+    ]);
+
     $default = [
-        "background" => [
-            "image" => "http://www.nocturnar.com/imagenes/fondos-de-pantalla-de-minecraft-Steve-Minecraft-Wallpapers-HD-Wallpaper.jpg",
-            "backgroundRepeat" => "no-repeat",
-            "backgroundPosition" => "center center",
-            "backgroundAttachment" => "fixed",
-            "backgroundSize" => "cover"
-        ],
-        "sounds" => true
+        "timestamp" => $parameters['timestamp'],
+        "widgets" => null,
+        "desktop" => null
     ];
 
-    $json = AccountVariables::getValue(Session::get("id"), "userdata");
+    $json = AccountVariables::getValue(Session::get("id"), "bootstrap");
     $json = json_decode($json, true);
     if (is_null($json)) {
         $json = json_encode($default);
-        AccountVariables::setValue(Session::get("id"), "userdata", $json);
     }
 
     Template::json($json);

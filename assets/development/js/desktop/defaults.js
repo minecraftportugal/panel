@@ -1,10 +1,10 @@
-App.Desktop.Defaults = (function() {
+App.Defaults = (function() {
 
     var Defaults = {};
 
-    Defaults.options = {};
+    Defaults.settings = {};
 
-    Defaults.options.background = {
+    Defaults.settings.background = {
         image: "https://panel.minecraft.pt/images/backgrounds/bg11.jpg",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
@@ -12,7 +12,7 @@ App.Desktop.Defaults = (function() {
         backgroundSize: "cover"
     };
 
-    Defaults.options.sounds = true;
+    Defaults.settings.sounds = true;
 
     Defaults.fixedWidgets = {
 
@@ -114,9 +114,9 @@ App.Desktop.Defaults = (function() {
             "title": "<i class='fa fa-paper-plane'></i> Registar Utilizador",
             "css": {
                 "min-width": "222px",
-                "min-height": "214px",
+                "min-height": "234px",
                 "max-width": "222px",
-                "max-height": "214px"
+                "max-height": "234px"
             }
         },
         "admin-accounts": {
@@ -180,9 +180,9 @@ App.Desktop.Defaults = (function() {
             "title": "<i class='fa fa-gear'></i> Opções",
             "css": {
                 "min-width": "672px",
-                "max-width": "800px",
-                "min-height": "304px",
-                "max-height": "504px"
+                "max-width": "672px",
+                "min-height": "333px",
+                "max-height": "333px"
             }
         },
 

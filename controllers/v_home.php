@@ -35,11 +35,13 @@ function v_home() {
 
         "ajax",
 
+        "desktop/defaults",
+
         "desktop/desktop",
 
         "desktop/widget",
 
-        "desktop/definition",
+        "forms",
 
         "cookies",
 
@@ -54,8 +56,6 @@ function v_home() {
         "sound",
 
         "unobtrusive",
-
-        "api"
 
     ];
 
