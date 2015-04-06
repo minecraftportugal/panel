@@ -214,20 +214,50 @@ App.Desktop = (function() {
         } else if (typeof(param) === typeof("")) {
 
             if (param in App.Desktop.Defaults.fixedWidgets) {
-
                 var config = App.Desktop.Defaults.fixedWidgets[param];
-
                 createdWidget = new Desktop.Widget(config);
-
             }
 
         }
 
-
         return createdWidget;
     };
 
+
+    Desktop.bootstrap = function() {
+
+        var now = Math.floor(Date.now() / 1000);
+
+        $.ajax({
+            url: "/bootstrap",
+
+            data: {
+                timestamp: now
+            },
+
+            method: "GET",
+
+            success: function(data, textStatus, jqXHR) {
+                $.when(Desktop.setBackground(Desktop.Defaults.options.background)).then(function() {
+                    var loadingDelay = Math.round(Math.random() * 1000);
+                    var loadingTimeout = setTimeout(function () {
+                        $("div#loading-blocker").fadeOut(100);
+                    }, loadingDelay);
+                });
+            },
+
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus);
+                alert("BOOTSTRAP ERROR! mail@minecraft.pt");
+            }
+        });
+    };
+
+    Desktop.bootstrap();
+
     Desktop.setBackground = function (bg) {
+
+        var dfd = $.Deferred();
 
         Desktop.background = bg;
 
@@ -247,10 +277,7 @@ App.Desktop = (function() {
             $(this).remove(); // prevent memory leaks as @benweet suggested
             $("body").css("background-image", "url(" + bg.image + ")");
 
-            var loadingDelay = Math.round(Math.random() * 1000);
-            var loadingTimeout = setTimeout(function () {
-                $("div#loading-blocker").fadeOut(100);
-            }, loadingDelay);
+            return dfd.promise();
         });
     };
 

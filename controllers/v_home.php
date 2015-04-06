@@ -55,7 +55,8 @@ function v_home() {
 
         "unobtrusive",
 
-        "api",
+        "api"
+
     ];
 
     $template->assign('scripts', $scripts);

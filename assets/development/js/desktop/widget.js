@@ -60,7 +60,7 @@ App.Desktop.Widget = (function() {
         this.states = states || [];
 
         /* Widget Property alwaysCreate requires a different name for each widget copy */
-        if (this.options.alwaysCreate) {
+        if (this.options.alwaysCreate && states === undefined) {
             this.options.name += new Date().getTime();
         }
 
@@ -375,9 +375,7 @@ App.Desktop.Widget = (function() {
         }
 
         if (this.options.pinned) {
-
             this.pin();
-
         }
 
     };
