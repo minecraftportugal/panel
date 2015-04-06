@@ -8,14 +8,14 @@
 
         <ul>
 
-            <li>
+            <!--<li>
                 <a id="menu-item-launcher" href="#" data-widget-open="launcher" role="toaster-launcher">
                     <i class="fa fa-money"></i> Launcher
                 </a>
                 <span rel="menu-item-launcher" role="toaster-content">
                     Este é o launcher web. Não funciona.
                 </span>
-            </li>
+            </li>-->
 
             <li>
                 <a id="menu-item-webchat" href="#" data-widget-open="irc" role="toaster-launcher">
@@ -63,10 +63,10 @@
             </li>
 
             <li>
-                <a id="menu-item-news" href="#" data-widget-open="status" role="toaster-launcher">
+                <a id="menu-item-status" href="#" data-widget-open="status" role="toaster-launcher">
                     <i class="fa fa-columns"></i> Status
                 </a>
-                <span rel="menu-item-news" role="toaster-content">
+                <span rel="menu-item-status" role="toaster-content">
                     Jogadores online, top players, etc...
                 </span>
             </li>
@@ -75,8 +75,8 @@
                 <a id="menu-item-dynmap" href="#" data-widget-open="dynmap" role="toaster-launcher">
                     <i class='fa fa-picture-o'></i> Dynmap
                 </a>
-                <span rel="menu-item-news" role="toaster-content">
-                    Mapa Interactivo em tempo real!
+                <span rel="menu-item-dynmap" role="toaster-content">
+                    Mapas interactivos actualizados em tempo real!
                 </span>
             </li>
 
@@ -84,8 +84,8 @@
                 <a id="menu-item-inquisitor" href="#" data-widget-open="inquisitor" role="toaster-launcher">
                     <i class="fa fa-tachometer"></i> Inquisitor
                 </a>
-                <span rel="menu-item-news" role="toaster-content">
-                    Estatísticas e registos!
+                <span rel="menu-item-inquisitor" role="toaster-content">
+                    Estatísticas e registos de todos os jogadores!
                 </span>
             </li>
 
@@ -93,19 +93,19 @@
                 <a id="menu-item-directory" href="#" data-widget-open="directory" role="toaster-launcher">
                     <i class="fa fa-users"></i> Jogadores
                 </a>
-                <span rel="menu-item-news" role="toaster-content">
-                    Todos os jogadores e membros
+                <span rel="menu-item-directory" role="toaster-content">
+                    Lista de todos os jogadores e membros
                 </span>
             </li>
 
-            <li>
+            <!--<li>
                 <a id="menu-item-factions" href="#" data-widget-open="factions" role="toaster-launcher">
                     <i class="fa fa-users"></i> Facções
                 </a>
-                <span rel="menu-item-news" role="toaster-content">
+                <span rel="menu-item-factions" role="toaster-content">
                     Todas as facções do nosso servidor Survival
                 </span>
-            </li>
+            </li>-->
 
         </ul>
 
@@ -138,7 +138,7 @@
                     <i class="fa fa-users"></i> Contas
                 </a>
                 <span rel="menu-item-admin-accounts" role="toaster-content">
-                    Lista de todos os registos
+                    Administrar contas
                 </span>
             </li>
 
@@ -147,7 +147,7 @@
                     <i class="fa fa-group"></i> Sessões
                 </a>
                 <span rel="menu-item-admin-sessions" role="toaster-content">
-                    Histórico de Sessões
+                    Histórico de sessões
                 </span>
             </li>
 
@@ -156,7 +156,7 @@
                     <i class="fa fa-th-list"></i> Drops
                 </a>
                 <span rel="menu-item-admin-drops" role="toaster-content">
-                    Lista de Item Drops
+                    Administrar item drops
                 </span>
             </li>
 
@@ -192,7 +192,7 @@
 
         <ul>
 
-            <li>
+            <!--<li>
                 <a id="menu-item-noob" href="#" data-widget-open="help-noob" role="toaster-launcher">
                     <i class="fa fa-life-ring"></i> Iniciantes
                 </a>
@@ -208,23 +208,13 @@
                 <span rel="menu-item-faq" role="toaster-content">
                     Perguntas Frequentes
                 </span>
-            </li>
+            </li>-->
 
             <li>
-                <a id="menu-item-wiki" href="#" data-widget-open="help-wiki" role="toaster-launcher">
-                    <i class="fa fa-money"></i> Wiki
-                </a>
-                <span rel="menu-item-faq" role="toaster-content">
-                    Minecraft Wiki
-                </span>
-            </li>
-
-
-            <li class="separator">
                 <a id="menu-item-about" href="#" data-widget-open="help-about" role="toaster-launcher">
                     <i class="fa fa-quote-left"></i> Sobre
                 </a>
-                <span rel="menu-item-faq" role="toaster-content">
+                <span rel="menu-item-about" role="toaster-content">
                     Informação sobre o MinePanel 3.0
                 </span>
             </li>
