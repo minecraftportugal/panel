@@ -49,7 +49,7 @@ class Template {
 
     }
 
-    public function json($json) {
+    public static function json($json) {
         header('Content-Type: application/json');
         echo $json;
     }
