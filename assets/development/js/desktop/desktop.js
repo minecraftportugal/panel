@@ -31,6 +31,7 @@ App.Desktop = (function() {
 
     Desktop.serializeState = function () {
 
+        // Pick widgets to serialize
         var widgets = [];
 
         if (Desktop.widgets === undefined) {
@@ -58,8 +59,15 @@ App.Desktop = (function() {
             widgets.push(object);
         });
 
+        // Pick settings to serialize
+        var settings = Desktop.settings;
 
-        var serializedObject = JSON.stringify(widgets, function (name, value) {
+        // Serialize these items in an object
+        var objectToSerialize = {
+            widgets: widgets,
+            settings: settings
+        };
+        var serializedObject = JSON.stringify(objectToSerialize, function (name, value) {
             return value;
         });
 
@@ -83,20 +91,29 @@ App.Desktop = (function() {
         }
 
         var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
-        var object = [];
+        var object = {
+            widgets: [],
+            settings: App.Defaults.settings
+        };
         try {
             object = JSON.parse(serializedObject);
         } catch (e) {
             console.log("Couldn't load widget states from localStorage")
         }
 
+        var widgets = object.widgets || [];
+        var settings = object.settings || App.Defaults.settings;
 
-        $.each(object, function (n, object) {
+        /* Restore widgets */
+        $.each(widgets, function (n, widget) {
 
-            var createdWidget = new Desktop.Widget(object.options, object.states);
+            var createdWidget = new Desktop.Widget(widget.options, widget.states);
             createdWidget.popState();
 
         });
+
+        /* Restore settings */
+        Desktop.settings = settings;
 
         return true;
     };

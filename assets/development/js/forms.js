@@ -4,13 +4,13 @@ App.Forms = {
 
 App.Forms.userOptions = function() {
 
-    $("input#chk_sounds").prop("checked", App.Desktop.settings.background.sounds);
+    $("input#chk_sounds").prop("checked", App.Desktop.settings.sounds);
     $("input#input_url").val(App.Desktop.settings.background.image);
 
     $("form[name=bg_settings]").submit(function(e) {
         e.preventDefault();
 
-        App.Desktop.settings.background.sounds = $("input#chk_sounds").prop("checked");
+        App.Desktop.settings.sounds = $("input#chk_sounds").prop("checked");
 
         var imageURL = $("input#input_url").val();
         var deferred = $.when(App.Desktop.setBackground({ image: imageURL }));
