@@ -20,6 +20,8 @@ $r->map('POST', '/register', 'u_user_register', 'controllers/users/u_user_regist
 
 /* Perfil e Configuração */
 $r->map('GET',  '/bootstrap', 'v_user_bootstrap', 'controllers/users/v_user_bootstrap.php');
+$r->map('POST',  '/bootstrap', 'u_user_bootstrap', 'controllers/users/v_user_bootstrap.php');
+
 $r->map('GET',  '/profile', 'v_user', 'controllers/users/v_user.php');
 $r->map('GET',  '/options', 'v_user_options', 'controllers/users/v_user_options.php');
 $r->map('GET', '/users/drops', 'v_user_drops', 'controllers/users/v_user_drops.php');

@@ -239,40 +239,20 @@ App.Desktop = (function() {
 
     Desktop.bootstrap = function() {
 
-        var now = Math.floor(Date.now() / 1000);
+        var deferred = $.when(Desktop.setBackground(App.Desktop.settings.background));
 
-        $.ajax({
-            url: "/bootstrap",
-
-            data: {
-                timestamp: now
-            },
-
-            method: "GET",
-
-            success: function(data, textStatus, jqXHR) {
-                var deferred = $.when(Desktop.setBackground(App.Desktop.settings.background));
-
-                deferred.then(function(data) {
-                    var loadingDelay = Math.round(Math.random() * 1000);
-                    var loadingTimeout = setTimeout(function () {
-                        $("div#loading-blocker").fadeOut(100);
-                    }, loadingDelay);
-                });
-
-                deferred.fail(function(data) {
-                    App.desktop.settings.background = App.Defaults.settings.background;
-                });
-            },
-
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus);
-                alert("BOOTSTRAP ERROR! mail@minecraft.pt");
-            }
+        deferred.then(function(data) {
+            var loadingDelay = Math.round(Math.random() * 1000);
+            var loadingTimeout = setTimeout(function () {
+                $("div#loading-blocker").fadeOut(100);
+            }, loadingDelay);
         });
-    };
 
-    Desktop.bootstrap();
+        deferred.fail(function(data) {
+            App.desktop.settings.background = App.Defaults.settings.background;
+        });
+
+    };
 
     Desktop.setBackground = function (bg) {
 

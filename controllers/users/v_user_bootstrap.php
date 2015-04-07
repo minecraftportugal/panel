@@ -9,6 +9,7 @@ function v_user_bootstrap() {
 
     Session::validateSession();
 
+    return;
 
     $parameters = ArgumentsHelper::process($_GET, [
         "timestamp" => 0,
