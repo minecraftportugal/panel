@@ -14,6 +14,8 @@ App.Defaults = (function() {
 
     Defaults.settings.sounds = true;
 
+    Defaults.settings.saveOnExit = true;
+
     Defaults.fixedWidgets = {
 
         "test": {
