@@ -10,7 +10,9 @@ function autoloader($name) {
         'All_in_One_SEO_Pack_Module_Manager', 'All_in_One_SEO_Pack_Feature_Manager', 'WC_Widget_Cart',
         'WC_Widget_Products', 'WC_Widget_Layered_Nav', 'WC_Widget_Layered_Nav_Filters', 'WC_Widget_Price_Filter',
         'WC_Widget_Product_Categories', 'WC_Widget_Product_Search', 'WC_Widget_Product_Tag_Cloud',
-        'WC_Widget_Recent_Reviews', 'WC_Widget_Recently_Viewed', 'WC_Widget_Top_Rated_Products'
+        'WC_Widget_Recent_Reviews', 'WC_Widget_Recently_Viewed', 'WC_Widget_Top_Rated_Products', 'GADASH_Config',
+        'GADASH_Tools', 'Sunrise4', 'Sunrise4_Views', 'GADASH_Tracking', 'GADASH_Frontend_Ajax', 'GADASH_Backend_Ajax',
+        'BWS_add_admin_tooltip'
     ];
 
     $parts = explode('\\', $name);

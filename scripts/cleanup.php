@@ -5,7 +5,7 @@
 # v1.0
 #
 
-require 'bootstrap.php';
+require 'init/bootstrap.php';
 
 use minecraftia\db\Bitch;
 
