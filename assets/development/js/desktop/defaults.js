@@ -133,6 +133,12 @@ App.Defaults = (function() {
             "title": "<i class='fa fa-group'></i> Sessões"
         },
 
+        "admin-tickets": {
+            "name": "admin-tickets",
+            "source": "/admin/tickets",
+            "title": "<i class='fa fa-ticket'></i> Tickets"
+        },
+
         "admin-drops": {
             "name": "admin-drops",
             "source": "/admin/drops",

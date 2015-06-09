@@ -152,6 +152,14 @@
             </li>
 
             <li>
+                <a id="menu-item-admin-tickets" href="#" data-widget-open="admin-tickets" role="toaster-launcher">
+                    <i class="fa fa-ticket"></i> Tickets
+                </a>
+                <span rel="menu-item-admin-sessions" role="toaster-content">
+                    Tickets
+                </span>
+            </li>
+            <li>
                 <a id="menu-item-admin-drops" href="#" data-widget-open="admin-drops" role="toaster-launcher">
                     <i class="fa fa-th-list"></i> Drops
                 </a>

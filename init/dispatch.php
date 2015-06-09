@@ -71,6 +71,10 @@ $r->map('POST', '/admin/drops', 'u_admin_drops', 'controllers/admin/u_admin_drop
 $r->map('GET',  '/admin/logs', 'v_admin_logs', 'controllers/admin/v_admin_logs.php');
 $r->map('POST', '/admin/logs', 'u_admin_logs', 'controllers/admin/u_admin_logs.php');
 
+/* Tickets */
+$r->map('GET',  '/admin/tickets', 'v_admin_tickets', 'controllers/admin/v_admin_tickets.php');
+$r->map('POST', '/admin/tickets', 'u_admin_tickets', 'controllers/admin/u_admin_tickets.php');
+
 /* Endereços IP */
 $r->map('GET',  '/admin/ip_addresses', 'v_admin_ip_addresses', 'controllers/admin/v_admin_ip_addresses.php');
 

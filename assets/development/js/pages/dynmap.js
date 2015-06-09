@@ -41,16 +41,12 @@ $(function() {
 
         $("div.overlay_button").click(function() {
             $("div.dynmap-custom-controls").css("visibility", "hidden");
-            $("div.overlay").fadeIn(250, function() {
-
-            })
+            $("div.overlay").fadeIn(250, function() { })
         });
 
-        $("div.overlay").click(function() {
+        $("div.overlay").click(function(e) {
             $("div.dynmap-custom-controls").css("visibility", "visible");
-            $(this).fadeOut(250, function() {
-
-            })
+            $(this).fadeOut(250, function () { });
         });
 
         $("div.dynmap-loading-cover").fadeOut(100);
