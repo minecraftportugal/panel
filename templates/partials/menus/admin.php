@@ -50,6 +50,14 @@
             </span>
         </li>
         <li>
+            <a id="menu-item-admin-bans" href="#" data-widget-open="admin-bans" role="toaster-launcher">
+                <i class="fa fa-crosshairs"></i> Bans
+            </a>
+            <span rel="menu-item-admin-bans" role="toaster-content">
+                Bans aplicados aos jogadores
+            </span>
+        </li>
+        <li>
             <a id="menu-item-admin-logs" href="#" data-widget-open="admin-logs" role="toaster-launcher">
                 <i class="fa fa-warning"></i> Logs
             </a>

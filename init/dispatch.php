@@ -83,6 +83,10 @@ $r->map('POST', '/admin/logs', 'u_admin_logs', 'controllers/admin/u_admin_logs.p
 $r->map('GET',  '/admin/tickets', 'v_admin_tickets', 'controllers/admin/v_admin_tickets.php');
 $r->map('POST', '/admin/tickets', 'u_admin_tickets', 'controllers/admin/u_admin_tickets.php');
 
+/* Bans */
+$r->map('GET',  '/admin/bans', 'v_admin_bans', 'controllers/admin/v_admin_bans.php');
+$r->map('POST', '/admin/bans', 'u_admin_bans', 'controllers/admin/u_admin_bans.php');
+
 /* Endereços IP */
 $r->map('GET',  '/admin/ip_addresses', 'v_admin_ip_addresses', 'controllers/admin/v_admin_ip_addresses.php');
 

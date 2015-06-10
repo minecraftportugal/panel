@@ -369,3 +369,8 @@ span.badge-offline {
 .w100px {
     width: 100px;
 }
+
+span.annotation {
+    font-size: 10px;
+    color: #cccccc;
+}

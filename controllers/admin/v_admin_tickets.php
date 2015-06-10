@@ -107,7 +107,6 @@ function v_admin_tickets() {
         'order_by' => 'status'
     ]);
 
-
     $status_form_select = FormHelper::select('status', [
         [ 'value' => '', 'label' => '&mdash;'],
         [ 'value' => 'CLOSED', 'label' => 'CLOSED'],

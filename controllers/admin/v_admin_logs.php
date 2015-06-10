@@ -20,14 +20,16 @@ function v_admin_logs() {
 
     $form_url = '/admin/logs';
 
-    $parameters = ArgumentsHelper::process($_GET, [
+    $event_types = Logs::event_types();
+
+    $parameters = ArgumentsHelper::process($_GET, array_merge([
         "page" => 1,
         "per_page" => 20,
         "accountid" => null,
         "event_type" => null,
         "order_by" => "time",
         "asc_desc" => "desc"
-    ]);
+    ], array_combine($event_types, array_map(function() { return 1; }, $event_types))));
 
     $total = Logs::count($parameters);
     
@@ -47,7 +49,8 @@ function v_admin_logs() {
       "expand" => 20,
     ]);
 
-    $event_types = Logs::event_types();
+
+
 
     $table = new TableHelper($action_url, $parameters);
 

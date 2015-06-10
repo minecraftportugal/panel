@@ -145,6 +145,11 @@ App.Defaults = (function() {
             "title": "<i class='fa fa-th-list'></i> Drops"
         },
 
+        "admin-bans": {
+            "name": "admin-bans",
+            "source": "/admin/bans",
+            "title": "<i class='fa fa-crosshairs'></i> Bans"
+        },
 
         "admin-logs": {
             "name": "admin-logs",

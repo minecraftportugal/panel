@@ -270,3 +270,13 @@ table.inventory tr:not(:nth-child(4)) td:first-child {
     background: rgba(180, 0, 0, 0.15);
     border: 1px solid #880000;
 }
+
+tr.greenish {
+    background: rgba(0, 180, 0, 0.05);
+    border: none;
+}
+
+tr.reddish {
+    background: rgba(180, 0, 0, 0.05);
+    border: none;
+}
