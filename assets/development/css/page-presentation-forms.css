@@ -119,6 +119,16 @@ input[type="number"] {
   /* width: 60px; */
 }
 
+textarea.editable {
+    border: 1px solid #333333;
+    color: #EEEEEE;
+    width: calc(100% - 20px);
+    background: rgba(255, 255, 255, 0.05);
+    resize: vertical;
+    max-height: 100px;
+    margin: 4px;
+}
+
 textarea.readonly {
     border: 0;
     color: #ffffff;

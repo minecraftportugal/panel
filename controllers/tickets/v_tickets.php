@@ -10,38 +10,35 @@ use helpers\table\TableHelper;
 use helpers\minotar\MinotarHelper;
 use helpers\form\FormHelper;
 
-function v_admin_tickets() {
+function v_tickets() {
 
-    Session::validateSession(true);
+    Session::validateSession();
 
     $xsrf_token = Session::getXSRFToken();
 
-    $template = Template::init('admin/v_admin_tickets');
+    $template = Template::init('tickets/v_tickets');
 
     $parameters = ArgumentsHelper::process($_GET, [
         'id' => null,
-        'owner' => null,
-        'admin' => null,
         'ticket_date_begin' => null,
         'ticket_date_end' => null,
-        'expiration_date_begin' => null,
-        'expiration_date_end' => null,
-        'description' => null,
-        'adminreply' => null,
-        'userreply' => null,
         'status' => null,
         'page' => 1,
         'per_page' => 10,
         'order_by' => '1',
         'asc_desc' => 'desc'
     ]);
+    $parameters['owner'] = Session::get('username');
+    $parameters['admin'] = null;
+    $parameters['description'] = null;
+    $parameters['expiration_date_begin'] = null;
+    $parameters['expiration_date_end'] = null;
+    $parameters['adminreply'] = null;
+    $parameters['userreply'] = null;
 
-    $action_url = '/admin/tickets';
-
-    $form_url = '/admin/tickets';
+    $action_url = '/tickets';
 
     $total = AccountTickets::count($parameters);
-
     $page = AccountTickets::get($parameters);
 
     /** Filters: Change and add new data */
@@ -114,9 +111,13 @@ function v_admin_tickets() {
         [ 'value' => 'OPEN', 'label' => 'OPEN']
     ], $parameters['status']);
 
-    $template->assign('action_url', $action_url);
+    /*<select id="status_sel" name="status">
+                        <option value="">&mdash;</option>
+                        <option value="CLOSED">CLOSED</option>
+                        <option value="OPEN">OPEN</option>
+                    </select>;*/
 
-    $template->assign('form_url', $form_url);
+    $template->assign('action_url', $action_url);
 
     $template->assign('parameters', $parameters);
 

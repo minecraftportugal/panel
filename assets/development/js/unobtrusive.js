@@ -95,6 +95,15 @@ $(function() {
         $form.find("input[type=text]").attr("value", "");
         $form.find("input[type=date]").attr("value", "");
         $form.find("input[type=checkbox]").attr("checked", false);
+        $form.find("select").each(function(n, element) {
+            $element = $(element);
+
+            $element.find("option[selected]").each(function() {
+               $(this).removeAttr('selected');
+            });
+
+            $element.find("option:first").attr("selected", "selected");
+        });
 
         $form.submit();
     });

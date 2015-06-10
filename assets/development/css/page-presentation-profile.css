@@ -204,6 +204,7 @@ table.stats {
 table.stats th,
 table.stats td {
     padding: 4px;
+    vertical-align: middle;
 }
 
 table.stats th {
@@ -212,6 +213,30 @@ table.stats th {
 
 }
 
+table.tickets {
+    border-collapse: separate;
+    table-layout: fixed;
+}
+
+table.tickets th,
+table.tickets td {
+    vertical-align: middle;
+    overflow: hidden;
+}
+
+table.tickets td {
+    padding: 10px;
+}
+
+table.tickets th {
+    padding: 4px;
+    border-top: solid 1px #353535;
+    border-bottom: solid 1px #353535;
+    background: linear-gradient(to bottom, #252525, #353535);
+    color: #FFFFFF;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    text-align: left;
+}
 
 table.inventory {
     border: 2px solid #888888;
@@ -232,4 +257,16 @@ table.inventory tr:nth-child(4) td {
 table.inventory tr:not(:nth-child(4)) td:first-child {
 
     margin-left: 10px;
+}
+
+.greenish {
+    color: #dddddd;
+    background: rgba(0, 180, 0, 0.15);
+    border: 1px solid #008800;
+}
+
+.reddish {
+    color: #dddddd;
+    background: rgba(180, 0, 0, 0.15);
+    border: 1px solid #880000;
 }

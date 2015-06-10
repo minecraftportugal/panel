@@ -31,6 +31,21 @@
          </span>
       </li>
 
+
+      <li>
+          <a id="menu-tickets" href="/tickets"
+             data-widget-action="open"
+             data-widget-classes="widget-scrollable-y"
+             data-widget-title="<i class='fa fa-ticket'></i> User Tickets"
+             data-widget-name="user-tickets"
+             role="toaster-launcher">
+              <i class="fa fa-ticket"></i> User Tickets
+          </a>
+       <span rel="menu-tickets" role="toaster-content">
+           Ver os Tickets deste utilizador
+       </span>
+      </li>
+
       <li class="separator">
         <a id="menu-logout" href="#" role="toaster-launcher">
           <i class="fa fa-sign-out"></i> Sair

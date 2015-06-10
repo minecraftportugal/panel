@@ -1,4 +1,4 @@
-<div id="widget-accounts">
+<div id="widget-admin-tickets">
 
     <?= $notices ?>
 
@@ -48,11 +48,7 @@
                     <h2>Estado</h2>
                 </li>
                 <li>
-                    <select id="status_sel" name="status">
-                        <option value="">&mdash;</option>
-                        <option value="CLOSED">CLOSED</option>
-                        <option value="OPEN">OPEN</option>
-                    </select>
+                    <?= $status_form_select ?>
                 </li>
                 <li>
                     <input type="submit" value="pesquisa" />
@@ -77,13 +73,13 @@
 
                     <td rowspan="<?= $r['rowspan'] ?>">
                         <a href="/ticket?id=<?= $r['id'] ?>"
-                           title="<?= $r["owner"] ?>"
+                           title="Ticket #<?= $r["id"] ?>"
                            class="noajax"
                            data-widget-action="open"
                            data-widget-classes="widget-scrollable-y"
-                           data-widget-name="profile-<?= $r["owner"] ?>"
-                           data-widget-title="<i class='fa fa-ticket'></i> <?= $r["owner"] ?>">
-                            <span class="pull-left"><?= $r["id"] ?></span>
+                           data-widget-name="ticket-<?= $r["id"] ?>"
+                           data-widget-title="<i class='fa fa-ticket'></i> Ticket #<?= $r["id"] ?>">
+                            <span class="pull-left">#<?= $r["id"] ?></span>
                         </a>
                     </td>
 
@@ -161,8 +157,8 @@
                 <tr class="<?= $r['rowcolor'] ?>">
 
                     <td>
-                        <? if (!is_null($r['adminid'])): ?>
-                            <span><?= $r['adminhead'] ?></span>
+                        <? if (!is_null($r['ownerid'])): ?>
+                            <span><?= $r['ownerhead'] ?></span>
                         <? endif; ?>
                     </td>
 
@@ -192,7 +188,7 @@
 
             <? if ($total == 0): ?>
                 <tr>
-                    <td colspan="8" class="center">
+                    <td colspan="6" class="center">
                         <div>
                             Não foram encontrados tickets através dos critérios especificados!
                         </div>
@@ -202,9 +198,7 @@
             </tbody>
             <? endif; ?>
 
-
         </table>
-
 
         <div class="separator"></div>
 

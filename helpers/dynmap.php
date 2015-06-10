@@ -4,7 +4,7 @@ namespace helpers\dynmap;
 
 class DynmapHelper {
 
-    function url($playername = null) {
+    static function url($playername = null) {
         $url = DYNMAP_URL;
 
         if (!is_null($playername)) {
@@ -15,7 +15,7 @@ class DynmapHelper {
 
     }
 
-    function map($playername = null, $block = true) {
+    static function map($playername = null, $block = true) {
 
         $url = DynmapHelper::url($playername);
 
@@ -28,7 +28,7 @@ class DynmapHelper {
         return $html;
     }
 
-    function url_position($position, $world) {
+    static function url_position($position, $world) {
         $x = round($position[0]);
         $y = round($position[1]);
         $z = round($position[2]);
@@ -36,7 +36,7 @@ class DynmapHelper {
         return DYNMAP_URL . "?zoom=6&worldname=$world&x=$x&y=$y&z=$z";
     }
 
-    function map_position($position, $world, $block = true) {
+    static function map_position($position, $world, $block = true) {
 
 
         $url = DynmapHelper::url_position($position, $world);
@@ -51,7 +51,7 @@ class DynmapHelper {
         return $html;
     }
 
-    function url_offline() {
+    static function url_offline() {
         return "/testpattern";
     }
 

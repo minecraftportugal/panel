@@ -59,8 +59,8 @@ class AccountTickets {
                   LEFT JOIN minecraft_auth.accounts a_owner ON t.owner = a_owner.playername
                   LEFT JOIN minecraft_auth.accounts a_admin ON t.admin = a_admin.playername
                 WHERE ((:id is NULL) OR (t.id = :id))
-                AND t.owner = IFNULL(:owner, t.owner)
-                AND t.admin = IFNULL(:admin, t.admin)
+                AND ((t.owner = IFNULL(:owner, t.owner)) OR (t.owner IS NULL and :owner IS NULL))
+                AND ((t.admin = IFNULL(:admin, t.admin)) OR (t.admin IS NULL and :admin IS NULL))
                 AND ((:ticket_date_begin IS NULL) OR (:ticket_date_begin <= DATE(t.date)))
                 AND ((:ticket_date_end IS NULL) OR (:ticket_date_end >= DATE(t.date)))
                 AND ((:expiration_date_begin IS NULL) OR (:expiration_date_begin <= DATE(t.expiration)))
@@ -100,6 +100,71 @@ class AccountTickets {
         }
     }
 
+    public static function toggle($parameters) {
+        $q = "UPDATE minecraft_tickets.SHT_Tickets t
+        SET t.status = IF(t.status = 'OPEN', 'CLOSED', 'OPEN')
+        WHERE t.id = :id
+        ";
+
+        if (array_key_exists('owner', $parameters)) {
+            $q .= "AND t.owner = :owner";
+        }
+
+        $result = Bitch::source('default')->query($q, $parameters);
+
+        if (!$result) {
+            die('Invalid query');
+        }
+
+        return true;
+
+    }
+
+    public static function assign($parameters) {
+        $q = "UPDATE minecraft_tickets.SHT_Tickets t
+        SET t.admin = :admin
+        WHERE t.id = :id";
+
+        $result = Bitch::source('default')->query($q, $parameters);
+
+        if (!$result) {
+            die('Invalid query');
+        }
+
+        return true;
+
+    }
+
+    public static function admin_reply($parameters) {
+        $q = "UPDATE minecraft_tickets.SHT_Tickets t
+        SET t.admin = :admin,
+          t.adminreply = CONCAT(:admin, ': ', :reply)
+        WHERE t.id = :id";
+
+        $result = Bitch::source('default')->query($q, $parameters);
+
+        if (!$result) {
+            die('Invalid query');
+        }
+
+        return true;
+
+    }
+
+    public static function user_reply($parameters) {
+        $q = "UPDATE minecraft_tickets.SHT_Tickets t
+        SET t.userreply = :reply
+        WHERE t.id = :id AND t.owner = :owner";
+
+        $result = Bitch::source('default')->query($q, $parameters);
+
+        if (!$result) {
+            die('Invalid query');
+        }
+
+        return true;
+
+    }
 }
 
 ?>
