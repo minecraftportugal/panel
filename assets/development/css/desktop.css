@@ -58,6 +58,13 @@ div#widget-button-home-menu {
     height: 30px;
 }
 
+div#widget-button-admin-menu {
+    position: absolute;
+    left: 31px;
+    bottom: 0;
+    height: 30px;
+}
+
 div#widget-button-home-menu.active {
     background: linear-gradient(to bottom, #555555, #353535);
 }
@@ -65,7 +72,7 @@ div#widget-button-home-menu.active {
 div#widget-button-container-scroll-left {
     border-right: 1px solid #101010;
     position: absolute;
-    left: 111px;
+    left: 31px;
     bottom: 0;
 }
 
@@ -79,7 +86,7 @@ div#widget-button-container-scroll-left:active {
 
 div#widget-button-container {
     position: absolute;
-    left: 122px;
+    left: 42px;
     right: 74px;
     bottom: 0;
     height: 30px;
@@ -160,17 +167,22 @@ div.widget-button-container-scroll:active {
 
 div#widget-homemenu {
     left: 0px;
-    height: 180px;
+    height: 330px;
+}
+
+div#widget-adminmenu {
+    left: 31px;
+    height: 240px;
 }
 
 div#widget-usermenu {
     right: 0px;
-    height: 131px;
+    height: 151px;
 }
 
 div#widget-desktopmenu {
     right: 31px;
-    height: 182px;
+    height: 212px;
 }
 
 div.widget-menu {
@@ -219,32 +231,29 @@ div.widget-menu .bg-icon {
     padding-left: 20px !important;
 }
 
-div.widget-menu > ul > li:first-child {
+div.widget-menu li {
     vertical-align: middle !important;
+}
+
+div.widget-menu li.header {
     padding-left: 6px;
     background: linear-gradient(to bottom, #454545, #252525);
+}
+
+div.widget-menu li {
     height: 30px !important;
     line-height: 30px;
 }
 
-div.widget-menu > ul:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-div.widget-menu > ul:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-
-div.widget-menu > ul > li > ul > li > a {
+div.widget-menu > ul > li > a {
     padding-left: 6px;
 }
 
-div.widget-menu > ul > li > ul > li > a:hover {
+div.widget-menu > ul > li > a:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-div.widget-menu > ul > li > ul > li > a:active {
+div.widget-menu > ul > li > a:active {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
