@@ -9,6 +9,12 @@
                     Bans (<?= $total ?>)
                 </li>
                 <li>
+                    <h2>Sujeito</h2>
+                </li>
+                <li>
+                    <input type="text" name="subject" placeholder="" value="<?= $parameters['subject'] ?>">
+                </li>
+                <li>
                     <h2 title="Apenas serão mostrados bans postos após esta data">Criado após</h2>
                 </li>
                 <li>
@@ -48,6 +54,10 @@
                     <label class="checkbox" for="chk_expired" title="ban expirado">expirados</label>
                 </li>
                 <li>
+                    <input id="chk_effective" type="checkbox" name="effective" value="1" <?= $parameters['effective'] == 1 ? 'checked="checked"' : '' ?> />
+                    <label class="checkbox" for="chk_effective" title="ban em vigor">em vigor</label>
+                </li>
+                <li>
                     <h2>Tipo</h2>
                 </li>
                 <li>
@@ -72,7 +82,7 @@
 
                 <tbody class="font-mono">
                 <? foreach((array)$page as $r): ?>
-                    <tr class="<?= (!$r['effective']) ? 'reddish' : 'greenish' ?>">
+                    <tr class="<?= (!$r['effective']) ? '' : 'reddish' ?>">
 
                         <td>
                             <? if ($r['bantype'] == 'NAME'): ?>
@@ -98,15 +108,14 @@
                                     &nbsp;(<i class="fa fa-volume-off" title="muted"></i>)
                                 <? endif; ?>
                             <? else: ?>
-                                <a href="/profile?id=<?= $r['accountid'] ?>"
+                                <a href="/admin/accounts?ipaddress=<?= $r['subject'] ?>"
                                    title="<?= $r["subject"] ?>"
                                    class="noajax"
                                    data-widget-action="open"
                                    data-widget-classes="widget-scrollable-y"
-                                   data-widget-name="profile-<?= $r["subject"] ?>"
-                                   data-widget-title="<i class='fa fa-user'></i> <?= $r["subject"] ?>">
+                                   data-widget-name="admin-accounts"
+                                   data-widget-title="<i class='fa fa-users'></i> Contas">
                                     <span class="pull-left"><?= $r["subject"] ?></span>
-                                    <span class="pull-left online" title="O jogador está online!"></span>
                                 </a>
                                 <? if ($r["bantype"] == 'MUTE'): ?>
                                     &nbsp;(<i class="fa fa-volume-off" title="muted"></i>)

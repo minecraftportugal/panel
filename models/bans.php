@@ -18,7 +18,8 @@ class Bans {
         "expires_date_end" => null,
         "permanent" => 0,
         "temporary" => 0,
-        "expired" => 0
+        "expired" => 0,
+        "effective" => 0
     ];
 
     public static function count($args = []) {
@@ -27,7 +28,7 @@ class Bans {
         $args = array_intersect_key($args, array_flip([
             "subject", "banner", "bantype", "created_date_begin",
             "created_date_end", "expires_date_begin", "expires_date_end",
-            "permanent", "expired", "temporary"
+            "permanent", "expired", "temporary", "effective"
         ]));
 
         $q = "SELECT SUM(x.total) AS total FROM (
@@ -44,6 +45,7 @@ class Bans {
                   AND ((:permanent = 0) OR (:permanent = 1 AND bip.expires = 0))
                   AND ((:temporary = 0) OR (:temporary = 1 AND bip.expires > 0))
                   AND ((:expired = 0) OR (:expired = 1 AND (bip.expires / 1000) < UNIX_TIMESTAMP() AND bip.expires > 0))
+                  AND ((:effective = 0) OR (:effective = 1 AND (bip.expires / 1000) > UNIX_TIMESTAMP() OR bip.expires = 0))
                   UNION
                   SELECT COUNT(1) AS total
                   FROM minecraft_maxbans.bans ban
@@ -58,6 +60,7 @@ class Bans {
                   AND ((:permanent = 0) OR (:permanent = 1 AND ban.expires = 0))
                   AND ((:temporary = 0) OR (:temporary = 1 AND ban.expires > 0))
                   AND ((:expired = 0) OR (:expired = 1 AND (ban.expires / 1000) < UNIX_TIMESTAMP() AND ban.expires > 0))
+                  AND ((:effective = 0) OR (:effective = 1 AND NOT (ban.expires / 1000) > UNIX_TIMESTAMP() OR ban.expires = 0))
                   UNION
                   SELECT COUNT(1) AS total
                   FROM minecraft_maxbans.mutes bmu
@@ -72,6 +75,7 @@ class Bans {
                   AND ((:permanent = 0) OR (:permanent = 1 AND bmu.expires = 0))
                   AND ((:temporary = 0) OR (:temporary = 1 AND bmu.expires > 0))
                   AND ((:expired = 0) OR (:expired = 1 AND (bmu.expires / 1000) < UNIX_TIMESTAMP() AND bmu.expires > 0))
+                  AND ((:effective = 0) OR (:effective = 1 AND NOT (bmu.expires / 1000) > UNIX_TIMESTAMP() OR bmu.expires = 0))
               ) x;";
 
         return Bitch::source('default')->first($q, $args)["total"];
@@ -88,7 +92,7 @@ class Bans {
         $args = array_intersect_key($args, array_flip([
             "subject", "banner", "bantype", "created_date_begin",
             "created_date_end", "expires_date_begin", "expires_date_end",
-            "permanent", "expired", "temporary",
+            "permanent", "expired", "temporary", "effective",
             "index", "per_page"
         ]));
 
@@ -113,6 +117,7 @@ class Bans {
               AND ((:permanent = 0) OR (:permanent = 1 AND bip.expires = 0))
               AND ((:temporary = 0) OR (:temporary = 1 AND bip.expires > 0))
               AND ((:expired = 0) OR (:expired = 1 AND (bip.expires / 1000) < UNIX_TIMESTAMP() AND bip.expires > 0))
+              AND ((:effective = 0) OR (:effective = 1 AND (bip.expires / 1000) > UNIX_TIMESTAMP() OR bip.expires = 0))
               UNION
               SELECT IFNULL(a.playername, ban.name) AS subject, ban.reason, IFNULL(a2.playername, ban.banner) AS banner,
                     IF(ban.time = 0, '', FROM_UNIXTIME(ban.time / 1000)) AS time_df,
@@ -134,6 +139,7 @@ class Bans {
               AND ((:permanent = 0) OR (:permanent = 1 AND ban.expires = 0))
               AND ((:temporary = 0) OR (:temporary = 1 AND ban.expires > 0))
               AND ((:expired = 0) OR (:expired = 1 AND (ban.expires / 1000) < UNIX_TIMESTAMP() AND ban.expires > 0))
+              AND ((:effective = 0) OR (:effective = 1 AND (ban.expires / 1000) > UNIX_TIMESTAMP() OR ban.expires = 0))
               UNION
               SELECT IFNULL(a.playername, bmu.name) AS subject, bmu.reason, IFNULL(a2.playername, bmu.muter) AS banner,
                     IF(bmu.time = 0, '', FROM_UNIXTIME(bmu.time / 1000)) AS time_df,
@@ -155,6 +161,7 @@ class Bans {
               AND ((:permanent = 0) OR (:permanent = 1 AND bmu.expires = 0))
               AND ((:temporary = 0) OR (:temporary = 1 AND bmu.expires > 0))
               AND ((:expired = 0) OR (:expired = 1 AND (bmu.expires / 1000) < UNIX_TIMESTAMP() AND bmu.expires > 0))
+              AND ((:effective = 0) OR (:effective = 1 AND (bmu.expires / 1000) > UNIX_TIMESTAMP() OR bmu.expires = 0))
         ) x
         WHERE 1 = 1
         AND ((:created_date_begin IS NULL) OR (:created_date_begin <= date(x.time_df)))

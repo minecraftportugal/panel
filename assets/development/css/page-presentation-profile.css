@@ -196,6 +196,9 @@ div.hunger > span.full
 /*
  * Tables
  */
+table.listing tr.striked td {
+    text-decoration: line-through;
+}
 
 table.stats {
     border-collapse: separate;

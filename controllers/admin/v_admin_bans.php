@@ -31,6 +31,7 @@ function v_admin_bans() {
         "permanent" => 0,
         "temporary" => 0,
         "expired" => 0,
+        "effective" => 0,
         "order_by" => "time_df",
         "asc_desc" => "desc"
     ]);
