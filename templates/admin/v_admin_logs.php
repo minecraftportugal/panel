@@ -2,6 +2,8 @@
 
   <?= $notices ?>
 
+    <? //var_dump($parameters); die(); ?>
+
   <div class="page-panel-body page-panel-left page-filters page-panel-scrollable-auto">
     <form name="manage_logs_filters" action="<?= $action_url ?>" method="GET" autocomplete="off">
       <ul>
@@ -13,7 +15,7 @@
         </li>
       <? foreach($event_types as $event_type): ?>
         <li>
-          <input id="chk_<?= $event_type ?>" type="checkbox" name="<?= $event_type ?>" value="1" <?= $parameters[$event_type] == 1 ? 'checked="checked"' : '' ?> />
+          <input id="chk_<?= $event_type ?>" type="checkbox" name="event_type[<?= $event_type ?>]" value="1" <?= /*$parameters["event_type[" . $event_type . "]"]*/ 1  == 1 ? 'checked="checked"' : '' ?> />
           <label class="checkbox" for="chk_<?= $event_type ?>" title="<?= $event_type ?>"><?= $event_type ?></label>
         </li>
       <? endforeach; ?>

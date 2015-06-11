@@ -22,17 +22,18 @@ function v_admin_logs() {
 
     $event_types = Logs::event_types();
 
-    $parameters = ArgumentsHelper::process($_GET, array_merge([
+    $parameters = ArgumentsHelper::process($_GET, [
         "page" => 1,
         "per_page" => 20,
         "accountid" => null,
-        "event_type" => null,
+        "event_type" => [],
         "order_by" => "time",
         "asc_desc" => "desc"
-    ], array_combine($event_types, array_map(function() { return 1; }, $event_types))));
+    ]);
+
 
     $total = Logs::count($parameters);
-    
+
     $page = Logs::get($parameters);
 
     $link_after = ArgumentsHelper::serialize($parameters);
@@ -48,9 +49,6 @@ function v_admin_logs() {
       "show_pages" => 4,
       "expand" => 20,
     ]);
-
-
-
 
     $table = new TableHelper($action_url, $parameters);
 
