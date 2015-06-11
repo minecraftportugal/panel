@@ -49,6 +49,14 @@ $r->map('GET',  '/directory', 'v_directory', 'controllers/directory/v_directory.
 /* IRC */
 $r->map('GET', '/irc', 'v_irc', 'controllers/irc/v_irc.php');
 
+/* Tickets */
+$r->map('GET',  '/ticket', 'v_ticket', 'controllers/tickets/v_ticket.php');
+$r->map('GET',  '/tickets', 'v_tickets', 'controllers/tickets/v_tickets.php');
+$r->map('POST',  '/ticket/admin/reply', 'u_ticket_admin_reply', 'controllers/tickets/u_ticket_admin_reply.php');
+$r->map('POST',  '/ticket/reply', 'u_ticket_reply', 'controllers/tickets/u_ticket_reply.php');
+$r->map('POST',  '/ticket/toggle', 'u_ticket_toggle', 'controllers/tickets/u_ticket_toggle.php');
+$r->map('POST',  '/ticket/assign', 'u_ticket_assign', 'controllers/tickets/u_ticket_assign.php');
+
 /* * Admin * */
 
 /* Registar Utilizador */
@@ -70,6 +78,14 @@ $r->map('POST', '/admin/drops', 'u_admin_drops', 'controllers/admin/u_admin_drop
 /* Logs */
 $r->map('GET',  '/admin/logs', 'v_admin_logs', 'controllers/admin/v_admin_logs.php');
 $r->map('POST', '/admin/logs', 'u_admin_logs', 'controllers/admin/u_admin_logs.php');
+
+/* Tickets */
+$r->map('GET',  '/admin/tickets', 'v_admin_tickets', 'controllers/admin/v_admin_tickets.php');
+$r->map('POST', '/admin/tickets', 'u_admin_tickets', 'controllers/admin/u_admin_tickets.php');
+
+/* Bans */
+$r->map('GET',  '/admin/bans', 'v_admin_bans', 'controllers/admin/v_admin_bans.php');
+$r->map('POST', '/admin/bans', 'u_admin_bans', 'controllers/admin/u_admin_bans.php');
 
 /* Endereços IP */
 $r->map('GET',  '/admin/ip_addresses', 'v_admin_ip_addresses', 'controllers/admin/v_admin_ip_addresses.php');

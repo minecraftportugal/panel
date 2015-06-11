@@ -23,8 +23,11 @@ class AccountDrops {
     public static function count($args = []) {
         $args = array_merge(AccountDrops::$args, $args);
 
-        /* Other models don't need this. Why? /!\ */
-        $args = array_intersect_key($args, array_flip(["accountid", "drop_date_begin", "drop_date_end", "taken_date_begin", "taken_date_end", "undelivered", "delivered"]));
+        $args = array_intersect_key($args, array_flip([
+            "accountid", "drop_date_begin", "drop_date_end",
+            "taken_date_begin", "taken_date_end",
+            "undelivered", "delivered"
+        ]));
 
         $q = "SELECT COUNT(1) AS total
             FROM itemdrops i INNER JOIN accounts a ON i.accountid = a.id

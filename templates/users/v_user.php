@@ -274,7 +274,7 @@
                     Ficha do Jogador
                 </div>
                 <div>
-                    <table class="stats font-mono">
+                    <table class="stats font-mono w100">
                         <tbody>
                         <? if ($player): ?>
                             <tr><th>Status</th><td class="<?= $player['online'] == 1 ? 'online' : 'offline' ?>"><?= $player['online'] == 1 ? 'online' : 'offline' ?></td></tr>

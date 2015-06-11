@@ -28,4 +28,13 @@ CONNice::add('inquisitor', [
   'password' => 'minecr4ft'
   ]);
 
+CONNice::add('tickets', [
+    'prefix' => 'mysql',
+    'host' => 'localhost',
+    'port' => 3306,
+    'database' => 'minecraft_tickets',
+    'user' => 'minecraft',
+    'password' => 'minecr4ft'
+]);
+
 ?>

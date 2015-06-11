@@ -153,6 +153,13 @@ table.listing.alt-rows-2 tr:nth-child(4n-3) td {
     background: rgba(255, 255, 255, 0.1);
 }
 
+tr.light td {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+tr.dark td {
+    background: rgba(0, 0, 0, 0.05);
+}
 
 table.listing thead td.column-sortable {
     cursor: pointer;
@@ -163,7 +170,11 @@ table.listing thead td.column-sortable:active {
     background: linear-gradient(to bottom, #000000, #252525) !important;
 }
 
-table.listing tbody tr:hover td {
+table.listing:not(grouped-listing) tbody tr:hover td {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+table.listing.grouped-listing tbody:hover tr td {
     background: rgba(255, 255, 255, 0.1) !important;
 }
 
@@ -337,4 +348,29 @@ span.badge-offline {
 
 .text-center {
     text-align: center;
+}
+
+.h30px {
+    height: 30px;
+}
+
+.h80px {
+    height: 80px;
+}
+
+.h350px {
+    height: 350px;
+}
+
+.w100pct {
+    width: 100%;
+}
+
+.w100px {
+    width: 100px;
+}
+
+span.annotation {
+    font-size: 10px;
+    color: #cccccc;
 }

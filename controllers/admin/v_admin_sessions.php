@@ -83,14 +83,12 @@ function v_admin_sessions() {
     $table->add_column([
         'width' => '25%',
         'label' => 'Data',
-        'label_title' => 'Timestamp',
         'order_by' => 'time'
     ]);
 
     $table->add_column([
         'width' => '25%',
-        'label' => 'Informação',
-        'label_title' => 'Informação',
+        'label' => 'Evento'
     ]);
 
     $template->assign('action_url', $action_url);

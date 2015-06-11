@@ -1,6 +1,16 @@
 /* On DOM loaded... */
 $(function() {
 
+    /* Adjust taskbar items position if admin menu is to be present */
+    (function() {
+        var $menu_admin_button = $("div#widget-button-admin-menu");
+
+        if ($menu_admin_button.length > 0) {
+            $("div#widget-button-container").css({ left : 73 });
+            $("div#widget-button-container-scroll-left").css({left: 62});
+        }
+    })();
+
     /* Open menus with open-menu data- API */
     $(document).on("click", "div[data-open-menu]", function(event) {
         var $button = $(this);
@@ -95,6 +105,15 @@ $(function() {
         $form.find("input[type=text]").attr("value", "");
         $form.find("input[type=date]").attr("value", "");
         $form.find("input[type=checkbox]").attr("checked", false);
+        $form.find("select").each(function(n, element) {
+            $element = $(element);
+
+            $element.find("option[selected]").each(function() {
+               $(this).removeAttr('selected');
+            });
+
+            $element.find("option:first").attr("selected", "selected");
+        });
 
         $form.submit();
     });

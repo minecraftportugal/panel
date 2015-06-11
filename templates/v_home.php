@@ -36,6 +36,13 @@
         <?= $menu_home ?>
     </div>
 
+    <? if ($admin): ?>
+        <div class="widget-menu" id="widget-adminmenu">
+            <?= $menu_admin ?>
+        </div>
+    <? endif; ?>
+
+
     <div class="widget-menu" id="widget-usermenu">
         <?= $menu_user ?>
     </div>

@@ -115,8 +115,17 @@ function v_home() {
 
     /* Home menu */
     $menu_home = Template::init('partials/menus/home');
-    $menu_home->assign('admin', Session::isAdmin());
     $template->assign('menu_home', $menu_home);
+
+    /* Admin menu */
+    $admin = Session::isAdmin();
+    $template->assign('admin', $admin);
+    $taskbar->assign('admin', $admin);
+    if ($admin) {
+        $menu_admin = Template::init('partials/menus/admin');
+        $menu_admin->assign('admin', $admin);
+        $template->assign('menu_admin', $menu_admin);
+    }
 
     /* User menu */
     $menu_user = Template::init('partials/menus/user');

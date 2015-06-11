@@ -10,7 +10,7 @@ class Logs {
         "page" => 1,
         "per_page" => 20,
         "accountid" => null,
-        "event_type" => null,
+        "event_type" => [],
         "order_by" => "1",
         "asc_desc" => "desc"
     ];
@@ -18,13 +18,24 @@ class Logs {
     public static function count($args = []) {
         $args = array_merge(Logs::$args, $args);
 
-        /* Other models don't need this. Why? /!\ */
-        $args = array_intersect_key($args, array_flip(["accountid", "event_type"]));
+        $event_type = $args['event_type'];
+        unset($args['event_type']);
+
+        //var_dump($event_type);die();
+//        if (is_array($event_type) && count($event_type) > 0) {
+//            $sql_in = implode(",", array_fill(0, count($event_type), "?"));
+//        } else if (is_scalar($event_type)) {
+//            $sql_in = "?";
+//        } else {
+//            die('wat');
+//        }
+
+        $args = array_intersect_key($args, array_flip(["accountid"]));
 
         $q = "SELECT COUNT(1) AS total
         FROM logs l LEFT JOIN accounts a ON l.accountid = a.id
         WHERE ((:accountid IS NULL) OR (l.accountid = :accountid))
-        AND ((:event_type IS NULL) OR (l.event_type = :event_type))";
+        ";
 
         return Bitch::source('default')->first($q, $args)["total"];
     }
@@ -35,13 +46,13 @@ class Logs {
         $asc_desc = $args["asc_desc"];
 
         /* Other models don't need this. Why? /!\ */
-        $args = array_intersect_key($args, array_flip(["accountid", "event_type", "page", "per_page"]));
+        $args = array_intersect_key($args, array_flip(["accountid", "page", "per_page"]));
 
         $q = "SELECT * FROM (
             SELECT l.id, l.time, l.event_type, l.accountid, l.ipaddress, l.comment, a.playername
             FROM logs l LEFT JOIN accounts a ON l.accountid = a.id
             WHERE ((:accountid IS NULL) OR (l.accountid = :accountid))
-            AND ((:event_type IS NULL) OR (l.event_type = :event_type))
+
         ) x
         ORDER BY $order_by $asc_desc
         LIMIT :index, :per_page;";

@@ -133,12 +133,23 @@ App.Defaults = (function() {
             "title": "<i class='fa fa-group'></i> Sessões"
         },
 
+        "admin-tickets": {
+            "name": "admin-tickets",
+            "source": "/admin/tickets",
+            "title": "<i class='fa fa-ticket'></i> Tickets"
+        },
+
         "admin-drops": {
             "name": "admin-drops",
             "source": "/admin/drops",
             "title": "<i class='fa fa-th-list'></i> Drops"
         },
 
+        "admin-bans": {
+            "name": "admin-bans",
+            "source": "/admin/bans",
+            "title": "<i class='fa fa-crosshairs'></i> Bans"
+        },
 
         "admin-logs": {
             "name": "admin-logs",
