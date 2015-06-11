@@ -176,9 +176,9 @@
                             <? endif; ?>
                         </td>
 
-                        <td class="center">
+                        <? /* <td class="center">
                             <input class="check-delete" name="delete[]" value="<?= $r["id"] ?>" type="checkbox" />
-                        </td>
+                        </td> */?>
 
                     </tr>
                 <? endforeach; ?>
@@ -197,12 +197,12 @@
                 </tbody>
             </table>
 
-            <div class="separator"></div>
+            <? /* <div class="separator"></div>
 
             <div class="center">
                 <input type="hidden" name="xsrf_token" value="<?= $xsrf_token ?>">
                 <input type="submit" value="OK">
-            </div>
+            </div> */?>
         </form>
 
         <div class="separator"></div>

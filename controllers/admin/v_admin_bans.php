@@ -111,12 +111,12 @@ function v_admin_bans() {
         'order_by' => 'expires_df'
     ]);
 
-    $table->add_column([
+    /*$table->add_column([
         'width' => '18px',
         'alignment' => 'center',
         'label' => '<i class="fa fa-trash-o"></i>',
         'label_title' => 'Apagar'
-    ]);
+    ]);*/
 
     $bantype_form_select = FormHelper::select('bantype', [
         [ 'value' => '', 'label' => '&mdash;'],
