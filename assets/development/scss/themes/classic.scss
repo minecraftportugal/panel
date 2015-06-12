@@ -1,3 +1,26 @@
-$taskbar-gradient-direction: to bottom;
-$taskbar-gradient-start-color: #000025;
-$taskbar-gradient-end-color: #101010;
+$widget-taskbar-background: linear-gradient(to bottom, #252525, #101010);
+
+$widget-button-menu-opened: linear-gradient(to bottom, #000000, #000000, #101010);
+
+$widget-button-container-scroll-background: linear-gradient(to bottom, #252525, #101010, #101010);
+$widget-button-container-scroll-border-color: #101010;
+
+$widget-button-container-scroll-background-hover: linear-gradient(to top, #050505, #252525);
+$widget-button-container-scroll-background-active: linear-gradient(to top, #000000, #000000, #101010);
+
+$widget-button-container-scroll-border-color: #101010;
+
+$widget-button-background: linear-gradient(to bottom, #252525, #101010);
+$widget-button-color: #FFFFFF;
+$widget-button-border-color: #101010;
+$widget-button-hover-color: #666666;
+$widget-button-hover-background: linear-gradient(to top, #050505, #252525);
+
+$widget-button-active-color: #888888;
+$widget-button-active-background: linear-gradient(to top, #000000, #000000, #101010);
+
+$widget-menu-background: linear-gradient(to bottom, #454545, #252525);
+$widget-menu-color: #FFFFFF;
+$widget-menu-border-color: #252525;
+$widget-menu-box-shadow: 0 0 40px 5px #000;
+$widget-menu-icon-color: #888888;

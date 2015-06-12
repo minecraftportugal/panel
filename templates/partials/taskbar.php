@@ -1,4 +1,4 @@
-<div id="widget-button-home-menu" class="widget-context-button widget-home-button" title="Click me!" data-open-menu="div#widget-homemenu" role="toaster-launcher">
+<div id="widget-button-home-menu" class="widget-menu-button widget-home-button" title="Click me!" data-open-menu="div#widget-home-menu" role="toaster-launcher">
     <i class="fa fa-home"></i>
 </div>
 
@@ -7,7 +7,7 @@
 </span>
 
 <? if ($admin): ?>
-    <div id="widget-button-admin-menu" class="widget-context-button widget-admin-button" title="Noo! Click me instead!" data-open-menu="div#widget-adminmenu" role="toaster-launcher">
+    <div id="widget-button-admin-menu" class="widget-menu-button widget-admin-button" title="Noo! Click me instead!" data-open-menu="div#widget-admin-menu" role="toaster-launcher">
         <i class="fa fa-gear"></i>
     </div>
 <? endif; ?>
@@ -25,20 +25,20 @@
 <div id="widget-button-container-scroll-right" class="widget-button-container-scroll" >
 </div>
 
-<div id="widget-button-desktopmenu" class="widget-context-button" data-open-menu="div#widget-desktopmenu" role="toaster-launcher">
+<div id="widget-button-desktop-menu" class="widget-menu-button" data-open-menu="div#widget-desktop-menu" role="toaster-launcher">
   <i class="fa fa-desktop"></i>
 </div>
 
-<span rel="widget-button-desktopmenu" role="toaster-content">
+<span rel="widget-button-desktop-menu" role="toaster-content">
     Este menu contém operações sobre o Desktop
 </span>
 
-<div id="widget-button-usermenu" class="widget-context-button" data-open-menu="div#widget-usermenu" role="toaster-launcher">
+<div id="widget-button-user-menu" class="widget-menu-button" data-open-menu="div#widget-user-menu" role="toaster-launcher">
     <a id="usermenu-small" href="#" title="Utilizador" class="bg-icon"
        style="background-image: url('<?= $head_url ?>');">
     </a>
 </div>
 
-<span rel="widget-button-usermenu" role="toaster-content">
+<span rel="widget-button-user-menu" role="toaster-content">
     Este é o menu do utilizador. Contém cenas do user.
 </span>

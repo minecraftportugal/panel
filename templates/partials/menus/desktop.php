@@ -5,7 +5,7 @@
   </li>
 
   <li>
-    <a href="#" id="menu-container-minimize-all" class="widget-context-button" role="toaster-launcher">
+    <a href="#" id="menu-container-minimize-all" role="toaster-launcher">
       <i class="fa fa-minus-circle"></i> Minimizar Tudo
     </a>
     <span rel="menu-container-minimize-all" role="toaster-content">
@@ -14,7 +14,7 @@
   </li>
 
   <li>
-    <a href="#" id="menu-container-embiggen" class="widget-context-button" role="toaster-launcher">
+    <a href="#" id="menu-container-embiggen" role="toaster-launcher">
       <i class="fa fa-th-large"></i> Maximizar Tudo
     </a>
     <span rel="menu-container-embiggen" role="toaster-content">
@@ -23,7 +23,7 @@
   </li>
 
   <li>
-    <a href="#" id="menu-container-cascade" class="widget-context-button" role="toaster-launcher">
+    <a href="#" id="menu-container-cascade" role="toaster-launcher">
       <i class="fa fa-align-justify"></i> Dispor em Cascata
     </a>
     <span rel="menu-container-cascade" role="toaster-content">
@@ -32,7 +32,7 @@
   </li>
 
   <li>
-    <a href="#" id="menu-container-tile" class="widget-context-button" role="toaster-launcher">
+    <a href="#" id="menu-container-tile" role="toaster-launcher">
       <i class="fa fa-list-alt"></i> Alinhar
     </a>
     <span rel="menu-container-tile" role="toaster-content">
@@ -53,7 +53,7 @@
     <a id="menu-reset-widgets" href="#" role="toaster-launcher">
       <i class="fa fa-undo"></i> Reset Desktop
     </a>
-    <span rel="widget-button-desktopmenu" role="toaster-content">
+    <span rel="menu-reset-widgets" role="toaster-content">
         Fecha todas as janelas e limpa os dados do utilizador, voltando o desktop ao seu estado inicial.
     </span>
   </li>

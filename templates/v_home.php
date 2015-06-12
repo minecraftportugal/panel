@@ -32,22 +32,22 @@
         <?= $taskbar ?>
     </div>
 
-    <div class="widget-menu" id="widget-homemenu">
+    <div class="widget-menu" id="widget-home-menu">
         <?= $menu_home ?>
     </div>
 
     <? if ($admin): ?>
-        <div class="widget-menu" id="widget-adminmenu">
+        <div class="widget-menu" id="widget-admin-menu">
             <?= $menu_admin ?>
         </div>
     <? endif; ?>
 
 
-    <div class="widget-menu" id="widget-usermenu">
+    <div class="widget-menu" id="widget-user-menu">
         <?= $menu_user ?>
     </div>
     
-    <div class="widget-menu" id="widget-desktopmenu">
+    <div class="widget-menu" id="widget-desktop-menu">
         <?= $menu_desktop ?>
     </div>
     

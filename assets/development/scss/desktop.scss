@@ -6,16 +6,16 @@
 
 /* unselectable */
 * {
-     -moz-user-select: -moz-none;
-     -khtml-user-select: none;
-     -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
 
-     /*
-         Introduced in IE 10.
-         See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-     */
-     -ms-user-select: none;
-     user-select: none;
+    /*
+        Introduced in IE 10.
+        See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
 }
 
 body {
@@ -42,7 +42,7 @@ p, td, th, span {
 }
 
 div#widget-taskbar {
-    background: linear-gradient($taskbar-gradient-direction, $taskbar-gradient-start-color, $taskbar-gradient-end-color);
+    background: $widget-taskbar-background;
     position: absolute;
     left: 0;
     right: 0;
@@ -67,23 +67,56 @@ div#widget-button-admin-menu {
     height: 30px;
 }
 
-div#widget-button-home-menu.active {
-    background: linear-gradient(to bottom, #555555, #353535);
+div#widget-button-desktop-menu {
+    position: absolute;
+    right: 31px;
+    bottom: 0;
+}
+
+div#widget-button-user-menu {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+div#widget-button-home-menu.active,
+div#widget-button-admin-menu.active,
+div#widget-button-desktop-menu.active,
+div#widget-button-user-menu.active {
+    background: $widget-button-menu-opened;
+}
+
+div.widget-button-container-scroll {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    width: 10px;
+    cursor: pointer;
+}
+
+div.widget-button-container-scroll:hover {
+    background: $widget-button-container-scroll-background;
+}
+
+div.widget-button-container-scroll:active {
+    background: $widget-button-container-scroll-background-active;
 }
 
 div#widget-button-container-scroll-left {
-    border-right: 1px solid #101010;
+    border-right: 1px solid $widget-button-container-scroll-border-color;
     position: absolute;
     left: 31px;
     bottom: 0;
 }
 
-div#widget-button-container-scroll-left:hover {
-    background: linear-gradient(to top, #050505, #050505, #252525);
-}
-
-div#widget-button-container-scroll-left:active {
-    background: linear-gradient(to top, #000000, #000000, #101010);
+div#widget-button-container-scroll-right {
+    border-left: 1px solid $widget-button-container-scroll-border-color;
+    border-right: 1px solid $widget-button-container-scroll-border-color;
+    position: absolute;
+    right: 62px;
+    bottom: 0;
+    height: 30px;
 }
 
 div#widget-button-container {
@@ -96,93 +129,46 @@ div#widget-button-container {
     white-space: nowrap;
 }
 
-div#widget-button-container-scroll-right {
-    border-left: 1px solid #101010;
-    border-right: 1px solid #101010;
-    position: absolute;
-    right: 62px;
-    bottom: 0;
-    height: 30px;
-}
-
-div#widget-button-container-scroll-right:hover {
-    background: linear-gradient(to top, #050505, #050505, #252525);
-}
-
-div#widget-button-container-scroll-right:active {
-    background: linear-gradient(to top, #000000, #000000, #101010);
-}
-
-div#widget-button-desktopmenu {
-    position: absolute;
-    right: 31px;
-    bottom: 0;
-}
-
-div#widget-button-usermenu {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-div.widget-context-button    {
+div.widget-menu-button {
+    background: $widget-button-background;
     display: inline-block;
     cursor: pointer;
     position: relative;
-    color: #FFFFFF;
+    color: $widget-button-color;
     height: 30px;
     line-height: 30px;
     text-align: center;
     width: 30px;
     overflow: hidden;
-    border-right: 1px solid #101010;
+    border-right: 1px solid $widget-button-border-color;
 }
 
-div.widget-context-button:hover {
-    background: linear-gradient(to top, #050505, #050505, #252525);
+div.widget-menu-button:hover {
+    color: $widget-button-hover-color;
+    background: $widget-button-hover-background;
 }
 
-div.widget-context-button:active {
-    color: #888888;
-    background: linear-gradient(to top, #000000, #000000, #101010);
+div.widget-menu-button:active {
+    color: $widget-button-active-color;
+    background: $widget-button-active-background;
 }
 
-
-div.widget-button-container-scroll {
-    display: inline-block;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    width: 10px;
-    cursor: pointer;
-}
-
-
-div.widget-button-container-scroll:hover {
-    background: linear-gradient(to top, #050505, #050505, #252525);
-}
-
-div.widget-button-container-scroll:active {
-    color: #888888;
-    background: linear-gradient(to top, #000000, #000000, #101010);
-}
-
-div#widget-homemenu {
+div#widget-home-menu {
     left: 0px;
     height: 330px;
 }
 
-div#widget-adminmenu {
+div#widget-admin-menu {
     left: 31px;
     height: 270px;
 }
 
-div#widget-usermenu {
+div#widget-user-menu {
     right: 0px;
     height: 151px;
 }
 
-div#widget-desktopmenu {
+div#widget-desktop-menu {
     right: 31px;
     height: 212px;
 }
@@ -191,16 +177,15 @@ div.widget-menu {
      display: none;
      position: absolute;
      top: 30px;
-     background: red;
-     border: 1px solid #252525;
-     box-shadow: 0 0 40px 5px #000;
-     background: linear-gradient(to bottom, #454545, #252525);
-     color: #FFFFFF;
+     border: 1px solid $widget-menu-border-color;
+     box-shadow: $widget-menu-box-shadow;
+     background: $widget-menu-background;
+     color: $widget-menu-color;
      z-index: 2000000000;
 }
 
 div.widget-menu i {
-    color: #888888;
+    color: $widget-menu-icon-color;
 }
 
 div.widget-menu > ul {
