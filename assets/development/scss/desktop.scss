@@ -1,3 +1,5 @@
+@import 'themes/classic';
+
 #html-templates {
     display: none;
 }
@@ -40,7 +42,7 @@ p, td, th, span {
 }
 
 div#widget-taskbar {
-    background: linear-gradient(to bottom, #252525, #101010);
+    background: linear-gradient($taskbar-gradient-direction, $taskbar-gradient-start-color, $taskbar-gradient-end-color);
     position: absolute;
     left: 0;
     right: 0;
