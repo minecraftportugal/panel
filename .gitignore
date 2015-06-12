@@ -1,6 +1,7 @@
 config.php
 robots.txt
 *.sublime-workspace
+*.swp
 .idea
 _*
 node_modules
