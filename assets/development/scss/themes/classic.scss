@@ -12,15 +12,52 @@ $widget-button-container-scroll-border-color: #101010;
 
 $widget-button-background: linear-gradient(to bottom, #252525, #101010);
 $widget-button-color: #FFFFFF;
-$widget-button-border-color: #101010;
+$widget-button-border: 1px solid #101010;
 $widget-button-hover-color: #666666;
 $widget-button-hover-background: linear-gradient(to top, #050505, #252525);
 
-$widget-button-active-color: #888888;
-$widget-button-active-background: linear-gradient(to top, #000000, #000000, #101010);
+$widget-button-color-active: #888888;
+$widget-button-background-active: linear-gradient(to top, #000000, #000000, #101010);
 
 $widget-menu-background: linear-gradient(to bottom, #454545, #252525);
 $widget-menu-color: #FFFFFF;
 $widget-menu-border-color: #252525;
 $widget-menu-box-shadow: 0 0 40px 5px #000;
 $widget-menu-icon-color: #888888;
+
+$widget-menu-li-separator: 1px solid #252525;
+$widget-menu-li-header-background: linear-gradient(to bottom, #656565, #626262);
+$widget-menu-li-header-color: #FCFCFC;
+$widget-menu-li-hover-background: rgba(255, 255, 255, 0.15);
+$widget-menu-li-active-background: rgba(255, 255, 255, 0.1);
+
+$widget-background: linear-gradient(to top right, #000000, #282828);
+$widget-border: 1px solid #000000;
+$widget-box-shadow: 2px 2px 4px #1C1C1C;
+$widget-color: #FFFFFF;
+
+$widget-pinned-background: rgba(0, 0, 0, 0.8);
+$widget-pinned-border: 1px solid #111111;
+$widget-loading-background: rgba(0, 0, 0, 0.5);
+$widget-titlebar-background: linear-gradient(to top, #111111, #111111, #1C1C1C);
+$widget-titlebar-color: #666666;
+$widget-titlebar-border: 1px solid #000000;
+$widget-titlebar-background-active: linear-gradient(to top, #111111, #111111, #222222);
+$widget-titlebar-color-title: #4C4C4C;
+$widget-titlebar-color-icons: #4C4C4C;
+$widget-titlebar-color-title-active: #FFFFFF;
+$widget-titlebar-color-icons-active: #FFFFFF;
+$widget-titlebar-color-icons-hover: #050505;
+$widget-titlebar-background-icons-hover: rgba(255,255,255,0.1);
+$widget-titlebar-background-icons-active-hover: rgba(255,255,255,0.1);
+
+$widget-button-active-color: #FFFFFF;
+$widget-button-active-background: rgba(255, 255, 255, 0.1);;
+
+$widget-button-minimized-color: #555555;
+$widget-button-minimized-background: rgba(0, 0, 0, 0);
+
+$widget-button-minimized-background-hover: rgba(0, 0, 0, 0);
+
+$widget-button-minimized-background-active: linear-gradient(to top, #050505, #050505, #202020);
+

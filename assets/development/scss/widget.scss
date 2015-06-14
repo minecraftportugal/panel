@@ -1,21 +1,13 @@
-/*
- * widget.css
- * Widget CSS
- */
+@import 'themes/classic';
 
 div.widget {
     position: absolute;
-    background: linear-gradient(to top right, #000000, #282828);
-    border: none;
-
+    background: $widget-background;
     padding: 0px 0px 0px 0px;
-    color: #FFF;
-
-    border: 1px solid #000000;
-    box-shadow: 2px 2px 4px #1C1C1C;
+    color: $widget-color;
+    border: $widget-border;
+    box-shadow: $widget-box-shadow;
     border-radius: 4px;
-
-    
     z-index: 1000000000;
 }
 
@@ -36,9 +28,9 @@ div.widget.maximized div.widget-titlebar {
 /* pinned widgets */
 
 div.widget.pinned {
-    background: rgba(0, 0, 0, 0.8);
+    background: $widget-pinned-background;
     box-shadow: none;
-    border: 1px solid #111111;
+    border: $widget-pinned-border;
     z-index: 10;
 }
 
@@ -112,7 +104,7 @@ div.widget-loading {
     width: 100%;
     top: 18px;
     height: calc(100% - 18px);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: $widget-loading-background;
     background-repeat: no-repeat;
     background-position: center center;
     z-index: 2147483644;
@@ -144,34 +136,32 @@ div.widget-body iframe {
     top: 0px;
     left: 0px;
     bottom: 0px;
-    bottom: 0px;
     right: 0px;
 }
 
 div.widget-titlebar {
     position: absolute;
-    background: linear-gradient(to top, #111111, #111111, #1C1C1C);
-    border-bottom: 1px solid #000000;
+    background: $widget-titlebar-background;
+    border-bottom: $widget-titlebar-border;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     height: 18px;
     top: 0px;
     left: 0px;
     right: 0px;
-    color: #666666;
+    color: $widget-titlebar-color;
 }
 
 div.widget.widget-active div.widget-titlebar {
-    background: linear-gradient(to top, #111111, #111111, #222222);
-    color: #FFFFFF;
+    background: $widget-titlebar-background-active;
 }
 
 div.widget.widget-active div.widget-titlebar div.title {
-    color: #FFFFFF;
+    color: $widget-titlebar-color-title-active;
 }
 
 div.widget.widget-active div.widget-titlebar .fa {
-    color: #FFFFFF;
+    color: $widget-titlebar-color-icons-active;
 }
 
 div.widget-button, div.widget-title {
@@ -181,17 +171,16 @@ div.widget-button, div.widget-title {
 div.widget-ui {
     position: absolute;
     text-align: center;
-    color: #000000;
 }
 
 div.widget-title {
     line-height: 18px;
     text-align: center;
-    color: #4C4C4C;
+    color: $widget-titlebar-color-title;
 }
 
 div.widget-titlebar .fa {
-    color: #4C4C4C;
+    color: $widget-titlebar-color-icons;
     font-size: 12px;
     height: 18px;
     line-height: 18px;
@@ -201,16 +190,16 @@ div.widget-titlebar .fa {
 }
 
 div.widget-ui:hover .fa {
-        color: #050505;
+    color: $widget-titlebar-color-icons-hover;
 }
 
 
 div.widget-ui:hover {
-    background-color:rgba(255,255,255,0.1);
+    background-color: $widget-titlebar-background-icons-hover;
 }
 
 div.widget.widget-active div.widget-ui:hover {
-    background-color:rgba(255,255,255,0.1);
+    background-color: $widget-titlebar-background-icons-active-hover;
 }
 
 div.widget-drag {
@@ -366,46 +355,46 @@ div#logo:hover {
     opacity: 0.9;
 }
 
-/*BOTTOM BUTTONS*/
 div.widget-button {
     display: inline-block;
     cursor: pointer;
     position: relative;
-    color: #FFFFFF;
+    color: $widget-button-color;
+    background: $widget-button-background;
     height: 30px;
     line-height: 30px;
     text-align: center;
     min-width: 100px;
     padding: 0px 5px 0px 5px;
     overflow: hidden;
-    border-right: 1px solid #101010;
+    border-right: $widget-button-border;
 }
 
 div.widget-button:hover {
-    background: linear-gradient(to top, #050505, #050505, #252525);
+    background: $widget-button-hover-background;
 }
 
 div.widget-button:active {
-    color: #888888;
-    background: linear-gradient(to top, #000000, #000000, #101010);
+    color: $widget-button-color-active;
+    background: $widget-button-background-active;
 }
 
 div.widget-button.widget-button-active {
-    color: #FFFFFF;
-    background: rgba(255, 255, 255, 0.1);
+    color: $widget-button-active-color;
+    background: $widget-button-active-background;
 }
 
 div.widget-button.minimized {
-    color: #555555;
-    background: rgba(0, 0, 0, 0);
+    color: $widget-button-minimized-color;
+    background: $widget-button-minimized-background;
 }
 
 div.widget-button.minimized:hover {
-    background: rgba(0, 0, 0, 0);
+    background: $widget-button-minimized-background-hover;
 }
 
 div.widget-button.minimized:active {
-    background: linear-gradient(to top, #050505, #050505, #202020);
+    background: $widget-button-minimized-background-active;
 }
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */

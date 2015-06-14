@@ -140,7 +140,7 @@ div.widget-menu-button {
     text-align: center;
     width: 30px;
     overflow: hidden;
-    border-right: 1px solid $widget-button-border-color;
+    border-right: $widget-button-border;
 }
 
 div.widget-menu-button:hover {
@@ -149,8 +149,8 @@ div.widget-menu-button:hover {
 }
 
 div.widget-menu-button:active {
-    color: $widget-button-active-color;
-    background: $widget-button-active-background;
+    color: $widget-button-color-active;
+    background: $widget-button-background-active;
 }
 
 div#widget-home-menu {
@@ -194,17 +194,13 @@ div.widget-menu > ul {
     height: 100%;
 }
 
-div.widget-menu > ul:not(:first-child) {
-    border-left: 1px solid #252525;
-}
-
 div.widget-menu li {
     height: 25px;
     line-height: 25px;
 }
 
 div.widget-menu li.separator {
-    border-top: 1px solid #252525;
+    border-top: $widget-menu-li-separator;
 }
 
 div.widget-menu a {
@@ -212,7 +208,6 @@ div.widget-menu a {
 }
 
 div.widget-menu .bg-icon {
-    background: linear-gradient(to bottom, #454545, #404040);
     background-repeat: no-repeat;
     background-position: 0 center !important;
     padding-left: 20px !important;
@@ -228,8 +223,8 @@ div.widget-menu li {
 
 div.widget-menu li.header {
     padding-left: 6px;
-    background: linear-gradient(to bottom, #656565, #626262);
-    color: #FCFCFC;
+    background: $widget-menu-li-header-background;
+    color: $widget-menu-li-header-color
 }
 
 div.widget-menu li {
@@ -242,16 +237,15 @@ div.widget-menu > ul > li > a {
 }
 
 div.widget-menu > ul > li > a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: $widget-menu-li-hover-background;
 }
 
 div.widget-menu > ul > li > a:active {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: $widget-menu-li-active-background;
 }
 
 /* toaster */
 div.toaster {
-
     position: absolute;
     right: 20px;
     top: 20px;
