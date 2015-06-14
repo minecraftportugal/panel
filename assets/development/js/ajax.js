@@ -34,13 +34,15 @@ App.Ajax.initiator = function(initiator) {
 
 App.Ajax.handleError = function(jqXHR, textStatus, errorThrown) {
 
-    // console.log(jqxHR, textStatus, errorThrown);
-
     switch (jqXHR.status) {
 
         case 401:
             window.location.href = "/";
             break;
+
+        default:
+            break;
+
     }
 
 };

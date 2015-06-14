@@ -5,5 +5,7 @@ robots.txt
 .idea
 _*
 node_modules
+npm-debug.log
+public
 assets/production
 assets/development/css

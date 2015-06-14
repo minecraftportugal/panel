@@ -29,7 +29,7 @@ function v_home() {
 
         "lib/jquery/jqueryui",
 
-        "lib/Three",
+        "lib/Three/Three",
 
         "app",
 
@@ -63,6 +63,8 @@ function v_home() {
 
     $styles = [
 
+        "lib/font-awesome.min",
+
         "reset",
 
         "fonts",
@@ -77,8 +79,6 @@ function v_home() {
 
         "items",
 
-        "font-awesome.min",
-
         "page-presentation",
 
         "page-presentation-forms",
@@ -86,6 +86,7 @@ function v_home() {
         "page-presentation-profile",
 
         "page-presentation-wp"
+
     ];
 
     $template->assign('styles', $styles);

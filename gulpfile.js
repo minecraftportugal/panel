@@ -7,9 +7,12 @@ var minify = require('gulp-minify');
 var concat = require('gulp-concat');
 var symlink = require('gulp-sym');
 var sass = require('gulp-sass');
+var copy = require('gulp-copy');
+var debug = require('gulp-debug');
+var eventstream = require('event-stream');
 
 /* default sass task */
-gulp.task('default', ['dev-sass', 'build-js', 'build-json', 'build-css', 'build-fonts', 'build-images', 'build-sounds', 'production'], function() {
+gulp.task('default', ['dev-sass', 'build-js', 'build-json', 'build-css', 'production'], function() {
     // place code for your default task here
 });
 
@@ -22,8 +25,8 @@ gulp.task('dev-sass', function () {
 
 /* watch for the task above */
 gulp.task('dev-sass:watch', function () {
-    gulp.watch('./assets/development/scss/**/*.scss', ['dev-sass']);
-});
+    return gulp.watch('./assets/development/scss/**/*.scss', ['dev-sass']);
+});gitgi
 
 /* generate js files for production */
 gulp.task('build-js', function() {
@@ -34,7 +37,6 @@ gulp.task('build-js', function() {
         .pipe(gulp.dest('./assets/production/js'))
 });
 
-/* generate json files for production */
 gulp.task('build-json', function() {
     return gulp.src('./assets/development/js/**/*.json')
         .pipe(size())
@@ -50,32 +52,32 @@ gulp.task('build-css', function() {
         .pipe(gulp.dest('./assets/production/css'))
 });
 
-/* generate fonts files for production */
-gulp.task('build-fonts', function() {
-    return gulp.src('./assets/development/fonts/**/*')
-        .pipe(gulp.dest('./assets/production/fonts'))
-});
-
-/* generate images files for production */
-gulp.task('build-images', function() {
-    return gulp.src('./assets/development/images/**/*')
-        .pipe(gulp.dest('./assets/production/images'))
-});
-
-/* generate sounds files for production */
-gulp.task('build-sounds', function() {
-    return gulp.src('./assets/development/sounds/**/*')
-        .pipe(gulp.dest('./assets/production/sounds'))
-});
-
 /* use the development environment */
 gulp.task('development', function() {
     return gulp.src('./assets/development')
         .pipe(symlink('./public', {force: true, relative: true}))
 });
 
+
+/* set up the symlink environment for production */
+gulp.task('production-symlinks', function(cb) {
+    eventstream.concat(
+        gulp.src('./assets/fonts')
+            .pipe(symlink('./assets/production/fonts', {force: true, relative: true})),
+        gulp.src('./assets/images')
+            .pipe(symlink('./assets/production/images', {force: true, relative: true})),
+        gulp.src('./assets/sounds')
+            .pipe(symlink('./assets/production/sounds', {force: true, relative: true})),
+        gulp.src('./assets/lib/js')
+            .pipe(symlink('./assets/production/js/lib', {force: true, relative: true})),
+        gulp.src('./assets/lib/css')
+            .pipe(symlink('./assets/production/css/lib', {force: true, relative: true}))
+    ).on('end', cb);
+});
+
+
 /* use the production environment */
-gulp.task('production', function() {
+gulp.task('production', ['production-symlinks'], function() {
     return gulp.src('./assets/production')
         .pipe(symlink('./public', {force: true, relative: true}))
 });
