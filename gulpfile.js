@@ -26,7 +26,7 @@ gulp.task('dev-sass', function () {
 /* watch for the task above */
 gulp.task('dev-sass:watch', function () {
     return gulp.watch('./assets/development/scss/**/*.scss', ['dev-sass']);
-});gitgi
+});
 
 /* generate js files for production */
 gulp.task('build-js', function() {
