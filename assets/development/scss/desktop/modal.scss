@@ -1,3 +1,4 @@
+@import '../themes/classic';
 
 /* modal modals */
 div#modal-blocker {
@@ -6,21 +7,20 @@ div#modal-blocker {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background: $widget-loading-background;
     display: none;
     z-index: 2000000000;
 }
 
 div.modal {
     position: absolute;
-    background: linear-gradient(to top right, #000000, #282828);
-    border: none;
+    background: $widget-background;
 
     padding: 0px 0px 0px 0px;
     color: #FFF;
 
-    border: 1px solid #000000;
-    box-shadow: 0px 0px 4px #000000;
+    border: $widget-border;
+    box-shadow: $widget-box-shadow;
     border-radius: 6px;
     border-bottom-right-radius: 0px;
 
@@ -46,8 +46,8 @@ div.modal-ui {
 
 div.modal-titlebar {
     position: absolute;
-    background: linear-gradient(to top, #050505, #222222);
-    border-bottom: 1px solid #000000;
+    background: $widget-titlebar-background;
+    border-bottom: $widget-titlebar-border;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     height: 18px;

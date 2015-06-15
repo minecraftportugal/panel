@@ -21,7 +21,7 @@ function v_home() {
     /* scripts */
     $scripts = [
 
-        "sop",
+        "policy/sameorigin",
 
         "lib/jquery/jquery",
 
@@ -69,11 +69,11 @@ function v_home() {
 
         "fonts",
 
-        "desktop",
+        "desktop/desktop",
 
-        "widget",
+        "desktop/widget",
 
-        "modal",
+        "desktop/modal",
 
         "scrollbar",
 
