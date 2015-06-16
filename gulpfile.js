@@ -53,9 +53,18 @@ gulp.task('build-css', function() {
 });
 
 /* use the development environment */
-gulp.task('development', function() {
+gulp.task('development', ['development-symlinks'], function() {
     return gulp.src('./assets/development')
         .pipe(symlink('./public', {force: true, relative: true}))
+});
+
+/* use the symlink environment */
+/* I need this here because ./assets/development/css/* is in gitignore */
+gulp.task('development-symlinks', function(cb) {
+    eventstream.concat(
+        gulp.src('./assets/lib/css')
+            .pipe(symlink('./assets/development/css/lib', {force: true, relative: true}))
+    ).on('end', cb);
 });
 
 

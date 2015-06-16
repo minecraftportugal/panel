@@ -264,7 +264,7 @@ div.toaster.otherside {
 }
 div.toaster.success {
     color: #dddddd;
-    background: rgba(0, 180, 0, 0.75);
+    background: rgba(0, 180, 0, 0.25);
     border: 1px solid #008800;
 }
 
@@ -274,7 +274,7 @@ div.toaster.success div.toaster-titlebar {
 
 div.toaster.error {
     color: #dddddd;
-    background: rgba(180, 0, 0, 0.75);
+    background: rgba(180, 0, 0, 0.25);
     border: 1px solid #880000;
 }
 
@@ -284,7 +284,7 @@ div.toaster.error div.toaster-titlebar {
 
 div.toaster.warning {
     color: #ffffff;
-    background: rgba(120, 120, 40, 0.75);
+    background: rgba(120, 120, 40, 0.25);
     border: 1px solid #ffff20;
 }
 
@@ -294,7 +294,7 @@ div.toaster.warning div.toaster-titlebar {
 
 div.toaster.info {
     color: #FFFFFF;
-    background: rgba(0, 155, 255, 0.75);
+    background: rgba(0, 155, 255, 0.25);
     border: 1px solid #009fff;
 }
 
@@ -314,7 +314,7 @@ div.toaster.info div.toaster-titlebar {
 
 div.toaster-titlebar {
 
-    font-size: 2em;
+    font-size: 1.4em;
     width: 100%;
 
 }

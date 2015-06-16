@@ -104,7 +104,7 @@ App.Desktop.Widget = (function() {
 
             if (this.options.modal) {
 
-                this.initButtons();
+                this.initModal();
 
             } else {
 
@@ -163,7 +163,11 @@ App.Desktop.Widget = (function() {
 
         $(this.selector).find("div.body").css(this.options.cssBody);
 
-        $(this.selector).find("div.widget-body").addClass(this.options.classes);
+        if (this.options.modal) {
+            $(this.selector).find("div.modal-body").addClass(this.options.classes);
+        } else {
+            $(this.selector).find("div.widget-body").addClass(this.options.classes);
+        }
 
         if (notApplyingStates) {
             this.bringTop();
@@ -380,34 +384,50 @@ App.Desktop.Widget = (function() {
 
     };
 
-    Widget.prototype.initButtons = function() {
+    Widget.prototype.initModal = function() {
 
         $(this.selector).css("left", 0);
         $(this.selector).css("top", 0);
 
         (function(that) {
-            $.each(that.options.modalButtons, function(k, v) {
 
-                $btn = $("<button></button>");
+            if (that.options.modalButtons !== false) {
+                $.each(that.options.modalButtons, function (k, v) {
 
-                $btn.html(k);
-                $btn.attr("type", "button");
+                    $btn = $("<button></button>");
 
-                (function(that) {
+                    $btn.html(k);
+                    $btn.attr("type", "button");
 
-                    $btn.click(function() {
+                    (function (that) {
 
-                        if (!(v())) {
-                            that.close();
-                        }
+                        $btn.click(function () {
 
-                    });
+                            if (!(v())) {
+                                that.close();
+                            }
 
-                })(that);
+                        });
 
-                $(that.selector).find("div.modal-buttons").append($btn);
+                    })(that);
 
-            });
+                    $(that.selector).find("div.modal-buttons").append($btn);
+
+                });
+            } else {
+                $(that.selector).find("div.modal-buttons").hide();
+                $(that.selector).find("div.modal-body").css("bottom", 0);
+            }
+
+            if (that.options.modalOptions.closeButton !== undefined) {
+                if (!that.options.modalOptions.closeButton) {
+                    $(that.selector).find(".modal-close").hide();
+                }
+            }
+
+            if (!that.options.modalOptions.icon) {
+                console.log('REMOVER ICONE MODAL AQUI');
+            }
         })(this);
 
     };

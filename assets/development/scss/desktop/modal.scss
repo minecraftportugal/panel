@@ -135,12 +135,15 @@ div.modal-buttons input[type=button]:active {
 }
 
 div.modal-body {
-    overflow-y: scroll;
-    overflow-x: hidden;
     position: absolute;
     top: 19px;
     right: 0px;
     bottom: 50px;
     left: 0px;
     border: none;
+}
+
+div.modal-body:not(.widget-not-scrollable) {
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

@@ -1,7 +1,22 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: mario
- * Date: 16/06/2015
- * Time: 19:43
- */ 
+<?
+
+namespace helpers\json;
+
+class JSONHelper {
+
+    public static function respond($response) {
+
+        if (is_string($response)) {
+            header('Content-Type: application/json');
+            echo $response;
+        } else if (is_object($response) or is_array($response)) {
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
+
+    }
+
+
+}
+
+?>

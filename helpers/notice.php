@@ -72,6 +72,42 @@ class NoticeHelper {
 
     }
 
+    public static function renderObject($args = []) {
+
+        $defaults = [
+            "classes" => ""
+        ];
+
+        $args = array_merge($defaults, $args);
+
+        $object = [];
+
+        $error = NoticeHelper::get('error');
+        if ($error != false) {
+            $object["error"] = [
+                "title" => "<i class=\"fa fa-exclamation-triangle\"></i> Erro!",
+                "message" => $error,
+                "classes" => "error",
+                "duration" => 3000,
+                "sound" => "break"
+            ];
+        }
+
+        $success = NoticeHelper::get('success');
+        if ($success != false) {
+            $object["success"] = [
+                "title" => "<i class=\"fa fa-check-circle\"></i> Sucesso!",
+                "message" => $success,
+                "classes" => "error",
+                "duration" => 3000,
+                "sound" => "break"
+            ];
+        }
+
+        return $object;
+
+    }
+
 }
 
 ?>

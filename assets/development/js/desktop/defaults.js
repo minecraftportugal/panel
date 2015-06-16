@@ -5,14 +5,14 @@ App.Defaults = (function() {
     Defaults.settings = {};
 
     Defaults.settings.background = {
-        image: "https://panel.minecraft.pt/images/backgrounds/bg11.jpg",
+        image: "https://panel.minecraft.pt/images/backgrounds/bg5.jpg",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundAttachment: "fixed",
         backgroundSize: "cover"
     };
 
-    Defaults.settings.sounds = true;
+    Defaults.settings.sounds = false;
 
     Defaults.settings.saveOnExit = true;
 
@@ -27,6 +27,22 @@ App.Defaults = (function() {
             "maximized": false,
             "classes": "",
             "alwaysCreate": true
+        },
+
+        "public-login": {
+            "name": "public-login",
+            "source": "/login",
+            "title": "",
+            "mode": "ajax",
+            "modal": true,
+            "modalOptions": {
+                "closeButton": false,
+                "icon": ""
+            },
+            "modalButtons": false,
+            "maximized": false,
+            "classes": "widget-not-scrollable",
+            "css": {"width": "800px", "height": "600px", "background": "rgba(50, 50, 50, 0.25)"}
         },
 
         "launcher": {

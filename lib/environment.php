@@ -50,7 +50,7 @@ class Environment {
         return $path_info;
     }
 
-    function getSelfURL() { 
+    public static function getSelfURL() {
         
         function strleft($s1, $s2) { return substr($s1, 0, strpos($s1, $s2)); }
 
@@ -71,6 +71,9 @@ class Environment {
         return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI']; 
     }
 
+    public static function isAjax() {
+        return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && ($_SERVER['HTTP_X_REQUESTED_WITH'] == "XMLHttpRequest"));
+    }
 
 }
 

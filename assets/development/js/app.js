@@ -28,3 +28,7 @@ App.logout = function() {
     $(document.body).append(form);
     form.submit(); 
 };
+
+App.showLogin = function() {
+    App.Desktop.open("public-login");
+};

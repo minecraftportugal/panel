@@ -83,11 +83,13 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.loadState = function () {
+    Desktop.loadState = function (isLoggedIn) {
+
+        var dfd = $.Deferred();
 
         var base64Object = localStorage.getItem("widgetState");
         if ((base64Object === undefined) || (base64Object === null)) {
-            return false;
+            return dfd.resolve(false);
         }
 
         var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
@@ -104,18 +106,19 @@ App.Desktop = (function() {
         var widgets = object.widgets || [];
         var settings = object.settings || App.Defaults.settings;
 
-        /* Restore widgets */
-        $.each(widgets, function (n, widget) {
+        /* Restore widgets and settings */
+        if (isLoggedIn) {
+            $.each(widgets, function (n, widget) {
+                var createdWidget = new Desktop.Widget(widget.options, widget.states);
+                createdWidget.popState();
+            });
 
-            var createdWidget = new Desktop.Widget(widget.options, widget.states);
-            createdWidget.popState();
+            Desktop.settings = settings;
+        }
 
-        });
 
-        /* Restore settings */
-        Desktop.settings = settings;
+        return dfd.resolve(true);
 
-        return true;
     };
 
     Desktop.loadFixedState = function (name) {
@@ -236,21 +239,28 @@ App.Desktop = (function() {
         return createdWidget;
     };
 
+    Desktop.bootstrap = function(isLoggedIn) {
 
-    Desktop.bootstrap = function() {
+        $.when(Desktop.loadState(isLoggedIn))
+            .then()
+            .fail(function(data) {
+                App.Desktop.loadFixedState("basic");
+            }).always(function() {
 
-        var deferred = $.when(Desktop.setBackground(App.Desktop.settings.background));
-
-        deferred.then(function(data) {
-            var loadingDelay = Math.round(Math.random() * 1000);
-            var loadingTimeout = setTimeout(function () {
-                $("div#loading-blocker").fadeOut(100);
-            }, loadingDelay);
-        });
-
-        deferred.fail(function(data) {
-            App.desktop.settings.background = App.Defaults.settings.background;
-        });
+                $.when(Desktop.setBackground(App.Desktop.settings.background))
+                    .then()
+                    .fail(function(data) {
+                        App.desktop.settings.background = App.Defaults.settings.background;
+                    }).always(function(data) {
+                        var loadingDelay = 10;//Math.round(Math.random() * 1000);
+                        var loadingTimeout = setTimeout(function () {
+                            if (!isLoggedIn) {
+                                App.showLogin();
+                            }
+                            $("div#loading-blocker").fadeOut(100);
+                        }, loadingDelay);
+                    });
+            });
 
     };
 
@@ -358,18 +368,17 @@ App.Desktop = (function() {
 
         $(window).on("unload", function() {
             if (Desktop.settings.saveOnExit) {
-                Desktop.saveState();
+                var username = $("meta[name=username]").attr("content");
+                var loggedIn = !!username;
+                if (loggedIn) {
+                    Desktop.saveState();
+                }
             } else {
                 Desktop.settings.saveOnExit = true;
             }
         });
 
         $(function() {
-
-            if (!Desktop.loadState()) {
-                Desktop.loadFixedState("basic");
-            }
-
             $("div#widget-button-container").sortable();
         });
 

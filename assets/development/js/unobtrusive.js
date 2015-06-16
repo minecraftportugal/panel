@@ -176,7 +176,9 @@ $(function() {
     /* it's hash time! */
     window.location = "#";
 
-    /* Bootstrap Desktop */
-    App.Desktop.bootstrap();
+    /* Bootstrap Desktop*/
+    var username = $("meta[name=username]").attr("content");
+    var loggedIn = !!username;
+    App.Desktop.bootstrap(loggedIn);
 
 });

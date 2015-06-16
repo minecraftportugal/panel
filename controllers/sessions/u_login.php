@@ -4,6 +4,7 @@ use lib\session\Session;
 use lib\environment\Environment;
 use models\logs\Logs;
 use helpers\notice\NoticeHelper;
+use helpers\json\JSONHelper;
 
 function u_login() {
 
@@ -16,7 +17,13 @@ function u_login() {
 
         Logs::create('login', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
 
-        header('Location: /');
+        NoticeHelper::set('success', 'yay!');
+
+        JSONHelper::respond([
+            "action" => "login",
+            "status" => "ok",
+            "notice" => NoticeHelper::renderObject()
+        ]);
 
     } else {
 
@@ -24,8 +31,11 @@ function u_login() {
 
         NoticeHelper::set('error', 'username/password inválidos');
 
-        header('Location: /login');
-
+        JSONHelper::respond([
+            "action" => "login",
+            "status" => "ko",
+            "notice" => NoticeHelper::renderObject()
+        ]);
 
     }
 }

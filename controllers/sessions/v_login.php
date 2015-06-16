@@ -1,12 +1,13 @@
 <?
 
 use lib\session\Session;
+use lib\environment\Environment;
 use lib\template\Template;
 use helpers\notice\NoticeHelper;
 
 function v_login() {
 
-    if (Session::isLoggedIn()) {
+    if (!Environment::isAjax()) {
         header('Location: /');
         exit();
     }
@@ -16,36 +17,17 @@ function v_login() {
     /* scripts */
     $scripts = [
 
-        "sop",
-
-        "lib/jquery/jquery",
-
-        "pages/login",
+        "pages/public",
 
     ];
 
     $template->assign('scripts', $scripts);
 
-    /* styles */
-    $styles = [
-
-        "reset",
-
-        "public",
-
-    ];
-
-    $template->assign('styles', $styles);
-
-    $error = NoticeHelper::get('error');
-
-    $success = NoticeHelper::get('success');
+    $notices = NoticeHelper::render();
 
     $icon_path = "/images/icons";
 
-    $template->assign('error', $error);
-
-    $template->assign('success', $success);
+    $template->assign('notices', $notices);
 
     $template->assign('icon_path', $icon_path);
 
