@@ -1,3 +1,7 @@
 [submodule "vendors/PHPMailer"]
 	path = vendors/PHPMailer
 	url = https://github.com/PHPMailer/PHPMailer.git
+
+[submodule "vendors/kint"]
+	path = vendors/kint
+	url = https://github.com/raveren/kint.git
