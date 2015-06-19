@@ -22,6 +22,8 @@ function v_home() {
         "lib/jquery/jqueryui",
         "lib/Three/Three",
         "app",
+        "debug",
+        "public",
         "ajax",
         "desktop/defaults",
         "desktop/desktop",
@@ -52,65 +54,58 @@ function v_home() {
         "page-presentation-wp"
     ]);
 
-    if ($loggedIn) {
-        /* xsrf token */
-        $template->assign('xsrf_token', Session::getXSRFToken());
+    /* xsrf token */
+    $template->assign('xsrf_token', Session::getXSRFToken());
 
-        /* session */
-        $user = Accounts::first(['id' => Session::get('id')]);
-        $template->assign('user', $user);
+    /* session */
+    $user = (!is_null(Session::get('id'))) ? Accounts::first(['id' => Session::get('id')]) : NULL;
+    $template->assign('user', $user);
 
-        /* page background */
-        $background_css = Template::init('partials/background-css');
-        $background_css->assign('background_image', '/images/backgrounds/bg9.jpg');
-        $template->assign('background_css', $background_css);
+    /* page background */
+    $background_css = Template::init('partials/background-css');
+    $background_css->assign('background_image', '/images/backgrounds/bg9.jpg');
+    $template->assign('background_css', $background_css);
 
-        $desktop_logo = Template::init('partials/desktop-logo');
-        if ($user['donor'] == 1) {
-            $desktop_logo->assign('bg_image', '/images/logo_xxs.png');
-            $desktop_logo->assign('bg_height', '128px');
-            $desktop_logo->assign('logo_action', 'help-about');
-        } else {
-            $desktop_logo->assign('bg_image', '/images/pls_xxs.png');
-            $desktop_logo->assign('bg_height', '147px');
-            $desktop_logo->assign('logo_action', 'help-donate');
-        }
-        $template->assign('desktop_logo', $desktop_logo);
-
-        /* Task bar */
-        $taskbar = Template::init('partials/taskbar');
-        $head_url = MinotarHelper::url($user['playername'], 16);
-        $taskbar->assign('head_url', $head_url);
-        $template->assign('taskbar', $taskbar);
-
-        /* Home menu */
-        $menu_home = Template::init('partials/menus/home');
-        $template->assign('menu_home', $menu_home);
-
-        /* Admin menu */
-        $admin = Session::isAdmin();
-        $template->assign('admin', $admin);
-        $taskbar->assign('admin', $admin);
-        if ($admin) {
-            $menu_admin = Template::init('partials/menus/admin');
-            $menu_admin->assign('admin', $admin);
-            $template->assign('menu_admin', $menu_admin);
-        }
-
-        /* User and desktop menus */
-        $menu_user = Template::init('partials/menus/user');
-        $menu_user->assign('user', $user);
-        $menu_user->assign('head_url', $head_url);
-        $template->assign('menu_user', $menu_user);
-
-        $menu_desktop = Template::init('partials/menus/desktop');
-        $template->assign('menu_desktop', $menu_desktop);
-
+    $desktop_logo = Template::init('partials/desktop-logo');
+    if ($user['donor'] == 1) {
+        $desktop_logo->assign('bg_image', '/images/logo_xxs.png');
+        $desktop_logo->assign('bg_height', '128px');
+        $desktop_logo->assign('logo_action', 'help-about');
     } else {
-
-
-
+        $desktop_logo->assign('bg_image', '/images/pls_xxs.png');
+        $desktop_logo->assign('bg_height', '147px');
+        $desktop_logo->assign('logo_action', 'help-donate');
     }
+    $template->assign('desktop_logo', $desktop_logo);
+
+    /* Task bar */
+    $taskbar = Template::init('partials/taskbar');
+    $head_url = MinotarHelper::url($user['playername'], 16);
+    $taskbar->assign('head_url', $head_url);
+    $template->assign('taskbar', $taskbar);
+
+    /* Home menu */
+    $menu_home = Template::init('partials/menus/home');
+    $template->assign('menu_home', $menu_home);
+
+    /* Admin menu */
+    $admin = Session::isAdmin();
+    $template->assign('admin', $admin);
+    $taskbar->assign('admin', $admin);
+    if ($admin) {
+        $menu_admin = Template::init('partials/menus/admin');
+        $menu_admin->assign('admin', $admin);
+        $template->assign('menu_admin', $menu_admin);
+    }
+
+    /* User and desktop menus */
+    $menu_user = Template::init('partials/menus/user');
+    $menu_user->assign('user', $user);
+    $menu_user->assign('head_url', $head_url);
+    $template->assign('menu_user', $menu_user);
+
+    $menu_desktop = Template::init('partials/menus/desktop');
+    $template->assign('menu_desktop', $menu_desktop);
 
 
     /* HTML templates for javascript content*/

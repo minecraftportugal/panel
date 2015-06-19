@@ -12,6 +12,10 @@ div#modal-blocker {
     z-index: 2000000000;
 }
 
+div#modal-blocker.transparent {
+    background: transparent;
+}
+
 div.modal {
     position: absolute;
     background: $widget-background;

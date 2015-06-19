@@ -14,15 +14,6 @@ function v_login() {
 
     $template = Template::init('sessions/v_login');
 
-    /* scripts */
-    $scripts = [
-
-        "pages/public",
-
-    ];
-
-    $template->assign('scripts', $scripts);
-
     $notices = NoticeHelper::render();
 
     $icon_path = "/images/icons";

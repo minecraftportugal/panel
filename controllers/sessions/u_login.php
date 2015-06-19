@@ -17,11 +17,12 @@ function u_login() {
 
         Logs::create('login', Session::get('id'), Environment::get('REMOTE_ADDR'), "");
 
-        NoticeHelper::set('success', 'yay!');
+        NoticeHelper::set('success', 'Bem-vindo!');
 
         JSONHelper::respond([
             "action" => "login",
             "status" => "ok",
+            "session" => $_SESSION,
             "notice" => NoticeHelper::renderObject()
         ]);
 
@@ -29,7 +30,7 @@ function u_login() {
 
         Logs::create('failed_login', null, Environment::get('REMOTE_ADDR'), "Username: $username, Password: $password");
 
-        NoticeHelper::set('error', 'username/password inválidos');
+        NoticeHelper::set('error', 'O username / password que escreveste estão errados!');
 
         JSONHelper::respond([
             "action" => "login",

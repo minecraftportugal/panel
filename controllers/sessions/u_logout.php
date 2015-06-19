@@ -5,6 +5,7 @@ use lib\environment\Environment;
 use lib\xauth\xAuth;
 use models\logs\Logs;
 use helpers\notice\NoticeHelper;
+use helpers\json\JSONHelper;
 
 function u_logout() {
 
@@ -25,7 +26,11 @@ function u_logout() {
 
     NoticeHelper::set('success', 'sessão terminada');
 
-    header('Location: /login');
+    JSONHelper::respond([
+        "action" => "logout",
+        "status" => "ok",
+        "notice" => NoticeHelper::renderObject()
+    ]);
 }
 
 ?>

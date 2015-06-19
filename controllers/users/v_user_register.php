@@ -1,6 +1,7 @@
 <?
 
 use lib\session\Session;
+use lib\environment\Environment;
 use lib\template\Template;
 use helpers\notice\NoticeHelper;
 
@@ -11,46 +12,16 @@ function v_user_register() {
         exit();
     }
 
+    if (!Environment::isAjax()) {
+        header('Location: /#/register');
+        exit();
+    }
+
     $template = Template::init('users/v_user_register');
 
-    /* scripts */
-    $scripts = [
+    $template->assign('icon_path', "/images/icons");
 
-        "sop",
-
-        "lib/jquery/jquery",
-
-        "cookies",
-
-        "pages/register",
-
-    ];
-
-    $template->assign('scripts', $scripts);
-
-    /* styles */
-    $styles = [
-
-        "reset",
-
-        "public",
-
-    ];
-
-    $template->assign('styles', $styles);
-
-
-    $error = NoticeHelper::get('error');
-
-    $success = NoticeHelper::get('success');
-
-    $icon_path = "/images/icons";
-
-    $template->assign('error', $error);
-
-    $template->assign('success', $success);
-
-    $template->assign('icon_path', $icon_path);
+    $template->assign('notices', NoticeHelper::render());
 
     $template->render();
 

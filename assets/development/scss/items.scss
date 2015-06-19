@@ -7,6 +7,11 @@ span.item {
   margin: 2px;
   float: left;
   position: relative;
+  visibility: hidden;
+}
+
+span.item-name {
+  visibility: hidden;
 }
 
 span.item > span.amount {

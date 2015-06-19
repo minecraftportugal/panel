@@ -37,12 +37,12 @@ App.Defaults = (function() {
             "modal": true,
             "modalOptions": {
                 "closeButton": false,
-                "icon": ""
+                "icon": "",
+                "transparentBlocker": true
             },
-            "modalButtons": false,
             "maximized": false,
             "classes": "widget-not-scrollable",
-            "css": {"width": "800px", "height": "600px", "background": "rgba(50, 50, 50, 0.25)"}
+            "css": {"width": "800px", "height": "600px", "background": "rgba(0, 0, 0, 0.1)"}
         },
 
         "launcher": {
@@ -193,13 +193,15 @@ App.Defaults = (function() {
             "source": "/page?page=about",
             "modal": true,
             "title": " <i class='fa fa-quote-left'></i> Sobre",
-            "modalButtons": {
-                "Fechar": function () {
-                    return false;
+            "modalOptions": {
+                "buttons": {
+                    "Fechar": function () {
+                        return false;
+                    }
+                },
+                "cssBody": {
+                    "overflow": "hidden"
                 }
-            },
-            "cssBody": {
-                "overflow": "hidden"
             }
         },
 
@@ -221,12 +223,14 @@ App.Defaults = (function() {
             "mode": "static",
             "modal": true,
             "title": " <i class='fa fa-question'></i> Sair",
-            "modalButtons": {
-                "<i class='fa fa-sign-in'></i> Cancelar": function () {
-                    return false;
-                },
-                "<i class='fa fa-sign-in'></i> Sair": function () {
-                    App.logout();
+            "modalOptions": {
+                "buttons": {
+                    "<i class='fa fa-sign-in'></i> Cancelar": function () {
+                        return false;
+                    },
+                    "<i class='fa fa-sign-in'></i> Sair": function () {
+                        App.logout();
+                    }
                 }
             },
             "css": {
@@ -245,15 +249,17 @@ App.Defaults = (function() {
             "name": "modal-test",
             "source": "<h1> D: </h1>",
             "modal": true,
-            "modalButtons": {
-                "yes": function () {
-                    console.log("yes");
-                    return true;
-                },
+            "modalOptions": {
+                "buttons": {
+                    "yes": function () {
+                        console.log("yes");
+                        return true;
+                    },
 
-                "no": function () {
-                    console.log("no");
-                    return false;
+                    "no": function () {
+                        console.log("no");
+                        return false;
+                    }
                 }
             },
             "mode": "static",
@@ -265,15 +271,17 @@ App.Defaults = (function() {
             "name": "modal-post",
             "source": "/posts/show?id=1533",
             "modal": true,
-            "modalButtons": {
-                "yes": function () {
-                    console.log("yes");
-                    return true;
-                },
+            "modalOptions": {
+                "buttons": {
+                    "yes": function () {
+                        console.log("yes");
+                        return true;
+                    },
 
-                "no": function () {
-                    console.log("no");
-                    return false;
+                    "no": function () {
+                        console.log("no");
+                        return false;
+                    }
                 }
             },
             "mode": "normal",
@@ -309,7 +317,7 @@ App.Defaults = (function() {
                     "mode": "iframe",
                     "modal": false,
                     "pinned": false,
-                    "modalButtons": {},
+                    "modalOptions": {},
                     "alwaysCreate": true,
                     "alwaysReload": true,
                     "maximized": false,
@@ -347,7 +355,7 @@ App.Defaults = (function() {
                     "mode": "ajax",
                     "modal": false,
                     "pinned": false,
-                    "modalButtons": {},
+                    "modalOptions": {},
                     "alwaysCreate": false,
                     "alwaysReload": true,
                     "maximized": false,
@@ -383,7 +391,7 @@ App.Defaults = (function() {
                     "mode": "ajax",
                     "modal": false,
                     "pinned": false,
-                    "modalButtons": {},
+                    "modalOptions": {},
                     "alwaysCreate": false,
                     "alwaysReload": true,
                     "maximized": false,

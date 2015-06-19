@@ -7,10 +7,10 @@ App.settings = {
 };
 
 App.logout = function() {
-    var form = $('<form class="noajax"></form>');
+    var form = $('<form></form>');
     form.attr("method", "post");
     form.attr("action", "/logout");
-    var field = $("<input></input>");
+    var field = $("<input>");
     field.attr("type", "hidden");
     field.attr("name", "logout");
     field.attr("value", "1");
@@ -18,7 +18,8 @@ App.logout = function() {
     form.append(field);
     
     var xsrf_token = $("meta[name=xsrf_token]").attr("content");
-    field = $("<input></input>");
+
+    field = $("<input>");
     field.attr("type", "hidden");
     field.attr("name", "xsrf_token");
     field.attr("value", xsrf_token);
@@ -27,8 +28,4 @@ App.logout = function() {
 
     $(document.body).append(form);
     form.submit(); 
-};
-
-App.showLogin = function() {
-    App.Desktop.open("public-login");
 };

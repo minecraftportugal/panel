@@ -98,7 +98,7 @@ class NoticeHelper {
             $object["success"] = [
                 "title" => "<i class=\"fa fa-check-circle\"></i> Sucesso!",
                 "message" => $success,
-                "classes" => "error",
+                "classes" => "success",
                 "duration" => 3000,
                 "sound" => "break"
             ];

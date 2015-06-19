@@ -8,17 +8,16 @@ App.Desktop = (function() {
     Desktop.widgets = [];
 
     /* Settings */
-    Desktop.settings = {
-        "saveOnExit": true
-    };
+    Desktop.settings = {};
     $.extend(Desktop.settings, App.Defaults.settings);
     $.extend(Desktop.settings.background, App.Defaults.settings.background);
 
-    /* * * * Static Methods * * * /
-     /*
-     * Desktop.count
-     */
-    Desktop.getWidgetSerialNumber = function () {
+    /* Globals */
+    Desktop.globals = {
+        saveOnExit: true
+    };
+
+    Desktop.getWidgetSerialNumber = function() {
 
         if (Desktop.counter === undefined) {
             Desktop.counter = 1;
@@ -29,7 +28,7 @@ App.Desktop = (function() {
         return Desktop.counter;
     };
 
-    Desktop.serializeState = function () {
+    Desktop.serializeState = function() {
 
         // Pick widgets to serialize
         var widgets = [];
@@ -38,22 +37,18 @@ App.Desktop = (function() {
             Desktop.widgets = [];
         }
 
-        $.each(Desktop.widgets, function (n, widget) {
+        $.each(Desktop.widgets, function(n, widget) {
 
             /* Don't save modal widgets */
             if (widget.options.modal) {
-                widget.close();
                 return true;
             }
 
             widget.pushState();
 
             var object = {
-
                 options: widget.options,
-
                 states: widget.states
-
             };
 
             widgets.push(object);
@@ -67,7 +62,7 @@ App.Desktop = (function() {
             widgets: widgets,
             settings: settings
         };
-        var serializedObject = JSON.stringify(objectToSerialize, function (name, value) {
+        var serializedObject = JSON.stringify(objectToSerialize, function(name, value) {
             return value;
         });
 
@@ -75,21 +70,29 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.saveState = function () {
-
+    Desktop.saveState = function() {
+        console.log("Desktop.saveState");
         var serializedObject = Desktop.serializeState();
         var base64Object = btoa(serializedObject);
         localStorage.setItem("widgetState", base64Object);
 
     };
 
-    Desktop.loadState = function (isLoggedIn) {
-
+    Desktop.loadState = function() {
+        console.log("Desktop.loadState");
         var dfd = $.Deferred();
+        var widgets;
+        var settings;
 
         var base64Object = localStorage.getItem("widgetState");
         if ((base64Object === undefined) || (base64Object === null)) {
-            return dfd.resolve(false);
+
+            widgets = App.Defaults.fixedStates["basic"];
+
+            return dfd.resolve({
+                widgets: widgets,
+                settings: App.Defaults.settings
+            });
         }
 
         var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
@@ -103,60 +106,54 @@ App.Desktop = (function() {
             console.log("Couldn't load widget states from localStorage")
         }
 
-        var widgets = object.widgets || [];
-        var settings = object.settings || App.Defaults.settings;
-
-        /* Restore widgets and settings */
-        if (isLoggedIn) {
-            $.each(widgets, function (n, widget) {
-                var createdWidget = new Desktop.Widget(widget.options, widget.states);
-                createdWidget.popState();
-            });
-
-            Desktop.settings = settings;
-        }
-
-
-        return dfd.resolve(true);
+        widgets = object.widgets || [];
+        settings = object.settings || App.Defaults.settings;
+        console.log("loadState", widgets);
+        return dfd.resolve({
+            widgets: widgets,
+            settings: settings
+        });
 
     };
 
-    Desktop.loadFixedState = function (name) {
+    Desktop.loadFixedState = function(name) {
 
-        var object = App.Defaults.fixedStates[name];
+        var widgets = App.Defaults.fixedStates[name];
 
-        $.each(object, function (n, object) {
-            var createdWidget = new Desktop.Widget(object.options, object.states);
+        $.each(widgets, function(n, widget) {
+            var createdWidget = new Desktop.Widget(widget.options, widget.states);
             createdWidget.popState();
         });
 
     };
 
-    Desktop.clearState = function () {
-        Desktop.settings.saveOnExit = false;
+    Desktop.clearState = function() {
+        Desktop.globals.saveOnExit = false;
         localStorage.clear();
         window.location.reload();
     };
 
-    Desktop.closeAll = function () {
+    Desktop.closeAll = function() {
 
         var toClose = [];
 
-        $.each(Desktop.widgets, function (n, widget) {
+        $.each(Desktop.widgets, function(n, widget) {
+
             if (!widget.options.modal && !widget.options.pinned) {
                 toClose.push(widget);
             }
+
         });
 
-        $.each(toClose, function (n, widget) {
+        $.each(toClose, function(n, widget) {
             widget.close();
         });
     };
 
-    Desktop.cascade = function () {
+    Desktop.cascade = function() {
         Desktop.counter = 0;
         $("div.widget").css("z-index", "0"); // reset all z-index. so pq posso.
-        $.each(Desktop.widgets, function (n, e) {
+        $.each(Desktop.widgets, function(n, e) {
             Desktop.counter += 1;
             e.shrink();
             e.initPosition();
@@ -164,10 +161,10 @@ App.Desktop = (function() {
         });
     };
 
-    Desktop.tile = function () {
+    Desktop.tile = function() {
         var wLeft = 0;
         var wTop = 0;
-        $.each(Desktop.widgets, function (n, e) {
+        $.each(Desktop.widgets, function(n, e) {
             e.shrink();
             $(e.selector).css("left", wLeft + "px");
             $(e.selector).css("top", wTop + "px");
@@ -187,25 +184,25 @@ App.Desktop = (function() {
         });
     };
 
-    Desktop.embiggen = function () {
-        $.each(Desktop.widgets, function (n, e) {
+    Desktop.embiggen = function() {
+        $.each(Desktop.widgets, function(n, e) {
             e.maximize();
             //e.bringTop();
             //e.setActive();
         });
     };
 
-    Desktop.minimizeAll = function () {
-        $.each(Desktop.widgets, function (n, widget) {
+    Desktop.minimizeAll = function() {
+        $.each(Desktop.widgets, function(n, widget) {
             widget.minimize();
         });
     };
 
-    Desktop.getWidgetByName = function (name) {
+    Desktop.getWidgetByName = function(name) {
 
         var widget;
 
-        $.each(Desktop.widgets, function (n, e) {
+        $.each(Desktop.widgets, function(n, e) {
 
             if (e.options.name == name) {
 
@@ -219,7 +216,7 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.open = function (param) {
+    Desktop.open = function(param) {
 
         var createdWidget;
 
@@ -239,32 +236,126 @@ App.Desktop = (function() {
         return createdWidget;
     };
 
-    Desktop.bootstrap = function(isLoggedIn) {
 
-        $.when(Desktop.loadState(isLoggedIn))
-            .then()
-            .fail(function(data) {
-                App.Desktop.loadFixedState("basic");
-            }).always(function() {
+    Desktop.bootstrap = function(state) {
 
-                $.when(Desktop.setBackground(App.Desktop.settings.background))
-                    .then()
-                    .fail(function(data) {
-                        App.desktop.settings.background = App.Defaults.settings.background;
-                    }).always(function(data) {
-                        var loadingDelay = 10;//Math.round(Math.random() * 1000);
-                        var loadingTimeout = setTimeout(function () {
-                            if (!isLoggedIn) {
-                                App.showLogin();
-                            }
-                            $("div#loading-blocker").fadeOut(100);
-                        }, loadingDelay);
-                    });
+        console.log("Desktop.bootstrap", state);
+
+        /* show loading blocker */
+        $("div#loading-blocker").addClass("block-enabled");
+
+        $.when(Desktop.loadState()).then(function(data) {
+
+            /* Restore widgets and settings */
+            Desktop.settings = data.settings;
+            $.each(data.widgets, function(n, widget) {
+                var createdWidget = new Desktop.Widget(widget.options, widget.states);
+                createdWidget.popState();
             });
+
+        }).fail(function(data) {
+
+            /* Restore widgets and settings */
+            Desktop.settings = data.settings;
+
+            $.each(data.widgets, function(n, widget) {
+                var createdWidget = new Desktop.Widget(widget.options, widget.states);
+                createdWidget.popState();
+            });
+
+        }).always(function() {
+
+            /* de qualquer forma, carregar o background */
+            $.when(Desktop.setBackground(App.Desktop.settings.background)).fail(function(data) {
+
+                App.desktop.settings.background = App.Defaults.settings.background;
+
+            }).always(function(data) {
+
+                if (state.isLoggedIn) {
+                    Desktop.logIn(state);
+                } else {
+                    Desktop.logOut(state);
+                }
+
+                var loadingDelay = 1000 + Math.round(Math.random() * 100);
+                var loadingTimeout = setTimeout(function() {
+
+                    /* remove huge loading blocker */
+                    //$("div#loading-blocker").fadeOut(200, function() {
+                    $("div#loading-blocker").removeClass("block-enabled");
+
+                    /* fadeOut adds style { display: none } to this element */
+                    //    $("div#loading-blocker").removeAttr("style");
+                    //});
+
+
+                }, loadingDelay);
+
+            });
+
+        });
 
     };
 
-    Desktop.setBackground = function (bg) {
+    Desktop.changeDomWithoutReloadForLogin = function(session) {
+        console.log("Add Meta Tags");
+        /* add meta tags */
+        $("<meta>").appendTo("head").attr("name", "xsrf_token").attr("content", session.xsrf_token);
+        $("<meta>").appendTo("head").attr("name", "username").attr("content", session.username);
+
+        
+
+    };
+
+    Desktop.changeDomWithoutReloadForLogout = function() {
+        console.log("Removing Meta Tags");
+        /* remove meta tags */
+        $("meta[name=xsrf_token]").remove();
+        $("meta[name=username]").remove();
+
+    };
+
+    Desktop.logIn = function(state) {
+        console.log("Desktop.logIn", state);
+
+        if (state.session !== undefined) {
+            Desktop.changeDomWithoutReloadForLogin(state.session);
+        }
+
+        /* Turn on saving state when opening the panel to the user */
+        Desktop.globals.saveOnExit = true;
+
+        /* show elements that appear when logged in */
+        $(".show-when-logged-in").show();
+
+        /* hide modal login if it is open */
+        var w = App.Desktop.getWidgetByName("public-login");
+        (!!w) && w.close();
+
+    };
+
+    Desktop.logOut = function(state) {
+        console.log("Desktop.logOut");
+
+        /* hide elements that appear when logged in */
+        $(".show-when-logged-in").hide();
+
+        if (!!state && state.isLoggedIn) {
+            Desktop.saveState();
+            Desktop.globals.saveOnExit = false;
+        }
+
+        console.log(Desktop.widgets);
+        $.each(Desktop.widgets.slice(), function(n, widget) {
+            widget.close();
+        });
+        Desktop.open("public-login");
+
+        Desktop.changeDomWithoutReloadForLogout();
+    };
+
+    Desktop.setBackground = function(bg) {
 
         var background = $.extend({}, App.Defaults.settings.background);
         $.extend(background, bg);
@@ -282,7 +373,7 @@ App.Desktop = (function() {
         $body.css("background-size", background.backgroundSize);
 
         // http://stackoverflow.com/questions/5057990/how-can-i-check-if-a-background-image-is-loaded
-        $("<img/>").attr("src", background.image).load(function () {
+        $("<img/>").attr("src", background.image).load(function() {
             $(this).remove(); // prevent memory leaks as @benweet suggested
             $("body").css("background-image", "url(" + background.image + ")");
             dfd.resolve(background);
@@ -367,14 +458,15 @@ App.Desktop = (function() {
         });
 
         $(window).on("unload", function() {
-            if (Desktop.settings.saveOnExit) {
+            console.log("on unload");
+            if (Desktop.globals.saveOnExit) {
                 var username = $("meta[name=username]").attr("content");
                 var loggedIn = !!username;
                 if (loggedIn) {
                     Desktop.saveState();
                 }
             } else {
-                Desktop.settings.saveOnExit = true;
+                Desktop.globals.saveOnExit = true;
             }
         });
 

@@ -27,15 +27,10 @@
 <body>
 
     <div id="widget-container">
-        <? if ($loggedIn): ?>
-            <?= $desktop_logo ?>
-        <? endif; ?>
+        <?= $desktop_logo ?>
     </div>
 
-<? if ($loggedIn): ?>
-
-    
-    <div id="widget-taskbar">
+    <div class="show-when-logged-in" id="widget-taskbar">
         <?= $taskbar ?>
     </div>
 
@@ -57,9 +52,6 @@
         </div>
     <? endif; ?>
 
-<? endif; ?>
-
-
     <? /* /!\ move html templates somewher else ? */ ?>
     <div id="html-templates">
         <?= $html_templates ?>
@@ -69,7 +61,7 @@
 
     </div>
 
-    <div id="loading-blocker">
+    <div id="loading-blocker" class="block-enabled">
         <i class="fa fa-spinner fa-spin fa-5x"></i>
     </div>
 

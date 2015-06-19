@@ -9,7 +9,6 @@ App.Desktop.Widget = (function() {
         "mode" : "ajax",
         "modal" : false,
         "pinned" : false,
-        "modalButtons" : {},
         "alwaysCreate" : false,
         "alwaysReload" : true,
         "maximized" : false,
@@ -20,10 +19,17 @@ App.Desktop.Widget = (function() {
             "left": "0px",
             "width" : "800px",
             "height" : "400px",
-            "min-width" : "480px",
-            "min-height" : "360px",
+            "min-width" : null, // "480px",
+            "min-height" : null,// "360px",
             "max-width" : null, //"700px",
             "max-height" : null //"700px"
+        },
+
+        "modalOptions" : {
+            "closeButton": true,
+            "icon": true,
+            "buttons": {},
+            "transparentBlocker": false
         },
 
         "cssBody" : {
@@ -45,16 +51,9 @@ App.Desktop.Widget = (function() {
 
     Widget.prototype.init = function(options, states) {
 
-        /* Mix given options and defaults */
+        /* Deep Mix given options and defaults */
         this.options = {};
-        this.options.css = {};
-        $.extend(this.options, Widget.defaults);
-        $.extend(this.options, options);
-
-        /* Mix CSS */
-        if (options.css !== undefined) {
-            $.extend(this.options.css, options.css);
-        }
+        $.extend(true, this.options, Widget.defaults, options);
 
         /* Stack of states for this widget */
         this.states = states || [];
@@ -371,9 +370,14 @@ App.Desktop.Widget = (function() {
         /* Modal widget */
         if (this.options.modal) {
 
-            /* modal blocker*/
-            var max_z = Widget.getMaxZindex("div.widget.modal");
-            $("div#modal-blocker").fadeIn(100);
+            /* Modal blocker*/
+            if (this.options.modalOptions.transparentBlocker) {
+                $("div#modal-blocker").addClass("transparent");
+            } else {
+                $("div#modal-blocker").removeClass("transparent");
+            }
+
+            $("div#modal-blocker").show();
             widgetInstance.bringTop();
 
         }
@@ -391,8 +395,8 @@ App.Desktop.Widget = (function() {
 
         (function(that) {
 
-            if (that.options.modalButtons !== false) {
-                $.each(that.options.modalButtons, function (k, v) {
+            if (Object.keys(that.options.modalOptions.buttons).length > 0) {
+                $.each(that.options.modalOptions.buttons, function (k, v) {
 
                     $btn = $("<button></button>");
 
@@ -426,7 +430,7 @@ App.Desktop.Widget = (function() {
             }
 
             if (!that.options.modalOptions.icon) {
-                console.log('REMOVER ICONE MODAL AQUI');
+                $(that.selector).find(".modal-icon").hide();
             }
         })(this);
 

@@ -1,140 +1,188 @@
-App.Ajax = {};
+App.Ajax = (function() {
 
-App.Ajax.jsonActionMap = {
+    var Ajax = {};
 
-    "login": {
+    Ajax.jsonActionMap = {
 
-        "ok": function(data) {
-            window.location = "/";
+        "login": {
+
+            "ok": function(data) {
+                data.isLoggedIn = true;
+                App.Desktop.bootstrap(data);
+            },
+
+            "ko": function(data) {
+
+            }
         },
 
-        "ko": function(data) {
 
-        }
-    },
+        "register": {
 
-    "logout": {
+            "ok": function(data) {
 
-    }
-};
+            },
 
-App.Ajax.initiator = function(initiator) {
+            "ko": function(data) {
 
-    var tagname = $(initiator).prop("tagName");
-
-    var href, action, type, data, container, loading_blocker;
-
-    switch (tagname) {
-
-        case "A":
-            href = $(initiator).attr("href");
-            container = $(initiator).closest("div.widget-body");
-
-            App.Ajax.request(href, undefined, "GET", container);
-            break;
-
-        case "FORM":
-            action = $(initiator).attr("action");
-            type = $(initiator).attr("method");
-            data = $(initiator).serialize();
-            container = $(initiator).closest("div.widget-body");
-
-            App.Ajax.request(action, data, type, container);
-            break;
-
-        default:
-            console.log("ERROR: Can't initiate AJAX request");
-            break;
-    }
-};
-
-App.Ajax.handleSuccess = function(data, textStatus, jqXHR, container) {
-    var contentType = jqXHR.getResponseHeader("Content-Type");
-
-    switch (contentType) {
-        case "text/html" :
-            this.handleHTML(data, container);
-            break;
-
-        case "application/json" :
-            this.handleJSON(data);
-            break;
-
-        default:
-            break;
-    }
-
-};
-
-App.Ajax.handleJSON = function(data) {
-
-        if (!!data.notice) {
-            $.each(data.notice, function(key, value) {
-                App.Toaster.fadeIn(value);
-            });
-        }
-
-        var fn = null;
-        try {
-            var fn = App.Ajax.jsonActionMap[data.action][data.status];
-        } catch(e) {
-            console.log(e);
-        }
-
-        if (fn !== null) {
-            fn();
-        } else {
-            console.log("Couldn't map JSON data to an action");
-        }
-
-
-};
-
-App.Ajax.handleHTML = function(data, container) {
-    container.html(data);
-};
-
-App.Ajax.handleError = function(jqXHR, textStatus, errorThrown) {
-
-    switch (jqXHR.status) {
-
-        case 401:
-            App.showLogin();
-            break;
-
-        default:
-            break;
-
-    }
-
-};
-
-App.Ajax.request = function(url, data, type, container) {
-
-    var loading_blocker = container.next();
-
-    $.ajax({
-      
-        url : url,
-      
-        data : data,
-      
-        type : type,
-      
-        beforeSend: function(jqXHR, settings) {
-            loading_blocker.addClass("block-enabled");
+            }
         },
-      
-        success : function(data, textStatus, jqXHR) {
-            App.Ajax.handleSuccess(data, textStatus, jqXHR, container);
-            loading_blocker.removeClass("block-enabled");
-        },
-      
-        error : function(jqXHR, textStatus, errorThrown) {
-            App.Ajax.handleError(jqXHR, textStatus, errorThrown);
-            loading_blocker.removeClass("block-enabled");
-        }
-    
-    });
 
-};
+        "logout": {
+
+            "ok": function(data) {
+                App.Desktop.logOut(data);
+            }
+
+        }
+    };
+
+    Ajax.handles = [];
+
+    Ajax.initiator = function(initiator) {
+
+        var tagname = $(initiator).prop("tagName");
+
+        var href, action, type, data, container, loading_blocker;
+
+        container = $(initiator).closest("div.body");
+
+        loading_blocker = $("div#loading-blocker");
+        //loading_blocker = container.next();
+
+        switch (tagname) {
+
+            case "A":
+                href = $(initiator).attr("href");
+                type = "GET";
+
+                App.Ajax.request(href, undefined, type, container, loading_blocker);
+
+                break;
+
+            case "FORM":
+                action = $(initiator).attr("action");
+                type = $(initiator).attr("method");
+                data = $(initiator).serialize();
+
+                App.Ajax.request(action, data, type, container, loading_blocker);
+
+                break;
+
+            default:
+                console.log("ERROR: Can't initiate AJAX request");
+                break;
+        }
+    };
+
+    Ajax.handleSuccess = function(data, textStatus, jqXHR, container) {
+        var contentType = jqXHR.getResponseHeader("Content-Type");
+
+        switch (contentType) {
+            case "text/html" :
+                this.handleHTML(data, container);
+                break;
+
+            case "application/json" :
+                this.handleJSON(data);
+                break;
+
+            default:
+                break;
+        }
+
+    };
+
+    Ajax.handleJSON = function(data) {
+
+            if (!!data.notice) {
+                $.each(data.notice, function(key, value) {
+                    App.Toaster.fadeIn(value);
+                });
+            }
+
+            var fn = null;
+            try {
+                var fn = App.Ajax.jsonActionMap[data.action][data.status];
+            } catch(e) {
+                console.log(e);
+            }
+
+            if (fn !== null) {
+                fn(data);
+            } else {
+                console.log("Couldn't map JSON data to an action");
+            }
+
+
+    };
+
+    Ajax.handleHTML = function(data, container) {
+        //container.fadeOut(100, function() {
+            container.html(data);
+            container.fadeIn(100);
+        //});
+
+    };
+
+    Ajax.handleError = function(jqXHR, textStatus, errorThrown) {
+
+        switch (jqXHR.status) {
+
+            case 401:
+                Ajax.abortAll();
+                App.Desktop.logOut();
+                break;
+
+            default:
+                break;
+
+        }
+
+    };
+
+    Ajax.request = function(url, data, type, container, loading_blocker) {
+
+        var handle = $.ajax({
+
+            url: url,
+
+            data: data,
+
+            type: type,
+
+            beforeSend: function(jqXHR, settings) {
+                loading_blocker.addClass("block-enabled");
+            },
+
+            success: function(data, textStatus, jqXHR) {
+                App.Ajax.handleSuccess(data, textStatus, jqXHR, container);
+                loading_blocker.removeClass("block-enabled");
+            },
+
+            error: function(jqXHR, textStatus, errorThrown) {
+                App.Ajax.handleError(jqXHR, textStatus, errorThrown);
+                loading_blocker.removeClass("block-enabled");
+            },
+
+            complete: function(e, jqXHR, options) {
+                Ajax.handles = xhrPool = $.grep(Ajax.handles, function(handle) { return handle !=jqXHR });
+            }
+
+        });
+
+        Ajax.handles.push(handle);
+    };
+
+
+    Ajax.abortAll = function() {
+
+        $.each(Ajax.handles, function(n, elem) {
+            elem.abort();
+        });
+
+    };
+
+    return Ajax;
+
+})();

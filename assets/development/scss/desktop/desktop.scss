@@ -338,6 +338,7 @@ span[role=toaster-content] {
 
 /* modal modals */
 div#loading-blocker {
+    display: none;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -347,11 +348,20 @@ div#loading-blocker {
     background-image: url('/images/logo_s.png');
     background-repeat: no-repeat;
     background-position: center center;
-    z-index: 2000000000;
+    z-index: 3000000000;
     color: #FFFFFF;
 }
+
+div#loading-blocker.block-enabled {
+  display: block;
+}
+
 div#loading-blocker i {
     position: absolute;
     top: 80%;
     left: 50%;
+}
+
+.show-when-logged-in {
+  display: none;
 }

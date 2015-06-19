@@ -1,12 +1,14 @@
-$(function() {
+App.Public = {};
+
+App.Public.load = function() {
 
   $("input").keypress(function(e) {
     if (e.which == 13) {
       e.preventDefault();
-      $("button[type=submit]").click();
+      $(this).closest("form").find("button[type=submit]").click();
     }
   });
 
   $("span.email").html("mail" + "&#64;" + "minecraft.pt");
 
-});
+};

@@ -1,13 +1,13 @@
 div#login {
 
-    background: url("/images/logo.png") no-repeat 10px 10px;
+    background: rgba(0, 0, 0, 0.5) url("/images/logo.png") no-repeat 10px 10px;
     width: 100%;
     height: 100%;
 
     div#actions {
         width: 260px;
         height: 150px;
-        bottom: 150px;
+        bottom: 110px;
         right: 20px;
     }
 
@@ -25,30 +25,31 @@ div#login {
     }
 }
 
-
 div#register {
 
-    background: url("/images/registration.png") no-repeat right -15px;
+    background: rgba(0, 0, 0, 0.5) url("/images/registration_s.png") no-repeat 125px -10px;
     width: 100%;
     height: 100%;
 
     div#actions {
         width: 240px;
         height: 125px;
-        bottom: 40px;
+        bottom: 105px;
         right: 70px;
     }
 
     div#motd {
         width: 360px;
         height: 150px;
-        bottom: 20px;
+        bottom: 80px;
         left: 50px;
     }
 
 }
 
 div#login, div#register {
+
+    font-size: 14px;
 
     a {
         text-decoration: underline;
@@ -65,9 +66,7 @@ div#login, div#register {
         position: absolute;
 
         form {
-            position: absolute;
             width: 100%;
-            top: 0;
 
             ul {
 
@@ -89,38 +88,45 @@ div#login, div#register {
                 background: rgba(255, 255, 255, 0.25);
                 color: white;
                 margin: auto;
+                text-shadow: 1px 1px #000;
             }
 
             input[type=text], input[type=password] {
                 outline: none;
                 margin-bottom: 0.3em;
+                text-shadow: 1px 1px #000;
             }
 
             button {
+                font-size: 1em;
                 background: rgba(0, 0, 0, 0.3);
                 border-radius: 5px;
                 cursor: pointer;
                 width: 198px;
                 height: 30px;
                 margin-bottom: 10px;
+                text-shadow: 1px 1px #000;
             }
 
             button:active {
                 background: rgba(0, 0, 0, 0.8);
                 cursor: pointer;
                 margin-right: 2px;
+
             }
 
-            button#login {
-                color: #dddddd;
-                background: rgba(0, 255, 56, 0.25);
-                border: 1px solid #00FF38;
+            button#login,
+            button#register {
+                color: #ffffff;
+                background: rgba(140, 140, 140, 0.25);
+                border: 1px solid #1e1e1e;
             }
 
+            button#show-login,
             button#show-register {
               color: #FFFFFF;
-              background: rgba(0, 79, 221, 0.25);
-              border: 1px solid #004fdd;
+              background: rgba(0, 186, 186, 0.25);
+              border: 1px solid #3ababa;
             }
 
         }
@@ -132,14 +138,15 @@ div#login, div#register {
     }
 
     h1 {
-        font-size: 1.8em;
-        text-shadow: 1px 1px #444;
+        font-size: 2em;
+        text-shadow: 1px 1px #000;
     }
 
     h2 {
         font-size: 1.5em;
         margin-bottom: 1em;
         padding-top: 0.5em;
+        text-shadow: 1px 1px #000;
     }
 
     span.center {
@@ -151,6 +158,7 @@ div#login, div#register {
         text-align: left;
         margin-top: 1em;
         line-height: 1.2em;
+        text-shadow: 1px 1px #444;
     }
 
     div#social {
@@ -219,5 +227,9 @@ div#login, div#register {
 
     a.socialicon[href]:active {
         background-position: 75% 75%;
+    }
+
+    span.important {
+      color: #ff6f70;
     }
 }

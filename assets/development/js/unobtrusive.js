@@ -129,6 +129,12 @@ $(function() {
         event.preventDefault();
     });
 
+    /* Link behaviour inside modals */
+    $(document).on('click', 'div.modal a:not(.noajax)[href!=#]:not([target])', function(event) {
+        App.Ajax.initiator(this);
+        event.preventDefault();
+    });
+
     /* Form submit behaviour */
     $(document).on('submit', 'form:not(.noajax)', function(event) {
         App.Ajax.initiator(this);
@@ -177,8 +183,7 @@ $(function() {
     window.location = "#";
 
     /* Bootstrap Desktop*/
-    var username = $("meta[name=username]").attr("content");
-    var loggedIn = !!username;
-    App.Desktop.bootstrap(loggedIn);
+    var isLoggedIn = !!($("meta[name=username]").attr("content"));
+    App.Desktop.bootstrap({isLoggedIn: isLoggedIn});
 
 });

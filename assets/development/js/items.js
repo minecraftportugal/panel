@@ -101,6 +101,8 @@ App.Items.load = function() {
                 $(this).attr('style', 'background-position:'+x+'px '+y+'px');
             }
 
+            $(this).css("visibility", "visible");
+
             return;
 
         });
@@ -165,6 +167,8 @@ App.Items.load = function() {
 
                 $(this).html(title);
             }
+
+            $(this).css("visibility", "visible");
 
             return;
         });
