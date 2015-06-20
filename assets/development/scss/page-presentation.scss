@@ -1,3 +1,5 @@
+@import 'themes/classic';
+
 a {
   color: #FFFFFF;
   text-decoration: none;
@@ -366,6 +368,14 @@ span.badge-offline {
     width: 100%;
 }
 
+.w50pct {
+  width: 50%;
+}
+
+.w25pct {
+  width: 25%;
+}
+
 .w100px {
     width: 100px;
 }
@@ -373,4 +383,58 @@ span.badge-offline {
 span.annotation {
     font-size: 10px;
     color: #cccccc;
+}
+
+div#page-credits {
+
+    img {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      color: $text-title-color
+    }
+
+    dl.credits {
+
+        text-align: center;
+
+        dt {
+            color: $text-2nd-title-color;
+            margin-bottom: 8px;
+            text-align: center;
+            font-size: 1.1em;
+            text-shadow: 1px 1px #1e1e1e;
+        }
+
+        dt:not(:first-child) {
+            margin-top: 10px;
+        }
+
+        dd {
+            display: inline-block;
+            vertical-align: center;
+            text-align: center;
+            margin: 0 4px 4px 0;
+            text-shadow: 1px 1px $text-sub-title-color;
+
+            span {
+              font-size: 0.8em;
+              color: $text-sub-title-color;
+              font-style: italic;
+              text-shadow: 1px 1px #000000;
+            }
+
+            span:before {
+              content: '(';
+            }
+
+            span:after {
+              content: ')';
+            }
+        }
+
+    }
+
 }

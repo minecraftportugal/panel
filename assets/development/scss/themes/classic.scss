@@ -24,6 +24,7 @@ $widget-menu-color: #FFFFFF;
 $widget-menu-border-color: #252525;
 $widget-menu-box-shadow: 0 0 40px 5px #000;
 $widget-menu-icon-color: #888888;
+$widget-menu-icon-shadow-color: #ffffff;
 
 $widget-menu-li-separator: 1px solid #252525;
 $widget-menu-li-header-background: linear-gradient(to bottom, #151515, #101010);
@@ -60,3 +61,7 @@ $widget-button-minimized-background: rgba(0, 0, 0, 0);
 $widget-button-minimized-background-hover: rgba(0, 0, 0, 0);
 
 $widget-button-minimized-background-active: linear-gradient(to top, #050505, #050505, #202020);
+
+$text-2nd-title-color: #6a6a6a;
+$text-title-color: #8d8d8d;
+$text-sub-title-color: #b5b5b5;

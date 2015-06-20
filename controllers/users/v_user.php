@@ -31,13 +31,13 @@ function v_user () {
         "asc_desc" => "desc"
     ]);
 
-    $id = $parameters['id'];
-
-    assert(!is_null($id));
+    if (is_null($parameters['id'])) {
+        $parameters['id'] = Session::get("id");
+    }
 
     $action_url = '/profile';
 
-    $player = Accounts::first(['id' => $id], true); // true : fetch all inquisitor data
+    $player = Accounts::first(['id' => $parameters['id']], true); // true : fetch all inquisitor data
 
     $own = ($parameters['id'] == Session::get('id'));
 

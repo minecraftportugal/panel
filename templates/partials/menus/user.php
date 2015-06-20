@@ -14,7 +14,7 @@
   </li>
 
   <li>
-      <a id="menu-profile" href="/profile/?id=<?= $user['id'] ?>"
+      <a id="menu-profile" href="/profile"
          data-widget-action="open"
          data-widget-classes="widget-scrollable-y"
          data-widget-title="<i class='fa fa-user'e></i> <?= $user['playername'] ?>"

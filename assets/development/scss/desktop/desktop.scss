@@ -141,6 +141,10 @@ div.widget-menu-button {
     width: 30px;
     overflow: hidden;
     border-right: $widget-button-border;
+
+    i {
+      text-shadow: 1px 1px #666666;
+    }
 }
 
 div.widget-menu-button:hover {
@@ -186,6 +190,7 @@ div.widget-menu {
 
 div.widget-menu i {
     color: $widget-menu-icon-color;
+    text-shadow: 1px 1px $widget-menu-icon-shadow-color;
 }
 
 div.widget-menu > ul {

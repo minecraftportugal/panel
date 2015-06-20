@@ -1,7 +1,7 @@
 <ul>
 
   <li class="header">
-    <i class="fa fa-desktop"></i> Desktop
+    <i class="fa fa-desktop"></i> Painel
   </li>
 
   <li>

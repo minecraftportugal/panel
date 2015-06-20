@@ -323,7 +323,7 @@ App.Desktop = (function() {
     Desktop.logIn = function() {
         console.log("Desktop.logIn", App.session);
 
-        if (!!App.session) {
+        if (!!App.session) { /* !!! */
             Desktop.changeDomWithoutReloadForLogin();
         }
 
