@@ -32,7 +32,6 @@ App.Desktop = (function() {
 
         // Pick widgets to serialize
         var widgets = [];
-
         if (Desktop.widgets === undefined) {
             Desktop.widgets = [];
         }
@@ -54,61 +53,66 @@ App.Desktop = (function() {
             widgets.push(object);
         });
 
-        // Pick settings to serialize
-        var settings = Desktop.settings;
-
         // Serialize these items in an object
-        var objectToSerialize = {
+        return JSON.stringify({
             widgets: widgets,
-            settings: settings
-        };
-        var serializedObject = JSON.stringify(objectToSerialize, function(name, value) {
+            settings: Desktop.settings
+        }, function(name, value) {
             return value;
         });
 
-        return serializedObject;
 
     };
 
     Desktop.saveState = function() {
-        console.log("Desktop.saveState");
-        var serializedObject = Desktop.serializeState();
-        var base64Object = btoa(serializedObject);
-        localStorage.setItem("widgetState", base64Object);
-
+        if (!!App.session) {
+            console.log("Desktop.saveState");
+            var serializedObject = Desktop.serializeState();
+            var base64Object = btoa(serializedObject);
+            localStorage.setItem("widgetState_" + App.session.username, base64Object);
+        }
     };
 
     Desktop.loadState = function() {
         console.log("Desktop.loadState");
+
         var dfd = $.Deferred();
         var widgets;
         var settings;
+        var defaultWidgets = App.Defaults.fixedStates["basic"];
 
-        var base64Object = localStorage.getItem("widgetState");
-        if ((base64Object === undefined) || (base64Object === null)) {
-
-            widgets = App.Defaults.fixedStates["basic"];
-
+        /* load an empty state if no user is logged in */
+        if (!App.session) {
             return dfd.resolve({
-                widgets: widgets,
+                widgets: [],
                 settings: App.Defaults.settings
             });
         }
 
+        /* try to load the base64 object from localStorage */
+        var base64Object = localStorage.getItem("widgetState_" + App.session.username);
+        if ((base64Object === undefined) || (base64Object === null)) {
+            return dfd.resolve({
+                widgets: defaultWidgets,
+                settings: App.Defaults.settings
+            });
+        }
+
+        /* try to parse the base64 object into a JSON structure */
         var serializedObject = atob(base64Object); //base64Object; // atob(base64Object);
-        var object = {
-            widgets: [],
+        var userData = {
+            widgets: defaultWidgets,
             settings: App.Defaults.settings
         };
         try {
-            object = JSON.parse(serializedObject);
+            userData = JSON.parse(serializedObject);
         } catch (e) {
             console.log("Couldn't load widget states from localStorage")
         }
 
-        widgets = object.widgets || [];
-        settings = object.settings || App.Defaults.settings;
-        console.log("loadState", widgets);
+        widgets = userData.widgets || [];
+        settings = userData.settings || App.Defaults.settings;
+        console.log("loadState", widgets, settings);
         return dfd.resolve({
             widgets: widgets,
             settings: settings
@@ -237,9 +241,9 @@ App.Desktop = (function() {
     };
 
 
-    Desktop.bootstrap = function(state) {
+    Desktop.bootstrap = function() {
 
-        console.log("Desktop.bootstrap", state);
+        console.log("Desktop.bootstrap", App.session);
 
         /* show loading blocker */
         $("div#loading-blocker").addClass("block-enabled");
@@ -272,10 +276,10 @@ App.Desktop = (function() {
 
             }).always(function(data) {
 
-                if (state.isLoggedIn) {
-                    Desktop.logIn(state);
+                if (!!App.session) {
+                    Desktop.logIn();
                 } else {
-                    Desktop.logOut(state);
+                    Desktop.logOut();
                 }
 
                 var loadingDelay = 1000 + Math.round(Math.random() * 100);
@@ -298,13 +302,13 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.changeDomWithoutReloadForLogin = function(session) {
+    Desktop.changeDomWithoutReloadForLogin = function() {
         console.log("Add Meta Tags");
         /* add meta tags */
-        $("<meta>").appendTo("head").attr("name", "xsrf_token").attr("content", session.xsrf_token);
-        $("<meta>").appendTo("head").attr("name", "username").attr("content", session.username);
+        $("<meta>").appendTo("head").attr("name", "xsrf_token").attr("content", App.session.xsrf_token);
+        $("<meta>").appendTo("head").attr("name", "username").attr("content", App.session.username);
 
-        
+
 
     };
 
@@ -316,11 +320,11 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.logIn = function(state) {
-        console.log("Desktop.logIn", state);
+    Desktop.logIn = function() {
+        console.log("Desktop.logIn", App.session);
 
-        if (state.session !== undefined) {
-            Desktop.changeDomWithoutReloadForLogin(state.session);
+        if (!!App.session) {
+            Desktop.changeDomWithoutReloadForLogin();
         }
 
         /* Turn on saving state when opening the panel to the user */
@@ -335,14 +339,15 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.logOut = function(state) {
+    Desktop.logOut = function() {
         console.log("Desktop.logOut");
 
         /* hide elements that appear when logged in */
         $(".show-when-logged-in").hide();
 
-        if (!!state && state.isLoggedIn) {
+        if (!!App.session) {
             Desktop.saveState();
+            App.session = undefined;
             Desktop.globals.saveOnExit = false;
         }
 

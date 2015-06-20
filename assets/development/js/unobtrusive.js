@@ -183,7 +183,13 @@ $(function() {
     window.location = "#";
 
     /* Bootstrap Desktop*/
-    var isLoggedIn = !!($("meta[name=username]").attr("content"));
-    App.Desktop.bootstrap({isLoggedIn: isLoggedIn});
+    if (!!$("meta[name=username]").attr("content")) {
+        App.session = {
+            username: $("meta[name=username]").attr("content"),
+            xsrf_token: $("meta[name=xsrf_token]").attr("content")
+        };
+    }
+
+    App.Desktop.bootstrap();
 
 });

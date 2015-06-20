@@ -7,7 +7,7 @@ App.Ajax = (function() {
         "login": {
 
             "ok": function(data) {
-                data.isLoggedIn = true;
+                App.session = data.session;
                 App.Desktop.bootstrap(data);
             },
 
