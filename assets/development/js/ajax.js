@@ -56,7 +56,7 @@ App.Ajax = (function() {
                 href = $(initiator).attr("href");
                 type = "GET";
 
-                App.Ajax.request(href, undefined, type, container, loading_blocker);
+                Ajax.request(href, undefined, type, container, loading_blocker);
 
                 break;
 
@@ -65,7 +65,7 @@ App.Ajax = (function() {
                 type = $(initiator).attr("method");
                 data = $(initiator).serialize();
 
-                App.Ajax.request(action, data, type, container, loading_blocker);
+                Ajax.request(action, data, type, container, loading_blocker);
 
                 break;
 
@@ -76,7 +76,7 @@ App.Ajax = (function() {
     };
 
     Ajax.handleSuccess = function(data, textStatus, jqXHR, container) {
-        var contentType = jqXHR.getResponseHeader("Content-Type");
+        var contentType = jqXHR.getResponseHeader("Content-Type").split(";")[0];
 
         switch (contentType) {
             case "text/html" :
@@ -88,6 +88,7 @@ App.Ajax = (function() {
                 break;
 
             default:
+                console.log("Unable to handle Content Type ", contentType);
                 break;
         }
 
@@ -103,7 +104,7 @@ App.Ajax = (function() {
 
             var fn = null;
             try {
-                var fn = App.Ajax.jsonActionMap[data.action][data.status];
+                var fn = Ajax.jsonActionMap[data.action][data.status];
             } catch(e) {
                 console.log(e);
             }
@@ -156,17 +157,17 @@ App.Ajax = (function() {
             },
 
             success: function(data, textStatus, jqXHR) {
-                App.Ajax.handleSuccess(data, textStatus, jqXHR, container);
+                Ajax.handleSuccess(data, textStatus, jqXHR, container);
                 loading_blocker.removeClass("block-enabled");
             },
 
             error: function(jqXHR, textStatus, errorThrown) {
-                App.Ajax.handleError(jqXHR, textStatus, errorThrown);
+                Ajax.handleError(jqXHR, textStatus, errorThrown);
                 loading_blocker.removeClass("block-enabled");
             },
 
             complete: function(e, jqXHR, options) {
-                Ajax.handles = xhrPool = $.grep(Ajax.handles, function(handle) { return handle !=jqXHR });
+                Ajax.handles = $.grep(Ajax.handles, function(handle) { return handle != jqXHR });
             }
 
         });
