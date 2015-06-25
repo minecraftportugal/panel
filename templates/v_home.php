@@ -4,12 +4,17 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 <? if (isset($xsrf_token)): ?>
-    <meta name="xsrf_token" content="<?= $xsrf_token ?>" >
+    <meta name="xsrf_token" content="<?= $xsrf_token ?>">
 <? endif; ?>
 <? if (isset($user)): ?>
-    <meta name="username" content="<?= $user["playername"] ?>" >
+    <meta name="username" content="<?= $user["playername"] ?>">
 <? endif; ?>
-
+<? if (isset($user["admin"])): ?>
+    <meta name="admin" content="<?= $user["admin"] ?>">
+<? endif; ?>
+<? if (isset($user["donor"])): ?>
+    <meta name="donor" content="<?= $user["donor"] ?>">
+<? endif; ?>
     <title>minecraft.pt | MinePanel 3.0</title>
 
     <link rel="shortcut icon" href="favicon.ico" >
@@ -46,11 +51,9 @@
         <?= $menu_desktop ?>
     </div>
 
-    <? if ($admin): ?>
-        <div class="widget-menu" id="widget-admin-menu">
-            <?= $menu_admin ?>
-        </div>
-    <? endif; ?>
+    <div class="widget-menu" id="widget-admin-menu">
+        <?= $menu_admin ?>
+    </div>
 
     <? /* /!\ move html templates somewher else ? */ ?>
     <div id="html-templates">

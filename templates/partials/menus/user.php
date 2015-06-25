@@ -1,7 +1,8 @@
 <ul>
 
-  <li class="header">
-    <i class="bg-icon" style=" background-image: url('<?= $head_url ?>');"></i> <?= $user['playername'] ?>
+  <li id="usermenu-name" class="header">
+    <i class="bg-icon" style=" background-image: url('<?= $head_url ?>');"></i>
+    <span><?= $user['playername'] ?></span>
   </li>
 
   <li>
@@ -17,7 +18,7 @@
       <a id="menu-profile" href="/profile"
          data-widget-action="open"
          data-widget-classes="widget-scrollable-y"
-         data-widget-title="<i class='fa fa-user'e></i> <?= $user['playername'] ?>"
+         data-widget-title="<i class='fa fa-user'></i> <?= $user['playername'] ?>"
          data-widget-name="profile-<?= $user['playername'] ?>"
          role="toaster-launcher">
           <i class="fa fa-user"></i> Perfil

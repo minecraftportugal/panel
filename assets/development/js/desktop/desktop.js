@@ -66,7 +66,6 @@ App.Desktop = (function() {
 
     Desktop.saveState = function() {
         if (!!App.session) {
-            console.log("Desktop.saveState");
             var serializedObject = Desktop.serializeState();
             var base64Object = btoa(serializedObject);
             localStorage.setItem("widgetState_" + App.session.username, base64Object);
@@ -74,7 +73,6 @@ App.Desktop = (function() {
     };
 
     Desktop.loadState = function() {
-        console.log("Desktop.loadState");
 
         var dfd = $.Deferred();
         var widgets;
@@ -112,7 +110,7 @@ App.Desktop = (function() {
 
         widgets = userData.widgets || [];
         settings = userData.settings || App.Defaults.settings;
-        console.log("loadState", widgets, settings);
+
         return dfd.resolve({
             widgets: widgets,
             settings: settings
@@ -120,11 +118,12 @@ App.Desktop = (function() {
 
     };
 
-    Desktop.loadFixedState = function(name) {
+    Desktop.setState = function(data) {
 
-        var widgets = App.Defaults.fixedStates[name];
+        /* Restore widgets and settings */
+        Desktop.settings = data.settings;
 
-        $.each(widgets, function(n, widget) {
+        $.each(data.widgets, function(n, widget) {
             var createdWidget = new Desktop.Widget(widget.options, widget.states);
             createdWidget.popState();
         });
@@ -243,121 +242,124 @@ App.Desktop = (function() {
 
     Desktop.bootstrap = function() {
 
-        console.log("Desktop.bootstrap", App.session);
+        var dfd = $.Deferred();
 
-        /* show loading blocker */
-        $("div#loading-blocker").addClass("block-enabled");
-
-        $.when(Desktop.loadState()).then(function(data) {
-
-            /* Restore widgets and settings */
-            Desktop.settings = data.settings;
-            $.each(data.widgets, function(n, widget) {
-                var createdWidget = new Desktop.Widget(widget.options, widget.states);
-                createdWidget.popState();
+        $.when(
+            Desktop.loadState()
+        ).then(function(state, background) {
+            Desktop.setState(state);
+            Desktop.setBackground(Desktop.settings.background).then(function() {    
+                dfd.resolve();
+            }).fail(function() {
+                dfd.resolve();
             });
-
-        }).fail(function(data) {
-
-            /* Restore widgets and settings */
-            Desktop.settings = data.settings;
-
-            $.each(data.widgets, function(n, widget) {
-                var createdWidget = new Desktop.Widget(widget.options, widget.states);
-                createdWidget.popState();
-            });
-
-        }).always(function() {
-
-            /* de qualquer forma, carregar o background */
-            $.when(Desktop.setBackground(App.Desktop.settings.background)).fail(function(data) {
-
-                App.desktop.settings.background = App.Defaults.settings.background;
-
-            }).always(function(data) {
-
-                if (!!App.session) {
-                    Desktop.logIn();
-                } else {
-                    Desktop.logOut();
-                }
-
-                var loadingDelay = 1000 + Math.round(Math.random() * 100);
-                var loadingTimeout = setTimeout(function() {
-
-                    /* remove huge loading blocker */
-                    //$("div#loading-blocker").fadeOut(200, function() {
-                    $("div#loading-blocker").removeClass("block-enabled");
-
-                    /* fadeOut adds style { display: none } to this element */
-                    //    $("div#loading-blocker").removeAttr("style");
-                    //});
-
-
-                }, loadingDelay);
-
-            });
-
         });
 
+        return dfd;
     };
 
     Desktop.changeDomWithoutReloadForLogin = function() {
-        console.log("Add Meta Tags");
+
         /* add meta tags */
         $("<meta>").appendTo("head").attr("name", "xsrf_token").attr("content", App.session.xsrf_token);
         $("<meta>").appendTo("head").attr("name", "username").attr("content", App.session.username);
+        $("<meta>").appendTo("head").attr("name", "admin").attr("content", App.session.admin);
 
 
+        /* Adjust taskbar items position if admin menu is to be present */
+        (function() {
+            var $menu_admin_button = $("div#widget-button-admin-menu");
+
+            if (App.session.admin == "1") {
+                $("div#widget-button-container").css({ left : 73 });
+                $("div#widget-button-container-scroll-left").css({left: 62});
+                $menu_admin_button.show();
+            } else {
+                $("div#widget-button-container").css({ left : 42 });
+                $("div#widget-button-container-scroll-left").css({left: 31});
+                $menu_admin_button.hide();
+            }
+        })();
+
+        /* Change user menu icon, username label and profile menu link */
+        (function() {
+            var $menu_profile = $("a#menu-profile");
+            $menu_profile.attr("data-widget-title", "<i class='fa fa-user'></i> " + App.session.username);
+            $menu_profile.attr("data-widget-name", "profile-" + App.session.username);
+
+            $("a#usermenu-small").css("background-image", "url('//minotar.minecraft.pt/avatar/" + App.session.username + "/16')");
+            $("li#usermenu-name i").css("background-image", "url('//minotar.minecraft.pt/avatar/" + App.session.username + "/16')");
+            $("li#usermenu-name span").html(App.session.username);
+        })();
+
+        /* Logo / Donation request */
 
     };
 
     Desktop.changeDomWithoutReloadForLogout = function() {
-        console.log("Removing Meta Tags");
+
         /* remove meta tags */
         $("meta[name=xsrf_token]").remove();
         $("meta[name=username]").remove();
+        $("meta[name=admin]").remove();
 
+
+        /* Change user menu icon and username label */
+        (function() {
+            var $menu_profile = $("a#menu-profile");
+            $menu_profile.attr("data-widget-title", "<i class='fa fa-user'></i> ");
+            $menu_profile.attr("data-widget-name", "profile-");
+
+            $("a#usermenu-small").css("background-image", "");
+            $("li#usermenu-name i").css("background-image", "");
+            $("li#usermenu-name span").html("");
+        })();
     };
 
     Desktop.logIn = function() {
-        console.log("Desktop.logIn", App.session);
 
-        if (!!App.session) { /* !!! */
-            Desktop.changeDomWithoutReloadForLogin();
-        }
+        Desktop.showCurtain();
+        Desktop.bootstrap().then(function() {
 
-        /* Turn on saving state when opening the panel to the user */
-        Desktop.globals.saveOnExit = true;
+            if (!!App.session) { /* !!! */
+                Desktop.changeDomWithoutReloadForLogin();
+            }
 
-        /* show elements that appear when logged in */
-        $(".show-when-logged-in").show();
+            /* Turn on saving state when opening the panel to the user */
+            Desktop.globals.saveOnExit = true;
 
-        /* hide modal login if it is open */
-        var w = App.Desktop.getWidgetByName("public-login");
-        (!!w) && w.close();
+            /* show elements that appear when logged in */
+            $(".show-when-logged-in").show();
 
+            /* hide modal login if it is open */
+            var w = Desktop.getWidgetByName("public-login");
+            (!!w) && w.close();
+            Desktop.hideCurtain();
+        });
     };
 
     Desktop.logOut = function() {
-        console.log("Desktop.logOut");
 
-        /* hide elements that appear when logged in */
-        $(".show-when-logged-in").hide();
+        Desktop.showCurtain();
+        Desktop.bootstrap().then(function() {
 
-        if (!!App.session) {
-            Desktop.saveState();
-            App.session = undefined;
-            Desktop.globals.saveOnExit = false;
-        }
+            /* hide elements that appear when logged in */
+            $(".show-when-logged-in").hide();
 
-        console.log(Desktop.widgets);
-        $.each(Desktop.widgets.slice(), function(n, widget) {
-            widget.close();
+            if (!!App.session) {
+                Desktop.saveState();
+                App.session = undefined;
+                Desktop.globals.saveOnExit = false;
+            }
+
+            $.each(Desktop.widgets.slice(), function(n, widget) {
+                widget.close();
+            });
+            Desktop.open("public-login");
+
+            Desktop.changeDomWithoutReloadForLogout();
+            Desktop.hideCurtain();
         });
-        Desktop.open("public-login");
-
-        Desktop.changeDomWithoutReloadForLogout();
     };
 
     Desktop.setBackground = function(bg) {
@@ -366,7 +368,6 @@ App.Desktop = (function() {
         $.extend(background, bg);
 
         var dfd = $.Deferred();
-        Desktop.background = background;
 
         var $body = $("body");
         $body.css("background-repeat", background.backgroundRepeat);
@@ -383,10 +384,34 @@ App.Desktop = (function() {
             $("body").css("background-image", "url(" + background.image + ")");
             dfd.resolve(background);
         }).error(function(e) {
-            dfd.reject(background);
+            Desktop.settings.background = App.Defaults.settings.background;
+            dfd.reject();
         });
 
         return dfd;
+    };
+
+    Desktop.hideCurtain = function() {
+
+        //var loadingDelay = 1000 + Math.round(Math.random() * 100);
+        //var loadingTimeout = setTimeout(function() {
+
+            /* remove huge loading blocker */
+            //$("div#loading-blocker").fadeOut(200, function() {
+            $("div#loading-blocker").removeClass("block-enabled");
+
+            /* fadeOut adds style { display: none } to this element */
+            //    $("div#loading-blocker").removeAttr("style");
+            //});
+
+        //}, loadingDelay);
+
+    };
+
+    Desktop.showCurtain = function() {
+
+        /* show loading blocker */
+        $("div#loading-blocker").addClass("block-enabled");
     };
 
     /* DOM event initializations */
@@ -463,7 +488,7 @@ App.Desktop = (function() {
         });
 
         $(window).on("unload", function() {
-            console.log("on unload");
+
             if (Desktop.globals.saveOnExit) {
                 var username = $("meta[name=username]").attr("content");
                 var loggedIn = !!username;
