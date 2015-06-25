@@ -8,7 +8,7 @@ App.Ajax = (function() {
 
             "ok": function(data) {
                 App.session = data.session;
-                App.Desktop.bootstrap(data);
+                App.Desktop.logIn();
             },
 
             "ko": function(data) {
@@ -31,7 +31,7 @@ App.Ajax = (function() {
         "logout": {
 
             "ok": function(data) {
-                App.Desktop.logOut(data);
+                App.Desktop.logOut();
             }
 
         }
@@ -47,8 +47,8 @@ App.Ajax = (function() {
 
         container = $(initiator).closest("div.body");
 
-        loading_blocker = $("div#loading-blocker");
-        //loading_blocker = container.next();
+        //loading_blocker = $("div#loading-blocker");
+        loading_blocker = container.next();
 
         switch (tagname) {
 

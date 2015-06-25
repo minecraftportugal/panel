@@ -17,7 +17,7 @@
       <a id="menu-profile" href="/profile"
          data-widget-action="open"
          data-widget-classes="widget-scrollable-y"
-         data-widget-title="<i class='fa fa-user'e></i> <?= $user['playername'] ?>"
+         data-widget-title="<i class='fa fa-user'></i> <?= $user['playername'] ?>"
          data-widget-name="profile-<?= $user['playername'] ?>"
          role="toaster-launcher">
           <i class="fa fa-user"></i> Perfil

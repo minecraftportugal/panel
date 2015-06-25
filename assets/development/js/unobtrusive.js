@@ -1,16 +1,6 @@
 /* On DOM loaded... */
 $(function() {
 
-    /* Adjust taskbar items position if admin menu is to be present */
-    (function() {
-        var $menu_admin_button = $("div#widget-button-admin-menu");
-
-        if ($menu_admin_button.length > 0) {
-            $("div#widget-button-container").css({ left : 73 });
-            $("div#widget-button-container-scroll-left").css({left: 62});
-        }
-    })();
-
     /* Open menus with open-menu data- API */
     $(document).on("click", "div[data-open-menu]", function(event) {
         var $button = $(this);
@@ -185,11 +175,16 @@ $(function() {
     /* Bootstrap Desktop*/
     if (!!$("meta[name=username]").attr("content")) {
         App.session = {
-            username: $("meta[name=username]").attr("content"),
-            xsrf_token: $("meta[name=xsrf_token]").attr("content")
+            "username": $("meta[name=username]").attr("content"),
+            "xsrf_token": $("meta[name=xsrf_token]").attr("content"),
+            "admin": $("meta[name=admin]").attr("content") || "0"
         };
     }
 
-    App.Desktop.bootstrap();
+    if (!!App.session) {
+        App.Desktop.logIn();
+    } else {
+        App.Desktop.logOut();
+    }
 
 });

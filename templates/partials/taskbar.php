@@ -6,11 +6,9 @@
     Este é o menu Principal. Contém todas as aplicações deste painel.
 </span>
 
-<? if ($admin): ?>
-    <div id="widget-button-admin-menu" class="widget-menu-button widget-admin-button" title="Noo! Click me instead!" data-open-menu="div#widget-admin-menu" role="toaster-launcher">
-        <i class="fa fa-gear"></i>
-    </div>
-<? endif; ?>
+<div id="widget-button-admin-menu" class="widget-menu-button widget-admin-button" title="Noo! Click me instead!" data-open-menu="div#widget-admin-menu" role="toaster-launcher">
+    <i class="fa fa-gear"></i>
+</div>
 
 <span rel="widget-button-admin-menu" role="toaster-content">
     Este é o menu de administração ;-)

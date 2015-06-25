@@ -67,15 +67,10 @@ function v_home() {
     $template->assign('background_css', $background_css);
 
     $desktop_logo = Template::init('partials/desktop-logo');
-    if ($user['donor'] == 1) {
-        $desktop_logo->assign('bg_image', '/images/logo_xxs.png');
-        $desktop_logo->assign('bg_height', '128px');
-        $desktop_logo->assign('logo_action', 'help-about');
-    } else {
-        $desktop_logo->assign('bg_image', '/images/pls_xxs.png');
-        $desktop_logo->assign('bg_height', '147px');
-        $desktop_logo->assign('logo_action', 'help-donate');
-    }
+    $desktop_logo->assign('bg_image', '/images/logo_xxs.png');
+    $desktop_logo->assign('bg_height', '128px');
+    $desktop_logo->assign('logo_action', 'help-about');
+
     $template->assign('desktop_logo', $desktop_logo);
 
     /* Task bar */
@@ -92,11 +87,10 @@ function v_home() {
     $admin = Session::isAdmin();
     $template->assign('admin', $admin);
     $taskbar->assign('admin', $admin);
-    if ($admin) {
-        $menu_admin = Template::init('partials/menus/admin');
-        $menu_admin->assign('admin', $admin);
-        $template->assign('menu_admin', $menu_admin);
-    }
+
+    $menu_admin = Template::init('partials/menus/admin');
+    $menu_admin->assign('admin', $admin);
+    $template->assign('menu_admin', $menu_admin);
 
     /* User and desktop menus */
     $menu_user = Template::init('partials/menus/user');
