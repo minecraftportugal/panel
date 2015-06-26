@@ -132,7 +132,11 @@ App.Desktop = (function() {
 
     Desktop.clearState = function() {
         Desktop.globals.saveOnExit = false;
-        localStorage.clear();
+        if (!!App.session.username) {
+            delete(localStorage["widgetState_" + App.session.username])
+        } else {
+            localStorage.clear();
+        }
         window.location.reload();
     };
 
