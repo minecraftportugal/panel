@@ -18,7 +18,11 @@
 
 <body>
 
-    <p>Queres jogar no nosso servidor e ter acesso a todos os conteudos que oferecemos? Regista-te nesta página!</p>
+    <p>
+        Queres jogar no nosso servidor e ter acesso a todos os conteudos que oferecemos?
+        Para poderes jogar conosco não necessitas de uma conta mojang, podendo utilizar qualquer nome disponível,
+        bastando que te registes aqui.
+    </p>
     <p>
         Utiliza o <u>mesmo</u> nome de utilizador que usas para jogar Minecraft e um endereço de email válido onde possas receber a tua password.
         <span class="important">Se tentares jogar com um nome diferente do que utilizaste aqui, não irás conseguir fazer login.</span>
