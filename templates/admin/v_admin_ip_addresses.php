@@ -25,7 +25,7 @@
           </td>
 
           <td>
-              <?= $r["playernames"] ?>
+              <textarea class="readonly" rows="1" readonly><?= $r["playernames"] ?></textarea>
           </td>
 
         </tr>
