@@ -5,39 +5,28 @@ use lib\template\Template;
 use models\accounts\Accounts;
 use helpers\minotar\MinotarHelper;
 
-function v_page_players() {
+function v_page_register() {
 
-    Session::refererProtect();
+    //Session::refererProtect();
 
-    $template = Template::init('pages/v_players');
+    $template = Template::init('pages/v_register');
 
-    /* scripts */
-    $scripts = [
-
+    $template->assign('scripts',[
         "lib/jquery/jquery",
+        "pages/register"
+    ]);
 
-        "pages/players"
-    ];
-
-    $template->assign('scripts', $scripts);
-
-    $styles = [
-
+    $template->assign('styles', [
+        "lib/font-awesome.min",
         "reset",
-
-        "pages/players"
-
-    ];
-
-    $template->assign('styles', $styles);
+        "pages/register"
+    ]);
 
     $players = Accounts::get(["per_page" => 100, "online" => 1]);
 
     /** Filters: Change and add new data */
     foreach ($players as $k => $v) {
-
         $players[$k]['head'] = MinotarHelper::head($players[$k]['playername'], "32px");
-
     }
 
     $total = count($players);
@@ -49,4 +38,5 @@ function v_page_players() {
     $template->render();
 
 }
+
 ?>

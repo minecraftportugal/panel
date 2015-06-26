@@ -20,6 +20,7 @@ function v_page() {
     $pages = [
         'players' => 'v_page_players',
         'launcher' => 'v_page_launcher',
+        'register' => 'v_page_register',
         'about' => null,
         'help'=> null
     ];
@@ -46,9 +47,7 @@ function v_page() {
     } else {
 
         $template = Template::init('v_404_not_found');
-
         $template->assign('self_url', Environment::getSelfURL());
-
         $template->render(404);
 
     }
