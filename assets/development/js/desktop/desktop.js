@@ -269,6 +269,20 @@ App.Desktop = (function() {
         $("<meta>").appendTo("head").attr("name", "username").attr("content", App.session.username);
         $("<meta>").appendTo("head").attr("name", "admin").attr("content", App.session.admin);
 
+        /* Adjust taskbar items position if admin menu is to be present */
+        (function() {
+            var $menu_admin_button = $("div#widget-button-admin-menu");
+
+            if (App.session.admin == "1") {
+                $("div#widget-button-container").css({ left : 73 });
+                $("div#widget-button-container-scroll-left").css({left: 62});
+                $menu_admin_button.show();
+            } else {
+                $("div#widget-button-container").css({ left : 42 });
+                $("div#widget-button-container-scroll-left").css({left: 31});
+                $menu_admin_button.hide();
+            }
+        })();
 
         /* Adjust taskbar items position if admin menu is to be present */
         (function() {
@@ -292,8 +306,10 @@ App.Desktop = (function() {
             $menu_profile.attr("data-widget-name", "profile-" + App.session.username);
 
             $("a#usermenu-small").css("background-image", "url('//minotar.minecraft.pt/avatar/" + App.session.username + "/16')");
+
             $("li#usermenu-name i").css("background-image", "url('//minotar.minecraft.pt/avatar/" + App.session.username + "/16')");
             $("li#usermenu-name span").html(App.session.username);
+
         })();
 
         /* Logo / Donation request */
@@ -307,7 +323,6 @@ App.Desktop = (function() {
         $("meta[name=username]").remove();
         $("meta[name=admin]").remove();
 
-
         /* Change user menu icon and username label */
         (function() {
             var $menu_profile = $("a#menu-profile");
@@ -315,8 +330,10 @@ App.Desktop = (function() {
             $menu_profile.attr("data-widget-name", "profile-");
 
             $("a#usermenu-small").css("background-image", "");
+
             $("li#usermenu-name i").css("background-image", "");
             $("li#usermenu-name span").html("");
+
         })();
     };
 
