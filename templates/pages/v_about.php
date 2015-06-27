@@ -23,7 +23,8 @@
                 <dd>Mário C. <span>neofreak</span></dd>
 
                 <dt>artwork</dt>
-                <dd>Joaquim B. <span>ktn</span></dd>
+                <dd>Joaquim B. <span>kyn</span></dd>
+                <dd>T. Simões <span>_simoes_</span></dd>
 
                 <dt>contribuições</dt>
                 <dd>Hugo P. <span>Theorem</span></dd>
