@@ -36,8 +36,8 @@
         <a id="menu-item-admin-tickets" href="#" data-widget-open="admin-tickets" role="toaster-launcher">
             <i class="fa fa-ticket"></i> Tickets
         </a>
-        <span rel="menu-item-admin-sessions" role="toaster-content">
-            Tickets
+        <span rel="menu-item-admin-tickets" role="toaster-content">
+            Visão Geral dos Tickets
         </span>
     </li>
     <li>
