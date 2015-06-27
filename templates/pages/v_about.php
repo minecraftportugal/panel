@@ -12,12 +12,12 @@
     </div>
 
     <div class="padded">
-        <span class="w50pct pull-left center">
+        <span class="w40pct pull-left center">
             <img src="/images/logo_xs.png"/>
         </span>
-        <span class="pull-left w25pct">
+        <span class="pull-left w30pct">
             <dl class="credits">
-                <dt><h1>minepanel</h1></dt>
+                <dt><h1>web panel</h1></dt>
 
                 <dt>design e programação</dt>
                 <dd>Mário C. <span>neofreak</span></dd>
@@ -30,22 +30,14 @@
                 <dd>Hugo P. <span>Theorem</span></dd>
                 <dd>Rui L. <span>tulicreme</span></dd>
                 <dd>Vasco F.<span>dubaiss</span></dd>
-
-                <dt><a href="#">creditos dos outros</a></dt>
             </dl>
         </span>
-        <span class="pull-left w25pct">
+        <span class="pull-left w30pct">
             <dl class="credits">
                 <dt><h1>minecraft server</h1></dt>
                 <dt>direcção executiva</dt>
                 <dd>Mário C. <span>neofreak</span></dd>
                 <dd>João A. <span>Deevian</span></dd>
-
-                <dt>administracao do servidor</dt>
-                <dd>Mário C. <span>neofreak</span></dd>
-                <dd>João A. <span>Deevian</span></dd>
-                <dd>Joana F. <span>IronJoo</span></dd>
-                <dd>Pedro X. <span>xhip</span></dd>
 
                 <dt>programação</dt>
                 <dd>João A. <span>Deevian</span></dd>
@@ -53,6 +45,11 @@
                 <dd>Vasco F.<span>dubaiss</span></dd>
                 <dd>Mário C. <span>neofreak</span></dd>
 
+                <dt>administracao do servidor</dt>
+                <dd>Mário C. <span>neofreak</span></dd>
+                <dd>João A. <span>Deevian</span></dd>
+                <dd>Joana F. <span>IronJoo</span></dd>
+                <dd>Pedro F. <span>xhip</span></dd>
             </dl>
         </span>
     </div>

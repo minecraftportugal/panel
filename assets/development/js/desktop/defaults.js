@@ -198,10 +198,14 @@ App.Defaults = (function() {
                     "Fechar": function () {
                         return false;
                     }
-                },
-                "cssBody": {
-                    "overflow": "hidden"
                 }
+            },
+            "css": {
+                "height": "370px",
+                "width": "800px"
+            },
+            "cssBody": {
+                "overflow": "hidden"
             }
         },
 
