@@ -299,8 +299,8 @@
                         <? endif; ?>
                         <tr><th>Level</th><td><?= $player['level'] ?></td></tr>
                         <tr><th>XP</th><td><?= $player['totalExperience'] ?>/<?= $player['lifetimeExperience'] ?></td></tr>
-                        <tr><th>Tempo total</th><td> <?= $player['totalTime'] ?></td></tr>
-                        <tr><th>Ultima sessão</th><td> <?= $player['sessionTime'] ?></td></tr>
+                        <tr><th>Tempo total</th><td> <?= $player['totalTimeStr'] ?></td></tr>
+                        <tr><th>Ultima sessão</th><td> <?= $player['sessionTimeStr'] ?></td></tr>
                         <tr><th>KMs Percorridos</th><td> <?= round($player['totalDistanceTraveled']/1000,2) ?> km</td></tr>
                         <tr><th>Modo de Jogo</th><td> <?= $player['gameMode'] ?></td></tr>
                         <tr><th>World</th><td> <?= $player['world'] ?></td></tr>

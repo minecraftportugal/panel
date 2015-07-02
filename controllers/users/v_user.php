@@ -92,8 +92,8 @@ function v_user () {
             }
         }
 
-        $player['totalTime'] = DateTimeHelper::stoh($player['totalTime']);
-        $player['sessionTime'] = DateTimeHelper::stoh($player['sessionTime']);
+        $player['totalTimeStr'] = DateTimeHelper::stoh($player['totalTime']);
+        $player['sessionTimeStr'] = DateTimeHelper::stoh($player['sessionTime']);
 
     } else {
 
@@ -119,6 +119,7 @@ function v_user () {
             $count_blocks = 0;
             $count_diamond = 0;
         }
+
         $count_hours = round($player['totalTime']/60/60);
         $count_hours = $count_hours > 0 ? $count_hours : 1;
 
