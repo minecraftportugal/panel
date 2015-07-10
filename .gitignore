@@ -9,3 +9,4 @@ npm-debug.log
 public
 assets/production
 assets/development/css
+scripts/.minecraftPremiumCheckLastId
