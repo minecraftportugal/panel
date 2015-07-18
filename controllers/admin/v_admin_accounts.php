@@ -60,11 +60,13 @@ function v_admin_accounts() {
 
         $page[$k]['badges'] = $badges;
 
-        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], "24px", "3px");
+        $page[$k]['head'] =  MinotarHelper::head($page[$k]['playername'], '24px', '3px');
 
-        $page[$k]['totalTime'] = DateTimeHelper::stoh($page[$k]["totalTime"]);
+        $page[$k]['totalTime'] = DateTimeHelper::stoh($page[$k]['totalTime']);
 
-        $page[$k]['sessionTime'] = DateTimeHelper::stoh($page[$k]["sessionTime"]);
+        $page[$k]['sessionTime'] = DateTimeHelper::stoh($page[$k]['sessionTime']);
+
+        $page[$k]['hasPlayed'] = ($page[$k]['registerdate_df'] == $page[$k]['lastlogindate_df']);
 
     }
 
@@ -125,16 +127,16 @@ function v_admin_accounts() {
 
     $table->add_column([
         'width' => '15%',
-        'label' => 'Tempo total',
-        'label_title' => 'Tempo total em jogo',
-        'order_by' => 'totalTime'
+        'label' => 'Ultima Sessão',
+        'label_title' => 'Tempo da última sessão',
+        'order_by' => 'sessionTime'
     ]);
 
     $table->add_column([
         'width' => '15%',
-        'label' => 'Tempo da Sessão',
-        'label_title' => 'Tempo da última sessão',
-        'order_by' => 'sessionTime'
+        'label' => 'Tempo Total',
+        'label_title' => 'Tempo total em jogo',
+        'order_by' => 'totalTime'
     ]);
 
     $table->add_column([

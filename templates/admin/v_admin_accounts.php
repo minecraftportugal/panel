@@ -148,7 +148,7 @@
             </td>
 
             <td>
-                <?= $r["lastlogindate"] != NULL ? $r["lastlogindate"] : "<i>".$r["registerdate"]."</i>" ?>
+                <?= $r["lastlogindate"] ?>
             </td>
 
             <td>
@@ -158,11 +158,11 @@
             </td>
 
             <td>
-                <?= $r["totalTime"] ?>
+                <?= $r["totalTime"] > 0 ? $r["totalTime"] : "" ?>
             </td>
 
             <td>
-                <?= $r["sessionTime"] ?>
+                <?= $r["sessionTime"] > 0 ? $r["sessionTime"] : "" ?>
             </td>
 
             <td class="center">
