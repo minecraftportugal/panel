@@ -158,11 +158,11 @@
             </td>
 
             <td>
-                <?= $r["totalTime"] > 0 ? $r["totalTime"] : "" ?>
+                <?= $r["sessionTime"] > 0 ? $r["sessionTime"] : "" ?>
             </td>
 
             <td>
-                <?= $r["sessionTime"] > 0 ? $r["sessionTime"] : "" ?>
+                <?= $r["totalTime"] > 0 ? $r["totalTime"] : "" ?>
             </td>
 
             <td class="center">
