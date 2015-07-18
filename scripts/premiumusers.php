@@ -6,6 +6,8 @@
 # v1.0
 #
 
+define('SAVEFILE', dirname(__FILE__) . '/.minecraftPremiumCheckLastId');
+
 require 'init/bootstrap.php';
 
 use minecraftia\db\Bitch;
@@ -53,13 +55,36 @@ function premiumCheck($playername) {
     return $status;
 }
 
-$limit = null;
-if (isset($argv[1])) {
-    $limit = intval($argv[1]);
-    echo "Starting with ID $limit.\n";
-} 
+function saveLastId($id) {
+	$result = file_put_contents(SAVEFILE, $id);
+}
 
-$users = getUsers($limit);
+function readLastId() {
+	$id = file_get_contents(SAVEFILE);
+	return $id;
+}
+
+#
+# Main
+#
+$lastId = null;
+
+# Try using a lastId givin to the program as an argument.
+# If no argument given, try to read it from SAVEFILE
+# If no SAVEFILE found, use 1 as the default
+if (isset($argv[1])) {
+	$lastId = intval($argv[1]);
+} else {
+	$savedId = readLastId();
+	if ($savedId === false) {
+		$lastId = 1;
+	} else {
+		$lastId = intval($savedId);
+	}
+}
+
+echo "Starting with ID $lastId.\n";
+$users = getUsers($lastId);
 
 foreach ($users as $user) {
     $id = $user['id'];
@@ -71,8 +96,7 @@ foreach ($users as $user) {
     echo "$playername : $result ($ispremium)...\t\t";
 
     setPremium($id, $result);
-
-
+    saveLastId($id);
 }
 
 ?>
