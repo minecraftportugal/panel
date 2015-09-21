@@ -95,6 +95,10 @@ function onActiveWindowChange(window) {
 	//alert("Active window: "+window);
 }
 
+function onPolicyError() {
+  alert('policy error');
+}
+
 /* This event ensures that lightIRC sends the default quit message when the user closes the browser window */
 window.onbeforeunload = function() {
   swfobject.getObjectById('lightIRC').sendQuit();
