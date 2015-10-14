@@ -15,7 +15,7 @@
 <? if (isset($user["donor"])): ?>
     <meta name="donor" content="<?= $user["donor"] ?>">
 <? endif; ?>
-    <title>minecraft.pt | MinePanel 3.0</title>
+    <title>Comunidade Minecraft Portugal | MinePanel 3.0</title>
 
     <link rel="shortcut icon" href="favicon.ico" >
 <? foreach ($styles as $style): ?>

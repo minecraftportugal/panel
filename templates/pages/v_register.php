@@ -34,7 +34,7 @@
                 <input type="text" id="username" name="username" placeholder="esteves" />
             </li>
             <li>
-                <input type="text" id="email" name="email" placeholder="esteves@minecraft.pt" />
+                <input type="text" id="email" name="email" placeholder="esteves@mcpt.eu" />
             </li>
             <li>
                 <button id="register" type="submit">Registar!</button>

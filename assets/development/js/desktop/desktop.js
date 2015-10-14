@@ -305,9 +305,9 @@ App.Desktop = (function() {
             $menu_profile.attr("data-widget-title", "<i class='fa fa-user'></i> " + App.session.username);
             $menu_profile.attr("data-widget-name", "profile-" + App.session.username);
 
-            $("a#usermenu-small").css("background-image", "url('//minotar.minecraft.pt/avatar/" + App.session.username + "/16')");
+            $("a#usermenu-small").css("background-image", "url('//minotar.mcpt.eu/avatar/" + App.session.username + "/16')");
 
-            $("li#usermenu-name i").css("background-image", "url('//minotar.minecraft.pt/avatar/" + App.session.username + "/16')");
+            $("li#usermenu-name i").css("background-image", "url('//minotar.mcpt.eu/avatar/" + App.session.username + "/16')");
             $("li#usermenu-name span").html(App.session.username);
 
         })();

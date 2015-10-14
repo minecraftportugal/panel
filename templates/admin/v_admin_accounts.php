@@ -18,7 +18,7 @@
           <h2>Endereço de Email</h2>
         </li>
         <li>
-          <input type="text" name="emailaddress" placeholder="mail@minecraft.pt" value="<?= $parameters['emailaddress'] ?>">
+          <input type="text" name="emailaddress" placeholder="mail@mcpt.eu" value="<?= $parameters['emailaddress'] ?>">
         </li>
         <li>
           <h2>Endereço IP</h2>

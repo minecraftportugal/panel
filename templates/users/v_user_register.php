@@ -20,7 +20,7 @@
                     <input type="text" id="username" name="username" placeholder="esteves" />
                 </li>
                 <li>
-                    <input type="text" id="email" name="email" placeholder="esteves@minecraft.pt" />
+                    <input type="text" id="email" name="email" placeholder="esteves@mcpt.eu" />
                 </li>
                 <li>
                     <button id="register" type="submit">Registar!</button>
@@ -43,7 +43,7 @@
     <div id="social">
         <ul class="icons">
             <li>
-                <a title="Site" href="http://www.minecraft.pt/" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_wp.png');" target="_blank"></a>
+                <a title="Site" href="http://www.mcpt.eu/" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_wp.png');" target="_blank"></a>
             </li>
             <li>
                 <a title="Facebook" href="http://facebook.com/MinecraftPT" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_fb.png');" target="_blank"></a>
@@ -55,10 +55,10 @@
                 <a title="Twitter" href="http://www.twitter.com/oficialmcpt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_twitter.png');" target="_blank"></a>
             </li>
             <li>
-                <a title="Email" href="mailto:mail[ a t ]minecraft.pt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_email.png');" target="_blank"></a>
+                <a title="Email" href="mailto:mail[ a t ]mcpt.eu" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_email.png');" target="_blank"></a>
             </li>
             <li>
-                <a title="Webchat" href="//www.minecraft.pt/webchat" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_chat.png');" target="_blank"></a>
+                <a title="Webchat" href="//www.mcpt.eu/webchat" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_chat.png');" target="_blank"></a>
             </li>
             <li>
                 <a title="Youtube" href="http://www.youtube.com/user/oficialmcpt" class="socialicon" style="background-image: url('<?= $icon_path ?>/social_yt.png');" target="_blank"></a>

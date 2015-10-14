@@ -1,5 +1,5 @@
 // bypass same origin policy
-document.domain = "minecraft.pt";
+document.domain = "mcpt.eu";
 
 $(document).ready(function() {
 

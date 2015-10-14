@@ -40,8 +40,8 @@
     <? endif;?>
 
     <p>Servidor da Comunidade Minecraft Portugal</p>
-    <p>IP: minecraft.pt</p>
-    <p><a href="//www.minecraft.pt/registo" target="_blank">Regista-te já!</a></p>
+    <p>IP: mcpt.eu</p>
+    <p><a href="//www.mcpt.eu/registo" target="_blank">Regista-te já!</a></p>
 
 </body>
 </html>

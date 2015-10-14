@@ -5,7 +5,7 @@ App.Defaults = (function() {
     Defaults.settings = {};
 
     Defaults.settings.background = {
-        image: "https://panel.minecraft.pt/images/backgrounds/bg5.jpg",
+        image: "https://panel.mcpt.eu/images/backgrounds/bg5.jpg",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center center",
         backgroundAttachment: "fixed",
@@ -55,7 +55,7 @@ App.Defaults = (function() {
 
         "forum": {
             "name": "forum",
-            "source": "//forum.minecraft.pt/",
+            "source": "//forum.mcpt.eu/",
             "title": "<i class='fa fa-institution'></i> Fórum",
             "mode": "iframe"
         },
@@ -94,7 +94,7 @@ App.Defaults = (function() {
 
         "dynmap": {
             "name": "dynmap",
-            "source": "//dynmap.minecraft.pt/",
+            "source": "//dynmap.mcpt.eu/",
             "alwaysCreate": true,
             "title": "<i class='fa fa-picture-o'></i> Dynmap",
             "mode": "iframe",
@@ -106,7 +106,7 @@ App.Defaults = (function() {
 
         "inquisitor": {
             "name": "inquisitor",
-            "source": "//inquisitor.minecraft.pt",
+            "source": "//inquisitor.mcpt.eu",
             "alwaysCreate": true,
             "title": "<i class='fa fa-tachometer'></i> Inquisitor",
             "mode": "iframe",
@@ -296,7 +296,7 @@ App.Defaults = (function() {
 
         "pinned": {
             "name": "pinned",
-            "source": "//dynmap.minecraft.pt",
+            "source": "//dynmap.mcpt.eu",
             "pinned": true,
             "mode": "iframe",
             "title": "<i class='fa fa-life-ring'></i> Dynmapinned",
@@ -316,7 +316,7 @@ App.Defaults = (function() {
                         "min-width": "610px",
                         "min-height": "400px"
                     },
-                    "source": "//dynmap.minecraft.pt/",
+                    "source": "//dynmap.mcpt.eu/",
                     "title": "<i class='fa fa-picture-o'></i> Dynmap",
                     "mode": "iframe",
                     "modal": false,

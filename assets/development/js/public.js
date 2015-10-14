@@ -9,6 +9,6 @@ App.Public.load = function() {
     }
   });
 
-  $("span.email").html("mail" + "&#64;" + "minecraft.pt");
+  $("span.email").html("mail" + "&#64;" + "mcpt.eu");
 
 };

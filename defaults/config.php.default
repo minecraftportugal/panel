@@ -11,7 +11,7 @@ define('VALID_REFERER', "/^https?:\/\/[a-zA-Z0-9\.\-]+\.site\.minecraft/");
 define('WEB_ROOT', "/home/notch/dev/minecraftia");
 
 /* DYNMAP URL */
-define('DYNMAP_URL', "//dynmap.minecraft.pt/");
+define('DYNMAP_URL', "//dynmap.mcpt.eu/");
 //define('DYNMAP_URL', "//ticklemynausea.net/?mute");
 
 /* main xAuth db */
@@ -38,7 +38,7 @@ define('PHPMAILER_EMAIL   ', "");
 define('LIGHTIRC_PATH', "/vendors/lightIRC/lightIRC.swf");
 
 /* Minotar */
-define('MINOTAR_SERVER', "//minotar.minecraft.pt");
+define('MINOTAR_SERVER', "//minotar.mcpt.eu");
 //define('MINOTAR_SERVER', "//minotar.net");
 
 ?>
