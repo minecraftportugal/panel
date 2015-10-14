@@ -14,7 +14,7 @@ use minecraftia\db\Bitch;
 
 function getUsers($limit) {
     if (!is_null($limit)) {
-        $sql = "SELECT * FROM accounts a WHERE id >= :limit";
+        $sql = "SELECT * FROM accounts a WHERE id > :limit";
         $users = Bitch::source('default')->all($sql, compact('limit')); 
     } else {
         $sql = "SELECT * FROM accounts a";

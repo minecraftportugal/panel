@@ -385,23 +385,21 @@ function drop_item($sql, $dropset) {
   return $runtime;
 }
 
-function make_drop($name, $sql, $drop_template, $sleep_time) {
+function make_drop($name, $sql, $drop_template) {
   echo "$name " . date("Y-m-d H:i:s") . ": \n";
   $drop_result = drop_item($sql, $drop_template);
-  sleep($sleep_time);
 }
 
-while (true) {
 
-  # send vip drops
-  make_drop("V", $sql_vip, $drop_template_geral, rand(10,30));
 
-  # send default drops
-  make_drop("D", $sql_default, $drop_template_geral, rand(10,30));
+# send vip drops
+make_drop("V", $sql_vip, $drop_template_geral);
 
-  # send online drops
-  make_drop("O", $sql_online, $drop_template_geral, rand(10,30));
+# send default drops
+make_drop("D", $sql_default, $drop_template_geral);
 
-}
+# send online drops
+make_drop("O", $sql_online, $drop_template_geral);
+
 
 ?>

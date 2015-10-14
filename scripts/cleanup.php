@@ -17,7 +17,7 @@ $sql['old_itemdrops'] = "
 ";
 
 #
-# Apagar todos os registos não usados com mais de 24h 
+# Apagar todos os registos não usados (sem login) com mais de 24h 
 #
 $sql['unused_registrations'] = "
   DELETE FROM accounts WHERE lastlogindate IS NULL AND registerdate < NOW() - INTERVAL 1 DAY;
@@ -25,16 +25,17 @@ $sql['unused_registrations'] = "
 
 #
 # Apagar todos os registos usados, mas inactivos há mais de de dois meses e que não jogaram pelo menos 10 horas
+# Os jogadores que já tem mais de 10 horas de jogo aparecem no site com o badge Member e nunca serão apagados
 #
-$sql['inactive_registrations'] = "
-  DELETE FROM accounts
-  WHERE lastlogindate < NOW() - INTERVAL 2 MONTH
-  AND playername in (
-    SELECT name
-    FROM minecraft_inquisitor.players ip
-    WHERE (ip.totalTime <= 10*3600 OR ip.totalTime IS NULL)
-  );    
-";
+#$sql['inactive_registrations'] = "
+#  DELETE FROM accounts
+#  WHERE lastlogindate < NOW() - INTERVAL 2 MONTH
+#  AND playername in (
+#    SELECT name
+#    FROM minecraft_inquisitor.players ip
+#    WHERE (ip.totalTime <= 10*3600 OR ip.totalTime IS NULL)
+#  );    
+#";
 
 #
 # Apagar todos os registos do inquisitor que nao estao na tabela accounts
