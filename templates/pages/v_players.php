@@ -41,7 +41,7 @@
 
     <p>Servidor da Comunidade Minecraft Portugal</p>
     <p>IP: mcpt.eu</p>
-    <p><a href="//www.mcpt.eu/registo" target="_blank">Regista-te já!</a></p>
+    <p><a href="//www.mcpt.eu/registo">Regista-te já!</a></p>
 
 </body>
 </html>

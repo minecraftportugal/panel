@@ -23,10 +23,7 @@
         Para poderes jogar conosco não necessitas de uma conta mojang, podendo utilizar qualquer nome disponível,
         bastando que te registes aqui.
     </p>
-    <p>
-        Utiliza o <u>mesmo</u> nome de utilizador que usas para jogar Minecraft e um endereço de email válido onde possas receber a tua password.
-        <span class="important">Se tentares jogar com um nome diferente do que utilizaste aqui, não irás conseguir fazer login.</span>
-    </p>
+
     <? if (ENABLE_REGISTRATIONS): ?>
     <form id="register" name="register" method="post" action="/register">
         <ul>
@@ -52,6 +49,12 @@
         <h1>Registrations are currently disabled.</h1>
     </p>
     <? endif; ?>
+
+    <p>
+        Utiliza o <u>mesmo</u> nome de utilizador que usas para jogar Minecraft e um endereço de email válido onde possas receber a tua password.
+        <span class="important">Se tentares jogar com um nome diferente do que utilizaste aqui, não irás conseguir fazer login.</span>
+    </p>
+
     <p>
         Receberás um email com a tua password e com alguns detalhes importantes. Não te esqueças de o ler com atenção!
     </p>

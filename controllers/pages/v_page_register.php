@@ -1,9 +1,6 @@
 <?php
 
-use lib\session\Session;
 use lib\template\Template;
-use models\accounts\Accounts;
-use helpers\minotar\MinotarHelper;
 
 function v_page_register() {
 
@@ -21,19 +18,6 @@ function v_page_register() {
         "reset",
         "pages/register"
     ]);
-
-    $players = Accounts::get(["per_page" => 100, "online" => 1]);
-
-    /** Filters: Change and add new data */
-    foreach ($players as $k => $v) {
-        $players[$k]['head'] = MinotarHelper::head($players[$k]['playername'], "32px");
-    }
-
-    $total = count($players);
-
-    $template->assign('players', $players);
-
-    $template->assign('total', $total);
 
     $template->render();
 
