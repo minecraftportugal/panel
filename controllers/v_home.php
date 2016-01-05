@@ -51,7 +51,8 @@ function v_home() {
         "page-presentation-public",
         "page-presentation-forms",
         "page-presentation-profile",
-        "page-presentation-wp"
+        "page-presentation-wp",
+        "ads"
     ]);
 
     /* xsrf token */
@@ -101,10 +102,15 @@ function v_home() {
     $menu_desktop = Template::init('partials/menus/desktop');
     $template->assign('menu_desktop', $menu_desktop);
 
-
     /* HTML templates for javascript content*/
     $html_templates = Template::init('partials/html-templates');
     $template->assign('html_templates', $html_templates);
+
+    /* Ads */
+    if (!$user["donor"]) {
+        $ad_desktop = Template::init('partials/ads/leaderboard-bottom');
+        $template->assign('ad_desktop', $ad_desktop);
+    }
 
     /* Render */
     $template->render();

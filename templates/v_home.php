@@ -68,5 +68,11 @@
         <i class="fa fa-spinner fa-spin fa-5x"></i>
     </div>
 
+<? if (isset($ad_desktop)): ?>
+    <div id="container-ad-desktop" class="show-when-logged-in">
+        <?= $ad_desktop ?>
+    </div>
+<? endif; ?>
+
 </body>
 </html>

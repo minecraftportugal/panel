@@ -1,0 +1,18 @@
+div#container-ad-desktop {
+  position: absolute;
+  bottom: 15px;
+  margin: auto;
+  width: 728px;
+  height: 105px;
+  left: calc(50% - 364px);
+  z-index: 2147483638;
+  background-color: #000;
+  border: 1px solid black;
+  text-align: center;
+
+  a#ad-donate {
+    font-size: 10px;
+    color: #fff;
+    text-decoration: underline;
+  }
+}
