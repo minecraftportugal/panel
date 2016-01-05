@@ -36,9 +36,9 @@ function v_status() {
 
     }
 
-    $players['new'] = Accounts::get(["per_page" => 15, "yeslogin" => 1, "order_by" => "registerdate", "asc_desc" => "DESC"]);
+    $players['new'] = Accounts::get(["per_page" => 15, "yeslogin" => 1, "order_by" => "registerdate_df", "asc_desc" => "DESC"]);
 
-    foreach ($players['top'] as $k => $v) {
+    foreach ($players['new'] as $k => $v) {
 
         $players['new'][$k]['head'] =  MinotarHelper::head($players['new'][$k]['playername'], "25px");
 
