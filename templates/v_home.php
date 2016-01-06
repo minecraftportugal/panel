@@ -3,6 +3,9 @@
 <head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <meta name="keywords" content="minecraft mine portugal minept factions videogames multiplayer">
+    <meta name="description" content="WebPanel do servidor Factions/Survival da Comunidade Minecraft Portugal">
+
 <? if (isset($xsrf_token)): ?>
     <meta name="xsrf_token" content="<?= $xsrf_token ?>">
 <? endif; ?>
@@ -15,7 +18,7 @@
 <? if (isset($user["donor"])): ?>
     <meta name="donor" content="<?= $user["donor"] ?>">
 <? endif; ?>
-    <title>Comunidade Minecraft Portugal | MinePanel 3.0</title>
+    <title>MinePanel 3.0 | Comunidade Minecraft Portugal</title>
 
     <link rel="shortcut icon" href="favicon.ico" >
 <? foreach ($styles as $style): ?>
