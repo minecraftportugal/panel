@@ -77,5 +77,6 @@
     </div>
 <? endif; ?>
 
+    <?= $analytics ?>
 </body>
 </html>

@@ -112,6 +112,10 @@ function v_home() {
         $template->assign('ad_desktop', $ad_desktop);
     }
 
+    /* Google Analytics */
+    $analytics = Template::init('partials/analytics');
+    $template->assign('analytics', $analytics);
+
     /* Render */
     $template->render();
 
