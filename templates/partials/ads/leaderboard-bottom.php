@@ -1,4 +1,4 @@
-<a id="ad-donate" href="//www.mcpt.eu/contribuir" target="_blank">A sobrevivencia do mcpt.eu está em causa! Remove os ads do teu panel com um donativo e ajuda-nos a suportar os custos mensais!</a>
+<a id="ad-donate" href="//www.mcpt.eu/contribuir" target="_blank">A sobrevivencia do mcpt.eu está em causa! Remove os ads do site com um donativo e ajuda-nos a suportar os custos mensais!</a>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <!-- panel.mcpt.eu_leaderboard_bottom -->
 <ins class="adsbygoogle"
