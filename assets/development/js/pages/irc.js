@@ -10,7 +10,7 @@
 var params = {};
 
 /* Change these parameters */
-params.host = "vianetworks.ptnet.org";
+params.host = "uevora.ptnet.org";
 params.port = 6667;
 params.policyPort = 843;
 
