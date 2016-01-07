@@ -1,7 +1,7 @@
 <?
 
 /* Debug Mode */
-define('DEBUG', true);
+define('DEBUG', false);
 
 /* Website URLs */
 define('URL', "//site.minecraft/");

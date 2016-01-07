@@ -19,12 +19,15 @@ class DBNice {
       private $_result = null;
 
       private static function death($e, $context) {
+          echo '<pre>';
           if (DEBUG) {
               debug_print_backtrace();
               die($e->getMessage().' in '.$e->getFile().' on line '.$e->getLine());
+
           } else {
               die('DBNice Error!');
           }
+          echo '</pre>';
       }
       /**
        * Did anyone call for a constructor?
