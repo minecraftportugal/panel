@@ -337,8 +337,6 @@ App.Defaults = (function() {
                         "css": {
                             "top": "0px",
                             "left": "0px",
-                            "width": "1330px",
-                            "height": "933px",
                             "z-index": "1000000020"
                         },
                         "maximized": true,
@@ -371,10 +369,11 @@ App.Defaults = (function() {
                 "states": [
                     {
                         "css": {
-                            "top": "427px",
-                            "left": "6px",
                             "width": "424px",
-                            "height": "501px",
+                            "height": "40%",
+                            "bottom": "6px",
+                            "top": "",
+                            "left": "6px",
                             "z-index": "1000000021"
                         },
                         "maximized": false,
@@ -407,10 +406,11 @@ App.Defaults = (function() {
                 "states": [
                     {
                         "css": {
-                            "top": "427px",
-                            "left": "439px",
                             "width": "452px",
-                            "height": "500px",
+                            "height": "40%",
+                            "bottom": "6px",
+                            "top": "",
+                            "left": "439px",
                             "z-index": "1000000022"
                         },
                         "maximized": false,

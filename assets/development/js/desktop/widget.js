@@ -492,6 +492,7 @@ App.Desktop.Widget = (function() {
         var state = {
             "css" : {
                 "top": $(this.selector).css("top"),
+                "bottom": $(this.selector).css("bottom"),
                 "left": $(this.selector).css("left"),
                 "width": $(this.selector).css("width"),
                 "height": $(this.selector).css("height"),
@@ -531,6 +532,7 @@ App.Desktop.Widget = (function() {
             }
 
             $(this.selector).css(state.css);
+
         }
 
     };
