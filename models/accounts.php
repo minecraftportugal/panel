@@ -215,12 +215,9 @@ class Accounts {
 
     public static function ip_addresses() {
 
-        $q = "SELECT COUNT(x.lastip) total, x.lastip, GROUP_CONCAT(x.playername) playernames
-        FROM (
-          SELECT ifnull(lastloginip,registerip) lastip, playername
-          FROM accounts
-        ) x 
-        GROUP BY x.lastip 
+        $q = "SELECT COUNT(1) total, IFNULL(lastloginip,registerip) AS lastip, GROUP_CONCAT(playername) playernames
+        FROM accounts
+        GROUP BY IFNULL(lastloginip,registerip)
         HAVING total > 1
         ORDER BY total DESC";
 
