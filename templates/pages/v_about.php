@@ -49,7 +49,6 @@
                 <dd>Mário C. <span>neofreak</span></dd>
                 <dd>João A. <span>Deevian</span></dd>
                 <dd>Joana F. <span>IronJoo</span></dd>
-                <dd>Pedro F. <span>xhip</span></dd>
             </dl>
         </span>
     </div>
