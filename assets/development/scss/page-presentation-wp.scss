@@ -1,13 +1,25 @@
-div.post img {
-  max-width: 100%;
-  height: auto;
-}
+div.post {
 
-div.post p {
-  line-height: 1.1em;
-  margin-bottom: 2em;
-}
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
-div.post p:first-letter {
-  font-size: 1.2em;
+  li {
+    list-style-type: circle;
+    margin-left: 2em;
+  }
+
+  p, li {
+    line-height: 1.2em;
+  }
+
+  p:not(:last-child), ul:not(:last-child), div.wp-caption:not(:last-child) {
+    margin-bottom: 1em;
+  }
+
+  p:first-letter {
+    font-size: 1.2em;
+  }
+
 }
