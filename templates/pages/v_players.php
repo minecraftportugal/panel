@@ -19,29 +19,35 @@
 
 <body>
 
+<div id="onlineplayers">
+
+<? if ($total > 0): ?>
+    <h1><?= $total ?> jogador<? if ($total > 1): ?>es<? endif; ?> online!</h1>
+<? else: ?>
+    <h1>Survival/Factions</h1>
+<? endif; ?>
+
+    <p>IP: mcpt.eu</p>
+    <p><a href="//www.mcpt.eu/registo" target="_top">Regista-te já!</a></p>
+
 <? if ($total > 0): ?>
 
-    <div id="onlineplayers">
-        <h1><?= $total ?> jogador<? if ($total > 1): ?>es<? endif; ?> online!</h1>
-
-        <p>IP: mcpt.eu</p>
-        <p><a href="//www.mcpt.eu/registo" target="_top">Regista-te já!</a></p>
-
-        <ul>
-        <? foreach((array)$players as $r): ?>
-            <li>
-                <span class="stevehead">
-                    <?= $r['head'] ?>
-                </span>
-                <span class="name">
-                    <?= $r['playername'] ?>
-                </span>
-            </li>
-        <? endforeach; ?>
+    <ul>
+    <? foreach((array)$players as $r): ?>
+        <li>
+            <span class="stevehead">
+                <?= $r['head'] ?>
+            </span>
+            <span class="name">
+                <?= $r['playername'] ?>
+            </span>
+        </li>
+    <? endforeach; ?>
         </ul>
-    </div>
 
-    <? endif;?>
+<? endif; ?>
+
+</div>
 
 </body>
 </html>
