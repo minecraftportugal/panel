@@ -22,7 +22,7 @@
 <? if ($total > 0): ?>
 
     <div id="onlineplayers">
-        <h1><?= $total ?> jogadores online!</h1>
+        <h1><?= $total ?> jogador<? if ($total > 1): ?>es<? endif; ?> online!</h1>
 
         <p>IP: mcpt.eu</p>
         <p><a href="//www.mcpt.eu/registo" target="_top">Regista-te já!</a></p>
