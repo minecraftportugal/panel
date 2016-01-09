@@ -18,93 +18,100 @@ use minecraftia\db\Bitch;
 
 $drop_definitions = [
 
-  // Hoe + Seeds
-  'FARMERPACK'  => [[292, 0, 1], [295, 0, 5], [361, 0, 2], [362, 0, 2]],
+    // Hoe + Seeds
+    'FARMERPACK'  => [[292, 0, 1], [295, 0, 5], [361, 0, 2], [362, 0, 2]],
 
-  // flintsteel + 10 obsidian
-  'PORTALKIT'   => [[49, 0, 10], [259, 0, 1]],
+    // flintsteel + 10 obsidian
+    'PORTALKIT'   => [[49, 0, 10], [259, 0, 1]],
 
-  // full leather armor
-  'FULLLEATHER' => [[298, 0, 1], [299, 0, 1], [300, 0, 1], [301, 0, 1]],
+    // full leather armor
+    'FULLLEATHER' => [[298, 0, 1], [299, 0, 1], [300, 0, 1], [301, 0, 1]],
 
-  // full chain mail armor
-  'FULLCHAIN'   => [[302, 0, 1], [303, 0, 1], [304, 0, 1], [305, 0, 1]],
+    // full chain mail armor
+    'FULLCHAIN'   => [[302, 0, 1], [303, 0, 1], [304, 0, 1], [305, 0, 1]],
 
-  // two flowers
-  'FLOWERS'     => [[37, 0, 1], [38, 0, 1]],
+    // two flowers
+    'FLOWERS'     => [[37, 0, 1], [38, 0, 1]],
 
-  // 5 potato + 1 poisonous
-  'POTATOPACK'  => [[393, 0, 5], [394, 0, 1]],
+    // 5 potato + 1 poisonous
+    'POTATOPACK'  => [[393, 0, 5], [394, 0, 1]],
 
-   // 5 bread
-  'BREADPACK'   => [[297, 0, 5]],
+    // 5 bread
+    'BREADPACK'   => [[297, 0, 5]],
 
-  // 32 torch
-  'TORCHES'     => [[50, 0, 32]],
+    // 32 torch
+    'TORCHES'     => [[50, 0, 32]],
 
-  // 2 steak
-  'STEAKS'      => [[364, 0, 2]],
+    // 2 steak
+    'STEAKS'      => [[364, 0, 2]],
 
-  // 2 cooked chicken
-  'CHICKENS'    => [[366, 0, 2]],
+    // 2 cooked chicken
+    'CHICKENS'    => [[366, 0, 2]],
 
-  // 2 fish + 1 raw fish
-  'FISH'        => [[349, 0, 2], [350, 0, 1]],
+    // 2 fish + 1 raw fish
+    'FISH'        => [[349, 0, 2], [350, 0, 1]],
 
-  // cookie!
-  'COOKIE'      => [[357, 0, 1]],
+    // cookie!
+    'COOKIE'      => [[357, 0, 1]],
 
-  // 16 snowball
-  'SNOWBALLS'   => [[332, 0, 16]],
+    // 16 snowball
+    'SNOWBALLS'   => [[332, 0, 16]],
 
-  // an iron sword
-  'IRONSWORD'   => [[267, 0, 1]],
+    // an iron sword
+    'IRONSWORD'   => [[267, 0, 1]],
 
-  // A lie
-  'THECAKE'     => [[354, 0, 1]],
+    // A lie
+    'THECAKE'     => [[354, 0, 1]],
 
-  // Bow + 32 arrows
-  'ARCHER'      => [[261, 0, 1], [262, 0, 32]],
+    // Bow + 32 arrows
+    'ARCHER'      => [[261, 0, 1], [262, 0, 32]],
 
-   // 2 diamonds
-  '2DIAMONDS'   => [[264, 0, 2]],
+    // 2 diamonds
+    '2DIAMONDS'   => [[264, 0, 2]],
 
-  // 1 diamond sword
-  'DMDSWORD'    => [[276, 0, 1]],
+    // 1 diamond sword
+    'DMDSWORD'    => [[276, 0, 1]],
 
-  // Golden Apple
-  'GLDAPPLE'    => [[322, 0, 1]],
+    // Golden Apple
+    'GLDAPPLE'    => [[322, 0, 1]],
 
-  // Discs
-  '13DISC'      => [[2256, 0, 1]],
-  'CATDISC'     => [[2257, 0, 1]],
-  'BLOCKSDISC'  => [[2258, 0, 1]],
-  'CHIRPDISC'   => [[2259, 0, 1]],
-  'FARDISC'     => [[2260, 0, 1]],
-  'MALLDISC'    => [[2261, 0, 1]],
-  'MELLDISC'    => [[2262, 0, 1]],
-  'STALLDISC'   => [[2263, 0, 1]],
-  'STRADDISC'   => [[2264, 0, 1]],
-  'WARDDISC'    => [[2265, 0, 1]],
-  '11DISC'      => [[2266, 0, 1]],
+    // Discs
+    '13DISC'      => [[2256, 0, 1]],
+    'CATDISC'     => [[2257, 0, 1]],
+    'BLOCKSDISC'  => [[2258, 0, 1]],
+    'CHIRPDISC'   => [[2259, 0, 1]],
+    'FARDISC'     => [[2260, 0, 1]],
+    'MALLDISC'    => [[2261, 0, 1]],
+    'MELLDISC'    => [[2262, 0, 1]],
+    'STALLDISC'   => [[2263, 0, 1]],
+    'STRADDISC'   => [[2264, 0, 1]],
+    'WARDDISC'    => [[2265, 0, 1]],
+    '11DISC'      => [[2266, 0, 1]],
+    'WAITDISC'    => [[2267, 0, 1]],
 
-  // 4 book and kill
-  'BOOKNQUILL'  => [[386, 0, 4]],
+    // 4 book and kill
+    'BOOKNQUILL'  => [[386, 0, 4]],
 
-  // spawn pig + carrotstick + saddle
-  'PIGTAXI'     => [[329, 0, 1], [383, 90, 1], [398, 0, 1]],
+    // spawn pig + carrotstick + saddle
+    'PIGTAXI'     => [[329, 0, 1], [383, 90, 1], [398, 0, 1]],
 
-  // spawn ocelot
-  'SPAWNOCELOT' => [[383, 98, 1]],
+    // spawn ocelot
+    'SPAWNOCELOT' => [[383, 98, 1]],
 
-  // spawn wolf
-  'SPAWNWOLF'   => [[383, 95, 1]],
+    // spawn wolf
+    'SPAWNWOLF'   => [[383, 95, 1]],
 
-  // 8 diamonds
-  '8DIAMONDS'   => [[264, 0, 4]],
+    // spawn mooshroom
+    'SPAWNMOO'    => [[383, 96, 1]],
 
-  // mob head set
-  'MOBHEADSET'  => [[397, 0, 1], [397, 2, 1], [397, 4, 1]]
+    // spawn horse
+    'SPAWNHORSE'  => [[383, 100, 1], [418, 0, 1]],
+
+    // 8 diamonds
+    '8DIAMONDS'   => [[264, 0, 4]],
+
+    // mob head set
+    'MOBHEADSET'  => [[397, 0, 1], [397, 2, 1], [397, 4, 1]]
 ];
 
 #
@@ -138,26 +145,29 @@ $drop_template_geral = [
     'DMDSWORD'    => 2,
     'GLDAPPLE'    => 2,
     '13DISC'      => 2, 
-    'CATDISC'    => 2,
+    'CATDISC'     => 2,
     'BLOCKSDISC'  => 2,
     'CHIRPDISC'   => 2,
     'FARDISC'     => 2,
     'MALLDISC'    => 2,
     'MELLDISC'    => 2,
-    'STALLDISC'    => 2,
+    'STALLDISC'   => 2,
     'STRADDISC'   => 2,
     'WARDDISC'    => 2,
     '11DISC'      => 2,
+    'WAITDISC'    => 2,
     'BOOKNQUILL'  => 2, 
     'PIGTAXI'     => 2,
     'PORTALKIT'   => 2,
-    'FULLCHAIN' => 2,
+    'FULLCHAIN'   => 2,
 
     // rare drops
     'SPAWNOCELOT' => 1, 
-    'SPAWNWOLF'   => 1, 
+    'SPAWNWOLF'   => 1,
+    'SPAWNMOO'    => 1,
+    'SPAWNHORSE'  => 1,
     '8DIAMONDS'   => 1, 
-//  'MOBHEADSET'  => 1 
+    'MOBHEADSET'  => 1
 ];
 
 #
