@@ -10,7 +10,7 @@ function v_page_balance() {
     $template = Template::init('pages/v_balance');
 
     $template->assign('scripts',[
-
+        'pages/players'
     ]);
 
     $template->assign('styles', [
