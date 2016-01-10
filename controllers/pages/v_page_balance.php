@@ -11,10 +11,6 @@ function v_page_balance() {
 
     $template->assign('scripts',[
 
-        "lib/jquery/jquery",
-
-        'pages/players'
-
     ]);
 
     $template->assign('styles', [
