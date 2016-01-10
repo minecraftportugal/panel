@@ -10,12 +10,19 @@ function v_page_balance() {
     $template = Template::init('pages/v_balance');
 
     $template->assign('scripts',[
+
+        "lib/jquery/jquery",
+
         'pages/players'
+
     ]);
 
     $template->assign('styles', [
+
         "reset",
+
         "pages/balance"
+
     ]);
 
     $url = "https://docs.google.com/spreadsheets/u/1/d/1mQxrmVZu3r3xnOXHC9WbMcGLmIYSGQhfFNnCc-MvJjs/pub?gid=1&single=true&output=csv";
