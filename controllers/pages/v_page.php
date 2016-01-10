@@ -21,8 +21,9 @@ function v_page() {
         'players' => 'v_page_players',
         'launcher' => 'v_page_launcher',
         'register' => 'v_page_register',
+        'balance' => 'v_page_balance',
         'about' => null,
-        'help'=> null
+        'help' => null
     ];
 
     if (array_key_exists($page, $pages)) {
