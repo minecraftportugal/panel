@@ -4,7 +4,7 @@ use lib\template\Template;
 
 function v_page_register() {
 
-    //Session::refererProtect();
+    Session::refererProtect();
 
     $template = Template::init('pages/v_register');
 
