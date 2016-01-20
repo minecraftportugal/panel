@@ -1,4 +1,4 @@
- <?
+<?
 
 #
 # Minecraftia! Clean up old registrations and crap
