@@ -1,5 +1,6 @@
 <?php
 
+use lib\session\Session;
 use lib\template\Template;
 
 function v_page_register() {
