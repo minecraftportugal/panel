@@ -18,6 +18,9 @@
 <? if (isset($user["donor"])): ?>
     <meta name="donor" content="<?= $user["donor"] ?>">
 <? endif; ?>
+<? if (isset($user["contributor"])): ?>
+    <meta name="contributor" content="<?= $user["contributor"] ?>">
+<? endif; ?>
     <title>MinePanel 3.0 | Comunidade Minecraft Portugal</title>
 
     <link rel="shortcut icon" href="favicon.ico" >
@@ -71,11 +74,9 @@
         <i class="fa fa-spinner fa-spin fa-5x"></i>
     </div>
 
-<? if (isset($ad_desktop)): ?>
     <div id="container-ad-desktop" class="show-when-logged-in">
         <?= $ad_desktop ?>
     </div>
-<? endif; ?>
 
     <?= $analytics ?>
 </body>

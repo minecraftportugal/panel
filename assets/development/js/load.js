@@ -172,12 +172,14 @@ $(function() {
     /* it's hash time! */
     window.location = "#";
 
-    /* Bootstrap Desktop*/
+    /* User data when reloaded */
     if (!!$("meta[name=username]").attr("content")) {
         App.session = {
             "username": $("meta[name=username]").attr("content"),
             "xsrf_token": $("meta[name=xsrf_token]").attr("content"),
-            "admin": $("meta[name=admin]").attr("content") || "0"
+            "admin": $("meta[name=admin]").attr("content") || "0",
+            "donor": $("meta[name=donor]").attr("content") || "0",
+            "contributor": $("meta[name=contributor]").attr("content") || "0"
         };
     }
 

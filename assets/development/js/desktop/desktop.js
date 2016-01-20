@@ -268,6 +268,8 @@ App.Desktop = (function() {
         $("<meta>").appendTo("head").attr("name", "xsrf_token").attr("content", App.session.xsrf_token);
         $("<meta>").appendTo("head").attr("name", "username").attr("content", App.session.username);
         $("<meta>").appendTo("head").attr("name", "admin").attr("content", App.session.admin);
+        $("<meta>").appendTo("head").attr("name", "donor").attr("content", App.session.donor);
+        $("<meta>").appendTo("head").attr("name", "contributor").attr("content", App.session.contributor);
 
         /* Adjust taskbar items position if admin menu is to be present */
         (function() {
@@ -313,7 +315,16 @@ App.Desktop = (function() {
         })();
 
         /* Logo / Donation request */
+        /* * * */
 
+        /* remove ads if user is a donor */
+        (function() {
+            if (App.session.donor === "1") {
+                $("div#container-ad-desktop").hide();
+            } else {
+                $("div#container-ad-desktop").show();
+            }
+        })();
     };
 
     Desktop.changeDomWithoutReloadForLogout = function() {
@@ -342,15 +353,15 @@ App.Desktop = (function() {
         Desktop.showCurtain();
         Desktop.bootstrap().then(function() {
 
+            /* show elements that appear when logged in */
+            $(".show-when-logged-in").show();
+
             if (!!App.session) { /* !!! */
                 Desktop.changeDomWithoutReloadForLogin();
             }
 
             /* Turn on saving state when opening the panel to the user */
             Desktop.globals.saveOnExit = true;
-
-            /* show elements that appear when logged in */
-            $(".show-when-logged-in").show();
 
             /* hide modal login if it is open */
             var w = Desktop.getWidgetByName("public-login");

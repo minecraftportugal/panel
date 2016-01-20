@@ -15,11 +15,15 @@ class Session {
      * validateLogin: validates user logins
      */
     public static function validateLogin($username, $password) {
-        $q = 'SELECT id, playername, password, admin FROM accounts WHERE playername=:username AND active=1;';
+        $q = "SELECT id, playername AS username, password, admin, donor, contributor
+          FROM accounts
+          WHERE playername = :username
+          AND active=1
+        ";
 
         if ($result = Bitch::source('default')->first($q, compact('username'))) {
             if (xAuth::checkPassword($password, $result['password'])) {
-                Session::initSession($result['id'], $result['playername'], $result['admin']);
+                Session::initSession($result);
                 return true;
             }
         }
@@ -30,13 +34,15 @@ class Session {
     /*
      * initSession: initializes a users' session
      */
-    private static function initSession($id, $username, $admin) {
-        Session::set('id', $id);
-        Session::set('username', $username);
-        Session::set('admin', $admin);
+    private static function initSession($user) {
+        Session::set('id', $user['id']);
+        Session::set('username', $user['username']);
+        Session::set('admin', $user['admin']);
+        Session::set('donor', $user['donor']);
+        Session::set('contributor', $user['contributor']);
         Session::set('xsrf_token', substr(md5(rand()), 0, 32));
         
-        xAuth::refreshxAuthSession($id);
+        xAuth::refreshxAuthSession($user['id']);
     }
 
     /*
