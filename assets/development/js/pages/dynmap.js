@@ -52,5 +52,23 @@ $(function() {
         $("div.dynmap-loading-cover").fadeOut(100);
         $("div.dynmap-custom-controls").css("visibility", "visible");
 
+        $(document).keydown(function(e) {
+            var text = Math.round(window.dynmap.loc.x) + " " + Math.round(window.dynmap.loc.y) + " " + Math.round(window.dynmap.loc.z);
+            if ((e.keyCode == 67) && (!!window.dynmap.loc)) {
+                window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+            }
+        });
+
+        dynmap.map.on('mousemove', function(mevent) {
+            var loc = dynmap.getProjection().fromLatLngToLocation(mevent.latlng, dynmap.world.sealevel+1);
+            window.dynmap.loc = loc;
+        });
+
+        dynmap.map.on('mouseout', function(mevent) {
+            window.dynmap.loc = null;
+        });
+
     }, loadingDelay);
+
+
 });
