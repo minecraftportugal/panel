@@ -112,7 +112,8 @@ $(function() {
         var $markerlist = $("ul.markerlist");
         $markerlist.empty();
         $.each(window.dynmapmarkersets, function(k, v) {
-            if (Object.keys(v.markers).length === 0) {
+            console.log(v);
+            if ((!v.markers) || (Object.keys(v.markers).length === 0)) {
                 return;
             }
 
@@ -137,8 +138,10 @@ $(function() {
             $ul.appendTo($li);
             $li.appendTo($markerlist);
 
-            $("div.dynmap-loading-cover").fadeOut(100);
+
         });
+
+        $("div.dynmap-loading-cover").fadeOut(100);
     };
 
 
