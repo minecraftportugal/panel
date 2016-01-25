@@ -112,7 +112,7 @@ $(function() {
         var $markerlist = $("ul.markerlist");
         $markerlist.empty();
         $.each(window.dynmapmarkersets, function(k, v) {
-            console.log(v);
+
             if ((!v.markers) || (Object.keys(v.markers).length === 0)) {
                 return;
             }
@@ -124,6 +124,11 @@ $(function() {
 
             var $ul = $("<ul></ul>").addClass("markers");;
             $.each(v.markers, function(k, v) {
+
+                if (!v) {
+                    return;
+                }
+
                 var $li = $("<li></li>").html(v.label).addClass("marker-label");
                 $li.css("background-image", "url(/tiles/_markers_/" + v.icon + ".png)");
                 $li.click(function(e) {
