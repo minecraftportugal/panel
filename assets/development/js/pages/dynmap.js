@@ -1,20 +1,30 @@
 $(function() {
 
-    $(document).on("click", function (event) {
-        if (event.which === 2)
-            event.preventDefault();
-    });
+    var uiTransformInit = function() {
 
-    var loadingDelay = 500;
+        $(document).on("click", function (event) {
+            if (event.which === 2)
+                event.preventDefault();
+        });
 
-    $("body").prepend('<div class="dynmap-custom-controls"></div>');
+        $("body").prepend('<div class="dynmap-custom-controls"></div>');
 
-    $("body").append('<div class="dynmap-loading-cover"></div>');
+        $("body").append('<div class="dynmap-loading-cover"></div>');
+    };
 
-    var modifyInterface = setTimeout(function() {
+    var mainInterfaceSetup = function() {
+        /*
+         * General UI changes
+         */
+
 
         $("div.dynmap-custom-controls").parent()
-            .append("<div class='overlay'><div class='overlay-worlds'></div><div class='overlay-players'></div><div class='overlay-layers'></div></div>");
+            .append("<div>" +
+                "<div class='overlay overlay-worlds'></div>" +
+                "<div class='overlay overlay-players'></div>" +
+                "<div class='overlay overlay-layers'></div>" +
+                "<div class='overlay overlay-markers'></div>" +
+                "</div>");
 
         $("div.largeclock")
             .detach().appendTo("div.dynmap-custom-controls");
@@ -23,7 +33,10 @@ $(function() {
             .detach().appendTo("div.dynmap-custom-controls");
 
         $("div.dynmap-custom-controls")
-            .append("<div class='overlay_button'><a href='#'></a></div>");
+            .append("<div class='overlay_button overlay_button_worlds'><a href='#'></a></div>")
+            .append("<div class='overlay_button overlay_button_layers'><a href='#'></a></div>")
+            .append("<div class='overlay_button overlay_button_players'><a href='#'></a></div>")
+            .append("<div class='overlay_button overlay_button_markers'><a href='#'></a></div>");
 
         $("div.leaflet-control")
             .detach().appendTo("div.dynmap-custom-controls");
@@ -32,16 +45,35 @@ $(function() {
         $("ul.playerlist").detach().appendTo("div.overlay-players");
         $("form.leaflet-control-layers-list").detach().appendTo("div.overlay-layers");
 
-        $("ul.playerlist").prepend("<h1>Jogadores</h1>");
-        $("ul.worldlist").prepend("<h1>Mundos</h1>");
-        $("form.leaflet-control-layers-list").prepend("<h1>Layers</h1>");
+        $("<ul></ul>").addClass("markerlist").appendTo("div.overlay-markers");
+
+
+        $("ul.playerlist").parent().prepend("<h1>Jogadores</h1>");
+        $("ul.worldlist").parent().prepend("<h1>Mundos</h1>");
+        $("form.leaflet-control-layers-list").parent().prepend("<h1>Layers</h1>").addClass("overlay-title");
+        $("ul.markerlist").parent().prepend("<h1>Markers</h1>");
 
         $("div.sidebar").remove();
         $("div.leaflet-control-layers").remove();
 
-        $("div.overlay_button").click(function() {
+        $("div.overlay_button_worlds").click(function() {
             $("div.dynmap-custom-controls").css("visibility", "hidden");
-            $("div.overlay").fadeIn(250, function() { })
+            $("div.overlay-worlds").fadeIn(250, function() { })
+        });
+
+        $("div.overlay_button_layers").click(function() {
+            $("div.dynmap-custom-controls").css("visibility", "hidden");
+            $("div.overlay-layers").fadeIn(250, function() { })
+        });
+
+        $("div.overlay_button_players").click(function() {
+            $("div.dynmap-custom-controls").css("visibility", "hidden");
+            $("div.overlay-players").fadeIn(250, function() { })
+        });
+
+        $("div.overlay_button_markers").click(function() {
+            $("div.dynmap-custom-controls").css("visibility", "hidden");
+            $("div.overlay-markers").fadeIn(250, function() { })
         });
 
         $("div.overlay").click(function(e) {
@@ -49,9 +81,13 @@ $(function() {
             $(this).fadeOut(250, function () { });
         });
 
-        $("div.dynmap-loading-cover").fadeOut(100);
+
         $("div.dynmap-custom-controls").css("visibility", "visible");
 
+
+        /*
+         * Copy location to clipboard
+         */
         $(document).keydown(function(e) {
             var text = Math.round(window.dynmap.loc.x) + " " + Math.round(window.dynmap.loc.y) + " " + Math.round(window.dynmap.loc.z);
             if ((e.keyCode == 67) && (!!window.dynmap.loc)) {
@@ -66,6 +102,63 @@ $(function() {
 
         dynmap.map.on('mouseout', function(mevent) {
             window.dynmap.loc = null;
+        });
+
+    };
+
+    var dynmapMarkerSetup = function() {
+
+        /* load markers list */
+        var $markerlist = $("ul.markerlist");
+        $markerlist.empty();
+        $.each(window.dynmapmarkersets, function(k, v) {
+            if (Object.keys(v.markers).length === 0) {
+                return;
+            }
+
+            var $li = $("<li></li>").addClass("markerset-label");
+            $li.append($("<span></span>").html(v.label));
+            $li.appendTo($markerlist);
+
+
+            var $ul = $("<ul></ul>").addClass("markers");;
+            $.each(v.markers, function(k, v) {
+                var $li = $("<li></li>").html(v.label).addClass("marker-label");
+                $li.css("background-image", "url(/tiles/_markers_/" + v.icon + ".png)");
+                $li.click(function(e) {
+                    var dynmapLoc = { x : v.x, y : v.y, z : v.z };
+                    var leafletLoc = window.dynmap.getProjection().fromLocationToLatLng(dynmapLoc);
+                    window.dynmap.map.panTo(leafletLoc);
+                });
+                $li.appendTo($ul);
+            });
+
+            $li = $("<li></li>");
+            $ul.appendTo($li);
+            $li.appendTo($markerlist);
+
+            $("div.dynmap-loading-cover").fadeOut(100);
+        });
+    };
+
+
+    var loadingDelay = 500;
+
+    uiTransformInit();
+
+    setTimeout(function() {
+
+
+
+        mainInterfaceSetup();
+
+        dynmapMarkerSetup();
+
+        $(dynmap).bind("mapchanged", function(e) {
+            setTimeout(dynmapMarkerSetup, loadingDelay);
+        });
+
+        $(dynmap).bind("mapchanging", function(e) {
         });
 
     }, loadingDelay);

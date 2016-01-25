@@ -73,6 +73,10 @@ div.overlay_button {
     background: linear-gradient(to top, #111111, #111111, #222222);
 }
 
+div.overlay_button:active, div.leaflet-control-zoom a:active {
+    background: linear-gradient(to top, #000000, #000000, #111111);
+}
+
 div.coord-control {
     margin-right: 5px;
     width: 90px;
@@ -103,11 +107,27 @@ div.overlay_button a {
     display: inline-block;
     height: 28px;
     width: 28px;
-    background-image: url('//dynmap.mcpt.eu/images/sign.png');
     background-position: center center;
     background-size: 60%;
     background-repeat: no-repeat;
 }
+
+div.overlay_button_worlds a {
+    background-image: url('//dynmap.mcpt.eu/tiles/_markers_/world.png');
+}
+
+div.overlay_button_players a {
+    background-image: url('//dynmap.mcpt.eu/images/player_face.png');
+}
+
+div.overlay_button_layers a {
+    background-image: url('//dynmap.mcpt.eu/css/images/layers.png');
+}
+
+div.overlay_button_markers a {
+    background-image: url('//dynmap.mcpt.eu/tiles/_markers_/pin.png');
+}
+
 
 div.overlay {
     position: fixed;
@@ -123,18 +143,19 @@ div.overlay {
 }
 
 div.overlay-worlds {
-    width: 33.33%;
-    float: left;
+
 }
 
 div.overlay-players {
-    width: 33.33%;
-    float: left;
+
 }
 
 div.overlay-layers {
-    width: 33.33%;
-    float: left;
+
+}
+
+div.overlay-layers {
+
 }
 
 div.overlay h1 {
@@ -149,7 +170,9 @@ div.overlay form {
 }
 
 ul.worldlist > li {
-    clear: both;
+    min-width: 200px;
+    max-width: 250px;
+    display: inline-block;
 }
 
 li.world > div {
@@ -175,7 +198,8 @@ ul.playerlist a {
 }
 
 ul.worldlist,
-ul.playerlist {
+ul.playerlist,
+ul.markerlist {
     font-size: 16px;
     padding: 5px;
     text-align: center;
@@ -234,13 +258,14 @@ ul.playerlist li {
     padding: 10px;
     margin: 5px;
     height: 60px;
-    width: 60px;
+    min-width: 60px;
+    max-width: 90px;
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    float: left;
+    display: inline-block;
 }
 
-ul.playerlist li img{
+ul.playerlist li img {
     width: 48px;
     image-rendering: crisp-edges;
 }
@@ -257,7 +282,6 @@ ul.playerlist li:active {
 
 ul.playerlist li a {
     color: #FFFFFF;
-
     display: block;
 }
 
@@ -265,6 +289,7 @@ ul.playerlist li a {
 ul.playerlist li span.playerIcon {
 
 }
+
 
 ul.playerlist li img {
 
@@ -285,8 +310,9 @@ div.compass {
 }
 
 div.overlay-layers form {
-    margin-left: 20%;
-    margin-right: 20%;
+    margin: auto;
+    min-width: 150px;
+    max-width: 200px;
 }
 
 div.overlay-layers label {
@@ -324,3 +350,37 @@ div.overlay-layers input[type=checkbox] {
 }
 
 
+ul.markerlist {
+    margin: auto;
+}
+
+ul.markerlist > li > ul > li {
+    display: inline-block;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-position: 10px center;
+    padding-left: 30px;
+    min-width:80px;
+    max-width:120px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+
+ul.markerlist > li > ul > li:hover {
+    background-color: rgba(128, 128, 128, 0.35);
+}
+
+ul.markerlist > li > ul > li:active {
+    color: #FFFFFF;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid #000000;
+}
+
+ul.markerlist > li > ul > li a {
+    color: #FFFFFF;
+    display: block;
+}
