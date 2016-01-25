@@ -33,10 +33,10 @@ $(function() {
             .detach().appendTo("div.dynmap-custom-controls");
 
         $("div.dynmap-custom-controls")
-            .append("<div class='overlay_button overlay_button_worlds'><a href='#'></a></div>").attr("title", "Mundos")
-            .append("<div class='overlay_button overlay_button_layers'><a href='#'></a></div>").attr("title", "Layers")
-            .append("<div class='overlay_button overlay_button_players'><a href='#'></a></div>").attr("title", "Jogadores")
-            .append("<div class='overlay_button overlay_button_markers'><a href='#'></a></div>").attr("title", "Mapas");
+            .append("<div title='Mundos' class='overlay_button overlay_button_worlds'><a href='#'></a></div>")
+            .append("<div title='Layers' class='overlay_button overlay_button_layers'><a href='#'></a></div>")
+            .append("<div title='Jogadores' class='overlay_button overlay_button_players'><a href='#'></a></div>")
+            .append("<div title='Markers' class='overlay_button overlay_button_markers'><a href='#'></a></div>");
 
         $("div.leaflet-control")
             .detach().appendTo("div.dynmap-custom-controls");
