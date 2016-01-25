@@ -33,10 +33,10 @@ $(function() {
             .detach().appendTo("div.dynmap-custom-controls");
 
         $("div.dynmap-custom-controls")
-            .append("<div class='overlay_button overlay_button_worlds'><a href='#'></a></div>")
-            .append("<div class='overlay_button overlay_button_layers'><a href='#'></a></div>")
-            .append("<div class='overlay_button overlay_button_players'><a href='#'></a></div>")
-            .append("<div class='overlay_button overlay_button_markers'><a href='#'></a></div>");
+            .append("<div class='overlay_button overlay_button_worlds'><a href='#'></a></div>").attr("title", "Mundos")
+            .append("<div class='overlay_button overlay_button_layers'><a href='#'></a></div>").attr("title", "Layers")
+            .append("<div class='overlay_button overlay_button_players'><a href='#'></a></div>").attr("title", "Jogadores")
+            .append("<div class='overlay_button overlay_button_markers'><a href='#'></a></div>").attr("title", "Mapas");
 
         $("div.leaflet-control")
             .detach().appendTo("div.dynmap-custom-controls");
@@ -46,9 +46,20 @@ $(function() {
         $("form.leaflet-control-layers-list").detach().appendTo("div.overlay-layers");
 
         $("<ul></ul>").addClass("markerlist").appendTo("div.overlay-markers");
+        var $playercontrols = $("<ul></ul>").addClass("playercontrols").appendTo("div.overlay-players");
 
+        var $stopfollow =  $("<li></li>").append("<a>parar de seguir jogador</a>").attr("id", "stopFollowing").click(function() {
+            dynmap.followPlayer(null);
+        });
+        $playercontrols.append($stopfollow);
 
-        $("ul.playerlist").parent().prepend("<h1>Jogadores</h1>");
+        $("ul.playerlist")
+            .parent()
+            .prepend("<h1>Jogadores</h1>")
+            .append("<p>Clica no ícone da cabeça de um jogador para o marcar e seguir automáticamente.</p>" +
+                   "<p>Clica na área à volta do nome para saltar para a sua posição apenas.</p>")
+            .append($playercontrols);
+
         $("ul.worldlist").parent().prepend("<h1>Mundos</h1>");
         $("form.leaflet-control-layers-list").parent().prepend("<h1>Layers</h1>").addClass("overlay-title");
         $("ul.markerlist").parent().prepend("<h1>Markers</h1>");
@@ -125,11 +136,11 @@ $(function() {
             var $ul = $("<ul></ul>").addClass("markers");;
             $.each(v.markers, function(k, v) {
 
-                if (!v) {
+                if (!v && v.hasOwnProperty('x') && v.hasOwnProperty('y') && v.hasOwnProperty('z')) {
                     return;
                 }
 
-                var $li = $("<li></li>").html(v.label).addClass("marker-label");
+                var $li = $("<li></li>").html(v.label.replace(" [home]", "").replace("<br/>", " ")).addClass("marker-label");
                 $li.css("background-image", "url(/tiles/_markers_/" + v.icon + ".png)");
                 $li.click(function(e) {
                     var dynmapLoc = { x : v.x, y : v.y, z : v.z };

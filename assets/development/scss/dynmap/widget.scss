@@ -150,6 +150,12 @@ div.overlay-players {
 
 }
 
+div.overlay-players p {
+    font-weight: normal;
+    text-align: center;
+    font-style: italic;
+}
+
 div.overlay-layers {
 
 }
@@ -193,12 +199,13 @@ ul.worldlist {
     margin: auto;
 }
 
-ul.playerlist a {
+ul.playerlist a, ul.playercontrols a {
     font-size: 10px;
 }
 
 ul.worldlist,
 ul.playerlist,
+ul.playercontrols,
 ul.markerlist {
     font-size: 16px;
     padding: 5px;
@@ -251,30 +258,41 @@ ul.playerlist {
     margin: auto;
 }
 
-ul.playerlist li {
+ul.playerlist li, ul.playercontrols li {
     display: inline-block;
     border: 1px solid #000000;
     border-radius: 4px;
     padding: 10px;
     margin: 5px;
-    height: 60px;
     min-width: 60px;
-    max-width: 90px;
+    max-width: 110px;
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    display: inline-block;
 }
+
+ul.playerlist li {
+    height: 60px;
+}
+
+
+ul.playercontrols li {
+    height: 22px;
+}
+
+
 
 ul.playerlist li img {
     width: 48px;
     image-rendering: crisp-edges;
 }
 
-ul.playerlist li:hover {
+ul.playerlist li:hover,
+ul.playercontrols li:hover {
     background-color: rgba(128, 128, 128, 0.35);
 }
 
-ul.playerlist li:active {
+ul.playerlist li:active,
+ul.playercontrols li:active {
     color: #FFFFFF;
     background-color: rgba(0, 0, 0, 0.1);
     border: 1px solid #000000;
@@ -364,9 +382,13 @@ ul.markerlist > li > ul > li {
     background-position: 10px center;
     padding-left: 30px;
     min-width:80px;
-    max-width:120px;
+    max-width:250px;
     background-repeat: no-repeat;
     cursor: pointer;
+}
+
+ul.markerlist li.markerset-label {
+    margin-top: 20px;
 }
 
 
