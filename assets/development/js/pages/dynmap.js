@@ -163,8 +163,8 @@ $(function() {
                 if (!v && v.hasOwnProperty('x') && v.hasOwnProperty('y') && v.hasOwnProperty('z')) {
                     return;
                 }
-
-                var $li = $("<li></li>").html(v.label.replace(" [home]", "").replace("<br/>", " ")).addClass("marker-label");
+                var label = v.label === "" ? "<i>s/n</i>" : v.label.replace(" [home]", "").replace("<br/>", " ");
+                var $li = $("<li></li>").html(label).addClass("marker-label");
                 $li.css("background-image", "url(/tiles/_markers_/" + v.icon + ".png)");
                 $li.click(function(e) {
                     var dynmapLoc = { x : v.x, y : v.y, z : v.z };
