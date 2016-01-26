@@ -100,10 +100,34 @@ $(function() {
          * Copy location to clipboard
          */
         $(document).keydown(function(e) {
-            var text = Math.round(window.dynmap.loc.x) + " " + Math.round(window.dynmap.loc.y) + " " + Math.round(window.dynmap.loc.z);
-            if ((e.keyCode == 67) && (!!window.dynmap.loc)) {
-                window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+            if ((e.keyCode === 67) && (!!window.dynmap.loc)) {
+                var text = Math.round(window.dynmap.loc.x) + " " + Math.round(window.dynmap.loc.y) + " " + Math.round(window.dynmap.loc.z);
+                window.prompt("Copiar coordenadas: Ctrl+C, Enter", text);
             }
+        })
+
+        $(document).keydown(function(e) {
+
+            if (e.keyCode !== 73) {
+                return;
+            }
+
+            var text = window.prompt("Introduzir coordenadas: x y z, Enter");
+            var matches = text.match(/\s*(-?\d+)\s+(-?\d+)\s+(-?\d+)\s*/);
+            if (matches.length != 4) {
+                return;
+            }
+
+            var loc = { x : parseInt(matches[1]), y : parseInt(matches[2]), z :  parseInt(matches[3]) };
+
+            console.log(loc);
+
+            var latlng = dynmap.getProjection().fromLocationToLatLng(loc);
+
+            console.log(latlng);
+
+            dynmap.panToLatLng(latlng);
+
         });
 
         dynmap.map.on('mousemove', function(mevent) {
