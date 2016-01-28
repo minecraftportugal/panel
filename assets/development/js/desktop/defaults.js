@@ -313,8 +313,8 @@ App.Defaults = (function() {
             {
                 "options": {
                     "css": {
-                        "min-width": "610px",
-                        "min-height": "400px"
+                        "min-width": "444px",
+                        "min-height": "200px"
                     },
                     "source": "//dynmap.mcpt.eu/",
                     "title": "<i class='fa fa-picture-o'></i> Dynmap",

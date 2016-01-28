@@ -19,10 +19,10 @@ App.Desktop.Widget = (function() {
             "left": "0px",
             "width" : "800px",
             "height" : "400px",
-            "min-width" : null, // "480px",
-            "min-height" : null,// "360px",
-            "max-width" : null, //"700px",
-            "max-height" : null //"700px"
+            "min-width" : "480px",
+            "min-height" : "360px",
+            "max-width" : null,
+            "max-height" : null
         },
 
         "modalOptions" : {
