@@ -1,5 +1,9 @@
 $(function() {
 
+    var regionHideList = [
+        'WorldGuard', 'WorldBorder'
+    ];
+
     var uiTransformInit = function() {
 
         $(document).on("click", function (event) {
@@ -12,11 +16,8 @@ $(function() {
         $("body").append('<div class="dynmap-loading-cover"></div>');
     };
 
+    /* * General UI changes */
     var mainInterfaceSetup = function() {
-        /*
-         * General UI changes
-         */
-
 
         $("div.dynmap-custom-controls").parent()
             .append("<div>" +
@@ -95,7 +96,18 @@ $(function() {
 
         $("div.dynmap-custom-controls").css("visibility", "visible");
 
-
+        /*
+         * Hide certain layers from regular users
+         */
+        if (top.$("meta[name=admin]").attr("content") !== "1") {
+            $("form.leaflet-control-layers-list label").each(function(n, elem) {
+                var labelText = $(elem).find("span").html().trim();
+                if (regionHideList.indexOf(labelText) >= 0) {
+                    console.log(labelText, "in", regionHideList);
+                    $(elem).remove();
+                }
+            });
+        }
         /*
          * Copy location to clipboard
          */
@@ -106,6 +118,7 @@ $(function() {
             }
         })
 
+        /* Input location from keyboard */
         $(document).keydown(function(e) {
 
             if (e.keyCode !== 73) {
@@ -130,9 +143,9 @@ $(function() {
 
         });
 
+        /* Keep coordinates in an acessible object */
         dynmap.map.on('mousemove', function(mevent) {
-            var loc = dynmap.getProjection().fromLatLngToLocation(mevent.latlng, dynmap.world.sealevel+1);
-            window.dynmap.loc = loc;
+            window.dynmap.loc = dynmap.getProjection().fromLatLngToLocation(mevent.latlng, dynmap.world.sealevel+1);
         });
 
         dynmap.map.on('mouseout', function(mevent) {
@@ -141,11 +154,13 @@ $(function() {
 
     };
 
+    /* Setup markers interface */
     var dynmapMarkerSetup = function() {
 
         /* load markers list */
         var $markerlist = $("ul.markerlist");
         $markerlist.empty();
+
         $.each(window.dynmapmarkersets, function(k, v) {
 
             if ((!v.markers) || (Object.keys(v.markers).length === 0)) {
