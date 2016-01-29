@@ -239,7 +239,8 @@ App.Defaults = (function() {
             },
             "css": {
                 "width": "450px",
-                "height": "90px"
+                "height": "90px",
+                "min-height": "90px"
             },
             "cssBody": {
                 "overflow": "hidden",
