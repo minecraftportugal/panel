@@ -17,10 +17,10 @@
         <form name="register" method="post" action="/register">
             <ul>
                 <li>
-                    <input type="text" id="username" name="username" placeholder="esteves" />
+                    <input type="text" id="username" name="username" placeholder="o teu nome" />
                 </li>
                 <li>
-                    <input type="text" id="email" name="email" placeholder="esteves@mcpt.eu" />
+                    <input type="text" id="email" name="email" placeholder="o teu email" />
                 </li>
                 <li>
                     <button id="register" type="submit">Registar!</button>
