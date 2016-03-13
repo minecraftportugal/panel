@@ -310,7 +310,7 @@ class Accounts {
         $plain_password = $password;
         $password = xAuth::encryptPassword($password);
         $q = "INSERT INTO accounts(playername, password, pwtype, email, registerdate, registerip, active)
-            VALUES(:username, :password, '0', :email, sysdate(), :ip, 1)";
+            VALUES(:username, :password, '0', :email, NOW(), :ip, 1)";
         $result = Bitch::source('default')->query($q, compact('username', 'password', 'email', 'ip'));
 
         if (!$result) {

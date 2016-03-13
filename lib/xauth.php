@@ -15,13 +15,13 @@ class xAuth {
 
         // Insert into sessions table
         $q = "INSERT INTO sessions(accountid, ipaddress, logintime, websession) 
-        VALUES($accountid, :ip, sysdate(), 1)
-        ON DUPLICATE KEY UPDATE ipaddress = :ip, logintime = sysdate(), websession = 1";
+        VALUES($accountid, :ip, NOW(), 1)
+        ON DUPLICATE KEY UPDATE ipaddress = :ip, logintime = NOW(), websession = 1";
 
         $result = Bitch::source('default')->query($q, compact('ip'));
 
         $q = "UPDATE accounts
-        SET lastlogindate = sysdate(), lastloginip = :ip
+        SET lastlogindate = NOW(), lastloginip = :ip
         WHERE id = :accountid;";
 
         $result = Bitch::source('default')->query($q, compact('ip', 'accountid'));
