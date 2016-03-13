@@ -107,10 +107,9 @@ function v_home() {
     $template->assign('html_templates', $html_templates);
 
     /* Ads */
-    if (!$user["donor"]) {
-        $ad_desktop = Template::init('partials/ads/leaderboard-bottom');
-        $template->assign('ad_desktop', $ad_desktop);
-    }
+    $ad_desktop = Template::init('partials/ads/leaderboard-bottom');
+    $template->assign('ad_desktop', $ad_desktop);
+
 
     /* Google Analytics */
     $analytics = Template::init('partials/analytics');

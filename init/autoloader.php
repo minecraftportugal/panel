@@ -12,7 +12,9 @@ function autoloader($name) {
         'WC_Widget_Product_Categories', 'WC_Widget_Product_Search', 'WC_Widget_Product_Tag_Cloud',
         'WC_Widget_Recent_Reviews', 'WC_Widget_Recently_Viewed', 'WC_Widget_Top_Rated_Products', 'GADASH_Config',
         'GADASH_Tools', 'Sunrise4', 'Sunrise4_Views', 'GADASH_Tracking', 'GADASH_Frontend_Ajax', 'GADASH_Backend_Ajax',
-        'BWS_add_admin_tooltip'
+        'BWS_add_admin_tooltip', 'GADWP_Manager', 'GADWP_Tools', 'GADWP_Config', 'GADWP_GAPI_Controller', 'toc',
+        'toc_widget', 'Wpacc', 'BWS_admin_tooltip', 'GADWP_Tracking', 'GADWP_Manager', 'GADWP_Tools', 'GADWP_Config',
+        'GADWP_GAPI_Controller', 'toc', 'toc_widget', 'Wpacc', 'BWS_admin_tooltip', 'GADWP_Tracking'
     ];
 
     $parts = explode('\\', $name);
