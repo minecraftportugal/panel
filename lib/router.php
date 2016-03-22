@@ -19,11 +19,12 @@ class Router {
 
     public function __construct() {
 
-        $this->_cenas = [
+        $this->_methods = [
             'GET' => [],
             'POST' => [],
             'PUT' => [],
-            'DELETE' => []
+            'DELETE' => [],
+            'OPTIONS' => []
         ];
 
     }
@@ -34,28 +35,32 @@ class Router {
 
         foreach ($methods as $method) {
 
-            $this->_cenas[$method][] = new Route($pattern, $value, $phpfile);
+            $this->_methods[$method][] = new Route($pattern, $value, $phpfile);
 
         }
 
     }
 
-    public function match ($method, $key) {
+    public function match($method, $key) {
 
-        foreach ($this->_cenas[$method] as $route) {
+        if (array_key_exists($method, $this->_methods)) {
 
+            foreach ($this->_methods[$method] as $route) {
 
-            if ($route->_pattern == $key) {
+                if ($route->_pattern == $key) {
 
-               if (!is_null($route->_phpfile)) {
-                   require_once($route->_phpfile);
-               }
+                    if (!is_null($route->_phpfile)) {
+                        require_once($route->_phpfile);
+                    }
 
-               return $route->_value;
+                    return $route->_value;
+
+                }
 
             }
-
         }
+
+        return null;
 
     }
 
