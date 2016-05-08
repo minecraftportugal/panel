@@ -49,10 +49,9 @@ function setPremium($id, $result) {
 }
 
 function premiumCheck($playername) {
-    $url = "https://minecraft.net/haspaid.jsp?user=$playername";
+    $url = "https://api.mojang.com/users/profiles/minecraft/$playername";
     $status = file_get_contents($url);
-
-    return $status;
+    return $status === '' ? 'false' : 'true';
 }
 
 function saveLastId($id) {
