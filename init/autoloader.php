@@ -42,6 +42,7 @@ function autoloader($name) {
         switch ($parts[0]) {
 
             case 'PHPMailer':
+                require_once('vendors/PHPMailer/class.smtp.php');
                 require_once('vendors/PHPMailer/class.phpmailer.php');
                 break;
 
